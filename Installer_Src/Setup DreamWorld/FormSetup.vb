@@ -23,7 +23,6 @@ Public Class FormSetup
 
 #Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
-
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
     Private _Adv As FormSettings
@@ -40,6 +39,7 @@ Public Class FormSetup
     Private _speed As Double = 50
     Private cpu As New PerformanceCounter
     Private Graphs As New FormGraphs
+    Private NssmService As ClassNssm
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -261,251 +261,10 @@ Public Class FormSetup
 
     End Function
 
-    Public Function KillAll() As Boolean
+#Disable Warning CA2109
 
-        If ScanAgents() > 0 Then
-            Dim response = MsgBox(My.Resources.Avatars_in_World, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
-            If response = vbNo Then Return False
-        End If
-
-        ToDoList.Clear()
-
-        PropAborting = True
-
-        ' close everything as gracefully as possible.
-
-        StopIcecast()
-
-        Dim n As Integer = RegionCount()
-
-        ' only wait if the port 8001 is working
-
-        If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
-
-        For Each RegionUUID In RegionUuids()
-            If RegionEnabled(RegionUUID) And
-            (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
-                SequentialPause()
-
-                If CBool(GetHwnd(Group_Name(RegionUUID))) Then
-                    TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
-                    ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
-                Else
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-                End If
-            End If
-            Application.DoEvents()
-        Next
-
-        Dim LastCount As Integer = 0
-        Dim counter As Integer = 3000 ' 5 minutes to quit all regions
-
-        If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
-
-        While (counter > 0 AndAlso PropOpensimIsRunning())
-            Application.DoEvents()
-            counter -= 1
-
-            Dim ListofPIDs = RegionPIDs()
-            Dim CountisRunning As New List(Of Integer)
-            Dim AllProcesses() = Process.GetProcessesByName("Opensim") ' cache of processes
-            For Each P In AllProcesses
-                If ListofPIDs.Contains(P.Id) Then
-                    CountisRunning.Add(P.Id)
-                End If
-            Next
-
-            If CountisRunning.Count <> LastCount Then
-                If CountisRunning.Count = 1 Then
-                    TextPrint(My.Resources.One_region)
-                Else
-                    TextPrint($"{CStr(CountisRunning.Count)} {Global.Outworldz.My.Resources.Regions_Are_Running}")
-                End If
-            End If
-
-            LastCount = CountisRunning.Count
-
-            If CountisRunning.Count = 0 Then
-                counter = 0
-            End If
-
-            ProcessQuit()   '  check if any processes exited
-            CheckPost()                 ' see if anything arrived in the web server
-
-            For Each PID In CountisRunning
-                For Each RegionUUID In RegionUuids()
-                    If ProcessID(RegionUUID) = PID Then
-                        ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
-                        Application.DoEvents()
-                    End If
-                Next
-            Next
-
-            Sleep(1000)
-        End While
-        PropUpdateView = True ' make form refresh
-
-        ClearAllRegions()
-        StopRobust()
-        Zap("baretail")
-        Zap("cports")
-
-        TimerMain.Stop()
-
-        ProcessIdDict.Clear()
-
-        PropInstanceHandles.Clear()
-        PropOpensimIsRunning() = False
-
-        Settings.SaveSettings()
-
-        Return True
-
-    End Function
-
-    Public Sub Reload(ByVal sender As Object, ByVal e As EventArgs)
-
-        FrmHome_Load(sender, e)
-
-    End Sub
-
-    Public Function StartOpensimulator() As Boolean
-
-        Bench.Start("StartOpensim")
-        StartTimer()
-
-        PropOpensimIsRunning = True
-
-        OpenPorts()
-
-        Dim ini = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\OpenSim.exe.config")
-        Grep(ini, Settings.LogLevel)
-
-        If Not Settings.DeregisteredOnce Then
-            DeregisterRegions(True)
-            Settings.DeregisteredOnce = True
-        End If
-
-        If Not PropOpensimIsRunning Then Return False
-        PropAborting = False
-        Buttons(BusyButton)
-
-        DoEstates() ' has to be done after MySQL starts up.
-
-        CheckOverLap()
-
-        If Settings.ServerType = RobustServerName Then
-            StartRobust()
-            Dim ctr = 60
-            While Not IsRobustRunning() AndAlso ctr > 0
-                Sleep(1000)
-                ctr -= 1
-            End While
-
-            Dim RegionName = Settings.WelcomeRegion
-            Dim UUID As String = FindRegionByName(RegionName)
-            Dim out As New Guid
-            If Guid.TryParse(UUID, out) Then
-                Boot(RegionName)
-            End If
-        End If
-
-        If Settings.GraphVisible Then
-            G()
-        End If
-
-        For Each RegionUUID In RegionUuids()
-
-            If RegionEnabled(RegionUUID) Then
-
-                Dim RegionName = Region_Name(RegionUUID)
-                If Settings.WelcomeRegion = RegionName Then Continue For
-
-                If PropOpensimIsRunning Then
-                    Boot(RegionName)
-                End If
-            End If
-            Application.DoEvents()
-        Next
-
-        Settings.SaveSettings()
-        CalcCPU()
-        Buttons(StopButton)
-        TextPrint(My.Resources.Ready)
-        Bench.Print("StartOpensim")
-        Return True
-
-    End Function
-
-    Private Sub Form1_Closed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-
-        Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
-        If result <> vbYes Then
-            Return
-        End If
-
-        If Not RunningBackupName.IsEmpty Then
-            Dim response = MsgBox($"{My.Resources.backup_running} .  {My.Resources.Quit_Now_Word}?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
-            If response = vbNo Then Return
-        End If
-
-        ReallyQuit()
-
-    End Sub
-
-    ''' <summary>Form Load is main() for all DreamGrid</summary>
-    ''' <param name="sender">Unused</param>
-    ''' <param name="e">Unused</param>
-    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-
-        Application.EnableVisualStyles()
-
-        Dim _myFolder As String = My.Application.Info.DirectoryPath
-
-        ' setup a debug path
-        If Debugger.IsAttached Then
-            ' for debugging when compiling
-            _myFolder = _myFolder.Replace("\Installer_Src\Setup DreamWorld\bin\Debug", "")
-            _myFolder = _myFolder.Replace("\Installer_Src\Setup DreamWorld\bin\Release", "")
-            ' for testing, as the compiler buries itself in ../../../debug
-        End If
-
-        If Not System.IO.File.Exists(_myFolder & "\OutworldzFiles\Settings.ini") Then
-            Create_ShortCut(_myFolder & "\Start.exe")
-        End If
-
-        Settings = New MySettings(_myFolder) With {
-            .CurrentDirectory = _myFolder
-        }
-
-        Settings.CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
-
-        Settings.OpensimBinPath() = _myFolder & "\OutworldzFiles\Opensim\bin\"
-
-        Log("Startup", DisplayObjectInfo(Me))
-
-        Dim cinfo() = System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
-        Try
-            My.Application.ChangeUICulture(Settings.Language)
-            My.Application.ChangeCulture(Settings.Language)
-        Catch
-            My.Application.ChangeUICulture("en")
-            My.Application.ChangeCulture("en")
-        End Try
-
-        Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture
-
-        Me.Controls.Clear() 'removes all the controls on the form
-        InitializeComponent() 'load all the controls again
-        Application.DoEvents()
-        FrmHome_Load(sender, e) 'Load everything in your form load event again so it will be translated
-
-    End Sub
-
-    Private Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
-
+    Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
+#Enable Warning CA2109
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
         SetScreen()     ' move Form to fit screen from SetXY.ini
@@ -817,7 +576,7 @@ Public Class FormSetup
         SetServerType()
 
         If SetIniData() Then
-            MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            If Settings.ServiceMode() Then MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
             Return
@@ -936,7 +695,14 @@ Public Class FormSetup
             TextPrint("--> Login = " & "http://" & Settings.BaseHostName & ":80")
         End If
 
-        Application.DoEvents() ' let timer run
+        Application.DoEvents() ' let any tasks run
+
+        ' Start as a Service?
+
+        If Settings.ServiceMode() Then
+            TextPrint(My.Resources.StartingAsService)
+            Startup()
+        End If
 
         If Settings.Autostart Then
             TextPrint(My.Resources.Auto_Startup_word)
@@ -948,6 +714,247 @@ Public Class FormSetup
         End If
 
         ToolBar(True)
+
+    End Sub
+
+    Public Function KillAll() As Boolean
+
+        If Not Settings.ServiceMode Then
+            If ScanAgents() > 0 Then
+                Dim response = MsgBox(My.Resources.Avatars_in_World, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
+                If response = vbNo Then Return False
+            End If
+        End If
+
+        ToDoList.Clear()
+
+        PropAborting = True
+
+        ' close everything as gracefully as possible.
+
+        StopIcecast()
+
+        Dim n As Integer = RegionCount()
+
+        ' only wait if the port 8001 is working
+
+        If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
+
+        For Each RegionUUID In RegionUuids()
+            If RegionEnabled(RegionUUID) And
+            (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
+                SequentialPause()
+
+                If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+                    TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
+                    ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+                Else
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+                End If
+            End If
+            Application.DoEvents()
+        Next
+
+        Dim LastCount As Integer = 0
+        Dim counter As Integer = 3000 ' 5 minutes to quit all regions
+
+        If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
+
+        While (counter > 0 AndAlso PropOpensimIsRunning())
+            Application.DoEvents()
+            counter -= 1
+
+            Dim ListofPIDs = RegionPIDs()
+            Dim CountisRunning As New List(Of Integer)
+            Dim AllProcesses() = Process.GetProcessesByName("Opensim") ' cache of processes
+            For Each P In AllProcesses
+                If ListofPIDs.Contains(P.Id) Then
+                    CountisRunning.Add(P.Id)
+                End If
+            Next
+
+            If CountisRunning.Count <> LastCount Then
+                If CountisRunning.Count = 1 Then
+                    TextPrint(My.Resources.One_region)
+                Else
+                    TextPrint($"{CStr(CountisRunning.Count)} {Global.Outworldz.My.Resources.Regions_Are_Running}")
+                End If
+            End If
+
+            LastCount = CountisRunning.Count
+
+            If CountisRunning.Count = 0 Then
+                counter = 0
+            End If
+
+            ProcessQuit()   '  check if any processes exited
+            CheckPost()                 ' see if anything arrived in the web server
+
+            For Each PID In CountisRunning
+                For Each RegionUUID In RegionUuids()
+                    If ProcessID(RegionUUID) = PID Then
+                        ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+                        Application.DoEvents()
+                    End If
+                Next
+            Next
+
+            Sleep(1000)
+        End While
+        PropUpdateView = True ' make form refresh
+
+        ClearAllRegions()
+        StopRobust()
+        Zap("baretail")
+        Zap("cports")
+
+        TimerMain.Stop()
+
+        ProcessIdDict.Clear()
+
+        PropInstanceHandles.Clear()
+        PropOpensimIsRunning() = False
+
+        Settings.SaveSettings()
+
+        Return True
+
+    End Function
+
+    Public Function StartOpensimulator() As Boolean
+
+        Bench.Start("StartOpensim")
+        StartTimer()
+
+        PropOpensimIsRunning = True
+
+        OpenPorts()
+
+        Dim ini = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\OpenSim.exe.config")
+        Grep(ini, Settings.LogLevel)
+
+        If Not Settings.DeregisteredOnce Then
+            DeregisterRegions(True)
+            Settings.DeregisteredOnce = True
+        End If
+
+        If Not PropOpensimIsRunning Then Return False
+        PropAborting = False
+        Buttons(BusyButton)
+
+        DoEstates() ' has to be done after MySQL starts up.
+
+        CheckOverLap()
+
+        If Settings.ServerType = RobustServerName Then
+            StartRobust()
+            Dim ctr = 60
+            While Not IsRobustRunning() AndAlso ctr > 0
+                Sleep(1000)
+                ctr -= 1
+            End While
+
+            Dim RegionName = Settings.WelcomeRegion
+            Dim UUID As String = FindRegionByName(RegionName)
+            Dim out As New Guid
+            If Guid.TryParse(UUID, out) Then
+                Boot(RegionName)
+            End If
+        End If
+
+        If Settings.GraphVisible Then
+            G()
+        End If
+
+        For Each RegionUUID In RegionUuids()
+
+            If RegionEnabled(RegionUUID) Then
+
+                Dim RegionName = Region_Name(RegionUUID)
+                If Settings.WelcomeRegion = RegionName Then Continue For
+
+                If PropOpensimIsRunning Then
+                    Boot(RegionName)
+                End If
+            End If
+            Application.DoEvents()
+        Next
+
+        Settings.SaveSettings()
+        CalcCPU()
+        Buttons(StopButton)
+        TextPrint(My.Resources.Ready)
+        Bench.Print("StartOpensim")
+        Return True
+
+    End Function
+
+    Private Sub Form1_Closed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+
+        If Not Settings.ServiceMode Then
+            Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
+            If result <> vbYes Then
+                Return
+            End If
+
+            If Not RunningBackupName.IsEmpty Then
+                Dim response = MsgBox($"{My.Resources.backup_running} .  {My.Resources.Quit_Now_Word}?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
+                If response = vbNo Then Return
+            End If
+        End If
+
+        ReallyQuit()
+
+    End Sub
+
+    ''' <summary>Form Load is main() for all DreamGrid</summary>
+    ''' <param name="sender">Unused</param>
+    ''' <param name="e">Unused</param>
+    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        Application.EnableVisualStyles()
+
+        Dim _myFolder As String = My.Application.Info.DirectoryPath
+
+        ' setup a debug path
+        If Debugger.IsAttached Then
+            ' for debugging when compiling
+            _myFolder = _myFolder.Replace("\Installer_Src\Setup DreamWorld\bin\Debug", "")
+            _myFolder = _myFolder.Replace("\Installer_Src\Setup DreamWorld\bin\Release", "")
+            ' for testing, as the compiler buries itself in ../../../debug
+        End If
+
+        If Not System.IO.File.Exists(_myFolder & "\OutworldzFiles\Settings.ini") Then
+            Create_ShortCut(_myFolder & "\Start.exe")
+        End If
+
+        Settings = New MySettings(_myFolder) With {
+            .CurrentDirectory = _myFolder
+        }
+
+        Settings.CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
+
+        Settings.OpensimBinPath() = _myFolder & "\OutworldzFiles\Opensim\bin\"
+
+        Log("Startup", DisplayObjectInfo(Me))
+
+        Dim cinfo() = System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
+        Try
+            My.Application.ChangeUICulture(Settings.Language)
+            My.Application.ChangeCulture(Settings.Language)
+        Catch
+            My.Application.ChangeUICulture("en")
+            My.Application.ChangeCulture("en")
+        End Try
+
+        Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture
+
+        Me.Controls.Clear() 'removes all the controls on the form
+        InitializeComponent() 'load all the controls again
+        Application.DoEvents()
+        FrmHome_Load(sender, e) 'Load everything in your form load event again so it will be translated
 
     End Sub
 
@@ -1086,10 +1093,13 @@ Public Class FormSetup
                         TextPrint($"{GroupName} Crashed 5 times - Stopped with Errors")
                         ErrorGroup(GroupName)
                         RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
-                        Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
-                        If (yesno = vbYes) Then
-                            Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                        If Not Settings.ServiceMode Then
+                            Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
+                            If (yesno = vbYes) Then
+                                Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                            End If
                         End If
+
                         ExitList.TryRemove(GroupName, "")
                         Continue While
                     End If
@@ -1114,11 +1124,13 @@ Public Class FormSetup
 
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
                     ErrorGroup(GroupName)
-
-                    Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
-                    If (yesno = vbYes) Then
-                        Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                    If Not Settings.ServiceMode Then
+                        Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
+                        If (yesno = vbYes) Then
+                            Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                        End If
                     End If
+
                 End If
             Else
                 StopGroup(GroupName)
@@ -1131,7 +1143,10 @@ Public Class FormSetup
     End Sub
 
     ''' <summary>Event handler for Icecast</summary>
+#Disable Warning CA2109
+
     Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
+#Enable Warning CA2109
 
         If PropAborting Then Return
 
@@ -1142,10 +1157,11 @@ Public Class FormSetup
         End If
         IcecastCrashCounter = 0
 
-        Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-
-        If (yesno = vbYes) Then
-            Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
+        If Not Settings.ServiceMode Then
+            Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If yesno = MsgBoxResult.Yes Then
+                Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
+            End If
         End If
 
     End Sub
@@ -1243,17 +1259,19 @@ Public Class FormSetup
 
         Dim RegionUUID As String = FindRegionByName(Settings.WelcomeRegion)
         If RegionUUID.Length = 0 AndAlso Settings.ServerType = RobustServerName Then
-            MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
-            TextPrint(My.Resources.Stopped_word)
+            If Not Settings.ServiceMode Then
+                MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
+                TextPrint(My.Resources.Stopped_word)
 
 #Disable Warning CA2000 ' Dispose objects before losing scope
-            Dim FormRegions = New FormRegions
+                Dim FormRegions = New FormRegions
 #Enable Warning CA2000 ' Dispose objects before losing scope
-            FormRegions.Activate()
-            FormRegions.Select()
-            FormRegions.Visible = True
-            FormRegions.BringToFront()
-            Buttons(StartButton)
+                FormRegions.Activate()
+                FormRegions.Select()
+                FormRegions.Visible = True
+                FormRegions.BringToFront()
+                Buttons(StartButton)
+            End If
             Return
         End If
 
@@ -1278,7 +1296,7 @@ Public Class FormSetup
         End If
 
         If SetIniData() Then
-            MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, My.Resources.Error_word)
+            If Settings.ServiceMode() Then MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, My.Resources.Error_word)
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
             Return
@@ -1333,7 +1351,7 @@ Public Class FormSetup
             ForceBackupOnce()
         End If
 
-        TextPrint($"{My.Resources.Grid_Address_is_word} http://{Settings.BaseHostName}:{Settings.HttpPort}")
+        TextPrint($"{My.Resources.Grid_Address_is_word} http//{Settings.BaseHostName}{Settings.HttpPort}")
 
         ' Launch the rockets
         TextPrint(My.Resources.Start_Regions_word)
@@ -1528,7 +1546,7 @@ Public Class FormSetup
 
             If MyCPUCollection.Count > 180 Then MyCPUCollection.RemoveAt(0)
 
-            PercentCPU.Text = $"CPU {speed / 100:P1}"
+            PercentCPU.Text = $"CPU {speed / 100} %"
         Catch ex As Exception
             ErrorLog(ex.Message)
         End Try
@@ -1556,7 +1574,7 @@ Public Class FormSetup
                 r = Math.Round(r)
                 v = Math.Round(v)
                 Settings.Ramused = r
-                PercentRAM.Text = $"{r / 100:p1} RAM"
+                PercentRAM.Text = $"{r / 100}% RAM"
                 Virtual.Text = $"{v} MB VRAM"
             Next
             results.Dispose()
@@ -1783,7 +1801,7 @@ Public Class FormSetup
 
                     Dim UUID = System.Guid.NewGuid.ToString
 
-                    Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}/TOS?uid={UUID}"
+                    Dim URL = $"http//{Settings.PublicIP}{Settings.DiagnosticPort}/TOS?uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
@@ -2147,7 +2165,7 @@ Public Class FormSetup
         TextPrint(My.Resources.Check_Diag)
         Dim wsstarted = IsRegionReady(CType(Settings.DiagnosticPort, Integer))
         If wsstarted = False Then
-            MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            If Settings.ServiceMode() Then MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
         End If
 
     End Sub
@@ -2731,9 +2749,12 @@ Public Class FormSetup
     End Sub
 
     Private Sub MnuExit_Click(sender As System.Object, e As EventArgs) Handles mnuExit.Click
-
-        Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
-        If result = vbYes Then
+        If Not Settings.ServiceMode() Then
+            Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
+            If result = vbYes Then
+                ReallyQuit()
+            End If
+        Else
             ReallyQuit()
         End If
 
@@ -2942,8 +2963,14 @@ Public Class FormSetup
                     db = Settings.RegionDBName
                 End If
 
-                Dim yesno = MsgBox(My.Resources.Are_You_Sure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, Global.Outworldz.My.Resources.Restore_word)
-                If yesno = vbYes Then
+                Dim yesno As MsgBoxResult
+                If Settings.ServiceMode Then
+                    yesno = MsgBoxResult.Yes
+                Else
+                    yesno = MsgBox(My.Resources.Are_You_Sure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, Global.Outworldz.My.Resources.Restore_word)
+                End If
+
+                If yesno = MsgBoxResult.Yes Then
 
                     DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\RestoreMysql.bat"))
 
@@ -3060,6 +3087,42 @@ Public Class FormSetup
         Next
     End Sub
 
+    Private Sub ShowConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowConsoleToolStripMenuItem.Click
+
+        If Not ServiceExists("DreamGrid") Then
+            ShowDOSWindow(RobustName, SHOWWINDOWENUM.SWRESTORE)
+            Return
+        End If
+
+        ' Service exists
+        ' enable console for Service mode
+        Dim args As String = ""
+
+        Dim INI = New LoadIni(Settings.OpensimBinPath & "Opensim.ConsoleClient.ini", ";", System.Text.Encoding.UTF8)
+
+        INI.SetIni("Startup", "pass", CStr(Settings.Password))
+        INI.SetIni("Startup", "user", $"{Settings.AdminFirst} {Settings.AdminLast}")
+        INI.SetIni("Startup", "port", CStr(Settings.HttpPort))
+        INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
+        INI.SaveIni()
+
+        Dim ConsoleProcess As New Process
+        ConsoleProcess.StartInfo.UseShellExecute = False
+        ConsoleProcess.StartInfo.FileName = Settings.OpensimBinPath & "Opensim.ConsoleClient.exe"
+        ConsoleProcess.StartInfo.CreateNoWindow = False
+        ConsoleProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
+        ConsoleProcess.StartInfo.RedirectStandardOutput = False
+        ConsoleProcess.StartInfo.Arguments &= args
+
+        Try
+            ConsoleProcess.Start()
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+            TextPrint($"Console {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
+        End Try
+
+    End Sub
+
     Private Sub ShowHyperGridAddressToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowHyperGridAddressToolStripMenuItem.Click
 
         TextPrint($"{My.Resources.Grid_Address_is_word} http://{Settings.PublicIP}:{Settings.HttpPort}")
@@ -3117,7 +3180,16 @@ Public Class FormSetup
     End Sub
 
     Private Sub StartButton_Click(sender As System.Object, e As EventArgs) Handles StartButton.Click
+
+        If Settings.RunAsService Then
+            TextPrint("Starting Service. No Opensim DOS boxes will show")
+            Using NssmService As New ClassNssm ' single instance
+                NssmService.StartService()
+            End Using
+            Return
+        End If
         Startup()
+
     End Sub
 
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
@@ -3145,6 +3217,17 @@ Public Class FormSetup
         Settings.SCEnable = True
         Settings.SaveSettings()
         StartIcecast()
+
+    End Sub
+
+    Private Sub StartToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem4.Click
+
+        Using NssmService As New ClassNssm ' single instance
+            NssmService.StopAndDeleteService()
+            NssmService.InstallService()
+        End Using
+
+        TextPrint("Click Start to run as a Service. No Dos Boxes will show.")
 
     End Sub
 
@@ -3196,6 +3279,10 @@ Public Class FormSetup
         Sleep(2000)
         PropAborting = False
 
+    End Sub
+
+    Private Sub StopToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem4.Click
+        NssmService.StopAndDeleteService()
     End Sub
 
     Private Sub TechnicalInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TechnicalInfoToolStripMenuItem.Click

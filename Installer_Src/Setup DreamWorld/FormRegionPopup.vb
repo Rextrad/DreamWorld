@@ -183,8 +183,38 @@ Public Class FormRegionPopup
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles ShowConsoleButton.Click
-        gPick = "Console"
-        DialogResult = DialogResult.OK
+
+        If Not ServiceExists("DreamGrid") Then
+            gPick = "Console"
+            DialogResult = DialogResult.OK
+        Else
+            ' enable console for Service mode
+            Dim args As String = ""
+
+            Dim INI = New LoadIni(Settings.OpensimBinPath & "Opensim.ConsoleClient.ini", ";", System.Text.Encoding.UTF8)
+            Dim RegionNum = FindRegionByName(_RegionName)
+            INI.SetIni("Startup", "pass", CStr(Settings.Password))
+            INI.SetIni("Startup", "user", $"{Settings.AdminFirst} {Settings.AdminLast}")
+            INI.SetIni("Startup", "port", CStr(GroupPort(RegionNum)))
+            INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
+            INI.SaveIni()
+
+            Dim ConsoleProcess As New Process
+            ConsoleProcess.StartInfo.UseShellExecute = False
+            ConsoleProcess.StartInfo.FileName = Settings.OpensimBinPath & "Opensim.ConsoleClient.exe"
+            ConsoleProcess.StartInfo.CreateNoWindow = False
+            ConsoleProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
+            ConsoleProcess.StartInfo.RedirectStandardOutput = False
+            ConsoleProcess.StartInfo.Arguments &= args
+
+            Try
+                ConsoleProcess.Start()
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+                TextPrint($"Console {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
+            End Try
+
+        End If
     End Sub
 
     Private Sub Button2_Click_2(sender As Object, e As EventArgs) Handles Restart.Click

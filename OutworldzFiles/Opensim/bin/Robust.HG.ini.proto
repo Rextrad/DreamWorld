@@ -214,9 +214,10 @@ ExternalHostNameForLSL="${Const|BaseURL}:${Const|PublicPort}"
 ; * The following are for the remote console
 ; * They have no effect for the local or basic console types
 ; * Leave commented to diable logins to the console
-;ConsoleUser=Admin
-;ConsolePass=secret
-;ConsolePort=0
+ConsoleUser=
+ConsolePass=
+ConsolePort=0
+
 [Hypergrid]
 
 ;# {HomeURI} {Hypergrid} {The Home URL of this world} {}

@@ -831,6 +831,13 @@ Module SmartStart
 
             End If
 
+            'Do not boot a region when services are available 
+
+            If ServiceExists("Dreamgrid") Then
+                PropUpdateView = True ' make form refresh
+                Return True
+            End If
+
             TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
 
             DoCurrency()
@@ -845,7 +852,13 @@ Module SmartStart
 #Enable Warning CA2000 ' Dispose objects before losing scope
             AddHandler BootProcess.Exited, AddressOf OpensimExited ' Registering event handler
 
-            BootProcess.StartInfo.UseShellExecute = True
+            ' enable console for Service mode
+            Dim args As String = ""
+            If Settings.ServiceMode() Then
+                args = " -console=rest" ' space is required
+            End If
+
+            BootProcess.StartInfo.UseShellExecute = False
             BootProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath()
             BootProcess.StartInfo.FileName = """" & Settings.OpensimBinPath() & "OpenSim.exe" & """"
             BootProcess.StartInfo.CreateNoWindow = False
@@ -859,7 +872,7 @@ Module SmartStart
                     BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
             End Select
 
-            BootProcess.StartInfo.Arguments = " -inidirectory=" & """" & "./Regions/" & GroupName & """"
+            BootProcess.StartInfo.Arguments = " -inidirectory=" & """" & "./Regions/" & GroupName & """" & args
 
             Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.OpensimBinPath() & "Regions\" & GroupName)
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))

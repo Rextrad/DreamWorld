@@ -4214,6 +4214,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Failed to.
+        '''</summary>
+        Friend ReadOnly Property Failedto() As String
+            Get
+                Return ResourceManager.GetString("Failedto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Failed to Save New Password.
         '''</summary>
         Friend ReadOnly Property Failpassword() As String
@@ -10442,6 +10451,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Service Failed to Delete.
+        '''</summary>
+        Friend ReadOnly Property ServiceFailedtoDelete() As String
+            Get
+                Return ResourceManager.GetString("ServiceFailedtoDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Service Failed to Install.
+        '''</summary>
+        Friend ReadOnly Property ServiceFailedtoInstall() As String
+            Get
+                Return ResourceManager.GetString("ServiceFailedtoInstall", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Service Failed to Start.
+        '''</summary>
+        Friend ReadOnly Property ServiceFailedtoStart() As String
+            Get
+                Return ResourceManager.GetString("ServiceFailedtoStart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Service Installed.
+        '''</summary>
+        Friend ReadOnly Property ServiceInstalled() As String
+            Get
+                Return ResourceManager.GetString("ServiceInstalled", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Service Removed.
+        '''</summary>
+        Friend ReadOnly Property ServiceRemoved() As String
+            Get
+                Return ResourceManager.GetString("ServiceRemoved", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Set Debug Level.
         '''</summary>
         Friend ReadOnly Property Set_Debug_Level_word() As String
@@ -11097,6 +11151,15 @@ Namespace My.Resources
         Friend ReadOnly Property Starting_word() As String
             Get
                 Return ResourceManager.GetString("Starting_word", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Starting As A Service.
+        '''</summary>
+        Friend ReadOnly Property StartingAsService() As String
+            Get
+                Return ResourceManager.GetString("StartingAsService", resourceCulture)
             End Get
         End Property
         

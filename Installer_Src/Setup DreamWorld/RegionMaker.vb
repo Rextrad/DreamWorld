@@ -1952,6 +1952,11 @@ Module RegionMaker
 
             If INI.SetIni("Const", "ApachePort", CStr(Settings.ApachePort)) Then Return True
 
+            '
+            'Remote Console            
+            If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
+            If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
+
             ' Support viewers object cache, default true users may need to reduce viewer bandwidth if some prims Or terrain parts fail to rez. change to false if you need to use old viewers that do Not
             ' support this feature
 

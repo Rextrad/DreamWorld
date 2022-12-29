@@ -161,8 +161,15 @@ Module Robust
         RobustProcess.StartInfo.FileName = Settings.OpensimBinPath & "robust.exe"
         RobustProcess.StartInfo.CreateNoWindow = False
         RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
-
         RobustProcess.StartInfo.RedirectStandardOutput = False
+
+        ' enable console for Service mode
+        Dim args As String = ""
+        If ServiceExists("DreamGrid") And Settings.ServiceMode Then
+            args = " -console=rest" ' space required
+        End If
+
+        RobustProcess.StartInfo.Arguments &= args
 
         Select Case Settings.ConsoleShow
             Case "True"
@@ -256,6 +263,10 @@ Module Robust
         Dim ViewerString As String = ""
         Dim GridString As String = ""
         Dim Bans As String = Settings.BanList
+        ' causes robust to crash due to bad parser
+        Bans = Bans.Replace("(", "")
+        Bans = Bans.Replace(")", "")
+
         Dim filename As String
         If Bans.Length = 0 Then
             filename = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/Opensim/BanListProto.txt")
@@ -293,8 +304,11 @@ Module Robust
             End If
 
             ' ban MAC Addresses
-            Dim result As Guid
-            If Guid.TryParse(s, result) Then
+            'acbf6d9e97686d38d6fc1c2b335f126
+
+            Dim pattern4 = New Regex("^[0-9a-f]{32}", RegexOptions.IgnoreCase)
+            Dim match4 As Match = pattern4.Match(s)
+            If match4.Success Then
                 MACString += s & " " ' delimiter is a " " and  not a pipe
                 Continue For
             End If
@@ -305,6 +319,9 @@ Module Robust
             End If
 
         Next
+
+        INI.SetIni("LoginService", "DeniedMacs", MACString)
+        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
         ' Ban grids
         If GridString.Length > 0 Then
@@ -317,8 +334,6 @@ Module Robust
         If MACString.Length > 0 Then
             MACString = Mid(MACString, 1, MACString.Length - 1)
         End If
-        INI.SetIni("LoginService", "DeniedMacs", MACString)
-        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
         'Ban Viewers
         If ViewerString.Length > 0 Then
@@ -386,6 +401,10 @@ Module Robust
             End Using
 
             Dim INI = New LoadIni(Settings.OpensimBinPath & "Robust.HG.ini", ";", System.Text.Encoding.UTF8)
+
+            If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
+            If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
+            If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True
 
             If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName Then
                 MsgBox(My.Resources.Cannot_locate, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
@@ -527,7 +546,7 @@ Module Robust
             Grep(anini, Settings.LogLevel)
 
             Return False
-        Catch
+        Catch ex As Exception
             Return True
         End Try
 

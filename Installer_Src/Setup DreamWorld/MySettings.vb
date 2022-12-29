@@ -108,6 +108,13 @@ Public Class MySettings
 
     End Sub
 
+    Public Function ServiceMode() As Boolean
+
+        Dim Param = Command()
+        Return RunAsService And Param = "Server" And Not Autostart
+
+    End Function
+
     Public Sub SetMySetting(key As String, value As String)
 
         If value Is Nothing Then Return
@@ -118,6 +125,10 @@ Public Class MySettings
 #End Region
 
 #Region "Properties"
+
+    ''' <summary>
+    ''' Run as a service
+    ''' </summary>
 
     ''' <summary>
     ''' Diva will set Logins to disabled (-1) if this switch is set
@@ -1222,6 +1233,10 @@ Public Class MySettings
         End Set
     End Property
 
+    ''' <summary>
+    ''' Http Port for the grid in robust default = 8002
+    ''' </summary>
+
     Public Property HttpPort() As Integer
         Get
             Return CInt("0" & GetMySetting("HttpPort", "8002"))
@@ -1879,8 +1894,6 @@ Public Class MySettings
         End Set
     End Property
 
-
-
     Public Property RestartOnCrash() As Boolean
         Get
             Return CType(GetMySetting("RestartOnCrash", "False"), Boolean)
@@ -1944,6 +1957,15 @@ Public Class MySettings
         End Get
         Set
             SetMySetting("RootMysqlPassword", Value)
+        End Set
+    End Property
+
+    Public Property RunAsService() As Boolean
+        Get
+            Return CType(GetMySetting("RunAsService", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("RunAsService", CStr(Value))
         End Set
     End Property
 

@@ -1,9 +1,10 @@
 REVISIONS FOR DREAMGRID
 
+V5.3  General Release
+
 V5.28
 Gloebit DLL's were missing.
-Opensim 6b4dfcde84 ("mantis 9039: do not lose runtime permitions on llAttachToAvatarTemp", 2022-11-18)
-
+Opensim 6b4dfcde84 ("mantis 9039: do not lose runtime permissions on llAttachToAvatarTemp", 2022-11-18)
 	llObjectGetLinkKey and llSHA256String added
 	Added missing GroupPowers  for VoteOnProposal, ExperienceAdmin, ExperienceCreator, GroupBanAccess, HostEvent
 	Don't close a http socket still in use
