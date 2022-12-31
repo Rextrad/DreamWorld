@@ -778,7 +778,6 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
-        Application.DoEvents()
 
         SyncLock BootupLock
 
@@ -833,7 +832,7 @@ Module SmartStart
 
             'Do not boot a region when services are available 
 
-            If ServiceExists("Dreamgrid") Then
+            If ServiceExists("Dreamgrid") And Not Settings.ServiceMode Then
                 PropUpdateView = True ' make form refresh
                 Return True
             End If

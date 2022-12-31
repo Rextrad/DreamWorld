@@ -13,13 +13,12 @@
 
     Public Sub InstallService()
 
-        If NssmCommand("install DreamGrid Start.exe AppParameters server") Then
-            If NssmCommand("set DreamGrid Description DreamGrid DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.") Then
-                Settings.RunAsService = True
-                TextPrint(My.Resources.ServiceInstalled)
-            Else
-                TextPrint(My.Resources.ServiceFailedtoInstall)
-            End If
+        If NssmCommand($"install DreamGrid {Settings.CurrentDirectory}\Start.exe AppParameters server") Then
+            NssmCommand("set DreamGrid Description DreamGrid DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.")
+            'NssmCommand($"nssm set DreamGrid AppDirectory ""{Settings.CurrentDirectory}""")
+
+            Settings.RunAsService = True
+            TextPrint(My.Resources.ServiceInstalled)
 
         End If
 

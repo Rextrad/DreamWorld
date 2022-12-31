@@ -39,7 +39,7 @@ Public Class FormSetup
     Private _speed As Double = 50
     Private cpu As New PerformanceCounter
     Private Graphs As New FormGraphs
-    Private ReadOnly NssmService As ClassNssm
+    Private ReadOnly NssmService As New ClassNssm
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -703,6 +703,7 @@ Public Class FormSetup
         If Settings.ServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Startup()
+            Return
         End If
 
         If Settings.Autostart Then
@@ -1544,7 +1545,7 @@ Public Class FormSetup
 
             If MyCPUCollection.Count > 180 Then MyCPUCollection.RemoveAt(0)
 
-            PercentCPU.Text = $"CPU {speed / 100} %"
+            PercentCPU.Text = $"CPU {(speed / 100).ToString("0.0", Globalization.CultureInfo.CurrentCulture)} %"
         Catch ex As Exception
             BreakPoint.Dump(ex)
             ErrorLog("Chart 2 " & ex.Message)
@@ -2051,6 +2052,7 @@ Public Class FormSetup
 
         If TimerisBusy > 0 And TimerisBusy < 30 Then
             TimerisBusy += 1
+            application.doevents
             Return
         Else
             TimerisBusy = 0
@@ -3182,10 +3184,9 @@ Public Class FormSetup
 
         If Settings.RunAsService Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
-            Using NssmService As New ClassNssm ' single instance
-                NssmService.StartService()
-                TextPrint("Service Installed as 'DreamGrid' in Services ")
-            End Using
+
+            NssmService.StartService()
+            TextPrint("Service Installed as 'DreamGrid' in Services ")
             Return
         End If
         Startup()
@@ -3222,15 +3223,13 @@ Public Class FormSetup
 
     Private Sub StartToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem4.Click
 
-        If Settings.RunAsService And NssmService IsNot Nothing Then
+        If Settings.RunAsService And ServiceExists("DreamGrid") Then
             TextPrint("Service is already installed")
             Return
         End If
 
-        Using NssmService As New ClassNssm ' single instance
-            NssmService.StopAndDeleteService()
-            NssmService.InstallService()
-        End Using
+        NssmService.StopAndDeleteService()
+        NssmService.InstallService()
 
         TextPrint("Click Start to run as a Service. No Dos Boxes will show.")
 
@@ -3288,14 +3287,10 @@ Public Class FormSetup
 
     Private Sub StopToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem4.Click
 
-        If Not Settings.RunAsService Then
-            TextPrint("Service is not installed")
-            Return
-        End If
 
-        If NssmService IsNot Nothing Then
+        If ServiceExists("DreamGrid") Then
             NssmService.StopAndDeleteService()
-            TextPrint("Services removed")
+            TextPrint("DreamGrid Service removed")
         Else
             TextPrint("DreamGrid Service is not installed")
         End If
