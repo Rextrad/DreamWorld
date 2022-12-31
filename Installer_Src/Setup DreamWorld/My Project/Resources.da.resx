@@ -3852,4 +3852,25 @@
   <data name="WebPort" xml:space="preserve">
     <value>Webport (80)</value>
   </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Var ikke i stand til at</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Tjenesten kunne ikke slettes</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Tjenesten kunne ikke installeres</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Tjenesten kunne ikke starte</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Service installeret</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Service fjernet</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Starter som en service</value>
+  </data>
 </root>

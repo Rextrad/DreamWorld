@@ -1,6 +1,17 @@
 REVISIONS FOR DREAMGRID
 
-V5.3  General Release
+V5.3 Release
+Closed all crashreports.  5.31 will be the beta for running as a service.
+
+V5.29
+HIGH DPI monitor modes such as 150% should look better.
+Oars have the size Appended (1X1) = 256X256 meters
+Dual redundant WAP IP detection
+Delete old FXCOp Analyzer
+Cleaned up Web menu and Perl examples.
+Added a cache clearing fix to /VR on web site.
+Prep work for Running as a Service which is the goal of the 5.3 series
+
 
 V5.28
 Gloebit DLL's were missing.

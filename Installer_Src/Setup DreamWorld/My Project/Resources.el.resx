@@ -3852,4 +3852,25 @@
   <data name="WebPort" xml:space="preserve">
     <value>Θύρα Ιστού (80)</value>
   </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Απέτυχε να</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Η διαγραφή της υπηρεσίας απέτυχε</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Η εγκατάσταση της υπηρεσίας απέτυχε</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Η υπηρεσία απέτυχε να ξεκινήσει</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Εγκαταστάθηκε η υπηρεσία</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Η υπηρεσία καταργήθηκε</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Ξεκινώντας ως υπηρεσία</value>
+  </data>
 </root>

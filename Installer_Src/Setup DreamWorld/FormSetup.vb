@@ -3,7 +3,6 @@
 ' Copyright Outworldz, LLC. AGPL3.0 https://opensource.org/licenses/AGPL
 
 #End Region
-
 Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports System.IO
@@ -21,9 +20,10 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
-#Disable Warning CA2213 ' Disposable fields should be disposed
+
     ReadOnly BackupThread As New Backups
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
+
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
     Private _Adv As FormSettings
     Private _ContentIAR As FormOAR
@@ -39,7 +39,7 @@ Public Class FormSetup
     Private _speed As Double = 50
     Private cpu As New PerformanceCounter
     Private Graphs As New FormGraphs
-    Private NssmService As ClassNssm
+    Private ReadOnly NssmService As ClassNssm
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -47,7 +47,8 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-    Private wql As New ObjectQuery("Select TotalVirtualMemorySize, FreeVirtualMemory ,TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem")
+    Private ReadOnly wql As New ObjectQuery("Select TotalVirtualMemorySize, FreeVirtualMemory ,TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem")
+
     Private ws As NetServer
 
 #End Region
@@ -931,10 +932,9 @@ Public Class FormSetup
         End If
 
         Settings = New MySettings(_myFolder) With {
-            .CurrentDirectory = _myFolder
-        }
-
-        Settings.CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
+            .CurrentDirectory = _myFolder,
+            .CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
+            }
 
         Settings.OpensimBinPath() = _myFolder & "\OutworldzFiles\Opensim\bin\"
 
@@ -1012,9 +1012,7 @@ Public Class FormSetup
 
                 PID = ProcessID(RegionUUID)
                 ProcessID(RegionUUID) = 0
-                If ProcessIdDict.ContainsKey(PID) Then
-                    ProcessIdDict.Remove(PID)
-                End If
+                ProcessIdDict.Remove(PID)
                 DelPidFile(RegionUUID) 'kill the disk PID
 
                 If PropInstanceHandles.ContainsKey(PID) Then
@@ -1030,9 +1028,8 @@ Public Class FormSetup
                 Continue While
             End If
 
-            If ToDoList.ContainsKey(RegionUUID) Then
-                ToDoList.Remove(RegionUUID)
-            End If
+            ToDoList.Remove(RegionUUID)
+
 
             If Reason = "NoLogin" Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
@@ -1263,9 +1260,9 @@ Public Class FormSetup
                 MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
                 TextPrint(My.Resources.Stopped_word)
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
                 Dim FormRegions = New FormRegions
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
                 FormRegions.Activate()
                 FormRegions.Select()
                 FormRegions.Visible = True
@@ -1522,6 +1519,7 @@ Public Class FormSetup
                 speed = Me.Cpu1.NextValue()
                 If speed > 100 Then speed = 100
             Catch ex As Exception
+                ErrorLog("Chart 1 " & ex.Message)
                 BreakPoint.Dump(ex)
                 If Not Settings.CpuPatched Then
                     Dim pUpdate = New Process()
@@ -1548,7 +1546,8 @@ Public Class FormSetup
 
             PercentCPU.Text = $"CPU {speed / 100} %"
         Catch ex As Exception
-            ErrorLog(ex.Message)
+            BreakPoint.Dump(ex)
+            ErrorLog("Chart 2 " & ex.Message)
         End Try
         'RAM
 
@@ -1574,12 +1573,13 @@ Public Class FormSetup
                 r = Math.Round(r)
                 v = Math.Round(v)
                 Settings.Ramused = r
-                PercentRAM.Text = $"{r / 100}% RAM"
-                Virtual.Text = $"{v} MB VRAM"
+                PercentRAM.Text = $"{r / 100:p1} RAM"
+                Virtual.Text = $"VRAM {v}MB"
             Next
             results.Dispose()
         Catch ex As Exception
-            ErrorLog(ex.Message)
+            BreakPoint.Dump(ex)
+            ErrorLog("Chart 3 " & ex.Message)
         End Try
 
     End Sub
@@ -1588,11 +1588,11 @@ Public Class FormSetup
 
         Graphs.Close()
         Graphs.Dispose()
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Graphs = New FormGraphs With {
             .Visible = True
         }
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         Graphs.Activate()
         Graphs.Select()
         Graphs.BringToFront()
@@ -1866,9 +1866,7 @@ Public Class FormSetup
 
             For Each Avi In Remove
                 CurrentLocation.Remove(Avi)
-                If Visitor.ContainsKey(Avi) Then
-                    Visitor.Remove(Avi)
-                End If
+                Visitor.Remove(Avi)
             Next
 
             total = CachedAvatars.Count
@@ -2263,9 +2261,9 @@ Public Class FormSetup
 
     Private Sub BackupCriticalFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupCriticalFilesToolStripMenuItem.Click
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim CriticalForm As New FormBackupBoxes
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
 
         CriticalForm.Activate()
         CriticalForm.Visible = True
@@ -2427,9 +2425,9 @@ Public Class FormSetup
 
     Private Sub DebugToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DebugToolStripMenuItem1.Click
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim FormInput As New FormDebug
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         FormInput.Activate()
         FormInput.Visible = True
         FormInput.Select()
@@ -2653,9 +2651,9 @@ Public Class FormSetup
 
     Private Sub LanguageToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LanguageToolStripMenuItem1.Click
 
-#Disable Warning CA2000
+
         Dim Lang As New Language
-#Enable Warning CA2000
+
         Lang.Activate()
         Lang.Visible = True
         Lang.Select()
@@ -2738,9 +2736,9 @@ Public Class FormSetup
 
     Private Sub MnuAbout_Click(sender As System.Object, e As EventArgs) Handles mnuAbout.Click
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim HelpAbout = New FormCopyright
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         HelpAbout.Show()
         HelpAbout.Activate()
         HelpAbout.Select()
@@ -2985,7 +2983,8 @@ Public Class FormSetup
                             outputFile.WriteLine($"@REM A program to restore MySQL from a backup{vbCrLf}mysql -u root {db} {opt} < ""{thing}""{vbCrLf} @pause{vbCrLf}")
                         End Using
                     Catch ex As Exception
-                        ErrorLog(" Failed to create restore file:" & ex.Message)
+                        BreakPoint.Dump(ex)
+                        ErrorLog("RestoreDatabase Failed to create restore file:" & ex.Message)
                         Return
                     End Try
 
@@ -3027,7 +3026,7 @@ Public Class FormSetup
 
     End Sub
 
-    Private Sub RunCheck(type As String)
+    Private Shared Sub RunCheck(type As String)
         Using p = New Process()
             Dim pi = New ProcessStartInfo With {
                 .Arguments = $"check_inventory.php {type}",
@@ -3071,9 +3070,9 @@ Public Class FormSetup
 
     Private Sub SearchHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchHelpToolStripMenuItem.Click
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim HelpAbout = New FormSearchHelp
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         HelpAbout.Show()
         HelpAbout.Activate()
         HelpAbout.Select()
@@ -3185,6 +3184,7 @@ Public Class FormSetup
             TextPrint("Starting Service. No Opensim DOS boxes will show")
             Using NssmService As New ClassNssm ' single instance
                 NssmService.StartService()
+                TextPrint("Service Installed as 'DreamGrid' in Services ")
             End Using
             Return
         End If
@@ -3221,6 +3221,11 @@ Public Class FormSetup
     End Sub
 
     Private Sub StartToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem4.Click
+
+        If Settings.RunAsService And NssmService IsNot Nothing Then
+            TextPrint("Service is already installed")
+            Return
+        End If
 
         Using NssmService As New ClassNssm ' single instance
             NssmService.StopAndDeleteService()
@@ -3282,7 +3287,19 @@ Public Class FormSetup
     End Sub
 
     Private Sub StopToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem4.Click
-        NssmService.StopAndDeleteService()
+
+        If Not Settings.RunAsService Then
+            TextPrint("Service is not installed")
+            Return
+        End If
+
+        If NssmService IsNot Nothing Then
+            NssmService.StopAndDeleteService()
+            TextPrint("Services removed")
+        Else
+            TextPrint("DreamGrid Service is not installed")
+        End If
+
     End Sub
 
     Private Sub TechnicalInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TechnicalInfoToolStripMenuItem.Click

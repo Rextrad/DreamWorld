@@ -3852,4 +3852,25 @@
   <data name="WebPort" xml:space="preserve">
     <value>Port web (80)</value>
   </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Fallat en</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>El servei no s'ha pogut suprimir</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>El servei no s'ha pogut instal·lar</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>No s'ha pogut iniciar el servei</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Servei instal·lat</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Servei eliminat</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Començant com a servei</value>
+  </data>
 </root>

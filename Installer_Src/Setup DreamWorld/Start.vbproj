@@ -940,10 +940,19 @@
       <DependentUpon>FormTide.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.ar-SA.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.ar.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTOS.ca.resx">
       <DependentUpon>FormTOS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTOS.cs.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.da.resx">
       <DependentUpon>FormTOS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTOS.de.resx">

@@ -193,10 +193,19 @@ Public Class FormSSL
         PictureBox1.Image = My.Resources.lock_time
         Using SSLProcess As New Process
 
+            Dim shortname = Settings.DnsName
+
+            Dim pattern = New Regex("\.?(.*)$", RegexOptions.IgnoreCase)
+            Dim match As Match = pattern.Match(shortname)
+            Dim Str As String = ""
+            If match.Success Then
+                shortname = match.Groups(1).Value
+            End If
+
             SSLProcess.StartInfo.CreateNoWindow = True
             SSLProcess.StartInfo.UseShellExecute = False
             SSLProcess.StartInfo.RedirectStandardOutput = True
-            SSLProcess.StartInfo.Arguments = $"--accepttos --source manual --host {Settings.DnsName} --validation filesystem --webroot ""{IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\htdocs")}"" --store pemfiles --pemfilespath ""{IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\Certs")}""  "
+            SSLProcess.StartInfo.Arguments = $"--accepttos --source manual --host {shortname} --validation filesystem --webroot ""{IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\htdocs")}"" --store pemfiles --pemfilespath ""{IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\Certs")}""  "
             If Settings.SSLEmail.Length > 0 Then
                 SSLProcess.StartInfo.Arguments &= $" --emailaddress {Settings.SSLEmail} "
             End If
@@ -210,12 +219,12 @@ Public Class FormSSL
                     SSLProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "SSL")
                     Dim Address As String = "explorer.exe"
                     Try
-                        Process.Start(Address, $"/open, {SSLProcess.StartInfo.FileName}")
+                        '            Process.Start(Address, $"/open, {SSLProcess.StartInfo.FileName}")
                     Catch ex As Exception
                         BreakPoint.Print(ex.Message)
                     End Try
                 End Using
-                Return
+                '   Return
             End If
 
             SSLProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\SSL")
@@ -238,10 +247,11 @@ Public Class FormSSL
                 Logger("OK", log, "SSL")
                 Logger("Info", "Certificate installed", "SSL")
                 ' It was not installed, so we need to restart Apache
-                If Settings.SSLIsInstalled = False Then
-                    Settings.SSLIsInstalled = True
-                    PictureBox1.Image = My.Resources.lock_time
-                End If
+                Settings.SSLIsInstalled = True
+                PictureBox1.Image = My.Resources.lock_time
+                StopApache()
+                StartApache()
+
             Else
                 If Status = -1 Then Logger("Error", "Failed to make the Certificate", "SSL")
                 If Status = 1 Then Logger("Error", "Non-recognized command", "SSL")
@@ -269,7 +279,7 @@ Public Class FormSSL
 
         'If Debugger.IsAttached Then Settings.SSLIsInstalled = False
 
-        LogFile = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\logs\SSL.log")
+        LogFile = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\SSL.log")
 
         If Not Settings.ApacheEnable Then
             Settings.SSLEnabled = False
