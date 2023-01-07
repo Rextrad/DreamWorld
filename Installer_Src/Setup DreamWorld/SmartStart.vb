@@ -562,6 +562,7 @@ Module SmartStart
 
 #Region "HTML"
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId:="System.Int32.TryParse(System.String,System.Int32@)")>
     Public Function RegionListHTML(Data As String) As String
 
         ' there is only a 16KB capability in Opensim for reading a web page.
@@ -778,7 +779,6 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
-
         SyncLock BootupLock
 
             PropOpensimIsRunning() = True
@@ -830,7 +830,7 @@ Module SmartStart
 
             End If
 
-            'Do not boot a region when services are available 
+            'Do not boot a region when services are available
 
             If ServiceExists("Dreamgrid") And Not Settings.ServiceMode Then
                 PropUpdateView = True ' make form refresh
@@ -1071,8 +1071,9 @@ Module SmartStart
         PokeRegionTimer(RegionUUID)
         TextPrint($"{Region_Name(RegionUUID)}: load oar {File}")
 
-        Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
-        ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}load oar --force-terrain --force-parcels ""{File}""{vbCrLf}")
+        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")3
+        RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
+        RPC_Region_Command(RegionUUID, $"load oar --force-terrain --force-parcels ""{File}""")
         Result.Scan()
 
         If Not AvatarsIsInGroup(Group_Name(RegionUUID)) Then
