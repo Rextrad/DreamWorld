@@ -22,6 +22,8 @@ Public Class WaitForFile
         o.text = text
         o.RegionUUID = RegionUUID
 
+        PokeRegionTimer(RegionUUID)
+
         Filename = IO.Path.Combine(Settings.OpensimBinPath, $"Regions/{Group_Name(o.RegionUUID)}/Opensim.log")
         If Not File.Exists(Filename) Then
             ' Create or overwrite the file.
@@ -71,9 +73,12 @@ Public Class WaitForFile
                     line = reader.ReadLine()
                     If line IsNot Nothing Then
                         'Debug.Print(line)
-                        If ScanForPattern(line, text) Then
+                        If line.Contains(text) Then
                             If o.Type = "Load OAR" Then
                                 DoLandOneRegion(RegionUUID) ' set region to no rez, no scripts
+                                RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Loaded_word}", "")
+                            Else
+                                RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Finished_word}", "")
                             End If
                             reader.Close()
                             Return
@@ -82,8 +87,8 @@ Public Class WaitForFile
                         lastMaxOffset += line.Length
                     End If
                     CTR += 1
-                    Sleep(100)
                     PokeRegionTimer(RegionUUID)
+                    Sleep(100)
                 End While
             Catch ex As Exception
                 reader.Close()
