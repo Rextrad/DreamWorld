@@ -370,6 +370,7 @@ Public Class FormRegions
 
         If StopLoading = "StopRequested" Then
             ResetRun()
+            StopLoading = "Stopped"
             Return
         End If
 
@@ -383,6 +384,7 @@ Public Class FormRegions
         Try
             For Each J In FormSetup.ContentOAR.GetJson
                 If StopLoading = "StopRequested" Then
+                    StopLoading = "Stopped"
                     ResetRun()
                     Return
                 End If
@@ -421,6 +423,7 @@ Public Class FormRegions
                     Else
                         BreakPoint.Print("Bad Region UUID " & RegionUUID)
                         ResetRun()
+                        StopLoading = "Stopped"
                         Return
                     End If
                 Else
@@ -429,6 +432,7 @@ Public Class FormRegions
 
                     If StopLoading = "StopRequested" Then
                         ResetRun()
+                        StopLoading = "Stopped"
                         Return
                     End If
                     RegionUUID = CreateRegionStruct(shortname)
@@ -447,11 +451,13 @@ Public Class FormRegions
                         If SizeRegion = 0 Then
                             ErrorLog($"Cannot load OAR - bad size in {J.Name}")
                             ResetRun()
+                            StopLoading = "Stopped"
                             Return
                         End If
                     Else
                         ErrorLog($"Cannot load OAR {J.Name}")
                         ResetRun()
+                        StopLoading = "Stopped"
                         Return
                     End If
 
@@ -486,11 +492,13 @@ Public Class FormRegions
                 End If
                 If StopLoading = "StopRequested" Then
                     ResetRun()
+                    StopLoading = "Stopped"
                     Return
                 End If
             Next
         Catch ex As Exception
             ResetRun()
+            StopLoading = "Stopped"
             BreakPoint.Print(ex.Message)
         End Try
 
@@ -518,11 +526,13 @@ Public Class FormRegions
 
                 If StopLoading = "StopRequested" Then
                     ResetRun()
+                    StopLoading = "Stopped"
                     Return
                 End If
 
                 If Not PropOpensimIsRunning Then
                     ResetRun()
+                    StopLoading = "Stopped"
                     Return
                 End If
 
@@ -532,6 +542,9 @@ Public Class FormRegions
                 If RegionEnabled(RegionUUID) Then
                     TextPrint($"{My.Resources.Start_word} {Region_Name}")
                     Dim File = $"{PropDomain}/Outworldz_Installer/OAR/{Region_Name}"
+
+                    License(File, RegionUUID)
+
                     Dim obj As New TaskObject With {
                         .TaskName = TaskName.LoadAllFreeOARs,
                         .Command = File
@@ -543,6 +556,7 @@ Public Class FormRegions
 
                 If StopLoading = "StopRequested" Then
                     ResetRun()
+                    StopLoading = "Stopped"
                     Return
                 End If
 
@@ -550,7 +564,7 @@ Public Class FormRegions
         Catch ex As Exception
             BreakPoint.Print(ex.Message)
         End Try
-
+        StopLoading = "Stopped"
         ResetRun()
 
     End Sub
@@ -559,6 +573,7 @@ Public Class FormRegions
 
         gEstateName = ""
         FormSetup.Buttons(FormSetup.StopButton)
+
 
     End Sub
 

@@ -1071,7 +1071,7 @@ Module SmartStart
         PokeRegionTimer(RegionUUID)
         TextPrint($"{Region_Name(RegionUUID)}: load oar {File}")
 
-        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")3
+        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
         RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
         RPC_Region_Command(RegionUUID, $"load oar --force-terrain --force-parcels ""{File}""")
         Result.Scan()
