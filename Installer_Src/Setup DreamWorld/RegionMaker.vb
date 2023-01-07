@@ -545,120 +545,128 @@ Module RegionMaker
                             uuid = CStr(INI.GetIni(fName, "RegionUUID", "", "String"))
 
                             Dim SomeUUID As New Guid
-                            If Not Guid.TryParse(uuid, SomeUUID) Then
+                            If Not Guid.TryParse(uuid, SomeUUID) And Not Settings.ServiceMode Then
                                 MsgBox("Cannot read UUID In INI file For " & fName, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
-                                '  TODO Auto repair this error from a backup
-                                Exit For
+                                ErrorLog("Cannot read UUID In INI file For " & fName)
+                                Dim newfile = file
+                                newfile = newfile.Replace(".ini", ".bak")
+                                CopyFileFast(newfile, file)
+                                '  Auto repair this error from a backup
+                            End If
+
+                            If Verbose Then TextPrint("-> " & fName)
+                            CreateRegionStruct(fName, uuid)
+
+                            RegionEnabled(uuid) = CBool(INI.GetIni(fName, "Enabled", "True", "Boolean"))
+
+                            RegionIniFilePath(uuid) = file ' save the path
+                            RegionIniFolderPath(uuid) = System.IO.Path.GetDirectoryName(file)
+
+                            Dim theEnd As Integer = RegionIniFolderPath(uuid).LastIndexOf("\", StringComparison.OrdinalIgnoreCase)
+                            OpensimIniPath(uuid) = RegionIniFolderPath(uuid).Substring(0, theEnd + 1)
+
+                            Dim DirName = Path.GetFileName(FolderName)
+                            If DirName.Length > 0 Then
+                                Group_Name(uuid) = DirName
+                                Group = DirName
                             Else
-                                If Verbose Then TextPrint("-> " & fName)
-                                CreateRegionStruct(fName, uuid)
-
-                                RegionEnabled(uuid) = CBool(INI.GetIni(fName, "Enabled", "True", "Boolean"))
-
-                                RegionIniFilePath(uuid) = file ' save the path
-                                RegionIniFolderPath(uuid) = System.IO.Path.GetDirectoryName(file)
-
-                                Dim theEnd As Integer = RegionIniFolderPath(uuid).LastIndexOf("\", StringComparison.OrdinalIgnoreCase)
-                                OpensimIniPath(uuid) = RegionIniFolderPath(uuid).Substring(0, theEnd + 1)
-
-                                Dim DirName = Path.GetFileName(FolderName)
-                                If DirName.Length > 0 Then
-                                    Group_Name(uuid) = DirName
-                                    Group = DirName
-                                Else
+                                If Not Settings.ServiceMode Then
                                     MsgBox("Cannot locate Dos Box name for " & fName, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
-                                    Return 0
-                                End If
-
-                                SizeX(uuid) = CInt(INI.GetIni(fName, "SizeX", "256", "Integer"))
-                                SizeY(uuid) = CInt(INI.GetIni(fName, "SizeY", "256", "Integer"))
-
-                                ' extended props V2.1
-                                NonPhysical_PrimMax(uuid) = CStr(INI.GetIni(fName, "NonPhysicalPrimMax", "1024", "Integer"))
-                                Physical_PrimMax(uuid) = CStr(INI.GetIni(fName, "PhysicalPrimMax", "64", "Integer"))
-                                Clamp_PrimSize(uuid) = CBool(INI.GetIni(fName, "ClampPrimSize", "False", "Boolean"))
-                                Max_Agents(uuid) = CStr(INI.GetIni(fName, "MaxAgents", "100", "Integer"))
-
-                                ' Location is int,int format.
-                                Dim C As String = CStr(INI.GetIni(fName, "Location", RandomNumber.Between(980, 1020) & "," & RandomNumber.Between(980, 1020)))
-                                Dim parts As String() = C.Split(New Char() {","c}) ' split at the comma
-                                Coord_X(uuid) = CInt("0" & CStr(parts(0).Trim))
-                                Coord_Y(uuid) = CInt("0" & CStr(parts(1).Trim))
-
-                                ' options parameters coming from INI file can be blank!
-                                MinTimerInterval(uuid) = CStr(INI.GetIni(fName, "MinTimerInterval", "", "String"))
-                                FrameTime(uuid) = CStr(INI.GetIni(fName, "FrameTime", "", "String"))
-                                RegionSnapShot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
-                                MapType(uuid) = CStr(INI.GetIni(fName, "MapType", "", "String"))
-                                RegionPhysics(uuid) = CStr(INI.GetIni(fName, "Physics", "", "String"))
-                                Max_Prims(uuid) = CStr(INI.GetIni(fName, "MaxPrims", "", "String"))
-                                GodDefault(uuid) = CStr(INI.GetIni(fName, "GodDefault", "True", "String"))
-                                AllowGods(uuid) = CStr(INI.GetIni(fName, "AllowGods", "", "String"))
-                                RegionGod(uuid) = CStr(INI.GetIni(fName, "RegionGod", "", "String"))
-                                ManagerGod(uuid) = CStr(INI.GetIni(fName, "ManagerGod", "", "String"))
-                                Birds(uuid) = CStr(INI.GetIni(fName, "Birds", "", "String"))
-                                Tides(uuid) = CStr(INI.GetIni(fName, "Tides", "", "String"))
-                                Teleport_Sign(uuid) = CBool(INI.GetIni(fName, "Teleport", "", "Boolean"))
-                                DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "", "String"))
-                                Disallow_Foreigners(uuid) = CStr(INI.GetIni(fName, "DisallowForeigners", "", "String"))
-                                Disallow_Residents(uuid) = CStr(INI.GetIni(fName, "DisallowResidents", "", "String"))
-                                SkipAutobackup(uuid) = CStr(INI.GetIni(fName, "SkipAutoBackup", "", "String"))
-                                Snapshot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
-                                ScriptEngine(uuid) = CStr(INI.GetIni(fName, "ScriptEngine", "", "String"))
-                                GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "", "String"))
-                                Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "", "String"))
-                                Smart_Start(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "Boolean"))
-                                LandingSpot(uuid) = CStr(INI.GetIni(fName, "DefaultLanding", "", "String"))
-                                OpensimWorldAPIKey(uuid) = CStr(INI.GetIni(fName, "OpensimWorldAPIKey", "", "String"))
-                                Cores(uuid) = CInt(0 & INI.GetIni(fName, "Cores", "", "String"))
-                                Priority(uuid) = CStr(INI.GetIni(fName, "Priority", "", "String"))
-
-                                ' Four  scenarios for ports
-                                ' if the system was shut down safely ( default = true after an update), then
-                                ' sequence them.
-                                ' if not, read them from the INI files.
-                                ' If the iNI files have Nothing, Then  go Max
-                                ' if this is after boot up, use the backed up settings.
-                                ' Adding a new region always uses
-
-                                ' Get Next Port
-                                If ThisGroup = 0 Then
-                                    ThisGroup = GetPort(uuid)
-                                    GroupPort(uuid) = ThisGroup
-                                End If
-
-                                Region_Port(uuid) = ThisGroup
-
-                                Dim G = Group_Name(uuid)
-                                If GetHwnd(G) = IntPtr.Zero Then
-                                    Region_Port(uuid) = GetPort(uuid)
-                                    Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))}  To {fName}", "Port")
-                                    Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
                                 Else
-                                    Region_Port(uuid) = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
-                                    If Region_Port(uuid) = 0 Then Region_Port(uuid) = LargestPort() + 1
-                                    Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
-                                    '
-                                    GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
-                                    BreakPoint.Print($"Assign Group Port {CStr(GroupPort(uuid))} To {fName}")
-                                    '
-                                    If GroupPort(uuid) = 0 Then
-                                        GroupPort(uuid) = ThisGroup
-                                        Logger("Port", $"Re-Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                                    End If
-
+                                    ErrorLog("Cannot locate Dos Box name for " & fName)
                                 End If
 
-                                ' If region Is already set, use its port as they cannot change while up.
-                                ' restore backups of transient data
-                                Dim o = FindBackupByName(fName)
-                                If o >= 0 Then
-                                    AvatarCount(uuid) = Backup(o)._AvatarCount
-                                    ProcessID(uuid) = Backup(o)._ProcessID
-                                    RegionStatus(uuid) = Backup(o)._Status
-                                    Timer(uuid) = Backup(o)._Timer
-                                    CrashCounter(uuid) = Backup(o)._CrashCounter
+                                Return 0
+                            End If
+
+                            SizeX(uuid) = CInt(INI.GetIni(fName, "SizeX", "256", "Integer"))
+                            SizeY(uuid) = CInt(INI.GetIni(fName, "SizeY", "256", "Integer"))
+
+                            ' extended props V2.1
+                            NonPhysical_PrimMax(uuid) = CStr(INI.GetIni(fName, "NonPhysicalPrimMax", "1024", "Integer"))
+                            Physical_PrimMax(uuid) = CStr(INI.GetIni(fName, "PhysicalPrimMax", "64", "Integer"))
+                            Clamp_PrimSize(uuid) = CBool(INI.GetIni(fName, "ClampPrimSize", "False", "Boolean"))
+                            Max_Agents(uuid) = CStr(INI.GetIni(fName, "MaxAgents", "100", "Integer"))
+
+                            ' Location is int,int format.
+                            Dim C As String = CStr(INI.GetIni(fName, "Location", RandomNumber.Between(980, 1020) & "," & RandomNumber.Between(980, 1020)))
+                            Dim parts As String() = C.Split(New Char() {","c}) ' split at the comma
+                            Coord_X(uuid) = CInt("0" & CStr(parts(0).Trim))
+                            Coord_Y(uuid) = CInt("0" & CStr(parts(1).Trim))
+
+                            ' options parameters coming from INI file can be blank!
+                            MinTimerInterval(uuid) = CStr(INI.GetIni(fName, "MinTimerInterval", "", "String"))
+                            FrameTime(uuid) = CStr(INI.GetIni(fName, "FrameTime", "", "String"))
+                            RegionSnapShot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
+                            MapType(uuid) = CStr(INI.GetIni(fName, "MapType", "", "String"))
+                            RegionPhysics(uuid) = CStr(INI.GetIni(fName, "Physics", "", "String"))
+                            Max_Prims(uuid) = CStr(INI.GetIni(fName, "MaxPrims", "", "String"))
+                            GodDefault(uuid) = CStr(INI.GetIni(fName, "GodDefault", "True", "String"))
+                            AllowGods(uuid) = CStr(INI.GetIni(fName, "AllowGods", "", "String"))
+                            RegionGod(uuid) = CStr(INI.GetIni(fName, "RegionGod", "", "String"))
+                            ManagerGod(uuid) = CStr(INI.GetIni(fName, "ManagerGod", "", "String"))
+                            Birds(uuid) = CStr(INI.GetIni(fName, "Birds", "", "String"))
+                            Tides(uuid) = CStr(INI.GetIni(fName, "Tides", "", "String"))
+                            Teleport_Sign(uuid) = CBool(INI.GetIni(fName, "Teleport", "", "Boolean"))
+                            DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "", "String"))
+                            Disallow_Foreigners(uuid) = CStr(INI.GetIni(fName, "DisallowForeigners", "", "String"))
+                            Disallow_Residents(uuid) = CStr(INI.GetIni(fName, "DisallowResidents", "", "String"))
+                            SkipAutobackup(uuid) = CStr(INI.GetIni(fName, "SkipAutoBackup", "", "String"))
+                            Snapshot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
+                            ScriptEngine(uuid) = CStr(INI.GetIni(fName, "ScriptEngine", "", "String"))
+                            GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "", "String"))
+                            Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "", "String"))
+                            Smart_Start(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "Boolean"))
+                            LandingSpot(uuid) = CStr(INI.GetIni(fName, "DefaultLanding", "", "String"))
+                            OpensimWorldAPIKey(uuid) = CStr(INI.GetIni(fName, "OpensimWorldAPIKey", "", "String"))
+                            Cores(uuid) = CInt(0 & INI.GetIni(fName, "Cores", "", "String"))
+                            Priority(uuid) = CStr(INI.GetIni(fName, "Priority", "", "String"))
+
+                            ' Four  scenarios for ports
+                            ' if the system was shut down safely ( default = true after an update), then
+                            ' sequence them.
+                            ' if not, read them from the INI files.
+                            ' If the iNI files have Nothing, Then  go Max
+                            ' if this is after boot up, use the backed up settings.
+                            ' Adding a new region always uses
+
+                            ' Get Next Port
+                            If ThisGroup = 0 Then
+                                ThisGroup = GetPort(uuid)
+                                GroupPort(uuid) = ThisGroup
+                            End If
+
+                            Region_Port(uuid) = ThisGroup
+
+                            Dim G = Group_Name(uuid)
+                            If GetHwnd(G) = IntPtr.Zero Then
+                                Region_Port(uuid) = GetPort(uuid)
+                                Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))}  To {fName}", "Port")
+                                Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
+                            Else
+                                Region_Port(uuid) = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
+                                If Region_Port(uuid) = 0 Then Region_Port(uuid) = LargestPort() + 1
+                                Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
+                                '
+                                GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
+                                BreakPoint.Print($"Assign Group Port {CStr(GroupPort(uuid))} To {fName}")
+                                '
+                                If GroupPort(uuid) = 0 Then
+                                    GroupPort(uuid) = ThisGroup
+                                    Logger("Port", $"Re-Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
                                 End If
+
+                            End If
+
+                            ' If region Is already set, use its port as they cannot change while up.
+                            ' restore backups of transient data
+                            Dim o = FindBackupByName(fName)
+                            If o >= 0 Then
+                                AvatarCount(uuid) = Backup(o)._AvatarCount
+                                ProcessID(uuid) = Backup(o)._ProcessID
+                                RegionStatus(uuid) = Backup(o)._Status
+                                Timer(uuid) = Backup(o)._Timer
+                                CrashCounter(uuid) = Backup(o)._CrashCounter
                             End If
 
                             INI.SaveIni()
@@ -668,8 +676,11 @@ Module RegionMaker
                         Next
                     Catch ex As Exception
                         BreakPoint.Dump(ex)
-                        MsgBox(My.Resources.Error_Region + fName + "  " + ex.Message, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-                        ErrorLog("ErrParse file " + fName + ": " + ex.Message)
+                        If Not Not Settings.ServiceMode Then
+                            MsgBox($"{My.Resources.Error_Region}{fName}  {ex.Message}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                        End If
+
+                        ErrorLog($"{My.Resources.Error_Region}{fName}  {ex.Message}")
                         PropUpdateView = True ' make form refresh
                         Return 0
                     End Try
@@ -1712,6 +1723,7 @@ Module RegionMaker
 
 #Region "TOS"
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Function TOS(post As String) As String
         ' currently unused as is only in standalone
         Debug.Print("UUID:" + post)
@@ -1953,7 +1965,7 @@ Module RegionMaker
             If INI.SetIni("Const", "ApachePort", CStr(Settings.ApachePort)) Then Return True
 
             '
-            'Remote Console            
+            'Remote Console
             If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
             If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
 
