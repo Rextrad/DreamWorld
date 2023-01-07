@@ -1,7 +1,14 @@
 REVISIONS FOR DREAMGRID
 
+
+V5.31 Run as a Service Branch
+Gravity region is a 4X4, not a 1X1
+Load OAR prints on the DreamGrid console when the OAR is finished loading 
+Load OAR in bulk always showed even when gracefully finishing.
+DOS boxes always popped up for a brief time.
+
 V5.3 Release
-Closed all crashreports.  5.31 will be the beta for running as a service.
+Closed all crash reports.  5.31 will be the beta for running as a service.
 
 V5.29
 HIGH DPI monitor modes such as 150% should look better.
