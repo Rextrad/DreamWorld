@@ -857,7 +857,7 @@ Module SmartStart
                 args = " -console=rest" ' space is required
             End If
 
-            BootProcess.StartInfo.UseShellExecute = False
+            BootProcess.StartInfo.UseShellExecute = True
             BootProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath()
             BootProcess.StartInfo.FileName = """" & Settings.OpensimBinPath() & "OpenSim.exe" & """"
             BootProcess.StartInfo.CreateNoWindow = False
