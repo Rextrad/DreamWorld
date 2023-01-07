@@ -29,11 +29,12 @@ Module DNS
 
         If Settings.DnsName.Length = 0 And Settings.EnableHypergrid Then
             Dim newname = GetNewDnsName()
-            If newname.Length >= 0 Then
-                If RegisterName(newname) Then
+            If newname.Length >= 0 And Not Settings.ServiceMode Then
+                If Not RegisterName(newname) Then
                     Settings.DnsName = newname
                     Settings.PublicIP = newname
                     Settings.SaveSettings()
+
                     MsgBox(My.Resources.NameAlreadySet, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Information_word)
                 End If
             End If
@@ -50,7 +51,8 @@ Module DNS
         Dim Checkname As String = String.Empty
 
         If IPCheck.IsPrivateIP(DNSName) Then
-            Return False
+            Settings.DnsTestPassed() = True
+            Return True
         End If
 
         Dim DNS = New List(Of String) From {
@@ -70,15 +72,18 @@ Module DNS
                 End Try
 
                 If Checkname = "UPDATE" Then
+                    Settings.DnsTestPassed() = True
                     Return True
                 ElseIf Checkname = "NAK" Then
-                    MsgBox(DNSName & ":" & My.Resources.DDNS_In_Use, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
-                    Exit For
+                    If Not Settings.ServiceMode Then
+                        MsgBox(DNSName & ":" & My.Resources.DDNS_In_Use, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                        Exit For
+                    End If
                 End If
-                Application.doevents()
+                Application.DoEvents()
             Next
         End Using
-
+        Settings.DnsTestPassed() = False
         Return False
 
     End Function

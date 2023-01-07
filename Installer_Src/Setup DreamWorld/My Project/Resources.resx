@@ -1739,9 +1739,6 @@
   <data name="Sorry_No_Help" xml:space="preserve">
     <value>Sorry, Help is not yet available for this.</value>
   </data>
-  <data name="Starting_WebServer_word" xml:space="preserve">
-    <value>Starting webserver</value>
-  </data>
   <data name="OpensimNeedstoStop" xml:space="preserve">
     <value>Opensimulator  Must Be Stopped</value>
   </data>
@@ -3885,7 +3882,6 @@
   </data>
   <data name="SSLTLS" xml:space="preserve">
     <value>Enable SSL/TLS</value>
-    <comment>V5</comment>
   </data>
   <data name="Backup_Custom" xml:space="preserve">
     <value>Backup Custom Web Pages</value>

@@ -167,6 +167,7 @@ Module Robust
         Dim args As String = ""
         If ServiceExists("DreamGrid") And Settings.ServiceMode Then
             args = " -console=rest" ' space required
+            Settings.GraphVisible = False
         End If
 
         RobustProcess.StartInfo.Arguments &= args
@@ -181,6 +182,7 @@ Module Robust
         End Select
 
         Try
+            TextPrint($"Booting Robust")
             RobustProcess.Start()
             RobustHandler = True
         Catch ex As Exception
@@ -203,22 +205,25 @@ Module Robust
         ' Wait for Robust to start listening
         Dim counter = 0
         While Not IsRobustRunning() And PropOpensimIsRunning
-            Dim sleeptime = 5    ' seconds
+
             TextPrint("Robust " & Global.Outworldz.My.Resources.isBooting)
             counter += 1
             ' 2 minutes to boot on bad hardware at 5 sec per spin
-            If counter > 60 * 2 / sleeptime Then
+            If counter > 120 Then
                 TextPrint(My.Resources.Robust_failed_to_start)
                 FormSetup.Buttons(FormSetup.StartButton)
-                Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-                If (yesno = vbYes) Then
-                    Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+                If Not Settings.ServiceMode Then
+                    Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                    If (yesno = vbYes) Then
+                        Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+                    End If
                 End If
+
                 FormSetup.Buttons(FormSetup.StartButton)
                 MarkRobustOffline()
                 Return False
             End If
-            Sleep(sleeptime * 1000) ' in ms
+            Sleep(1000) ' in ms
         End While
         Sleep(2000)
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Robust_running)
@@ -238,7 +243,11 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            ConsoleCommand(RobustName, "q")
+            If Settings.ServiceMode Then
+                Zap("Robust")
+            Else
+                ConsoleCommand(RobustName, "q")
+            End If
 
             Dim ctr As Integer = 0
             ' wait 30 seconds for robust to quit
@@ -405,7 +414,7 @@ Module Robust
             If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
             If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True
 
-            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName Then
+            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName And Not Settings.ServiceMode Then
                 MsgBox(My.Resources.Cannot_locate, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
                 Dim RegionName = ChooseRegion(False)
 
@@ -577,6 +586,7 @@ Module Robust
                     RobustIcon(True)
                     Return True
                 End If
+                Log("INFO", $"Robust is Not running: {Up}")
             End Try
 
         End Using
@@ -636,9 +646,11 @@ Module Robust
         RobustCrashCounter = 0
         MarkRobustOffline()
 
-        Dim yesno = MsgBox(My.Resources.Robust_exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-        If (yesno = vbYes) Then
-            Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+        If Not Settings.ServiceMode Then
+            Dim yesno = MsgBox(My.Resources.Robust_exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If (yesno = vbYes) Then
+                Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+            End If
         End If
 
     End Sub

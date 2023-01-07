@@ -3,6 +3,7 @@
 ' Copyright Outworldz, LLC. AGPL3.0 https://opensource.org/licenses/AGPL
 
 #End Region
+
 Imports System.Globalization
 Imports System.Text.RegularExpressions
 Imports System.IO
@@ -20,11 +21,12 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
-
+    Public ReadOnly NssmService As New ClassNssm
     ReadOnly BackupThread As New Backups
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
+    Private ReadOnly wql As New ObjectQuery("Select TotalVirtualMemorySize, FreeVirtualMemory ,TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem")
     Private _Adv As FormSettings
     Private _ContentIAR As FormOAR
     Private _ContentOAR As FormOAR
@@ -39,7 +41,6 @@ Public Class FormSetup
     Private _speed As Double = 50
     Private cpu As New PerformanceCounter
     Private Graphs As New FormGraphs
-    Private ReadOnly NssmService As New ClassNssm
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -47,8 +48,6 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-    Private ReadOnly wql As New ObjectQuery("Select TotalVirtualMemorySize, FreeVirtualMemory ,TotalVisibleMemorySize, FreePhysicalMemory FROM Win32_OperatingSystem")
-
     Private ws As NetServer
 
 #End Region
@@ -507,16 +506,15 @@ Public Class FormSetup
 
         Cleanup() ' old files thread
 
-        DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\Status.log"))
-
         'UPNP create if we need it
         PropMyUPnpMap = New UPnp()
 
         ' WebUI Menu
         ViewWebUI.Visible = Settings.WifiEnabled
-
-        CheckForUpdates()
-        Application.DoEvents()
+        If Not Settings.ServiceMode() Then
+            CheckForUpdates()
+            Application.DoEvents()
+        End If
 
         ' Get Opensimulator Scripts to date if needed
         If Settings.DeleteScriptsOnStartupLevel <> PropSimVersion Then
@@ -546,6 +544,7 @@ Public Class FormSetup
         Dim processes = Process.GetProcessesByName("Opensim")
         For Each p In processes
             If Not PropInstanceHandles.ContainsKey(p.Id) Then
+                Dim id = p.Id
                 PropInstanceHandles.TryAdd(p.Id, p.MainWindowTitle)
             End If
         Next
@@ -577,14 +576,17 @@ Public Class FormSetup
         SetServerType()
 
         If SetIniData() Then
-            If Settings.ServiceMode() Then MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            If Not Settings.ServiceMode() Then
+                MsgBox("Failed to setup INI files", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            End If
+            ErrorLog("Failed to setup INI files")
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
             Return
         End If
 
         ' Boot Port 8001 Server
-        TextPrint(My.Resources.Starting_WebServer_word)
+        TextPrint(My.Resources.Starting_DiagPort_Webserver)
         PropWebserver = NetServer.GetWebServer
         PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
         Application.DoEvents()
@@ -643,25 +645,32 @@ Public Class FormSetup
         End If
 
         TextPrint(My.Resources.RefreshingOAR)
-        ContentOAR = New FormOAR
-        ContentOAR.Init("OAR")
-        TextPrint(My.Resources.RefreshingIAR)
-        ContentIar = New FormOAR
-        ContentIar.Init("IAR")
+        If Not Settings.RunAsService Then
+            ContentOAR = New FormOAR
+            ContentOAR.Init("OAR")
+            TextPrint(My.Resources.RefreshingIAR)
+            ContentIar = New FormOAR
+            ContentIar.Init("IAR")
+            Application.DoEvents()
+            LoadLocalIAROAR() ' load IAR and OAR local content
 
-        Application.DoEvents()
-        LoadLocalIAROAR() ' load IAR and OAR local content
+            TextPrint(My.Resources.Setup_Ports_word)
+            Application.DoEvents()
+            Firewall.SetFirewall()
 
-        TextPrint(My.Resources.Setup_Ports_word)
-        Application.DoEvents()
-        Firewall.SetFirewall()
+            ' Get the names of all the lands
+            InitLand()
+            InitTrees()
 
-        ' Get the names of all the lands
-        InitLand()
-        InitTrees()
+            HelpOnce("License") ' license on bottom
+            HelpOnce("Startup")
 
-        HelpOnce("License") ' license on bottom
-        HelpOnce("Startup")
+            ' also turn on the lights for the other services.
+            IsRobustRunning()
+            IsApacheRunning()
+            IsIceCastRunning()
+
+        End If
 
         Joomla.CheckForjOpensimUpdate()
 
@@ -669,11 +678,6 @@ Public Class FormSetup
         Randomize()
         If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
         If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
-
-        ' also turn on the lights for the other services.
-        IsRobustRunning()
-        IsApacheRunning()
-        IsIceCastRunning()
 
         Settings.SaveSettings()
 
@@ -704,6 +708,8 @@ Public Class FormSetup
             TextPrint(My.Resources.StartingAsService)
             Startup()
             Return
+        Else
+            TextPrint("Starting on Desktop")
         End If
 
         If Settings.Autostart Then
@@ -1031,7 +1037,6 @@ Public Class FormSetup
 
             ToDoList.Remove(RegionUUID)
 
-
             If Reason = "NoLogin" Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
                 PropUpdateView = True
@@ -1093,11 +1098,12 @@ Public Class FormSetup
                         RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
                         If Not Settings.ServiceMode Then
                             Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
-                            If (yesno = vbYes) Then
+                            If yesno = vbYes Then
                                 Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
                             End If
                         End If
 
+                        ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
                         ExitList.TryRemove(GroupName, "")
                         Continue While
                     End If
@@ -1127,6 +1133,7 @@ Public Class FormSetup
                         If (yesno = vbYes) Then
                             Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
                         End If
+                        ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log)
                     End If
 
                 End If
@@ -1160,6 +1167,7 @@ Public Class FormSetup
             If yesno = MsgBoxResult.Yes Then
                 Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
             End If
+            ErrorLog(My.Resources.Icecast_Exited)
         End If
 
     End Sub
@@ -1261,7 +1269,6 @@ Public Class FormSetup
                 MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
                 TextPrint(My.Resources.Stopped_word)
 
-
                 Dim FormRegions = New FormRegions
 
                 FormRegions.Activate()
@@ -1294,7 +1301,11 @@ Public Class FormSetup
         End If
 
         If SetIniData() Then
-            If Settings.ServiceMode() Then MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, My.Resources.Error_word)
+            If Not Settings.ServiceMode() Then
+                MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, My.Resources.Error_word)
+            Else
+                ErrorLog("Failed to setup")
+            End If
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
             Return
@@ -1802,7 +1813,7 @@ Public Class FormSetup
 
                     Dim UUID = System.Guid.NewGuid.ToString
 
-                    Dim URL = $"http//{Settings.PublicIP}{Settings.DiagnosticPort}/TOS?uid={UUID}"
+                    Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}/TOS?uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
@@ -1818,7 +1829,7 @@ Public Class FormSetup
                     AddorUpdateVisitor(Avatar, RegionName)
                     PropUpdateView = True
 
-                    If Not IsTOSAccepted(AgentObject, UUID) Then
+                    If Not IsTOSAccepted(AgentObject, UUID) And Settings.TOSEnabled Then
                         RPC_admin_dialog(AgentObject.AvatarUUID, $"{My.Resources.AgreeTOS}{vbCrLf}{URL}")
                         SetTos2Zero(AgentObject.AvatarUUID)
                     End If
@@ -2052,7 +2063,7 @@ Public Class FormSetup
 
         If TimerisBusy > 0 And TimerisBusy < 30 Then
             TimerisBusy += 1
-            application.doevents
+            Application.DoEvents()
             Return
         Else
             TimerisBusy = 0
@@ -2062,7 +2073,7 @@ Public Class FormSetup
 
         Chart()                     ' do charts collection
         CheckPost()                 ' see if anything arrived in the web server
-        CheckForBootedRegions()     ' task to scan for anything that just came online
+        CheckForBootedRegions()     ' task to scan for anything that just came on line
         TeleportAgents()            ' send them onward
         ProcessQuit()               ' check if any processes exited
         PrintBackups()              ' print if backups are running
@@ -2165,9 +2176,31 @@ Public Class FormSetup
         TextPrint(My.Resources.Check_Diag)
         Dim wsstarted = IsRegionReady(CType(Settings.DiagnosticPort, Integer))
         If wsstarted = False Then
-            If Settings.ServiceMode() Then MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            If Not Settings.ServiceMode() Then
+                MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
+            End If
+            ErrorLog($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}")
         End If
 
+    End Sub
+
+    Private Shared Sub RunCheck(type As String)
+        Using p = New Process()
+            Dim pi = New ProcessStartInfo With {
+                .Arguments = $"check_inventory.php {type}",
+                .FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/php7/php.exe"),
+                .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/php7/"),
+                .UseShellExecute = True, ' so we can redirect streams and minimize
+                .WindowStyle = ProcessWindowStyle.Normal,
+                .CreateNoWindow = False
+            }
+            p.StartInfo = pi
+            Try
+                p.Start()
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+        End Using
     End Sub
 
     Private Sub AddUserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddUserToolStripMenuItem.Click
@@ -2263,9 +2296,7 @@ Public Class FormSetup
 
     Private Sub BackupCriticalFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupCriticalFilesToolStripMenuItem.Click
 
-
         Dim CriticalForm As New FormBackupBoxes
-
 
         CriticalForm.Activate()
         CriticalForm.Visible = True
@@ -2426,7 +2457,6 @@ Public Class FormSetup
     End Sub
 
     Private Sub DebugToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DebugToolStripMenuItem1.Click
-
 
         Dim FormInput As New FormDebug
 
@@ -2653,7 +2683,6 @@ Public Class FormSetup
 
     Private Sub LanguageToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LanguageToolStripMenuItem1.Click
 
-
         Dim Lang As New Language
 
         Lang.Activate()
@@ -2738,7 +2767,6 @@ Public Class FormSetup
 
     Private Sub MnuAbout_Click(sender As System.Object, e As EventArgs) Handles mnuAbout.Click
 
-
         Dim HelpAbout = New FormCopyright
 
         HelpAbout.Show()
@@ -2749,12 +2777,9 @@ Public Class FormSetup
     End Sub
 
     Private Sub MnuExit_Click(sender As System.Object, e As EventArgs) Handles mnuExit.Click
-        If Not Settings.ServiceMode() Then
-            Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
-            If result = vbYes Then
-                ReallyQuit()
-            End If
-        Else
+
+        Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
+        If result = vbYes Then
             ReallyQuit()
         End If
 
@@ -2812,15 +2837,19 @@ Public Class FormSetup
     End Sub
 
     Private Sub OffToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OffToolStripMenuItem.Click
+
         OnToolStripMenuItem.Checked = False
         OffToolStripMenuItem.Checked = True
         Settings.ShowMysqlStats = False
+
     End Sub
 
     Private Sub OnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnToolStripMenuItem.Click
+
         OnToolStripMenuItem.Checked = True
         OffToolStripMenuItem.Checked = False
         Settings.ShowMysqlStats = True
+
     End Sub
 
     Private Sub OnTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnTopToolStripMenuItem.Click
@@ -3028,25 +3057,6 @@ Public Class FormSetup
 
     End Sub
 
-    Private Shared Sub RunCheck(type As String)
-        Using p = New Process()
-            Dim pi = New ProcessStartInfo With {
-                .Arguments = $"check_inventory.php {type}",
-                .FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/php7/php.exe"),
-                .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/php7/"),
-                .UseShellExecute = True, ' so we can redirect streams and minimize
-                .WindowStyle = ProcessWindowStyle.Normal,
-                .CreateNoWindow = False
-            }
-            p.StartInfo = pi
-            Try
-                p.Start()
-            Catch ex As Exception
-                BreakPoint.Dump(ex)
-            End Try
-        End Using
-    End Sub
-
     Private Sub SaveAllRunningRegiondsAsOARSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAllRunningRegiondsAsOARSToolStripMenuItem.Click
 
         If Not PropOpensimIsRunning() Then
@@ -3072,7 +3082,6 @@ Public Class FormSetup
 
     Private Sub SearchHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchHelpToolStripMenuItem.Click
 
-
         Dim HelpAbout = New FormSearchHelp
 
         HelpAbout.Show()
@@ -3090,7 +3099,7 @@ Public Class FormSetup
 
     Private Sub ShowConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowConsoleToolStripMenuItem.Click
 
-        If Not ServiceExists("DreamGrid") Then
+        If Not ServiceExists("DreamGrid") And Not Settings.RunAsService Then
             ShowDOSWindow(RobustName, SHOWWINDOWENUM.SWRESTORE)
             Return
         End If
@@ -3184,10 +3193,7 @@ Public Class FormSetup
 
         If Settings.RunAsService Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
-
             NssmService.StartService()
-            TextPrint("Service Installed as 'DreamGrid' in Services ")
-            Return
         End If
         Startup()
 
@@ -3286,7 +3292,6 @@ Public Class FormSetup
     End Sub
 
     Private Sub StopToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem4.Click
-
 
         If ServiceExists("DreamGrid") Then
             NssmService.StopAndDeleteService()

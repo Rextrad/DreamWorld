@@ -108,10 +108,16 @@ Public Class MySettings
 
     End Sub
 
+    ''' <summary>
+    ''' Returns is we started with the Server param which means run as a Service.
+    ''' </summary>
+    ''' <returns></returns>
     Public Function ServiceMode() As Boolean
 
         Dim Param = Command()
-        Return RunAsService And Param = "Server" And Not Autostart
+        Log("Service", $"Startup param = {Param}")
+        Log("Service", $"Environment path = {Environment.CommandLine}")
+        Return RunAsService And Param.ToLower = "server"
 
     End Function
 
@@ -941,7 +947,22 @@ Public Class MySettings
             Return GetMySetting("DnsName")
         End Get
         Set
+            Log("DNS", $"DNS Set to {CStr(Value)}")
             SetMySetting("DnsName", Value)
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' A flag when DNS test is okay
+    ''' </summary>
+    ''' <returns>true/false</returns>
+    Public Property DnsTestPassed() As Boolean
+        Get
+            Return CType(GetMySetting("DnsTestPassed", "False"), Boolean)
+        End Get
+        Set
+            Log("DNS", $"DNS Working Set to {CStr(Value)}")
+            SetMySetting("DnsTestPassed", CStr(Value))
         End Set
     End Property
 
@@ -1962,6 +1983,7 @@ Public Class MySettings
 
     Public Property RunAsService() As Boolean
         Get
+            Log("Service", $"{CType(GetMySetting("RunAsService", "False"), Boolean)}")
             Return CType(GetMySetting("RunAsService", "False"), Boolean)
         End Get
         Set

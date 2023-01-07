@@ -184,7 +184,7 @@ Public Class FormRegionPopup
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles ShowConsoleButton.Click
 
-        If Not ServiceExists("DreamGrid") Then
+        If Not ServiceExists("DreamGrid") And Not Settings.RunAsService Then
             gPick = "Console"
             DialogResult = DialogResult.OK
         Else

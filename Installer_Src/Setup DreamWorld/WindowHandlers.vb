@@ -359,6 +359,8 @@ Module WindowHandlers
 
     Public Function ShowDOSWindow(RegionUUID As String, command As SHOWWINDOWENUM) As Boolean
 
+        If Settings.ServiceMode Then Return True
+
         If Settings.ConsoleShow = "None" AndAlso command <> SHOWWINDOWENUM.SWMINIMIZE Then
             Return True
         End If
