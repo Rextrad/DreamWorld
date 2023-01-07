@@ -105,7 +105,7 @@ Module OAR
                         .TaskName = TaskName.LoadOneOarTask,
                         .Command = v
                     }
-                    Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+                    Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
                     RebootAndRunTask(RegionUUID, obj)
                     Result.Scan()
 
@@ -171,7 +171,7 @@ Module OAR
             .Type = "Load OAR"
         }
 
-        Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
         RebootAndRunTask(RegionUUID, obj)
         Result.Scan()
 
@@ -193,7 +193,7 @@ Module OAR
             End If
 
             SendMessage(RegionUUID, Global.Outworldz.My.Resources.New_Content)
-            Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+            Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
             ConsoleCommand(RegionUUID, LoadOarStr)
             Result.Scan()
         Catch ex As Exception
