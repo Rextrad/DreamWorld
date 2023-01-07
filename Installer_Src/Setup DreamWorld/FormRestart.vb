@@ -95,10 +95,12 @@ Public Class FormRestart
             NoDelayRadioButton.Checked = True
         End If
 
+        CheckBox1.Checked = Settings.RunAsService
+
         SetScreen()
         HelpOnce("Restart")
 
-        initted = True ' suppress the install of the startup on formload
+        initted = True ' suppress the install of the startup on form load
 
     End Sub
 
@@ -180,6 +182,29 @@ Public Class FormRestart
 #End Region
 
 #Region "TypeOfRestart"
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+
+        If CheckBox1.Checked Then
+            If Settings.RunAsService And ServiceExists("DreamGrid") Then
+                TextPrint("Service is already installed")
+                Return
+            End If
+
+            FormSetup.NssmService.StopAndDeleteService()
+            FormSetup.NssmService.InstallService()
+            TextPrint("Click Start to run as a Service. No Dos Boxes will show.")
+        Else
+            If ServiceExists("DreamGrid") Then
+                FormSetup.NssmService.StopAndDeleteService()
+                TextPrint("DreamGrid Service removed")
+            Else
+                TextPrint("DreamGrid Service is not installed")
+            End If
+
+        End If
+
+    End Sub
 
     ''' <summary>
     ''' 0 for no waiting

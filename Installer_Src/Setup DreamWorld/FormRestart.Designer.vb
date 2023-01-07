@@ -25,9 +25,10 @@ Partial Class FormRestart
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRestart))
         Me.AutoStart = New System.Windows.Forms.GroupBox()
+        Me.IntervalGroupBox = New System.Windows.Forms.GroupBox()
         Me.NoDelayRadioButton = New System.Windows.Forms.RadioButton()
-        Me.SequentialRadioButton = New System.Windows.Forms.RadioButton()
         Me.ConcurrentRadioButton = New System.Windows.Forms.RadioButton()
+        Me.SequentialRadioButton = New System.Windows.Forms.RadioButton()
         Me.RestartOnCrash = New System.Windows.Forms.CheckBox()
         Me.ARTimerBox = New System.Windows.Forms.CheckBox()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -37,14 +38,15 @@ Partial Class FormRestart
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem30 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IntervalGroupBox = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoStart.SuspendLayout()
-        Me.MenuStrip2.SuspendLayout()
         Me.IntervalGroupBox.SuspendLayout()
+        Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'AutoStart
         '
+        Me.AutoStart.Controls.Add(Me.CheckBox1)
         Me.AutoStart.Controls.Add(Me.IntervalGroupBox)
         Me.AutoStart.Controls.Add(Me.RestartOnCrash)
         Me.AutoStart.Controls.Add(Me.ARTimerBox)
@@ -54,10 +56,22 @@ Partial Class FormRestart
         Me.AutoStart.Controls.Add(Me.AutoStartCheckbox)
         Me.AutoStart.Location = New System.Drawing.Point(15, 42)
         Me.AutoStart.Name = "AutoStart"
-        Me.AutoStart.Size = New System.Drawing.Size(324, 268)
+        Me.AutoStart.Size = New System.Drawing.Size(324, 346)
         Me.AutoStart.TabIndex = 45
         Me.AutoStart.TabStop = False
         Me.AutoStart.Text = "Automatic Startup"
+        '
+        'IntervalGroupBox
+        '
+        Me.IntervalGroupBox.Controls.Add(Me.NoDelayRadioButton)
+        Me.IntervalGroupBox.Controls.Add(Me.ConcurrentRadioButton)
+        Me.IntervalGroupBox.Controls.Add(Me.SequentialRadioButton)
+        Me.IntervalGroupBox.Location = New System.Drawing.Point(25, 153)
+        Me.IntervalGroupBox.Name = "IntervalGroupBox"
+        Me.IntervalGroupBox.Size = New System.Drawing.Size(242, 94)
+        Me.IntervalGroupBox.TabIndex = 1869
+        Me.IntervalGroupBox.TabStop = False
+        Me.IntervalGroupBox.Text = "Boot Interval"
         '
         'NoDelayRadioButton
         '
@@ -70,17 +84,6 @@ Partial Class FormRestart
         Me.NoDelayRadioButton.Text = "No Delay"
         Me.NoDelayRadioButton.UseVisualStyleBackColor = True
         '
-        'SequentialRadioButton
-        '
-        Me.SequentialRadioButton.AutoSize = True
-        Me.SequentialRadioButton.Location = New System.Drawing.Point(30, 66)
-        Me.SequentialRadioButton.Name = "SequentialRadioButton"
-        Me.SequentialRadioButton.Size = New System.Drawing.Size(102, 17)
-        Me.SequentialRadioButton.TabIndex = 1867
-        Me.SequentialRadioButton.TabStop = True
-        Me.SequentialRadioButton.Text = "Sequential order"
-        Me.SequentialRadioButton.UseVisualStyleBackColor = True
-        '
         'ConcurrentRadioButton
         '
         Me.ConcurrentRadioButton.AutoSize = True
@@ -91,6 +94,17 @@ Partial Class FormRestart
         Me.ConcurrentRadioButton.TabStop = True
         Me.ConcurrentRadioButton.Text = "Parallel Booting"
         Me.ConcurrentRadioButton.UseVisualStyleBackColor = True
+        '
+        'SequentialRadioButton
+        '
+        Me.SequentialRadioButton.AutoSize = True
+        Me.SequentialRadioButton.Location = New System.Drawing.Point(30, 66)
+        Me.SequentialRadioButton.Name = "SequentialRadioButton"
+        Me.SequentialRadioButton.Size = New System.Drawing.Size(102, 17)
+        Me.SequentialRadioButton.TabIndex = 1867
+        Me.SequentialRadioButton.TabStop = True
+        Me.SequentialRadioButton.Text = "Sequential order"
+        Me.SequentialRadioButton.UseVisualStyleBackColor = True
         '
         'RestartOnCrash
         '
@@ -168,24 +182,23 @@ Partial Class FormRestart
         Me.ToolStripMenuItem30.Size = New System.Drawing.Size(72, 32)
         Me.ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'IntervalGroupBox
+        'CheckBox1
         '
-        Me.IntervalGroupBox.Controls.Add(Me.NoDelayRadioButton)
-        Me.IntervalGroupBox.Controls.Add(Me.ConcurrentRadioButton)
-        Me.IntervalGroupBox.Controls.Add(Me.SequentialRadioButton)
-        Me.IntervalGroupBox.Location = New System.Drawing.Point(25, 153)
-        Me.IntervalGroupBox.Name = "IntervalGroupBox"
-        Me.IntervalGroupBox.Size = New System.Drawing.Size(242, 94)
-        Me.IntervalGroupBox.TabIndex = 1869
-        Me.IntervalGroupBox.TabStop = False
-        Me.IntervalGroupBox.Text = "Boot Interval"
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(37, 269)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(108, 17)
+        Me.CheckBox1.TabIndex = 1870
+        Me.CheckBox1.Text = "Run as a Service"
+        Me.ToolTip1.SetToolTip(Me.CheckBox1, "There is no need to click the Start button .  Opensim runs as a service")
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'FormRestart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(351, 320)
+        Me.ClientSize = New System.Drawing.Size(351, 426)
         Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.AutoStart)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -194,10 +207,10 @@ Partial Class FormRestart
         Me.Text = "Restart"
         Me.AutoStart.ResumeLayout(False)
         Me.AutoStart.PerformLayout()
-        Me.MenuStrip2.ResumeLayout(False)
-        Me.MenuStrip2.PerformLayout()
         Me.IntervalGroupBox.ResumeLayout(False)
         Me.IntervalGroupBox.PerformLayout()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -217,4 +230,5 @@ Partial Class FormRestart
     Friend WithEvents SequentialRadioButton As RadioButton
     Friend WithEvents ConcurrentRadioButton As RadioButton
     Friend WithEvents IntervalGroupBox As GroupBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
