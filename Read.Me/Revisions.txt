@@ -1,7 +1,11 @@
 REVISIONS FOR DREAMGRID
 
+V5.32
+Typo fixed in a InternalIpaddress setting to Network Ports (missing a CRLF)
+
 V5.31
-Added a InternalIpaddress setting to Network Ports. Thanks, Ai AUstin!
+Added a InternalIpaddress setting to Network Ports. Thanks, Ai Austin!
+Oops, I borked it.  Regions do not start.
 
 V5.3 Release
 Closed all crashreports.  5.31 will be the beta for running as a service.
