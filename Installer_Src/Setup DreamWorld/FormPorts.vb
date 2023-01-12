@@ -48,7 +48,15 @@ Public Class FormPorts
 
 #Region "Private Methods"
 
+    Private isChanged As Boolean
+
     Private Sub IsClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Closed
+
+        If isChanged Then
+            For Each RegionUUID In RegionUuids()
+                WriteRegionObject(Group_Name(RegionUUID), Region_Name(RegionUUID))
+            Next
+        End If
 
         Settings.SaveSettings()
 
@@ -63,7 +71,7 @@ Public Class FormPorts
         Label7.Text = Global.Outworldz.My.Resources.Private_Port_Word
         MaxP.Text = Global.Outworldz.My.Resources.Highest_Used_word
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
-        OverrideNameLabel.Text = Global.Outworldz.My.Resources.External
+        ExternalHostNameLabel.Text = Global.Outworldz.My.Resources.External
         Text = Global.Outworldz.My.Resources.Region_Ports_word
         ToolStripMenuItem30.Image = Global.Outworldz.My.Resources.question_and_answer
         ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Help_word
@@ -71,7 +79,7 @@ Public Class FormPorts
         ToolTip1.SetToolTip(ExternalHostName, Global.Outworldz.My.Resources.External_text)
         ToolTip1.SetToolTip(FirstRegionPort, Global.Outworldz.My.Resources.Default_8004_word)
         ToolTip1.SetToolTip(HTTPPort, Global.Outworldz.My.Resources.Default_8002_word)
-        ToolTip1.SetToolTip(OverrideNameLabel, Global.Outworldz.My.Resources.External_text)
+        ToolTip1.SetToolTip(ExternalHostNameLabel, Global.Outworldz.My.Resources.External_text)
         ToolTip1.SetToolTip(PrivatePort, Global.Outworldz.My.Resources.Default_8003_word)
         ToolTip1.SetToolTip(uPnPEnabled, Global.Outworldz.My.Resources.UPnP_Enabled_text)
         Upnp.Image = Global.Outworldz.My.Resources.about
@@ -96,9 +104,11 @@ Public Class FormPorts
         ExternalHostName.Text = Settings.OverrideName
         If Settings.ServerType <> RobustServerName Then
             ExternalHostName.Enabled = True
+            ExternalHostNameLabel.Enabled = True
         Else
             ExternalHostName.Text = ""
             ExternalHostName.Enabled = False
+            ExternalHostNameLabel.Enabled = False
         End If
 
         HelpOnce("Ports")
@@ -110,7 +120,7 @@ Public Class FormPorts
 
         If Not initted Then Return
         Settings.UPnPEnabled = uPnPEnabled.Checked
-        Settings.SaveSettings()
+        isChanged = True
 
     End Sub
 
@@ -126,7 +136,7 @@ Public Class FormPorts
         DiagnosticPort.Text = digitsOnly.Replace(DiagnosticPort.Text, "")
 
         Settings.DiagnosticPort = CInt("0" & DiagnosticPort.Text)
-        Settings.SaveSettings()
+        isChanged = True
         CheckDefaultPorts()
 
     End Sub
@@ -134,19 +144,18 @@ Public Class FormPorts
     Private Sub ExternalHostName_TextChanged(sender As Object, e As EventArgs) Handles ExternalHostName.TextChanged
 
         If Not initted Then Return
-
-        Settings.OverrideName = ExternalHostName.Text
+        Settings.ExternalHostName = ExternalHostName.Text
+        isChanged = True
 
     End Sub
 
     Private Sub FirstRegionPort_TextChanged_1(sender As Object, e As EventArgs) Handles FirstRegionPort.TextChanged
 
         If Not initted Then Return
-
         Dim digitsOnly = New Regex("[^\d]")
         FirstRegionPort.Text = digitsOnly.Replace(FirstRegionPort.Text, "")
         Settings.FirstRegionPort() = CInt("0" & FirstRegionPort.Text)
-        Settings.SaveSettings()
+        isChanged = True
 
         FirstRegionPort.Text = CStr(Settings.FirstRegionPort())
         MaxP.Text = Global.Outworldz.My.Resources.Highest_Used_word & " " & CStr(LargestPort())
@@ -160,8 +169,16 @@ Public Class FormPorts
         Dim digitsOnly = New Regex("[^\d]")
         HTTPPort.Text = digitsOnly.Replace(HTTPPort.Text, "")
         Settings.HttpPort = CInt("0" & HTTPPort.Text)
-        Settings.SaveSettings()
+        isChanged = True
         CheckDefaultPorts()
+
+    End Sub
+
+    Private Sub intIP_TextChanged(sender As Object, e As EventArgs) Handles intIP.TextChanged
+
+        If Not initted Then Return
+        Settings.InternalAddress = intIP.Text
+        isChanged = True
 
     End Sub
 
@@ -172,26 +189,20 @@ Public Class FormPorts
         Dim digitsOnly = New Regex("[^\d]")
         PrivatePort.Text = digitsOnly.Replace(PrivatePort.Text, "")
         Settings.PrivatePort = CInt("0" & PrivatePort.Text)
-        Settings.SaveSettings()
+        isChanged = True
         CheckDefaultPorts()
 
     End Sub
 
     Private Sub ToolStripMenuItem30_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem30.Click
+
         HelpManual("Ports")
+
     End Sub
 
     Private Sub Upnp_Click(sender As Object, e As EventArgs) Handles Upnp.Click
 
         HelpManual("Ports")
-
-    End Sub
-
-    Private Sub intIP_TextChanged(sender As Object, e As EventArgs) Handles intIP.TextChanged
-
-        If Not initted Then Return
-        Settings.InternalAddress = intIP.Text
-        Settings.SaveSettings()
 
     End Sub
 
