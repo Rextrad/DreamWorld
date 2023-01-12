@@ -1349,7 +1349,6 @@ Public Class FormRegion
                 Region_Port(RegionUUID) = GroupPort(RegionUUID)
             End If
 
-
             FileStuff.CopyFileFast(RegionIniFilePath(RegionUUID), RegionIniFilePath(RegionUUID) & ".bak")
 
             SyncLock WriteLock
@@ -1361,7 +1360,7 @@ Public Class FormRegion
                                 "[" & RegionName.Text & "]" & vbCrLf &
                                 "RegionUUID=" & UUID.Text & vbCrLf &
                                 "Location=" & CoordX.Text & "," & CoordY.Text & vbCrLf &
-                                "InternalAddress=" & Settings.InternalAddress &
+                                "InternalAddress=" & Settings.InternalAddress & vbCrLf &
                                 "InternalPort=" & Region_Port(RegionUUID) & vbCrLf &
                                 "GroupPort=" & GroupPort(RegionUUID) & vbCrLf &
                                 "AllowAlternatePorts = False" & vbCrLf &

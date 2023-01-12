@@ -132,21 +132,6 @@ Public Class MySettings
         End Set
     End Property
 
-
-    ''' <summary>
-    ''' InternalAddress, rarely used
-    ''' </summary>
-    ''' <returns>0.0.0.0 usually, or LAN IP</returns>
-    Public Property InternalAddress() As String
-        Get
-            Return GetMySetting("InternalAddress", "0.0.0.0")
-        End Get
-        Set
-            SetMySetting("InternalAddress", Value)
-        End Set
-    End Property
-
-
     ''' <summary>
     ''' Diva Wifi Email address
     ''' </summary>
@@ -1256,6 +1241,19 @@ Public Class MySettings
 
     End Property
 
+    ''' <summary>
+    ''' InternalAddress, rarely used
+    ''' </summary>
+    ''' <returns>0.0.0.0 usually, or LAN IP</returns>
+    Public Property InternalAddress() As String
+        Get
+            Return GetMySetting("InternalAddress", "0.0.0.0")
+        End Get
+        Set
+            SetMySetting("InternalAddress", Value)
+        End Set
+    End Property
+
     Public Property KeepForDays() As Integer
         Get
             Return CInt("0" & GetMySetting("KeepForDays", "3"))
@@ -1893,8 +1891,6 @@ Public Class MySettings
             SetMySetting("RenderMinHeight", CStr(Value))
         End Set
     End Property
-
-
 
     Public Property RestartOnCrash() As Boolean
         Get
