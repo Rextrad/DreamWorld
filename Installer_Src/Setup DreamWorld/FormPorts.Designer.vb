@@ -29,7 +29,7 @@ Partial Class FormPorts
         Me.Label1 = New System.Windows.Forms.Label()
         Me.intIP = New System.Windows.Forms.TextBox()
         Me.FirstRegionPort = New System.Windows.Forms.TextBox()
-        Me.OverrideNameLabel = New System.Windows.Forms.Label()
+        Me.ExternalHostNameLabel = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.ExternalHostName = New System.Windows.Forms.TextBox()
         Me.MaxP = New System.Windows.Forms.Label()
@@ -54,7 +54,7 @@ Partial Class FormPorts
         Me.GroupBoxA.Controls.Add(Me.Label1)
         Me.GroupBoxA.Controls.Add(Me.intIP)
         Me.GroupBoxA.Controls.Add(Me.FirstRegionPort)
-        Me.GroupBoxA.Controls.Add(Me.OverrideNameLabel)
+        Me.GroupBoxA.Controls.Add(Me.ExternalHostNameLabel)
         Me.GroupBoxA.Controls.Add(Me.Label26)
         Me.GroupBoxA.Controls.Add(Me.ExternalHostName)
         Me.GroupBoxA.Controls.Add(Me.MaxP)
@@ -99,15 +99,15 @@ Partial Class FormPorts
         Me.FirstRegionPort.TabIndex = 11
         Me.ToolTip1.SetToolTip(Me.FirstRegionPort, Global.Outworldz.My.Resources.Resources.Default_8004_word)
         '
-        'OverrideNameLabel
+        'ExternalHostNameLabel
         '
-        Me.OverrideNameLabel.AutoSize = True
-        Me.OverrideNameLabel.Location = New System.Drawing.Point(20, 178)
-        Me.OverrideNameLabel.Name = "OverrideNameLabel"
-        Me.OverrideNameLabel.Size = New System.Drawing.Size(192, 13)
-        Me.OverrideNameLabel.TabIndex = 6
-        Me.OverrideNameLabel.Text = "External HostName For Region Servers"
-        Me.ToolTip1.SetToolTip(Me.OverrideNameLabel, Global.Outworldz.My.Resources.Resources.External_text)
+        Me.ExternalHostNameLabel.AutoSize = True
+        Me.ExternalHostNameLabel.Location = New System.Drawing.Point(20, 178)
+        Me.ExternalHostNameLabel.Name = "ExternalHostNameLabel"
+        Me.ExternalHostNameLabel.Size = New System.Drawing.Size(192, 13)
+        Me.ExternalHostNameLabel.TabIndex = 6
+        Me.ExternalHostNameLabel.Text = "External HostName For Region Servers"
+        Me.ToolTip1.SetToolTip(Me.ExternalHostNameLabel, Global.Outworldz.My.Resources.Resources.External_text)
         '
         'Label26
         '
@@ -260,7 +260,7 @@ Partial Class FormPorts
     Friend WithEvents PrivatePort As TextBox
     Friend WithEvents DiagnosticPort As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents OverrideNameLabel As Label
+    Friend WithEvents ExternalHostNameLabel As Label
     Friend WithEvents ExternalHostName As TextBox
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents MenuStrip2 As MenuStrip

@@ -418,8 +418,10 @@ Public Class FormSetup
 
         For Each RegionUUID In RegionUuids()
 
-            If RegionEnabled(RegionUUID) Then
+            'just the internal port may have changed.
+            WriteRegionObject(Group_Name(RegionUUID), Region_Name(RegionUUID))
 
+            If RegionEnabled(RegionUUID) Then
                 Dim RegionName = Region_Name(RegionUUID)
                 If Settings.WelcomeRegion = RegionName Then Continue For
 
