@@ -1,5 +1,15 @@
 REVISIONS FOR DREAMGRID
 
+V5.33
+Services Merged for debug
+Opensim 1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000
+	Fixed a region crash when being griefed
+	robust: add exclude by Disk id0
+	fix 2 bugs caused by nonsense xinventory fieldname
+	mantis 9039: Code involving permissions on attached prim won't execute for non-owner.
+	Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets
+	add llObjectGetLinkKey(...)
+
 V5.32
 Typo fixed in a InternalIpaddress setting to Network Ports (missing a CRLF)
 

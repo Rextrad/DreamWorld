@@ -1,5 +1,4 @@
 /*
-/*
  * Copyright (c) Contributors, http://opensimulator.org/
  * See CONTRIBUTORS.TXT for a full list of copyright holders.
  *
@@ -994,7 +993,7 @@ namespace OpenSim.Framework
             catch (Exception e)
             {
                 m_log.InfoFormat("[FORMS]: Error creating {0} request to : {1}. Request: {2}", verb, requestUrl, e.Message);
-                throw e;
+                throw;
             }
 
             int sendlen = 0;
@@ -1015,8 +1014,8 @@ namespace OpenSim.Framework
                 }
                 catch (Exception e)
                 {
-                    m_log.DebugFormat("[FORMS]: Error sending {0} request to: {1}. {2}", verb,requestUrl, e.Message);
-                    throw e;
+                    m_log.InfoFormat("[FORMS]: Error sending {0} request to: {1}. {2}", verb,requestUrl, e.Message);
+                    throw;
                 }
             }
 
@@ -1036,8 +1035,8 @@ namespace OpenSim.Framework
             }
             catch (Exception e)
             {
-                m_log.DebugFormat("[FORMS]: Error receiving response from {0}: {1}.", requestUrl, e.Message);
-                throw e;
+                m_log.InfoFormat("[FORMS]: Error receiving response from {0}: {1}.", requestUrl, e.Message);
+                throw;
             }
 
             int tickdiff = Util.EnvironmentTickCountSubtract(tickstart);
@@ -1110,8 +1109,8 @@ namespace OpenSim.Framework
             }
             catch (Exception e)
             {
-                m_log.DebugFormat("[FORMS]: Error sending POST request to {0}: {1}", requestUrl, e.Message);
-                throw e;
+                m_log.InfoFormat("[FORMS]: Error sending POST request to {0}: {1}", requestUrl, e.Message);
+                throw;
             }
 
             string respstring = String.Empty;
@@ -1129,14 +1128,14 @@ namespace OpenSim.Framework
             }
             catch (Exception e)
             {
-                m_log.DebugFormat("[FORMS]: Error receiving response from {0}: {1}", requestUrl, e.Message);
-                throw e;
+                m_log.InfoFormat("[FORMS]: Error receiving response from {0}: {1}", requestUrl, e.Message);
+                throw;
             }
 
             int tickdiff = Util.EnvironmentTickCountSubtract(tickstart);
             if (tickdiff > WebUtil.LongCallTime)
             {
-                m_log.DebugFormat("[FORMS]: request {0} POST {1} took {2}ms {3}/{4}bytes",
+                m_log.InfoFormat("[FORMS]: request {0} POST {1} took {2}ms {3}/{4}bytes",
                     reqnum, requestUrl, tickdiff, sendlen, rcvlen);
             }
             else if (WebUtil.DebugLevel >= 4)

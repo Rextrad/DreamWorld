@@ -28,7 +28,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -44,8 +43,9 @@ using OpenSim.Services.Connectors.InstantMessage;
 using OpenSim.Services.Interfaces;
 using GridRegion = OpenSim.Services.Interfaces.GridRegion;
 using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
-using RegionFlags = OpenSim.Framework.RegionFlags;
 using OpenSim.Services.Connectors.Hypergrid;
+using RegionFlags = OpenSim.Framework.RegionFlags;
+using System.IO;
 
 namespace OpenSim.Services.LLLoginService
 {
@@ -86,9 +86,10 @@ namespace OpenSim.Services.LLLoginService
         protected int m_MaxAgentGroups = 42;
         protected string m_DestinationGuide;
         protected string m_AvatarPicker;
-        protected string m_AllowedClients;
-        protected string m_DeniedClients;
+        protected Regex m_AllowedClientsRegex;
+        protected Regex m_DeniedClientsRegex;
         protected string m_DeniedMacs;
+        protected string m_DeniedID0s;
         protected string m_MessageUrl;
         protected string m_DSTZone;
         protected bool m_allowDuplicatePresences = false;
@@ -139,13 +140,37 @@ namespace OpenSim.Services.LLLoginService
 
             m_allowLoginFallbackToAnyRegion = m_LoginServerConfig.GetBoolean("AllowLoginFallbackToAnyRegion", m_allowLoginFallbackToAnyRegion);
 
-            string[] possibleAccessControlConfigSections = new string[] { "AccessControl", "LoginService" };
-            m_AllowedClients = Util.GetConfigVarFromSections<string>(
-                    config, "AllowedClients", possibleAccessControlConfigSections, string.Empty);
-            m_DeniedClients = Util.GetConfigVarFromSections<string>(
-                    config, "DeniedClients", possibleAccessControlConfigSections, string.Empty);
-            m_DeniedMacs = Util.GetConfigVarFromSections<string>(
-                        config, "DeniedMacs", possibleAccessControlConfigSections, string.Empty);
+            string[] accessControlConfigSections = new string[] { "AccessControl", "LoginService" };
+            string AllowedClients = Util.GetConfigVarFromSections<string>(config, "AllowedClients", accessControlConfigSections, string.Empty);
+            if (!string.IsNullOrEmpty(AllowedClients))
+            {
+                try
+                {
+                    m_AllowedClientsRegex = new Regex(AllowedClients, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                }
+                catch
+                {
+                    m_AllowedClientsRegex = null;
+                    m_log.Error("[GATEKEEPER SERVICE]: failed to parse AllowedClients");
+                }
+            }
+
+            string DeniedClients = Util.GetConfigVarFromSections<string>(config, "DeniedClients", accessControlConfigSections, string.Empty);
+            if (!string.IsNullOrEmpty(DeniedClients))
+            {
+                try
+                {
+                    m_DeniedClientsRegex = new Regex(DeniedClients, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                }
+                catch
+                {
+                    m_DeniedClientsRegex = null;
+                    m_log.Error("[GATEKEEPER SERVICE]: failed to parse DeniedClients");
+                }
+            }
+
+            m_DeniedMacs = Util.GetConfigVarFromSections<string>(config, "DeniedMacs", accessControlConfigSections, string.Empty);
+            m_DeniedID0s = Util.GetConfigVarFromSections<string>(config, "DeniedID0s", accessControlConfigSections, string.Empty);
 
             m_MessageUrl = m_LoginServerConfig.GetString("MessageUrl", string.Empty);
             m_DSTZone = m_LoginServerConfig.GetString("DSTZone", "America/Los_Angeles;Pacific Standard Time");
@@ -391,40 +416,54 @@ namespace OpenSim.Services.LLLoginService
                 else
                     clientNameToCheck = channel + " " + clientVersion;
 
-                if (!string.IsNullOrWhiteSpace(m_AllowedClients))
+                if (m_AllowedClientsRegex != null)
                 {
-                    Regex arx = new Regex(m_AllowedClients);
-                    Match am = arx.Match(clientNameToCheck);
-
-                    if (!am.Success)
+                    lock(m_AllowedClientsRegex)
                     {
-                        m_log.InfoFormat(
-                            "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: client {2} is not allowed",
-                            firstName, lastName, clientNameToCheck);
-                        return LLFailedLoginResponse.LoginBlockedProblem;
+                        Match am = m_AllowedClientsRegex.Match(clientNameToCheck);
+
+                        if (!am.Success)
+                        {
+                            m_log.InfoFormat(
+                                "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: client {2} is not allowed",
+                                firstName, lastName, clientNameToCheck);
+                            return LLFailedLoginResponse.LoginBlockedProblem;
+                        }
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(m_DeniedClients))
+                if (m_DeniedClientsRegex != null)
                 {
-                    Regex drx = new Regex(m_DeniedClients);
-                    Match dm = drx.Match(clientNameToCheck);
-
-                    if (dm.Success)
+                    lock(m_DeniedClientsRegex)
                     {
-                        m_log.InfoFormat(
-                            "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: client {2} is denied",
-                            firstName, lastName, clientNameToCheck);
-                        return LLFailedLoginResponse.LoginBlockedProblem;
+                        Match dm = m_DeniedClientsRegex.Match(clientNameToCheck);
+
+                        if (dm.Success)
+                        {
+                            m_log.InfoFormat(
+                                "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: client {2} is denied",
+                                firstName, lastName, clientNameToCheck);
+                            return LLFailedLoginResponse.LoginBlockedProblem;
+                        }
                     }
                 }
 
                 if (!string.IsNullOrWhiteSpace(m_DeniedMacs))
                 {
-                    m_log.InfoFormat("[LLOGIN SERVICE]: Checking users Mac {0} against list of denied macs {1} ...", curMac, m_DeniedMacs);
+                    //m_log.InfoFormat("[LLOGIN SERVICE]: Checking users Mac {0} against list of denied macs {1} ...", curMac, m_DeniedMacs);
                     if (m_DeniedMacs.Contains(curMac))
                     {
                         m_log.InfoFormat("[LLOGIN SERVICE]: Login failed, reason: client with mac {0} is denied", curMac);
+                        return LLFailedLoginResponse.LoginBlockedProblem;
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(m_DeniedID0s))
+                {
+                    //m_log.InfoFormat("[LLOGIN SERVICE]: Checking users Mac {0} against list of denied macs {1} ...", curMac, m_DeniedMacs);
+                    if (m_DeniedID0s.Contains(id0))
+                    {
+                        m_log.InfoFormat("[LLOGIN SERVICE]: Login failed, reason: client with ido {0} is denied", id0);
                         return LLFailedLoginResponse.LoginBlockedProblem;
                     }
                 }
