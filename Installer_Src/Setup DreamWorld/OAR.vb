@@ -5,6 +5,7 @@
 
 #End Region
 
+Imports System.Net
 Imports System.Text.RegularExpressions
 
 Module OAR
@@ -49,6 +50,26 @@ Module OAR
         End Set
     End Property
 
+    Public Sub License(Webpath As String, RegionUUID As String)
+
+        Dim Path = IO.Path.Combine(Settings.CurrentDirectory, "Licenses_to_Content")
+
+        Dim str = Webpath
+        str = str.Replace(".tgz", ".txt")
+        Dim Data As String = ""
+
+        Using client As New WebClient
+            Try
+                Data = client.DownloadString(str)
+            Catch ex As Exception
+            End Try
+
+        End Using
+        Using file As New System.IO.StreamWriter(Path & $"\{Region_Name(RegionUUID)}.txt", False)
+            file.Write(Data)
+        End Using
+    End Sub
+
     Public Sub LoadOar(RegionName As String)
 
         If RegionName Is Nothing Then Return
@@ -65,7 +86,7 @@ Module OAR
         ' Create an instance of the open file dialog box. Set filter options and filter index.
         Using openFileDialog1 = New OpenFileDialog With {
             .InitialDirectory = BackupPath(),
-            .Filter = Global.Outworldz.My.Resources.OAR_Load_and_Save & "(*.OAR,*.GZ,*.TGZ)|*.oar;*.gz;*.tgz;*.OAR;*.GZ;*.TGZ|All Files (*.*)|*.*",
+            .Filter = Global.Outworldz.My.Resources.OAR_Load_and_Save & "(*.OAR,* .GZ,* .TGZ)|*.oar;*.gz;*.tgz;*.OAR;*.GZ;*.TGZ|All Files (*.*)|*.*",
             .FilterIndex = 1,
             .Multiselect = False
             }
@@ -105,7 +126,7 @@ Module OAR
                         .TaskName = TaskName.LoadOneOarTask,
                         .Command = v
                     }
-                    Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+                    Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
                     RebootAndRunTask(RegionUUID, obj)
                     Result.Scan()
 
@@ -140,6 +161,7 @@ Module OAR
         Dim RegionUUID As String = FindRegionByName(RegionName)
         If RegionUUID.Length = 0 Then
             ErrorLog(My.Resources.Cannot_find_region_word)
+            Return
         End If
 
         If CheckRegionFit(RegionUUID, thing) Then Return
@@ -171,7 +193,7 @@ Module OAR
             .Type = "Load OAR"
         }
 
-        Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
         RebootAndRunTask(RegionUUID, obj)
         Result.Scan()
 
@@ -182,7 +204,6 @@ Module OAR
         Dim backMeUp = T.backMeUp
         Dim LoadOarStr = T.Command
         ResumeRegion(RegionUUID)
-
         Try
             If backMeUp = "Yes" Then
                 SendMessage(RegionUUID, Global.Outworldz.My.Resources.CPU_Intensive)
@@ -193,7 +214,7 @@ Module OAR
             End If
 
             SendMessage(RegionUUID, Global.Outworldz.My.Resources.New_Content)
-            Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
+            Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
             ConsoleCommand(RegionUUID, LoadOarStr)
             Result.Scan()
         Catch ex As Exception

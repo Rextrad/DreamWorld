@@ -467,7 +467,12 @@ Module DoIni
                     outputFile.Flush()
                 End Using
             Catch ex As Exception
-                MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                If Not ServiceMode() Then
+                    MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                Else
+                    ErrorLog(ex.Message)
+                End If
+
             End Try
 
             Try
@@ -487,7 +492,12 @@ Module DoIni
                     outputFile.Flush()
                 End Using
             Catch ex As Exception
-                MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                If Not ServiceMode() Then
+                    MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                Else
+                    ErrorLog(ex.Message)
+                End If
+
             End Try
 
             Return False

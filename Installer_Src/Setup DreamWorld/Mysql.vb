@@ -264,8 +264,14 @@ Public Module MysqlInterface
                 Dim MysqlLog As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\data")
                 If ctr = 60 Then ' about 60 seconds when it fails
 
-                    Dim yesno = MsgBox(My.Resources.Mysql_Failed, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-                    If (yesno = vbYes) Then
+                    Dim yesno As MsgBoxResult = MsgBoxResult.No
+                    If Not ServiceMode() Then
+                        yesno = MsgBox(My.Resources.Mysql_Failed, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                    Else
+                        ErrorLog(My.Resources.Mysql_Failed)
+                    End If
+
+                    If yesno = MsgBoxResult.Yes Then
                         Dim files As Array = Nothing
                         Try
                             files = Directory.GetFiles(MysqlLog, "*.err", SearchOption.TopDirectoryOnly)
@@ -350,6 +356,7 @@ Public Module MysqlInterface
 
 #Region "Delete Stuff"
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")>
     Public Sub DeleteContent(RegionUuid As String, tablename As String, uuidname As String)
 
         Using MysqlConn As New MySqlConnection(Settings.RegionMySqlConnection)
@@ -633,7 +640,7 @@ Public Module MysqlInterface
         Using Connection As New MySqlConnection(Settings.RobustMysqlConnection)
             Try
                 Connection.Open()
-                Dim stm = "Select avatarname, avataruuid from robust.tosauth where TIMESTAMPDIFF(minute,createtime,now()) > 5 and agreed = 0; "
+                Dim stm = "Select avatarname, avataruuid, grid from tosauth where TIMESTAMPDIFF(minute,createtime,now()) > 5 and agreed = 0; "
                 Using cmd = New MySqlCommand(stm, Connection)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         While reader.Read()
@@ -734,6 +741,7 @@ Public Module MysqlInterface
 
 #Region "Needs fixup"
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")>
     Public Sub DoOpensim(stm As String)
 
         Using MysqlConn As New MySqlConnection(Settings.RegionMySqlConnection)
@@ -811,6 +819,7 @@ Public Module MysqlInterface
 
     End Function
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")>
     <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100Review Sql queries for security vulnerabilities")>
     Public Sub QuerySuper(SQL As String)
 
@@ -2105,16 +2114,26 @@ Public Module MysqlInterface
         End Try
 
         If files IsNot Nothing Then
-            Dim yesno = MsgBox(My.Resources.MySql_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-            If (yesno = vbYes) Then
+            Dim yesno = MsgBoxResult.No
+            If Not ServiceMode() Then
+                yesno = MsgBoxResult.No
+                ErrorLog(My.Resources.MySql_Exited)
+            Else
+                MsgBox(My.Resources.MySql_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            End If
 
+            If yesno = MsgBoxResult.Yes Then
                 For Each FileName As String In files
                     Baretail("""" & FileName & """")
                 Next
             End If
         Else
             PropAborting = True
-            MsgBox(My.Resources.Error_word, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If Not ServiceMode() Then
+                MsgBox(My.Resources.Error_word, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                ErrorLog(My.Resources.Error_word)
+            End If
+
         End If
 
     End Sub

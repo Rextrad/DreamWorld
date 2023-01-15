@@ -109,7 +109,6 @@ Public Class FormDnsName
 
     Private Sub NextNameButton_Click(sender As Object, e As EventArgs) Handles NextNameButton.Click
 
-
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
         DNSNameBox.Text = String.Empty
         Application.DoEvents()
@@ -123,18 +122,16 @@ Public Class FormDnsName
             DNSNameBox.Text = newname
         End If
 
-
     End Sub
 
     Private Sub SaveAll()
-
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
 
         Settings.SaveSettings()
         SetPublicIP()
 
-        If UniqueId.Text.Length > 0 Then Me.Close()
+        If Settings.DnsTestPassed Then Me.Close()
 
     End Sub
 

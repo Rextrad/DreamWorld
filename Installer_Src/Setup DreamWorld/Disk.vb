@@ -67,7 +67,7 @@ Module Disk
         Sleeping.Clear()
         Busy = False
 
-        PropUpdateView = True ' make form refresh        
+        PropUpdateView = True ' make form refresh
 
     End Sub
 
@@ -93,7 +93,11 @@ Module Disk
                             SThread.Priority = ThreadPriority.BelowNormal ' UI gets priority
                             SThread.Start()
                             Busy = True
-                            MsgBox(My.Resources.Diskspacelow & $" {Free:n0} Bytes", vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                            If Not ServiceMode() Then
+                                ErrorLog(My.Resources.Diskspacelow & $" {Free:n0} Bytes")
+                                MsgBox(My.Resources.Diskspacelow & $" {Free:n0} Bytes", vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                            End If
+
                         End If
                     End If
 

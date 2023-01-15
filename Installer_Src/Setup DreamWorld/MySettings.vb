@@ -120,6 +120,10 @@ Public Class MySettings
 #Region "Properties"
 
     ''' <summary>
+    ''' Run as a service
+    ''' </summary>
+
+    ''' <summary>
     ''' Diva will set Logins to disabled (-1) if this switch is set
     ''' </summary>
     ''' <returns>AccountConfirmationRequired as boolean</returns>
@@ -930,7 +934,22 @@ Public Class MySettings
             Return GetMySetting("DnsName")
         End Get
         Set
+            Log("DNS", $"DNS Set to {CStr(Value)}")
             SetMySetting("DnsName", Value)
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' A flag when DNS test is okay
+    ''' </summary>
+    ''' <returns>true/false</returns>
+    Public Property DnsTestPassed() As Boolean
+        Get
+            Return CType(GetMySetting("DnsTestPassed", "False"), Boolean)
+        End Get
+        Set
+            Log("DNS", $"DNS Working Set to {CStr(Value)}")
+            SetMySetting("DnsTestPassed", CStr(Value))
         End Set
     End Property
 
@@ -1221,6 +1240,10 @@ Public Class MySettings
             SetMySetting("HomeVectorZ", Value)
         End Set
     End Property
+
+    ''' <summary>
+    ''' Http Port for the grid in robust default = 8002
+    ''' </summary>
 
     Public Property HttpPort() As Integer
         Get
@@ -1955,6 +1978,16 @@ Public Class MySettings
         End Get
         Set
             SetMySetting("RootMysqlPassword", Value)
+        End Set
+    End Property
+
+    Public Property RunAsService() As Boolean
+        Get
+            Log("Service", $"{CType(GetMySetting("RunAsService", "False"), Boolean)}")
+            Return CType(GetMySetting("RunAsService", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("RunAsService", CStr(Value))
         End Set
     End Property
 

@@ -77,6 +77,8 @@ Module SmartStart
     ''' </summary>
     Public Sub CheckForBootedRegions()
 
+        If ServiceMode() Then Return
+
         ' booted regions from web server
         Bench.Start("Booted list")
         Try
@@ -562,6 +564,7 @@ Module SmartStart
 
 #Region "HTML"
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId:="System.Int32.TryParse(System.String,System.Int32@)")>
     Public Function RegionListHTML(Data As String) As String
 
         ' there is only a 16KB capability in Opensim for reading a web page.
@@ -778,8 +781,6 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
-        Application.DoEvents()
-
         SyncLock BootupLock
 
             PropOpensimIsRunning() = True
@@ -805,30 +806,32 @@ Module SmartStart
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
-            If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+            'If CBool(GetHwnd(Group_Name(RegionUUID))) Then
 
-                Try
-                    Dim P = Process.GetProcessById(PID)
-                    P.EnableRaisingEvents = True
-                    AddHandler P.Exited, AddressOf OpensimExited ' Registering event handler
-                Catch ex As Exception
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
-                    Return False
-                End Try
+            If CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
 
-                ' scan over all regions in the DOS box
-                For Each UUID As String In RegionUuidListByName(GroupName)
-                    ProcessID(UUID) = PID
-                    Thaw(UUID)
-                    RegionStatus(UUID) = SIMSTATUSENUM.Booted
-                    SendToOpensimWorld(UUID, 0)
-                    TextPrint($"{BootName} {My.Resources.Ready}")
-                Next
-
-                ShowDOSWindow(RegionUUID, MaybeHideWindow())
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                ProcessID(RegionUUID) = PID
                 PropUpdateView = True ' make form refresh
-                Return True
 
+                If Not ServiceMode() Then
+                    Try
+                        Dim P = Process.GetProcessById(PID)
+                        P.EnableRaisingEvents = True
+                        AddHandler P.Exited, AddressOf OpensimExited ' Registering event handler
+                    Catch ex As Exception
+                        RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
+                        Return False
+                    End Try
+
+                    Thaw(RegionUUID)
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                    SendToOpensimWorld(RegionUUID, 0)
+                    TextPrint($"{BootName} {My.Resources.Ready}")
+                    ShowDOSWindow(RegionUUID, MaybeHideWindow())
+                    Return True
+                    '^^^^^^^^^^^^^^^
+                End If
             End If
 
             TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
@@ -845,6 +848,12 @@ Module SmartStart
 #Enable Warning CA2000 ' Dispose objects before losing scope
             AddHandler BootProcess.Exited, AddressOf OpensimExited ' Registering event handler
 
+            ' enable console for Service mode
+            Dim args As String = ""
+            If ServiceMode() Then
+                args = " -console=rest" ' space is required
+            End If
+
             BootProcess.StartInfo.UseShellExecute = False
             BootProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath()
             BootProcess.StartInfo.FileName = """" & Settings.OpensimBinPath() & "OpenSim.exe" & """"
@@ -859,7 +868,7 @@ Module SmartStart
                     BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
             End Select
 
-            BootProcess.StartInfo.Arguments = " -inidirectory=" & """" & "./Regions/" & GroupName & """"
+            BootProcess.StartInfo.Arguments = " -inidirectory=" & """" & "./Regions/" & GroupName & """" & args
 
             Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.OpensimBinPath() & "Regions\" & GroupName)
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
@@ -1059,8 +1068,9 @@ Module SmartStart
         PokeRegionTimer(RegionUUID)
         TextPrint($"{Region_Name(RegionUUID)}: load oar {File}")
 
-        Dim Result = New WaitForFile(RegionUUID, "Start scripts done", "Load OAR")
-        ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}load oar --force-terrain --force-parcels ""{File}""{vbCrLf}")
+        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
+        RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
+        RPC_Region_Command(RegionUUID, $"load oar --force-terrain --force-parcels ""{File}""")
         Result.Scan()
 
         If Not AvatarsIsInGroup(Group_Name(RegionUUID)) Then

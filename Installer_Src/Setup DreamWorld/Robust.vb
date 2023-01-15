@@ -161,8 +161,16 @@ Module Robust
         RobustProcess.StartInfo.FileName = Settings.OpensimBinPath & "robust.exe"
         RobustProcess.StartInfo.CreateNoWindow = False
         RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
-
         RobustProcess.StartInfo.RedirectStandardOutput = False
+
+        ' enable console for Service mode
+        Dim args As String = ""
+        If ServiceExists("DreamGridService") And ServiceMode() Then
+            args = " -console=rest" ' space required
+            Settings.GraphVisible = False
+        End If
+
+        RobustProcess.StartInfo.Arguments &= args
 
         Select Case Settings.ConsoleShow
             Case "True"
@@ -174,6 +182,7 @@ Module Robust
         End Select
 
         Try
+            TextPrint($"Booting Robust")
             RobustProcess.Start()
             RobustHandler = True
         Catch ex As Exception
@@ -196,22 +205,25 @@ Module Robust
         ' Wait for Robust to start listening
         Dim counter = 0
         While Not IsRobustRunning() And PropOpensimIsRunning
-            Dim sleeptime = 5    ' seconds
+
             TextPrint("Robust " & Global.Outworldz.My.Resources.isBooting)
             counter += 1
             ' 2 minutes to boot on bad hardware at 5 sec per spin
-            If counter > 60 * 2 / sleeptime Then
+            If counter > 120 Then
                 TextPrint(My.Resources.Robust_failed_to_start)
                 FormSetup.Buttons(FormSetup.StartButton)
-                Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-                If (yesno = vbYes) Then
-                    Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+                If Not ServiceMode() Then
+                    Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                    If (yesno = vbYes) Then
+                        Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+                    End If
                 End If
+
                 FormSetup.Buttons(FormSetup.StartButton)
                 MarkRobustOffline()
                 Return False
             End If
-            Sleep(sleeptime * 1000) ' in ms
+            Sleep(1000) ' in ms
         End While
         Sleep(2000)
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Robust_running)
@@ -231,14 +243,17 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            ConsoleCommand(RobustName, "q")
+            If ServiceMode() Then
+                Zap("Robust")
+            Else
+                ConsoleCommand(RobustName, "q")
+            End If
 
             Dim ctr As Integer = 0
             ' wait 30 seconds for robust to quit
             While IsRobustRunning() And ctr < 30
                 Application.DoEvents()
                 Sleep(1000)
-                ConsoleCommand(RobustName, "q")
                 ctr += 1
             End While
             If ctr = 30 Then Zap("Robust")
@@ -256,6 +271,10 @@ Module Robust
         Dim ViewerString As String = ""
         Dim GridString As String = ""
         Dim Bans As String = Settings.BanList
+        ' causes robust to crash due to bad parser
+        Bans = Bans.Replace("(", "")
+        Bans = Bans.Replace(")", "")
+
         Dim filename As String
         If Bans.Length = 0 Then
             filename = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/Opensim/BanListProto.txt")
@@ -293,8 +312,11 @@ Module Robust
             End If
 
             ' ban MAC Addresses
-            Dim result As Guid
-            If Guid.TryParse(s, result) Then
+            'acbf6d9e97686d38d6fc1c2b335f126
+
+            Dim pattern4 = New Regex("^[0-9a-f]{32}", RegexOptions.IgnoreCase)
+            Dim match4 As Match = pattern4.Match(s)
+            If match4.Success Then
                 MACString += s & " " ' delimiter is a " " and  not a pipe
                 Continue For
             End If
@@ -305,6 +327,9 @@ Module Robust
             End If
 
         Next
+
+        INI.SetIni("LoginService", "DeniedMacs", MACString)
+        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
         ' Ban grids
         If GridString.Length > 0 Then
@@ -317,8 +342,6 @@ Module Robust
         If MACString.Length > 0 Then
             MACString = Mid(MACString, 1, MACString.Length - 1)
         End If
-        INI.SetIni("LoginService", "DeniedMacs", MACString)
-        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
         'Ban Viewers
         If ViewerString.Length > 0 Then
@@ -387,7 +410,11 @@ Module Robust
 
             Dim INI = New LoadIni(Settings.OpensimBinPath & "Robust.HG.ini", ";", System.Text.Encoding.UTF8)
 
-            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName Then
+            If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
+            If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
+            If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True
+
+            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName And Not ServiceMode() Then
                 MsgBox(My.Resources.Cannot_locate, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
                 Dim RegionName = ChooseRegion(False)
 
@@ -527,7 +554,7 @@ Module Robust
             Grep(anini, Settings.LogLevel)
 
             Return False
-        Catch
+        Catch ex As Exception
             Return True
         End Try
 
@@ -559,6 +586,7 @@ Module Robust
                     RobustIcon(True)
                     Return True
                 End If
+                Log("INFO", $"Robust is Not running: {Up}")
             End Try
 
         End Using
@@ -618,9 +646,11 @@ Module Robust
         RobustCrashCounter = 0
         MarkRobustOffline()
 
-        Dim yesno = MsgBox(My.Resources.Robust_exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-        If (yesno = vbYes) Then
-            Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+        If Not ServiceMode() Then
+            Dim yesno = MsgBox(My.Resources.Robust_exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If (yesno = vbYes) Then
+                Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+            End If
         End If
 
     End Sub

@@ -3852,4 +3852,25 @@
   <data name="WebPort" xml:space="preserve">
     <value>منفذ الويب (80)</value>
   </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>رسبت في</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>فشل حذف الخدمة</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>فشل تثبيت الخدمة</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>فشل بدء الخدمة</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>تم تثبيت الخدمة</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>الخدمة إزالتها</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>البدء كخدمة</value>
+  </data>
 </root>

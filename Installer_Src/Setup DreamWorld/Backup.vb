@@ -28,12 +28,14 @@ Module Backup
 
             SequentialPause()
 
-            Dim w = New WaitForOar()
-            w.Data = Oar
+            Dim w = New WaitForOar With {
+                .Data = Oar
+            }
 
             Dim threadDelegate = New ThreadStart(AddressOf w.Dowork)
-            Dim newThread = New Thread(threadDelegate)
-            newThread.Priority = ThreadPriority.BelowNormal
+            Dim newThread = New Thread(threadDelegate) With {
+                .Priority = ThreadPriority.BelowNormal
+            }
             newThread.Start()
 
         End If
@@ -196,7 +198,6 @@ Public Class WaitForOar
 
     Public Data As New OarObject
 
-    <CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId:="Outworldz.Logging.Log(System.String,System.String)")>
     Public Sub Dowork()
         Dim RegionUUID = Data.RegionUUID
         Dim FolderAndFileName = Data.FolderAndFileName

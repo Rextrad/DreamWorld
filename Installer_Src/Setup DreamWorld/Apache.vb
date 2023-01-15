@@ -308,8 +308,15 @@ Module Apache
         End If
         ApacheCrashCounter = 0
 
-        Dim yesno = MsgBox(My.Resources.Apache_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-        If (yesno = vbYes) Then
+        Dim yesno As MsgBoxResult
+        If Not ServiceMode() Then
+            yesno = MsgBox(My.Resources.Apache_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+        Else
+            ErrorLog(My.Resources.Apache_Exited)
+            yesno = MsgBoxResult.No
+        End If
+
+        If yesno = MsgBoxResult.Yes Then
             Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\Apache\error*.log") & """")
         End If
 

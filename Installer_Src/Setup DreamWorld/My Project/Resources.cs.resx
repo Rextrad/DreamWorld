@@ -3852,4 +3852,25 @@
   <data name="WebPort" xml:space="preserve">
     <value>Webový port (80)</value>
   </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Nepodařilo</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Službu se nepodařilo odstranit</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Instalace služby se nezdařila</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Službu se nepodařilo spustit</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Služba nainstalována</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Služba odstraněna</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Spuštění jako služba</value>
+  </data>
 </root>

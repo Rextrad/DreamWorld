@@ -22,6 +22,8 @@ Public Class WaitForFile
         o.text = text
         o.RegionUUID = RegionUUID
 
+        PokeRegionTimer(RegionUUID)
+
         Filename = IO.Path.Combine(Settings.OpensimBinPath, $"Regions/{Group_Name(o.RegionUUID)}/Opensim.log")
         If Not File.Exists(Filename) Then
             ' Create or overwrite the file.
@@ -60,20 +62,24 @@ Public Class WaitForFile
 
         Dim RegionUUID As String = o.RegionUUID
         Dim text = o.text
-        Const timeout = 30 * 60 ' 30 minutes to save
+        Dim sleeptime As Integer = 100
+        Dim timeout = 30 * 60 * sleeptime ' 30 minutes to save
         While CTR < timeout
             PokeRegionTimer(RegionUUID)
             Try
                 'seek to the last max offset
                 reader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin)
                 Dim line As String = ""
-                While reader.BaseStream.Length <> lastMaxOffset And CTR < timeout * 10
+                While reader.BaseStream.Length <> lastMaxOffset And CTR < timeout
                     line = reader.ReadLine()
                     If line IsNot Nothing Then
                         'Debug.Print(line)
-                        If ScanForPattern(line, text) Then
+                        If line.Contains(text) Then
                             If o.Type = "Load OAR" Then
                                 DoLandOneRegion(RegionUUID) ' set region to no rez, no scripts
+                                RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Loaded_word}", "")
+                            Else
+                                RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Finished_word}", "")
                             End If
                             reader.Close()
                             Return
@@ -82,8 +88,8 @@ Public Class WaitForFile
                         lastMaxOffset += line.Length
                     End If
                     CTR += 1
-                    Sleep(100)
                     PokeRegionTimer(RegionUUID)
+                    Sleep(sleeptime)
                 End While
             Catch ex As Exception
                 reader.Close()

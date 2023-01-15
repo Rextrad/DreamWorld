@@ -129,8 +129,11 @@ Public Class LoadIni
 
             If Retry < 0 Then
                 ErrorLog($"Region INI filed to save: {FileName}")
-                Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
-                Throw New System.Exception("A INI File Exception has occurred.")
+                If Not ServiceMode() Then
+                    Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
+                Else
+                    ErrorLog($"Region INI filed to save: {FileName}")
+                End If
             End If
         End While
 

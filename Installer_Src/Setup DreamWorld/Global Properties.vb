@@ -64,7 +64,7 @@ Module Global_Properties
     Public Sub TextPrint(Value As String)
 
         SyncLock TextLock
-            Log(My.Resources.Info_word, Value)
+
             Dim dt = Date.Now.ToString(Globalization.CultureInfo.CurrentCulture)
             If Settings.ShowDateandTimeinLogs Then
                 FormSetup.TextBox1.Text += $"{dt} {Value}{vbCrLf}"

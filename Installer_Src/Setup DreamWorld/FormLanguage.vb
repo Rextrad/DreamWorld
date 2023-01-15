@@ -234,7 +234,7 @@
         My.Application.ChangeCulture(Settings.Language)
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
-        FormSetup.Reload(sender, e) 'Load everything in your form load event again
+        FormSetup.FrmHome_Load(sender, e) 'Load everything in your form load event again
     End Sub
 
     Private Sub Turkish_Click(sender As Object, e As EventArgs) Handles Turkish.Click

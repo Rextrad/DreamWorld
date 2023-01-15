@@ -61,6 +61,8 @@ Module WindowHandlers
         ''' <param name="command">String</param>
         ''' <returns></returns>
         If command Is Nothing Then Return True
+        If ServiceMode() Then Return True
+
         If command.Length > 0 Then
             command = ToLowercaseKeys(command)
             Dim PID As Integer
@@ -175,6 +177,29 @@ Module WindowHandlers
 
     End Function
 
+    Public Sub GetOpensimNamesFromFiles()
+
+        For Each RegionUUID In RegionUuids()
+            Dim OpensimPathName = OpensimIniPath(RegionUUID)
+            Dim Name = Region_Name(RegionUUID)
+            Dim PIDfile = IO.Path.Combine(OpensimPathName, "PID.pid")
+            Try
+                Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
+                    While Not Reader.EndOfStream
+                        Dim line As String = Reader.ReadLine
+                        Dim PID As Integer
+                        If Int32.TryParse(line, PID) Then
+                            PropInstanceHandles.TryAdd(PID, Name)
+                        End If
+                    End While
+                End Using
+            Catch
+            End Try
+
+        Next
+
+    End Sub
+
     ''' <summary>
     ''' Returns a handle to the window, by process list, or by reading the PID file.
     ''' </summary>
@@ -286,6 +311,21 @@ Module WindowHandlers
     End Sub
 
     ''' <summary>
+    ''' Returns is we started with the Server param which means run as a Service.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function ServiceMode() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
+        Dim run = CBool(Param.ToLower = "service")
+        Return run
+
+    End Function
+
+    ''' <summary>
     ''' Sets the window title text
     ''' </summary>
     ''' <param name="myProcess">PID</param>
@@ -302,6 +342,8 @@ Module WindowHandlers
         If myProcess Is Nothing Then
             Return
         End If
+
+        If ServiceMode() Then Return
 
         Dim WindowCounter As Integer = 0
         Dim myhandle As IntPtr
@@ -358,6 +400,8 @@ Module WindowHandlers
     End Sub
 
     Public Function ShowDOSWindow(RegionUUID As String, command As SHOWWINDOWENUM) As Boolean
+
+        If ServiceMode() Then Return True
 
         If Settings.ConsoleShow = "None" AndAlso command <> SHOWWINDOWENUM.SWMINIMIZE Then
             Return True
