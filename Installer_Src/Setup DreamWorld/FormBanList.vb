@@ -7,6 +7,7 @@
 
 Imports System.Globalization
 Imports System.Net
+Imports System.Text.RegularExpressions
 
 Public Class FormBanList
 
@@ -207,12 +208,18 @@ Public Class FormBanList
                 For index As Integer = 0 To words.Length - 1
                     BreakPoint.Print(words(index))
                     Dim elems() As String = words(index).Split("="c)
+                    Dim pattern = New Regex("(^[a-z0-9]{32})", RegexOptions.IgnoreCase)
+                    Dim match As Match = pattern.Match(elems(0))
+                    If match.Success Then
+                        elems(0) = $"MAC:{match.Groups(1).Value}"
+                    End If
+
                     If elems.Length = 1 Then
                         table.Rows.Add(elems(0).Trim, "")
                     ElseIf elems.Length = 2 Then
                         table.Rows.Add(elems(0).Trim, elems(1).Trim)
                     End If
-                    ' remove all IPs from firewall as they are read - new ones or edited ones will be saved back on clode
+                    ' remove all IPs from firewall as they are read - new ones or edited ones will be saved back on close
                     Dim I As System.Net.IPAddress = Nothing
                     If IPAddress.TryParse(elems(0).Trim, I) Then
                         Firewall.ReleaseIp(elems(0).Trim)
@@ -231,6 +238,11 @@ Public Class FormBanList
                         line = reader.ReadLine()
                         If line.Length > 1 Then
                             Dim words() = line.Split("|".ToCharArray)
+                            Dim pattern = New Regex("(^[a-z0-9]{32})", RegexOptions.IgnoreCase)
+                            Dim match As Match = pattern.Match(words(0))
+                            If match.Success Then
+                                words(0) = $"MAC:{match.Groups(1).Value}"
+                            End If
                             If words(0) = "469947894f9e298a7726b4a58ff7bf9f" Then
                                 words(0) = "#469947894f9e298a7726b4a58ff7bf9f"
                                 words(1) = "Should not be banned as it a loopback adapter. Use Disk ID instead."
