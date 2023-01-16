@@ -53,12 +53,13 @@ Public Class FormPorts
     Private Sub IsClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Closed
 
         If isChanged Then
+            SetServerType()
+
             For Each RegionUUID In RegionUuids()
                 WriteRegionObject(Group_Name(RegionUUID), Region_Name(RegionUUID))
             Next
+            Settings.SaveSettings()
         End If
-
-        Settings.SaveSettings()
 
     End Sub
 
@@ -71,15 +72,15 @@ Public Class FormPorts
         Label7.Text = Global.Outworldz.My.Resources.Private_Port_Word
         MaxP.Text = Global.Outworldz.My.Resources.Highest_Used_word
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
-        ExternalHostNameLabel.Text = Global.Outworldz.My.Resources.External
+        OverrideNameLabel.Text = Global.Outworldz.My.Resources.External
         Text = Global.Outworldz.My.Resources.Region_Ports_word
         ToolStripMenuItem30.Image = Global.Outworldz.My.Resources.question_and_answer
         ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Help_word
         ToolTip1.SetToolTip(DiagnosticPort, Global.Outworldz.My.Resources.Default_8001_word)
-        ToolTip1.SetToolTip(ExternalHostName, Global.Outworldz.My.Resources.External_text)
+        ToolTip1.SetToolTip(OverrideName, Global.Outworldz.My.Resources.External_text)
         ToolTip1.SetToolTip(FirstRegionPort, Global.Outworldz.My.Resources.Default_8004_word)
         ToolTip1.SetToolTip(HTTPPort, Global.Outworldz.My.Resources.Default_8002_word)
-        ToolTip1.SetToolTip(ExternalHostNameLabel, Global.Outworldz.My.Resources.External_text)
+        ToolTip1.SetToolTip(OverrideNameLabel, Global.Outworldz.My.Resources.External_text)
         ToolTip1.SetToolTip(PrivatePort, Global.Outworldz.My.Resources.Default_8003_word)
         ToolTip1.SetToolTip(uPnPEnabled, Global.Outworldz.My.Resources.UPnP_Enabled_text)
         Upnp.Image = Global.Outworldz.My.Resources.about
@@ -101,14 +102,14 @@ Public Class FormPorts
 
         ' only used for region servers that are not behind a NAT
 
-        ExternalHostName.Text = Settings.OverrideName
+        OverrideName.Text = Settings.OverrideName
         If Settings.ServerType <> RobustServerName Then
-            ExternalHostName.Enabled = True
-            ExternalHostNameLabel.Enabled = True
+            OverrideName.Enabled = True
+            OverrideNameLabel.Enabled = True
         Else
-            ExternalHostName.Text = ""
-            ExternalHostName.Enabled = False
-            ExternalHostNameLabel.Enabled = False
+            OverrideName.Text = ""
+            OverrideName.Enabled = False
+            OverrideNameLabel.Enabled = False
         End If
 
         HelpOnce("Ports")
@@ -141,10 +142,10 @@ Public Class FormPorts
 
     End Sub
 
-    Private Sub ExternalHostName_TextChanged(sender As Object, e As EventArgs) Handles ExternalHostName.TextChanged
+    Private Sub ExternalHostName_TextChanged(sender As Object, e As EventArgs) Handles OverrideName.TextChanged
 
         If Not initted Then Return
-        Settings.ExternalHostName = ExternalHostName.Text
+        Settings.OverrideName = OverrideName.Text
         isChanged = True
 
     End Sub
