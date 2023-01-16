@@ -552,13 +552,13 @@ MapTileURL="${Const|BaseURL}:${Const|PublicPort}/"
 
 ; Url to search service
 ;SearchURL = "${Const|BaseURL}:${Const|PublicPort}/JOpensim/index.php?option=com_opensim&view=inworldsearch&task=viewersearch&tmpl=component&"
-;SearchURL=http://www.hyperica.com/Search/query.php
-SearchURL=http://www.hyperica.com/Search/query.php
+;SearchURL=http://www.outworldz.com/Search/query.php
+SearchURL=http://www.outworldz.com/Search/query.php
 
 ; For V3 destination guide
 ;DestinationGuide = "${Const|BaseURL}:${Const|PublicPort}/JOpensim//index.php?option=com_opensim&view=guide&tmpl=component"
-;DestinationGuideURI="http://www.hyperica.com/destination-guide/"
-DestinationGuide="http://www.hyperica.com/destination-guide/"
+;DestinationGuideURI="http://www.outworldz.com/destination-guide/"
+DestinationGuide="http://www.outworldz.com/destination-guide/"
 
 ; For V3 avatar picker (( work in progress ))
 ; AvatarPicker = "${Const|BaseURL}/avatars"
@@ -617,6 +617,7 @@ DOSForgiveClientAfterMS=120000
 ;Attempt to login or hypergrid in to the grid, teleport should timeout and login should fail.
 ;
 DeniedMacs=
+DeniedID0s=
 
 [MapImageService]
 LocalServiceModule="OpenSim.Services.MapImageService.dll:MapImageService"
@@ -725,7 +726,9 @@ AllowExcept=
 ;Attempt to login or hypergrid in to the grid, teleport should timeout and login should fail.
 ;
 DeniedMacs=
-
+;
+DeniedID0s=
+;
 [UserAgentService]
 LocalServiceModule="OpenSim.Services.HypergridService.dll:UserAgentService"
 

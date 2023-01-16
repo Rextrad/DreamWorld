@@ -267,6 +267,7 @@ Module Robust
 
     Public Sub DoBanList(INI As LoadIni)
 
+        Dim IDString As String = ""
         Dim MACString As String = ""
         Dim ViewerString As String = ""
         Dim GridString As String = ""
@@ -312,12 +313,19 @@ Module Robust
             End If
 
             ' ban MAC Addresses
-            'acbf6d9e97686d38d6fc1c2b335f126
+            'MAC:acbf6d9e97686d38d6fc1c2b335f126
 
-            Dim pattern4 = New Regex("^[0-9a-f]{32}", RegexOptions.IgnoreCase)
+            Dim pattern4 = New Regex("^MAC:([0-9a-f]{32})", RegexOptions.IgnoreCase)
             Dim match4 As Match = pattern4.Match(s)
             If match4.Success Then
-                MACString += s & " " ' delimiter is a " " and  not a pipe
+                MACString += match4.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+                Continue For
+            End If
+
+            Dim pattern5 = New Regex("^ID:([0-9a-f]{32})", RegexOptions.IgnoreCase)
+            Dim match5 As Match = pattern5.Match(s)
+            If match5.Success Then
+                IDString += match5.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
                 Continue For
             End If
 
@@ -329,7 +337,10 @@ Module Robust
         Next
 
         INI.SetIni("LoginService", "DeniedMacs", MACString)
-        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
+        INI.SetIni("GatekeeperService", "DeniedMacs", IDString)
+
+        INI.SetIni("LoginService", "DeniedID0s", MACString)
+        INI.SetIni("GatekeeperService", "DeniedID0s", MACString)
 
         ' Ban grids
         If GridString.Length > 0 Then
