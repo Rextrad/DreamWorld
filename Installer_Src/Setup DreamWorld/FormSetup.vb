@@ -1371,7 +1371,7 @@ Public Class FormSetup
             ForceBackupOnce()
         End If
 
-        TextPrint($"{My.Resources.Grid_Address_is_word} http//{Settings.BaseHostName}{Settings.HttpPort}")
+        TextPrint($"{My.Resources.Grid_Address_is_word} http://{Settings.BaseHostName}{Settings.HttpPort}")
 
         ' Launch the rockets
         TextPrint(My.Resources.Start_Regions_word)
@@ -1824,7 +1824,7 @@ Public Class FormSetup
 
                     Dim UUID = System.Guid.NewGuid.ToString
 
-                    Dim URL = $"http//{Settings.PublicIP}{Settings.DiagnosticPort}/TOS?uid={UUID}"
+                    Dim URL = $"http://{Settings.PublicIP}{Settings.DiagnosticPort}/TOS?uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
