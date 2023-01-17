@@ -1371,7 +1371,7 @@ Public Class FormSetup
             ForceBackupOnce()
         End If
 
-        TextPrint($"{My.Resources.Grid_Address_is_word} http://{Settings.BaseHostName}{Settings.HttpPort}")
+        TextPrint($"{My.Resources.Grid_Address_is_word} http://{Settings.BaseHostName}:{Settings.HttpPort}")
 
         ' Launch the rockets
         TextPrint(My.Resources.Start_Regions_word)
