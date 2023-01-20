@@ -590,7 +590,7 @@ Public Class FormSetup
 
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
-        If Not RunningInServiceMode() Then
+        If (ServiceExists("DreamGridService") And RunningInServiceMode()) Or Not ServiceExists("DreamGridService") Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Application.DoEvents()

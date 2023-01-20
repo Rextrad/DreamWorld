@@ -105,7 +105,7 @@ Public Module MysqlInterface
 
         INI.SetIni("mysqld", "innodb_buffer_pool_size", $"{Settings.Total_InnoDB_GBytes()}G")
 
-        If Settings.MysqlRunasaService Then
+        If Settings.MysqlRunasaService Or RunningInServiceMode() Then
             INI.SetIni("mysqld", "innodb_doublewrite", "0")
             INI.SetIni("mysqld", "innodb_max_dirty_pages_pct", "75")
             INI.SetIni("mysqld", "innodb_flush_log_at_trx_commit", "2")
