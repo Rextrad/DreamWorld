@@ -343,21 +343,15 @@ Module Robust
         INI.SetIni("GatekeeperService", "DeniedID0s", MACString)
 
         ' Ban grids
-        If GridString.Length > 0 Then
-            GridString = Mid(GridString, 1, GridString.Length - 1)
-        End If
+        GridString = GridString.Replace(",", "")
 
         INI.SetIni("GatekeeperService", "AllowExcept", GridString)
 
         ' Ban Macs
-        If MACString.Length > 0 Then
-            MACString = Mid(MACString, 1, MACString.Length - 1)
-        End If
+        MACString = MACString.Replace(" ", "")
 
         'Ban Viewers
-        If ViewerString.Length > 0 Then
-            ViewerString = Mid(ViewerString, 1, ViewerString.Length - 1)
-        End If
+        ViewerString = ViewerString.Replace(" ", "")
 
         INI.SetIni("AccessControl", "DeniedClients", ViewerString)
 
