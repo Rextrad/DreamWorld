@@ -2699,6 +2699,14 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub KickUserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KickUserToolStripMenuItem.Click
+
+        Dim RegionUUID = FindRegionByName(ChooseRegion(True))
+        Dim user = InputBox("User First and Last Name?", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Information_word)
+        ConsoleCommand(RegionUUID, $"kick user {user}")
+
+    End Sub
+
     Private Sub LanguageToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LanguageToolStripMenuItem1.Click
 
         Dim Lang As New Language
