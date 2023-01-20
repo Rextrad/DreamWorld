@@ -265,7 +265,7 @@ Public Module MysqlInterface
                 If ctr = 60 Then ' about 60 seconds when it fails
 
                     Dim yesno As MsgBoxResult = MsgBoxResult.No
-                    If Not ServiceMode() Then
+                    If Not RunningInServiceMode() Then
                         yesno = MsgBox(My.Resources.Mysql_Failed, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
                     Else
                         ErrorLog(My.Resources.Mysql_Failed)
@@ -2115,7 +2115,7 @@ Public Module MysqlInterface
 
         If files IsNot Nothing Then
             Dim yesno = MsgBoxResult.No
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 yesno = MsgBoxResult.No
                 ErrorLog(My.Resources.MySql_Exited)
             Else
@@ -2129,7 +2129,7 @@ Public Module MysqlInterface
             End If
         Else
             PropAborting = True
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox(My.Resources.Error_word, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
                 ErrorLog(My.Resources.Error_word)
             End If

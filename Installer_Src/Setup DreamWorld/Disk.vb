@@ -93,7 +93,7 @@ Module Disk
                             SThread.Priority = ThreadPriority.BelowNormal ' UI gets priority
                             SThread.Start()
                             Busy = True
-                            If Not ServiceMode() Then
+                            If Not RunningInServiceMode() Then
                                 ErrorLog(My.Resources.Diskspacelow & $" {Free:n0} Bytes")
                                 MsgBox(My.Resources.Diskspacelow & $" {Free:n0} Bytes", vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
                             End If

@@ -513,7 +513,7 @@ Public Class FormSetup
 
         ' WebUI Menu
         ViewWebUI.Visible = Settings.WifiEnabled
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             CheckForUpdates()
             Application.DoEvents()
         End If
@@ -579,7 +579,7 @@ Public Class FormSetup
         SetServerType()
 
         If SetIniData() Then
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox("Failed to setup INI files", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
             End If
             ErrorLog("Failed to setup INI files")
@@ -590,7 +590,7 @@ Public Class FormSetup
 
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Application.DoEvents()
@@ -709,9 +709,9 @@ Public Class FormSetup
 
         ' Start as a Service?
 
-        Log("Service", $"Service is {CStr(ServiceMode())}")
+        Log("Service", $"Service is {CStr(RunningInServiceMode())}")
 
-        If ServiceMode() Then
+        If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Startup()
             Return
@@ -734,7 +734,7 @@ Public Class FormSetup
 
     Public Function KillAll() As Boolean
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             If ScanAgents() > 0 Then
                 Dim response = MsgBox(My.Resources.Avatars_in_World, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
                 If response = vbNo Then Return False
@@ -845,6 +845,11 @@ Public Class FormSetup
 
         PropOpensimIsRunning = True
 
+        If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
+            TextPrint("Starting Service. No Opensim DOS boxes will show")
+            Return NssmService.StartService()
+        End If
+
         OpenPorts()
 
         Dim ini = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\OpenSim.exe.config")
@@ -908,7 +913,7 @@ Public Class FormSetup
 
     Private Sub Form1_Closed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
             If result <> vbYes Then
                 Return
@@ -1007,7 +1012,7 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
 
         ' now look at the exit stack
         While Not ExitList.IsEmpty
@@ -1105,7 +1110,7 @@ Public Class FormSetup
                         TextPrint($"{GroupName} Crashed 5 times - Stopped with Errors")
                         ErrorGroup(GroupName)
                         RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
-                        If Not ServiceMode() Then
+                        If Not RunningInServiceMode() Then
                             Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
                             If yesno = vbYes Then
                                 Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
@@ -1137,7 +1142,7 @@ Public Class FormSetup
 
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
                     ErrorGroup(GroupName)
-                    If Not ServiceMode() Then
+                    If Not RunningInServiceMode() Then
                         Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
                         If (yesno = vbYes) Then
                             Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
@@ -1171,7 +1176,7 @@ Public Class FormSetup
         End If
         IcecastCrashCounter = 0
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
             If yesno = MsgBoxResult.Yes Then
                 Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
@@ -1182,7 +1187,7 @@ Public Class FormSetup
     End Sub
 
     Private Sub RestartDOSboxes()
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
         If PropRobustExited = True Then
             RobustIcon(False)
         End If
@@ -1274,7 +1279,7 @@ Public Class FormSetup
 
         Dim RegionUUID As String = FindRegionByName(Settings.WelcomeRegion)
         If RegionUUID.Length = 0 AndAlso Settings.ServerType = RobustServerName Then
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
                 TextPrint(My.Resources.Stopped_word)
 
@@ -1310,7 +1315,7 @@ Public Class FormSetup
         End If
 
         If SetIniData() Then
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox("Failed to setup", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, My.Resources.Error_word)
             Else
                 ErrorLog("Failed to setup")
@@ -1342,7 +1347,7 @@ Public Class FormSetup
             End If
         Next
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             ' create tables in case we need them
             SetupWordPress()    ' in case they want to use WordPress
             SetupSimStats()     ' Perl code
@@ -2019,7 +2024,7 @@ Public Class FormSetup
 #End Region
 
     Private Shared Sub PrintBackups()
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
         For Each k In RunningBackupName
             TextPrint(k.Key)
             RunningBackupName.TryRemove(k.Key, "")
@@ -2084,7 +2089,7 @@ Public Class FormSetup
 
         Chart()                     ' do charts collection
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             CheckPost()                 ' see if anything arrived in the web server
             CheckForBootedRegions()     ' task to scan for anything that just came on line
             TeleportAgents()            ' send them onward
@@ -2099,7 +2104,7 @@ Public Class FormSetup
             ScanAgents()                ' update agent count
 
             '^^^^^^^^^^^^^^^^^^^^^
-            If ServiceMode() Then Return
+            If RunningInServiceMode() Then Return
 
             CalcDiskFree()              ' check for free disk space
             If Settings.ShowMysqlStats Then
@@ -2194,7 +2199,7 @@ Public Class FormSetup
         TextPrint(My.Resources.Check_Diag)
         Dim wsstarted = IsRegionReady(CType(Settings.DiagnosticPort, Integer))
         If wsstarted = False Then
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
             End If
             ErrorLog($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}")
@@ -2702,7 +2707,7 @@ Public Class FormSetup
     Private Sub KickUserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KickUserToolStripMenuItem.Click
 
         Dim RegionUUID = FindRegionByName(ChooseRegion(True))
-        Dim user = InputBox("User First and Last Name?", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Information_word)
+        Dim user = InputBox("User First and Last Name?", My.Resources.Information_word, "")
         ConsoleCommand(RegionUUID, $"kick user {user}")
 
     End Sub
@@ -2803,7 +2808,7 @@ Public Class FormSetup
     End Sub
 
     Private Sub MnuExit_Click(sender As System.Object, e As EventArgs) Handles mnuExit.Click
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
             If result = vbYes Then
                 ReallyQuit()
@@ -3022,7 +3027,7 @@ Public Class FormSetup
                 End If
 
                 Dim yesno As MsgBoxResult
-                If ServiceMode() Then
+                If RunningInServiceMode() Then
                     yesno = MsgBoxResult.Yes
                 Else
                     yesno = MsgBox(My.Resources.Are_You_Sure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, Global.Outworldz.My.Resources.Restore_word)
@@ -3220,11 +3225,6 @@ Public Class FormSetup
 
     Private Sub StartButton_Click(sender As System.Object, e As EventArgs) Handles StartButton.Click
 
-        If ServiceMode() Then
-            TextPrint("Starting Service. No Opensim DOS boxes will show")
-            NssmService.StartService()
-            Return
-        End If
         Startup()
 
     End Sub

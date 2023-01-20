@@ -174,7 +174,7 @@ Module FileStuff
         End If
 
         If Not System.IO.Directory.Exists(sourcePath) Then
-            If Not ServiceMode() Then
+            If Not RunningInServiceMode() Then
                 MsgBox("Cannot locate folder " & sourcePath, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
             End If
             ErrorLog("Cannot locate folder " & sourcePath)

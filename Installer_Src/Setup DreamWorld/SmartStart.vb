@@ -77,7 +77,7 @@ Module SmartStart
     ''' </summary>
     Public Sub CheckForBootedRegions()
 
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
 
         ' booted regions from web server
         Bench.Start("Booted list")
@@ -814,7 +814,7 @@ Module SmartStart
                 ProcessID(RegionUUID) = PID
                 PropUpdateView = True ' make form refresh
 
-                If Not ServiceMode() Then
+                If Not RunningInServiceMode() Then
                     Try
                         Dim P = Process.GetProcessById(PID)
                         P.EnableRaisingEvents = True
@@ -850,7 +850,7 @@ Module SmartStart
 
             ' enable console for Service mode
             Dim args As String = ""
-            If ServiceMode() Then
+            If RunningInServiceMode() Then
                 args = " -console=rest" ' space is required
             End If
 

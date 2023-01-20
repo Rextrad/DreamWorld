@@ -165,9 +165,13 @@ Module Robust
 
         ' enable console for Service mode
         Dim args As String = ""
-        If ServiceExists("DreamGridService") And ServiceMode() Then
+        If ServiceExists("DreamGridService") And RunningInServiceMode() Then
             args = " -console=rest" ' space required
             Settings.GraphVisible = False
+        End If
+
+        If ServiceExists(("DreamGridService")) Then
+            Return True
         End If
 
         RobustProcess.StartInfo.Arguments &= args
@@ -212,7 +216,7 @@ Module Robust
             If counter > 120 Then
                 TextPrint(My.Resources.Robust_failed_to_start)
                 FormSetup.Buttons(FormSetup.StartButton)
-                If Not ServiceMode() Then
+                If Not RunningInServiceMode() Then
                     Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
                     If (yesno = vbYes) Then
                         Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
@@ -243,7 +247,7 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            If ServiceMode() Then
+            If RunningInServiceMode() Then
                 Zap("Robust")
             Else
                 ConsoleCommand(RobustName, "q")
@@ -419,7 +423,7 @@ Module Robust
             If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
             If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True
 
-            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName And Not ServiceMode() Then
+            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName And Not RunningInServiceMode() Then
                 MsgBox(My.Resources.Cannot_locate, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
                 Dim RegionName = ChooseRegion(False)
 
@@ -651,7 +655,7 @@ Module Robust
         RobustCrashCounter = 0
         MarkRobustOffline()
 
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             Dim yesno = MsgBox(My.Resources.Robust_exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
             If (yesno = vbYes) Then
                 Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
