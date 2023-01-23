@@ -458,7 +458,7 @@ Module DoIni
     "$CONF_center_coord_y = " & """" & CStr(Settings.MapCenterY) & """" & ";		// the Center-Y-Coordinate " & vbCrLf &
     "// style-sheet items" & vbCrLf &
     "$CONF_style_sheet     = " & """" & "/css/stylesheet.css" & """" & ";          //Link To your StyleSheet" & vbCrLf &
-    "$CONF_HOME            = " & """/" & Settings.CMS & "/""" & ";          //Link To your Home Folder in htdocs.  WordPress, DreamGrid, JOpensim/jOpensim or user assigned folder" & vbCrLf &
+    $"$CONF_HOME           = ""http://{Settings.PublicIP}:{Settings.ApachePort}/{Settings.CMS}"" //Link To your Home Folder In htdocs.  WordPress, DreamGrid, JOpensim/jOpensim Or user assigned folder" & vbCrLf &
     "?>"
 
             Try
@@ -467,7 +467,7 @@ Module DoIni
                     outputFile.Flush()
                 End Using
             Catch ex As Exception
-                If Not ServiceMode() Then
+                If Not RunningInServiceMode() Then
                     MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
                 Else
                     ErrorLog(ex.Message)
@@ -492,7 +492,7 @@ Module DoIni
                     outputFile.Flush()
                 End Using
             Catch ex As Exception
-                If Not ServiceMode() Then
+                If Not RunningInServiceMode() Then
                     MsgBox(ex.Message, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
                 Else
                     ErrorLog(ex.Message)

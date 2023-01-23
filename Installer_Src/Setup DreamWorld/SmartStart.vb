@@ -77,7 +77,7 @@ Module SmartStart
     ''' </summary>
     Public Sub CheckForBootedRegions()
 
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
 
         ' booted regions from web server
         Bench.Start("Booted list")
@@ -807,7 +807,7 @@ Module SmartStart
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
             Dim isrunning As Boolean
-            If ServiceMode() And CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
+            If RunningInServiceMode() And CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
                 isrunning = True
             Else
                 If CBool(GetHwnd(Group_Name(RegionUUID))) Then isrunning = True
@@ -817,7 +817,6 @@ Module SmartStart
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 ProcessID(RegionUUID) = PID
                 PropUpdateView = True ' make form refresh
-
 
                 Try
                     Dim P = Process.GetProcessById(PID)
@@ -853,7 +852,7 @@ Module SmartStart
 
             ' enable console for Service mode
             Dim args As String = ""
-            If ServiceMode() Then
+            If RunningInServiceMode() Then
                 args = " -console=rest" ' space is required
             End If
 

@@ -309,7 +309,7 @@ Module Apache
         ApacheCrashCounter = 0
 
         Dim yesno As MsgBoxResult
-        If Not ServiceMode() Then
+        If Not RunningInServiceMode() Then
             yesno = MsgBox(My.Resources.Apache_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
         Else
             ErrorLog(My.Resources.Apache_Exited)

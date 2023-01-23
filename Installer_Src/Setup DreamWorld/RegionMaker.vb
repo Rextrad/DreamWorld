@@ -101,7 +101,7 @@ Module RegionMaker
     ''' </summary>
     Public Sub CheckPost()
 
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
         For Each TKey In WebserverList
 
             Dim ProcessString As String = TKey.Key ' recover the PID as string
@@ -549,7 +549,7 @@ Module RegionMaker
                             uuid = CStr(INI.GetIni(fName, "RegionUUID", "", "String"))
 
                             Dim SomeUUID As New Guid
-                            If Not Guid.TryParse(uuid, SomeUUID) And Not ServiceMode() Then
+                            If Not Guid.TryParse(uuid, SomeUUID) And Not RunningInServiceMode() Then
                                 MsgBox("Cannot read UUID In INI file For " & fName, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
                                 ErrorLog("Cannot read UUID In INI file For " & fName)
                                 Dim newfile = file
@@ -574,7 +574,7 @@ Module RegionMaker
                                 Group_Name(uuid) = DirName
                                 Group = DirName
                             Else
-                                If Not ServiceMode() Then
+                                If Not RunningInServiceMode() Then
                                     MsgBox("Cannot locate Dos Box name for " & fName, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
                                 Else
                                     ErrorLog("Cannot locate Dos Box name for " & fName)
@@ -680,7 +680,7 @@ Module RegionMaker
                         Next
                     Catch ex As Exception
                         BreakPoint.Dump(ex)
-                        If Not Not ServiceMode() Then
+                        If Not Not RunningInServiceMode() Then
                             MsgBox($"{My.Resources.Error_Region}{fName}  {ex.Message}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
                         End If
 

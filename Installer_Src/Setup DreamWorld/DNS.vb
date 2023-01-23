@@ -29,7 +29,7 @@ Module DNS
 
         If Settings.DnsName.Length = 0 And Settings.EnableHypergrid Then
             Dim newname = GetNewDnsName()
-            If newname.Length >= 0 And Not ServiceMode() Then
+            If newname.Length >= 0 And Not RunningInServiceMode() Then
                 If Not RegisterName(newname) Then
                     Settings.DnsName = newname
                     Settings.PublicIP = newname
@@ -75,7 +75,7 @@ Module DNS
                     Settings.DnsTestPassed() = True
                     Return True
                 ElseIf Checkname = "NAK" Then
-                    If Not ServiceMode() Then
+                    If Not RunningInServiceMode() Then
                         MsgBox(DNSName & ":" & My.Resources.DDNS_In_Use, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
                         Exit For
                     End If

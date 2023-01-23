@@ -23,13 +23,16 @@
 
     End Sub
 
-    Public Sub StartService()
+    Public Function StartService() As Boolean
+
         If NssmCommand("start DreamGridService") Then
             TextPrint(My.Resources.ServiceInstalled)
+            Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoStart)
+            Return False
         End If
-    End Sub
+    End Function
 
     Public Sub StopAndDeleteService()
 

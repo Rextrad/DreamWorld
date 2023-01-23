@@ -1,7 +1,7 @@
 REVISIONS FOR DREAMGRID
 
 V5.33
-Services Merged for debug
+Added a Kick User command to the help Console Commands Menu
 Opensim 1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000
 	Fixed a region crash when being griefed
 	robust: add exclude by Disk id0

@@ -61,7 +61,7 @@ Module WindowHandlers
         ''' <param name="command">String</param>
         ''' <returns></returns>
         If command Is Nothing Then Return True
-        If ServiceMode() Then Return True
+        If RunningInServiceMode() Then Return True
 
         If command.Length > 0 Then
             command = ToLowercaseKeys(command)
@@ -281,6 +281,21 @@ Module WindowHandlers
 
     End Sub
 
+    ''' <summary>
+    ''' Returns is we started with the Server param which means run as a Service.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function RunningInServiceMode() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
+        Dim run = CBool(Param.ToLower = "service")
+        Return run
+
+    End Function
+
     Public Sub SendMsg(msg As String)
 
         Dim l As New List(Of String)
@@ -314,21 +329,6 @@ Module WindowHandlers
     End Sub
 
     ''' <summary>
-    ''' Returns is we started with the Server param which means run as a Service.
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function ServiceMode() As Boolean
-
-        Dim Param = Command()
-        'Log("Service", $"Startup param = {Param}")
-        'Log("Service", $"Environment path = {Environment.CommandLine}")
-        'Log("Service", $"RunAsService = {RunAsService}")
-        Dim run = CBool(Param.ToLower = "service")
-        Return run
-
-    End Function
-
-    ''' <summary>
     ''' Sets the window title text
     ''' </summary>
     ''' <param name="myProcess">PID</param>
@@ -346,7 +346,7 @@ Module WindowHandlers
             Return
         End If
 
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
 
         Dim WindowCounter As Integer = 0
         Dim myhandle As IntPtr
@@ -404,7 +404,7 @@ Module WindowHandlers
 
     Public Function ShowDOSWindow(RegionUUID As String, command As SHOWWINDOWENUM) As Boolean
 
-        If ServiceMode() Then Return True
+        If RunningInServiceMode() Then Return True
 
         If Settings.ConsoleShow = "None" AndAlso command <> SHOWWINDOWENUM.SWMINIMIZE Then
             Return True

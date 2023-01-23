@@ -95,7 +95,7 @@ Public Class FormRestart
             NoDelayRadioButton.Checked = True
         End If
 
-        CheckBox1.Checked = Settings.RunAsService
+        RunAsServiceCheckbox.Checked = Settings.RunAsService
 
         SetScreen()
         HelpOnce("Restart")
@@ -183,9 +183,9 @@ Public Class FormRestart
 
 #Region "TypeOfRestart"
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles RunAsServiceCheckbox.CheckedChanged
 
-        If CheckBox1.Checked Then
+        If RunAsServiceCheckbox.Checked Then
             If ServiceExists("DreamGridService") Then
                 TextPrint("Service is already installed")
                 Return

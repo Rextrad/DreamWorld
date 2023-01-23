@@ -21,7 +21,7 @@ Module Teleport
     End Function
 
     Public Sub TeleportAgents()
-        If ServiceMode() Then Return
+        If RunningInServiceMode() Then Return
         Bench.Start("TeleportAgents")
         Try
             For Each Keypair In TeleportAvatarDict

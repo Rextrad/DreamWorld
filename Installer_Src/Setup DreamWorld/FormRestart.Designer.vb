@@ -25,6 +25,7 @@ Partial Class FormRestart
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRestart))
         Me.AutoStart = New System.Windows.Forms.GroupBox()
+        Me.RunAsServiceCheckbox = New System.Windows.Forms.CheckBox()
         Me.IntervalGroupBox = New System.Windows.Forms.GroupBox()
         Me.NoDelayRadioButton = New System.Windows.Forms.RadioButton()
         Me.ConcurrentRadioButton = New System.Windows.Forms.RadioButton()
@@ -38,7 +39,6 @@ Partial Class FormRestart
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem30 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.AutoStart.SuspendLayout()
         Me.IntervalGroupBox.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
@@ -46,7 +46,7 @@ Partial Class FormRestart
         '
         'AutoStart
         '
-        Me.AutoStart.Controls.Add(Me.CheckBox1)
+        Me.AutoStart.Controls.Add(Me.RunAsServiceCheckbox)
         Me.AutoStart.Controls.Add(Me.IntervalGroupBox)
         Me.AutoStart.Controls.Add(Me.RestartOnCrash)
         Me.AutoStart.Controls.Add(Me.ARTimerBox)
@@ -56,10 +56,21 @@ Partial Class FormRestart
         Me.AutoStart.Controls.Add(Me.AutoStartCheckbox)
         Me.AutoStart.Location = New System.Drawing.Point(15, 42)
         Me.AutoStart.Name = "AutoStart"
-        Me.AutoStart.Size = New System.Drawing.Size(324, 346)
+        Me.AutoStart.Size = New System.Drawing.Size(324, 311)
         Me.AutoStart.TabIndex = 45
         Me.AutoStart.TabStop = False
         Me.AutoStart.Text = "Automatic Startup"
+        '
+        'RunAsServiceCheckbox
+        '
+        Me.RunAsServiceCheckbox.AutoSize = True
+        Me.RunAsServiceCheckbox.Location = New System.Drawing.Point(37, 269)
+        Me.RunAsServiceCheckbox.Name = "RunAsServiceCheckbox"
+        Me.RunAsServiceCheckbox.Size = New System.Drawing.Size(108, 17)
+        Me.RunAsServiceCheckbox.TabIndex = 1870
+        Me.RunAsServiceCheckbox.Text = "Run as a Service"
+        Me.ToolTip1.SetToolTip(Me.RunAsServiceCheckbox, "There is no need to click the Start button .  Opensim runs as a service")
+        Me.RunAsServiceCheckbox.UseVisualStyleBackColor = True
         '
         'IntervalGroupBox
         '
@@ -182,23 +193,12 @@ Partial Class FormRestart
         Me.ToolStripMenuItem30.Size = New System.Drawing.Size(72, 32)
         Me.ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(37, 269)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(108, 17)
-        Me.CheckBox1.TabIndex = 1870
-        Me.CheckBox1.Text = "Run as a Service"
-        Me.ToolTip1.SetToolTip(Me.CheckBox1, "There is no need to click the Start button .  Opensim runs as a service")
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'FormRestart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(351, 426)
+        Me.ClientSize = New System.Drawing.Size(351, 369)
         Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.AutoStart)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -230,5 +230,5 @@ Partial Class FormRestart
     Friend WithEvents SequentialRadioButton As RadioButton
     Friend WithEvents ConcurrentRadioButton As RadioButton
     Friend WithEvents IntervalGroupBox As GroupBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents RunAsServiceCheckbox As CheckBox
 End Class
