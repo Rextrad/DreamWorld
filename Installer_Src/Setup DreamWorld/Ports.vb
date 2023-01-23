@@ -57,14 +57,14 @@ Module Ports
                             Exit For
                         End If
 
-                        If CBool(GetHwnd(Groupname)) Then
-                            Dim RegionPort = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
-                            If RegionPortList.ContainsKey(RegionPort) Then
-                                RegionPortList.Item(RegionPort) = RegionUUID  ' update
-                            Else
-                                RegionPortList.TryAdd(RegionPort, RegionUUID) ' add
-                            End If
-                        End If
+                        'If CBool(GetHwnd(Groupname)) Then
+                        'Dim RegionPort = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
+                        'If RegionPortList.ContainsKey(RegionPort) Then
+                        'RegionPortList.Item(RegionPort) = RegionUUID  ' update
+                        'Else
+                        'RegionPortList.TryAdd(RegionPort, RegionUUID) ' add
+                        'End If
+                        'End If
                     Next
                 Catch ex As Exception
                     BreakPoint.Dump(ex)

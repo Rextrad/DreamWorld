@@ -542,7 +542,7 @@ Public Class FormSetup
 
         Application.DoEvents()
 
-        GetOpensimNamesFromFiles()
+
 
         ' collect all process windows
         '  Dim processes = Process.GetProcessesByName("Opensim")
@@ -550,7 +550,6 @@ Public Class FormSetup
         'If Not PropInstanceHandles.ContainsKey(p.Id) Then
         'PropInstanceHandles.TryAdd(p.Id, OpensimNames.Item(p.Id))
         'End If
-        'Next
 
         For Each RegionUUID In RegionUuids()
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
@@ -841,6 +840,9 @@ Public Class FormSetup
     Public Function StartOpensimulator() As Boolean
 
         Bench.Start("StartOpensim")
+
+        GetOpensimNamesFromFiles()
+
         StartTimer()
 
         PropOpensimIsRunning = True
