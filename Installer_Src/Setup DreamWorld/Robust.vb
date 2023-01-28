@@ -443,7 +443,7 @@ Module Robust
 
             If Settings.AltDnsName.Length > 0 Then
                 INI.SetIni("Hypergrid", "HomeURIAlias", Settings.AltDnsName)
-                INI.SetIni("Hypergrid", "GatekeeperURIAlias", Settings.AltDnsName)
+                INI.SetIni("Hypergrid", "GatekeeperURIAlias", $"http://{Settings.AltDnsName}:{Settings.HttpPort}/")
             End If
 
             INI.SetIni("Const", "GridName", Settings.SimName)
