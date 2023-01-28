@@ -220,10 +220,6 @@ Public Class FormRegionlist
 
         If chosen = "Start" Then
             ResumeRegion(RegionUUID)
-            If RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Then
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
-                Return
-            End If
 
             FormSetup.Buttons(FormSetup.BusyButton)
 

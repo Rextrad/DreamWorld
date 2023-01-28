@@ -115,8 +115,6 @@ Module SmartStart
                     MapTime(RegionUUID) = CInt(seconds)
                 End If
 
-                TeleportAgents()
-
                 If Estate(RegionUUID) = "SimSurround" Then
                     Landscape(RegionUUID, RegionName)
                 End If
@@ -259,14 +257,13 @@ Module SmartStart
                     '[Resume] = 8
                     If PropAborting Then Continue For
                     If Not PropOpensimIsRunning() Then Continue For
-                    ResumeRegion(RegionUUID)
+                    'ResumeRegion(RegionUUID)
                     BreakPoint.Print($"{GroupName} Is Resuming")
                     Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
                     For Each R As String In GroupList
                         If RegionEnabled(RegionUUID) Then
                             Boot(RegionName)
                         End If
-                        RunTaskList(RegionUUID)
                     Next
                     PropUpdateView = True
                     Continue For
@@ -546,6 +543,9 @@ Module SmartStart
 
         Logger("Teleport Request", Region_Name(RegionUUID) & ":" & AgentID, "Teleport")
 
+        ResumeRegion(RegionUUID) ' Wait for it to start booting
+        Application.DoEvents()
+
         If Teleport Then
             If TeleportAvatarDict.ContainsKey(AgentID) Then
                 TeleportAvatarDict.TryRemove(AgentID, "")
@@ -553,9 +553,6 @@ Module SmartStart
             TeleportAvatarDict(AgentID) = RegionUUID
         End If
 
-        ResumeRegion(RegionUUID) ' Wait for it to start booting
-
-        Application.DoEvents()
         Return False
 
     End Function
@@ -692,38 +689,39 @@ Module SmartStart
 
                     ' smart, and up
                     If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
+
                         If TeleportType.ToUpperInvariant = "UUID" Then
-                            'Logger("Already Booted UUID Teleport", Name & ":" & AgentID, "Teleport")
+                            Logger("Already Booted UUID Teleport", Name & ":" & AgentID, "Teleport")
                             Return RegionUUID
                         ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
-                            'Logger("Already Booted Named Teleport", Name & ":" & AgentID, "Teleport")
+                            Logger("Already Booted Named Teleport", Name & ":" & AgentID, "Teleport")
                             Return Name
                         Else ' Its a sign!
-                            'Logger("Already Booted TP Sign Teleport", Name & ":" & AgentID, "Teleport")
+                            Logger("Already Booted TP Sign Teleport", Name & ":" & AgentID, "Teleport")
                             Return Name & "|0"
                         End If
                     Else  ' requires booting
                         If TeleportType.ToUpperInvariant = "UUID" Then
                             If Settings.BootOrSuspend Then
                                 AddEm(RegionUUID, AgentID, True)
-                                'Logger("Boot Type UUID Teleport", Name & ":" & AgentID, "Teleport")
+                                Logger("Boot Type UUID Teleport", Name & ":" & AgentID, "Teleport")
                                 RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
                                 Dim uuid = FindRegionByName(Settings.ParkingLot)
                                 Return uuid
                             Else
                                 AddEm(RegionUUID, AgentID, True)
-                                'Logger("Suspend type UUID Teleport", Name & ":" & AgentID, "Teleport")
+                                Logger("Suspend type UUID Teleport", Name & ":" & AgentID, "Teleport")
                                 Return RegionUUID
                             End If
 
                         ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
                             If Settings.BootOrSuspend Then
                                 AddEm(RegionUUID, AgentID, True)
-                                'Logger("Boot Type Named Teleport", Name & ":" & AgentID, "Teleport")
+                                Logger("Boot Type Named Teleport", Name & ":" & AgentID, "Teleport")
                                 RPC_admin_dialog(AgentID, $"Booting your region { Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
                                 Return Settings.ParkingLot
                             Else
-                                'Logger("Suspend Type Named Teleport", Name & ":" & AgentID, "Teleport")
+                                Logger("Suspend Type Named Teleport", Name & ":" & AgentID, "Teleport")
                                 AddEm(RegionUUID, AgentID, True)
                                 Return Name
                             End If
@@ -736,10 +734,10 @@ Module SmartStart
                             End If
                             If Settings.BootOrSuspend Then
                                 RPC_admin_dialog(AgentID, $"Booting your region { Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(time)} seconds.")
-                                'Logger("Sign Boot, Agent ", Name & ":" & AgentID, "Teleport")
+                                Logger("Sign Boot, Agent ", Name & ":" & AgentID, "Teleport")
                                 Return Settings.ParkingLot
                             Else
-                                'Logger("Sign Suspend,Agent ", Name & ":" & AgentID, "Teleport")
+                                Logger("Sign Suspend,Agent ", Name & ":" & AgentID, "Teleport")
                                 Return RegionUUID
                             End If
                         End If
@@ -758,7 +756,7 @@ Module SmartStart
                     Logger("Teleport Non Smart", Name & ":" & AgentID, "Teleport")
                     Return Name
                 Else     ' Its a sign!
-                    'Logger("Teleport Sign ", Name & ":" & AgentID, "Teleport")
+                    Logger("Teleport Sign ", Name & ":" & AgentID, "Teleport")
                     AddEm(RegionUUID, AgentID, False)
                     Return Name
                 End If
@@ -977,19 +975,21 @@ Module SmartStart
         ' smart boot Freeze/Thaw type
         For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
             Thaw(RegionUUID)
+            RunTaskList(RegionUUID)
             PokeRegionTimer(RegionUUID)
         Next
 
         If IsRegionReady(GroupPort(RegionUUID)) Then
-            RunTaskList(RegionUUID)
             For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                PokeRegionTimer(RegionUUID)
+                RunTaskList(RegionUUID)
             Next
         End If
-        TeleportAgents()
 
         ' not smart boot Freeze/Thaw
         If RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Or
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
                  RegionStatus(RegionUUID) = SIMSTATUSENUM.Error Or
                  RegionStatus(RegionUUID) = SIMSTATUSENUM.ShuttingDownForGood Then
 
@@ -999,8 +999,6 @@ Module SmartStart
             Next
             PropUpdateView = True ' make form refresh
         End If
-
-        RunTaskList(RegionUUID)
 
     End Sub
 
