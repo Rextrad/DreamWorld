@@ -230,7 +230,7 @@ Public Class FormSmartStart
         DelayRegionReady.Text = digitsOnly.Replace(DelayRegionReady.Text, "")
         Settings.TeleportSleepTime = CInt("0" & DelayRegionReady.Text)
         If Settings.TeleportSleepTime < 0 Then Settings.TeleportSleepTime = 0
-        TextPrint(My.Resources.Min_time)
+        If Settings.SmartStartTimeout < Settings.TeleportSleepTime - 5 Then Seconds.Text = CStr(Settings.TeleportSleepTime + 5)
         Settings.SaveSettings()
 
     End Sub
@@ -1222,8 +1222,8 @@ Public Class FormSmartStart
         Dim digitsOnly = New Regex("[^\d]")
         Seconds.Text = digitsOnly.Replace(Seconds.Text, "")
         Settings.SmartStartTimeout = CInt("0" & Seconds.Text)
-        Settings.SaveSettings()
         If Settings.SmartStartTimeout < 10 Then Settings.SmartStartTimeout = 10
+        Settings.SaveSettings()
         TextPrint(My.Resources.minkeepalive)
 
     End Sub
