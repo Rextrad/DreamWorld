@@ -1815,7 +1815,7 @@ Public Class FormSetup
                 LastAvatars(person.AvatarUUID) = person
             Next
 
-            GetAllAgents()  ' to list (of Cachedavatars)
+            GetAllAgents()  ' to list (of Cached avatars)
 
             ' start with zero avatars
             For Each RegionUUID In RegionUuids()

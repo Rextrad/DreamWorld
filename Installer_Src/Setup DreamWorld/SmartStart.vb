@@ -173,7 +173,9 @@ Module SmartStart
                     ' Smart Start Timer
                     If Settings.Smart_Start AndAlso Smart_Start(RegionUUID) AndAlso status = SIMSTATUSENUM.Booted Then
                         Dim diff = DateAndTime.DateDiff(DateInterval.Second, Timer(RegionUUID), Date.Now)
-                        If diff < 0 Then diff = 0
+                        If diff < 0 Then
+                            diff = 0
+                        End If
 
                         If diff > Settings.SmartStartTimeout AndAlso RegionName <> Settings.WelcomeRegion Then
                             BreakPoint.Print($"State Changed to ShuttingDown {GroupName} ")
@@ -301,7 +303,7 @@ Module SmartStart
         ' Scan all the regions
         CachedAvatars.Clear()
         ' List of AvatarObject
-        CachedAvatars = GetPresence() ' local usres
+        CachedAvatars = GetPresence() ' local users
 
         Dim HGUsers = GetGridUsers() ' HG users
         For Each item In HGUsers
