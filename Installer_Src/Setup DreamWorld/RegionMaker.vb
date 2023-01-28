@@ -82,7 +82,10 @@ Module RegionMaker
             Settings.SaveSettings()
         End If
 
+        GetOpensimNamesFromFiles()
+
         If GetAllRegions(Verbose) = 0 Then Return False
+
         TextPrint($"Loaded {CStr(RegionCount)} Regions")
 
         Return True
@@ -1203,7 +1206,7 @@ Module RegionMaker
         End Get
         Set(ByVal Value As Integer)
             If Debugger.IsAttached Then
-                'Logger(Region_Name(RegionUUID), $"Status => {GetStateString(Value)}", "Status")
+                Logger(Region_Name(RegionUUID), $"Status => {GetStateString(Value)}", "Status")
             End If
             RegionList(RegionUUID)._Status = Value
         End Set

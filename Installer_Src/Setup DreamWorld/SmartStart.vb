@@ -804,36 +804,38 @@ Module SmartStart
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
-            'If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+            Dim isrunning As Boolean
+            If RunningInServiceMode() And CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
+                isrunning = True
+            Else
+                If CBool(GetHwnd(Group_Name(RegionUUID))) Then isrunning = True
+            End If
 
-            If CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
-
+            If isrunning Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 ProcessID(RegionUUID) = PID
                 PropUpdateView = True ' make form refresh
 
-                If Not RunningInServiceMode() Then
-                    Try
-                        Dim P = Process.GetProcessById(PID)
-                        P.EnableRaisingEvents = True
-                        AddHandler P.Exited, AddressOf OpensimExited ' Registering event handler
-                    Catch ex As Exception
-                        RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
-                        Return False
-                    End Try
+                Try
+                    Dim P = Process.GetProcessById(PID)
+                    P.EnableRaisingEvents = True
+                    AddHandler P.Exited, AddressOf OpensimExited ' Registering event handler
+                Catch ex As Exception
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
+                    Return False
+                End Try
 
-                    Thaw(RegionUUID)
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-                    SendToOpensimWorld(RegionUUID, 0)
-                    TextPrint($"{BootName} {My.Resources.Ready}")
-                    ShowDOSWindow(RegionUUID, MaybeHideWindow())
-                    Return True
-                    '^^^^^^^^^^^^^^^
-                End If
+                Thaw(RegionUUID)
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                SendToOpensimWorld(RegionUUID, 0)
+                TextPrint($"{BootName} {My.Resources.Ready}")
+                ShowDOSWindow(RegionUUID, MaybeHideWindow())
+                Return True
+                '^^^^^^^^^^^^^^^
             End If
 
             TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
-
+            Application.DoEvents()
             DoCurrency()
             SetCores(RegionUUID)
 

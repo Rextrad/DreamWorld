@@ -163,7 +163,6 @@ Module WindowHandlers
                     End If
                 Next
             Catch ex As Exception
-                'BreakPoint.Print(ex.Message)
             End Try
         Else
             Try
@@ -179,24 +178,28 @@ Module WindowHandlers
 
     Public Sub GetOpensimNamesFromFiles()
 
-        For Each RegionUUID In RegionUuids()
-            Dim OpensimPathName = OpensimIniPath(RegionUUID)
-            Dim Name = Region_Name(RegionUUID)
-            Dim PIDfile = IO.Path.Combine(OpensimPathName, "PID.pid")
+        Dim P = IO.Path.Combine(Settings.CurrentDirectory, "Outworldzfiles\Opensim\bin\Regions")
+        Dim directory As New System.IO.DirectoryInfo(P)
+
+        For Each Folder In directory.GetDirectories()
+            Dim GroupName = Folder.Name
+            Dim PIDfile = IO.Path.Combine(Folder.FullName, "PID.pid")
             Try
                 Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
                     While Not Reader.EndOfStream
                         Dim line As String = Reader.ReadLine
                         Dim PID As Integer
                         If Int32.TryParse(line, PID) Then
-                            PropInstanceHandles.TryAdd(PID, Name)
+                            PropInstanceHandles.TryAdd(PID, GroupName)
+                        Else
+                            Debug.Print("No PID on disk")
                         End If
                     End While
                 End Using
             Catch
             End Try
-
         Next
+
 
     End Sub
 
@@ -430,6 +433,8 @@ Module WindowHandlers
                 Sleep(100)
                 Application.DoEvents()
             End While
+        Else
+            Log("Warn", $"Cannot minimize or find {Group_Name(RegionUUID)}")
         End If
         Return False
 
