@@ -804,14 +804,8 @@ Module SmartStart
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
-            Dim isrunning As Boolean
-            If RunningInServiceMode() And CheckPort(Settings.PublicIP, GroupPort(RegionUUID)) Then
-                isrunning = True
-            Else
-                If CBool(GetHwnd(Group_Name(RegionUUID))) Then isrunning = True
-            End If
 
-            If isrunning Then
+            If CheckPort(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 ProcessID(RegionUUID) = PID
                 PropUpdateView = True ' make form refresh
@@ -981,7 +975,7 @@ Module SmartStart
             PokeRegionTimer(RegionUUID)
         Next
 
-        If IsRegionReady(GroupPort(RegionUUID)) Then
+        If CheckPort(RegionUUID) Then
             For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 PokeRegionTimer(RegionUUID)

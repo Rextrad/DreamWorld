@@ -756,12 +756,12 @@ Public Class FormRegion
             Dim RegionUUID As String = FindRegionByName(RegionName.Text)
             If RegionUUID.Length > 0 Then
 
-                If IsRegionReady(GroupPort(RegionUUID)) Then
+                If CheckPort(RegionUUID) Then
                     ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                 End If
 
                 Dim loopctr = 120 ' wait 2 minutes
-                While IsRegionReady(GroupPort(RegionUUID)) And loopctr > 0
+                While CheckPort(RegionUUID) And loopctr > 0
                     Sleep(1000)
                     loopctr -= 1
                 End While

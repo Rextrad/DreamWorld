@@ -542,8 +542,6 @@ Public Class FormSetup
 
         Application.DoEvents()
 
-
-
         ' collect all process windows
         '  Dim processes = Process.GetProcessesByName("Opensim")
         '' For Each p In processes
@@ -2208,7 +2206,7 @@ Public Class FormSetup
     Private Shared Sub CheckDiagPort()
 
         TextPrint(My.Resources.Check_Diag)
-        Dim wsstarted = IsRegionReady(CType(Settings.DiagnosticPort, Integer))
+        Dim wsstarted = CheckPort2(Settings.LANIP, CType(Settings.DiagnosticPort, Integer))
         If wsstarted = False Then
             If Not RunningInServiceMode() Then
                 MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)

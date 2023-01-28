@@ -185,21 +185,23 @@ Module WindowHandlers
             Dim GroupName = Folder.Name
             Dim PIDfile = IO.Path.Combine(Folder.FullName, "PID.pid")
             Try
-                Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
-                    While Not Reader.EndOfStream
-                        Dim line As String = Reader.ReadLine
-                        Dim PID As Integer
-                        If Int32.TryParse(line, PID) Then
-                            PropInstanceHandles.TryAdd(PID, GroupName)
-                        Else
-                            Debug.Print("No PID on disk")
-                        End If
-                    End While
-                End Using
-            Catch
+                If System.IO.File.Exists(PIDfile) Then
+                    Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
+                        While Not Reader.EndOfStream
+                            Dim line As String = Reader.ReadLine
+                            Dim PID As Integer
+                            If Int32.TryParse(line, PID) Then
+                                PropInstanceHandles.TryAdd(PID, GroupName)
+                            Else
+                                Debug.Print("No PID on disk")
+                            End If
+                        End While
+                    End Using
+                End If
+            Catch ex As Exception
+                Debug.Print(ex.Message)
             End Try
         Next
-
 
     End Sub
 

@@ -14,11 +14,6 @@ Module Teleport
 
     ''' <summary>Check if region is ready for login</summary>
     ''' <returns>true if up</returns>
-    Public Function IsRegionReady(Port As Integer) As Boolean
-
-        Return CheckPort(Settings.LANIP, Port)
-
-    End Function
 
     Public Sub TeleportAgents()
 
@@ -37,7 +32,7 @@ Module Teleport
 
                     ElseIf status = SIMSTATUSENUM.Booted Then
                         ShowDOSWindow(RegionToUUID, MaybeShowWindow())
-                        If IsRegionReady(Port) And RegionIsRegisteredOnline(RegionToUUID) Then
+                        If CheckPort(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
                             Dim DestinationName = Region_Name(RegionToUUID)
                             Dim FromRegionUUID As String = GetRegionFromAgentId(AgentID)
                             Dim fromName = Region_Name(FromRegionUUID)

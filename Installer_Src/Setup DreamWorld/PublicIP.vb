@@ -24,7 +24,33 @@ Module PublicIP
 
     End Sub
 
-    Public Function CheckPort(ServerAddress As String, Port As Integer) As Boolean
+    ''' <summary>
+    ''' Checks port or window handle to see if region is up
+    ''' </summary>
+    ''' <param name="RegionUUID">RegionUUID</param>
+    ''' <returns></returns>
+    Public Function CheckPort(RegionUUID As String) As Boolean
+
+        If RunningInServiceMode() Then
+            If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
+                Return True
+            End If
+        Else
+            If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+                Return True
+            End If
+        End If
+        Return False
+
+    End Function
+
+    ''' <summary>
+    ''' Checks port to see if region is up
+    ''' </summary>
+    ''' <param name="ServerAddress">IP</param>
+    ''' <param name="Port">Port</param>
+    ''' <returns>True is in memory</returns>
+    Public Function CheckPort2(ServerAddress As String, Port As Integer) As Boolean
 
         Dim success As Boolean
         Dim result As IAsyncResult = Nothing
