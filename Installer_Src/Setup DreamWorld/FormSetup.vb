@@ -842,6 +842,7 @@ Public Class FormSetup
 
         Bench.Start("StartOpensim")
         StartTimer()
+        StartTeleporter()
 
         PropOpensimIsRunning = True
 
@@ -1003,6 +1004,15 @@ Public Class FormSetup
             System.Diagnostics.Process.Start(e.LinkText)
         Catch
         End Try
+
+    End Sub
+
+    Private Sub StartTeleporter()
+
+        Dim WebThread = New Thread(AddressOf TeleportAgents)
+        WebThread.SetApartmentState(ApartmentState.STA)
+        WebThread.Priority = ThreadPriority.BelowNormal
+        WebThread.Start()
 
     End Sub
 
@@ -2092,7 +2102,6 @@ Public Class FormSetup
         If Not RunningInServiceMode() Then
             CheckPost()                 ' see if anything arrived in the web server
             CheckForBootedRegions()     ' task to scan for anything that just came on line
-            TeleportAgents()            ' send them onward
             ProcessQuit()               ' check if any processes exited
             PrintBackups()              ' print if backups are running
             Chat2Speech()               ' speak of the devil
