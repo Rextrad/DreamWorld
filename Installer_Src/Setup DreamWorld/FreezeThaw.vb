@@ -42,6 +42,7 @@
     Public Sub Thaw(RegionUUID As String)
 
         Dim PID = ProcessID(RegionUUID)
+
         Try
             NtResumeProcess(CachedProcess(PID).Handle)
         Catch

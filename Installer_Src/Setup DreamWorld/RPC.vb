@@ -212,7 +212,7 @@ Module RPC
 
         'http://opensimulator.org/wiki/Remoteadmin:admin_teleport_agent
 
-        Debug.Print("Teleport To:" & ToRegionName)
+        TextPrint("Teleport To:" & ToRegionName)
 
         Dim ht = New Hashtable From {
             {"password", Settings.MachineId},
