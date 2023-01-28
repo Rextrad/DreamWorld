@@ -771,8 +771,12 @@ namespace OpenSim.Services.HypergridService
 
             if(m_gatekeeperHost.Equals(reqGrid))
                 return true;
+
+            m_log.DebugFormat("[GATEKEEPER SERVICE]: Verifying alternate grid {0}", reqGrid.URI);
+
             if (m_gateKeeperAlias != null && m_gateKeeperAlias.Contains(reqGrid))
                 return true;
+
             return false;
         }
 

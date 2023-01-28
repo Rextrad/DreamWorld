@@ -764,11 +764,11 @@ namespace OpenSim.Region.CoreModules.Framework.EntityTransfer
                 UUID regID = sp.Scene.GetSmartStartALTRegion(finalDestination.RegionID, sp.ControllingClient.AgentId);
                 if (regID != UUID.Zero && regID != finalDestination.RegionID)
                 {
-                    //if (regID == sp.Scene.RegionInfo.RegionID)
-                    //{
-                    //    sp.ControllingClient.SendTeleportFailed("Destination region Loading. Teleport will happen soon");
-                    //    return;
-                    //}
+                    if (regID == sp.Scene.RegionInfo.RegionID)
+                    {
+                        sp.ControllingClient.SendTeleportFailed("Destination region Loading. Teleport will happen soon");
+                        return;
+                    }
 
                     finalDestination = sp.Scene.GridService.GetRegionByUUID(sp.Scene.RegionInfo.ScopeID, regID);
                     if (finalDestination == null)
