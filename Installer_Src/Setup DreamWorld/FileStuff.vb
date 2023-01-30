@@ -83,8 +83,10 @@ Module FileStuff
         "Outworldzfiles\Mysql\Dieter Mueller - Fred",
         "OutworldzFiles\Opensim\bin\addin-db-001", ' must be cleared or opensim updates can break.
         "OutworldzFiles\Opensim\bin\addin-db",' must be cleared or opensim updates can break.
-        "OutworldzFiles\Opensim\bin\Library.proto" ' old Diva library for standalone only
+        "OutworldzFiles\Opensim\bin\Library.proto", ' old Diva library for standalone only
+        "OutworldzFiles/Apache/bin/vcruntime140.dll" ' wrong version
         }
+
 
         If FormSetup.PropKillSource Then
             files.Add("OutworldzFiles\Opensim\.nant")

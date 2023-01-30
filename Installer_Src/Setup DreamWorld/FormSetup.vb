@@ -2607,6 +2607,8 @@ Public Class FormSetup
             FreezeThaw.Freeze(RegionUUID)
         Next
 
+        PropUpdateView = True
+
     End Sub
 
     Private Sub HelpClick(sender As Object, e As EventArgs)
@@ -3331,9 +3333,9 @@ Public Class FormSetup
 
         For Each RegionUUID In RegionUuids()
             Thaw(RegionUUID)
-            Application.DoEvents()
             Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
         Next
+        PropUpdateView = True
 
     End Sub
 
