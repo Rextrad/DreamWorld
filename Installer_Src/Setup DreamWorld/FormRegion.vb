@@ -520,7 +520,6 @@ Public Class FormRegion
 
         Select Case RegionPhysics(RegionUUID)
             Case "" : Physics_Default.Checked = True
-            Case "-1" : Physics_Default.Checked = True
             Case "0" : Physics_Default.Checked = True
             Case "1" : Physics_Default.Checked = True   ' ODE is gone
             Case "2" : Physics_Bullet.Checked = True
@@ -1236,7 +1235,7 @@ Public Class FormRegion
             MapType(RegionUUID) = Map
 
             'Case "" : Physics_Default.Checked = True
-            'Case "-1" : Physics_Default.Checked = True
+            'Case "-1" : Physics_Off.Checked = True
             'Case "0" : Physics_Default.Checked = True
             'Case "1" : Physics_ODE.Checked = True
             'Case "2" : Physics_Bullet.Checked = True
@@ -1704,6 +1703,10 @@ Public Class FormRegion
 
     Private Sub RadioButton16_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton16.CheckedChanged
         BoxSize = 256 * 16
+        If Initted1 Then Changed1 = True
+    End Sub
+
+    Private Sub RadioButton17_CheckedChanged(sender As Object, e As EventArgs)
         If Initted1 Then Changed1 = True
     End Sub
 

@@ -2140,6 +2140,11 @@ Module RegionMaker
                     If INI.SetIni("Startup", "physics", "basicphysics") Then Return True
                     If INI.SetIni("Startup", "UseSeparatePhysicsThread", "False") Then Return True
                     If INI.SetIni("ODEPhysicsSettings", "use_NINJA_physics_joints", "False") Then Return True
+                Case 1 'None
+                    If INI.SetIni("Startup", "meshing", "") Then Return True
+                    If INI.SetIni("Startup", "physics", "") Then Return True
+                    If INI.SetIni("Startup", "UseSeparatePhysicsThread", "False") Then Return True
+                    If INI.SetIni("ODEPhysicsSettings", "use_NINJA_physics_joints", "False") Then Return True
                 Case 2 'Physics_Bullet
                     If INI.SetIni("Startup", "meshing", "Meshmerizer") Then Return True
                     If INI.SetIni("Startup", "physics", "BulletSim") Then Return True
@@ -2172,6 +2177,10 @@ Module RegionMaker
                 Case "0" 'Physics_Default
                     If INI.SetIni("Startup", "meshing", "ZeroMesher") Then Return True
                     If INI.SetIni("Startup", "physics", "basicphysics") Then Return True
+                    If INI.SetIni("Startup", "UseSeparatePhysicsThread", "False") Then Return True
+                Case "-1" ' Off
+                    If INI.SetIni("Startup", "meshing", "") Then Return True
+                    If INI.SetIni("Startup", "physics", "") Then Return True
                     If INI.SetIni("Startup", "UseSeparatePhysicsThread", "False") Then Return True
                 Case "1" ' default
                     If INI.SetIni("Startup", "meshing", "Meshmerizer") Then Return True

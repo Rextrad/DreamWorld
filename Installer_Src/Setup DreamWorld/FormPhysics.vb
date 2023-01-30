@@ -54,7 +54,7 @@ Public Class FormPhysics
 
         GroupBox1.Text = Global.Outworldz.My.Resources.Physics_Engine
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
-        Physics0_None.Text = Global.Outworldz.My.Resources.None
+
         Physics2_Bullet.Text = Global.Outworldz.My.Resources.Bullet_Physics_word
         Physics3_Separate.Text = Global.Outworldz.My.Resources.Bullet_Threaded_word
         Physics5_Hybrid.Text = Global.Outworldz.My.Resources.ubODE_Hybrid_word
@@ -66,7 +66,7 @@ Public Class FormPhysics
         SetScreen()
 
         Select Case Settings.Physics
-            Case 0 : Physics0_None.Checked = True
+
             Case 2 : Physics2_Bullet.Checked = True
             Case 3 : Physics3_Separate.Checked = True
             Case 4 : Physics4_UbODE.Checked = True
@@ -95,16 +95,6 @@ Public Class FormPhysics
 
         If Physics5_Hybrid.Checked Then
             Settings.Physics = 5
-            Settings.SaveSettings()
-        End If
-
-    End Sub
-
-    Private Sub PhysicsNone_CheckedChanged(sender As Object, e As EventArgs) Handles Physics0_None.CheckedChanged
-
-        If Not initted Then Return
-        If Physics0_None.Checked Then
-            Settings.Physics = 0
             Settings.SaveSettings()
         End If
 

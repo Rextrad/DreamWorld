@@ -95,6 +95,8 @@ Partial Class FormRegion
         Me.ConciergeCheckBox = New System.Windows.Forms.CheckBox()
         Me.RichTextBoxModules = New System.Windows.Forms.RichTextBox()
         Me.PublicityGroupBox = New System.Windows.Forms.GroupBox()
+        Me.SearchLabel = New System.Windows.Forms.Label()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Hyperica = New System.Windows.Forms.LinkLabel()
         Me.APIKey = New System.Windows.Forms.TextBox()
@@ -175,8 +177,6 @@ Partial Class FormRegion
         Me.Label9 = New System.Windows.Forms.Label()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.SearchLabel = New System.Windows.Forms.Label()
         Me.RegionsGroupbox.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.ScriptsGroupbox.SuspendLayout()
@@ -943,6 +943,26 @@ Partial Class FormRegion
         Me.PublicityGroupBox.TabStop = False
         Me.PublicityGroupBox.Text = "Publicity"
         '
+        'SearchLabel
+        '
+        Me.SearchLabel.AutoSize = True
+        Me.SearchLabel.Location = New System.Drawing.Point(17, 111)
+        Me.SearchLabel.Name = "SearchLabel"
+        Me.SearchLabel.Size = New System.Drawing.Size(41, 13)
+        Me.SearchLabel.TabIndex = 8
+        Me.SearchLabel.Text = "Search"
+        '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(78, 111)
+        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(150, 13)
+        Me.LinkLabel1.TabIndex = 7
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "https://outworldz.com/Search"
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -1195,56 +1215,56 @@ Partial Class FormRegion
         '
         Me.BasicsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.cube_green
         Me.BasicsToolStripMenuItem.Name = "BasicsToolStripMenuItem"
-        Me.BasicsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.BasicsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.BasicsToolStripMenuItem.Text = "Basics"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.cube_green
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
         'MapsToolStripMenuItem
         '
         Me.MapsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.earth_view
         Me.MapsToolStripMenuItem.Name = "MapsToolStripMenuItem"
-        Me.MapsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.MapsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.MapsToolStripMenuItem.Text = "Maps"
         '
         'PhysicsToolStripMenuItem
         '
         Me.PhysicsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.transform
         Me.PhysicsToolStripMenuItem.Name = "PhysicsToolStripMenuItem"
-        Me.PhysicsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.PhysicsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.PhysicsToolStripMenuItem.Text = "Physics"
         '
         'ScriptsToolStripMenuItem
         '
         Me.ScriptsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.text_marked
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.ScriptsToolStripMenuItem.Text = "Scripts"
         '
         'PermissionsToolStripMenuItem
         '
         Me.PermissionsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.spy
         Me.PermissionsToolStripMenuItem.Name = "PermissionsToolStripMenuItem"
-        Me.PermissionsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.PermissionsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.PermissionsToolStripMenuItem.Text = "Permissions"
         '
         'PublicityToolStripMenuItem
         '
         Me.PublicityToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.microsoft_edge
         Me.PublicityToolStripMenuItem.Name = "PublicityToolStripMenuItem"
-        Me.PublicityToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.PublicityToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.PublicityToolStripMenuItem.Text = "Publicity"
         '
         'ModulesToolStripMenuItem
         '
         Me.ModulesToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.window_add
         Me.ModulesToolStripMenuItem.Name = "ModulesToolStripMenuItem"
-        Me.ModulesToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ModulesToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.ModulesToolStripMenuItem.Text = "Modules"
         '
         'CPUTab
@@ -1367,7 +1387,7 @@ Partial Class FormRegion
         'Physics_Hybrid
         '
         Me.Physics_Hybrid.AutoSize = True
-        Me.Physics_Hybrid.Location = New System.Drawing.Point(15, 70)
+        Me.Physics_Hybrid.Location = New System.Drawing.Point(15, 67)
         Me.Physics_Hybrid.Name = "Physics_Hybrid"
         Me.Physics_Hybrid.Size = New System.Drawing.Size(55, 17)
         Me.Physics_Hybrid.TabIndex = 5
@@ -1378,7 +1398,7 @@ Partial Class FormRegion
         'Physics_Bullet
         '
         Me.Physics_Bullet.AutoSize = True
-        Me.Physics_Bullet.Location = New System.Drawing.Point(15, 93)
+        Me.Physics_Bullet.Location = New System.Drawing.Point(15, 90)
         Me.Physics_Bullet.Name = "Physics_Bullet"
         Me.Physics_Bullet.Size = New System.Drawing.Size(92, 17)
         Me.Physics_Bullet.TabIndex = 3
@@ -1400,7 +1420,7 @@ Partial Class FormRegion
         'Physics_Separate
         '
         Me.Physics_Separate.AutoSize = True
-        Me.Physics_Separate.Location = New System.Drawing.Point(15, 116)
+        Me.Physics_Separate.Location = New System.Drawing.Point(15, 113)
         Me.Physics_Separate.Name = "Physics_Separate"
         Me.Physics_Separate.Size = New System.Drawing.Size(177, 17)
         Me.Physics_Separate.TabIndex = 4
@@ -1411,7 +1431,7 @@ Partial Class FormRegion
         'Physics_ubODE
         '
         Me.Physics_ubODE.AutoSize = True
-        Me.Physics_ubODE.Location = New System.Drawing.Point(15, 46)
+        Me.Physics_ubODE.Location = New System.Drawing.Point(15, 43)
         Me.Physics_ubODE.Name = "Physics_ubODE"
         Me.Physics_ubODE.Size = New System.Drawing.Size(153, 17)
         Me.Physics_ubODE.TabIndex = 2
@@ -1775,26 +1795,6 @@ Partial Class FormRegion
         '
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'LinkLabel1
-        '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(78, 111)
-        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(150, 13)
-        Me.LinkLabel1.TabIndex = 7
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "https://outworldz.com/Search"
-        '
-        'SearchLabel
-        '
-        Me.SearchLabel.AutoSize = True
-        Me.SearchLabel.Location = New System.Drawing.Point(17, 111)
-        Me.SearchLabel.Name = "SearchLabel"
-        Me.SearchLabel.Size = New System.Drawing.Size(41, 13)
-        Me.SearchLabel.TabIndex = 8
-        Me.SearchLabel.Text = "Search"
         '
         'FormRegion
         '
