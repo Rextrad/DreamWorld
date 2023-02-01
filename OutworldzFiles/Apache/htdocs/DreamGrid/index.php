@@ -14,7 +14,7 @@
 | <a href="/Audio">Audio</a>
 | <a href="/PerlExample">Perl Examples</a>
 | <a href="/Stats">Stats</a>
-| <a href="http://outworldz.com/Search" >Search</a> |
+| <a href="http://outworldz.com/Search" >Search</a> 
 | <a href="http://outworldz.com/DestinationGuide" >Destinations</a> |</p>
 
 <p>

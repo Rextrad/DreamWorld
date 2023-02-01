@@ -2554,8 +2554,8 @@ Module RegionMaker
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
         Else
             'kill all 3  as we are using Outworldz
-            INI.SetIni("DataSnapshot", "data_services", PropDomain & "/Search/register.php")
-            Dim SearchURL = PropDomain & "/Search/query.php"
+            INI.SetIni("DataSnapshot", "data_services", PropHttpsDomain & "/Search/register.php")
+            Dim SearchURL = PropHttpsDomain & "/Search/query.php"
             INI.SetIni("Search", "SearchURL", SearchURL)
             INI.SetIni("LoginService", "SearchURL", SearchURL)
 

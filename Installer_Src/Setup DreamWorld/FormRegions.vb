@@ -541,7 +541,7 @@ Public Class FormRegions
 
                 If RegionEnabled(RegionUUID) Then
                     TextPrint($"{My.Resources.Start_word} {Region_Name}")
-                    Dim File = $"{PropDomain}/Outworldz_Installer/OAR/{Region_Name}"
+                    Dim File = $"{PropHttpsDomain}/Outworldz_Installer/OAR/{Region_Name}"
 
                     License(File, RegionUUID)
 
@@ -573,7 +573,6 @@ Public Class FormRegions
 
         gEstateName = ""
         FormSetup.Buttons(FormSetup.StopButton)
-
 
     End Sub
 

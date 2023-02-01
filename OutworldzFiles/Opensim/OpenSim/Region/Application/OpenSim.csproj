@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AC9EB8AB-0000-0000-0000-000000000000}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ApplicationIcon>Resources\cubes_blue.ico</ApplicationIcon>
+    <ApplicationIcon>cube_blue.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>OpenSim</AssemblyName>
@@ -70,6 +70,9 @@
     </NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>False</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
@@ -245,6 +248,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cubes_blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cube_blue.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cube_blue.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

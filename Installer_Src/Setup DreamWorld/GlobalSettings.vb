@@ -9,7 +9,6 @@ Module GlobalSettings
 
 #Region "Const"
 
-    Public Const _Domain As String = "http://www.outworldz.com"
     Public Const _httpsDomain As String = "https://www.outworldz.com"
     Public Const _MyVersion As String = "5.33"
     Public Const _SimVersion As String = "Opensim #1afe46d61126fa2 FIRE-32583"

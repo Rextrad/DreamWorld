@@ -63,9 +63,9 @@ namespace OpenSim.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon cubes_blue {
+        internal static System.Drawing.Icon cube_blue {
             get {
-                object obj = ResourceManager.GetObject("cubes_blue", resourceCulture);
+                object obj = ResourceManager.GetObject("cube_blue", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

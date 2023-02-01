@@ -682,21 +682,21 @@ Module Robust
 
     Private Sub SetupRobustSearchINI(INI As LoadIni)
 
-        If Settings.CMS = JOpensim Then
-            Settings.CMS = "Hyperica"
-        End If
         If Settings.CMS = JOpensim And Settings.SearchOptions = JOpensim Then
             Dim SearchURL = "http://" & Settings.PublicIP & ":" & Settings.ApachePort & "/jOpensim/index.php?option=com_opensim&view=inworldsearch&task=viewersearch&tmpl=component&"
             INI.SetIni("LoginService", "SearchURL", SearchURL)
             INI.SetIni("LoginService", "DestinationGuide", "http://" & Settings.PublicIP & ":" & Settings.ApachePort & "/jOpensim/index.php?option=com_opensim&view=guide&tmpl=component")
         ElseIf Settings.SearchOptions = Outworldz Then
-            INI.SetIni("LoginService", "SearchURL", PropDomain & "/Search/query.php")
-            INI.SetIni("LoginService", "DestinationGuide", PropDomain & "/destination-guide")
+            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
         ElseIf Settings.SearchOptions = "Hyperica" Then
             Settings.SearchOptions = Outworldz
             Settings.SaveSettings()
-            INI.SetIni("LoginService", "SearchURL", PropDomain & "/Search/query.php")
-            INI.SetIni("LoginService", "DestinationGuide", PropDomain & "/destination-guide")
+            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
+        ElseIf Settings.SearchOptions = "Local" Then
+            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
         Else
             INI.SetIni("LoginService", "SearchURL", "")
             INI.SetIni("LoginService", "DestinationGuide", "")

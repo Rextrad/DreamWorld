@@ -7,9 +7,9 @@ Public Class AvatarObject
     Public AgentName As String
     Public AvatarUUID As String
     Public FirstName As String
+    Public Grid As String
     Public LastName As String
     Public RegionID As String
-    Public Grid As String
 End Class
 
 Module Global_Properties
@@ -141,13 +141,6 @@ Module Global_Properties
         Set(value As Boolean)
             _RegionFilesChanged = value
         End Set
-    End Property
-
-    Public ReadOnly Property PropDomain As String
-        Get
-            Return _Domain
-        End Get
-
     End Property
 
     Public ReadOnly Property PropHttpsDomain As String
