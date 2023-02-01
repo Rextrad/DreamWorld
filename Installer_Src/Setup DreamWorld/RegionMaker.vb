@@ -2522,43 +2522,49 @@ Module RegionMaker
 
         ' RegionSnapShot
         INI.SetIni("DataSnapshot", "index_sims", "True")
-        If Settings.CMS = JOpensim Then
-            Settings.CMS = "Local"
-        End If
 
-        If Settings.CMS = JOpensim AndAlso Settings.SearchOptions = JOpensim Then
-
-            INI.SetIni("DataSnapshot", "data_services", "")
-            Dim SearchURL = "http://" & Settings.PublicIP & ":" & Settings.ApachePort &
-                "/jOpensim/index.php?option=com_opensim&view=interface"
-            INI.SetIni("Search", "SearchURL", SearchURL)
-            INI.SetIni("LoginService", "SearchURL", SearchURL)
-            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll.bak"),
-                         IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
-
-        ElseIf Settings.SearchOptions = Outworldz Then
-
-            INI.SetIni("DataSnapshot", "data_services", PropDomain & "/Search/register.php")
-            Dim SearchURL = PropDomain & "/Search/query.php"
-            INI.SetIni("Search", "SearchURL", SearchURL)
-            INI.SetIni("LoginService", "SearchURL", SearchURL)
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
-
-        ElseIf Settings.SearchOptions = "Local" Then
-
+        If Settings.SearchOptions = "Local" Then
+            'kill 2 out of 3
             INI.SetIni("DataSnapshot", "data_services", $"http://{Settings.LANIP}:{Settings.ApachePort}/Search/register.php")
             Dim SearchURL = $"http://{Settings.PublicIP}:{Settings.ApachePort}/Search/query.php"
             INI.SetIni("Search", "SearchURL", SearchURL)
             INI.SetIni("LoginService", "SearchURL", SearchURL)
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.bak"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"))
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
-        Else
+
+        ElseIf Settings.SearchOptions = "None" Then
+            'kill all 3  as we are using nothing
+
             INI.SetIni("DataSnapshot", "data_services", "")
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
             INI.SetIni("Search", "SearchURL", "")
             INI.SetIni("LoginService", "SearchURL", "")
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"))
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
+        Else
+            'kill all 3  as we are using Outworldz
+            INI.SetIni("DataSnapshot", "data_services", PropDomain & "/Search/register.php")
+            Dim SearchURL = PropDomain & "/Search/query.php"
+            INI.SetIni("Search", "SearchURL", SearchURL)
+            INI.SetIni("LoginService", "SearchURL", SearchURL)
+
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"))
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
         End If
 
     End Sub

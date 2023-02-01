@@ -1,18 +1,23 @@
 REVISIONS FOR DREAMGRID
 
 V5.33
-Added a Kick User command to the help Console Commands Menu
-Opensim 1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000
-	Fixed a region crash when being griefed
-	robust: add exclude by Disk id0
-	fix 2 bugs caused by nonsense xinventory fieldname
+Fixed a long outstanding bug where an alternate Domain Name did not work. if you changed 
+	the name of your grid then old names would not work.   As one example, 	my grid is named 
+	www.outworldz.com:9000. If you went to outworldz.com, it would cough up a Failure To 
+	Verify Identity Error.  Adding outworldz.com to the alternate DNS name was supposed to 
+	fix this.  It now works as expected. 
+Added a Kick User command to the help Console Commands Menu.
+Opensim 1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000.
+	Fixed a region crash when being griefed.
+	robust: add exclude by Disk id0.
+	fix 2 bugs caused by nonsense xinventory fieldname.
 	mantis 9039: Code involving permissions on attached prim won't execute for non-owner.
-	Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets
-	add llObjectGetLinkKey(...)
-Gravity region is a 4X4, not a 1X1
-Load OAR prints on the DreamGrid console when the OAR is finished loading 
+	Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets..
+	add llObjectGetLinkKey(...).
+Gravity region is a 4X4, not a 1X1.
+Load OAR prints on the DreamGrid console when the OAR is finished loading.
 Load OAR in bulk always showed even when gracefully finishing.
-DOS boxes always popped up for a brief time.
+DOS boxes always popped up for a brief time even when set to not show,
 
 V5.32
 Typo fixed in a Internal IPaddress setting to Network Ports (missing a CRLF)
