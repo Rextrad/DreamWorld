@@ -526,7 +526,17 @@ Module Robust
                 INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
                 INI.SetIni("UserProfilesService", "Enabled", "False")
                 INI.SetIni("GridInfoService", "welcome", "${Const|BaseURL}:${Const|ApachePort}/jOpensim/index.php?option=com_opensim")
+                INI.SetIni("GridInfoService", "register", "${Const|BaseURL}:${Const|ApachePort}/jOpensim/index.php?option=com_opensim")
                 INI.SetIni("GridInfoService", "economy", "${Const|BaseURL}:${Const|ApachePort}/jOpensim/components/com_opensim/")
+                INI.SetIni("GridInfoService", "password", "${Const|BaseURL}:${Const|PublicPort}/wifi/forgotpassword/")
+
+            ElseIf Settings.CMS = WordPress Then
+                INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
+                INI.SetIni("UserProfilesService", "Enabled", "False")
+                INI.SetIni("GridInfoService", "welcome", "${Const|BaseURL}:${Const|ApachePort}/wordpress/wp-login.php?action=register")
+                INI.SetIni("GridInfoService", "register", "${Const|BaseURL}:${Const|ApachePort}/wordpress/wp-login.php?action=register")
+                INI.SetIni("GridInfoService", "economy", "${Const|BaseURL}:${Const|ApachePort}/")
+                INI.SetIni("GridInfoService", "password", "${Const|BaseURL}:${Const|ApachePort}/wordpress/wp-login.php?action=lostpassword")
             Else
                 INI.SetIni("ServiceList", "UserProfilesServiceConnector", "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector")
                 INI.SetIni("UserProfilesService", "Enabled", "True")
