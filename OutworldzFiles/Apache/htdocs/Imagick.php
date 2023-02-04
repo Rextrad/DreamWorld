@@ -2,6 +2,7 @@
 header();
 echo "Running";
 $image = new Imagick();
+echo "Imagick Running";
 echo "made magic";
 $image->newImage(1, 1, new ImagickPixel('#ffffff'));
 $image->setImageFormat('png');
