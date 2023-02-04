@@ -4,6 +4,7 @@ OutworldzFiles/Freeswitch
 OutworldzFiles/AutoBackup
 OutworldzFiles/Apache/htdocs/Stats/Maps
 OutworldzFiles/Apache/htdocs/Wordpress/
+OutworldzFiles/Php7.old/
 
 /DreamGridUpdater.exe
 .build
