@@ -4453,4 +4453,7 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>Starting As A Service</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Standby</value>
+  </data>
 </root>

@@ -4997,7 +4997,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Greek", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Grid address is.
         '''</summary>
@@ -5006,7 +5006,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Grid_Address_is_word", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to You can give this address out to people and they can visit your grid.
         '''</summary>
@@ -11088,6 +11088,15 @@ Namespace My.Resources
         Friend ReadOnly Property SSLTLS() As String
             Get
                 Return ResourceManager.GetString("SSLTLS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Standby.
+        '''</summary>
+        Friend ReadOnly Property Standby_word() As String
+            Get
+                Return ResourceManager.GetString("Standby_word", resourceCulture)
             End Get
         End Property
         

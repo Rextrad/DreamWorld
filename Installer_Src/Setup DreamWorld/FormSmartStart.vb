@@ -582,7 +582,7 @@ Public Class FormSmartStart
                 PictureBox4.Image = My.Resources._7x7
         End Select
 
-        SmartStartEnabled.Checked = Settings.Smart_Start
+        SmartStartEnabled.Checked = Settings.Smart_Start_Enabled
         TempCheckBox.Checked = Settings.TempRegion
         DelayRegionReady.Text = CStr(Settings.TeleportSleepTime)
 
@@ -636,7 +636,7 @@ Public Class FormSmartStart
         Dim n = 0
         Dim s As Boolean
         For Each RegionUUID In RegionUuids()
-            If Smart_Start(RegionUUID) And Settings.Smart_Start Then Continue For
+            If Smart_Suspend_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then Continue For
             Dim name = Region_Name(RegionUUID)
             ParkingSpot.Items.Add(name)
             If name = Settings.ParkingLot Then
@@ -1325,7 +1325,7 @@ Public Class FormSmartStart
             If SuspendButton.Checked Then DelayRegionReady.Text = My.Resources._0
         End If
 
-        Settings.Smart_Start = SmartStartEnabled.Checked
+        Settings.Smart_Start_Enabled = SmartStartEnabled.Checked
         TextPrint("Smart Start is " & CStr(SmartStartEnabled.Checked))
         Settings.SaveSettings()
     End Sub

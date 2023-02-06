@@ -11,7 +11,7 @@ Module OpensimWorld
             If Not RegionEnabled(RegionUUID) Then Continue For
 
             If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
-                (Smart_Start(RegionUUID) And Settings.Smart_Start) Then
+                (Smart_Suspend_Enabled(RegionUUID) And Settings.Smart_Start_Enabled) Then
 
                 Dim Avatars = GetAgentsInRegion(RegionUUID)
                 If Avatars <> InRegion(RegionUUID) Then

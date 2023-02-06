@@ -12,7 +12,7 @@ Module Backup
 
         If SkipAutobackup(RegionUUID) = "True" Then Return
 
-        If Not Settings.Smart_Start Or Not Smart_Start(RegionUUID) Then
+        If Settings.Smart_Start_Enabled And (Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) Then
             SequentialPause()
             Return
         End If
@@ -156,7 +156,6 @@ Module Backup
             If Not System.IO.Directory.Exists(f & "/OAR") Then
                 MakeFolder(f & "/OAR")
             End If
-
 
             Dim file = f & "/OAR/" & Region_Name(RegionUUID) & "_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss" & $"({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)})", Globalization.CultureInfo.InvariantCulture) & ".oar"
 

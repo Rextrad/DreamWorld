@@ -452,7 +452,7 @@ Module Robust
             DoBanList(INI)
 
             ' Smart Start cannot boot a HG region so send them to welcome.
-            'INI.SetIni("GatekeeperService", "AllowTeleportsToAnyRegion", CStr(Settings.Smart_Start))
+            'INI.SetIni("GatekeeperService", "AllowTeleportsToAnyRegion", CStr(Settings.Smart_Start_Enabled))
             INI.SetIni("GatekeeperService", "AllowTeleportsToAnyRegion", CStr(True))
 
             INI.SetIni("Const", "DiagnosticsPort", CStr(Settings.DiagnosticPort))
@@ -554,7 +554,7 @@ Module Robust
 
             ' SmartStart. Add own entries for DreamGrid host and port
             ' In future that may need to be more clever, as per machine in a servers cluster
-            If Settings.Smart_Start Then
+            If Settings.Smart_Start_Enabled Then
                 INI.SetIni("SmartStart", "Enabled", "True")
                 INI.SetIni("SmartStart", "URL", "http://" & Settings.LANIP() + ":" & CStr(Settings.DiagnosticPort))
                 INI.SetIni("SmartStart", "MachineID", CStr(Settings.MachineId))
