@@ -2265,7 +2265,7 @@ Public Class MySettings
     ''' <summary>
     ''' Enable the SmartStart Module
     ''' </summary>
-    Public Property Smart_Start() As Boolean
+    Public Property Smart_Start_Enabled() As Boolean
         Get
             Return CType(GetMySetting("SmartStart", "False"), Boolean)
         End Get

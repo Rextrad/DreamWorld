@@ -5382,16 +5382,8 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Small_Map", resourceCulture)
             End Get
         End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Smart Start.
-        '''</summary>
-        Friend Shared ReadOnly Property Smart_Start() As String
-            Get
-                Return ResourceManager.GetString("Smart_Start", resourceCulture)
-            End Get
-        End Property
-        
+
+
         '''<summary>
         '''  Looks up a localized string similar to Smart Start inschakelen.
         '''</summary>

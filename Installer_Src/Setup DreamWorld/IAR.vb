@@ -64,7 +64,7 @@ Module IAR
             ' find one that is running
             For Each RegionUUID In RegionUuids()
 
-                If IsBooted(RegionUUID) And Not Smart_Start(RegionUUID) Then
+                If IsBooted(RegionUUID) And Not Smart_Suspend_Enabled(RegionUUID) Then
                     UUID = RegionUUID
                     Exit For
                 End If

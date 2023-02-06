@@ -210,7 +210,7 @@ Public Class FormRegion
         ScriptOffButton.Text = My.Resources.Off
         ScriptRateLabel.Text = Global.Outworldz.My.Resources.Script_Timer_Rate
         SkipAutoCheckBox.Text = Global.Outworldz.My.Resources.Skip_Autobackup_word
-        SmartStartCheckBox.Text = Global.Outworldz.My.Resources.Smart_Start_word
+        Smart_Start_Group.Text = Global.Outworldz.My.Resources.Smart_Start_word
         TidesCheckbox.Text = Global.Outworldz.My.Resources.Tide_Enable
 
         ToolTip1.SetToolTip(GodLevel, Global.Outworldz.My.Resources.AllowGodsTooltip)
@@ -241,7 +241,7 @@ Public Class FormRegion
         ToolTip1.SetToolTip(ScriptRateLabel, Global.Outworldz.My.Resources.STComment)
         ToolTip1.SetToolTip(ScriptTimerTextBox, Global.Outworldz.My.Resources.STComment)
         ToolTip1.SetToolTip(SkipAutoCheckBox, Global.Outworldz.My.Resources.WillNotSave)
-        ToolTip1.SetToolTip(SmartStartCheckBox, Global.Outworldz.My.Resources.GTide)
+
         ToolTip1.SetToolTip(TidesCheckbox, Global.Outworldz.My.Resources.GTide)
         ToolTip1.SetToolTip(TPCheckBox1, Global.Outworldz.My.Resources.Teleport_Tooltip)
 
@@ -271,7 +271,11 @@ Public Class FormRegion
             CoordY.Text = (LargestY() + 0).ToString(Globalization.CultureInfo.InvariantCulture)
             EnabledCheckBox.Checked = True
             RadioButton1.Checked = True
-            SmartStartCheckBox.Checked = False
+
+            SmartStartOff.Checked = True
+            Freeze_Thaw.Checked = False
+            Shutdown_Boot.Checked = False
+
             NonphysicalPrimMax.Text = 1024.ToString(Globalization.CultureInfo.InvariantCulture)
             PhysicalPrimMax.Text = 64.ToString(Globalization.CultureInfo.InvariantCulture)
             ClampPrimSize.Checked = False
@@ -476,8 +480,13 @@ Public Class FormRegion
         If SkipAutobackup(RegionUUID) = "True" Then
             SkipAutoCheckBox.Checked = True
         End If
-        If Smart_Start(RegionUUID) Then
-            SmartStartCheckBox.Checked = True
+
+        If Smart_Suspend_Enabled(RegionUUID) Then
+            Freeze_Thaw.Checked = True
+        ElseIf Smart_Boot_Enabled(RegionUUID) Then
+            Shutdown_Boot.Checked = True
+        Else
+            SmartStartOff.Checked = True
         End If
 
         Select Case DisableGloebits(RegionUUID)
@@ -879,17 +888,6 @@ Public Class FormRegion
 
         If Initted1 Then Changed1 = True
 
-    End Sub
-
-    Private Sub SmartStartCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles SmartStartCheckBox.CheckedChanged
-
-        If Initted1 Then Changed1 = True
-        If SmartStartCheckBox.Checked And Settings.WelcomeRegion = RegionName.Text Then
-
-            MsgBox(My.Resources.Default_Not_SS)
-            SmartStartCheckBox.Checked = False
-
-        End If
     End Sub
 
     Private Sub StopHGCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DisableGBCheckBox.CheckedChanged
@@ -1327,10 +1325,16 @@ Public Class FormRegion
                 GDPR(RegionUUID) = ""
             End If
 
-            If SmartStartCheckBox.Checked Then
-                Smart_Start(RegionUUID) = True
+            If Freeze_Thaw.Checked Then
+                Smart_Suspend_Enabled(RegionUUID) = True
             Else
-                Smart_Start(RegionUUID) = False
+                Smart_Suspend_Enabled(RegionUUID) = False
+            End If
+
+            If Shutdown_Boot.Checked Then
+                Smart_Boot_Enabled(RegionUUID) = True
+            Else
+                Smart_Boot_Enabled(RegionUUID) = False
             End If
 
             ScriptEngine(RegionUUID) = "" ' default is blank
@@ -1397,7 +1401,8 @@ Public Class FormRegion
                                 "OpensimWorldAPIKey=" & OpensimWorldAPIKey(RegionUUID) & vbCrLf &
                                 "Priority=" & Priority(RegionUUID) & vbCrLf &
                                 "Cores=" & CStr(Cores(RegionUUID)) & vbCrLf &
-                                "SmartStart=" & CStr(Smart_Start(RegionUUID)) & vbCrLf
+                                "SmartBoot=" & CStr(Smart_Boot_Enabled(RegionUUID)) & vbCrLf &
+                                "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf
 
                     Try
                         Using outputFile As New StreamWriter(RegionIniFilePath(RegionUUID), False)
@@ -1710,6 +1715,18 @@ Public Class FormRegion
         If Initted1 Then Changed1 = True
     End Sub
 
+    Private Sub RadioButton17_CheckedChanged_1(sender As Object, e As EventArgs) Handles Freeze_Thaw.CheckedChanged
+
+        If Initted1 Then Changed1 = True
+
+    End Sub
+
+    Private Sub RadioButton18_CheckedChanged(sender As Object, e As EventArgs) Handles Shutdown_Boot.CheckedChanged
+
+        If Initted1 Then Changed1 = True
+
+    End Sub
+
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
         BoxSize = 256 * 2
         If Initted1 Then Changed1 = True
@@ -1768,6 +1785,12 @@ Public Class FormRegion
 
     Private Sub ScriptsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsToolStripMenuItem.Click
         HelpManual("Script Overrides")
+    End Sub
+
+    Private Sub SmartSuspend_CheckedChanged(sender As Object, e As EventArgs) Handles SmartStartOff.CheckedChanged
+
+        If Initted1 Then Changed1 = True
+
     End Sub
 
     Private Sub XEngineButton_CheckedChanged_1(sender As Object, e As EventArgs) Handles XEngineButton.CheckedChanged

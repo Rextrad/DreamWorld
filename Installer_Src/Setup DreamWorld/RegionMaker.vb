@@ -51,7 +51,6 @@ Module RegionMaker
         ShuttingDownForGood = 10
         NoLogin = 11
         NoError = 12
-        NoShutdown = 13
 
     End Enum
 
@@ -206,7 +205,8 @@ Module RegionMaker
                     ._RegionLandingSpot = "",
                     ._RegionName = name,
                     ._RegionPort = 0,
-                    ._RegionSmartStart = "",
+                    ._RegionSmartSuspend = "",
+                    ._RegionSmartBoot = "",
                     ._RegionSnapShot = "",
                     ._ScriptEngine = "",
                     ._SizeX = 256,
@@ -272,7 +272,7 @@ Module RegionMaker
                 ErrorLog("No Region UUID for Estate")
             End If
 
-            If Settings.AutoFill AndAlso Settings.Smart_Start AndAlso Smart_Start(RegionUUID) AndAlso out = 0 Then
+            If Settings.AutoFill AndAlso Settings.Smart_Start_Enabled AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso out = 0 Then
                 Estate(RegionUUID) = "SimSurround"
                 SetEstate(RegionUUID, 1999)
             End If
@@ -318,7 +318,7 @@ Module RegionMaker
         & "ScriptEngine=" & ScriptEngine(RegionUUID) & vbCrLf _
         & "Publicity=" & GDPR(RegionUUID) & vbCrLf _
         & "Concierge=" & Concierge(RegionUUID) & vbCrLf _
-        & "SmartStart=" & CStr(Smart_Start(RegionUUID)) & vbCrLf _
+        & "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf _
         & "LandingSpot=" & LandingSpot(RegionUUID) & vbCrLf _
         & "Cores=" & Cores(RegionUUID) & vbCrLf _
         & "Priority=" & Priority(RegionUUID) & vbCrLf _
@@ -620,7 +620,7 @@ Module RegionMaker
                             ScriptEngine(uuid) = CStr(INI.GetIni(fName, "ScriptEngine", "", "String"))
                             GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "", "String"))
                             Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "", "String"))
-                            Smart_Start(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "Boolean"))
+                            Smart_Suspend_Enabled(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "String"))
                             LandingSpot(uuid) = CStr(INI.GetIni(fName, "DefaultLanding", "", "String"))
                             OpensimWorldAPIKey(uuid) = CStr(INI.GetIni(fName, "OpensimWorldAPIKey", "", "String"))
                             Cores(uuid) = CInt(0 & INI.GetIni(fName, "Cores", "", "String"))
@@ -863,7 +863,6 @@ Module RegionMaker
         Public _RegionName As String = ""
         Public _RegionPath As String = ""  ' The full path to the region ini file
         Public _RegionPort As Integer
-
         Public _SizeX As Integer = 256
         Public _SizeY As Integer = 256
         Public _Status As Integer
@@ -895,7 +894,8 @@ Module RegionMaker
         Public _Physics As String = "  "
         Public _RegionGod As String = ""
         Public _RegionLandingSpot As String = ""
-        Public _RegionSmartStart As String = ""
+        Public _RegionSmartBoot As String = ""
+        Public _RegionSmartSuspend As String = ""
         Public _RegionSnapShot As String = ""
         Public _ScriptEngine As String = ""
         Public _SkipAutobackup As String = ""
@@ -1499,21 +1499,40 @@ Module RegionMaker
     End Property
 
     ''' <summary>
-    ''' Gets region Smart Start Type
+    ''' Gets region Smart Boot Type
     ''' </summary>
     ''' <param name="uuid"></param>
-    ''' <returns>True if Smart Start</returns>
-    Public Property Smart_Start(uuid As String) As Boolean
+    ''' <returns>True if Smart Boot</returns>
+    Public Property Smart_Boot_Enabled(uuid As String) As Boolean
         Get
             Try
-                If RegionList.ContainsKey(uuid) Then Return CBool(RegionList(uuid)._RegionSmartStart)
+                If RegionList.ContainsKey(uuid) Then Return CBool(RegionList(uuid)._RegionSmartBoot)
                 BadUUID(uuid)
             Catch
             End Try
             Return False
         End Get
         Set(ByVal Value As Boolean)
-            RegionList(uuid)._RegionSmartStart = CStr(Value)
+            RegionList(uuid)._RegionSmartBoot = CStr(Value)
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets region Smart Start Type
+    ''' </summary>
+    ''' <param name="uuid"></param>
+    ''' <returns>True if Smart Start</returns>
+    Public Property Smart_Suspend_Enabled(uuid As String) As Boolean
+        Get
+            Try
+                If RegionList.ContainsKey(uuid) Then Return CBool(RegionList(uuid)._RegionSmartSuspend)
+                BadUUID(uuid)
+            Catch
+            End Try
+            Return False
+        End Get
+        Set(ByVal Value As Boolean)
+            RegionList(uuid)._RegionSmartSuspend = CStr(Value)
         End Set
     End Property
 
@@ -2366,7 +2385,7 @@ Module RegionMaker
                 End Select
             End If
 
-            If Settings.Smart_Start Then
+            If Settings.Smart_Start_Enabled Then
                 INI.SetIni("SmartStart", "Enabled", "True")
                 INI.SetIni("SmartStart", "URL", $"http://{Settings.LANIP}:{Settings.DiagnosticPort}")
                 INI.SetIni("SmartStart", "MachineID", CStr(Settings.MachineId))

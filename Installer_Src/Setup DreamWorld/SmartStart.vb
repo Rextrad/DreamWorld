@@ -152,32 +152,28 @@ Module SmartStart
 
                 RunTaskList(RegionUUID)
 
-                If Settings.Smart_Start Then
+                If Settings.Smart_Start_Enabled And (Smart_Boot_Enabled(RegionUUID) Or Smart_Suspend_Enabled(RegionUUID)) Then
 
-                    Dim Nearby = AvatarIsNearby(RegionUUID)
                     ' If a region is stopped or suspended, boot it if someone is nearby
-                    If status = SIMSTATUSENUM.Stopped _
-                        Or status = SIMSTATUSENUM.Suspended Then
+                    If status = SIMSTATUSENUM.Stopped Or status = SIMSTATUSENUM.Suspended Then
+                        Dim Nearby = AvatarIsNearby(RegionUUID)
                         If Nearby Then
                             TextPrint($"{GroupName} {My.Resources.StartingNearby}")
                             ResumeRegion(RegionUUID)
+                            PokeRegionTimer(RegionUUID)
                             Continue For
                         End If
                     End If
 
-                    ' keep smart start regions alive if someone is near
-                    If Nearby Then
-                        PokeRegionTimer(RegionUUID)
-                    End If
-
                     ' Smart Start Timer
-                    If Settings.Smart_Start AndAlso Smart_Start(RegionUUID) AndAlso status = SIMSTATUSENUM.Booted Then
+                    If Settings.Smart_Start_Enabled AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso status = SIMSTATUSENUM.Booted Then
                         Dim diff = DateAndTime.DateDiff(DateInterval.Second, Timer(RegionUUID), Date.Now)
                         If diff < 0 Then
                             diff = 0
                         End If
 
-                        If diff > Settings.SmartStartTimeout AndAlso RegionName <> Settings.WelcomeRegion Then
+                        'If diff > Settings.SmartStartTimeout AndAlso RegionName <> Settings.WelcomeRegion Then
+                        If diff > Settings.SmartStartTimeout Then
                             BreakPoint.Print($"State Changed to ShuttingDown {GroupName} ")
                             If Settings.BootOrSuspend Then
                                 ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
@@ -437,15 +433,15 @@ Module SmartStart
                 ' if we are a shutdown type region, we must wait
 
                 If status = SIMSTATUSENUM.Booting And
-                    Settings.Smart_Start And
+                    Settings.Smart_Start_Enabled And
                     Settings.BootOrSuspend And
-                    Smart_Start(RegionUUID) Then
+                    Smart_Suspend_Enabled(RegionUUID) Then
                     PokeRegionTimer(RegionUUID)
                     BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                     wait = True
                     Exit For
                     ' could be a regular region so we wait
-                ElseIf status = SIMSTATUSENUM.Booting And (Not Settings.Smart_Start Or Not Smart_Start(RegionUUID)) Then
+                ElseIf status = SIMSTATUSENUM.Booting And (Not Settings.Smart_Start_Enabled Or Not Smart_Suspend_Enabled(RegionUUID)) Then
                     PokeRegionTimer(RegionUUID)
                     BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                     wait = True
@@ -456,7 +452,7 @@ Module SmartStart
             If Settings.SequentialMode = 1 Then
 
                 ' smart mode can wait on just CPU, not RAM
-                If Not Settings.Smart_Start Then
+                If Not Settings.Smart_Start_Enabled Then
                     If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
                         wait = True
                     End If
@@ -685,7 +681,7 @@ Module SmartStart
 
             ' Smart Start below here
 
-            If Smart_Start(RegionUUID) AndAlso Settings.Smart_Start Then
+            If Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
 
                 If RegionEnabled(RegionUUID) Then
 

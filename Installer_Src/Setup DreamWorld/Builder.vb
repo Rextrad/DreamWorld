@@ -376,7 +376,7 @@ Module Build
         CrashCounter(RegionUUID) = 0
         Coord_X(RegionUUID) = X
         Coord_Y(RegionUUID) = Y
-        Smart_Start(RegionUUID) = True
+        Smart_Suspend_Enabled(RegionUUID) = True
         Teleport_Sign(RegionUUID) = True
         SizeX(RegionUUID) = 256
         SizeY(RegionUUID) = 256

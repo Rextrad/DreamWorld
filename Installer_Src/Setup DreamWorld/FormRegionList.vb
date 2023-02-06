@@ -403,7 +403,7 @@ Public Class FormRegionlist
 
                         If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                         If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-                        If SmartButton.Checked And Not Smart_Start(RegionUUID) Then Continue For
+                        ' If SmartButton.Checked And Not Smart_Suspend_Enabled((RegionUUID) Then Continue For
 
                         RegionEnabled(RegionUUID) = AllNone.Checked
 
@@ -732,33 +732,21 @@ Public Class FormRegionlist
             Else
                 Num = Dgicon.Disabled
             End If
-        ElseIf Status = SIMSTATUSENUM.Stopped And Not Smart_Start(RegionUUID) Then
-            Letter = My.Resources.Stopped_word
-            Num = Dgicon.Stopped
-        ElseIf Status = SIMSTATUSENUM.Stopped And Not Smart_Start(RegionUUID) And Settings.Smart_Start And Not Settings.BootOrSuspend Then
-            Letter = My.Resources.Waiting
-            Num = Dgicon.Stopped
-        ElseIf Status = SIMSTATUSENUM.Stopped And Not Smart_Start(RegionUUID) And Not Settings.Smart_Start Then
-            Letter = My.Resources.Stopped_word
-            Num = Dgicon.Stopped
-        ElseIf Status = SIMSTATUSENUM.Stopped And Smart_Start(RegionUUID) And Settings.Smart_Start And Settings.BootOrSuspend Then
-            Letter = My.Resources.Stopped_word
-            Num = Dgicon.Stopped
-        ElseIf Status = SIMSTATUSENUM.Stopped And Smart_Start(RegionUUID) And Settings.Smart_Start And Not Settings.BootOrSuspend Then
-            Letter = My.Resources.Frozen
-            Num = Dgicon.SmartStartStopped
-        ElseIf Status = SIMSTATUSENUM.Suspended And Smart_Start(RegionUUID) And Settings.Smart_Start And Not Settings.BootOrSuspend Then
-            Letter = My.Resources.Frozen
+
+            'Smart Start rules
+        ElseIf Status = SIMSTATUSENUM.Suspended And Smart_Suspend_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then
+            Letter = My.Resources.Standby_word
             Num = Dgicon.Icecube
-        ElseIf Status = SIMSTATUSENUM.Stopped And Smart_Start(RegionUUID) Then
-            Letter = My.Resources.Stopped_word
+        ElseIf Status = SIMSTATUSENUM.Stopped And Smart_Boot_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then
+            Letter = My.Resources.Shutdown_word
             Num = Dgicon.SmartStartStopped
+
+        ElseIf Status = SIMSTATUSENUM.Stopped Then
+            Letter = My.Resources.Stopped_word
+            Num = Dgicon.Stopped
         ElseIf Status = SIMSTATUSENUM.Error Then
             Letter = My.Resources.Error_word
             Num = Dgicon.ErrorIcon
-        ElseIf Status = SIMSTATUSENUM.Suspended Then
-            Letter = My.Resources.Suspended_word
-            Num = Dgicon.Suspended
         ElseIf Status = SIMSTATUSENUM.RecyclingDown Then
             Letter = My.Resources.Recycling_Down_word
             Num = Dgicon.Recyclingdown
@@ -772,7 +760,7 @@ Public Class FormRegionlist
             Letter = My.Resources.Restarting_Now_word
             Num = Dgicon.Recyclingup
         ElseIf Status = SIMSTATUSENUM.Resume Then
-            Letter = "Restarting Now"
+            Letter = My.Resources.Restarting_Now_word
             Num = Dgicon.Recyclingup
         ElseIf Status = SIMSTATUSENUM.Booting Then
             Letter = My.Resources.Booting_word
@@ -794,9 +782,6 @@ Public Class FormRegionlist
         ElseIf Status = SIMSTATUSENUM.Booted And AvatarCount(RegionUUID) > 1 Then
             Letter = CStr(AvatarCount(RegionUUID) & " " & My.Resources.Avatars_word)
             Num = Dgicon.User2
-        ElseIf Status = SIMSTATUSENUM.NoShutdown Then
-            Letter = My.Resources.Busy_word
-            Num = Dgicon.Busy
         ElseIf Status = SIMSTATUSENUM.Booted Then
             If Region_Name(RegionUUID) = Settings.WelcomeRegion Then
                 Num = Dgicon.Home
@@ -1189,7 +1174,7 @@ Public Class FormRegionlist
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("warning", Globalization.CultureInfo.InvariantCulture))  ' 7 Unknown
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("user2", Globalization.CultureInfo.InvariantCulture))  ' 8 - 1 User
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("users1", Globalization.CultureInfo.InvariantCulture))  ' 9 - 2 user
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("nav_plain_blue", Globalization.CultureInfo.InvariantCulture))  ' 10 - 2 user
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("nav_plain_blue", Globalization.CultureInfo.InvariantCulture))  ' 10 - SmartStartStopped
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home", Globalization.CultureInfo.InvariantCulture))  '  11- home
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home_02", Globalization.CultureInfo.InvariantCulture))  '  12- home _offline
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("refresh", Globalization.CultureInfo.InvariantCulture))  '  13- Pending
@@ -1473,7 +1458,7 @@ Public Class FormRegionlist
 
                     If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                     If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-                    If SmartButton.Checked And Not Smart_Start(RegionUUID) Then Continue For
+                    If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
                     If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
                     If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1499,7 +1484,7 @@ Public Class FormRegionlist
                     ' RAM
 
                     If status = SIMSTATUSENUM.Booting _
-                            Or (status = SIMSTATUSENUM.Suspended And Settings.Smart_Start And Smart_Start(RegionUUID)) _
+                            Or (status = SIMSTATUSENUM.Suspended And Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID)) _
                             Or status = SIMSTATUSENUM.Booted _
                             Or status = SIMSTATUSENUM.RecyclingUp _
                             Or status = SIMSTATUSENUM.RecyclingDown _
@@ -1616,7 +1601,7 @@ Public Class FormRegionlist
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
 
-                    If Smart_Start(RegionUUID) Then
+                    If Smart_Suspend_Enabled(RegionUUID) Then
                         item1.SubItems.Add(My.Resources.Yes_word)
                     Else
                         item1.SubItems.Add("-".ToUpperInvariant)
@@ -1710,7 +1695,7 @@ Public Class FormRegionlist
 
             If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
             If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-            If SmartButton.Checked And Not Smart_Start(RegionUUID) Then Continue For
+            If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
             If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
             If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1753,7 +1738,7 @@ Public Class FormRegionlist
             If RegionEnabled(RegionUUID) Then
                 RegionCount += 1
             End If
-            If RegionEnabled(RegionUUID) And Smart_Start(RegionUUID) Then
+            If RegionEnabled(RegionUUID) And Smart_Suspend_Enabled(RegionUUID) Then
                 SSRegionCount += 1
             End If
             TotalRegionCount += 1
