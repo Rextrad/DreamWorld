@@ -45,83 +45,83 @@ Partial Class FormHelp
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.PrintToolStripMenuItem, Me.ToolStripMenuItem1, Me.WebSiteToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(996, 33)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(885, 30)
         Me.MenuStrip1.TabIndex = 0
         '
         'FileToolStripMenuItem
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(54, 29)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(46, 26)
         Me.FileToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.File_word
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.exit_icon
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(141, 34)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(116, 26)
         Me.ExitToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Exit__word
         '
         'PrintToolStripMenuItem
         '
         Me.PrintToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem1})
         Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(16, 29)
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(14, 24)
         Me.PrintToolStripMenuItem.Visible = False
         '
         'PrintToolStripMenuItem1
         '
         Me.PrintToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.printer3
         Me.PrintToolStripMenuItem1.Name = "PrintToolStripMenuItem1"
-        Me.PrintToolStripMenuItem1.Size = New System.Drawing.Size(102, 34)
+        Me.PrintToolStripMenuItem1.Size = New System.Drawing.Size(83, 26)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(16, 29)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(14, 26)
         '
         'WebSiteToolStripMenuItem
         '
         Me.WebSiteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HomeToolStripMenuItem, Me.DreamgridToolStripMenuItem, Me.SourceCodeToolStripMenuItem})
         Me.WebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.WebSiteToolStripMenuItem.Name = "WebSiteToolStripMenuItem"
-        Me.WebSiteToolStripMenuItem.Size = New System.Drawing.Size(321, 29)
+        Me.WebSiteToolStripMenuItem.Size = New System.Drawing.Size(275, 26)
         Me.WebSiteToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.More_Help
         '
         'HomeToolStripMenuItem
         '
         Me.HomeToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HomeToolStripMenuItem.Name = "HomeToolStripMenuItem"
-        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(236, 34)
+        Me.HomeToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
         Me.HomeToolStripMenuItem.Text = "Outworldz.com"
         '
         'DreamgridToolStripMenuItem
         '
         Me.DreamgridToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.cube_green
         Me.DreamgridToolStripMenuItem.Name = "DreamgridToolStripMenuItem"
-        Me.DreamgridToolStripMenuItem.Size = New System.Drawing.Size(236, 34)
+        Me.DreamgridToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
         Me.DreamgridToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Home_word
         '
         'SourceCodeToolStripMenuItem
         '
         Me.SourceCodeToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.transform
         Me.SourceCodeToolStripMenuItem.Name = "SourceCodeToolStripMenuItem"
-        Me.SourceCodeToolStripMenuItem.Size = New System.Drawing.Size(236, 34)
+        Me.SourceCodeToolStripMenuItem.Size = New System.Drawing.Size(193, 26)
         Me.SourceCodeToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Source_Code_word
         '
         'RichTextBox1
         '
         Me.RichTextBox1.BackColor = System.Drawing.SystemColors.Window
         Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox1.Location = New System.Drawing.Point(0, 33)
-        Me.RichTextBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.RichTextBox1.Location = New System.Drawing.Point(0, 30)
+        Me.RichTextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(996, 695)
+        Me.RichTextBox1.Size = New System.Drawing.Size(885, 552)
         Me.RichTextBox1.TabIndex = 1
         Me.RichTextBox1.Text = ""
         '
@@ -142,24 +142,24 @@ Partial Class FormHelp
         'WebBrowser1
         '
         Me.WebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WebBrowser1.Location = New System.Drawing.Point(0, 33)
-        Me.WebBrowser1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(30, 31)
+        Me.WebBrowser1.Location = New System.Drawing.Point(0, 30)
+        Me.WebBrowser1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(27, 25)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(996, 695)
+        Me.WebBrowser1.Size = New System.Drawing.Size(885, 552)
         Me.WebBrowser1.TabIndex = 2
         '
         'FormHelp
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(996, 728)
+        Me.ClientSize = New System.Drawing.Size(885, 582)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FormHelp"
         Me.Text = "Help"
         Me.MenuStrip1.ResumeLayout(False)

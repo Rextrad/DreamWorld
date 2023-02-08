@@ -266,7 +266,7 @@ Partial Class FormRegions
         '
         Me.CheckboxConcierge.AutoSize = True
         Me.CheckboxConcierge.Location = New System.Drawing.Point(19, 36)
-        Me.CheckboxConcierge.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckboxConcierge.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckboxConcierge.Name = "CheckboxConcierge"
         Me.CheckboxConcierge.Size = New System.Drawing.Size(234, 21)
         Me.CheckboxConcierge.TabIndex = 9
@@ -308,9 +308,9 @@ Partial Class FormRegions
         '
         Me.GroupBoxConcierge.Controls.Add(Me.CheckboxConcierge)
         Me.GroupBoxConcierge.Location = New System.Drawing.Point(300, 46)
-        Me.GroupBoxConcierge.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxConcierge.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBoxConcierge.Name = "GroupBoxConcierge"
-        Me.GroupBoxConcierge.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxConcierge.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBoxConcierge.Size = New System.Drawing.Size(250, 75)
         Me.GroupBoxConcierge.TabIndex = 1888
         Me.GroupBoxConcierge.TabStop = False
@@ -379,9 +379,9 @@ Partial Class FormRegions
         Me.GroupBoxChat.Controls.Add(Me.TextBox_Whisper_distance)
         Me.GroupBoxChat.Controls.Add(Me.Label_whisper_distance)
         Me.GroupBoxChat.Location = New System.Drawing.Point(300, 154)
-        Me.GroupBoxChat.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxChat.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBoxChat.Name = "GroupBoxChat"
-        Me.GroupBoxChat.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxChat.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBoxChat.Size = New System.Drawing.Size(250, 179)
         Me.GroupBoxChat.TabIndex = 1895
         Me.GroupBoxChat.TabStop = False
@@ -402,7 +402,7 @@ Partial Class FormRegions
         'AviName
         '
         Me.AviName.Location = New System.Drawing.Point(300, 429)
-        Me.AviName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.AviName.Margin = New System.Windows.Forms.Padding(4)
         Me.AviName.Name = "AviName"
         Me.AviName.Size = New System.Drawing.Size(213, 22)
         Me.AviName.TabIndex = 1896

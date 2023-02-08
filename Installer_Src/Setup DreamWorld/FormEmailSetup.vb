@@ -165,6 +165,8 @@ Public Class FormEmailSetup
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+        Settings.SaveSettings()
+
         If Not Settings.EmailEnabled Then
             MsgBox(My.Resources.EmailDisabled, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
             Return
@@ -180,6 +182,8 @@ Public Class FormEmailSetup
             Button1.Text = My.Resources.Ok
             Sleep(3000)
             Button1.Text = My.Resources.Send_word
+        Else
+            MsgBox(My.Resources.SMTPDisabled, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
         End If
 
     End Sub

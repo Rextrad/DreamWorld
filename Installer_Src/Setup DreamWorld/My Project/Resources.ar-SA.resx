@@ -3873,4 +3873,7 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>البدء كخدمة</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>تعليق</value>
+  </data>
 </root>

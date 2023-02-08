@@ -165,6 +165,15 @@ Public Class FormIarSave
         HelpManual("SaveIar")
     End Sub
 
+    Private Sub HelpToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem1.Click
+        Dim webAddress As String = "http://opensimulator.org/wiki/Inventory_Archives"
+        Try
+            Process.Start(webAddress)
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
+    End Sub
+
     Private Sub ModifyCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ModifyCheckBox.CheckedChanged
         GModify = ModifyCheckBox.Checked
     End Sub

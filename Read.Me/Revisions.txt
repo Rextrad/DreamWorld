@@ -1,23 +1,29 @@
 REVISIONS FOR DREAMGRID
 
+
 V5.33
-Fixed a long outstanding bug where an alternate Domain Name did not work. if you changed 
-	the name of your grid then old names would not work.   As one example, 	my grid is named 
-	www.outworldz.com:9000. If you went to outworldz.com, it would cough up a Failure To 
-	Verify Identity Error.  Adding outworldz.com to the alternate DNS name was supposed to 
-	fix this.  It now works as expected. 
-Added a Kick User command to the help Console Commands Menu.
-Opensim 1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000.
+Bug: Redirect home page of Apache to /DreamGrid/Joomla/Wordpress was not correct.
+Bug: Icecast may not start onnew grid due to a missing log folder.
+Money: Enabled Beta money module for land sale.
+Update: PHP7 updated to 7.4.33
+Ban List: add exclude by Disk ID, which is a hashed C drive ID. Also has a new syntax to differentitate MAC and DISK ID's
+Wordpress: Added WordPress for Opensim (WP4OS) config data. Profiles require adding Image Magic which is not working for me.
+New Feature: Added Smart Boot and Smart Suspend Overrides to each region.  You can choose the default, and override it per region to stop or freeze any region.  
+Now allows Welcome region to be frozen/thawed.  
+Emails: Offline and other Emails were not going to anyone but the sender. 
+Bug: Fixed difficult to understand Gatekeeper Alias bug where an alternate Domain Name for your grid did not work. Reason for this patch was if you changed the name of your grid then old names and landmarks would not work. As one example, my grid is named www.outworldz.com:9000. If you mistakenly went to outworldz.com without the www, it would produce a Failure To Verify Identity Error. Adding outworldz.com to the alternate DNS name was supposed to fix this. It now works as expected. 
+New Feature: Added a Kick User command to the help Console Commands Menu.
+Opensim change to #1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort default to 9000.
 	Fixed a region crash when being griefed.
-	robust: add exclude by Disk id0.
-	fix 2 bugs caused by nonsense xinventory fieldname.
-	mantis 9039: Code involving permissions on attached prim won't execute for non-owner.
-	Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets..
-	add llObjectGetLinkKey(...).
-Gravity region is a 4X4, not a 1X1.
-Load OAR prints on the DreamGrid console when the OAR is finished loading.
-Load OAR in bulk always showed even when gracefully finishing.
-DOS boxes always popped up for a brief time even when set to not show,
+	Fix 2 bugs caused by nonsense xinventory fieldname.
+	Mantis 9039: Code involving permissions on attached prim won't execute for non-owner.
+	Griefer fixes: Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets..
+	add llObjectGetLinkKey(...) LSL command
+OAR: Gravity region is a 4X4, not a 1X1.
+Load OAR now prints on the DreamGrid console when the OAR is finished loading.
+GUI: DOS boxes always popped up for a brief time even when set to not show.
+....and lot of little things 
+
 
 V5.32
 Typo fixed in a Internal IPaddress setting to Network Ports (missing a CRLF)

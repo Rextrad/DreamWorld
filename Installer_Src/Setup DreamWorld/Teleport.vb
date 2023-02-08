@@ -17,8 +17,6 @@ Module Teleport
 
     Public Sub TeleportAgents()
 
-        ' TODO If Not RunningInServiceMode() Then Return
-
         While PropOpensimIsRunning
             Try
                 For Each Keypair In TeleportAvatarDict
