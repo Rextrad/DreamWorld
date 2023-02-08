@@ -22,7 +22,8 @@ Opensim change to #1afe46d61126fa2 FIRE-32583: change [Const] PrivatePort defaul
 OAR: Gravity region is a 4X4, not a 1X1.
 Load OAR now prints on the DreamGrid console when the OAR is finished loading.
 GUI: DOS boxes always popped up for a brief time even when set to not show.
-....and lot of little things 
+External Host name for region servers should auto fill based on LAN vs WAN mode to help prevent setup error.
+....and lot more little things 
 
 
 V5.32
