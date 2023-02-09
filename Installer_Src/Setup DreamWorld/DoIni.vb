@@ -513,7 +513,23 @@ Module DoIni
             CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.proto"), IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
         End If
 
-        CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"), IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\tos.html"))
+        Dim File1 = IO.Path.Combine(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
+        Dim fileReader = My.Computer.FileSystem.ReadAllText(File1, System.Text.Encoding.UTF8)
+
+        Try
+            Dim arrList = New ArrayList(fileReader.Split(New String() {Convert.ToChar(13), Convert.ToChar(10)}, StringSplitOptions.RemoveEmptyEntries))
+            Dim HTML As String = ""
+            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\tos.html")
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(fname, False)
+
+            For Each Str As String In arrList
+                Str = Str.Replace("[GRIDNAME]", "'<!-- #get var=GridName -->'")
+                file.WriteLine(Str & vbCrLf)
+            Next
+            file.Close()
+        Catch
+        End Try
 
         Return False
 

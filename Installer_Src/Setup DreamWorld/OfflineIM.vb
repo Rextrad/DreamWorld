@@ -24,6 +24,7 @@ Module OfflineIM
     ''' <returns>string message</returns>
     Public Function SendEmail(FromName As String, ToEmail As String, Subject As String, Text As String) As String
 
+        Dim errormsg As String = ""
         If Not Settings.EmailEnabled Then Return My.Resources.EmailDisabled
 
         If FromName.Length = 0 Then
@@ -37,19 +38,25 @@ Module OfflineIM
         If Text.Length = 0 Then
             Return My.Resources.NoBody
         End If
+        Try
+            Using Message As New MimeMessage()
 
-        Using Message As New MimeMessage()
-            Message.From.Add(New MailboxAddress("", Settings.SmtPropUserName))
-            Message.To.Add(New MailboxAddress("", ToEmail))
-            Message.Subject = Subject
+                Message.From.Add(New MailboxAddress("", Settings.SmtPropUserName))
+                Message.To.Add(New MailboxAddress("", ToEmail))
+                Message.Subject = Subject
 
-            Dim builder = New BodyBuilder With {
-                .TextBody = Text
-            }
-            Message.Body = builder.ToMessageBody()
-            Return MailKit.SSL.SendMessage(Message)
+                Dim builder = New BodyBuilder With {
+                    .TextBody = Text
+                }
+                Message.Body = builder.ToMessageBody()
 
-        End Using
+                Return MailKit.SSL.SendMessage(Message)
+
+            End Using
+        Catch ex As Exception
+            errormsg = ex.Message
+        End Try
+        Return errormsg
 
     End Function
 
@@ -58,7 +65,7 @@ Module OfflineIM
         While (True)
             While PropOpensimIsRunning
 
-                If Settings.EmailEnabled And Settings.EnableEmailToSMTPCheckBox Then
+                If Settings.EmailEnabled Then
                     Dim Mails = OfflineEmails()
                     For Each email In Mails
                         Dim FromPerson = AvatarEmailData(email.Fromid)

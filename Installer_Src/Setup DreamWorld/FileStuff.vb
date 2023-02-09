@@ -87,7 +87,6 @@ Module FileStuff
         "OutworldzFiles/Apache/bin/vcruntime140.dll" ' wrong version
         }
 
-
         If FormSetup.PropKillSource Then
             files.Add("OutworldzFiles\Opensim\.nant")
             files.Add("OutworldzFiles\Opensim\doc")
@@ -252,8 +251,6 @@ Module FileStuff
         End If
 
         CopyFileFast(Path, IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\images\Photo.png"))
-
-        DoTos()
 
     End Sub
 
