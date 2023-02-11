@@ -2,6 +2,7 @@ REVISIONS FOR DREAMGRID
 
 
 V5.33
+Bug:TOS would save correctly to the web but the editor would always load the original Outworldz TOS. Made it harder to edit a second time.
 Bug: Redirect home page of Apache to /DreamGrid/Joomla/Wordpress was not correct.
 Bug: Icecast may not start onnew grid due to a missing log folder.
 Money: Enabled Beta money module for land sale.
