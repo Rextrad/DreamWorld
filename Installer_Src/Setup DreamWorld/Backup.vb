@@ -12,10 +12,10 @@ Module Backup
 
         If SkipAutobackup(RegionUUID) = "True" Then Return
 
-        If Settings.Smart_Start_Enabled And (Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) Then
-            SequentialPause()
-            Return
-        End If
+        'If Settings.Smart_Start_Enabled AndAlso (Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) Then
+        'SequentialPause()
+        'Return
+        'End If
 
         ' pass the two parameters it needs as in object
         Dim Oar = New OarObject With {

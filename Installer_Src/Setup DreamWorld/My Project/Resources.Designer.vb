@@ -1362,6 +1362,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Bootable.
+        '''</summary>
+        Friend ReadOnly Property Bootable() As String
+            Get
+                Return ResourceManager.GetString("Bootable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Booting.
         '''</summary>
         Friend ReadOnly Property Booting_word() As String
@@ -11367,6 +11376,15 @@ Namespace My.Resources
         Friend ReadOnly Property Suitcase_enable() As String
             Get
                 Return ResourceManager.GetString("Suitcase_enable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Suspendable.
+        '''</summary>
+        Friend ReadOnly Property Suspendable() As String
+            Get
+                Return ResourceManager.GetString("Suspendable", resourceCulture)
             End Get
         End Property
         

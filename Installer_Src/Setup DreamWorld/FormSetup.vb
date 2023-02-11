@@ -1482,8 +1482,6 @@ Public Class FormSetup
 
         Try
             ExitList.Clear()
-
-            ClearStack()
             PropInstanceHandles.Clear()
             WebserverList.Clear()
         Catch ex As Exception

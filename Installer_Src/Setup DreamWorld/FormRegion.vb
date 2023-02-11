@@ -73,15 +73,6 @@ Public Class FormRegion
         End Set
     End Property
 
-    Public Property RName1 As String
-        Get
-            Return RName
-        End Get
-        Set(value As String)
-            RName = value
-        End Set
-    End Property
-
 #End Region
 
 #Region "ScreenSize"
@@ -505,8 +496,6 @@ Public Class FormRegion
         RichTextBoxPermissions.Text = My.Resources.PermissionsHelp
         RichTextBoxScripts.Text = My.Resources.ScriptsHelp
         RichTextBoxModules.Text = My.Resources.ModulesHelp
-
-        RName1 = Name
 
         ''''''''''''''''''''''''''''' DREAMGRID REGION LOAD '''''''''''''''''
 
@@ -1325,17 +1314,8 @@ Public Class FormRegion
                 GDPR(RegionUUID) = ""
             End If
 
-            If Freeze_Thaw.Checked Then
-                Smart_Suspend_Enabled(RegionUUID) = True
-            Else
-                Smart_Suspend_Enabled(RegionUUID) = False
-            End If
-
-            If Shutdown_Boot.Checked Then
-                Smart_Boot_Enabled(RegionUUID) = True
-            Else
-                Smart_Boot_Enabled(RegionUUID) = False
-            End If
+            Smart_Suspend_Enabled(RegionUUID) = Freeze_Thaw.Checked
+            Smart_Boot_Enabled(RegionUUID) = Shutdown_Boot.Checked
 
             ScriptEngine(RegionUUID) = "" ' default is blank
             If ScriptOffButton.Checked = True Then
@@ -1707,12 +1687,16 @@ Public Class FormRegion
     End Sub
 
     Private Sub RadioButton16_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton16.CheckedChanged
+
         BoxSize = 256 * 16
         If Initted1 Then Changed1 = True
+
     End Sub
 
     Private Sub RadioButton17_CheckedChanged(sender As Object, e As EventArgs)
+
         If Initted1 Then Changed1 = True
+
     End Sub
 
     Private Sub RadioButton17_CheckedChanged_1(sender As Object, e As EventArgs) Handles Freeze_Thaw.CheckedChanged
@@ -1722,6 +1706,11 @@ Public Class FormRegion
     End Sub
 
     Private Sub RadioButton18_CheckedChanged(sender As Object, e As EventArgs) Handles Shutdown_Boot.CheckedChanged
+
+        If Settings.WelcomeRegion = Name And Shutdown_Boot.Checked Then
+            MsgBox("Your default Welcome region cannot be set to Shutdown. It can be set to Suspend")
+            Freeze_Thaw.Checked = True
+        End If
 
         If Initted1 Then Changed1 = True
 

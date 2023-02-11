@@ -3873,4 +3873,13 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>Començant com a servei</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>En espera</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Arrencable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspensible</value>
+  </data>
 </root>

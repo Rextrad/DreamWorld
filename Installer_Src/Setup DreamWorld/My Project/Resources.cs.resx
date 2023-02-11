@@ -3873,4 +3873,13 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>Spuštění jako služba</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Pohotovostní</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Spouštěcí</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Závěsné</value>
+  </data>
 </root>

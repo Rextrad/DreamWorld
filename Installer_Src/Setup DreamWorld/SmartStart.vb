@@ -166,13 +166,15 @@ Module SmartStart
                     End If
 
                     ' Smart Start Timer
-                    If Settings.Smart_Start_Enabled AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso status = SIMSTATUSENUM.Booted Then
+                    If Settings.Smart_Start_Enabled AndAlso
+                        (Smart_Boot_Enabled(RegionUUID) Or Smart_Suspend_Enabled(RegionUUID)) AndAlso
+                        status = SIMSTATUSENUM.Booted Then
+
                         Dim diff = DateAndTime.DateDiff(DateInterval.Second, Timer(RegionUUID), Date.Now)
                         If diff < 0 Then
                             diff = 0
                         End If
 
-                        'If diff > Settings.SmartStartTimeout AndAlso RegionName <> Settings.WelcomeRegion Then
                         If diff > Settings.SmartStartTimeout Then
                             BreakPoint.Print($"State Changed to ShuttingDown {GroupName} ")
                             If Settings.BootOrSuspend Then

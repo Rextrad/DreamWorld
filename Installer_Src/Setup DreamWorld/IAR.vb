@@ -51,7 +51,7 @@ Module IAR
     End Sub
 
     Public Function LoadIARContent(thing As String) As Boolean
-
+        'TODO need to fix with forward logic to keep sim alive
         ' handles IARS clicks
         If Not PropOpensimIsRunning() Then
             TextPrint(My.Resources.Not_Running)

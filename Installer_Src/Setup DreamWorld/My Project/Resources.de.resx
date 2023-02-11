@@ -3873,4 +3873,13 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>Starten als Dienst</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Stehen zu</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootfähig</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Aufhängbar</value>
+  </data>
 </root>

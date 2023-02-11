@@ -403,7 +403,8 @@ Public Class FormRegionlist
 
                         If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                         If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-                        ' If SmartButton.Checked And Not Smart_Suspend_Enabled((RegionUUID) Then Continue For
+                        If SmartButton.Checked And
+                            (Smart_Suspend_Enabled(RegionUUID) Or Smart_Suspend_Enabled(RegionUUID)) Then Continue For
 
                         RegionEnabled(RegionUUID) = AllNone.Checked
 
@@ -734,10 +735,10 @@ Public Class FormRegionlist
             End If
 
             'Smart Start rules
-        ElseIf Status = SIMSTATUSENUM.Suspended And Smart_Suspend_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then
+        ElseIf Status = SIMSTATUSENUM.Suspended AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Letter = My.Resources.Standby_word
             Num = Dgicon.Icecube
-        ElseIf Status = SIMSTATUSENUM.Stopped And Smart_Boot_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then
+        ElseIf Status = SIMSTATUSENUM.Stopped AndAlso Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Letter = My.Resources.Shutdown_word
             Num = Dgicon.SmartStartStopped
 
@@ -1459,6 +1460,7 @@ Public Class FormRegionlist
                     If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                     If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
                     If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
+                    If SmartButton.Checked And Not Smart_Boot_Enabled(RegionUUID) Then Continue For
                     If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
                     If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1483,13 +1485,9 @@ Public Class FormRegionlist
                     Dim fmtRam = "0.0" ' 9999 MB
                     ' RAM
 
-                    If status = SIMSTATUSENUM.Booting _
-                            Or (status = SIMSTATUSENUM.Suspended And Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID)) _
-                            Or status = SIMSTATUSENUM.Booted _
-                            Or status = SIMSTATUSENUM.RecyclingUp _
-                            Or status = SIMSTATUSENUM.RecyclingDown _
-                            Then
-
+                    If status = SIMSTATUSENUM.Booted Or
+                            status = SIMSTATUSENUM.RecyclingUp Or
+                            status = SIMSTATUSENUM.RecyclingDown Then
                         Try
                             Dim PID = ProcessID(RegionUUID)
                             Dim component1 As Process = CachedProcess(PID)
@@ -1602,7 +1600,9 @@ Public Class FormRegionlist
                     End If
 
                     If Smart_Suspend_Enabled(RegionUUID) Then
-                        item1.SubItems.Add(My.Resources.Yes_word)
+                        item1.SubItems.Add(My.Resources.Suspendable)
+                    ElseIf Smart_Boot_Enabled(RegionUUID) Then
+                        item1.SubItems.Add(My.Resources.Bootable)
                     Else
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
@@ -1695,7 +1695,7 @@ Public Class FormRegionlist
 
             If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
             If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-            If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
+            If SmartButton.Checked And (Not Smart_Suspend_Enabled(RegionUUID) And Not Smart_Boot_Enabled(RegionUUID)) Then Continue For
             If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
             If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1738,7 +1738,7 @@ Public Class FormRegionlist
             If RegionEnabled(RegionUUID) Then
                 RegionCount += 1
             End If
-            If RegionEnabled(RegionUUID) And Smart_Suspend_Enabled(RegionUUID) Then
+            If RegionEnabled(RegionUUID) And (Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) Then
                 SSRegionCount += 1
             End If
             TotalRegionCount += 1

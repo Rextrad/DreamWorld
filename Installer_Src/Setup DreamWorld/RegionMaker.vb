@@ -66,12 +66,6 @@ Module RegionMaker
 
 #Region "Start/Stop"
 
-    Public Sub ClearStack()
-
-        WebserverList.Clear()
-
-    End Sub
-
     Public Function Init(Verbose As Boolean) As Boolean
 
         If GetAlreadyUsedPorts() = 0 Then
@@ -272,9 +266,14 @@ Module RegionMaker
                 ErrorLog("No Region UUID for Estate")
             End If
 
-            If Settings.AutoFill AndAlso Settings.Smart_Start_Enabled AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso out = 0 Then
+            If Settings.AutoFill AndAlso
+                Settings.Smart_Start_Enabled AndAlso
+                (Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) AndAlso
+                out = 0 Then
+
                 Estate(RegionUUID) = "SimSurround"
                 SetEstate(RegionUUID, 1999)
+
             End If
 
             Dim proto = "; * Regions configuration file; " & vbCrLf _
@@ -319,6 +318,7 @@ Module RegionMaker
         & "Publicity=" & GDPR(RegionUUID) & vbCrLf _
         & "Concierge=" & Concierge(RegionUUID) & vbCrLf _
         & "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf _
+        & "SmartBoot=" & CStr(Smart_Boot_Enabled(RegionUUID)) & vbCrLf _
         & "LandingSpot=" & LandingSpot(RegionUUID) & vbCrLf _
         & "Cores=" & Cores(RegionUUID) & vbCrLf _
         & "Priority=" & Priority(RegionUUID) & vbCrLf _
@@ -621,6 +621,7 @@ Module RegionMaker
                             GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "", "String"))
                             Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "", "String"))
                             Smart_Suspend_Enabled(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "String"))
+                            Smart_Boot_Enabled(uuid) = CBool(INI.GetIni(fName, "SmartBoot", "False", "String"))
                             LandingSpot(uuid) = CStr(INI.GetIni(fName, "DefaultLanding", "", "String"))
                             OpensimWorldAPIKey(uuid) = CStr(INI.GetIni(fName, "OpensimWorldAPIKey", "", "String"))
                             Cores(uuid) = CInt(0 & INI.GetIni(fName, "Cores", "", "String"))

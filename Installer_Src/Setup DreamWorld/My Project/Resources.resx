@@ -4456,4 +4456,10 @@
   <data name="Standby_word" xml:space="preserve">
     <value>Standby</value>
   </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspendable</value>
+  </data>
 </root>

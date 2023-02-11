@@ -3873,4 +3873,13 @@
   <data name="StartingAsService" xml:space="preserve">
     <value>Ξεκινώντας ως υπηρεσία</value>
   </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Αναμονή</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Εκκίνηση</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Με δυνατότητα αναστολής</value>
+  </data>
 </root>

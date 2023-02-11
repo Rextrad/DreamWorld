@@ -377,6 +377,7 @@ Module Build
         Coord_X(RegionUUID) = X
         Coord_Y(RegionUUID) = Y
         Smart_Suspend_Enabled(RegionUUID) = True
+        Smart_Boot_Enabled(RegionUUID) = False
         Teleport_Sign(RegionUUID) = True
         SizeX(RegionUUID) = 256
         SizeY(RegionUUID) = 256
