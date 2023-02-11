@@ -14,10 +14,18 @@ Module OfflineIM
 
     End Sub
 
+    ''' <summary>
+    '''
+    ''' </summary>
+    ''' <param name="FromName">From Name</param>
+    ''' <param name="ToEmail">To Email</param>
+    ''' <param name="Subject">Subject</param>
+    ''' <param name="Text">Msg text</param>
+    ''' <returns>string message</returns>
     Public Function SendEmail(FromName As String, ToEmail As String, Subject As String, Text As String) As String
 
+        Dim errormsg As String = ""
         If Not Settings.EmailEnabled Then Return My.Resources.EmailDisabled
-
 
         If FromName.Length = 0 Then
             Return My.Resources.NoFromEmail
@@ -30,19 +38,25 @@ Module OfflineIM
         If Text.Length = 0 Then
             Return My.Resources.NoBody
         End If
+        Try
+            Using Message As New MimeMessage()
 
-        Using Message As New MimeMessage()
-            Message.From.Add(New MailboxAddress("", Settings.SmtPropUserName))
-            Message.To.Add(New MailboxAddress("", Settings.SmtPropUserName))
-            Message.Subject = Subject
+                Message.From.Add(New MailboxAddress("", Settings.SmtPropUserName))
+                Message.To.Add(New MailboxAddress("", ToEmail))
+                Message.Subject = Subject
 
-            Dim builder = New BodyBuilder With {
-                .TextBody = Text
-            }
-            Message.Body = builder.ToMessageBody()
-            Return MailKit.SSL.SendMessage(Message)
+                Dim builder = New BodyBuilder With {
+                    .TextBody = Text
+                }
+                Message.Body = builder.ToMessageBody()
 
-        End Using
+                Return MailKit.SSL.SendMessage(Message)
+
+            End Using
+        Catch ex As Exception
+            errormsg = ex.Message
+        End Try
+        Return errormsg
 
     End Function
 
@@ -51,7 +65,7 @@ Module OfflineIM
         While (True)
             While PropOpensimIsRunning
 
-                If Settings.EmailEnabled And Settings.EnableEmailToSMTPCheckBox Then
+                If Settings.EmailEnabled Then
                     Dim Mails = OfflineEmails()
                     For Each email In Mails
                         Dim FromPerson = AvatarEmailData(email.Fromid)
@@ -70,7 +84,7 @@ Module OfflineIM
                                 msg = msg.Substring(0, Settings.MaxMailSize)
                             End If
 
-                            Dim result = SendEmail($"{FromPerson.FirstName} {FromPerson.LastName}", $"{ToPerson.FirstName} {ToPerson.LastName}", $"IM from {FromPerson.FirstName} {FromPerson.LastName}", msg)
+                            Dim result = SendEmail($"{FromPerson.FirstName} {FromPerson.LastName} <{FromPerson.Email} <{FromPerson.Email}>", $"{ToPerson.FirstName} {ToPerson.LastName} <{ToPerson.Email}>", $"IM from {FromPerson.FirstName} {FromPerson.LastName}", msg)
                             If result = My.Resources.Ok Then
                                 Logger("Email", $"Offline IM Email sent from {FromPerson.FirstName} {FromPerson.LastName} to {ToPerson.FirstName} {ToPerson.LastName}", "Outworldz")
                                 DeleteIM(email.Id)

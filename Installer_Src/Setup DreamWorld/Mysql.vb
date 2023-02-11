@@ -416,7 +416,7 @@ Public Module MysqlInterface
 
         Dim stm = $"delete from visitor WHERE dateupdated < NOW() - INTERVAL {Settings.KeepVisits} DAY "
 
-        QueryString(stm) ' todo fix sql
+        QueryString(stm) ' TODO fix sql
 
         ' make a list of  'uuid1', 'uuid2' etc
         Dim list2 As New List(Of String)
@@ -438,7 +438,7 @@ Public Module MysqlInterface
         arr = list2.ToArray
         clause = Join(arr, ",")
 
-        stm = $"delete from visitor where regionname not in ({clause})" ' todo fix sql
+        stm = $"delete from visitor where regionname not in ({clause})" ' TODO fix sql
         QueryString(stm)
 
     End Sub

@@ -81,6 +81,7 @@ Public Class TosForm
 
         Dim reader As System.IO.StreamReader
         reader = System.IO.File.OpenText(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
+
         'now loop through each line
         Dim HTML As String = ""
         While reader.Peek <> -1
@@ -99,18 +100,18 @@ Public Class TosForm
 
     Private Sub Save()
         Try
-            Dim reader As System.IO.StreamReader
-            reader = System.IO.File.OpenText(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
-            'now loop through each line
+            Dim arrList = New ArrayList(Editor1.BodyHtml.Split(New String() {Convert.ToChar(13), Convert.ToChar(10)}, StringSplitOptions.RemoveEmptyEntries))
             Dim HTML As String = ""
-            While reader.Peek <> -1
-                Dim Str = reader.ReadLine()
-                Str = Str.Replace("[GRIDNAME]", "'<!-- #get var=GridName -->'")
-                HTML = HTML + Str + vbCrLf
-            End While
-            reader.Close()
+            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\tos.html")
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(fname, False)
 
-            CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"), IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\tos.html"))
+            For Each Str As String In arrList
+                Str = Str.Replace("[GRIDNAME]", "'<!-- #get var=GridName -->'")
+                file.WriteLine(Str & vbCrLf)
+            Next
+            file.Close()
+            CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"), IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
         Catch
         End Try
 

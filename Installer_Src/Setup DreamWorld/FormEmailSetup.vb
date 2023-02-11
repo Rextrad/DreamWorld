@@ -82,10 +82,6 @@ Public Class FormEmailSetup
         enableEmailToExternalObjectsCheckBox.Checked = Settings.EnableEmailToExternalObjects
         ToolTip1.SetToolTip(enableEmailToExternalObjectsCheckBox, Global.Outworldz.My.Resources.tt_enableEmailToExternalObjects)
 
-        enableEmailToSMTPCheckBox.Checked = Settings.EnableEmailToSMTPCheckBox
-        enableEmailToSMTPCheckBox.Text = Global.Outworldz.My.Resources.enableEmailToSMTP
-        ToolTip1.SetToolTip(enableEmailToSMTPCheckBox, Global.Outworldz.My.Resources.tt_enableEmailToSMTPCheckBox)
-
         ';# {enabled} {[Startup]emailmoduleDefaultEmailModule} {maximum number of emails from a object owner per hour} {} 500
         MailsFromOwnerPerHourTextBox.Text = CStr(Settings.MailsFromOwnerPerHour)
         MailsFromPrimOwnerPerHourLabel.Text = Global.Outworldz.My.Resources.EmailsFromOwnerPerHour
@@ -151,7 +147,7 @@ Public Class FormEmailSetup
         RadioButtonStartTlsWhenAvailable.Text = Global.Outworldz.My.Resources.StartTlsWhenAvailable
         ToolTip1.SetToolTip(RadioButtonStartTlsWhenAvailable, Global.Outworldz.My.Resources.tt_StartTlsWhenAvailable)
 
-        Button1.Text = My.Resources.Test_word
+        TestButton.Text = My.Resources.Test_word
         HelpOnce("Email")
 
         SetScreen()
@@ -163,23 +159,22 @@ Public Class FormEmailSetup
 
 #Region "TextBoxes"
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles TestButton.Click
+
+        Settings.SaveSettings()
 
         If Not Settings.EmailEnabled Then
             MsgBox(My.Resources.EmailDisabled, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
             Return
         End If
 
-        If Not Settings.EnableEmailToSMTPCheckBox Then
-            MsgBox(My.Resources.SMTPDisabled, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-            Return
-        End If
-
         Dim result = SendEmail(Settings.SmtPropUserName, Settings.SmtPropUserName, "Test Message from Dreamgrid", "Test Message from Dreamgrid")
         If result = My.Resources.Ok Then
-            Button1.Text = My.Resources.Ok
+            TestButton.Text = My.Resources.Ok
             Sleep(3000)
-            Button1.Text = My.Resources.Send_word
+            TestButton.Text = My.Resources.Send_word
+        Else
+            MsgBox(My.Resources.SMTPDisabled, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
         End If
 
     End Sub
@@ -232,12 +227,7 @@ Public Class FormEmailSetup
 
     End Sub
 
-    Private Sub enableEmailToSMTPCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles enableEmailToSMTPCheckBox.CheckedChanged
 
-        If Not initted Then Return
-        Settings.EnableEmailToSMTPCheckBox = enableEmailToSMTPCheckBox.Checked
-
-    End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
 

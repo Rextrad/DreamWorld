@@ -22,7 +22,7 @@ Partial Class FormIarLoad
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormIARLoad))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormIarLoad))
         Me.FolderTextbox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -37,28 +37,28 @@ Partial Class FormIarLoad
         '
         'FolderTextbox
         '
-        Me.FolderTextbox.Location = New System.Drawing.Point(28, 85)
-        Me.FolderTextbox.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.FolderTextbox.Location = New System.Drawing.Point(25, 93)
+        Me.FolderTextbox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.FolderTextbox.Name = "FolderTextbox"
-        Me.FolderTextbox.Size = New System.Drawing.Size(202, 26)
+        Me.FolderTextbox.Size = New System.Drawing.Size(247, 22)
         Me.FolderTextbox.TabIndex = 2
         Me.FolderTextbox.Text = "/"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(25, 24)
+        Me.Label1.Location = New System.Drawing.Point(22, 19)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(275, 20)
+        Me.Label1.Size = New System.Drawing.Size(246, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Enter first and last name of the avatar"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(253, 91)
+        Me.Label2.Location = New System.Drawing.Point(25, 72)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(127, 20)
+        Me.Label2.Size = New System.Drawing.Size(114, 17)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Folder to save to"
         '
@@ -69,60 +69,61 @@ Partial Class FormIarLoad
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.FolderTextbox)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 38)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.GroupBox1.Location = New System.Drawing.Point(11, 30)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.GroupBox1.Size = New System.Drawing.Size(474, 201)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(363, 161)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(28, 135)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.Button1.Location = New System.Drawing.Point(25, 123)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(128, 38)
+        Me.Button1.Size = New System.Drawing.Size(114, 30)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "OK"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'AviName
         '
-        Me.AviName.Location = New System.Drawing.Point(28, 49)
-        Me.AviName.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.AviName.Location = New System.Drawing.Point(25, 39)
+        Me.AviName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.AviName.Name = "AviName"
-        Me.AviName.Size = New System.Drawing.Size(272, 26)
+        Me.AviName.Size = New System.Drawing.Size(242, 22)
         Me.AviName.TabIndex = 1
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(507, 33)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(5, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(388, 32)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'HelpToolStripMenuItem
         '
+        Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(65, 29)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(79, 28)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
-        'FormIARLoad
+        'FormIarLoad
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 248)
+        Me.ClientSize = New System.Drawing.Size(388, 198)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
-        Me.Name = "FormIARLoad"
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Name = "FormIarLoad"
         Me.Text = "IAR"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

@@ -1027,20 +1027,6 @@ Public Class MySettings
 
     End Property
 
-    ''' <summary>
-    ''' Enable sending email to the world
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property EnableEmailToSMTPCheckBox() As Boolean
-        Get
-            Return CType(GetMySetting("enableEmailToSMTPCheckBox", "False"), Boolean)
-        End Get
-        Set
-            SetMySetting("enableEmailToSMTPCheckBox", CStr(Value))
-        End Set
-
-    End Property
-
     Public Property EnableHypergrid() As Boolean
         Get
             Return CType(GetMySetting("EnableHypergrid", "True"), Boolean)

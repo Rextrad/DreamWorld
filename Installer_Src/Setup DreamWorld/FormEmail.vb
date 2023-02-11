@@ -112,7 +112,8 @@ Public Class FormEmail
                 .HtmlBody = EditorBox.BodyHtml
             }
             Message.Body = builder.ToMessageBody()
-            MailKit.SSL.SendMessage(Message)
+            Dim status = MailKit.SSL.SendMessage(Message)
+            MsgBox(status, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
 
         End Using
         Me.Close()
