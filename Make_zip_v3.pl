@@ -3,6 +3,8 @@
 # build Zipfile
 # AGPL licensed, see AGPL 3.0 at https://www.gnu.org/licenses/agpl-3.0.en.html
 
+
+
 use strict;
 use warnings;
 use IO::All -utf8; 
@@ -292,6 +294,8 @@ if ( $publish =~ /p/ ) {
 
     PrintDate("Publishing now");
    
+   #https://publicsuffix.org/list/
+    Fetchpublicsuffix();   
     CheckDistro();
     CopyManuals();
         
@@ -683,3 +687,10 @@ sub GetVersion
 }
 
 
+sub Fetchpublicsuffix {
+  use LWP::Simple;
+  # always pull https://publicsuffix.org/list/
+  
+  my $content = get('https://publicsuffix.org/list/public_suffix_list.dat');
+  $content > io("$dir/OutworldzFiles/SSL/public_suffix_list.dat");   
+}
