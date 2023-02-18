@@ -83,15 +83,15 @@ Public Class FormRegionPopup
                 ShowConsoleButton.Enabled = True
                 StatsButton1.Enabled = False
                 StartButton.Enabled = True
-                StopButton.Enabled = False
+                StopButton.Enabled = True
                 SaveOAR.Enabled = True
                 LoadOAR.Enabled = True
                 Teleport.Enabled = True
                 EditButton1.Enabled = True
                 MsgButton.Enabled = False
-            End If
 
-            If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
+
+            ElseIf RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
                 ShowConsoleButton.Enabled = True
                 StatsButton1.Enabled = True
                 StartButton.Enabled = False
@@ -101,9 +101,7 @@ Public Class FormRegionPopup
                 Teleport.Enabled = True
                 EditButton1.Enabled = True
                 MsgButton.Enabled = True
-            End If
-
-            If RegionStatus(RegionUUID) = SIMSTATUSENUM.RecyclingDown Then
+            ElseIf RegionStatus(RegionUUID) = SIMSTATUSENUM.RecyclingDown Then
                 ShowConsoleButton.Enabled = True
                 StatsButton1.Enabled = False
                 StartButton.Enabled = False
@@ -113,9 +111,7 @@ Public Class FormRegionPopup
                 Teleport.Enabled = False
                 MsgButton.Enabled = False
                 EditButton1.Enabled = True
-            End If
-
-            If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting Or
+            ElseIf RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting Or
              RegionStatus(RegionUUID) = SIMSTATUSENUM.RecyclingUp Then
                 ShowConsoleButton.Enabled = True
                 StatsButton1.Enabled = False
@@ -126,10 +122,7 @@ Public Class FormRegionPopup
                 Teleport.Enabled = False
                 MsgButton.Enabled = False
                 EditButton1.Enabled = False
-            End If
-
-            ' stopped
-            If RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Then
+            ElseIf RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Then
                 ShowConsoleButton.Enabled = False
                 StatsButton1.Enabled = False
                 StartButton.Enabled = True
