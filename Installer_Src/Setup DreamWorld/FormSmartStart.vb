@@ -636,14 +636,16 @@ Public Class FormSmartStart
         Dim n = 0
         Dim s As Boolean
         For Each RegionUUID In RegionUuids()
-            If Smart_Suspend_Enabled(RegionUUID) And Settings.Smart_Start_Enabled Then Continue For
-            Dim name = Region_Name(RegionUUID)
-            ParkingSpot.Items.Add(name)
-            If name = Settings.ParkingLot Then
-                ParkingSpot.SelectedIndex = n
-                s = True
+            If Smart_Suspend_Enabled(RegionUUID) Or Not Smart_Boot_Enabled(RegionUUID) Then
+                Dim name = Region_Name(RegionUUID)
+                ParkingSpot.Items.Add(name)
+                If name = Settings.ParkingLot Then
+                    ParkingSpot.SelectedIndex = n
+                    s = True
+                End If
+                n += 1
             End If
-            n += 1
+
         Next
 
         With AviName
