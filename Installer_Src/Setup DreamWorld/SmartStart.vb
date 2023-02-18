@@ -418,55 +418,70 @@ Module SmartStart
         ''' <summary>
         ''' 0 for no waiting
         ''' 1 for Sequential
-        ''' 2 for concurrent
+        ''' 2 for parallel with various limits based on smart/non-smart
         ''' ''' </summary>
         '''
-        If Settings.SequentialMode = 0 Then
-            Return
-        End If
+        If Settings.SequentialMode = 0 Then Return
 
-        Dim ctr = 5 * 60 ' 5 minute max to start a region at 100% CPU
+        Dim ctr = 5 * 60 ' 5 minute max to start a region then give up
         While True
 
             Dim wait As Boolean = False
             For Each RegionUUID In RegionUuids()
                 Dim status = RegionStatus(RegionUUID)
 
-                ' if we are a shutdown type region, we must wait
+                If status = SIMSTATUSENUM.Stopped Then Continue For
+                If status = SIMSTATUSENUM.Booted Then Continue For
 
-                If status = SIMSTATUSENUM.Booting And
-                    Settings.Smart_Start_Enabled And
-                    Settings.BootOrSuspend And
-                    Smart_Suspend_Enabled(RegionUUID) Then
-                    PokeRegionTimer(RegionUUID)
-                    BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
-                    wait = True
-                    Exit For
-                    ' could be a regular region so we wait
-                ElseIf status = SIMSTATUSENUM.Booting And (Not Settings.Smart_Start_Enabled Or Not Smart_Suspend_Enabled(RegionUUID)) Then
-                    PokeRegionTimer(RegionUUID)
-                    BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
-                    wait = True
-                    Exit For
-                End If
+                BreakPoint.Print($"{Region_Name(RegionUUID)} is in state {GetStateString(status)}")
+
+                Select Case Settings.SequentialMode
+                    Case 1  ' parallel with limits
+                        '' SS Boot enabled
+                        If status = SIMSTATUSENUM.Booting And
+                        Settings.Smart_Start_Enabled And
+                        Settings.BootOrSuspend And
+                        Smart_Suspend_Enabled(RegionUUID) Then
+                            PokeRegionTimer(RegionUUID)
+                            BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                            wait = True
+                            Exit For
+
+                            'If a smart suspend we must wait too.
+                        ElseIf status = SIMSTATUSENUM.Booting And Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID) Then
+                            PokeRegionTimer(RegionUUID)
+                            BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                            wait = True
+                            Exit For
+                        Else
+                            If status = SIMSTATUSENUM.Booting Then
+                                PokeRegionTimer(RegionUUID)
+                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                                wait = True
+                                Exit For
+                            End If
+
+                        End If
+
+                    Case 2 '  for parallel with various limits based on smart/non-smart
+
+                        ' smart suspend mode is the only mode that can wait on just CPU
+                        If Settings.Smart_Start_Enabled And
+                            Not Settings.BootOrSuspend And
+                            Smart_Suspend_Enabled(RegionUUID) And
+                             FormSetup.CPUAverageSpeed > Settings.CpuMax Then
+
+                            PokeRegionTimer(RegionUUID)
+                            BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
+                            wait = True
+                        Else
+                            If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
+                                wait = True
+                            End If
+                        End If
+
+                End Select
             Next
-
-            If Settings.SequentialMode = 1 Then
-
-                ' smart mode can wait on just CPU, not RAM
-                If Not Settings.Smart_Start_Enabled Then
-                    If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
-                        wait = True
-                    End If
-                Else
-                    If (FormSetup.CPUAverageSpeed > Settings.CpuMax) Then
-                        wait = True
-                    Else
-                        wait = False
-                    End If
-                End If
-
-            End If
 
             If Not wait Then Exit While
             Application.DoEvents()
