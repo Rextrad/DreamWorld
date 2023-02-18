@@ -63,7 +63,7 @@ Module RPC
     Public Sub ReallyShutDown(RegionUUID As String, nextstate As SIMSTATUSENUM)
 
         Thaw(RegionUUID)
-        If Not RPC_Region_Command(RegionUUID, "quit") Then
+        If Not RPC_Region_Command(RegionUUID, "quit", 1000) Then
             nextstate = SIMSTATUSENUM.Stopped
         End If
 
@@ -77,14 +77,14 @@ Module RPC
 
     ''TODO logoff_user
 
-    Public Function RPC_admin_dialog(agentId As String, text As String) As Boolean
+    Public Function RPC_admin_dialog(agentId As String, text As String, Optional timeout As Integer = 1000) As Boolean
 
         Dim RegionUUID As String = GetRegionFromAgentId(agentId)
         Dim ht = New Hashtable From {
            {"password", Settings.MachineId},
            {"message", text}
         }
-        Return SendRPC(RegionUUID, "admin_dialog", ht)
+        Return SendRPC(RegionUUID, "admin_dialog", ht, timeout)
 
     End Function
 
@@ -131,14 +131,14 @@ Module RPC
 
     End Function
 
-    Public Function RPC_Region_Command(RegionUUID As String, Message As String) As Boolean
+    Public Function RPC_Region_Command(RegionUUID As String, Message As String, Optional timeout As Integer = 1000) As Boolean
 
         Dim ht = New Hashtable From {
            {"password", Settings.MachineId},
            {"command", Message}
         }
         Debug.Print($"admin_console_command {Message}")
-        Return SendRPC(RegionUUID, "admin_console_command", ht)
+        Return SendRPC(RegionUUID, "admin_console_command", ht, timeout)
 
     End Function
 
@@ -174,7 +174,7 @@ Module RPC
            {"message", Message}
         }
         Log("Info", "Message to " & Region_Name(RegionUUID) & " of " & Message)
-        Return SendRPC(RegionUUID, "admin_dialog", ht)
+        Return SendRPC(RegionUUID, "admin_dialog", ht, 1000)
 
     End Function
 
