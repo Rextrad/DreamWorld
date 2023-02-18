@@ -901,10 +901,11 @@ Public Class FormSetup
                 End If
             End If
             Application.DoEvents()
+            CalcCPU()
         Next
 
         Settings.SaveSettings()
-        CalcCPU()
+
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
         Bench.Print("StartOpensim")
@@ -1937,7 +1938,7 @@ Public Class FormSetup
 
     Private Sub SearchForOarsAtOutworldzToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchForOarsAtOutworldzToolStripMenuItem.Click
 
-        Dim webAddress As String = PropHttpsDomain & "/Outworldz_Installer/OAR"
+        Dim webAddress As String = PropHttpsDomain & "/cgi/freesculpts.plx?q=OAR-"
         Try
             Process.Start(webAddress)
         Catch ex As Exception
@@ -2580,7 +2581,7 @@ Public Class FormSetup
 
     Private Sub FindIARsOnOutworldzToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindIARsOnOutworldzToolStripMenuItem.Click
 
-        Dim webAddress As String = PropHttpsDomain & "/outworldz_installer/IAR"
+        Dim webAddress As String = PropHttpsDomain & "/cgi/freesculpts.plx?q=IAR-"
         Try
             Process.Start(webAddress)
         Catch ex As Exception
