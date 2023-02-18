@@ -105,6 +105,10 @@ Public Module MysqlInterface
 
         INI.SetIni("mysqld", "innodb_buffer_pool_size", $"{Settings.Total_InnoDB_GBytes()}G")
 
+        Dim Connections = 200 + 2 * RegionCount
+
+        INI.SetIni("mysqld", "max_connections", $"{CStr(Connections)}")
+
         If Settings.MysqlRunasaService Or RunningInServiceMode() Then
             INI.SetIni("mysqld", "innodb_doublewrite", "0")
             INI.SetIni("mysqld", "innodb_max_dirty_pages_pct", "75")
