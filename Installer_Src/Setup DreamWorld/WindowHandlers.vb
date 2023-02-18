@@ -377,7 +377,7 @@ Module WindowHandlers
             Try
 
                 myProcess.Refresh()
-                Thread.Sleep(100)
+                Thread.Sleep(10)
                 If myProcess.MainWindowTitle = windowName Then
                     isthere += 1
                     If isthere > 3 Then
@@ -393,7 +393,7 @@ Module WindowHandlers
             End Try
 
             WindowCounter += 1
-            If WindowCounter > 1200 Then '  2 minutes
+            If WindowCounter > 6000 Then '  1 minute
                 ErrorLog("SetWindowTextCall " & windowName & " timeout setting title")
                 Return
             End If
