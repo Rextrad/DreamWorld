@@ -429,7 +429,7 @@ Module WindowHandlers
                     HandleValid = ShowWindow(handle, command)
                     If HandleValid Then Return True
                 Catch ex As Exception
-                    BreakPoint.Dump(ex)
+                    BreakPoint.Print(ex.Message)
                 End Try
                 ctr -= 1
                 Sleep(100)
@@ -438,6 +438,8 @@ Module WindowHandlers
         Else
             Log("Warn", $"Cannot minimize or find {Group_Name(RegionUUID)}")
         End If
+
+
         Return False
 
     End Function
