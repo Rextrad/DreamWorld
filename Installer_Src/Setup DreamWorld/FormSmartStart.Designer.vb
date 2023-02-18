@@ -35,14 +35,15 @@ Partial Class FormSmartStart
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.SuspendButton = New System.Windows.Forms.RadioButton()
-        Me.ShutDownButton = New System.Windows.Forms.RadioButton()
-        Me.DelayRegionReady = New System.Windows.Forms.TextBox()
+        Me.DefaultBox = New System.Windows.Forms.GroupBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.DelayLabelRegionReady = New System.Windows.Forms.Label()
         Me.FillSizeLabel = New System.Windows.Forms.Label()
-        Me.ParkingRegion = New System.Windows.Forms.Label()
+        Me.DelayRegionReady = New System.Windows.Forms.TextBox()
+        Me.SuspendButton = New System.Windows.Forms.RadioButton()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.ShutDownButton = New System.Windows.Forms.RadioButton()
+        Me.DelayLabelRegionReady = New System.Windows.Forms.Label()
+        Me.ParkingRegion = New System.Windows.Forms.Label()
         Me.ParkingSpot = New System.Windows.Forms.ListBox()
         Me.MenuStrip4 = New System.Windows.Forms.MenuStrip()
         Me.HelpSmartStartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -160,10 +161,10 @@ Partial Class FormSmartStart
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.MenuStrip6 = New System.Windows.Forms.MenuStrip()
         Me.HelpPlantEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DefaultBox = New System.Windows.Forms.GroupBox()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.DefaultBox.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
@@ -185,7 +186,6 @@ Partial Class FormSmartStart
         Me.GroupBox3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip6.SuspendLayout()
-        Me.DefaultBox.SuspendLayout()
         Me.SuspendLayout()
         '
         'SmartStartEnabled
@@ -279,6 +279,53 @@ Partial Class FormSmartStart
         Me.TabPage1.Text = "Smart Boot"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'DefaultBox
+        '
+        Me.DefaultBox.Controls.Add(Me.SmartStartEnabled)
+        Me.DefaultBox.Controls.Add(Me.PictureBox4)
+        Me.DefaultBox.Controls.Add(Me.FillSizeLabel)
+        Me.DefaultBox.Controls.Add(Me.DelayRegionReady)
+        Me.DefaultBox.Controls.Add(Me.SuspendButton)
+        Me.DefaultBox.Controls.Add(Me.ListBox2)
+        Me.DefaultBox.Controls.Add(Me.ShutDownButton)
+        Me.DefaultBox.Controls.Add(Me.DelayLabelRegionReady)
+        Me.DefaultBox.Controls.Add(Me.Seconds)
+        Me.DefaultBox.Controls.Add(Me.DelayLabelShutDown)
+        Me.DefaultBox.Location = New System.Drawing.Point(29, 56)
+        Me.DefaultBox.Name = "DefaultBox"
+        Me.DefaultBox.Size = New System.Drawing.Size(273, 290)
+        Me.DefaultBox.TabIndex = 55
+        Me.DefaultBox.TabStop = False
+        Me.DefaultBox.Text = "Default"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox4.Image = Global.Outworldz.My.Resources.Resources._3x3
+        Me.PictureBox4.Location = New System.Drawing.Point(91, 191)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(102, 90)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 43
+        Me.PictureBox4.TabStop = False
+        '
+        'FillSizeLabel
+        '
+        Me.FillSizeLabel.AutoSize = True
+        Me.FillSizeLabel.Location = New System.Drawing.Point(14, 175)
+        Me.FillSizeLabel.Name = "FillSizeLabel"
+        Me.FillSizeLabel.Size = New System.Drawing.Size(42, 13)
+        Me.FillSizeLabel.TabIndex = 42
+        Me.FillSizeLabel.Text = "Fill Size"
+        '
+        'DelayRegionReady
+        '
+        Me.DelayRegionReady.Location = New System.Drawing.Point(17, 125)
+        Me.DelayRegionReady.Margin = New System.Windows.Forms.Padding(1)
+        Me.DelayRegionReady.Name = "DelayRegionReady"
+        Me.DelayRegionReady.Size = New System.Drawing.Size(40, 20)
+        Me.DelayRegionReady.TabIndex = 52
+        '
         'SuspendButton
         '
         Me.SuspendButton.AutoSize = True
@@ -289,6 +336,15 @@ Partial Class FormSmartStart
         Me.SuspendButton.TabStop = True
         Me.SuspendButton.Text = "Suspend (Freeze/Thaw)"
         Me.SuspendButton.UseVisualStyleBackColor = True
+        '
+        'ListBox2
+        '
+        Me.ListBox2.FormattingEnabled = True
+        Me.ListBox2.Items.AddRange(New Object() {"0", "1", "2", "3"})
+        Me.ListBox2.Location = New System.Drawing.Point(17, 191)
+        Me.ListBox2.Name = "ListBox2"
+        Me.ListBox2.Size = New System.Drawing.Size(56, 56)
+        Me.ListBox2.TabIndex = 39
         '
         'ShutDownButton
         '
@@ -301,25 +357,6 @@ Partial Class FormSmartStart
         Me.ShutDownButton.Text = "Shut Down/Boot Up"
         Me.ShutDownButton.UseVisualStyleBackColor = True
         '
-        'DelayRegionReady
-        '
-        Me.DelayRegionReady.Location = New System.Drawing.Point(17, 125)
-        Me.DelayRegionReady.Margin = New System.Windows.Forms.Padding(1)
-        Me.DelayRegionReady.Name = "DelayRegionReady"
-        Me.DelayRegionReady.Size = New System.Drawing.Size(40, 20)
-        Me.DelayRegionReady.TabIndex = 52
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox4.Image = Global.Outworldz.My.Resources.Resources._3x3
-        Me.PictureBox4.Location = New System.Drawing.Point(100, 175)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(102, 90)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox4.TabIndex = 43
-        Me.PictureBox4.TabStop = False
-        '
         'DelayLabelRegionReady
         '
         Me.DelayLabelRegionReady.AutoSize = True
@@ -329,15 +366,6 @@ Partial Class FormSmartStart
         Me.DelayLabelRegionReady.TabIndex = 51
         Me.DelayLabelRegionReady.Text = "Seconds Before Teleporting"
         '
-        'FillSizeLabel
-        '
-        Me.FillSizeLabel.AutoSize = True
-        Me.FillSizeLabel.Location = New System.Drawing.Point(14, 175)
-        Me.FillSizeLabel.Name = "FillSizeLabel"
-        Me.FillSizeLabel.Size = New System.Drawing.Size(42, 13)
-        Me.FillSizeLabel.TabIndex = 42
-        Me.FillSizeLabel.Text = "Fill Size"
-        '
         'ParkingRegion
         '
         Me.ParkingRegion.AutoSize = True
@@ -346,15 +374,6 @@ Partial Class FormSmartStart
         Me.ParkingRegion.Size = New System.Drawing.Size(80, 13)
         Me.ParkingRegion.TabIndex = 40
         Me.ParkingRegion.Text = "Parking Region"
-        '
-        'ListBox2
-        '
-        Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.Items.AddRange(New Object() {"0", "1", "2", "3"})
-        Me.ListBox2.Location = New System.Drawing.Point(17, 191)
-        Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(56, 56)
-        Me.ListBox2.TabIndex = 39
         '
         'ParkingSpot
         '
@@ -1593,25 +1612,6 @@ Partial Class FormSmartStart
         Me.HelpPlantEditorToolStripMenuItem.Size = New System.Drawing.Size(124, 20)
         Me.HelpPlantEditorToolStripMenuItem.Text = "Help Plant Editor"
         '
-        'DefaultBox
-        '
-        Me.DefaultBox.Controls.Add(Me.SmartStartEnabled)
-        Me.DefaultBox.Controls.Add(Me.PictureBox4)
-        Me.DefaultBox.Controls.Add(Me.FillSizeLabel)
-        Me.DefaultBox.Controls.Add(Me.DelayRegionReady)
-        Me.DefaultBox.Controls.Add(Me.SuspendButton)
-        Me.DefaultBox.Controls.Add(Me.ListBox2)
-        Me.DefaultBox.Controls.Add(Me.ShutDownButton)
-        Me.DefaultBox.Controls.Add(Me.DelayLabelRegionReady)
-        Me.DefaultBox.Controls.Add(Me.Seconds)
-        Me.DefaultBox.Controls.Add(Me.DelayLabelShutDown)
-        Me.DefaultBox.Location = New System.Drawing.Point(29, 56)
-        Me.DefaultBox.Name = "DefaultBox"
-        Me.DefaultBox.Size = New System.Drawing.Size(273, 290)
-        Me.DefaultBox.TabIndex = 55
-        Me.DefaultBox.TabStop = False
-        Me.DefaultBox.Text = "Default"
-        '
         'FormSmartStart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1628,6 +1628,8 @@ Partial Class FormSmartStart
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.DefaultBox.ResumeLayout(False)
+        Me.DefaultBox.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip4.ResumeLayout(False)
         Me.MenuStrip4.PerformLayout()
@@ -1662,8 +1664,6 @@ Partial Class FormSmartStart
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip6.ResumeLayout(False)
         Me.MenuStrip6.PerformLayout()
-        Me.DefaultBox.ResumeLayout(False)
-        Me.DefaultBox.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
