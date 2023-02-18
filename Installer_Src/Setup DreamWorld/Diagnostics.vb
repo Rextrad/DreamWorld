@@ -98,6 +98,10 @@ Module Diags
 
     Public Function OpenRouterPorts() As Boolean
 
+        If PropMyUPnpMap Is Nothing Then
+            Return False
+        End If
+
         If Not PropMyUPnpMap.UPnpEnabled And Settings.UPnPEnabled Then
             Settings.UPnPEnabled = False
             Settings.SaveSettings()

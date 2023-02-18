@@ -62,7 +62,6 @@ Module CPUCounter
         If PropOpensimIsRunning Then
 
             For Each RegionUUID In RegionUuids()
-                'Application.DoEvents()
 
                 Dim PID = ProcessID(RegionUUID)
                 If PID = 0 Then
@@ -127,7 +126,7 @@ Module CPUCounter
                 End Using
                 Application.DoEvents()
             Next
-        Catch
+        Catch ex As exception
         End Try
 
         Return Nothing
