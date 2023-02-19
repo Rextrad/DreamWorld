@@ -869,6 +869,7 @@ Module RegionMaker
         Public _Status As Integer
         Public _Timer As Date
         Public _UUID As String = ""
+        Public _BootTimer As Date    ' how long it takes to boot
 
 #End Region
 
@@ -1233,6 +1234,18 @@ Module RegionMaker
         Set(ByVal Value As Integer)
 
             RegionList(uuid)._SizeY = Value
+        End Set
+    End Property
+
+
+    Public Property BootTimer(uuid As String) As Date
+        Get
+            If RegionList.ContainsKey(uuid) Then Return RegionList(uuid)._BootTimer
+            BadUUID(uuid)
+            Return Date.Now
+        End Get
+        Set(ByVal Value As Date)
+            RegionList(uuid)._BootTimer = Value
         End Set
     End Property
 

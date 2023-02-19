@@ -98,7 +98,7 @@ Module SmartStart
                 GroupName = Group_Name(RegionUUID)
 
                 ' see how long it has been since we booted
-                Dim seconds = DateAndTime.DateDiff(DateInterval.Second, Timer(RegionUUID), DateTime.Now)
+                Dim seconds = DateAndTime.DateDiff(DateInterval.Second, BootTimer(RegionUUID), DateTime.Now)
                 If seconds < 0 Then seconds = 0
 
                 TextPrint($"{RegionName} {My.Resources.Boot_Time}:  {CStr(seconds)} {My.Resources.Seconds_word}")
@@ -882,6 +882,15 @@ Module SmartStart
             Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.OpensimBinPath() & "Regions\" & GroupName)
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
             Dim ok As Boolean = False
+
+            ' Mark them before we boot as a crash will immediately trigger the event that it exited
+            For Each UUID As String In RegionUuidListByName(GroupName)
+                RegionStatus(UUID) = SIMSTATUSENUM.Booting
+                Timer(RegionUUID) = Date.Now
+            Next
+            PokeRegionTimer(RegionUUID) ' auto pokes the group, too
+            BootTimer(RegionUUID) = Date.Now
+
             Try
                 ok = BootProcess.Start
             Catch ex As Exception
@@ -945,12 +954,6 @@ Module SmartStart
                     If Not PropInstanceHandles.ContainsKey(PID) Then
                         PropInstanceHandles.TryAdd(PID, GroupName)
                     End If
-
-                    ' Mark them before we boot as a crash will immediately trigger the event that it exited
-                    For Each UUID As String In RegionUuidListByName(GroupName)
-                        RegionStatus(UUID) = SIMSTATUSENUM.Booting
-                        PokeRegionTimer(RegionUUID)
-                    Next
 
                     AddCPU(PID, GroupName) ' get a list of running opensim processes
                     For Each UUID As String In RegionUuidListByName(GroupName)
