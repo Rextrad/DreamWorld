@@ -892,18 +892,18 @@ Public Class FormSetup
         For Each RegionUUID In RegionUuids()
 
             If RegionEnabled(RegionUUID) Then
-
                 Dim RegionName = Region_Name(RegionUUID)
                 If Settings.WelcomeRegion = RegionName Then Continue For
 
                 If PropOpensimIsRunning Then
                     Boot(RegionName)
+                    Application.DoEvents()
                 End If
             End If
             Application.DoEvents()
-            CalcCPU()
-        Next
 
+        Next
+        CalcCPU()
         Settings.SaveSettings()
 
         Buttons(StopButton)
