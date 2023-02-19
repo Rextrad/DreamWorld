@@ -1,10 +1,11 @@
 BareTail.udm
-OutworldzFiles/Opensim/.git
-OutworldzFiles/Freeswitch
-OutworldzFiles/AutoBackup
-OutworldzFiles/Apache/htdocs/Stats/Maps
-OutworldzFiles/Apache/htdocs/Wordpress/
-OutworldzFiles/Php7.old/
+/OutworldzFiles/Opensim/.git
+/OutworldzFiles/Freeswitch
+/OutworldzFiles/AutoBackup
+/OutworldzFiles/Apache/htdocs/Stats/Maps
+/OutworldzFiles/Apache/htdocs/Wordpress/
+/OutworldzFiles/Php7.old/
+/Licenses_to_Content/
 
 /DreamGridUpdater.exe
 .build
@@ -12,7 +13,7 @@ baretail.udm
 *.pid
 **/WifiPages-Custom
 fw.bat
-OutworldzFiles/Photo.png
+/OutworldzFiles/Photo.png
 UDProxy
 /OutworldzFiles/Opensim/WifiPages/
 /OutworldzFiles/Opensim/bin/WifiPages/
