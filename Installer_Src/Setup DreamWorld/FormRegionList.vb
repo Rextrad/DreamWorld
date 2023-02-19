@@ -271,6 +271,7 @@ Public Class FormRegionlist
         ElseIf chosen = "Console" Then
 
             ResumeRegion(RegionUUID)
+            PropUpdateView() = True
 
             Dim hwnd = GetHwnd(Group_Name(RegionUUID))
             If hwnd = IntPtr.Zero Then
@@ -736,9 +737,16 @@ Public Class FormRegionlist
 
             'Smart Start rules
         ElseIf Status = SIMSTATUSENUM.Suspended AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
-            Letter = My.Resources.Standby_word
+            Letter = My.Resources.Suspended_word
             Num = Dgicon.Icecube
+        ElseIf Status = SIMSTATUSENUM.Suspended AndAlso Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
+            Letter = My.Resources.Waiting
+            Num = Dgicon.Suspended
+
         ElseIf Status = SIMSTATUSENUM.Stopped AndAlso Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
+            Letter = My.Resources.Waiting
+            Num = Dgicon.SmartStartStopped
+        ElseIf Status = SIMSTATUSENUM.Stopped AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Letter = My.Resources.Shutdown_word
             Num = Dgicon.SmartStartStopped
 
@@ -1183,10 +1191,10 @@ Public Class FormRegionlist
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("package_error", Globalization.CultureInfo.InvariantCulture))  '  15- Error
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("gear_stop", Globalization.CultureInfo.InvariantCulture))  '  16 - NoLogon
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("redo", Globalization.CultureInfo.InvariantCulture))  '  17 - NOError
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", Globalization.CultureInfo.InvariantCulture))  '  17 - NoEstate
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icecastpic", Globalization.CultureInfo.InvariantCulture))  '  18 - icecube
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icemelted", Globalization.CultureInfo.InvariantCulture))  '  19 - icecube
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("hourglass", Globalization.CultureInfo.InvariantCulture))  '  209 - Busy - do not shutdown
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", Globalization.CultureInfo.InvariantCulture))  '  18 - NoEstate
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icecastpic", Globalization.CultureInfo.InvariantCulture))  '  19 - icecube
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icemelted", Globalization.CultureInfo.InvariantCulture))  '  20 - icecube
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("hourglass", Globalization.CultureInfo.InvariantCulture))  '  21 - Busy - do not shutdown
 
             If TheView1 = ViewType.Details Or TheView1 = ViewType.Icons Then
                 Timer1.Interval = 1000 ' check for Form1.PropUpdateView immediately
