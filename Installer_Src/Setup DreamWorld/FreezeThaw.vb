@@ -16,7 +16,7 @@
             NtSuspendProcess(CachedProcess(PID).Handle)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended
         ElseIf Smart_Boot_Enabled(RegionUUID) Then
-            ShutDown(RegionUUID, SIMSTATUSENUM.Suspended)
+            ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
         End If
 
     End Sub
