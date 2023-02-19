@@ -11,9 +11,11 @@ Module GlobalSettings
 
     Public Const _httpsDomain As String = "https://www.outworldz.com"
     Public Const _MyVersion As String = "5.33"
-    Public Const _SimVersion As String = "Opensim #1afe46d61126fa2 FIRE-32583"
+
+    Public Const _SimVersion As String = "Opensim #1e0207b4991 2023-02-19 03:32:19"
     Public Const FreeDiskSpaceWarn As Long = 100000000  ' 100 MB to freeze
     Public Const JOpensim As String = "JOpensim"
+
     Public Const jOpensimRev As String = "Joomla_3.9.23-Stable-Full_Package"
     Public Const jRev As String = "3.9.23"
     Public Const MetroServer As String = "Metro"

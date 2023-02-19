@@ -776,7 +776,6 @@ namespace OpenSim.Services.HypergridService
 
             if (m_gateKeeperAlias != null && m_gateKeeperAlias.Contains(reqGrid))
                 return true;
-
             return false;
         }
 
