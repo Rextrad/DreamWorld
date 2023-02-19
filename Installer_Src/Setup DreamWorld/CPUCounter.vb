@@ -70,6 +70,13 @@ Module CPUCounter
 
                 'Dim c As PerformanceCounter = Nothing
                 Dim RegionName = Region_Name(RegionUUID)
+
+                Dim Status = RegionStatus(RegionUUID)
+                If Status = SIMSTATUSENUM.Stopped Or Status = SIMSTATUSENUM.Suspended Then
+                    CPUValues.Item(RegionName) = 0
+                    Continue For
+                End If
+
                 If Not CounterList.ContainsKey(RegionName) Then
                     Try
                         Using counter As PerformanceCounter = GetPerfCounterForProcessId(PID)
@@ -126,7 +133,7 @@ Module CPUCounter
                 End Using
                 Application.DoEvents()
             Next
-        Catch ex As exception
+        Catch ex As Exception
         End Try
 
         Return Nothing
