@@ -62,8 +62,6 @@ Module CPUCounter
         If PropOpensimIsRunning Then
 
             For Each RegionUUID In RegionUuids()
-                'Application.DoEvents()
-
                 Dim PID = ProcessID(RegionUUID)
                 If PID = 0 Then
                     Continue For
@@ -71,6 +69,13 @@ Module CPUCounter
 
                 'Dim c As PerformanceCounter = Nothing
                 Dim RegionName = Region_Name(RegionUUID)
+
+                Dim Status = RegionStatus(RegionUUID)
+                If Status = SIMSTATUSENUM.Stopped Or Status = SIMSTATUSENUM.Suspended Then
+                    CPUValues.Item(RegionName) = 0
+                    Continue For
+                End If
+
                 If Not CounterList.ContainsKey(RegionName) Then
                     Try
                         Using counter As PerformanceCounter = GetPerfCounterForProcessId(PID)
