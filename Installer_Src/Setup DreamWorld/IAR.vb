@@ -58,7 +58,6 @@ Module IAR
             Return False
         End If
 
-        thing = thing.Replace("https:", "http:")
         Dim UUID As String = ""
         Try
             ' find one that is running
@@ -180,7 +179,7 @@ Module IAR
             Dim RegionName = Settings.WelcomeRegion
             If RegionName.Length = 0 Then Return
 
-            Using SaveIAR As New FormIARSaveAll
+            Using SaveIAR As New FormIarSaveAll
                 SaveIAR.ShowDialog()
 
                 Dim chosen = SaveIAR.DialogResult()

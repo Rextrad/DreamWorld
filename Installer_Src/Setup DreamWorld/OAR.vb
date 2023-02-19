@@ -139,7 +139,7 @@ Module OAR
 
     Public Sub LoadOARContent(thing As String)
 
-        thing = thing.Replace("https:", "http:")
+
         Dim RegionName = ChooseRegion(False)
         If RegionName.Length = 0 Then Return
 

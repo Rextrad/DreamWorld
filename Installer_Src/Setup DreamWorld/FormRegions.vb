@@ -540,9 +540,8 @@ Public Class FormRegions
 
                 If RegionEnabled(RegionUUID) Then
                     TextPrint($"{My.Resources.Start_word} {Region_Name}")
-                    Dim httpDomain = PropHttpsDomain
-                    httpDomain = httpDomain.Replace("https", "http")
-                    Dim File = $"{httpDomain}/Outworldz_Installer/OAR/{Region_Name}"
+
+                    Dim File = $"{PropHttpsDomain}/Outworldz_Installer/OAR/{Region_Name}"
 
                     License(File, RegionUUID)
 
