@@ -8,6 +8,7 @@ Ban List: add exclude by Disk ID, which is a hashed C drive ID. Also has a new s
 Bug: TOS would save correctly but the editor would always load the original Outworldz TOS. Made it harder to edit a second time.
 Bug: Redirect home page of Apache to /DreamGrid/Joomla/WordPress was not correct.
 Bug: Icecast did not start on new grid due to a missing log folder.
+Bug: Icon for SSL never changed state on Apache Screen.
 WordPress: Added WordPress for Opensim (WP4OS) config data. Profiles require adding Image Magic which is not working for me.
 New Feature: Added Smart Boot and Smart Suspend Overrides to each region.  You can choose the default and override it per region to stop or freeze any region.  
 Now allows Welcome region to be frozen/thawed.  
