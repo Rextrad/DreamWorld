@@ -36,9 +36,7 @@ Module Teleport
                             Dim fromName = Region_Name(FromRegionUUID)
                             If fromName Is Nothing Then Fin.Add(AgentID)
                             If fromName.Length > 0 Then
-                                If Settings.TeleportSleepTime = 0 And Not Settings.BootOrSuspend Then
-                                    'nothing
-                                ElseIf Settings.TeleportSleepTime > 0 And Settings.BootOrSuspend Then
+                                If Settings.TeleportSleepTime > 0 And Smart_Boot_Enabled(RegionToUUID) Then
                                     RPC_admin_dialog(AgentID, $"{ Region_Name(RegionToUUID)} will be ready in {CStr(Settings.TeleportSleepTime)} seconds.")
                                     Sleep(Settings.TeleportSleepTime * 1000)
                                 End If
