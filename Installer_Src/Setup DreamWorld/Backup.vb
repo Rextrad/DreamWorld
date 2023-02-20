@@ -22,23 +22,16 @@ Module Backup
             .RegionUUID = RegionUUID,
             .FolderAndFileName = FolderAndFileName
         }
+        SequentialPause()
+        Dim w = New WaitForOar With {
+            .Data = Oar
+        }
 
-        'if suspended, keep it alive
-        If Not Settings.BootOrSuspend Then
-
-            SequentialPause()
-
-            Dim w = New WaitForOar With {
-                .Data = Oar
-            }
-
-            Dim threadDelegate = New ThreadStart(AddressOf w.Dowork)
-            Dim newThread = New Thread(threadDelegate) With {
-                .Priority = ThreadPriority.BelowNormal
-            }
-            newThread.Start()
-
-        End If
+        Dim threadDelegate = New ThreadStart(AddressOf w.Dowork)
+        Dim newThread = New Thread(threadDelegate) With {
+            .Priority = ThreadPriority.BelowNormal
+        }
+        newThread.Start()
 
     End Sub
 
