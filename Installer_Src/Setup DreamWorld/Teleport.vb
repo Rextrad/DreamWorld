@@ -11,67 +11,91 @@ Module Teleport
 
     Public Fin As New List(Of String)
     Public TeleportAvatarDict As New ConcurrentDictionary(Of String, String)
-
-    ''' <summary>Check if region is ready for login</summary>
-    ''' <returns>true if up</returns>
+    Public TPQueue As TeleportAvatar = New TeleportAvatar
 
     Public Sub TeleportAgents()
 
-        While PropOpensimIsRunning
-            Try
-                For Each Keypair In TeleportAvatarDict
-                    Dim AgentID = Keypair.Key
-                    Dim RegionToUUID = Keypair.Value
-                    Dim status = RegionStatus(RegionToUUID)
-                    Dim Port As Integer = GroupPort(RegionToUUID)
+        'While PropOpensimIsRunning
+        Try
+            For Each Keypair In TeleportAvatarDict
+                Dim AgentID = Keypair.Key
+                Dim RegionToUUID = Keypair.Value
+                Dim status = RegionStatus(RegionToUUID)
+                Dim Port As Integer = GroupPort(RegionToUUID)
 
-                    If status = SIMSTATUSENUM.Stopped Then
-                        Fin.Add(AgentID) ' cancel this, the region went away
+                If status = SIMSTATUSENUM.Stopped Then
+                    Fin.Add(AgentID) ' cancel this, the region went away
 
-                    ElseIf status = SIMSTATUSENUM.Booted Then
-                        ShowDOSWindow(RegionToUUID, MaybeShowWindow())
-                        If CheckPort(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
-                            Dim DestinationName = Region_Name(RegionToUUID)
-                            Dim FromRegionUUID As String = GetRegionFromAgentId(AgentID)
-                            Dim fromName = Region_Name(FromRegionUUID)
-                            If fromName Is Nothing Then Fin.Add(AgentID)
-                            If fromName.Length > 0 Then
-                                If Settings.TeleportSleepTime > 0 And Smart_Boot_Enabled(RegionToUUID) Then
-                                    RPC_admin_dialog(AgentID, $"{ Region_Name(RegionToUUID)} will be ready in {CStr(Settings.TeleportSleepTime)} seconds.")
-                                    Sleep(Settings.TeleportSleepTime * 1000)
-                                End If
+                ElseIf status = SIMSTATUSENUM.Booted Then
+                    ShowDOSWindow(RegionToUUID, MaybeShowWindow())
+                    If CheckPort(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
+                        Dim DestinationName = Region_Name(RegionToUUID)
+                        Dim FromRegionUUID As String = GetRegionFromAgentId(AgentID)
+                        Dim fromName = Region_Name(FromRegionUUID)
+                        If fromName Is Nothing Then Fin.Add(AgentID)
+                        If fromName.Length > 0 Then
+                            If Settings.TeleportSleepTime > 0 And Smart_Boot_Enabled(RegionToUUID) Then
+                                RPC_admin_dialog(AgentID, $"{ Region_Name(RegionToUUID)} will be ready in {CStr(Settings.TeleportSleepTime)} seconds.")
+                                Sleep(Settings.TeleportSleepTime * 1000)
+                            End If
 
-                                If TeleportTo(FromRegionUUID, DestinationName, AgentID) Then
-                                    Logger("Teleport", $"{DestinationName} teleport command sent", "Teleport")
-                                    Fin.Add(AgentID)
-                                Else
-                                    Logger("Teleport", $"{DestinationName} failed to receive teleport", "Teleport")
-                                    BreakPoint.Print($"{DestinationName} failed to receive teleport")
-                                    RPC_admin_dialog(AgentID, $"Unable to locate region { Region_Name(RegionToUUID)}.")
-                                    Fin.Add(AgentID) ' cancel this, the agent is not anywhere  we can get to
-                                End If
+                            If TeleportTo(FromRegionUUID, DestinationName, AgentID) Then
+                                Logger("Teleport", $"{DestinationName} teleport command sent", "Teleport")
+                                Fin.Add(AgentID)
                             Else
+                                Logger("Teleport", $"{DestinationName} failed to receive teleport", "Teleport")
+                                BreakPoint.Print($"{DestinationName} failed to receive teleport")
+                                RPC_admin_dialog(AgentID, $"Unable to locate region { Region_Name(RegionToUUID)}.")
                                 Fin.Add(AgentID) ' cancel this, the agent is not anywhere  we can get to
                             End If
+                        Else
+                            Fin.Add(AgentID) ' cancel this, the agent is not anywhere  we can get to
                         End If
-                        ShowDOSWindow(RegionToUUID, MaybeHideWindow())
                     End If
-                Next
+                    ShowDOSWindow(RegionToUUID, MaybeHideWindow())
+                End If
+            Next
 
-                ' rem from the to list as they have moved on
-                For Each str As String In Fin
-                    Logger("Teleport Done", str, "Teleport")
-                    If TeleportAvatarDict.ContainsKey(str) Then
-                        TeleportAvatarDict.TryRemove(str, "")
-                    End If
-                Next
-            Catch
-            End Try
-            Fin.Clear()
+            ' rem from the to list as they have moved on
+            For Each str As String In Fin
+                Logger("Teleport Done", str, "Teleport")
+                If TeleportAvatarDict.ContainsKey(str) Then
+                    TeleportAvatarDict.TryRemove(str, "")
+                End If
+            Next
+        Catch
+        End Try
+        Fin.Clear()
 
-            Sleep(100)
+        'Sleep(100)
 
-        End While
+        'End While
+    End Sub
+
+    Public Sub testevent()
+
+        Dim c1 As New TeleportAvatar
+        ' Associate an event handler with an event.
+        AddHandler c1.AnEvent, AddressOf TeleportAgents
+        ' Call a method to raise the event.
+        TPQueue.Add("Fred", "B")
+        c1.TP()
+
     End Sub
 
 End Module
+
+Public Class TeleportAvatar
+
+    ' Declare an event.
+    Public Event AnEvent()
+
+    Sub Add(AgentID As String, Value As String)
+        TeleportAvatarDict.TryAdd(AgentID, Value)
+    End Sub
+
+    Public Sub TP()
+        RaiseEvent AnEvent()
+    End Sub
+
+End Class

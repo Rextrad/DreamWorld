@@ -557,13 +557,13 @@ Module SmartStart
         Logger("Teleport Request", Region_Name(RegionUUID) & ":" & AgentID, "Teleport")
 
         ResumeRegion(RegionUUID) ' Wait for it to start booting
-        Application.DoEvents()
 
         If Teleport Then
             If TeleportAvatarDict.ContainsKey(AgentID) Then
                 TeleportAvatarDict.TryRemove(AgentID, "")
             End If
-            TeleportAvatarDict(AgentID) = RegionUUID
+            TPQueue.Add(AgentID, RegionUUID)
+            TPQueue.TP()
         End If
 
         Return False
@@ -692,7 +692,8 @@ Module SmartStart
                     Return RegionUUID
                 End If
             End If
-            'Debug.Print("Teleport to " & Name)
+
+            Debug.Print("Teleport to " & Name)
 
             ' Smart Start below here
 
@@ -1011,6 +1012,8 @@ Module SmartStart
             Next
             PropUpdateView = True ' make form refresh
         End If
+
+        Application.DoEvents()
 
     End Sub
 

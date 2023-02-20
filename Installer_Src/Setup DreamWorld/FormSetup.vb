@@ -5,9 +5,9 @@
 #End Region
 
 Imports System.Globalization
-Imports System.Text.RegularExpressions
 Imports System.IO
 Imports System.Management
+Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports IWshRuntimeLibrary
 
@@ -264,8 +264,10 @@ Public Class FormSetup
 #Disable Warning CA2109
 
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
-#Enable Warning CA2109
+
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
+
+        AddHandler TPQueue.AnEvent, AddressOf TeleportAgents
 
         SetScreen()     ' move Form to fit screen from SetXY.ini
 
@@ -1010,10 +1012,10 @@ Public Class FormSetup
 
     Private Sub StartTeleporter()
 
-        Dim WebThread = New Thread(AddressOf TeleportAgents)
-        WebThread.SetApartmentState(ApartmentState.STA)
-        WebThread.Priority = ThreadPriority.BelowNormal
-        WebThread.Start()
+        ' Dim WebThread = New Thread(AddressOf TeleportAgents)
+        ' WebThread.SetApartmentState(ApartmentState.STA)
+        ' WebThread.Priority = ThreadPriority.BelowNormal
+        ' WebThread.Start()
 
     End Sub
 
@@ -2100,6 +2102,7 @@ Public Class FormSetup
 
         If Not RunningInServiceMode() Then
             CheckPost()                 ' see if anything arrived in the web server
+            TeleportAgents()
             CheckForBootedRegions()     ' task to scan for anything that just came on line
             ProcessQuit()               ' check if any processes exited
             PrintBackups()              ' print if backups are running
