@@ -177,7 +177,7 @@ Module SmartStart
 
                         If diff > Settings.SmartStartTimeout Then
                             BreakPoint.Print($"State Changed to ShuttingDown {GroupName} ")
-                            If Settings.BootOrSuspend Then
+                            If Smart_Boot_Enabled(RegionUUID) Then
                                 ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                             Else
                                 PauseRegion(RegionUUID)
@@ -440,8 +440,7 @@ Module SmartStart
                         '' SS Boot enabled
                         If status = SIMSTATUSENUM.Booting And
                         Settings.Smart_Start_Enabled And
-                        Settings.BootOrSuspend And
-                        Smart_Suspend_Enabled(RegionUUID) Then
+                         Smart_Boot_Enabled(RegionUUID) Then
                             PokeRegionTimer(RegionUUID)
                             BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                             wait = True
@@ -467,7 +466,6 @@ Module SmartStart
 
                         ' smart suspend mode is the only mode that can wait on just CPU
                         If Settings.Smart_Start_Enabled And
-                            Not Settings.BootOrSuspend And
                             Smart_Suspend_Enabled(RegionUUID) And
                              FormSetup.CPUAverageSpeed > Settings.CpuMax Then
 
@@ -698,7 +696,7 @@ Module SmartStart
 
             ' Smart Start below here
 
-            If Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
+            If Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
 
                 If RegionEnabled(RegionUUID) Then
 
@@ -717,7 +715,7 @@ Module SmartStart
                         End If
                     Else  ' requires booting
                         If TeleportType.ToUpperInvariant = "UUID" Then
-                            If Settings.BootOrSuspend Then
+                            If Smart_Boot_Enabled(RegionUUID) Then
                                 AddEm(RegionUUID, AgentID, True)
                                 Logger("Boot Type UUID Teleport", Name & ":" & AgentID, "Teleport")
                                 RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
@@ -730,7 +728,7 @@ Module SmartStart
                             End If
 
                         ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
-                            If Settings.BootOrSuspend Then
+                            If Smart_Boot_Enabled(RegionUUID) Then
                                 AddEm(RegionUUID, AgentID, True)
                                 Logger("Boot Type Named Teleport", Name & ":" & AgentID, "Teleport")
                                 RPC_admin_dialog(AgentID, $"Booting your region { Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
@@ -747,7 +745,7 @@ Module SmartStart
                             Else
                                 time = "|" & CStr(MapTime(RegionUUID) + Settings.TeleportSleepTime)
                             End If
-                            If Settings.BootOrSuspend Then
+                            If Smart_Boot_Enabled(RegionUUID) Then
                                 RPC_admin_dialog(AgentID, $"Booting your region { Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(time)} seconds.")
                                 Logger("Sign Boot, Agent ", Name & ":" & AgentID, "Teleport")
                                 Return Settings.ParkingLot
