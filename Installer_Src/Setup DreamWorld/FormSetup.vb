@@ -492,7 +492,8 @@ Public Class FormSetup
 
         CheckDefaultPorts()
 
-        Init(True)  ' read all region data
+        Dim failedload As Boolean
+        If Not Init(True) Then failedload = True ' read all region data
 
         AddVoices() ' add eva and mark voices
 
@@ -704,6 +705,11 @@ Public Class FormSetup
 
         Application.DoEvents() ' let any tasks run
 
+        If failedload Then
+            TextPrint($"*** FAILED to load ALL regions! ** ")
+            Return
+        End If
+
         ' Start as a Service?
 
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
@@ -867,7 +873,7 @@ Public Class FormSetup
 
         DoEstates() ' has to be done after MySQL starts up.
 
-        CheckOverLap()
+        If CheckOverLap() Then Return False
 
         If Settings.ServerType = RobustServerName Then
             StartRobust()

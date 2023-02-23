@@ -77,7 +77,10 @@ Module RegionMaker
 
         GetOpensimNamesFromFiles()
 
-        If GetAllRegions(Verbose) = 0 Then Return False
+        If GetAllRegions(Verbose) = 0 Then
+            TextPrint($"*** FAILED** Loaded {CStr(RegionCount)} Regions")
+            Return False
+        End If
 
         TextPrint($"Loaded {CStr(RegionCount)} Regions")
 
@@ -438,8 +441,8 @@ Module RegionMaker
         Dim Regions As New List(Of Region_Mapping)
 
         For Each RegionUUID In RegionUuids()
-
             Dim Name = Region_Name(RegionUUID)
+
             Dim Size As Integer = CInt(SizeX(RegionUUID) / 256)
 
             Dim X As Integer
@@ -453,7 +456,6 @@ Module RegionMaker
                         .Y = Coord_Y(RegionUUID) + Y
                     }
                     Regions.Add(map)
-                    ' If (Name.Contains("MartinBassManSlad")) Or (Name.Contains("Maya")) Then Breakpoint.Print($"{Name} {map.X} {map.Y}") End If
                 Next
             Next
         Next
@@ -519,7 +521,7 @@ Module RegionMaker
             Dim uuid As String = ""
             Dim folders() = Directory.GetDirectories(Settings.OpensimBinPath + "Regions")
             System.Array.Sort(folders)
-
+            Dim U As New Dictionary(Of String, String)
             For Each FolderName As String In folders
 
                 Dim ThisGroup As Integer = 0
@@ -556,6 +558,13 @@ Module RegionMaker
                                 newfile = newfile.Replace(".ini", ".bak")
                                 CopyFileFast(newfile, file)
                                 '  Auto repair this error from a backup
+                            End If
+
+                            If U.ContainsKey(uuid) Then
+                                TextPrint($"-> Region {fName} UUID is identical to {U.Item(uuid)} - Aborting")
+                                Return 0
+                            Else
+                                U.Add(uuid, fName)
                             End If
 
                             If Verbose Then TextPrint("-> " & fName)
@@ -847,6 +856,7 @@ Module RegionMaker
 
         Public _AvatarCount As Integer
         Public _BootTime As Integer
+        Public _BootTimer As Date
         Public _ClampPrimSize As Boolean
         Public _CoordX As Integer = 1000
         Public _CoordY As Integer = 1000
@@ -869,7 +879,7 @@ Module RegionMaker
         Public _Status As Integer
         Public _Timer As Date
         Public _UUID As String = ""
-        Public _BootTimer As Date    ' how long it takes to boot
+        ' how long it takes to boot
 
 #End Region
 
@@ -940,6 +950,17 @@ Module RegionMaker
             If Value < 0 Then Value = 0
             RegionList(uuid)._BootTime = Value
             Settings.SaveBootTime(Value, uuid)
+        End Set
+    End Property
+
+    Public Property BootTimer(uuid As String) As Date
+        Get
+            If RegionList.ContainsKey(uuid) Then Return RegionList(uuid)._BootTimer
+            BadUUID(uuid)
+            Return Date.Now
+        End Get
+        Set(ByVal Value As Date)
+            RegionList(uuid)._BootTimer = Value
         End Set
     End Property
 
@@ -1234,18 +1255,6 @@ Module RegionMaker
         Set(ByVal Value As Integer)
 
             RegionList(uuid)._SizeY = Value
-        End Set
-    End Property
-
-
-    Public Property BootTimer(uuid As String) As Date
-        Get
-            If RegionList.ContainsKey(uuid) Then Return RegionList(uuid)._BootTimer
-            BadUUID(uuid)
-            Return Date.Now
-        End Get
-        Set(ByVal Value As Date)
-            RegionList(uuid)._BootTimer = Value
         End Set
     End Property
 
