@@ -27,7 +27,7 @@
     ''' <param name="RegionUUID">RegionUUID</param>
     Public Sub PauseRegion(RegionUUID As String)
 
-        If Settings.Smart_Start_Enabled AndAlso Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled AndAlso Settings.BootOrSuspend = False Then
+        If Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Dim Groupname = Group_Name(RegionUUID)
             For Each UUID As String In RegionUuidListByName(Groupname)
                 BreakPoint.Print($"Pausing {Region_Name(UUID)}")

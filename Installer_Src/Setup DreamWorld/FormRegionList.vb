@@ -1031,6 +1031,9 @@ Public Class FormRegionlist
             ListView1.Columns.Add(My.Resources.Status_word, colsize.ColumnWidth("Column" & ctr & "_" & CStr(ViewType.Details), 120), HorizontalAlignment.Center)
             ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
             ctr += 1
+            ListView1.Columns.Add(My.Resources.Smart_Start_word, colsize.ColumnWidth("Column" & ctr & "_" & CStr(ViewType.Details), 90), HorizontalAlignment.Center)
+            ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
+            ctr += 1
             ListView1.Columns.Add(My.Resources.RAM_Word, colsize.ColumnWidth("Column" & ctr & "_" & CStr(ViewType.Details), 80), HorizontalAlignment.Center)
             ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
             ctr += 1
@@ -1078,9 +1081,6 @@ Public Class FormRegionlist
             ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
             ctr += 1
             ListView1.Columns.Add(My.Resources.Teleport_word, colsize.ColumnWidth("Column" & ctr, 65), HorizontalAlignment.Center)
-            ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
-            ctr += 1
-            ListView1.Columns.Add(My.Resources.Smart_Start_word, colsize.ColumnWidth("Column" & ctr & "_" & CStr(ViewType.Details), 80), HorizontalAlignment.Center)
             ListView1.Columns(ctr).Name = "Column" & ctr & "_" & CStr(ViewType.Details)
             ctr += 1
             ListView1.Columns.Add(My.Resources.Allow_Or_Disallow_Gods_word, colsize.ColumnWidth("Column" & ctr & "_" & CStr(ViewType.Details), 75), HorizontalAlignment.Center)
@@ -1183,7 +1183,7 @@ Public Class FormRegionlist
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("warning", Globalization.CultureInfo.InvariantCulture))  ' 7 Unknown
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("user2", Globalization.CultureInfo.InvariantCulture))  ' 8 - 1 User
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("users1", Globalization.CultureInfo.InvariantCulture))  ' 9 - 2 user
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("nav_plain_blue", Globalization.CultureInfo.InvariantCulture))  ' 10 - SmartStartStopped
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", Globalization.CultureInfo.InvariantCulture))  ' 10 - SmartStartStopped
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home", Globalization.CultureInfo.InvariantCulture))  '  11- home
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home_02", Globalization.CultureInfo.InvariantCulture))  '  12- home _offline
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("refresh", Globalization.CultureInfo.InvariantCulture))  '  13- Pending
@@ -1489,6 +1489,14 @@ Public Class FormRegionlist
                     item1.SubItems.Add(AvatarCount(RegionUUID).ToString(Globalization.CultureInfo.CurrentCulture))
 
                     item1.SubItems.Add(Letter)
+                    If Smart_Suspend_Enabled(RegionUUID) Then
+                        item1.SubItems.Add(My.Resources.Suspendable)
+                    ElseIf Smart_Boot_Enabled(RegionUUID) Then
+                        item1.SubItems.Add(My.Resources.Bootable)
+                    Else
+                        item1.SubItems.Add("-".ToUpperInvariant)
+                    End If
+
                     Dim fmtXY = "00000" ' 65536
                     Dim fmtRam = "0.0" ' 9999 MB
                     ' RAM
@@ -1514,6 +1522,7 @@ Public Class FormRegionlist
                         Dim Groupname As String = Group_Name(RegionUUID)
                         CPUValues.TryGetValue(Groupname, cpupercent)
                     End If
+
 
                     item1.SubItems.Add(CStr(cpupercent))
                     Dim c As Color = SystemColors.ControlText
@@ -1607,13 +1616,6 @@ Public Class FormRegionlist
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
 
-                    If Smart_Suspend_Enabled(RegionUUID) Then
-                        item1.SubItems.Add(My.Resources.Suspendable)
-                    ElseIf Smart_Boot_Enabled(RegionUUID) Then
-                        item1.SubItems.Add(My.Resources.Bootable)
-                    Else
-                        item1.SubItems.Add("-".ToUpperInvariant)
-                    End If
 
                     If AllowGods(RegionUUID).Length > 0 Then
                         item1.SubItems.Add(AllowGods(RegionUUID))

@@ -139,7 +139,6 @@ Module OAR
 
     Public Sub LoadOARContent(thing As String)
 
-
         Dim RegionName = ChooseRegion(False)
         If RegionName.Length = 0 Then Return
 
@@ -208,7 +207,7 @@ Module OAR
             If backMeUp = "Yes" Then
                 SendMessage(RegionUUID, Global.Outworldz.My.Resources.CPU_Intensive)
                 Dim R = New WaitForFile(RegionUUID, "Finished writing out OAR", "Save OAR")
-                ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}save oar ""{BackupPath()}/{Region_Name(RegionUUID)}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss}({CStr(SizeX(RegionUUID)/256)}X{CStr(SizeY(RegionUUID)/256)})""", Globalization.CultureInfo.InvariantCulture)}.oar")
+                ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}save oar ""{BackupPath()}/{Region_Name(RegionUUID)}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")}({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)}).oar""")
                 R.Scan()
                 SendMessage(RegionUUID, Global.Outworldz.My.Resources.New_Content)
             End If

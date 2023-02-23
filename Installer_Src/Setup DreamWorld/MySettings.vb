@@ -659,15 +659,6 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Property BootOrSuspend() As Boolean
-        Get
-            Return CType(GetMySetting("BootOrSuspend", "False"), Boolean)
-        End Get
-        Set
-            SetMySetting("BootOrSuspend", CStr(Value))
-        End Set
-    End Property
-
     Public Property BroadcastTideInfo() As Boolean
         Get
             Return CType(GetMySetting("BroadcastTideInfo", "True"), Boolean)

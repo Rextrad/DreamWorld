@@ -559,14 +559,6 @@ Public Class FormSmartStart
             Settings.TempRegion = False
         End If
 
-        If Settings.BootOrSuspend Then
-            SuspendButton.Checked = False
-            ShutDownButton.Checked = True
-        Else
-            SuspendButton.Checked = True
-            ShutDownButton.Checked = False
-        End If
-
         If AviName.Text.Length = 0 Then
             AviName.BackColor = Color.Red
         End If
@@ -653,8 +645,6 @@ Public Class FormSmartStart
             .AutoCompleteMode = AutoCompleteMode.Suggest
             .AutoCompleteSource = AutoCompleteSource.CustomSource
         End With
-
-        SuspendButton.Visible = True
 
         HelpOnce("SmartStart")
         _initialized = True
@@ -1029,16 +1019,6 @@ Public Class FormSmartStart
         TerrainPic.Image = My.Resources.flatland
     End Sub
 
-    Private Sub RadioButton1_CheckedChanged_1(sender As Object, e As EventArgs) Handles ShutDownButton.CheckedChanged
-
-        If Not _initialized Then Return
-        If Not ShutDownButton.Checked Then Return
-        DelayRegionReady.Text = My.Resources._20
-        Settings.BootOrSuspend = True
-        Settings.SaveSettings()
-
-    End Sub
-
     Private Sub RadioButton10_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton10.CheckedChanged
         LoadPlant(CStr(sender.AccessibleDescription))
     End Sub
@@ -1082,16 +1062,6 @@ Public Class FormSmartStart
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles Rand.CheckedChanged
         Settings.TerrainType = "Random"
         TerrainPic.Image = My.Resources.Random
-    End Sub
-
-    Private Sub RadioButton2_CheckedChanged_1(sender As Object, e As EventArgs) Handles SuspendButton.CheckedChanged
-
-        If Not _initialized Then Return
-        If Not SuspendButton.Checked Then Return
-        DelayRegionReady.Text = My.Resources._0
-        Settings.BootOrSuspend = False
-        Settings.SaveSettings()
-
     End Sub
 
     Private Sub RadioButton20_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton20.CheckedChanged
@@ -1322,10 +1292,6 @@ Public Class FormSmartStart
 
     Private Sub SmartStartEnabled_CheckedChanged(sender As Object, e As EventArgs) Handles SmartStartEnabled.CheckedChanged
         If Not _initialized Then Return
-
-        If SmartStartEnabled.Checked Then
-            If SuspendButton.Checked Then DelayRegionReady.Text = My.Resources._0
-        End If
 
         Settings.Smart_Start_Enabled = SmartStartEnabled.Checked
         TextPrint("Smart Start is " & CStr(SmartStartEnabled.Checked))
