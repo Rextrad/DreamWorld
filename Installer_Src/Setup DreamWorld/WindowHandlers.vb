@@ -72,7 +72,7 @@ Module WindowHandlers
                 If PID > 0 Then
                     Thaw(RegionUUID)
                 Else
-                    PID = GetPIDofWindow(Group_Name(RegionUUID))
+                    PID = GetPIDFromInstanceHandles(Group_Name(RegionUUID))
                     If PID = 0 Then
                         Return RPC_Region_Command(RegionUUID, command)
                     Else
@@ -183,27 +183,47 @@ Module WindowHandlers
 
         For Each Folder In directory.GetDirectories()
             Dim GroupName = Folder.Name
-            Dim PIDfile = IO.Path.Combine(Folder.FullName, "PID.pid")
-            Try
-                If System.IO.File.Exists(PIDfile) Then
-                    Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
-                        While Not Reader.EndOfStream
-                            Dim line As String = Reader.ReadLine
-                            Dim PID As Integer
-                            If Int32.TryParse(line, PID) Then
-                                PropInstanceHandles.TryAdd(PID, GroupName)
-                            Else
-                                Debug.Print("No PID on disk")
-                            End If
-                        End While
-                    End Using
-                End If
-            Catch ex As Exception
-                Debug.Print(ex.Message)
-            End Try
+            GetPIDFromFile(GroupName)
         Next
 
     End Sub
+
+    Public Sub GetPIDFromFile(GroupName As String)
+
+        Dim P = IO.Path.Combine(Settings.CurrentDirectory, "Outworldzfiles\Opensim\bin\Regions\{$Groupname}")
+        Dim PIDfile = IO.Path.Combine(P, "PID.pid")
+        Try
+            If System.IO.File.Exists(PIDfile) Then
+                Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
+                    While Not Reader.EndOfStream
+                        Dim line As String = Reader.ReadLine
+                        Dim PID As Integer
+                        If Int32.TryParse(line, PID) Then
+                            PropInstanceHandles.TryAdd(PID, GroupName)
+                        Else
+                            Debug.Print("No PID on disk")
+                        End If
+                    End While
+                End Using
+            End If
+        Catch ex As Exception
+            Debug.Print(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Function GetPIDFromInstanceHandles(GroupName As String) As Integer
+        Try
+            For Each pList In PropInstanceHandles
+                If pList.Value = GroupName Then
+                    Return pList.Key
+                End If
+            Next
+        Catch
+        End Try
+        Return 0
+
+    End Function
 
     ''' <summary>
     ''' Returns a handle to the window, by process list, or by reading the PID file.
@@ -220,19 +240,6 @@ Module WindowHandlers
             Catch
             End Try
         Next
-        Return 0
-
-    End Function
-
-    Public Function GetPIDofWindow(GroupName As String) As Integer
-        Try
-            For Each pList In PropInstanceHandles
-                If pList.Value = GroupName Then
-                    Return pList.Key
-                End If
-            Next
-        Catch
-        End Try
         Return 0
 
     End Function
@@ -438,7 +445,6 @@ Module WindowHandlers
         Else
             Log("Warn", $"Cannot minimize or find {Group_Name(RegionUUID)}")
         End If
-
 
         Return False
 
