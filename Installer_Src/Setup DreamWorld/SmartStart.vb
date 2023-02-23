@@ -448,7 +448,10 @@ Module SmartStart
                             Exit For
 
                             'If a smart suspend we must wait too.
-                        ElseIf status = SIMSTATUSENUM.Booting And Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID) Then
+                        ElseIf status = SIMSTATUSENUM.Booting And
+                            Settings.Smart_Start_Enabled And
+                            Smart_Suspend_Enabled(RegionUUID) Then
+
                             PokeRegionTimer(RegionUUID)
                             BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                             wait = True

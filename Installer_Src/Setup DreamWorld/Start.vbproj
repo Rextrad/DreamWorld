@@ -354,6 +354,12 @@
     <Compile Include="FormBlockify.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBulkLoad.Designer.vb">
+      <DependentUpon>FormBulkLoad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBulkLoad.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormDebug.Designer.vb">
       <DependentUpon>FormDebug.vb</DependentUpon>
     </Compile>
@@ -765,6 +771,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormBlockify.resx">
       <DependentUpon>FormBlockify.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBulkLoad.resx">
+      <DependentUpon>FormBulkLoad.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDebug.resx">
       <DependentUpon>FormDebug.vb</DependentUpon>
