@@ -75,7 +75,7 @@ Module RegionMaker
             Settings.SaveSettings()
         End If
 
-        GetOpensimNamesFromFiles()
+        GetOpensimPIDsFromFiles()
 
         If GetAllRegions(Verbose) = 0 Then
             TextPrint($"*** FAILED** Loaded {CStr(RegionCount)} Regions")

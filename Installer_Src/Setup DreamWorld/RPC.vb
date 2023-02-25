@@ -53,7 +53,7 @@ Module RPC
         Dim parameters = New List(Of Hashtable) From {ht}
         Try
             Dim RPC = New XmlRpcRequest(cmd, parameters)
-            Return RPC.Send(url, 2000).Value
+            Return RPC.Send(url).Value
         Catch ex As Exception
         End Try
         Return Nothing
@@ -63,7 +63,7 @@ Module RPC
     Public Sub ReallyShutDown(RegionUUID As String, nextstate As SIMSTATUSENUM)
 
         Thaw(RegionUUID)
-        If Not RPC_Region_Command(RegionUUID, "quit", 1000) Then
+        If Not RPC_Region_Command(RegionUUID, "quit") Then
             nextstate = SIMSTATUSENUM.Stopped
         End If
 
@@ -77,14 +77,14 @@ Module RPC
 
     ''TODO logoff_user
 
-    Public Function RPC_admin_dialog(agentId As String, text As String, Optional timeout As Integer = 1000) As Boolean
+    Public Function RPC_admin_dialog(agentId As String, text As String, Optional Timeout As Integer = 2000) As Boolean
 
         Dim RegionUUID As String = GetRegionFromAgentId(agentId)
         Dim ht = New Hashtable From {
            {"password", Settings.MachineId},
            {"message", text}
         }
-        Return SendRPC(RegionUUID, "admin_dialog", ht, timeout)
+        Return SendRPC(RegionUUID, "admin_dialog", ht, Timeout)
 
     End Function
 
@@ -131,18 +131,18 @@ Module RPC
 
     End Function
 
-    Public Function RPC_Region_Command(RegionUUID As String, Message As String, Optional timeout As Integer = 1000) As Boolean
+    Public Function RPC_Region_Command(RegionUUID As String, Message As String, Optional Timeout As Integer = 2000) As Boolean
 
         Dim ht = New Hashtable From {
            {"password", Settings.MachineId},
            {"command", Message}
         }
         Debug.Print($"admin_console_command {Message}")
-        Return SendRPC(RegionUUID, "admin_console_command", ht, timeout)
+        Return SendRPC(RegionUUID, "admin_console_command", ht, Timeout)
 
     End Function
 
-    Public Function RPC_Save_OAR(RegionUUID As String, Filename As String, Region_Name As String, Optional timeout As Integer = 2000) As Boolean
+    Public Function RPC_Save_OAR(RegionUUID As String, Filename As String, Region_Name As String, timeout As Integer) As Boolean
 
         If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
             Return False
@@ -174,7 +174,7 @@ Module RPC
            {"message", Message}
         }
         Log("Info", "Message to " & Region_Name(RegionUUID) & " of " & Message)
-        Return SendRPC(RegionUUID, "admin_dialog", ht, 1000)
+        Return SendRPC(RegionUUID, "admin_dialog", ht)
 
     End Function
 
@@ -228,7 +228,7 @@ Module RPC
 
     End Function
 
-    Private Function SendRPC(RegionUUID As String, cmd As String, ht As Hashtable, Optional Timeout As Integer = 1000) As Boolean
+    Private Function SendRPC(RegionUUID As String, cmd As String, ht As Hashtable, Optional Timeout As Integer = 2000) As Boolean
 
         If RegionUUID.Length = 0 Then Return False
 

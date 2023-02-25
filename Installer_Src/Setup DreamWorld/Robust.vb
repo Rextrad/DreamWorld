@@ -229,7 +229,7 @@ Module Robust
             End If
             Sleep(1000) ' in ms
         End While
-        Sleep(2000)
+        Sleep(1000)
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Robust_running)
         ShowDOSWindow(RobustName(), MaybeHideWindow())
         RobustIcon(True)

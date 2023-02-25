@@ -176,7 +176,7 @@ Module WindowHandlers
 
     End Function
 
-    Public Sub GetOpensimNamesFromFiles()
+    Public Sub GetOpensimPIDsFromFiles()
 
         Dim P = IO.Path.Combine(Settings.CurrentDirectory, "Outworldzfiles\Opensim\bin\Regions")
         Dim directory As New System.IO.DirectoryInfo(P)

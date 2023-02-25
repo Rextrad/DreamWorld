@@ -823,19 +823,17 @@ Public Class FormSetup
 
             Sleep(1000)
         End While
-        PropUpdateView = True ' make form refresh
 
+        PropOpensimIsRunning() = False
+        PropUpdateView = True ' make form refresh
+        TimerMain.Stop()
         ClearAllRegions()
         StopRobust()
         Zap("baretail")
         Zap("cports")
 
-        TimerMain.Stop()
-
         ProcessIdDict.Clear()
-
         PropInstanceHandles.Clear()
-        PropOpensimIsRunning() = False
 
         Settings.SaveSettings()
 
@@ -847,12 +845,8 @@ Public Class FormSetup
 
         Bench.Start("StartOpensim")
 
-        GetOpensimNamesFromFiles()
-
+        GetOpensimPIDsFromFiles()
         StartTimer()
-        StartTeleporter()
-
-        PropOpensimIsRunning = True
 
         If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
@@ -1013,15 +1007,6 @@ Public Class FormSetup
             System.Diagnostics.Process.Start(e.LinkText)
         Catch
         End Try
-
-    End Sub
-
-    Private Sub StartTeleporter()
-
-        ' Dim WebThread = New Thread(AddressOf TeleportAgents)
-        ' WebThread.SetApartmentState(ApartmentState.STA)
-        ' WebThread.Priority = ThreadPriority.BelowNormal
-        ' WebThread.Start()
 
     End Sub
 
@@ -1301,9 +1286,7 @@ Public Class FormSetup
             If Not RunningInServiceMode() Then
                 MsgBox(My.Resources.Default_Welcome, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Question, My.Resources.Information_word)
                 TextPrint(My.Resources.Stopped_word)
-
                 Dim FormRegions = New FormRegions
-
                 FormRegions.Activate()
                 FormRegions.Select()
                 FormRegions.Visible = True
@@ -3321,7 +3304,7 @@ Public Class FormSetup
 
         PropAborting = True
         StopIcecast()
-        Sleep(2000)
+        Sleep(1000)
         PropAborting = False
 
     End Sub
