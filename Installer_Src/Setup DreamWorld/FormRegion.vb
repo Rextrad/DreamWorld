@@ -337,7 +337,7 @@ Public Class FormRegion
             Core11Button.Checked = CBool(Cores(RegionUUID) And &H400)
             Core12Button.Checked = CBool(Cores(RegionUUID) And &H800)
             Core13Button.Checked = CBool(Cores(RegionUUID) And &H1000)
-            Core14Button.Checked = CBool(Cores(RegionUUID) And &H2000)
+            Core14Button.Checked = CBool(Cores(RegionUUID) And &H1000)
             Core15Button.Checked = CBool(Cores(RegionUUID) And &H4000)
             Core16Button.Checked = CBool(Cores(RegionUUID) And &H8000)
 

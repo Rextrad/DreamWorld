@@ -420,7 +420,7 @@ Public Class FormBulkLoad
             BulkLoadButton.Text = My.Resources.Aborted_word
             StopLoading = "StopRequested"
             TextPrint(My.Resources.Aborting)
-            Sleep(2000)
+            Sleep(1000)
             BulkLoadButton.Text = My.Resources.BulkLoad
             Me.Close()
         End If
@@ -430,7 +430,7 @@ Public Class FormBulkLoad
         If CoordinateX <= 1 Or CoordinateY < 32 Then
             MsgBox($"{My.Resources.BadCoordinates} : X >= 1 And Y > 32", MsgBoxStyle.Exclamation Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
             TextPrint(My.Resources.Aborting)
-            Sleep(2000)
+            Sleep(1000)
             BulkLoadButton.Text = My.Resources.BulkLoad
             Return
         End If
@@ -439,7 +439,7 @@ Public Class FormBulkLoad
 
         If BulkLoadButton.Text = My.Resources.Aborting Then
             TextPrint(My.Resources.Aborted_word)
-            Sleep(2000)
+            Sleep(1000)
             Me.Close()
         End If
 

@@ -22,7 +22,7 @@ Module Build
         Dim regionUUID = R.RegionUUID.ToString
         Dim Name = R.RegionName.ToString
 
-        If Not RPC_Region_Command(regionUUID, $"change region {Name}") Then Return False
+        If Not RPC_Region_Command(regionUUID, $"change region ""{Name}""") Then Return False
         If Settings.TerrainType = "Flat" Then
             If Not RPC_Region_Command(regionUUID, $"terrain fill {Settings.FlatlandLevel}") Then Return False
         ElseIf Settings.TerrainType = "Water" Then

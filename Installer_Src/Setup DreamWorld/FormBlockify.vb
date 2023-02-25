@@ -158,7 +158,7 @@ Public Class FormBlockify
         DeregisterRegions(False)
         TextPrint(My.Resources.Finished_word)
         GoButton.Text = My.Resources.Finished_word
-        Sleep(2000)
+        Sleep(1000)
         Me.Close()
 
     End Sub

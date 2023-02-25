@@ -171,8 +171,8 @@ Module Backup
         Const change = "change region"
         Const save = "save oar"
         Dim Result = New WaitForFile(RegionUUID, fin, "Save OAR")
-        RPC_Region_Command(RegionUUID, $"{change} {Region_Name(RegionUUID)}"" ")
-        RPC_Region_Command(RegionUUID, $"{save} ""{file}"" ")
+        RPC_Region_Command(RegionUUID, $"{change} ""{Region_Name(RegionUUID)}""")
+        RPC_Region_Command(RegionUUID, $"{save} ""{file}""")
     End Sub
 
 #End Region

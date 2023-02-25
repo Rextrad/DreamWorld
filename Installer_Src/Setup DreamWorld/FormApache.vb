@@ -114,7 +114,6 @@ Public Class FormApache
             SSLButton.Image = My.Resources.lock_open
         End If
 
-
         HelpOnce("Apache")
         initted = True
 
@@ -160,7 +159,6 @@ Public Class FormApache
     End Sub
 
     Private Sub ApachePort_TextChanged(sender As Object, e As EventArgs) Handles ApachePort.TextChanged
-
 
         If Not initted Then Return
 
