@@ -267,7 +267,7 @@ Public Class FormSetup
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
-        AddHandler TPQueue.AnEvent, AddressOf TeleportAgents
+        AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
 
         SetScreen()     ' move Form to fit screen from SetXY.ini
 
