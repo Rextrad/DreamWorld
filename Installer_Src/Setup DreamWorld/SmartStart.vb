@@ -442,8 +442,12 @@ Module SmartStart
                         Settings.Smart_Start_Enabled And
                          Smart_Boot_Enabled(RegionUUID) Then
                             PokeRegionTimer(RegionUUID)
-                            BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
-                            wait = True
+
+                            If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
+                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                                wait = True
+                            End If
+
                             Exit For
 
                             'If a smart suspend we must wait too.
@@ -451,19 +455,26 @@ Module SmartStart
                             Settings.Smart_Start_Enabled And
                             Smart_Suspend_Enabled(RegionUUID) Then
 
-                            PokeRegionTimer(RegionUUID)
-                            BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
-                            wait = True
-                            Exit For
-                        Else
-                            If status = SIMSTATUSENUM.Booting Then
                                 PokeRegionTimer(RegionUUID)
-                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+
+                            If (FormSetup.CPUAverageSpeed > Settings.CpuMax) Then
+                                BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
                                 wait = True
-                                Exit For
                             End If
 
-                        End If
+                            Exit For
+                            Else
+                                If status = SIMSTATUSENUM.Booting Then
+                                PokeRegionTimer(RegionUUID)
+                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                                If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
+                                    wait = True
+                                End If
+
+                                Exit For
+                                End If
+
+                            End If
 
                     Case 2 '  for parallel with various limits based on smart/non-smart
 
