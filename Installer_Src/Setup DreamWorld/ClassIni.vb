@@ -22,6 +22,10 @@ Public Class LoadIni
     Public Sub New(File As String, arg As String, encoding As System.Text.Encoding)
 
         If File Is Nothing Then Return
+        If Not IO.File.Exists(File) Then
+            ErrorLog($"Missing file {File}")
+            Return
+        End If
         FileName = File
         If arg Is Nothing Then Return
         If FileName.Length = 0 Then Return
@@ -34,7 +38,7 @@ Public Class LoadIni
         _parser.Parser.Configuration.SkipInvalidLines = False
         _parser.Parser.Configuration.AssigmentSpacer = ""
         _parser.Parser.Configuration.CommentString = Sep ' Opensim uses semicolons
-        _SettingsData = ReadINIFile()
+        _SettingsData = ReadINIFile(File)
         If _SettingsData Is Nothing Then
             Logger("$Error", $"No Data in {FileName}", "Outworldz")
         End If
@@ -198,7 +202,7 @@ Public Class LoadIni
 
     End Sub
 
-    Private Function ReadINIFile() As IniData
+    Private Function ReadINIFile(FileName As String) As IniData
         '{"Unknown file format. Couldn't parse the line: ''''. while parsing line number 0 with value '' - IniParser version: 2.5.2.0 while parsing line number 751 with value '''' - IniParser version: 2.5.2.0"}
         Dim waiting As Integer = 10 ' 1 sec
         While waiting > 0

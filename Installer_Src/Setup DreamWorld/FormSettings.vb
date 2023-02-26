@@ -30,7 +30,7 @@ Public Class FormSettings
     Dim FormServerType As New FormServerType
     Dim FormSpeech As New FormSpeech
     Dim FsAssets As New FormFSAssets
-    Dim Gloebits As New FormGloebits
+    Dim Gloebits As New FormCurrency
     Dim Icecast As New FormIcecast
     Dim Lang As New Language
     Dim Logging As New FormLogging
@@ -249,7 +249,7 @@ Public Class FormSettings
 
         Gloebits.Close()
         Gloebits.Dispose()
-        Gloebits = New FormGloebits
+        Gloebits = New FormCurrency
         Gloebits.Activate()
         Gloebits.Visible = True
         Gloebits.Select()

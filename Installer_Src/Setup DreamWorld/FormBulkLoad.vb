@@ -315,7 +315,7 @@ Public Class FormBulkLoad
             Catch
             End Try
             If AvatarUUID.Length > 0 Then
-                RegionOwnerTextBox.BackColor = Color.White
+                RegionOwnerTextBox.BackColor = Color.FromName("Window")
             End If
         End If
 

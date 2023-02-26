@@ -2137,13 +2137,17 @@ Module RegionMaker
             End If
 
             If Settings.GloebitsEnable Then
-                If INI.SetIni("Startup", "economymodule", "Gloebit") Then Return True
+                If INI.SetIni("Economy", "EconomyModule", "Gloebit") Then Return True
                 If INI.SetIni("Economy", "CurrencyURL", "") Then Return True
-            ElseIf Settings.CMS = JOpensim Then
-                If INI.SetIni("Startup", "economymodule", "jOpenSimMoneyModule") Then Return True
+            ElseIf Settings.JopensimMoney Then
+                ' TODO !!!  Jopensim money
+                If INI.SetIni("Economy", "EconomyModule", "") Then Return True
                 If INI.SetIni("Economy", "CurrencyURL", "{$Const|BaseURL}:${Const|ApachePort}/jOpensim/index.php?option=com_opensim&view=interface") Then Return True
+            ElseIf Settings.DTLEnable Then
+                If INI.SetIni("Economy", "EconomyModule", "DTLNSLMoneyModule") Then Return True
+                If INI.SetIni("Economy", "CurrencyURL", "{$Const|BaseURL}:${Const|ApachePort}/DTLCurrency/landtool.php") Then Return True
             Else
-                If INI.SetIni("Startup", "economymodule", "BetaGridLikeMoneyModule") Then Return True
+                If INI.SetIni("Economy", "EconomyModule", "BetaGridLikeMoneyModule") Then Return True
                 ' Any old URL will do for any amount of money
                 If INI.SetIni("Economy", "CurrencyURL", $"{Settings.PublicIP}:{Settings.DiagnosticPort}") Then Return True
             End If

@@ -714,13 +714,13 @@ Module SmartStart
                     If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
                         Logger("SmartStart", $"{Name} is Booted ", "Teleport")
                         If TeleportType.ToUpperInvariant = "UUID" Then
-                            Logger("SmartStart",$"Already Booted UUID Teleport {Name}:{AgentID}", "Teleport")
+                            Logger("SmartStart", $"Already Booted UUID Teleport {Name}:{AgentID}", "Teleport")
                             Return RegionUUID
                         ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
                             Logger("SmartStart", $"Already Booted Named Teleport {Name}:{AgentID}", "Teleport")
                             Return Name
                         Else ' Its a sign!
-                            Logger("SmartStart",$"Already Booted TP Sign Teleport {Name}:{AgentID}", "Teleport")
+                            Logger("SmartStart", $"Already Booted TP Sign Teleport {Name}:{AgentID}", "Teleport")
                             Return Name & "|0"
                         End If
                     Else  ' requires booting
@@ -742,7 +742,7 @@ Module SmartStart
                         ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
                             If Smart_Boot_Enabled(RegionUUID) Then
                                 AddEm(RegionUUID, AgentID, True)
-                                Logger("SmartStart", $"Boot Type Named Teleport {{Name}:{AgentID}", "Teleport")
+                                Logger("SmartStart", $"Boot Type Named Teleport {Name}:{AgentID}", "Teleport")
                                 RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
                                 Return Settings.ParkingLot
                             Else

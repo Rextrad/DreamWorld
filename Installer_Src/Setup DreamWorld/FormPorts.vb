@@ -53,12 +53,14 @@ Public Class FormPorts
     Private Sub IsClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Closed
 
         If isChanged Then
-            SetServerType()
-
-            For Each RegionUUID In RegionUuids()
-                WriteRegionObject(Group_Name(RegionUUID), Region_Name(RegionUUID))
-            Next
-            Settings.SaveSettings()
+            Dim v = MsgBox(My.Resources.Save_changes_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Save_changes_word)
+            If v = vbYes Then
+                SetServerType()
+                For Each RegionUUID In RegionUuids()
+                    WriteRegionObject(Group_Name(RegionUUID), Region_Name(RegionUUID))
+                Next
+                Settings.SaveSettings()
+            End If
         End If
 
     End Sub
@@ -99,9 +101,9 @@ Public Class FormPorts
         DiagnosticPort.Text = CStr(Settings.DiagnosticPort)
         PrivatePort.Text = CStr(Settings.PrivatePort)
         HTTPPort.Text = CStr(Settings.HttpPort)
+        MoneyTextBox.Text = CStr(Settings.DTLMoneyPort)
 
         ' only used for region servers that are not behind a NAT
-
         OverrideName.Text = Settings.OverrideName
         If Settings.ServerType <> RobustServerName Then
             OverrideName.Enabled = True
@@ -180,6 +182,19 @@ Public Class FormPorts
         If Not initted Then Return
         Settings.InternalAddress = intIP.Text
         isChanged = True
+
+    End Sub
+
+    Private Sub MoneyTextBox_TextChanged(sender As Object, e As EventArgs) Handles MoneyTextBox.TextChanged
+
+        If Not initted Then Return
+
+        Dim digitsOnly = New Regex("[^\d]")
+        MoneyTextBox.Text = digitsOnly.Replace(MoneyTextBox.Text, "")
+
+        Settings.DTLMoneyPort = CInt("0" & MoneyTextBox.Text)
+        isChanged = True
+        CheckDefaultPorts()
 
     End Sub
 

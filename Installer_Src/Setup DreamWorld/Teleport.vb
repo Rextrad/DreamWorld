@@ -72,30 +72,19 @@ Module Teleport
         'End While
     End Sub
 
-    Public Sub testevent()
-
-        Dim c1 As New TeleportAvatar
-        ' Associate an event handler with an event.
-        AddHandler c1.AnEvent, AddressOf TeleportAgents
-        ' Call a method to raise the event.
-        TPQueue.Add("Fred", "B")
-        c1.TP()
-
-    End Sub
-
 End Module
 
 Public Class TeleportAvatar
 
     ' Declare an event.
-    Public Event AnEvent()
+    Public Event TeleportEvent()
 
     Sub Add(AgentID As String, Value As String)
         TeleportAvatarDict.TryAdd(AgentID, Value)
     End Sub
 
     Public Sub TP()
-        RaiseEvent AnEvent()
+        RaiseEvent TeleportEvent()
     End Sub
 
 End Class

@@ -44,6 +44,8 @@ Partial Class FormPorts
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem30 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.MoneyTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBoxA.SuspendLayout()
         CType(Me.Upnp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
@@ -51,6 +53,8 @@ Partial Class FormPorts
         '
         'GroupBoxA
         '
+        Me.GroupBoxA.Controls.Add(Me.Label2)
+        Me.GroupBoxA.Controls.Add(Me.MoneyTextBox)
         Me.GroupBoxA.Controls.Add(Me.Label1)
         Me.GroupBoxA.Controls.Add(Me.intIP)
         Me.GroupBoxA.Controls.Add(Me.FirstRegionPort)
@@ -68,7 +72,7 @@ Partial Class FormPorts
         Me.GroupBoxA.Controls.Add(Me.Label4)
         Me.GroupBoxA.Location = New System.Drawing.Point(12, 39)
         Me.GroupBoxA.Name = "GroupBoxA"
-        Me.GroupBoxA.Size = New System.Drawing.Size(271, 266)
+        Me.GroupBoxA.Size = New System.Drawing.Size(271, 310)
         Me.GroupBoxA.TabIndex = 0
         Me.GroupBoxA.TabStop = False
         Me.GroupBoxA.Text = "Ports"
@@ -76,7 +80,7 @@ Partial Class FormPorts
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(17, 223)
+        Me.Label1.Location = New System.Drawing.Point(18, 249)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(115, 13)
         Me.Label1.TabIndex = 1860
@@ -85,7 +89,7 @@ Partial Class FormPorts
         '
         'intIP
         '
-        Me.intIP.Location = New System.Drawing.Point(20, 239)
+        Me.intIP.Location = New System.Drawing.Point(21, 265)
         Me.intIP.Name = "intIP"
         Me.intIP.Size = New System.Drawing.Size(219, 20)
         Me.intIP.TabIndex = 1861
@@ -93,7 +97,7 @@ Partial Class FormPorts
         '
         'FirstRegionPort
         '
-        Me.FirstRegionPort.Location = New System.Drawing.Point(165, 123)
+        Me.FirstRegionPort.Location = New System.Drawing.Point(166, 149)
         Me.FirstRegionPort.Name = "FirstRegionPort"
         Me.FirstRegionPort.Size = New System.Drawing.Size(47, 20)
         Me.FirstRegionPort.TabIndex = 11
@@ -102,7 +106,7 @@ Partial Class FormPorts
         'OverrideNameLabel
         '
         Me.OverrideNameLabel.AutoSize = True
-        Me.OverrideNameLabel.Location = New System.Drawing.Point(20, 178)
+        Me.OverrideNameLabel.Location = New System.Drawing.Point(21, 204)
         Me.OverrideNameLabel.Name = "OverrideNameLabel"
         Me.OverrideNameLabel.Size = New System.Drawing.Size(192, 13)
         Me.OverrideNameLabel.TabIndex = 6
@@ -112,7 +116,7 @@ Partial Class FormPorts
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(19, 129)
+        Me.Label26.Location = New System.Drawing.Point(20, 155)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(98, 13)
         Me.Label26.TabIndex = 4
@@ -120,7 +124,7 @@ Partial Class FormPorts
         '
         'OverrideName
         '
-        Me.OverrideName.Location = New System.Drawing.Point(23, 194)
+        Me.OverrideName.Location = New System.Drawing.Point(24, 220)
         Me.OverrideName.Name = "OverrideName"
         Me.OverrideName.Size = New System.Drawing.Size(219, 20)
         Me.OverrideName.TabIndex = 7
@@ -129,7 +133,7 @@ Partial Class FormPorts
         'MaxP
         '
         Me.MaxP.AutoSize = True
-        Me.MaxP.Location = New System.Drawing.Point(32, 153)
+        Me.MaxP.Location = New System.Drawing.Point(33, 179)
         Me.MaxP.Name = "MaxP"
         Me.MaxP.Size = New System.Drawing.Size(72, 13)
         Me.MaxP.TabIndex = 5
@@ -161,7 +165,7 @@ Partial Class FormPorts
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(17, 103)
+        Me.Label7.Location = New System.Drawing.Point(18, 129)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(62, 13)
         Me.Label7.TabIndex = 3
@@ -170,7 +174,7 @@ Partial Class FormPorts
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(19, 51)
+        Me.Label5.Location = New System.Drawing.Point(20, 77)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(84, 13)
         Me.Label5.TabIndex = 1
@@ -178,7 +182,7 @@ Partial Class FormPorts
         '
         'HTTPPort
         '
-        Me.HTTPPort.Location = New System.Drawing.Point(165, 73)
+        Me.HTTPPort.Location = New System.Drawing.Point(166, 99)
         Me.HTTPPort.Name = "HTTPPort"
         Me.HTTPPort.Size = New System.Drawing.Size(47, 20)
         Me.HTTPPort.TabIndex = 9
@@ -186,7 +190,7 @@ Partial Class FormPorts
         '
         'PrivatePort
         '
-        Me.PrivatePort.Location = New System.Drawing.Point(165, 99)
+        Me.PrivatePort.Location = New System.Drawing.Point(166, 125)
         Me.PrivatePort.Name = "PrivatePort"
         Me.PrivatePort.Size = New System.Drawing.Size(47, 20)
         Me.PrivatePort.TabIndex = 10
@@ -194,7 +198,7 @@ Partial Class FormPorts
         '
         'DiagnosticPort
         '
-        Me.DiagnosticPort.Location = New System.Drawing.Point(165, 47)
+        Me.DiagnosticPort.Location = New System.Drawing.Point(166, 73)
         Me.DiagnosticPort.Name = "DiagnosticPort"
         Me.DiagnosticPort.Size = New System.Drawing.Size(47, 20)
         Me.DiagnosticPort.TabIndex = 8
@@ -203,7 +207,7 @@ Partial Class FormPorts
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(17, 76)
+        Me.Label4.Location = New System.Drawing.Point(18, 102)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(49, 13)
         Me.Label4.TabIndex = 2
@@ -227,12 +231,29 @@ Partial Class FormPorts
         Me.ToolStripMenuItem30.Size = New System.Drawing.Size(68, 28)
         Me.ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(20, 51)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(73, 13)
+        Me.Label2.TabIndex = 1862
+        Me.Label2.Text = "Money Server"
+        '
+        'MoneyTextBox
+        '
+        Me.MoneyTextBox.Location = New System.Drawing.Point(166, 47)
+        Me.MoneyTextBox.Name = "MoneyTextBox"
+        Me.MoneyTextBox.Size = New System.Drawing.Size(47, 20)
+        Me.MoneyTextBox.TabIndex = 1863
+        Me.ToolTip1.SetToolTip(Me.MoneyTextBox, Global.Outworldz.My.Resources.Resources.Default_8001_word)
+        '
         'FormPorts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(295, 318)
+        Me.ClientSize = New System.Drawing.Size(295, 361)
         Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.GroupBoxA)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -267,4 +288,6 @@ Partial Class FormPorts
     Friend WithEvents ToolStripMenuItem30 As ToolStripMenuItem
     Friend WithEvents Label1 As Label
     Friend WithEvents intIP As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents MoneyTextBox As TextBox
 End Class

@@ -140,7 +140,7 @@ Public Class FormIarSave
 
     Private Sub AviName_TextChanged(sender As Object, e As EventArgs) Handles AviName.TextChanged
         If AviName.Text.Length > 0 Then
-            AviName.BackColor = Color.White
+            AviName.BackColor = Color.FromName("Window")
         End If
         GAvatarName = AviName.Text
     End Sub

@@ -1523,7 +1523,6 @@ Public Class FormRegionlist
                         CPUValues.TryGetValue(Groupname, cpupercent)
                     End If
 
-
                     item1.SubItems.Add(CStr(cpupercent))
                     Dim c As Color = SystemColors.ControlText
                     If cpupercent > 1 Then
@@ -1615,7 +1614,6 @@ Public Class FormRegionlist
                     Else
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
-
 
                     If AllowGods(RegionUUID).Length > 0 Then
                         item1.SubItems.Add(AllowGods(RegionUUID))
@@ -1796,9 +1794,9 @@ Public Class FormRegionlist
 
                     If O.Email.Length = 0 Then
                         item1.BackColor = Color.DarkGray
-                        item1.ForeColor = Color.White
+                        item1.ForeColor = Color.FromName("Window")
                     Else
-                        item1.BackColor = Color.White
+                        item1.BackColor = Color.FromName("Window")
                         item1.ForeColor = Color.Black
                     End If
 
