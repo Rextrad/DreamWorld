@@ -15,7 +15,6 @@ Module Teleport
 
     Public Sub TeleportAgents()
 
-        'While PropOpensimIsRunning
         Try
             For Each Keypair In TeleportAvatarDict
                 Dim AgentID = Keypair.Key
@@ -67,20 +66,6 @@ Module Teleport
         End Try
         Fin.Clear()
 
-        'Sleep(100)
-
-        'End While
-    End Sub
-
-    Public Sub testevent()
-
-        Dim c1 As New TeleportAvatar
-        ' Associate an event handler with an event.
-        AddHandler c1.AnEvent, AddressOf TeleportAgents
-        ' Call a method to raise the event.
-        TPQueue.Add("Fred", "B")
-        c1.TP()
-
     End Sub
 
 End Module
@@ -88,14 +73,28 @@ End Module
 Public Class TeleportAvatar
 
     ' Declare an event.
-    Public Event AnEvent()
+    Public Event TeleportEvent()
 
     Sub Add(AgentID As String, Value As String)
+
+        Delete(AgentID)
         TeleportAvatarDict.TryAdd(AgentID, Value)
+        TP(AgentID)
+
     End Sub
 
-    Public Sub TP()
-        RaiseEvent AnEvent()
+    Public Sub Delete(AgentID As String)
+        If TeleportAvatarDict.ContainsKey(AgentID) Then
+            TeleportAvatarDict.TryRemove(AgentID, "")
+        End If
+    End Sub
+
+    Public Sub TP(AgentID As String)
+
+        If TeleportAvatarDict.ContainsKey(AgentID) Then
+            TeleportAvatarDict.TryRemove(AgentID, "")
+        End If
+
     End Sub
 
 End Class
