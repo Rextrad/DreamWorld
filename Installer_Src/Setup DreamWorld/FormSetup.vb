@@ -492,10 +492,10 @@ Public Class FormSetup
 
         PropChangedRegionSettings = True
 
-        CheckDefaultPorts()
-
         Dim failedload As Boolean
         If Not Init(True) Then failedload = True ' read all region data
+
+        CheckDefaultPorts()
 
         AddVoices() ' add eva and mark voices
 
@@ -544,13 +544,6 @@ Public Class FormSetup
         End Using
 
         Application.DoEvents()
-
-        ' collect all process windows
-        '  Dim processes = Process.GetProcessesByName("Opensim")
-        '' For Each p In processes
-        'If Not PropInstanceHandles.ContainsKey(p.Id) Then
-        'PropInstanceHandles.TryAdd(p.Id, OpensimNames.Item(p.Id))
-        'End If
 
         For Each RegionUUID In RegionUuids()
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))

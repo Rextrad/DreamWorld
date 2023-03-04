@@ -1177,8 +1177,16 @@ Public Class FormRegion
                 Priority(RegionUUID) = "Normal"
             End If
 
-            Coord_X(RegionUUID) = CInt("0" & CoordX.Text)
-            Coord_Y(RegionUUID) = CInt("0" & CoordY.Text)
+            If Not Integer.TryParse(CoordX.Text, Coord_X(RegionUUID)) Then
+                ErrorLog("CoordX.Text cannot be made an int")
+                Return False
+            End If
+
+            If Not Integer.TryParse(CoordY.Text, Coord_Y(RegionUUID)) Then
+                ErrorLog("CoordY.Text cannot be made an int")
+                Return False
+            End If
+
             Region_Name(RegionUUID) = RegionName.Text
 
             SizeX(RegionUUID) = BoxSize
@@ -1338,51 +1346,51 @@ Public Class FormRegion
                 Try
 
                     Dim Region = "; * Regions configuration file" &
-                                "; * This Is Your World. See Common Settings->[Region Settings]." & vbCrLf &
-                                "; Automatically changed by Dreamworld" & vbCrLf &
-                                "[" & RegionName.Text & "]" & vbCrLf &
-                                "RegionUUID=" & UUID.Text & vbCrLf &
-                                "Location=" & CoordX.Text & "," & CoordY.Text & vbCrLf &
-                                "InternalAddress=" & Settings.InternalAddress & vbCrLf &
-                                "InternalPort=" & Region_Port(RegionUUID) & vbCrLf &
-                                "GroupPort=" & GroupPort(RegionUUID) & vbCrLf &
-                                "AllowAlternatePorts = False" & vbCrLf &
-                                "ExternalHostName=" & Settings.ExternalHostName & vbCrLf &
-                                "SizeX=" & BoxSize & vbCrLf &
-                                "SizeY=" & BoxSize & vbCrLf &
-                                "Enabled=" & CStr(EnabledCheckBox.Checked) & vbCrLf &
-                                "NonPhysicalPrimMax=" & NonphysicalPrimMax.Text & vbCrLf &
-                                "PhysicalPrimMax=" & PhysicalPrimMax.Text & vbCrLf &
-                                "ClampPrimSize=" & CStr(ClampPrimSize.Checked) & vbCrLf &
-                                "Concierge =  " & CStr(ConciergeCheckBox.Checked) & vbCrLf &
-                                "MaxAgents=" & MaxAgents.Text & vbCrLf &
-                                "MaxPrims=" & MaxPrims.Text & vbCrLf &
-                                "RegionType = Estate" & vbCrLf & vbCrLf &
-                                "DefaultLanding = " & LandingSpotTextBox.Text & vbCrLf & vbCrLf &
-                                ";# Extended region properties from Dreamgrid" & vbCrLf &
-                                "MinTimerInterval=" & ScriptTimerTextBox.Text & vbCrLf &
-                                "FrameTime=" & FrametimeBox.Text & vbCrLf &
-                                "RegionSnapShot=" & Snapshot & vbCrLf &
-                                "MapType=" & Map & vbCrLf &
-                                "Physics=" & Phys & vbCrLf &
-                                "GodDefault=" & GodDefault(RegionUUID) & vbCrLf &
-                                "AllowGods=" & AllowGods(RegionUUID) & vbCrLf &
-                                "RegionGod=" & RegionGod(RegionUUID) & vbCrLf &
-                                "ManagerGod=" & ManagerGod(RegionUUID) & vbCrLf &
-                                "Birds=" & Birds(RegionUUID) & vbCrLf &
-                                "Tides=" & Tides(RegionUUID) & vbCrLf &
-                                "Teleport=" & CStr(Teleport_Sign(RegionUUID)) & vbCrLf &
-                                "DisableGloebits=" & DisableGloebits(RegionUUID) & vbCrLf &
-                                "DisallowForeigners=" & Disallow_Foreigners(RegionUUID) & vbCrLf &
-                                "DisallowResidents=" & Disallow_Residents(RegionUUID) & vbCrLf &
-                                "SkipAutoBackup=" & SkipAutobackup(RegionUUID) & vbCrLf &
-                                "ScriptEngine=" & ScriptEngine(RegionUUID) & vbCrLf &
-                                "Publicity=" & GDPR(RegionUUID) & vbCrLf &
-                                "OpensimWorldAPIKey=" & OpensimWorldAPIKey(RegionUUID) & vbCrLf &
-                                "Priority=" & Priority(RegionUUID) & vbCrLf &
-                                "Cores=" & CStr(Cores(RegionUUID)) & vbCrLf &
-                                "SmartBoot=" & CStr(Smart_Boot_Enabled(RegionUUID)) & vbCrLf &
-                                "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf
+                            "; * This Is Your World. See Common Settings->[Region Settings]." & vbCrLf &
+                            "; Automatically changed by Dreamworld" & vbCrLf &
+                            "[" & RegionName.Text & "]" & vbCrLf &
+                            "RegionUUID=" & UUID.Text & vbCrLf &
+                            "Location=" & CoordX.Text & "," & CoordY.Text & vbCrLf &
+                            "InternalAddress=" & Settings.InternalAddress & vbCrLf &
+                            "InternalPort=" & Region_Port(RegionUUID) & vbCrLf &
+                            "GroupPort=" & GroupPort(RegionUUID) & vbCrLf &
+                            "AllowAlternatePorts = False" & vbCrLf &
+                            "ExternalHostName=" & Settings.ExternalHostName & vbCrLf &
+                            "SizeX=" & BoxSize & vbCrLf &
+                            "SizeY=" & BoxSize & vbCrLf &
+                            "Enabled=" & CStr(EnabledCheckBox.Checked) & vbCrLf &
+                            "NonPhysicalPrimMax=" & NonphysicalPrimMax.Text & vbCrLf &
+                            "PhysicalPrimMax=" & PhysicalPrimMax.Text & vbCrLf &
+                            "ClampPrimSize=" & CStr(ClampPrimSize.Checked) & vbCrLf &
+                            "Concierge =  " & CStr(ConciergeCheckBox.Checked) & vbCrLf &
+                            "MaxAgents=" & MaxAgents.Text & vbCrLf &
+                            "MaxPrims=" & MaxPrims.Text & vbCrLf &
+                            "RegionType = Estate" & vbCrLf & vbCrLf &
+                            "DefaultLanding = " & LandingSpotTextBox.Text & vbCrLf & vbCrLf &
+                            ";# Extended region properties from Dreamgrid" & vbCrLf &
+                            "MinTimerInterval=" & ScriptTimerTextBox.Text & vbCrLf &
+                            "FrameTime=" & FrametimeBox.Text & vbCrLf &
+                            "RegionSnapShot=" & Snapshot & vbCrLf &
+                            "MapType=" & Map & vbCrLf &
+                            "Physics=" & Phys & vbCrLf &
+                            "GodDefault=" & GodDefault(RegionUUID) & vbCrLf &
+                            "AllowGods=" & AllowGods(RegionUUID) & vbCrLf &
+                            "RegionGod=" & RegionGod(RegionUUID) & vbCrLf &
+                            "ManagerGod=" & ManagerGod(RegionUUID) & vbCrLf &
+                            "Birds=" & Birds(RegionUUID) & vbCrLf &
+                            "Tides=" & Tides(RegionUUID) & vbCrLf &
+                            "Teleport=" & CStr(Teleport_Sign(RegionUUID)) & vbCrLf &
+                            "DisableGloebits=" & DisableGloebits(RegionUUID) & vbCrLf &
+                            "DisallowForeigners=" & Disallow_Foreigners(RegionUUID) & vbCrLf &
+                            "DisallowResidents=" & Disallow_Residents(RegionUUID) & vbCrLf &
+                            "SkipAutoBackup=" & SkipAutobackup(RegionUUID) & vbCrLf &
+                            "ScriptEngine=" & ScriptEngine(RegionUUID) & vbCrLf &
+                            "Publicity=" & GDPR(RegionUUID) & vbCrLf &
+                            "OpensimWorldAPIKey=" & OpensimWorldAPIKey(RegionUUID) & vbCrLf &
+                            "Priority=" & Priority(RegionUUID) & vbCrLf &
+                            "Cores=" & CStr(Cores(RegionUUID)) & vbCrLf &
+                            "SmartBoot=" & CStr(Smart_Boot_Enabled(RegionUUID)) & vbCrLf &
+                            "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf
 
                     Try
                         Using outputFile As New StreamWriter(RegionIniFilePath(RegionUUID), False)
@@ -1547,7 +1555,7 @@ Public Class FormRegion
             MsgBox(My.Resources.NotValidVector, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)
             LandingSpotTextBox.BackColor = Color.Red
         Else
-            LandingSpotTextBox.BackColor = Color.White
+            LandingSpotTextBox.BackColor = Color.FromName("Window")
         End If
 
     End Sub

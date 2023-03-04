@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FormGloebits
+Partial Class FormCurrency
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class FormGloebits
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormGloebits))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCurrency))
         Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GLBShowNewSessionPurchaseIMCheckBox = New System.Windows.Forms.CheckBox()
@@ -46,14 +46,39 @@ Partial Class FormGloebits
         Me.ProductionCreateButton = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpGloebitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GloebitWebSiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelptDTLCurrencyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DTLWebSiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.GloeBitTab = New System.Windows.Forms.TabPage()
+        Me.DtlTab = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Banker = New System.Windows.Forms.TextBox()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.InitialBalance = New System.Windows.Forms.TextBox()
+        Me.MoneyPortTextbox = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.EnableDTLcheckbox = New System.Windows.Forms.CheckBox()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.GloeBitTab.SuspendLayout()
+        Me.DtlTab.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(20, 49)
+        Me.Button4.Location = New System.Drawing.Point(20, 6)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(401, 27)
         Me.Button4.TabIndex = 2
@@ -69,9 +94,9 @@ Partial Class FormGloebits
         Me.GroupBox3.Controls.Add(Me.Label4)
         Me.GroupBox3.Controls.Add(Me.ContactEmailTextBox)
         Me.GroupBox3.Controls.Add(Me.Label5)
-        Me.GroupBox3.Location = New System.Drawing.Point(20, 331)
+        Me.GroupBox3.Location = New System.Drawing.Point(16, 283)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(424, 159)
+        Me.GroupBox3.Size = New System.Drawing.Size(439, 159)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Currency"
@@ -141,7 +166,7 @@ Partial Class FormGloebits
         'GloebitsEnabled
         '
         Me.GloebitsEnabled.AutoSize = True
-        Me.GloebitsEnabled.Location = New System.Drawing.Point(30, 93)
+        Me.GloebitsEnabled.Location = New System.Drawing.Point(24, 45)
         Me.GloebitsEnabled.Name = "GloebitsEnabled"
         Me.GloebitsEnabled.Size = New System.Drawing.Size(95, 17)
         Me.GloebitsEnabled.TabIndex = 1
@@ -160,9 +185,9 @@ Partial Class FormGloebits
         Me.GroupBox2.Controls.Add(Me.ProductionCreateAppButton)
         Me.GroupBox2.Controls.Add(Me.ProductionReqAppButton)
         Me.GroupBox2.Controls.Add(Me.ProductionCreateButton)
-        Me.GroupBox2.Location = New System.Drawing.Point(20, 116)
+        Me.GroupBox2.Location = New System.Drawing.Point(20, 68)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(401, 209)
+        Me.GroupBox2.Size = New System.Drawing.Size(435, 209)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Production Mode"
@@ -259,30 +284,231 @@ Partial Class FormGloebits
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
-        Me.MenuStrip1.Size = New System.Drawing.Size(454, 30)
+        Me.MenuStrip1.Size = New System.Drawing.Size(471, 30)
         Me.MenuStrip1.TabIndex = 0
         '
         'HelpToolStripMenuItem
         '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpGloebitToolStripMenuItem, Me.GloebitWebSiteToolStripMenuItem, Me.HelptDTLCurrencyToolStripMenuItem, Me.DTLWebSiteToolStripMenuItem})
         Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(68, 28)
         Me.HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'FormGloebits
+        'HelpGloebitToolStripMenuItem
+        '
+        Me.HelpGloebitToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
+        Me.HelpGloebitToolStripMenuItem.Name = "HelpGloebitToolStripMenuItem"
+        Me.HelpGloebitToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.HelpGloebitToolStripMenuItem.Text = "Help Gloebit Currency"
+        '
+        'GloebitWebSiteToolStripMenuItem
+        '
+        Me.GloebitWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
+        Me.GloebitWebSiteToolStripMenuItem.Name = "GloebitWebSiteToolStripMenuItem"
+        Me.GloebitWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.GloebitWebSiteToolStripMenuItem.Text = "Gloebit Web Site"
+        '
+        'HelptDTLCurrencyToolStripMenuItem
+        '
+        Me.HelptDTLCurrencyToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
+        Me.HelptDTLCurrencyToolStripMenuItem.Name = "HelptDTLCurrencyToolStripMenuItem"
+        Me.HelptDTLCurrencyToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.HelptDTLCurrencyToolStripMenuItem.Text = "Help DTL Currency"
+        '
+        'DTLWebSiteToolStripMenuItem
+        '
+        Me.DTLWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
+        Me.DTLWebSiteToolStripMenuItem.Name = "DTLWebSiteToolStripMenuItem"
+        Me.DTLWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.DTLWebSiteToolStripMenuItem.Text = "DTL Web Site"
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(420, 109)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(8, 8)
+        Me.TableLayoutPanel1.TabIndex = 6
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Controls.Add(Me.GloeBitTab)
+        Me.TabControl1.Controls.Add(Me.DtlTab)
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.HotTrack = True
+        Me.TabControl1.Location = New System.Drawing.Point(0, 33)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(471, 489)
+        Me.TabControl1.TabIndex = 7
+        '
+        'GloeBitTab
+        '
+        Me.GloeBitTab.Controls.Add(Me.GroupBox2)
+        Me.GloeBitTab.Controls.Add(Me.GroupBox3)
+        Me.GloeBitTab.Controls.Add(Me.GloebitsEnabled)
+        Me.GloeBitTab.Controls.Add(Me.Button4)
+        Me.GloeBitTab.Location = New System.Drawing.Point(4, 22)
+        Me.GloeBitTab.Name = "GloeBitTab"
+        Me.GloeBitTab.Padding = New System.Windows.Forms.Padding(3)
+        Me.GloeBitTab.Size = New System.Drawing.Size(463, 463)
+        Me.GloeBitTab.TabIndex = 0
+        Me.GloeBitTab.Text = "Gloebit Currency"
+        Me.GloeBitTab.UseVisualStyleBackColor = True
+        '
+        'DtlTab
+        '
+        Me.DtlTab.Controls.Add(Me.GroupBox1)
+        Me.DtlTab.Controls.Add(Me.Label3)
+        Me.DtlTab.Controls.Add(Me.InitialBalance)
+        Me.DtlTab.Controls.Add(Me.MoneyPortTextbox)
+        Me.DtlTab.Controls.Add(Me.Label2)
+        Me.DtlTab.Controls.Add(Me.EnableDTLcheckbox)
+        Me.DtlTab.Location = New System.Drawing.Point(4, 22)
+        Me.DtlTab.Name = "DtlTab"
+        Me.DtlTab.Padding = New System.Windows.Forms.Padding(3)
+        Me.DtlTab.Size = New System.Drawing.Size(463, 463)
+        Me.DtlTab.TabIndex = 1
+        Me.DtlTab.Text = "DTL Currency"
+        Me.DtlTab.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Banker)
+        Me.GroupBox1.Controls.Add(Me.RadioButton3)
+        Me.GroupBox1.Controls.Add(Me.RadioButton2)
+        Me.GroupBox1.Controls.Add(Me.RadioButton1)
+        Me.GroupBox1.Location = New System.Drawing.Point(176, 23)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(200, 170)
+        Me.GroupBox1.TabIndex = 15
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Banker"
+        '
+        'Banker
+        '
+        Me.Banker.Location = New System.Drawing.Point(24, 115)
+        Me.Banker.Name = "Banker"
+        Me.Banker.Size = New System.Drawing.Size(155, 20)
+        Me.Banker.TabIndex = 12
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(24, 82)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(97, 17)
+        Me.RadioButton3.TabIndex = 2
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "Specific Avatar"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(24, 59)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(61, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "Anyone"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(24, 36)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(76, 17)
+        Me.RadioButton1.TabIndex = 0
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "No Banker"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(24, 105)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 13)
+        Me.Label3.TabIndex = 13
+        Me.Label3.Text = "Initial Balance"
+        '
+        'InitialBalance
+        '
+        Me.InitialBalance.Location = New System.Drawing.Point(27, 121)
+        Me.InitialBalance.Name = "InitialBalance"
+        Me.InitialBalance.Size = New System.Drawing.Size(61, 20)
+        Me.InitialBalance.TabIndex = 12
+        '
+        'MoneyPortTextbox
+        '
+        Me.MoneyPortTextbox.Location = New System.Drawing.Point(27, 69)
+        Me.MoneyPortTextbox.Name = "MoneyPortTextbox"
+        Me.MoneyPortTextbox.Size = New System.Drawing.Size(61, 20)
+        Me.MoneyPortTextbox.TabIndex = 11
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(24, 51)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(95, 13)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "Money Server Port"
+        '
+        'EnableDTLcheckbox
+        '
+        Me.EnableDTLcheckbox.AutoSize = True
+        Me.EnableDTLcheckbox.Location = New System.Drawing.Point(27, 23)
+        Me.EnableDTLcheckbox.Name = "EnableDTLcheckbox"
+        Me.EnableDTLcheckbox.Size = New System.Drawing.Size(83, 17)
+        Me.EnableDTLcheckbox.TabIndex = 2
+        Me.EnableDTLcheckbox.Text = "Enable DTL"
+        Me.EnableDTLcheckbox.UseVisualStyleBackColor = True
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Label1)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(463, 463)
+        Me.TabPage1.TabIndex = 2
+        Me.TabPage1.Text = "jOpensim Currency"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(132, 49)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(189, 25)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Not available yet"
+        '
+        'FormCurrency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(454, 521)
+        Me.ClientSize = New System.Drawing.Size(471, 521)
+        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.Controls.Add(Me.GloebitsEnabled)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "FormGloebits"
+        Me.Name = "FormCurrency"
         Me.Text = "Gloebit"
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -290,6 +516,15 @@ Partial Class FormGloebits
         Me.GroupBox2.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.GloeBitTab.ResumeLayout(False)
+        Me.GloeBitTab.PerformLayout()
+        Me.DtlTab.ResumeLayout(False)
+        Me.DtlTab.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -319,4 +554,24 @@ Partial Class FormGloebits
     Friend WithEvents GLBShowNewSessionPurchaseIMCheckBox As CheckBox
     Friend WithEvents GLBShowNewSessionAuthIMCheckBox As CheckBox
     Friend WithEvents GLBShowWelcomeMessageCheckBox As CheckBox
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents GloeBitTab As TabPage
+    Friend WithEvents DtlTab As TabPage
+    Friend WithEvents EnableDTLcheckbox As CheckBox
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents Label1 As Label
+    Friend WithEvents MoneyPortTextbox As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents InitialBalance As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents Banker As TextBox
+    Friend WithEvents HelpGloebitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GloebitWebSiteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelptDTLCurrencyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DTLWebSiteToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -470,6 +470,15 @@ Public Class MySettings
         End Set
     End Property
 
+    Public Property Banker() As String
+        Get
+            Return CType(GetMySetting("Banker", ""), String)
+        End Get
+        Set
+            SetMySetting("Banker", Value)
+        End Set
+    End Property
+
     Public Property BanList() As String
         Get
             Return GetMySetting("BanList", "")
@@ -964,6 +973,33 @@ Public Class MySettings
         End Set
     End Property
 
+    Public Property DTLEnable() As Boolean
+        Get
+            Return CType(GetMySetting("DTLEnable", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("DTLEnable", CStr(Value))
+        End Set
+    End Property
+
+    Public Property DTLInitialBalance() As Integer
+        Get
+            Return CInt(Settings.GetIni("Data", "DTLInitialBalance", "1000", "Integer"))
+        End Get
+        Set
+            SetMySetting("DTLInitialBalance", CStr(Value))
+        End Set
+    End Property
+
+    Public Property DTLMoneyPort() As Integer
+        Get
+            Return CInt(Settings.GetIni("Data", "DTLMoneyPort", "8000", "Integer"))
+        End Get
+        Set
+            SetMySetting("DTLMoneyPort", CStr(Value))
+        End Set
+    End Property
+
     ''' <summary>
     ''' Period in seconds to delay after an email Is sent.
     ''' </summary>
@@ -1219,10 +1255,6 @@ Public Class MySettings
         End Set
     End Property
 
-    ''' <summary>
-    ''' Http Port for the grid in robust default = 8002
-    ''' </summary>
-
     Public Property HttpPort() As Integer
         Get
             Return CInt("0" & GetMySetting("HttpPort", "8002"))
@@ -1232,6 +1264,9 @@ Public Class MySettings
         End Set
     End Property
 
+    ''' <summary>
+    ''' Http Port for the grid in robust default = 8002
+    ''' </summary>
     Public Property InstalledRuntime() As Boolean
         Get
             Return CType(GetMySetting("InstalledRuntime", "True"), Boolean)
@@ -1252,6 +1287,15 @@ Public Class MySettings
         End Get
         Set
             SetMySetting("InternalAddress", Value)
+        End Set
+    End Property
+
+    Public Property JopensimMoney() As Boolean
+        Get
+            Return CType(GetMySetting("JopensimMoney", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("JopensimMoney", CStr(Value))
         End Set
     End Property
 

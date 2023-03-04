@@ -5,7 +5,12 @@
 
 #End Region
 
-Public Class FormGloebits
+Imports System.Text.RegularExpressions
+
+Public Class FormCurrency
+
+    Private initted As Boolean
+    Private isChanged As Boolean
 
 #Region "ScreenSize"
 
@@ -42,11 +47,19 @@ Public Class FormGloebits
 
     Private Sub FormisClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Closed
 
-        DoCurrency()
+        If isChanged Then
+            Dim v = MsgBox(My.Resources.Save_changes_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Save_changes_word)
+            If v = vbYes Then
+                DoCurrency()
+                Settings.SaveSettings()
+            End If
+        End If
 
     End Sub
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
+
+        SetScreen()
 
         Button4.Text = Global.Outworldz.My.Resources.Free_Account
         GLBShowNewSessionAuthIMCheckBox.Text = Global.Outworldz.My.Resources.GLBShowNewSessionAuthIM_text
@@ -70,14 +83,53 @@ Public Class FormGloebits
         GLBShowNewSessionPurchaseIMCheckBox.Checked = Settings.GlbShowNewSessionPurchaseIM
         GLBShowWelcomeMessageCheckBox.Checked = Settings.GlbShowWelcomeMessage
 
-        GloebitsEnabled.Checked = Settings.GloebitsEnable
-        SetScreen()
+        If Settings.DTLEnable Then
+            GloebitsEnabled.Checked = False
+            EnableDTLcheckbox.Checked = True
+        ElseIf Settings.GloebitsEnable Then
+            GloebitsEnabled.Checked = Settings.GloebitsEnable
+            EnableDTLcheckbox.Checked = False
+        End If
+
+        EnableDTLcheckbox.Checked = Settings.DTLEnable
+        MoneyPortTextbox.Text = CStr(Settings.DTLMoneyPort)
+        InitialBalance.Text = CStr(Settings.DTLInitialBalance)
+
+        If Settings.Banker.Length = 0 Then
+            RadioButton1.Checked = True
+            Banker.Visible = False
+        ElseIf Settings.Banker = "00000000-0000-0000-0000-000000000000" Then
+            RadioButton2.Checked = True
+            Banker.Visible = False
+        Else
+            RadioButton3.Checked = True
+            Banker.Text = Settings.Banker
+            Banker.Visible = True
+        End If
+
+        StartMySQL()
+
+        Fillbox()
+        initted = True
 
     End Sub
 
 #End Region
 
-#Region "Mode"
+#Region "FillBox"
+
+    Private Sub Fillbox()
+
+        If Banker.Text.Length = 0 Then
+            Banker.BackColor = Color.Red
+        End If
+        With Banker
+            .AutoCompleteCustomSource = MysqlInterface.GetAvatarList()
+            .AutoCompleteMode = AutoCompleteMode.Suggest
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+        End With
+
+    End Sub
 
 #End Region
 
@@ -122,8 +174,9 @@ Public Class FormGloebits
 
     Private Sub ProdKeyTextBox_TextChanged(sender As Object, e As EventArgs) Handles ProdKeyTextBox.TextChanged
 
+        If Not initted Then Return
+        isChanged = True
         Settings.GLProdKey = ProdKeyTextBox.Text
-        Settings.SaveSettings()
 
     End Sub
 
@@ -135,8 +188,9 @@ Public Class FormGloebits
 
     Private Sub ProdSecretTextBox_TextChanged(sender As Object, e As EventArgs) Handles ProdSecretTextBox.TextChanged
 
+        If Not initted Then Return
+        isChanged = True
         Settings.GLProdSecret = ProdSecretTextBox.Text
-        Settings.SaveSettings()
 
     End Sub
 
@@ -171,68 +225,180 @@ Public Class FormGloebits
 
 #Region "OwnerInfo"
 
-    Private Sub ContactEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles ContactEmailTextBox.TextChanged
+    Private Sub Banker_TextChanged(sender As Object, e As EventArgs) Handles Banker.TextChanged
 
-        Settings.GlbOwnerEmail = ContactEmailTextBox.Text
-        Settings.SaveSettings()
-
-    End Sub
-
-    Private Sub GloebitsEnabled_CheckedChanged(sender As Object, e As EventArgs) Handles GloebitsEnabled.CheckedChanged
-
-        Settings.GloebitsEnable = GloebitsEnabled.Checked
-        Settings.SaveSettings()
-
-    End Sub
-
-    Private Sub OwnerNameTextbox_TextChanged(sender As Object, e As EventArgs) Handles OwnerNameTextbox.TextChanged
-
-        Settings.GlbOwnerName = OwnerNameTextbox.Text
-        Settings.SaveSettings()
+        If Not initted Then Return
+        If Banker.Text.Length = 0 Then
+            Banker.BackColor = Color.Red
+        Else
+            Banker.BackColor = Color.FromName("Window")
+        End If
+        Settings.Banker = Banker.Text
+        isChanged = True
 
     End Sub
-
-#End Region
-
-#Region "Help"
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
         Dim webAddress As String = "http://dev.gloebit.com/opensim/"
         Try
             Process.Start(webAddress)
         Catch ex As Exception
             BreakPoint.Dump(ex)
         End Try
+
+    End Sub
+
+    Private Sub ContactEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles ContactEmailTextBox.TextChanged
+
+        If Not initted Then Return
+        isChanged = True
+        Settings.GlbOwnerEmail = ContactEmailTextBox.Text
+
+    End Sub
+
+    Private Sub DTLWebSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DTLWebSiteToolStripMenuItem.Click
+
+        Dim webAddress As String = "http://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?OpenSim%2FMoneyServer"
+        Try
+            Process.Start(webAddress)
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
+
+    End Sub
+
+    Private Sub EnableDTLcheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles EnableDTLcheckbox.CheckedChanged
+
+        If Not initted Then Return
+        If EnableDTLcheckbox.Checked Then
+            Settings.GloebitsEnable = False
+            Settings.DTLEnable = True
+            GloebitsEnabled.Checked = False
+            isChanged = True
+        End If
+
     End Sub
 
     Private Sub GLBShowNewSessionAuthIMCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles GLBShowNewSessionAuthIMCheckBox.CheckedChanged
 
+        If Not initted Then Return
         Settings.GlbShowNewSessionAuthIM = GLBShowNewSessionAuthIMCheckBox.Checked
-        Settings.SaveSettings()
+        isChanged = True
 
     End Sub
 
     Private Sub GLBShowNewSessionPurchaseIMCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles GLBShowNewSessionPurchaseIMCheckBox.CheckedChanged
 
+        If Not initted Then Return
         Settings.GlbShowNewSessionPurchaseIM = GLBShowNewSessionPurchaseIMCheckBox.Checked
-        Settings.SaveSettings()
+        isChanged = True
 
     End Sub
 
     Private Sub GLBShowWelcomeMessageCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles GLBShowWelcomeMessageCheckBox.CheckedChanged
 
+        If Not initted Then Return
         Settings.GlbShowWelcomeMessage = GLBShowWelcomeMessageCheckBox.Checked
-        Settings.SaveSettings()
+        isChanged = True
 
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Dim webAddress As String = "http://dev.gloebit.com/opensim/"
+    Private Sub GloebitsEnabled_CheckedChanged(sender As Object, e As EventArgs) Handles GloebitsEnabled.CheckedChanged
+
+        If Not initted Then Return
+        If GloebitsEnabled.Checked Then
+            Settings.GloebitsEnable = True
+            Settings.DTLEnable = False
+            EnableDTLcheckbox.Checked = False
+            isChanged = True
+        Else
+            Settings.GloebitsEnable = False
+            isChanged = True
+        End If
+
+    End Sub
+
+    Private Sub GloebitWebSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GloebitWebSiteToolStripMenuItem.Click
+
+        Dim webAddress As String = "http://dev.gloebit.com"
         Try
             Process.Start(webAddress)
         Catch ex As Exception
             BreakPoint.Dump(ex)
         End Try
+
+    End Sub
+
+    Private Sub HelpGloebitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpGloebitToolStripMenuItem.Click
+
+        HelpManual("Gloebit")
+
+    End Sub
+
+    Private Sub HelptDTLCurrencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelptDTLCurrencyToolStripMenuItem.Click
+
+        HelpManual("DTL_Currency")
+
+    End Sub
+
+    Private Sub InitialBalance_TextChanged(sender As Object, e As EventArgs) Handles InitialBalance.TextChanged
+
+        If Not initted Then Return
+
+        Dim digitsOnly = New Regex("[^\d]")
+        InitialBalance.Text = digitsOnly.Replace(InitialBalance.Text, "")
+
+        Settings.DTLInitialBalance = CInt("0" & InitialBalance.Text)
+        isChanged = True
+
+    End Sub
+
+    Private Sub OwnerNameTextbox_TextChanged(sender As Object, e As EventArgs) Handles OwnerNameTextbox.TextChanged
+
+        If Not initted Then Return
+        Settings.GlbOwnerName = OwnerNameTextbox.Text
+        isChanged = True
+
+    End Sub
+
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+
+        If Not initted Then Return
+        Banker.Visible = False
+        Settings.Banker = ""
+        isChanged = True
+
+    End Sub
+
+    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
+
+        If Not initted Then Return
+        Banker.Visible = False
+        Settings.Banker = "00000000-0000-0000-0000-000000000000"
+        isChanged = True
+
+    End Sub
+
+    Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
+
+        If Not initted Then Return
+        Banker.Visible = True
+        isChanged = True
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles MoneyPortTextbox.TextChanged
+
+        If Not initted Then Return
+
+        Dim digitsOnly = New Regex("[^\d]")
+        MoneyPortTextbox.Text = digitsOnly.Replace(MoneyPortTextbox.Text, "")
+
+        Settings.DTLMoneyPort = CInt("0" & MoneyPortTextbox.Text)
+        isChanged = True
+        CheckDefaultPorts()
+
     End Sub
 
 #End Region

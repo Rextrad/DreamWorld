@@ -1260,7 +1260,7 @@ Public Class FormSmartStart
                     INI.SetIni("SimSurround", "Owner", AvatarUUID)
                     INI.SaveIni()
 
-                    AviName.BackColor = Color.White
+                    AviName.BackColor = Color.FromName("Window")
                 End If
             End If
         End If

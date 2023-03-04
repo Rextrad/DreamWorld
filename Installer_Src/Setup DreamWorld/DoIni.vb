@@ -154,28 +154,54 @@ Module DoIni
     Public Function DoCurrency() As Boolean
 
         If DoGloebit() Then Return True ' error = true
-        If DoAnotherCurrency() Then Return True
+        If DoDTLCurrency() Then Return True
 
         ' No error
         Return False
 
     End Function
 
-    Private Function DoAnotherCurrency() As Boolean
+    Private Function DoDTLCurrency() As Boolean
 
+        If Not Settings.DTLEnable Then Return False
+
+        Try
+            Dim INI = New LoadIni(IO.Path.Combine(Settings.OpensimBinPath, "MoneyServer.ini"), ";", System.Text.Encoding.UTF8)
+            ' always select the money symbol and the DLL's
+
+            INI.SetIni("MySql", "hostname", Settings.RobustServerIP)
+            INI.SetIni("MySql", "database", Settings.RobustDatabaseName)
+            INI.SetIni("MySql", "username", Settings.RobustUserName)
+            INI.SetIni("MySql", "password", Settings.RobustPassword)
+            INI.SetIni("MySql", "port", CStr(Settings.MySqlRobustDBPort))
+
+            INI.SetIni("MoneyServer", "ServerPort", CStr(Settings.DTLMoneyPort))
+
+            INI.SetIni("MoneyServer", "DefaultBalance", CStr(Settings.DTLInitialBalance))
+            INI.SetIni("MoneyServer", "HGAvatarDefaultBalance", CStr(Settings.DTLInitialBalance))
+            INI.SetIni("MoneyServer", "GuestAvatarDefaultBalance", CStr(Settings.DTLInitialBalance))
+            INI.SetIni("MoneyServer", "BankerAvatar", $"""{Settings.Banker}""")
+            ' Security
+            INI.SetIni("Certificate", "ServerCertPassword", $"""{Settings.MachineId}""")
+
+            INI.SaveIni()
+
+            Return False
+        Catch ex As Exception
+            Return True
+        End Try
         Return False
 
     End Function
 
     Private Function DoGloebit() As Boolean
 
+        If Not Settings.GloebitsEnable Then Return False
         'Gloebit.ini
         Try
             Dim INI = New LoadIni(Settings.OpensimBinPath & "config-addon-opensim\Gloebit.ini", ";", System.Text.Encoding.UTF8)
             ' always select the money symbol and the DLL's
             SelectMoneySymbol(INI)
-
-            If Not Settings.GloebitsEnable Then Return False
 
             INI.SetIni("Gloebit", "Enabled", CStr(Settings.GloebitsEnable))
             INI.SetIni("Gloebit", "GLBShowNewSessionAuthIM", CStr(Settings.GlbShowNewSessionAuthIM))
@@ -196,7 +222,8 @@ Module DoIni
             End If
 
             INI.SaveIni()
-        Catch
+        Catch ex As Exception
+            Return True
         End Try
 
         Return False
@@ -209,11 +236,17 @@ Module DoIni
         If Settings.GloebitsEnable Then
             INI.SetIni("LoginService", "Currency", "G$")
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
-        ElseIf Settings.GloebitsEnable = False And Settings.CMS = JOpensim Then
+        ElseIf Settings.JopensimMoney Then
             INI.SetIni("LoginService", "Currency", "jO$")
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
+        ElseIf Settings.DTLEnable Then
+            INI.SetIni("LoginService", "Currency", "D$")
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
         Else
             INI.SetIni("LoginService", "Currency", "$")
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
         End If
 
