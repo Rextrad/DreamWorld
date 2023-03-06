@@ -13,7 +13,7 @@
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>
     </AppDesignerFolder>
@@ -24,6 +24,7 @@
     </StartArguments>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -115,7 +116,6 @@
       <Name>System.Core</Name>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml">
       <Name>System.Xml</Name>
       <Private>False</Private>
@@ -237,15 +237,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="cube_blue.ico" />
-    <None Include="Resources\server.ico" />
-    <None Include="Resources\cubes.ico" />
-    <None Include="Resources\cube_yellow.ico" />
-    <None Include="Resources\cube_green.ico" />
-    <None Include="Resources\cube_blue.ico" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cube_blue.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
