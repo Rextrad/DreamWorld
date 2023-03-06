@@ -1903,17 +1903,65 @@ Public Module MysqlInterface
                 .WindowStyle = ProcessWindowStyle.Minimized,
                 .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\")
             }
-        Using Mutelist = New Process With {
+        Using Simstats = New Process With {
                 .StartInfo = pi
             }
 
             Try
-                Mutelist.Start()
-                Mutelist.WaitForExit()
+                Simstats.Start()
+                Simstats.WaitForExit()
             Catch ex As Exception
                 BreakPoint.Dump(ex)
                 ErrorLog("Could Not create SimStats Database " & ex.Message)
                 FileIO.FileSystem.CurrentDirectory = Settings.CurrentDirectory
+            End Try
+        End Using
+
+        pi = New ProcessStartInfo With {
+                .FileName = "perl.exe",
+                .UseShellExecute = True,
+                .CreateNoWindow = True,
+                .WindowStyle = ProcessWindowStyle.Hidden,
+                .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "MSFT_Runtimes"),
+                .Arguments = "CheckModules.pl"
+            }
+
+        Using Simstats = New Process With {
+                .StartInfo = pi
+            }
+
+            Try
+                Simstats.Start()
+                Simstats.WaitForExit()
+                If Simstats.ExitCode <> 0 Then
+                    InstallModules()
+                End If
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+                ErrorLog("Could Not create SimStats Database " & ex.Message)
+            End Try
+        End Using
+
+    End Sub
+
+    Private Sub InstallModules()
+
+        Dim pi = New ProcessStartInfo With {
+                .FileName = "InstallPerlModules.bat",
+                .UseShellExecute = True,
+                .CreateNoWindow = True,
+                .WindowStyle = ProcessWindowStyle.Hidden,
+                .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "MSFT_Runtimes")
+            }
+        Using Simstats = New Process With {
+                .StartInfo = pi
+            }
+
+            Try
+                Simstats.Start()
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+                ErrorLog("Could Not create SimStats Database " & ex.Message)
             End Try
         End Using
 
