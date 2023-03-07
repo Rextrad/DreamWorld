@@ -40,17 +40,7 @@ Module WindowHandlers
 
     Public Function CachedProcess(PID As Integer) As Process
 
-        If Not ProcessIdDict.ContainsKey(PID) Then
-            Try
-                Dim Pr = Process.GetProcessById(PID)
-                If Pr IsNot Nothing Then
-                    ProcessIdDict.Add(PID, Pr)
-                    Return Pr
-                End If
-            Catch ex As Exception
-            End Try
-        End If
-        Return ProcessIdDict(PID)
+        Return Process.GetProcessById(PID)
 
     End Function
 
@@ -157,16 +147,19 @@ Module WindowHandlers
 
         If Groupname <> RobustName() Then
             Try
-                For Each p In PropInstanceHandles
-                    If p.Value = Groupname Then
-                        Return CachedProcess(p.Key).MainWindowHandle
-                    End If
-                Next
+                Dim PID = GetPIDFromInstanceHandles(Groupname)
+                If PID = 0 Then Return IntPtr.Zero
+
+                Dim Pr = Process.GetProcessById(PID)
+                If Pr IsNot Nothing Then
+                    Return Pr.MainWindowHandle
+                End If
             Catch ex As Exception
             End Try
         Else
             Try
-                Return CachedProcess(PropRobustProcID).MainWindowHandle
+                Dim Pr = Process.GetProcessById(PropRobustProcID)
+                Return Pr.MainWindowHandle
             Catch
             End Try
 
@@ -190,7 +183,7 @@ Module WindowHandlers
 
     Public Sub GetPIDFromFile(GroupName As String)
 
-        Dim P = IO.Path.Combine(Settings.CurrentDirectory, "Outworldzfiles\Opensim\bin\Regions\{$Groupname}")
+        Dim P = IO.Path.Combine(Settings.CurrentDirectory, $"Outworldzfiles\Opensim\bin\Regions\{GroupName}")
         Dim PIDfile = IO.Path.Combine(P, "PID.pid")
         Try
             If System.IO.File.Exists(PIDfile) Then

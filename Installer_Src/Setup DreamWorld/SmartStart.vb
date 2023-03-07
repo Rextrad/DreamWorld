@@ -10,7 +10,7 @@ Imports System.Threading
 
 Module SmartStart
     Public ReadOnly BootedList As New List(Of String)
-    Public ReadOnly ProcessIdDict As New Dictionary(Of Integer, Process)
+
     Public MyCPUCollection As New List(Of Double)
     Public MyRAMCollection As New List(Of Double)
     Public ToDoList As New Dictionary(Of String, TaskObject)
@@ -917,11 +917,7 @@ Module SmartStart
                 PID = WaitForPID(BootProcess)      ' check if it gave us a PID, if not, it failed.
 
                 If PID > 0 Then
-                    If ProcessIdDict.ContainsKey(PID) Then
-                        ProcessIdDict.Item(PID) = CachedProcess(PID)
-                    Else
-                        ProcessIdDict.Add(PID, BootProcess)
-                    End If
+
                     ' 0 is all cores
                     Try
                         If Cores(RegionUUID) > 0 Then

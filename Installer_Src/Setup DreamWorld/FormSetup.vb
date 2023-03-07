@@ -825,7 +825,6 @@ Public Class FormSetup
         Zap("baretail")
         Zap("cports")
 
-        ProcessIdDict.Clear()
         PropInstanceHandles.Clear()
 
         Settings.SaveSettings()
@@ -1030,7 +1029,6 @@ Public Class FormSetup
 
                 PID = ProcessID(RegionUUID)
                 ProcessID(RegionUUID) = 0
-                ProcessIdDict.Remove(PID)
                 DelPidFile(RegionUUID) 'kill the disk PID
 
                 If PropInstanceHandles.ContainsKey(PID) Then
