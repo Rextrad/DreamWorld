@@ -4,7 +4,7 @@ use Try::Tiny;
 try {
 
     use  File::BOM;
-    use cxx Config::IniFiles;
+    use  Config::IniFiles;
 
 } catch {
     exit 1;    
