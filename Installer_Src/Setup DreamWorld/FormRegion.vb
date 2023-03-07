@@ -249,7 +249,7 @@ Public Class FormRegion
     Public Sub Init(Name As String)
 
         Me.Focus()
-
+        RName = Name
         If Name Is Nothing Then Return
         Name = Name.Trim() ' remove spaces
 
@@ -1709,15 +1709,23 @@ Public Class FormRegion
 
     Private Sub RadioButton17_CheckedChanged_1(sender As Object, e As EventArgs) Handles Freeze_Thaw.CheckedChanged
 
+        If Settings.WelcomeRegion = RName And Settings.Smart_Start_Enabled Then
+            MsgBox("Your default Welcome region cannot be set to Suspend Mode.")
+            Freeze_Thaw.Checked = False
+            SmartStartOff.Checked = True
+            Settings.SaveSettings()
+        End If
         If Initted1 Then Changed1 = True
 
     End Sub
 
     Private Sub RadioButton18_CheckedChanged(sender As Object, e As EventArgs) Handles Shutdown_Boot.CheckedChanged
 
-        If Settings.WelcomeRegion = Name And Shutdown_Boot.Checked Then
-            MsgBox("Your default Welcome region cannot be set to Shutdown. It can be set to Suspend")
-            Freeze_Thaw.Checked = True
+        If Settings.WelcomeRegion = RName And Settings.Smart_Start_Enabled Then
+            MsgBox("Your default Welcome region cannot be set to Shutdown Mode.")
+            Shutdown_Boot.Checked = False
+            SmartStartOff.Checked = True
+            Settings.SaveSettings()
         End If
 
         If Initted1 Then Changed1 = True
