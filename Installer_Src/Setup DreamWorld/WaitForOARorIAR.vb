@@ -9,6 +9,7 @@ Public Class SeekObject
 End Class
 
 Public Class WaitForFile
+    Implements IDisposable
 
     ReadOnly o As New SeekObject
     Private CTR As Integer
@@ -42,6 +43,10 @@ Public Class WaitForFile
 
     End Sub
 
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Dispose(True)
+    End Sub
+
     Public Sub Scan()
 
         ' file exists
@@ -66,6 +71,10 @@ Public Class WaitForFile
         Dim timeout = 30 * 60 * sleeptime ' 30 minutes to save
         While CTR < timeout
             PokeRegionTimer(RegionUUID)
+            If Not CheckPort(RegionUUID) Then
+                Return
+            End If
+
             Try
                 'seek to the last max offset
                 reader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin)
@@ -82,6 +91,7 @@ Public Class WaitForFile
                                 RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Finished_word}", "")
                             End If
                             reader.Close()
+
                             Return
                         End If
                         'update the last max offset
@@ -101,6 +111,13 @@ Public Class WaitForFile
         End While
         reader.Close()
 
+    End Sub
+
+    Protected Overridable Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+            reader.Close()
+            GC.SuppressFinalize(Me)
+        End If
     End Sub
 
     Private Shared Function ScanForPattern(line As String, text As String) As Boolean
