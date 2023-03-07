@@ -1921,7 +1921,7 @@ Public Module MysqlInterface
         Using Simstats = New Process With {
                 .StartInfo = pi
             }
-
+            TextPrint("Installing Perl Modules")
             Try
                 Simstats.Start()
                 Simstats.WaitForExit()
@@ -1930,7 +1930,7 @@ Public Module MysqlInterface
                 End If
             Catch ex As Exception
                 BreakPoint.Dump(ex)
-                ErrorLog("Could Not create SimStats Database " & ex.Message)
+                ErrorLog("Could Not Install Perl Modules:" & ex.Message)
             End Try
         End Using
 
