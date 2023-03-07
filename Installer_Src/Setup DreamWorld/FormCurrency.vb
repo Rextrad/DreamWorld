@@ -61,6 +61,12 @@ Public Class FormCurrency
 
         SetScreen()
 
+        ' suppress two tab pages as they do not yet work
+        TabControl1.TabPages.Remove(TabPage1)
+        'TabControl1.TabPages.Insert(0, TabPage1)
+        TabControl1.TabPages.Remove(DtlTab)
+        'TabControl1.TabPages.Insert(0, DTLTab)
+
         Button4.Text = Global.Outworldz.My.Resources.Free_Account
         GLBShowNewSessionAuthIMCheckBox.Text = Global.Outworldz.My.Resources.GLBShowNewSessionAuthIM_text
         GLBShowNewSessionPurchaseIMCheckBox.Text = Global.Outworldz.My.Resources.GLBShowNewSessionPurchaseIM_text
