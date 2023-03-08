@@ -55,6 +55,7 @@ Module FileStuff
             "OutworldzFiles\Opensim\bin\OpenSim.Additional.AutoRestart.dll",
             "OutworldzFiles\Opensim\bin\OpenSim.Additional.AutoRestart.pdb",
             "OutworldzFiles\Opensim\bin\config-include\Birds.ini",
+            "OutworldzFiles\Logs\Status.log",
             "SET_externalIP-Log.txt",
             "OutworldzFiles\Opensim\bin\Opensim.proto",
             "OutworldzFiles\Opensim\bin\OpenSimRegion.proto",
