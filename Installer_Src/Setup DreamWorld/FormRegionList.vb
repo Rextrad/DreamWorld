@@ -306,9 +306,8 @@ Public Class FormRegionlist
 
         ElseIf chosen = "Edit" Then
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
             Dim RegionForm As New FormRegion
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
             RegionForm.BringToFront()
             RegionForm.Init(RegionName)
             RegionForm.Activate()
@@ -1348,9 +1347,9 @@ Public Class FormRegionlist
                 Dim Username = item.SubItems(0).Text.Trim
                 Dim UUID = item.SubItems(7).Text.Trim
                 If Username.Length > 0 Then
-#Disable Warning CA2000
+
                     Dim UserData As New FormEditUser
-#Enable Warning CA2000
+
                     UserData.Init(UUID)
                     UserData.BringToFront()
                     UserData.Activate()
@@ -1367,7 +1366,7 @@ Public Class FormRegionlist
 
 #Region "Layout"
 
-    Dim regionLock As New Object
+    ReadOnly regionLock As New Object
 
     Private Sub ShowAvatars()
         Try
@@ -1899,9 +1898,8 @@ Public Class FormRegionlist
 
     Private Sub Email_Click(sender As Object, e As EventArgs) Handles Emails.Click
 
-#Disable Warning CA2000
         Dim EmailForm = New FormEmail
-#Enable Warning CA2000
+
         EmailForm.BringToFront()
         EmailForm.Init(UserView)
         Try

@@ -10,7 +10,7 @@ Imports System.Threading
 
 Module WindowHandlers
 
-    Private _exitList As New ConcurrentDictionary(Of String, String)
+    Private ReadOnly _exitList As New ConcurrentDictionary(Of String, String)
 
     Public ReadOnly Property ExitList As ConcurrentDictionary(Of String, String)
         Get
@@ -46,7 +46,7 @@ Module WindowHandlers
 
     Public Function ConsoleCommand(RegionUUID As String, command As String) As Boolean
 
-        ''' <summary>Sends keystrokes to Opensim. Always sends and enter button before to clear and use keys</summary>
+        ''' <summary>Sends keystrokes to Opensim. Always sends an enter button before to clear and use keys</summary>
         ''' <param name="ProcessID">PID of the DOS box</param>
         ''' <param name="command">String</param>
         ''' <returns></returns>
@@ -284,7 +284,7 @@ Module WindowHandlers
     End Sub
 
     ''' <summary>
-    ''' Returns is we started with the Server param which means run as a Service.
+    ''' Returns if we started with the Server param and service is installed, which means run as a Service.
     ''' </summary>
     ''' <returns></returns>
     Public Function RunningInServiceMode() As Boolean
@@ -293,8 +293,12 @@ Module WindowHandlers
         'Log("Service", $"Startup param = {Param}")
         'Log("Service", $"Environment path = {Environment.CommandLine}")
         'Log("Service", $"RunAsService = {RunAsService}")
-        Dim run = CBool(Param.ToLower = "service")
-        Return run
+
+        If ServiceExists("DreamGridService") And CBool(Param.ToLower = "service") Then
+            Return True
+        Else
+            Return False
+        End If
 
     End Function
 
@@ -435,8 +439,7 @@ Module WindowHandlers
                 Sleep(100)
                 Application.DoEvents()
             End While
-        Else
-            Log("Warn", $"Cannot minimize or find {Group_Name(RegionUUID)}")
+
         End If
 
         Return False

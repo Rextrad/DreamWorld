@@ -173,6 +173,7 @@ Module Backup
         Dim Result = New WaitForFile(RegionUUID, fin, "Save OAR")
         RPC_Region_Command(RegionUUID, $"{change} ""{Region_Name(RegionUUID)}""")
         RPC_Region_Command(RegionUUID, $"{save} ""{file}""")
+        Result.Scan()
     End Sub
 
 #End Region

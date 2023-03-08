@@ -91,9 +91,9 @@ Public Class FormDebug
     Private Shared Sub MakeMap()
 
         Try
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
             Dim NewMap = New FormGlobalMap
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
             NewMap.Show()
             NewMap.Activate()
             NewMap.Select()

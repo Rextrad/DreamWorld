@@ -472,6 +472,8 @@ Public Class FormSetup
 
         Me.Show()
 
+        CheckForUpdates()
+
         RunningBackupName.Clear()
 
         Dim v = Reflection.Assembly.GetExecutingAssembly().GetName().Version
@@ -486,8 +488,6 @@ Public Class FormSetup
         UpgradeDotNet() ' one time run for Dot net prerequisites
         SetupPerl() ' Ditto
         SetupPerlModules() ' Perl Language interpreter
-        Settings.DotnetUpgraded() = True
-
         TextPrint(My.Resources.Getting_regions_word)
 
         PropChangedRegionSettings = True
@@ -499,27 +499,18 @@ Public Class FormSetup
 
         AddVoices() ' add eva and mark voices
 
-        Application.DoEvents()
-
         ' Boot RAM Query
         Searcher1 = New ManagementObjectSearcher(wql)
-        Application.DoEvents()
 
         CopyWifi() 'Make the two folders in Wifi and Wifi bin for Diva
 
         Cleanup() ' old files thread
-
-        DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\Status.log"))
 
         'UPNP create if we need it
         PropMyUPnpMap = New UPnp()
 
         ' WebUI Menu
         ViewWebUI.Visible = Settings.WifiEnabled
-        If Not RunningInServiceMode() Then
-            CheckForUpdates()
-            Application.DoEvents()
-        End If
 
         ' Get Opensimulator Scripts to date if needed
         If Settings.DeleteScriptsOnStartupLevel <> PropSimVersion Then
@@ -583,25 +574,23 @@ Public Class FormSetup
 
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
-        If (ServiceExists("DreamGridService") And RunningInServiceMode()) Or Not ServiceExists("DreamGridService") Then
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Application.DoEvents()
         End If
 
         Sleep(100)
-        If TestPrivateLoopback(True) Then
-            ErrorLog("Diagnostic Listener port failed. Aborting")
-            TextPrint("Diagnostic Listener port failed. Aborting")
-            Return
+        ' Run Diagnostics
+        If Not RunningInServiceMode() Then
+            If TestPrivateLoopback(True) Then
+                ErrorLog("Diagnostic Listener port failed. Aborting")
+                TextPrint("Diagnostic Listener port failed. Aborting")
+                Return
+            End If
         End If
 
-        ' Run Diagnostics
-        CheckDiagPort()
-
-        Dim DB = IsMySqlRunning()
-
-        If DB Then
+        If IsMySqlRunning() Then
             ' clear any temp regions on boot.
             For Each RegionUUID In RegionUuids()
                 If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
@@ -633,7 +622,13 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
-        If Settings.ShowRegionListOnBoot Then
+        If RunningInServiceMode() Then
+            OnToolStripMenuItem.Checked = False
+            OffToolStripMenuItem.Checked = True
+            MySQLSpeed.Text = ""
+        End If
+
+        If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
         End If
 
@@ -1008,8 +1003,6 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
-        If RunningInServiceMode() Then Return
-
         ' now look at the exit stack
         While Not ExitList.IsEmpty
 
@@ -1182,6 +1175,7 @@ Public Class FormSetup
     End Sub
 
     Private Sub RestartDOSboxes()
+
         If RunningInServiceMode() Then Return
         If PropRobustExited = True Then
             RobustIcon(False)
@@ -1528,6 +1522,8 @@ Public Class FormSetup
 
     Private Sub Chart()
 
+        If RunningInServiceMode() Then Return
+
         ' Graph https://github.com/sinairv/MSChartWrapper
         Try
             ' running average
@@ -1619,6 +1615,8 @@ Public Class FormSetup
     End Sub
 
     Private Sub LoadHelp()
+
+        If RunningInServiceMode() Then Return
 
         ' read help files for menu
         TextPrint(My.Resources.LoadHelp)
@@ -2015,7 +2013,12 @@ Public Class FormSetup
 #End Region
 
     Private Shared Sub PrintBackups()
-        If RunningInServiceMode() Then Return
+
+        If RunningInServiceMode() Then
+            RunningBackupName.Clear()
+            Return
+        End If
+
         For Each k In RunningBackupName
             TextPrint(k.Key)
             RunningBackupName.TryRemove(k.Key, "")
@@ -2080,15 +2083,13 @@ Public Class FormSetup
 
         Chart()                     ' do charts collection
 
-        If Not RunningInServiceMode() Then
-            CheckPost()                 ' see if anything arrived in the web server
-            TeleportAgents()
-            CheckForBootedRegions()     ' task to scan for anything that just came on line
-            ProcessQuit()               ' check if any processes exited
-            PrintBackups()              ' print if backups are running
-            Chat2Speech()               ' speak of the devil
-            RestartDOSboxes()           ' Icons for failed Services
-        End If
+        CheckPost()                 ' see if anything arrived in the web server
+        TeleportAgents()
+        CheckForBootedRegions()     ' task to scan for anything that just came on line
+        ProcessQuit()               ' check if any processes exited
+        PrintBackups()              ' print if backups are running
+        Chat2Speech()               ' speak of the devil
+        RestartDOSboxes()           ' Icons for failed Services
 
         If SecondsTicker Mod 5 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("5 second + worker")
@@ -2108,8 +2109,6 @@ Public Class FormSetup
 
         If SecondsTicker = 60 Then
             Bench.Start("60 second worker")
-            DeleteOldWave()         ' clean up TTS cache
-            RegionListHTML("Name")  ' create HTML for old teleport boards
             DeleteDirectoryTmp()    ' clean up old tmp folder
             MakeMaps()              ' Make all the large maps
             Bench.Print("60 second worker")
@@ -2128,7 +2127,6 @@ Public Class FormSetup
         ' Run Search and events once at 5 minute mark
         If SecondsTicker = 300 Then
             Bench.Start("300 second worker")
-            BackupThread.RunTimedBackups() ' run background thread once and also expire old backups
             RunParser()     ' PHP parse for Publicity
             GetEvents()     ' fetch events from Outworldz
             ScanOpenSimWorld(True)
@@ -2138,10 +2136,6 @@ Public Class FormSetup
         If SecondsTicker Mod 300 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("300 second + worker")
             BackupThread.RunTimedBackups() ' run background right now, assuming its been long enough
-            If TestPrivateLoopback(False) Then
-                ErrorLog("Diagnostic Listener port failed")
-                TextPrint("Diagnostic Listener port failed")
-            End If
             Bench.Print("300 second + worker")
         End If
 
@@ -2184,19 +2178,6 @@ Public Class FormSetup
 #End Region
 
 #Region "Clicks"
-
-    Private Shared Sub CheckDiagPort()
-
-        TextPrint(My.Resources.Check_Diag)
-        Dim wsstarted = CheckPort2(Settings.LANIP, CType(Settings.DiagnosticPort, Integer))
-        If wsstarted = False Then
-            If Not RunningInServiceMode() Then
-                MsgBox($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
-            End If
-            ErrorLog($"{My.Resources.Diag_Port_word} {Settings.DiagnosticPort}  {Global.Outworldz.My.Resources.Diag_Broken}")
-        End If
-
-    End Sub
 
     Private Shared Sub RunCheck(type As String)
         Using p = New Process()
@@ -3126,7 +3107,7 @@ Public Class FormSetup
 
     Private Sub ShowConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowConsoleToolStripMenuItem.Click
 
-        If Not ServiceExists("DreamGridService") And Not Settings.RunAsService Then
+        If Not RunningInServiceMode() Then
             ShowDOSWindow(RobustName, SHOWWINDOWENUM.SWRESTORE)
             Return
         End If

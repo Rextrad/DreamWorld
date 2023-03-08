@@ -9,8 +9,7 @@ Imports System.IO
 Imports System.Threading
 
 Public Module Firewall
-
-    Dim FirewallLock As New Object
+    ReadOnly FirewallLock As New Object
 
     Function AddFirewallRules() As String
 

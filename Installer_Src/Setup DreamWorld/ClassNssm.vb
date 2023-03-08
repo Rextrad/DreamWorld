@@ -32,6 +32,7 @@
             TextPrint(My.Resources.ServiceFailedtoStart)
             Return False
         End If
+
     End Function
 
     Public Sub StopAndDeleteService()
@@ -60,10 +61,7 @@
 
     Private Function NssmCommand(command As String) As Boolean
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
         Dim BootProcess = New Process
-#Enable Warning CA2000 ' Dispose objects before losing scope
-
         BootProcess.StartInfo.UseShellExecute = True
         BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
         BootProcess.StartInfo.CreateNoWindow = True

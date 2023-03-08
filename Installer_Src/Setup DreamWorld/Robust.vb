@@ -165,13 +165,9 @@ Module Robust
 
         ' enable console for Service mode
         Dim args As String = ""
-        If ServiceExists("DreamGridService") And RunningInServiceMode() Then
+        If RunningInServiceMode() Then
             args = " -console=rest" ' space required
             Settings.GraphVisible = False
-        End If
-
-        If ServiceExists(("DreamGridService")) Then
-            Return True
         End If
 
         RobustProcess.StartInfo.Arguments &= args
@@ -340,19 +336,19 @@ Module Robust
 
         Next
 
-        INI.SetIni("LoginService", "DeniedMacs", MACString)
-        INI.SetIni("GatekeeperService", "DeniedMacs", IDString)
+        ' Ban Macs
+        MACString = MACString.Replace(" ", "")
 
-        INI.SetIni("LoginService", "DeniedID0s", MACString)
-        INI.SetIni("GatekeeperService", "DeniedID0s", MACString)
+        INI.SetIni("LoginService", "DeniedMacs", MACString)
+        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
+
+        INI.SetIni("LoginService", "DeniedID0s", IDString)
+        INI.SetIni("GatekeeperService", "DeniedID0s", IDString)
 
         ' Ban grids
         GridString = GridString.Replace(",", "")
 
         INI.SetIni("GatekeeperService", "AllowExcept", GridString)
-
-        ' Ban Macs
-        MACString = MACString.Replace(" ", "")
 
         'Ban Viewers
         ViewerString = ViewerString.Replace(" ", "")
@@ -610,7 +606,7 @@ Module Robust
 
         End Using
 
-        If Up = "" Then
+        If Up.Length = 0 Then
             MarkRobustOffline()
             Return False
         ElseIf Up.Contains("OpenSim") Then

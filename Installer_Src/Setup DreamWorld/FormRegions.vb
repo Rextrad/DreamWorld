@@ -13,10 +13,8 @@ Public Class FormRegions
 
 #Region "Forms"
 
-#Disable Warning CA2213
     Private BlockifyForm As New FormBlockify
     Private RegionForm As New FormRegion
-#Enable Warning CA2213
 
 #End Region
 
@@ -148,9 +146,9 @@ Public Class FormRegions
     Private Sub RegionBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RegionBox.SelectedIndexChanged
 
         Dim value As String = TryCast(RegionBox.SelectedItem, String)
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim RegionForm As New FormRegion
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         RegionForm.Init(value)
         RegionForm.Activate()
         RegionForm.Visible = True
@@ -168,9 +166,9 @@ Public Class FormRegions
         For Each RegionUUID In RegionUuids()
 
             Dim RegionName = Region_Name(RegionUUID)
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
             Dim RegionForm As New FormRegion
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
             RegionForm.Init(RegionName)
             RegionForm.Activate()
             RegionForm.Visible = True

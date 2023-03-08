@@ -16,7 +16,7 @@ Module FileStuff
     ''' <param name="file">Full Path </param>
     Public Sub Baretail(filepath As String)
 
-        Dim fname As String = ""
+        Dim fname As String
         If Settings.Logger = "Baretail" Then
             fname = IO.Path.Combine(Settings.CurrentDirectory, "baretail.exe")
         Else
@@ -24,9 +24,7 @@ Module FileStuff
         End If
 
         Try
-#Disable Warning CA2000 ' Dispose objects before losing scope
             Dim myProcess = New Process()
-#Enable Warning CA2000 ' Dispose objects before losing scope
             myProcess.StartInfo.UseShellExecute = False
             myProcess.StartInfo.FileName = fname
             myProcess.StartInfo.Arguments = filepath
@@ -55,6 +53,7 @@ Module FileStuff
             "OutworldzFiles\Opensim\bin\OpenSim.Additional.AutoRestart.dll",
             "OutworldzFiles\Opensim\bin\OpenSim.Additional.AutoRestart.pdb",
             "OutworldzFiles\Opensim\bin\config-include\Birds.ini",
+            "OutworldzFiles\Logs\Status.log",
             "SET_externalIP-Log.txt",
             "OutworldzFiles\Opensim\bin\Opensim.proto",
             "OutworldzFiles\Opensim\bin\OpenSimRegion.proto",

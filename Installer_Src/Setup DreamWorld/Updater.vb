@@ -14,6 +14,8 @@ Module Updater
     ''' <summary>Checks the Outworldz Web site to see if a new version exist,.</summary>
     Public Sub CheckForUpdates()
 
+        If RunningInServiceMode() Then Return
+
         Dim ReleasedVersion As Double
         Dim MyVersion As Double
         Try
@@ -60,9 +62,8 @@ Module Updater
 
     Public Sub ShowUpdateForm()
 
-#Disable Warning CA2000
         Dim FormUpdate = New FormUpdate()
-#Enable Warning CA2000
+
         FormUpdate.Init()
         FormUpdate.BringToFront()
         Dim doUpdate = FormUpdate.ShowDialog()

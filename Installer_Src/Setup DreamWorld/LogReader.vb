@@ -4,7 +4,7 @@ Imports System.Threading
 
 Public Class LogReader
 
-    Private Errors As New List(Of String) From {
+    Private ReadOnly Errors As New List(Of String) From {
                 "Couldn't start script"
             }
 
@@ -28,7 +28,7 @@ Public Class LogReader
 
         If o Is Nothing Then Return
         Dim RegionUUID As String = o.RegionUUID
-        Dim lastMaxOffset As Long = 0
+        Dim lastMaxOffset As Long
 
         Try
             Dim filename = IO.Path.Combine(Settings.OpensimBinPath, $"Regions/{Group_Name(RegionUUID)}/Opensim.log")
@@ -47,7 +47,6 @@ Public Class LogReader
 
                         'seek to the last max offset
                         reader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin)
-                        'Dim line As String = ""
                         While reader.BaseStream.Length <> lastMaxOffset
                             ScanIssues(reader.ReadLine(), RegionUUID)
                             'update the last max offset

@@ -13,7 +13,7 @@ Public Class WaitForFile
 
     ReadOnly o As New SeekObject
     Private CTR As Integer
-    Private Filename As String
+
     Private lastMaxOffset As Long
     Private reader As StreamReader
 
@@ -25,7 +25,7 @@ Public Class WaitForFile
 
         PokeRegionTimer(RegionUUID)
 
-        Filename = IO.Path.Combine(Settings.OpensimBinPath, $"Regions/{Group_Name(o.RegionUUID)}/Opensim.log")
+        Dim Filename = IO.Path.Combine(Settings.OpensimBinPath, $"Regions/{Group_Name(o.RegionUUID)}/Opensim.log")
         If Not File.Exists(Filename) Then
             ' Create or overwrite the file.
             Dim fs As FileStream = File.Create(Filename)
@@ -45,6 +45,7 @@ Public Class WaitForFile
 
     Public Sub Dispose() Implements IDisposable.Dispose
         Dispose(True)
+        GC.SuppressFinalize(Me)
     End Sub
 
     Public Sub Scan()
@@ -116,7 +117,6 @@ Public Class WaitForFile
     Protected Overridable Sub Dispose(ByVal disposing As Boolean)
         If disposing Then
             reader.Close()
-            GC.SuppressFinalize(Me)
         End If
     End Sub
 

@@ -15,7 +15,7 @@ Imports MySqlConnector
 #Region "MysqlInterface"
 
 Public Module MysqlInterface
-    Public WithEvents ProcessMySql As Process = New Process()
+    Public WithEvents ProcessMySql As New Process()
 
     Private _MysqlCrashCounter As Integer
     Private _MysqlExited As Boolean
@@ -359,12 +359,11 @@ Public Module MysqlInterface
             Try
                 MysqlConn.Open()
                 Dim stm = $"delete from {tablename} WHERE  {uuidname} = @UUID"
-#Disable Warning CA2100
+
                 Using cmd = New MySqlCommand(stm, MysqlConn)
                     cmd.Parameters.AddWithValue("@UUID", RegionUuid)
                     cmd.ExecuteNonQuery()
                 End Using
-#Enable Warning CA2100
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -380,7 +379,6 @@ Public Module MysqlInterface
     Public Sub DeleteIM(id As Integer)
 
         Dim stm = $"delete from im_offline where id = @param"
-        Dim v As String = ""
 
         Dim conn As String
         If (Settings.ServerType = RobustServerName) Then
@@ -392,11 +390,11 @@ Public Module MysqlInterface
         Using MysqlConn As New MySqlConnection(conn)
             Try
                 MysqlConn.Open()
-#Disable Warning CA2100
+
                 Using cmd As New MySqlCommand(stm, MysqlConn)
 #Enable Warning
                     cmd.Parameters.AddWithValue("@param", id)
-                    v = Convert.ToString(cmd.ExecuteScalar(), Globalization.CultureInfo.InvariantCulture)
+                    cmd.ExecuteScalar()
                 End Using
             Catch ex As Exception
                 BreakPoint.Print(ex.Message)
@@ -743,9 +741,9 @@ Public Module MysqlInterface
         Using MysqlConn As New MySqlConnection(Settings.RegionMySqlConnection)
             Try
                 MysqlConn.Open()
-#Disable Warning CA2100
+
                 Using cmd1 = New MySqlCommand(stm, MysqlConn)
-#Enable Warning CA2100
+
                     cmd1.ExecuteNonQuery()
                 End Using
             Catch ex As Exception
@@ -756,6 +754,7 @@ Public Module MysqlInterface
     End Sub
 
     ' TODO model for one param queries
+
     Public Function Queryparam(SQL As String, param As String) As String
 
         Dim v As String = ""
@@ -770,9 +769,11 @@ Public Module MysqlInterface
         Using MysqlConn As New MySqlConnection(conn)
             Try
                 MysqlConn.Open()
-#Disable Warning CA2100
+
+#Disable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 Using cmd As New MySqlCommand(SQL, MysqlConn)
-#Enable Warning
+#Enable Warning CA2100 ' Review SQL queries for security vulnerabilities
+
                     cmd.Parameters.AddWithValue("@param", param)
                     v = Convert.ToString(cmd.ExecuteScalar(), Globalization.CultureInfo.InvariantCulture)
                 End Using
@@ -785,7 +786,6 @@ Public Module MysqlInterface
 
     End Function
 
-    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100Review Sql queries for security vulnerabilities")>
     Public Function QueryString(SQL As String) As String
 
         Dim v As String = ""
@@ -800,10 +800,12 @@ Public Module MysqlInterface
             Using MysqlConn As New MySqlConnection(conn)
 
                 MysqlConn.Open()
-#Disable Warning CA2100
+
+#Disable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 Using cmd As New MySqlCommand(SQL, MysqlConn)
 #Enable Warning
                     v = Convert.ToString(cmd.ExecuteScalar(), Globalization.CultureInfo.InvariantCulture)
+#Enable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 End Using
 
             End Using
@@ -815,8 +817,6 @@ Public Module MysqlInterface
 
     End Function
 
-    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")>
-    <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100Review Sql queries for security vulnerabilities")>
     Public Sub QuerySuper(SQL As String)
 
         Dim conn As String
@@ -824,9 +824,11 @@ Public Module MysqlInterface
         Using MysqlConn As New MySqlConnection(conn)
             Try
                 MysqlConn.Open()
-#Disable Warning CA2100
+
+#Disable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 Using cmd As New MySqlCommand(SQL, MysqlConn)
-#Enable Warning
+#Enable Warning CA2100 ' Review SQL queries for security vulnerabilities
+
                     cmd.ExecuteNonQuery()
                 End Using
             Catch ex As Exception
@@ -1145,10 +1147,11 @@ Public Module MysqlInterface
                                 grid = grid.Replace("http://", "")
                                 grid = grid.Replace("/", "")
                                 Dim AvatarUUID = m.Groups(1).Value.ToString
-                                Dim HGVisitors As New AvatarObject
-                                HGVisitors.Grid = grid
-                                HGVisitors.RegionID = UUID
-                                HGVisitors.AvatarUUID = AvatarUUID
+                                Dim HGVisitors As New AvatarObject With {
+                                    .Grid = grid,
+                                    .RegionID = UUID,
+                                    .AvatarUUID = AvatarUUID
+                                }
                                 Dim parts As String() = m.Groups(3).Value.ToString.Split(" ".ToCharArray())
                                 HGVisitors.FirstName = parts(0).Trim
                                 HGVisitors.LastName = parts(1).Trim
@@ -1217,11 +1220,12 @@ Public Module MysqlInterface
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         While reader.Read()
                             If reader.GetString(0).Length > 0 Then
-                                Dim Avatar As New AvatarObject
-                                Avatar.AvatarUUID = reader.GetString("PrincipalID")
-                                Avatar.FirstName = reader.GetString("Firstname")
-                                Avatar.LastName = reader.GetString("LastName")
-                                Avatar.RegionID = reader.GetString("RegionID")
+                                Dim Avatar As New AvatarObject With {
+                                    .AvatarUUID = reader.GetString("PrincipalID"),
+                                    .FirstName = reader.GetString("Firstname"),
+                                    .LastName = reader.GetString("LastName"),
+                                    .RegionID = reader.GetString("RegionID")
+                                }
                                 Avatar.AgentName = Avatar.FirstName & " " & Avatar.LastName
                                 Avatar.Grid = Settings.PublicIP
                                 L.Add(Avatar)
@@ -1582,7 +1586,7 @@ Public Module MysqlInterface
             Try
                 MysqlConn.Open()
                 Dim stm = "SELECT name, landflags FROM land where regionuuid = @UUID and ((landflags & 64) or (landflags & 16) );"
-#Disable Warning CA2100
+
                 Using cmd = New MySqlCommand(stm, MysqlConn)
 #Enable Warning
 
@@ -1748,7 +1752,7 @@ Public Module MysqlInterface
             Try
                 MysqlConn.Open()
                 Dim stm = "update regions set flags = (flags) & ~4 where uuid = @UUID;"
-#Disable Warning CA2100
+
                 Using cmd = New MySqlCommand(stm, MysqlConn)
 #Enable Warning
                     cmd.Parameters.AddWithValue("@UUID", RegionUUID)
@@ -1768,7 +1772,7 @@ Public Module MysqlInterface
             Try
                 MysqlConn.Open()
                 Dim stm = "update regions set flags = (flags) | 4 where uuid = @UUID;"
-#Disable Warning CA2100
+
                 Using cmd = New MySqlCommand(stm, MysqlConn)
 #Enable Warning
                     cmd.Parameters.AddWithValue("@UUID", RegionUUID)
