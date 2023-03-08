@@ -1014,7 +1014,7 @@ Module RegionMaker
     Public Property CrashCounter(uuid As String) As Integer
         Get
             If RegionList.ContainsKey(uuid) Then
-                ErrorLog($"{Region_Name(uuid)} crashed")
+                Logger("Crash", $"{Region_Name(uuid)} crashed", "Outworldz")
                 Return RegionList(uuid)._CrashCounter
             End If
             BadUUID(uuid)

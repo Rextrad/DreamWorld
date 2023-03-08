@@ -1056,7 +1056,7 @@ Public Class FormSetup
             Dim Status = RegionStatus(RegionUUID)
             Dim RegionName = Region_Name(RegionUUID)
 
-            BreakPoint.Print($"{RegionName} {GetStateString(Status)}")
+            Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
 
             If Not RegionEnabled(RegionUUID) Then
                 ExitList.TryRemove(GroupName, "")

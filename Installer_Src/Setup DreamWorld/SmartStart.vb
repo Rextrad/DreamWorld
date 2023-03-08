@@ -241,14 +241,14 @@ Module SmartStart
                     If PropAborting Then Continue For
                     If Not PropOpensimIsRunning() Then Continue For
 
-                    BreakPoint.Print("State Is RestartPending")
+                    Logger("State", "State Is RestartPending", "Outworldz")
                     Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
                     For Each R As String In GroupList
                         PokeRegionTimer(RegionUUID)
                         Boot(RegionName)
                     Next
 
-                    BreakPoint.Print("State Is now Booted")
+                    Logger("State", "State Is now Booted", "Outworldz")
                     PropUpdateView = True
                     Continue For
                 End If
@@ -258,7 +258,7 @@ Module SmartStart
                     If PropAborting Then Continue For
                     If Not PropOpensimIsRunning() Then Continue For
                     'ResumeRegion(RegionUUID)
-                    BreakPoint.Print($"{GroupName} Is Resuming")
+                    Logger("State", $"{GroupName} Is Resuming", "Outworldz")
                     Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
                     For Each R As String In GroupList
                         If RegionEnabled(RegionUUID) Then
@@ -279,7 +279,7 @@ Module SmartStart
                     For Each R In GroupList
                         RegionStatus(R) = SIMSTATUSENUM.RestartPending
                         PokeRegionTimer(RegionUUID)
-                        BreakPoint.Print($"State changed to RestartPending {Region_Name(R)}")
+                        Logger("State", $"State changed to RestartPending {Region_Name(R)}", "Outworldz")
                     Next
                     PropUpdateView = True ' make form refresh
                     Continue For
