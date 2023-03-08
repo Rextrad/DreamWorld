@@ -30,7 +30,7 @@
         If Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Dim Groupname = Group_Name(RegionUUID)
             For Each UUID As String In RegionUuidListByName(Groupname)
-                BreakPoint.Print($"Pausing {Region_Name(UUID)}")
+                Logger("State", $"Pausing {Region_Name(UUID)}", "Outworldz")
                 Freeze(UUID)
             Next
 

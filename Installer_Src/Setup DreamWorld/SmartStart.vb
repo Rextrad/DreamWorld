@@ -176,7 +176,7 @@ Module SmartStart
                         End If
 
                         If diff > Settings.SmartStartTimeout Then
-                            BreakPoint.Print($"State Changed to ShuttingDown {GroupName} ")
+                            Logger("State", $"State Changed to ShuttingDown {GroupName} ", "Outworldz")
                             If Smart_Boot_Enabled(RegionUUID) Then
                                 ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                             Else

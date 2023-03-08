@@ -155,6 +155,7 @@ Module WindowHandlers
                     Return Pr.MainWindowHandle
                 End If
             Catch ex As Exception
+                BreakPoint.Print(ex.Message)
             End Try
         Else
             Try

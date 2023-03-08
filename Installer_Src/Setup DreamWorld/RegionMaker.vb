@@ -663,7 +663,7 @@ Module RegionMaker
                                 Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
                                 '
                                 GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
-                                BreakPoint.Print($"Assign Group Port {CStr(GroupPort(uuid))} To {fName}")
+                                Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
                                 '
                                 If GroupPort(uuid) = 0 Then
                                     GroupPort(uuid) = ThisGroup
