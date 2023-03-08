@@ -433,7 +433,7 @@ Module SmartStart
                 If status = SIMSTATUSENUM.Stopped Then Continue For
                 If status = SIMSTATUSENUM.Booted Then Continue For
 
-                BreakPoint.Print($"{Region_Name(RegionUUID)} is in state {GetStateString(status)}")
+                'BreakPoint.Print($"{Region_Name(RegionUUID)} is in state {GetStateString(status)}")
 
                 Select Case Settings.SequentialMode
                     Case 1  ' parallel with limits
