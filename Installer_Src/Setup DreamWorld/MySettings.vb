@@ -234,7 +234,6 @@ Public Class MySettings
     ''' <returns>80 by default</returns>
     Public Property ApachePort() As Integer
         Get
-            If SSLEnabled Then Return 443
             Return CInt("0" & GetMySetting("ApachePort", "80".ToUpperInvariant))
         End Get
         Set
