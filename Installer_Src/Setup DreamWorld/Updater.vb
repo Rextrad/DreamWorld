@@ -14,6 +14,8 @@ Module Updater
     ''' <summary>Checks the Outworldz Web site to see if a new version exist,.</summary>
     Public Sub CheckForUpdates()
 
+        If RunningInServiceMode() Then Return
+
         Dim ReleasedVersion As Double
         Dim MyVersion As Double
         Try
