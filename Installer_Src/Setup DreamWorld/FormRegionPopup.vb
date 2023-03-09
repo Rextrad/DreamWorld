@@ -177,18 +177,23 @@ Public Class FormRegionPopup
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles ShowConsoleButton.Click
 
-        If Not ServiceExists("DreamGridService") And Not Settings.RunAsService Then
+        If Not RunningInServiceMode() Then
             gPick = "Console"
             DialogResult = DialogResult.OK
         Else
+
+
             ' enable console for Service mode
             Dim args As String = ""
 
             Dim INI = New LoadIni(Settings.OpensimBinPath & "Opensim.ConsoleClient.ini", ";", System.Text.Encoding.UTF8)
-            Dim RegionNum = FindRegionByName(_RegionName)
+            Dim RegionUUID = FindRegionByName(_RegionName)
+
+            ResumeRegion(RegionUUID)
+
             INI.SetIni("Startup", "pass", CStr(Settings.Password))
             INI.SetIni("Startup", "user", $"{Settings.AdminFirst} {Settings.AdminLast}")
-            INI.SetIni("Startup", "port", CStr(GroupPort(RegionNum)))
+            INI.SetIni("Startup", "port", CStr(GroupPort(RegionUUID)))
             INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
             INI.SaveIni()
 
@@ -202,6 +207,7 @@ Public Class FormRegionPopup
 
             Try
                 ConsoleProcess.Start()
+                Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
             Catch ex As Exception
                 BreakPoint.Dump(ex)
                 TextPrint($"Console {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
