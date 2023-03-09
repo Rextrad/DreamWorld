@@ -19,7 +19,7 @@ Module PublicIP
 
             If Settings.DTLEnable Then
                 If Check.ContainsKey(Settings.DTLMoneyPort) Then
-                    bitch($"DTL Money Port: {Settings.DTLMoneyPort}")
+                    Bitch($"DTL Money Port: {Settings.DTLMoneyPort}")
                 Else
                     Check.Add(Settings.DTLMoneyPort, "DTL Money Port")
                 End If
@@ -27,33 +27,33 @@ Module PublicIP
 
             If Settings.SCEnable Then
                 If Check.ContainsKey(Settings.SCPortBase) Then
-                    bitch($"Icecast Port 1: {Settings.SCPortBase}")
+                    Bitch($"Icecast Port 1: {Settings.SCPortBase}")
                 Else
                     Check.Add(Settings.SCPortBase, "Icecast Port 1")
                 End If
 
                 If Check.ContainsKey(Settings.SCPortBase1) Then
-                    bitch($"Icecast Port 2 : {Settings.SCPortBase1}")
+                    Bitch($"Icecast Port 2 : {Settings.SCPortBase1}")
                 Else
                     Check.Add(Settings.SCPortBase1, "Icecast Port 2")
                 End If
             End If
 
             If Check.ContainsKey(Settings.DiagnosticPort) Then
-                bitch($"Diagnostic Port : {Settings.DiagnosticPort}")
+                Bitch($"Diagnostic Port : {Settings.DiagnosticPort}")
             Else
                 Check.Add(Settings.DiagnosticPort, "Diagnostic Port")
             End If
 
             If Check.ContainsKey(Settings.PrivatePort) Then
-                bitch($"Private Port : {Settings.PrivatePort}")
+                Bitch($"Private Port : {Settings.PrivatePort}")
             Else
                 Check.Add(Settings.PrivatePort, "Private Port")
             End If
 
             For Each Port In RegionUuids()
                 If Check.ContainsKey(Region_Port(Port)) Then
-                    bitch($"Region Port {Region_Name(Port)}: {Region_Port(Port)}")
+                    Bitch($"Region Port {Region_Name(Port)}: {Region_Port(Port)}")
                 Else
                     Check.Add(Region_Port(Port), "Region Port")
                 End If
@@ -151,7 +151,7 @@ Module PublicIP
 
     End Function
 
-    Private Sub bitch(msg As String)
+    Private Sub Bitch(msg As String)
 
         If Not RunningInServiceMode() Then
             MsgBox($"{Global.Outworldz.My.Resources.Error_word} Port conflict in {msg}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)

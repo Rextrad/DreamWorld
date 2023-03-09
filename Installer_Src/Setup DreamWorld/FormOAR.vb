@@ -479,16 +479,15 @@ Public Class FormOAR
                     Dim img As Image = Nothing
                     If item.Photo.Length > 0 Then
                         Dim link As New Uri($"{PropHttpsDomain}/Outworldz_installer/{_type}/{item.Photo}?r={CStr(Random())}")
-#Disable Warning CA2000
+
                         img = GetImageFromURL(link)
-#Enable Warning CA2000
 
                     End If
 
                     If img Is Nothing Then
-#Disable Warning CA2000
+
                         img = NoImage(item)
-#Enable Warning CA2000
+
                     End If
 
                     Dim colorcode As Color = Color.FromArgb(84, 115, 159)

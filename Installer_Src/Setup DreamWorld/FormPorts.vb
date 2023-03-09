@@ -177,7 +177,7 @@ Public Class FormPorts
 
     End Sub
 
-    Private Sub intIP_TextChanged(sender As Object, e As EventArgs) Handles intIP.TextChanged
+    Private Sub IntIP_TextChanged(sender As Object, e As EventArgs) Handles intIP.TextChanged
 
         If Not initted Then Return
         Settings.InternalAddress = intIP.Text

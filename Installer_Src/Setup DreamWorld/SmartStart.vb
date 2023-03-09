@@ -16,7 +16,7 @@ Module SmartStart
     Public ToDoList As New Dictionary(Of String, TaskObject)
     Public Visitor As New Dictionary(Of String, String)
 
-    Private ToDoCount As New Dictionary(Of String, Integer)
+    Private ReadOnly ToDoCount As New Dictionary(Of String, Integer)
 
     ''' <summary>
     ''' The list of commands
@@ -317,7 +317,7 @@ Module SmartStart
     ''' <param name="Taskname">A Task Name</param>
     Public Sub RebootAndRunTask(RegionUUID As String, TObj As TaskObject)
 
-        BreakPoint.Print($"{Region_Name(RegionUUID)} task {TObj.TaskName}")
+        'BreakPoint.Print($"{Region_Name(RegionUUID)} task {TObj.TaskName}")
 
         ' TODO add task queue
         ' so we can have more than one command
@@ -347,7 +347,7 @@ Module SmartStart
             Try
 
                 Dim Task = ToDoList.Item(RegionUUID)
-                BreakPoint.Print($"Pending tasks for {Region_Name(RegionUUID)}")
+                'BreakPoint.Print($"Pending tasks for {Region_Name(RegionUUID)}")
                 Try
                     ' stop trying after a period of time
                     ToDoCount(RegionUUID) = ToDoCount.Item(RegionUUID) + 1
@@ -361,7 +361,7 @@ Module SmartStart
                 End Try
 
                 If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
-                    BreakPoint.Print($"Running tasks for {Region_Name(RegionUUID)}")
+                    'BreakPoint.Print($"Running tasks for {Region_Name(RegionUUID)}")
                     ToDoList.Remove(RegionUUID)
 
                     ShowDOSWindow(RegionUUID, MaybeShowWindow())
@@ -431,7 +431,7 @@ Module SmartStart
                 If status = SIMSTATUSENUM.Stopped Then Continue For
                 If status = SIMSTATUSENUM.Booted Then Continue For
 
-                BreakPoint.Print($"{Region_Name(RegionUUID)} is in state {GetStateString(status)}")
+                'BreakPoint.Print($"{Region_Name(RegionUUID)} is in state {GetStateString(status)}")
 
                 Select Case Settings.SequentialMode
                     Case 1  ' parallel with limits
@@ -442,7 +442,7 @@ Module SmartStart
                             PokeRegionTimer(RegionUUID)
 
                             If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
-                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                                'BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                                 wait = True
                             End If
 
@@ -456,7 +456,7 @@ Module SmartStart
                             PokeRegionTimer(RegionUUID)
 
                             If (FormSetup.CPUAverageSpeed > Settings.CpuMax) Then
-                                BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
+                                'BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
                                 wait = True
                             End If
 
@@ -464,7 +464,7 @@ Module SmartStart
                         Else
                             If status = SIMSTATUSENUM.Booting Then
                                 PokeRegionTimer(RegionUUID)
-                                BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
+                                'BreakPoint.Print($"Waiting On {Region_Name(RegionUUID)}")
                                 If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
                                     wait = True
                                 End If
@@ -482,7 +482,7 @@ Module SmartStart
                              FormSetup.CPUAverageSpeed > Settings.CpuMax Then
 
                             PokeRegionTimer(RegionUUID)
-                            BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
+                            ' BreakPoint.Print($"Waiting On CPU for {Region_Name(RegionUUID)}")
                             wait = True
                         Else
                             If (FormSetup.CPUAverageSpeed > Settings.CpuMax Or Settings.Ramused > 90) Then
@@ -860,11 +860,10 @@ Module SmartStart
 
             If CopyOpensimProto(RegionUUID) Then Return False
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
             Dim BootProcess = New Process With {
                 .EnableRaisingEvents = True
             }
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
             AddHandler BootProcess.Exited, AddressOf OpensimExited ' Registering event handler
 
             ' enable console for Service mode

@@ -44,7 +44,7 @@ Module Global_Properties
 
 #Region "Subs"
 
-    Private TextLock As New Object
+    Private ReadOnly TextLock As New Object
 
     Public Sub Sleep(value As Integer)
         ''' <summary>Sleep(ms)</summary>

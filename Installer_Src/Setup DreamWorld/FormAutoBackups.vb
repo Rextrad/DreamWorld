@@ -220,9 +220,7 @@ Public Class FormAutoBackups
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BackupTypeButton.Click
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
         Dim BackupForm As New FormBackupBoxes
-#Enable Warning CA2000 ' Dispose objects before losing scope
 
         BackupForm.Activate()
         BackupForm.Visible = True

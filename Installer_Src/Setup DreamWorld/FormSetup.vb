@@ -472,6 +472,8 @@ Public Class FormSetup
 
         Me.Show()
 
+        CheckForUpdates()
+
         RunningBackupName.Clear()
 
         Dim v = Reflection.Assembly.GetExecutingAssembly().GetName().Version
@@ -495,11 +497,10 @@ Public Class FormSetup
 
         CheckDefaultPorts()
 
-        AddVoices() ' add eva and mark voices        
+        AddVoices() ' add eva and mark voices
 
         ' Boot RAM Query
         Searcher1 = New ManagementObjectSearcher(wql)
-
 
         CopyWifi() 'Make the two folders in Wifi and Wifi bin for Diva
 
@@ -510,9 +511,6 @@ Public Class FormSetup
 
         ' WebUI Menu
         ViewWebUI.Visible = Settings.WifiEnabled
-
-        CheckForUpdates()
-
 
         ' Get Opensimulator Scripts to date if needed
         If Settings.DeleteScriptsOnStartupLevel <> PropSimVersion Then
@@ -576,7 +574,7 @@ Public Class FormSetup
 
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
-        If RunningInServiceMode() Or Not ServiceExists("DreamGridService") Then
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Application.DoEvents()
@@ -584,10 +582,12 @@ Public Class FormSetup
 
         Sleep(100)
         ' Run Diagnostics
-        If TestPrivateLoopback(True) Then
-            ErrorLog("Diagnostic Listener port failed. Aborting")
-            TextPrint("Diagnostic Listener port failed. Aborting")
-            Return
+        If Not RunningInServiceMode() Then
+            If TestPrivateLoopback(True) Then
+                ErrorLog("Diagnostic Listener port failed. Aborting")
+                TextPrint("Diagnostic Listener port failed. Aborting")
+                Return
+            End If
         End If
 
         If IsMySqlRunning() Then

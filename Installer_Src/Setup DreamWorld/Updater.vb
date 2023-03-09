@@ -62,9 +62,8 @@ Module Updater
 
     Public Sub ShowUpdateForm()
 
-#Disable Warning CA2000
         Dim FormUpdate = New FormUpdate()
-#Enable Warning CA2000
+
         FormUpdate.Init()
         FormUpdate.BringToFront()
         Dim doUpdate = FormUpdate.ShowDialog()

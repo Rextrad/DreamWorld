@@ -10,7 +10,7 @@ Imports System.Threading
 
 Module WindowHandlers
 
-    Private _exitList As New ConcurrentDictionary(Of String, String)
+    Private ReadOnly _exitList As New ConcurrentDictionary(Of String, String)
 
     Public ReadOnly Property ExitList As ConcurrentDictionary(Of String, String)
         Get
@@ -155,7 +155,6 @@ Module WindowHandlers
                     Return Pr.MainWindowHandle
                 End If
             Catch ex As Exception
-                BreakPoint.Print(ex.Message)
             End Try
         Else
             Try
@@ -301,7 +300,6 @@ Module WindowHandlers
             Return False
         End If
 
-
     End Function
 
     Public Sub SendMsg(msg As String)
@@ -441,8 +439,7 @@ Module WindowHandlers
                 Sleep(100)
                 Application.DoEvents()
             End While
-        Else
-            Log("Warn", $"Cannot minimize or find {Group_Name(RegionUUID)}")
+
         End If
 
         Return False

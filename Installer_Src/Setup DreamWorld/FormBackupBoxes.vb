@@ -72,9 +72,8 @@ Public Class FormBackupBoxes
         End If
 
         BackupButton.Text = My.Resources.Running_word
-#Disable Warning CA2000 ' Dispose objects before losing scope
+
         Dim b As New Backups()
-#Enable Warning CA2000 ' Dispose objects before losing scope
 
         ' Settings.ini, BackupW Wifi and Backup Region ini
         b.RunFullBackupThread() 'run backup right now instead of on a timer

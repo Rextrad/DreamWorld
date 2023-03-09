@@ -42,9 +42,9 @@ Public Class FormEmail
         SetScreen()
         If Settings.SmtPropUserName = "LoginName@gmail.com" Then
             MsgBox(My.Resources.No_Email, vbInformation Or MsgBoxStyle.MsgBoxSetForeground, "Oops")
-#Disable Warning CA2000
+
             Dim FormEmail As New FormEmailSetup
-#Enable Warning CA2000
+
             FormEmail.Activate()
             FormEmail.Visible = True
             FormEmail.Select()
@@ -78,9 +78,9 @@ Public Class FormEmail
 
         If Not Settings.EmailEnabled Then
             MsgBox(My.Resources.tt_Email_Disabled, vbInformation Or MsgBoxStyle.MsgBoxSetForeground, "Oops")
-#Disable Warning CA2000
+
             Dim FormEmail As New FormEmailSetup
-#Enable Warning CA2000
+
             FormEmail.Activate()
             FormEmail.Visible = True
             FormEmail.Select()

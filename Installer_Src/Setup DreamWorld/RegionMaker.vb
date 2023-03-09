@@ -32,8 +32,8 @@ Module RegionMaker
     ReadOnly Backup As New List(Of Region_data)
     Private ReadOnly RegionList As New ConcurrentDictionary(Of String, Region_data)
 
+    Private ReadOnly WriteRegionlock As New Object
     Dim json As New JSONresult
-    Private WriteRegionlock As New Object
 
     Public Enum SIMSTATUSENUM As Integer
 
@@ -161,7 +161,7 @@ Module RegionMaker
 
 #Region "Create Region"
 
-    Private CreateRegionLock As New Object
+    Private ReadOnly CreateRegionLock As New Object
 
     Public Function CreateRegionStruct(name As String, Optional UUID As String = "") As String
 
@@ -830,9 +830,8 @@ Module RegionMaker
         Dim RegionUUID As String = FindRegionByName(RegionName)
         Dim size = SizeX(RegionUUID)
 
-#Disable Warning CA2000 ' Dispose objects before losing scope
         Dim VarForm As New FormDisplacement ' form for choosing a region in  a var
-#Enable Warning CA2000 ' Dispose objects before losing scope
+
         Dim span As Integer = CInt(Math.Ceiling(size / 256))
         ' Show Dialog as a modal dialog
         VarForm.Init(span, RegionUUID, Map)
@@ -1768,7 +1767,6 @@ Module RegionMaker
 
 #Region "TOS"
 
-    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Function TOS(post As String) As String
         ' currently unused as is only in standalone
         Debug.Print("UUID:" + post)
@@ -1783,7 +1781,7 @@ Module RegionMaker
             Dim match As Match = pattern.Match(post)
             If match.Success Then
 
-                Dim include = tosinclude(match.Groups(1).Value)
+                Dim include = TosInclude(match.Groups(1).Value)
 
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
                 Using streamReader As New System.IO.FileStream(Header, FileMode.Open, FileAccess.Read, FileShare.Read)
@@ -1837,7 +1835,7 @@ Module RegionMaker
 
     End Function
 
-    Private Function tosinclude(uid As String) As String
+    Private Function TosInclude(uid As String) As String
 
         ' Print a TOS webpage to the client
         Dim include = ""
@@ -1853,7 +1851,7 @@ Module RegionMaker
             End Using
             include += "<form>"
             include += "<input class='button' type='Submit' name='agree' value='Agree wth TOS'>"
-            include += $"<input type='hidden' name='sid' value='{uid.ToString}'>"
+            include += $"<input type='hidden' name='sid' value='{uid}'>"
             include += "</form>"
             include += "</body>"
             include += "</html>"

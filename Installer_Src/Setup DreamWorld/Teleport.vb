@@ -11,7 +11,7 @@ Module Teleport
 
     Public Fin As New List(Of String)
     Public TeleportAvatarDict As New ConcurrentDictionary(Of String, String)
-    Public TPQueue As TeleportAvatar = New TeleportAvatar
+    Public TPQueue As New TeleportAvatar
 
     Public Sub TeleportAgents()
 
@@ -75,7 +75,7 @@ Public Class TeleportAvatar
     ' Declare an event.
     Public Event TeleportEvent()
 
-    Sub Add(AgentID As String, Value As String)
+    Shared Sub Add(AgentID As String, Value As String)
 
         Delete(AgentID)
         TeleportAvatarDict.TryAdd(AgentID, Value)
@@ -83,13 +83,13 @@ Public Class TeleportAvatar
 
     End Sub
 
-    Public Sub Delete(AgentID As String)
+    Public Shared Sub Delete(AgentID As String)
         If TeleportAvatarDict.ContainsKey(AgentID) Then
             TeleportAvatarDict.TryRemove(AgentID, "")
         End If
     End Sub
 
-    Public Sub TP(AgentID As String)
+    Public Shared Sub TP(AgentID As String)
 
         If TeleportAvatarDict.ContainsKey(AgentID) Then
             TeleportAvatarDict.TryRemove(AgentID, "")

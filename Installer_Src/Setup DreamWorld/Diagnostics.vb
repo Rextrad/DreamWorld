@@ -371,7 +371,7 @@ Module Diags
                 TextPrint(My.Resources.Checking_Loopback_word & " " & RegionName)
                 Logger("INFO", Global.Outworldz.My.Resources.Checking_Loopback_word & " " & RegionName, "Diagnostics")
                 PortTest("http://" & Settings.PublicIP & ":" & Port & "/?_TestLoopback=" & RandomNumber.Random, Port)
-                UDPTest(Region_Port(RegionUUID))
+                'TODO UDPTest(Region_Port(RegionUUID))
 
             End If
         Next
@@ -380,7 +380,6 @@ Module Diags
 
     Private Sub UDPTest(Port As Integer)
 
-        Return
         ' This needs to send an actual UDP packet that generates a response such as a Ping
 
         Using UDPClient As New UdpClient()
