@@ -77,8 +77,6 @@ Module SmartStart
     ''' </summary>
     Public Sub CheckForBootedRegions()
 
-        If RunningInServiceMode() Then Return
-
         ' booted regions from web server
         Bench.Start("Booted list")
         Try
@@ -257,7 +255,7 @@ Module SmartStart
                     '[Resume] = 8
                     If PropAborting Then Continue For
                     If Not PropOpensimIsRunning() Then Continue For
-                    'ResumeRegion(RegionUUID)
+
                     Logger("State", $"{GroupName} Is Resuming", "Outworldz")
                     Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
                     For Each R As String In GroupList

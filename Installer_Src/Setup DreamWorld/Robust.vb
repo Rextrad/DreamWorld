@@ -165,12 +165,12 @@ Module Robust
 
         ' enable console for Service mode
         Dim args As String = ""
-        If ServiceExists("DreamGridService") And RunningInServiceMode() Then
+        If RunningInServiceMode() Then
             args = " -console=rest" ' space required
             Settings.GraphVisible = False
         End If
 
-        If ServiceExists(("DreamGridService")) Then
+        If Not RunningInServiceMode() Then
             Return True
         End If
 

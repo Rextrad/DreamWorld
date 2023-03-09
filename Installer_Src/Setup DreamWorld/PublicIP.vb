@@ -59,7 +59,10 @@ Module PublicIP
                 End If
             Next
         Catch ex As Exception
-            MsgBox($"{My.Resources.Port_Error}", MsgBoxStyle.Exclamation Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If Not RunningInServiceMode() Then
+                MsgBox($"{My.Resources.Port_Error}", MsgBoxStyle.Exclamation Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            End If
+
         End Try
 
     End Sub
@@ -150,7 +153,9 @@ Module PublicIP
 
     Private Sub bitch(msg As String)
 
-        Dim v = MsgBox($"{Global.Outworldz.My.Resources.Error_word} Port conflict in {msg}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+        If Not RunningInServiceMode() Then
+            MsgBox($"{Global.Outworldz.My.Resources.Error_word} Port conflict in {msg}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+        End If
 
     End Sub
 

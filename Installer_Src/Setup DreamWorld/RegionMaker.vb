@@ -97,7 +97,6 @@ Module RegionMaker
     ''' </summary>
     Public Sub CheckPost()
 
-        If RunningInServiceMode() Then Return
         For Each TKey In WebserverList
 
             Dim ProcessString As String = TKey.Key ' recover the PID as string
