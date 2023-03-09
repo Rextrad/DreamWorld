@@ -32,6 +32,7 @@
             TextPrint(My.Resources.ServiceFailedtoStart)
             Return False
         End If
+
     End Function
 
     Public Sub StopAndDeleteService()

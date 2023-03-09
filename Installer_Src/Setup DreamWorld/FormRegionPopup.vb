@@ -90,7 +90,6 @@ Public Class FormRegionPopup
                 EditButton1.Enabled = True
                 MsgButton.Enabled = False
 
-
             ElseIf RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
                 ShowConsoleButton.Enabled = True
                 StatsButton1.Enabled = True
@@ -181,7 +180,6 @@ Public Class FormRegionPopup
             gPick = "Console"
             DialogResult = DialogResult.OK
         Else
-
 
             ' enable console for Service mode
             Dim args As String = ""
