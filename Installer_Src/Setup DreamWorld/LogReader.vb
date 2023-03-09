@@ -47,7 +47,6 @@ Public Class LogReader
 
                         'seek to the last max offset
                         reader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin)
-                        'Dim line As String = ""
                         While reader.BaseStream.Length <> lastMaxOffset
                             ScanIssues(reader.ReadLine(), RegionUUID)
                             'update the last max offset
