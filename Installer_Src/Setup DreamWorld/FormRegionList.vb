@@ -1504,8 +1504,8 @@ Public Class FormRegionlist
                             status = SIMSTATUSENUM.RecyclingUp Or
                             status = SIMSTATUSENUM.RecyclingDown Then
                         Try
-                            Dim PID = ProcessID(RegionUUID)
-                            Dim component1 As Process = CachedProcess(PID)
+                            Dim PID = GetPIDFromFile(RegionUUID)
+                            Dim component1 As Process = Process.GetProcessById(PID)
                             Dim Memory As Double = (component1.WorkingSet64 / 1024) / 1024
                             TotalRam += Memory
                             item1.SubItems.Add(Memory.ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " MB")
