@@ -581,13 +581,12 @@ Public Class FormSetup
         End If
 
         Sleep(100)
-        ' Run Diagnostics
-        If Not RunningInServiceMode() Then
-            If TestPrivateLoopback(True) Then
-                ErrorLog("Diagnostic Listener port failed. Aborting")
-                TextPrint("Diagnostic Listener port failed. Aborting")
-                Return
-            End If
+
+        ' Run Diagnostics no matter who we are
+        If TestPrivateLoopback(True) Then
+            ErrorLog("Diagnostic Listener port failed. Aborting")
+            TextPrint("Diagnostic Listener port failed. Aborting")
+            Return
         End If
 
         If IsMySqlRunning() Then
@@ -700,8 +699,9 @@ Public Class FormSetup
             Return
         End If
 
-        ' Start as a Service?
+        Dim I = New ClassFilewatcher
 
+        ' Start as a Service?
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
 
         If RunningInServiceMode() Then
@@ -802,7 +802,7 @@ Public Class FormSetup
 
             For Each PID In CountisRunning
                 For Each RegionUUID In RegionUuids()
-                    If ProcessID(RegionUUID) = PID Then
+                    If GetPIDFromFile(RegionUUID) = PID Then
                         ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                         Application.DoEvents()
                     End If
@@ -819,8 +819,6 @@ Public Class FormSetup
         StopRobust()
         Zap("baretail")
         Zap("cports")
-
-        PropInstanceHandles.Clear()
 
         Settings.SaveSettings()
 
@@ -1020,20 +1018,10 @@ Public Class FormSetup
             If GroupList.Count > 0 Then
                 RegionUUID = GroupList(0)
 
-                PID = ProcessID(RegionUUID)
-                ProcessID(RegionUUID) = 0
+                PID = GetPIDFromFile(RegionUUID)
                 DelPidFile(RegionUUID) 'kill the disk PID
-
-                If PropInstanceHandles.ContainsKey(PID) Then
-                    PropInstanceHandles.TryRemove(PID, "")
-                End If
             Else
                 BreakPoint.Print("No UUID!")
-
-                If PID > 0 Then
-                    PropInstanceHandles.TryRemove(PID, "")
-                End If
-
                 Continue While
             End If
 
@@ -1453,13 +1441,12 @@ Public Class FormSetup
             End If
 
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-            ProcessID(RegionUUID) = 0
             DelPidFile(RegionUUID)
         Next
 
         Try
             ExitList.Clear()
-            PropInstanceHandles.Clear()
+
             WebserverList.Clear()
         Catch ex As Exception
             BreakPoint.Dump(ex)
