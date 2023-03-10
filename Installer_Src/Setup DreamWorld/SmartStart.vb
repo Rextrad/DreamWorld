@@ -825,14 +825,14 @@ Module SmartStart
             End If
 
             Dim GroupName = Group_Name(RegionUUID)
-            Dim PID As Integer = GetPIDFromInstanceHandles(GroupName)
+            Dim PID = GetPIDFromFile(GroupName)
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
 
             If CheckPort(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-                ProcessID(RegionUUID) = PID
+
                 PropUpdateView = True ' make form refresh
 
                 Try
@@ -912,9 +912,9 @@ Module SmartStart
             If ok Then
 
                 PID = WaitForPID(BootProcess)      ' check if it gave us a PID, if not, it failed.
+                ProcessID(RegionUUID) = PID
 
                 If PID > 0 Then
-
                     ' 0 is all cores
                     Try
                         If Cores(RegionUUID) > 0 Then
@@ -956,14 +956,7 @@ Module SmartStart
 
                     SetWindowTextCall(BootProcess, GroupName)
 
-                    If Not PropInstanceHandles.ContainsKey(PID) Then
-                        PropInstanceHandles.TryAdd(PID, GroupName)
-                    End If
-
                     AddCPU(PID, GroupName) ' get a list of running opensim processes
-                    For Each UUID As String In RegionUuidListByName(GroupName)
-                        ProcessID(UUID) = PID
-                    Next
                 Else
                     PropUpdateView = True ' make form refresh
                     Logger("Failed to boot ", BootName, "Outworldz")
