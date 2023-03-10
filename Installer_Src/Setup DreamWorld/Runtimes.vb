@@ -9,7 +9,6 @@ Module Runtimes
 
     Public Sub AddVoices()
 
-
         If Environment.OSVersion.Version.Build > 1000 Then
             Dim Registry = IO.Path.Combine(Settings.CurrentDirectory, "MSFT_Runtimes\eva.reg")
             Dim regeditProcess = Process.Start("regedit.exe", "/s " & """" & Registry & """")
@@ -20,7 +19,6 @@ Module Runtimes
             Settings.VoicesInstalled = True
             Settings.SaveSettings()
         End If
-
 
     End Sub
 
@@ -53,9 +51,8 @@ Module Runtimes
 
     Public Sub SetupPerlModules()
 
-        If Settings.VisitorsEnabled = True Then Return
         ' needed for DBIX::Class in util.pm
-        If Settings.VisitorsEnabledModules = False Then
+        If Not Settings.PerlModulesLoaded Then
             TextPrint(My.Resources.Setup_Perl)
             Using pPerl As New Process()
                 Dim pi = New ProcessStartInfo With {
@@ -63,7 +60,7 @@ Module Runtimes
                 .FileName = "cpan"
             }
                 pPerl.StartInfo = pi
-                pPerl.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                pPerl.StartInfo.WindowStyle = ProcessWindowStyle.Normal
                 Try
                     pPerl.Start()
                     pPerl.WaitForExit()
@@ -78,10 +75,11 @@ Module Runtimes
                 .FileName = "cpan"
             }
                 pPerl.StartInfo = pi
-                pPerl.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+                pPerl.StartInfo.WindowStyle = ProcessWindowStyle.Normal
                 Try
                     pPerl.Start()
-                    Settings.VisitorsEnabledModules = True
+                    pPerl.WaitForExit()
+                    Settings.PerlModulesLoaded = True
                     Settings.SaveSettings()
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
