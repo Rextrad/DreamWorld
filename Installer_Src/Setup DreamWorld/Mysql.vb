@@ -810,7 +810,7 @@ Public Module MysqlInterface
 
             End Using
         Catch ex As Exception
-            BreakPoint.Print(ex.Message)
+            Diagnostics.Debug.Print(ex.Message)
         End Try
 
         Return v
