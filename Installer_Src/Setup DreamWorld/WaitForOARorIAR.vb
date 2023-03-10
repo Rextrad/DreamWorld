@@ -12,10 +12,10 @@ Public Class WaitForFile
     Implements IDisposable
 
     ReadOnly o As New SeekObject
+    Private ReadOnly reader As StreamReader
     Private CTR As Integer
 
     Private lastMaxOffset As Long
-    Private reader As StreamReader
 
     Public Sub New(RegionUUID As String, text As String, Type As String)
 
