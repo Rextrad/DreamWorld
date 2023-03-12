@@ -12,7 +12,7 @@
         ShowDOSWindow(RegionUUID, MaybeHideWindow())
 
         If Smart_Suspend_Enabled(RegionUUID) Then
-            Dim PID = GetPIDFromFile(RegionUUID)
+            Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
             NtSuspendProcess(Process.GetProcessById(PID).Handle)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended
         ElseIf Smart_Boot_Enabled(RegionUUID) Then
@@ -44,7 +44,7 @@
     ''' <param name="RegionUUID">Region UUID</param>
     Public Sub Thaw(RegionUUID As String)
 
-        Dim PID = GetPIDFromFile(RegionUUID)
+        Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
 
         Try
             NtResumeProcess(Process.GetProcessById(PID).Handle)

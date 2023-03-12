@@ -101,7 +101,7 @@ Module WindowHandlers
         End If
 
         ' Regions
-        PID = GetPIDFromFile(RegionUUID)
+        PID = GetPIDFromFile(Group_Name(RegionUUID))
         If PID = 0 Then
             ' try a direct way
             RPC_Region_Command(RegionUUID, command)
@@ -133,6 +133,7 @@ Module WindowHandlers
 
         If Groupname <> RobustName() Then
             Try
+
                 Dim PID = GetPIDFromFile(Groupname)
                 If PID = 0 Then Return IntPtr.Zero
 
@@ -156,8 +157,6 @@ Module WindowHandlers
     End Function
 
     Public Sub GetOpensimPIDsFromFiles()
-
-        Return
 
         Dim P = IO.Path.Combine(Settings.CurrentDirectory, "Outworldzfiles\Opensim\bin\Regions")
         Dim directory As New System.IO.DirectoryInfo(P)

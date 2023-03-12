@@ -55,7 +55,7 @@ Module CPUCounter
 
             For Each RegionUUID In RegionUuids()
 
-                Dim PID = GetPIDFromFile(RegionUUID)
+                Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
                 If PID = 0 Then
                     Continue For
                 End If

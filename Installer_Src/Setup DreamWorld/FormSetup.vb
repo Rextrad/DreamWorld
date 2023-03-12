@@ -577,7 +577,6 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-            Application.DoEvents()
         End If
 
         Sleep(100)
@@ -802,7 +801,7 @@ Public Class FormSetup
 
             For Each PID In CountisRunning
                 For Each RegionUUID In RegionUuids()
-                    If GetPIDFromFile(RegionUUID) = PID Then
+                    If GetPIDFromFile(Group_Name(RegionUUID)) = PID Then
                         ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                         Application.DoEvents()
                     End If
@@ -1018,7 +1017,7 @@ Public Class FormSetup
             If GroupList.Count > 0 Then
                 RegionUUID = GroupList(0)
 
-                PID = GetPIDFromFile(RegionUUID)
+                PID = GetPIDFromFile(Group_Name(RegionUUID))
                 DelPidFile(RegionUUID) 'kill the disk PID
             Else
                 BreakPoint.Print("No UUID!")

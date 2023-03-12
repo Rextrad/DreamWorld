@@ -811,7 +811,7 @@ Module SmartStart
 
             ' stop if disabled
             Dim RegionUUID As String = FindRegionByName(BootName)
-
+            Dim GroupName = Group_Name(RegionUUID)
             ' must be real
             If String.IsNullOrEmpty(RegionUUID) Then
                 ErrorLog("Cannot find " & BootName & " to boot!")
@@ -824,8 +824,7 @@ Module SmartStart
                 Return True
             End If
 
-            Dim GroupName = Group_Name(RegionUUID)
-            Dim PID = GetPIDFromFile(GroupName)
+            Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler

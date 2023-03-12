@@ -75,12 +75,12 @@ Module RegionMaker
             Settings.SaveSettings()
         End If
 
-        GetOpensimPIDsFromFiles()
-
         If GetAllRegions(Verbose) = 0 Then
             TextPrint($"*** FAILED** Loaded {CStr(RegionCount)} Regions")
             Return False
         End If
+
+        GetOpensimPIDsFromFiles()
 
         TextPrint($"Loaded {CStr(RegionCount)} Regions")
 
@@ -1652,6 +1652,7 @@ Module RegionMaker
                     L.Add(pair.Value._UUID)
                 End If
             Next
+            Return L
         Catch ex As Exception
             BreakPoint.Dump(ex)
         End Try
