@@ -1776,6 +1776,16 @@ Public Class MySettings
         End Set
     End Property
 
+    Public Property PerlModulesLoaded() As Boolean
+        Get
+            Return CType(GetMySetting("PerlModulesLoaded", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("PerlModulesLoaded", CStr(Value))
+        End Set
+
+    End Property
+
     Public Property Physics() As Integer
         Get
             Return CInt("0" & GetMySetting("Physics", "3"))
@@ -2614,16 +2624,6 @@ Public Class MySettings
         End Get
         Set
             SetMySetting("VisitorsEnabled", CStr(Value))
-        End Set
-
-    End Property
-
-    Public Property VisitorsEnabledModules() As Boolean
-        Get
-            Return CType(GetMySetting("VisitorMapsEnabled", "False"), Boolean)
-        End Get
-        Set
-            SetMySetting("VisitorMapsEnabled", CStr(Value))
         End Set
 
     End Property

@@ -109,7 +109,7 @@ Partial Class FormRegionlist
         Me.RefreshButton.AutoSize = True
         Me.RefreshButton.Image = Global.Outworldz.My.Resources.Resources.refresh
         Me.RefreshButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.RefreshButton.Location = New System.Drawing.Point(200, 3)
+        Me.RefreshButton.Location = New System.Drawing.Point(220, 3)
         Me.RefreshButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.RefreshButton.Name = "RefreshButton"
         Me.RefreshButton.Padding = New System.Windows.Forms.Padding(2)
@@ -124,7 +124,7 @@ Partial Class FormRegionlist
         Me.ExportButton.AutoSize = True
         Me.ExportButton.Image = Global.Outworldz.My.Resources.Resources.xls_icon_3398
         Me.ExportButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ExportButton.Location = New System.Drawing.Point(500, 83)
+        Me.ExportButton.Location = New System.Drawing.Point(520, 83)
         Me.ExportButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.ExportButton.Name = "ExportButton"
         Me.ExportButton.Padding = New System.Windows.Forms.Padding(2)
@@ -197,10 +197,10 @@ Partial Class FormRegionlist
         Me.OffButton.Checked = True
         Me.OffButton.Location = New System.Drawing.Point(77, 51)
         Me.OffButton.Name = "OffButton"
-        Me.OffButton.Size = New System.Drawing.Size(39, 17)
+        Me.OffButton.Size = New System.Drawing.Size(66, 17)
         Me.OffButton.TabIndex = 18610
         Me.OffButton.TabStop = True
-        Me.OffButton.Text = "Off"
+        Me.OffButton.Text = "Disabled"
         Me.OffButton.UseVisualStyleBackColor = True
         '
         'OnButton
@@ -209,9 +209,9 @@ Partial Class FormRegionlist
         Me.OnButton.AutoSize = True
         Me.OnButton.Location = New System.Drawing.Point(77, 11)
         Me.OnButton.Name = "OnButton"
-        Me.OnButton.Size = New System.Drawing.Size(39, 17)
+        Me.OnButton.Size = New System.Drawing.Size(64, 17)
         Me.OnButton.TabIndex = 18611
-        Me.OnButton.Text = "On"
+        Me.OnButton.Text = "Enabled"
         Me.OnButton.UseVisualStyleBackColor = True
         '
         'SmartButton
@@ -254,7 +254,7 @@ Partial Class FormRegionlist
         '
         Me.Bootedbutton.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Bootedbutton.AutoSize = True
-        Me.Bootedbutton.Location = New System.Drawing.Point(122, 11)
+        Me.Bootedbutton.Location = New System.Drawing.Point(149, 11)
         Me.Bootedbutton.Name = "Bootedbutton"
         Me.Bootedbutton.Size = New System.Drawing.Size(65, 17)
         Me.Bootedbutton.TabIndex = 18616
@@ -265,7 +265,7 @@ Partial Class FormRegionlist
         '
         Me.StoppedButton.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.StoppedButton.AutoSize = True
-        Me.StoppedButton.Location = New System.Drawing.Point(122, 51)
+        Me.StoppedButton.Location = New System.Drawing.Point(149, 51)
         Me.StoppedButton.Name = "StoppedButton"
         Me.StoppedButton.Size = New System.Drawing.Size(65, 17)
         Me.StoppedButton.TabIndex = 18617
@@ -324,7 +324,7 @@ Partial Class FormRegionlist
         Me.RestartButton.AutoSize = True
         Me.RestartButton.Image = Global.Outworldz.My.Resources.Resources.refresh
         Me.RestartButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.RestartButton.Location = New System.Drawing.Point(200, 83)
+        Me.RestartButton.Location = New System.Drawing.Point(220, 83)
         Me.RestartButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.RestartButton.Name = "RestartButton"
         Me.RestartButton.Padding = New System.Windows.Forms.Padding(2)
@@ -338,7 +338,7 @@ Partial Class FormRegionlist
         Me.DetailsButton.AutoSize = True
         Me.DetailsButton.Image = Global.Outworldz.My.Resources.Resources.text_marked
         Me.DetailsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.DetailsButton.Location = New System.Drawing.Point(350, 3)
+        Me.DetailsButton.Location = New System.Drawing.Point(370, 3)
         Me.DetailsButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.DetailsButton.Name = "DetailsButton"
         Me.DetailsButton.Padding = New System.Windows.Forms.Padding(2)
@@ -352,7 +352,7 @@ Partial Class FormRegionlist
         Me.StopAllButton.AutoSize = True
         Me.StopAllButton.Image = Global.Outworldz.My.Resources.Resources.media_stop
         Me.StopAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.StopAllButton.Location = New System.Drawing.Point(350, 83)
+        Me.StopAllButton.Location = New System.Drawing.Point(370, 83)
         Me.StopAllButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.StopAllButton.Name = "StopAllButton"
         Me.StopAllButton.Padding = New System.Windows.Forms.Padding(2)
@@ -366,7 +366,7 @@ Partial Class FormRegionlist
         Me.RunAllButton.AutoSize = True
         Me.RunAllButton.Image = Global.Outworldz.My.Resources.Resources.media_play
         Me.RunAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.RunAllButton.Location = New System.Drawing.Point(350, 43)
+        Me.RunAllButton.Location = New System.Drawing.Point(370, 43)
         Me.RunAllButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.RunAllButton.Name = "RunAllButton"
         Me.RunAllButton.Padding = New System.Windows.Forms.Padding(2)
@@ -380,7 +380,7 @@ Partial Class FormRegionlist
         Me.AddRegionButton.AutoSize = True
         Me.AddRegionButton.Image = Global.Outworldz.My.Resources.Resources.package_add
         Me.AddRegionButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.AddRegionButton.Location = New System.Drawing.Point(200, 43)
+        Me.AddRegionButton.Location = New System.Drawing.Point(220, 43)
         Me.AddRegionButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.AddRegionButton.Name = "AddRegionButton"
         Me.AddRegionButton.Padding = New System.Windows.Forms.Padding(2)
@@ -439,7 +439,7 @@ Partial Class FormRegionlist
         Me.PictureBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.Outworldz.My.Resources.Resources.loader
-        Me.PictureBox1.Location = New System.Drawing.Point(800, 43)
+        Me.PictureBox1.Location = New System.Drawing.Point(820, 43)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(38, 34)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -451,7 +451,7 @@ Partial Class FormRegionlist
         Me.AvatarsButton.AutoSize = True
         Me.AvatarsButton.Image = Global.Outworldz.My.Resources.Resources.users2
         Me.AvatarsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.AvatarsButton.Location = New System.Drawing.Point(650, 3)
+        Me.AvatarsButton.Location = New System.Drawing.Point(670, 3)
         Me.AvatarsButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.AvatarsButton.Name = "AvatarsButton"
         Me.AvatarsButton.Padding = New System.Windows.Forms.Padding(2)
@@ -465,7 +465,7 @@ Partial Class FormRegionlist
         Me.IconsButton.AutoSize = True
         Me.IconsButton.Image = Global.Outworldz.My.Resources.Resources.transform
         Me.IconsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.IconsButton.Location = New System.Drawing.Point(500, 3)
+        Me.IconsButton.Location = New System.Drawing.Point(520, 3)
         Me.IconsButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.IconsButton.Name = "IconsButton"
         Me.IconsButton.Padding = New System.Windows.Forms.Padding(2)
@@ -478,7 +478,7 @@ Partial Class FormRegionlist
         '
         Me.Emails.Image = Global.Outworldz.My.Resources.Resources.mail_into
         Me.Emails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Emails.Location = New System.Drawing.Point(649, 82)
+        Me.Emails.Location = New System.Drawing.Point(669, 82)
         Me.Emails.Margin = New System.Windows.Forms.Padding(2)
         Me.Emails.Name = "Emails"
         Me.Emails.Size = New System.Drawing.Size(145, 34)
@@ -490,7 +490,7 @@ Partial Class FormRegionlist
         '
         Me.Users.Image = Global.Outworldz.My.Resources.Resources.users3
         Me.Users.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Users.Location = New System.Drawing.Point(649, 42)
+        Me.Users.Location = New System.Drawing.Point(669, 42)
         Me.Users.Margin = New System.Windows.Forms.Padding(2)
         Me.Users.Name = "Users"
         Me.Users.Size = New System.Drawing.Size(145, 34)
@@ -503,7 +503,7 @@ Partial Class FormRegionlist
         Me.ImportButton.AutoSize = True
         Me.ImportButton.Image = Global.Outworldz.My.Resources.Resources.package
         Me.ImportButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ImportButton.Location = New System.Drawing.Point(500, 43)
+        Me.ImportButton.Location = New System.Drawing.Point(520, 43)
         Me.ImportButton.MinimumSize = New System.Drawing.Size(83, 26)
         Me.ImportButton.Name = "ImportButton"
         Me.ImportButton.Padding = New System.Windows.Forms.Padding(2)

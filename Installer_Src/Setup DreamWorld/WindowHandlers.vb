@@ -38,12 +38,6 @@ Module WindowHandlers
 
 #End Region
 
-    Public Function CachedProcess(PID As Integer) As Process
-
-        Return Process.GetProcessById(PID)
-
-    End Function
-
     Public Function ConsoleCommand(RegionUUID As String, command As String) As Boolean
 
         ''' <summary>Sends keystrokes to Opensim. Always sends an enter button before to clear and use keys</summary>
@@ -51,25 +45,17 @@ Module WindowHandlers
         ''' <param name="command">String</param>
         ''' <returns></returns>
         If command Is Nothing Then Return True
-        If RunningInServiceMode() Then Return True
 
         If command.Length > 0 Then
             command = ToLowercaseKeys(command)
-            Dim PID As Integer
             If RegionUUID <> RobustName() Then
-                ShowDOSWindow(RegionUUID, MaybeShowWindow())
-                PID = ProcessID(RegionUUID)
-                If PID > 0 Then
-                    Thaw(RegionUUID)
-                Else
-                    PID = GetPIDFromInstanceHandles(Group_Name(RegionUUID))
-                    If PID = 0 Then
-                        Return RPC_Region_Command(RegionUUID, command)
-                    Else
-                        ProcessID(RegionUUID) = PID
-                    End If
+
+                Thaw(RegionUUID)
+                If RunningInServiceMode() Then
+                    Return RPC_Region_Command(RegionUUID, command)
                 End If
 
+                ShowDOSWindow(RegionUUID, MaybeShowWindow())
                 DoType(RegionUUID, command)
                 ShowDOSWindow(RegionUUID, MaybeHideWindow())
             Else ' Robust
@@ -115,7 +101,7 @@ Module WindowHandlers
         End If
 
         ' Regions
-        PID = ProcessID(RegionUUID)
+        PID = GetPIDFromFile(Group_Name(RegionUUID))
         If PID = 0 Then
             ' try a direct way
             RPC_Region_Command(RegionUUID, command)
@@ -135,7 +121,7 @@ Module WindowHandlers
 
     Public Function FocusWindow(ByVal PID As Integer) As Boolean
 
-        Dim p As System.Diagnostics.Process = CachedProcess(PID)
+        Dim p As System.Diagnostics.Process = Process.GetProcessById(PID)
         If p IsNot Nothing Then
             Return SetForegroundWindow(p.MainWindowHandle)
         End If
@@ -147,7 +133,8 @@ Module WindowHandlers
 
         If Groupname <> RobustName() Then
             Try
-                Dim PID = GetPIDFromInstanceHandles(Groupname)
+
+                Dim PID = GetPIDFromFile(Groupname)
                 If PID = 0 Then Return IntPtr.Zero
 
                 Dim Pr = Process.GetProcessById(PID)
@@ -176,23 +163,33 @@ Module WindowHandlers
 
         For Each Folder In directory.GetDirectories()
             Dim GroupName = Folder.Name
-            GetPIDFromFile(GroupName)
+            Dim PID = GetPIDFromFile(GroupName)
+
+            For Each RegionUUID In RegionUuidListByName(GroupName)
+                ProcessID(RegionUUID) = PID
+            Next
+
         Next
 
     End Sub
 
-    Public Sub GetPIDFromFile(GroupName As String)
+    ''' <summary>
+    ''' Returns a PID from PID.pid file in each region
+    ''' </summary>
+    ''' <param name="GroupName">GroupName</param>
+    ''' <returns>PID</returns>
+    Public Function GetPIDFromFile(GroupName As String) As Integer
 
-        Dim P = IO.Path.Combine(Settings.CurrentDirectory, $"Outworldzfiles\Opensim\bin\Regions\{GroupName}")
-        Dim PIDfile = IO.Path.Combine(P, "PID.pid")
+        Dim PID As Integer ' return this 0 or a positive in
+        Dim PIDFIle = IO.Path.Combine(Settings.CurrentDirectory, $"Outworldzfiles\Opensim\bin\Regions\{GroupName}\PID.pid")
         Try
-            If System.IO.File.Exists(PIDfile) Then
-                Using Reader As New IO.StreamReader(PIDfile, System.Text.Encoding.ASCII)
+            If System.IO.File.Exists(PIDFIle) Then
+                Using Reader As New IO.StreamReader(PIDFIle, System.Text.Encoding.ASCII)
                     While Not Reader.EndOfStream
                         Dim line As String = Reader.ReadLine
-                        Dim PID As Integer
+
                         If Int32.TryParse(line, PID) Then
-                            PropInstanceHandles.TryAdd(PID, GroupName)
+                            Return PID
                         Else
                             Debug.Print("No PID on disk")
                         End If
@@ -203,18 +200,7 @@ Module WindowHandlers
             Debug.Print(ex.Message)
         End Try
 
-    End Sub
-
-    Public Function GetPIDFromInstanceHandles(GroupName As String) As Integer
-        Try
-            For Each pList In PropInstanceHandles
-                If pList.Value = GroupName Then
-                    Return pList.Key
-                End If
-            Next
-        Catch
-        End Try
-        Return 0
+        Return PID
 
     End Function
 
@@ -273,13 +259,17 @@ Module WindowHandlers
 
         Dim S As System.Diagnostics.Process = CType(sender, Process)
         Dim RegionUUID = FindRegionUUIDByPID(S.Id)
-        Dim GroupName = Group_Name(RegionUUID)
-        Debug.Print($"{GroupName} Exited")
+        If RegionUUID.Length = 0 Then
+            ErrorLog("Null Region UUID")
+            Return
+        End If
+
+        Debug.Print($"{Region_Name(RegionUUID)} Exited")
         If RegionUUID.Length = 0 Then
             Return
         End If
 
-        ExitList.TryAdd(GroupName, "Exit")
+        ExitList.TryAdd(Region_Name(RegionUUID), "Exit")
 
     End Sub
 

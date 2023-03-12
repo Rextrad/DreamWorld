@@ -2,8 +2,8 @@
 
 Public Class IniWriter
 
+    Private ReadOnly _In As New List(Of String)
     Private _Filename As String
-    Dim _In As New List(Of String)
 
     Public Sub New(File As String)
 
@@ -54,7 +54,7 @@ Public Class IniWriter
     Public Sub Write(Name As String, value As String)
 
         Dim _Out As New List(Of String)
-        Dim found As Boolean = False
+        Dim found As Boolean
         For Each Item As String In _In
             If Item.StartsWith(Name, StringComparison.OrdinalIgnoreCase) Then
                 _Out.Add(value)

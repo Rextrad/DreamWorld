@@ -32,7 +32,7 @@ Module ProcessExtension
     Public Function RestoreRegion(PID As Integer) As Boolean
 
         Dim result As Boolean = True    ' assume success
-        Dim process As Process = CachedProcess(PID)
+        Dim process As Process = Process.GetProcessById(PID)
         For Each thread As ProcessThread In process.Threads
             Dim pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, False, CUInt(thread.Id))
             If pOpenThread = IntPtr.Zero Then
@@ -51,7 +51,7 @@ Module ProcessExtension
     <Extension()>
     Public Function SuspendRegion(PID As Integer) As Boolean
 
-        Dim process As Process = CachedProcess(PID)
+        Dim process As Process = Process.GetProcessById(PID)
         For Each thread As ProcessThread In process.Threads
             Dim pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, False, CUInt(thread.Id))
 

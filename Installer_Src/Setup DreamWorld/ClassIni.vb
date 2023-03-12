@@ -116,7 +116,6 @@ Public Class LoadIni
 
     End Function
 
-    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes")>
     Public Sub SaveIni()
 
         CopyFileFast(Settings.CurrentDirectory + "\OutworldzFiles\Settings.ini", Settings.CurrentDirectory + "\OutworldzFiles\Settings.bak")

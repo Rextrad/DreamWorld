@@ -320,9 +320,6 @@ Public Class FormDebug
 
         BotPID = BootProcess.Id
         ProgressPrint("Bot running")
-        Sleep(5000)
-
-        ConsoleCommand(BotPID, "connect")
 
     End Sub
 

@@ -906,8 +906,8 @@ Public Class FormRegionlist
             IconsButton.Text = Global.Outworldz.My.Resources.Icons_word
             ImportButton.Text = Global.Outworldz.My.Resources.Import_word
             KOT.Text = Global.Outworldz.My.Resources.Window_Word
-            OnButton.Text = Global.Outworldz.My.Resources.On_word
-            OffButton.Text = Global.Outworldz.My.Resources.Off
+            OnButton.Text = Global.Outworldz.My.Resources.Enabled_word
+            OffButton.Text = Global.Outworldz.My.Resources.Disabled_word
             OnTopToolStripMenuItem.Text = Global.Outworldz.My.Resources.On_Top
             RefreshButton.Text = Global.Outworldz.My.Resources.Refresh_word
             RestartButton.Text = Global.Outworldz.My.Resources.Restart_word
@@ -1466,8 +1466,7 @@ Public Class FormRegionlist
 
                     If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                     If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-                    If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
-                    If SmartButton.Checked And Not Smart_Boot_Enabled(RegionUUID) Then Continue For
+                    If SmartButton.Checked And (Not Smart_Suspend_Enabled(RegionUUID) And Not Smart_Boot_Enabled(RegionUUID)) Then Continue For
                     If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
                     If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1504,8 +1503,8 @@ Public Class FormRegionlist
                             status = SIMSTATUSENUM.RecyclingUp Or
                             status = SIMSTATUSENUM.RecyclingDown Then
                         Try
-                            Dim PID = ProcessID(RegionUUID)
-                            Dim component1 As Process = CachedProcess(PID)
+                            Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+                            Dim component1 As Process = Process.GetProcessById(PID)
                             Dim Memory As Double = (component1.WorkingSet64 / 1024) / 1024
                             TotalRam += Memory
                             item1.SubItems.Add(Memory.ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " MB")
