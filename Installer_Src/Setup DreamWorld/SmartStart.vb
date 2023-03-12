@@ -825,7 +825,7 @@ Module SmartStart
             End If
 
             Dim GroupName = Group_Name(RegionUUID)
-            Dim PID As Integer = GetPIDFromInstanceHandles(GroupName)
+            Dim PID As Integer = GetPIDFromFile(GroupName)
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
