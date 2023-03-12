@@ -41,6 +41,9 @@ Public Class FormSettings
     Dim Tide As New FormTide
     Dim Tos As New TosForm
     Dim Voice As New FormVoice
+    Dim Land As New FormLand
+    Dim Terrain As New FormTerrain
+
 #Enable Warning CA2213
 
 #End Region
@@ -556,6 +559,39 @@ Public Class FormSettings
         Voice.Visible = True
         Voice.Select()
         Voice.BringToFront()
+
+    End Sub
+
+    Private Sub Button1_Click_3(sender As Object, e As EventArgs) Handles BotButton.Click
+
+        Bots.Close()
+        Bots.Dispose()
+        Bots = New FormBots
+        Bots.Activate()
+        Bots.Visible = True
+        Bots.Select()
+
+    End Sub
+
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles LandButton.Click
+
+        Land.Close()
+        Land.Dispose()
+        Land = New FormLand
+        Land.Activate()
+        Land.Visible = True
+        Land.Select()
+
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles TerrainButton.Click
+
+        Terrain.Close()
+        Terrain.Dispose()
+        Terrain = New FormTerrain
+        Terrain.Activate()
+        Terrain.Visible = True
+        Terrain.Select()
 
     End Sub
 
