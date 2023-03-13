@@ -9,11 +9,10 @@ Public Class FormSettings
 
 #Region "Declarations"
 
-#Disable Warning CA2213
-
     Private Backups As New FormAutoBackups
     Dim Banlist As New FormBanList
     Private Bird As New FormBird
+    Dim Bots As New FormBots
     Dim Email As New FormEmailSetup
     Dim FormApache As New FormApache
     Dim FormCache As New FormCaches
@@ -32,19 +31,17 @@ Public Class FormSettings
     Dim FsAssets As New FormFSAssets
     Dim Gloebits As New FormCurrency
     Dim Icecast As New FormIcecast
+    Dim Land As New FormLandAndSea
     Dim Lang As New Language
     Dim Logging As New FormLogging
     Dim Maps As New FormMaps
     Dim Scripts As New FormScripts
     Dim Search As New FormSearch
     Dim SS As New FormSmartStart
+    Dim Terrain As New FormTerrain
     Dim Tide As New FormTide
     Dim Tos As New TosForm
     Dim Voice As New FormVoice
-    Dim Land As New FormLand
-    Dim Terrain As New FormTerrain
-
-#Enable Warning CA2213
 
 #End Region
 
@@ -284,6 +281,17 @@ Public Class FormSettings
 
     End Sub
 
+    Private Sub Button1_Click_3(sender As Object, e As EventArgs) Handles BotButton.Click
+
+        Bots.Close()
+        Bots.Dispose()
+        Bots = New FormBots
+        Bots.Activate()
+        Bots.Visible = True
+        Bots.Select()
+
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles PermissionsButton.Click
 
         FormPermissions.Close()
@@ -296,6 +304,17 @@ Public Class FormSettings
 
     End Sub
 
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles TerrainButton.Click
+
+        Terrain.Close()
+        Terrain.Dispose()
+        Terrain = New FormTerrain
+        Terrain.Activate()
+        Terrain.Visible = True
+        Terrain.Select()
+
+    End Sub
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles RestartButton.Click
 
         FormRestart.Close()
@@ -305,6 +324,17 @@ Public Class FormSettings
         FormRestart.Visible = True
         FormRestart.Select()
         FormRestart.BringToFront()
+
+    End Sub
+
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles LandButton.Click
+
+        Land.Close()
+        Land.Dispose()
+        Land = New FormLandAndSea
+        Land.Activate()
+        Land.Visible = True
+        Land.Select()
 
     End Sub
 
@@ -559,39 +589,6 @@ Public Class FormSettings
         Voice.Visible = True
         Voice.Select()
         Voice.BringToFront()
-
-    End Sub
-
-    Private Sub Button1_Click_3(sender As Object, e As EventArgs) Handles BotButton.Click
-
-        Bots.Close()
-        Bots.Dispose()
-        Bots = New FormBots
-        Bots.Activate()
-        Bots.Visible = True
-        Bots.Select()
-
-    End Sub
-
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles LandButton.Click
-
-        Land.Close()
-        Land.Dispose()
-        Land = New FormLand
-        Land.Activate()
-        Land.Visible = True
-        Land.Select()
-
-    End Sub
-
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles TerrainButton.Click
-
-        Terrain.Close()
-        Terrain.Dispose()
-        Terrain = New FormTerrain
-        Terrain.Activate()
-        Terrain.Visible = True
-        Terrain.Select()
 
     End Sub
 

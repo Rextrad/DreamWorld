@@ -355,6 +355,12 @@
     <Compile Include="FormBlockify.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormBots.Designer.vb">
+      <DependentUpon>FormBots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBots.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormBulkLoad.Designer.vb">
       <DependentUpon>FormBulkLoad.vb</DependentUpon>
     </Compile>
@@ -486,6 +492,12 @@
       <DependentUpon>FormJoomla.vb</DependentUpon>
     </Compile>
     <Compile Include="FormJoomla.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLandAndSea.Designer.vb">
+      <DependentUpon>FormLandAndSea.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLandAndSea.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormLanguage.Designer.vb">
@@ -656,6 +668,12 @@
     <Compile Include="FormSSL.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTerrain.Designer.vb">
+      <DependentUpon>FormTerrain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTerrain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTide.Designer.vb">
       <DependentUpon>FormTide.vb</DependentUpon>
     </Compile>
@@ -773,6 +791,9 @@
     <EmbeddedResource Include="FormBlockify.resx">
       <DependentUpon>FormBlockify.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormBots.resx">
+      <DependentUpon>FormBots.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBulkLoad.resx">
       <DependentUpon>FormBulkLoad.vb</DependentUpon>
     </EmbeddedResource>
@@ -840,6 +861,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormJoomla.resx">
       <DependentUpon>FormJoomla.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLandAndSea.resx">
+      <DependentUpon>FormLandAndSea.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLanguage.resx">
       <DependentUpon>FormLanguage.vb</DependentUpon>
@@ -945,6 +969,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSSL.resx">
       <DependentUpon>FormSSL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTerrain.resx">
+      <DependentUpon>FormTerrain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTide.resx">
       <DependentUpon>FormTide.vb</DependentUpon>
