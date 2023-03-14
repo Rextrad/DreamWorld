@@ -42,6 +42,7 @@ Public Class LogReader
 
                     While True
                         Sleep(10000)
+                        Application.DoEvents()
                         'if the file size has not changed, idle
                         If reader.BaseStream.Length = lastMaxOffset Then Continue While
 
