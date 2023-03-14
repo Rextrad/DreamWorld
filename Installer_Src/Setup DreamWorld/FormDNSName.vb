@@ -258,7 +258,6 @@ Public Class FormDnsName
 
         If Not initted Then Return
         Settings.MachineId() = UniqueId.Text
-
     End Sub
 
 #End Region

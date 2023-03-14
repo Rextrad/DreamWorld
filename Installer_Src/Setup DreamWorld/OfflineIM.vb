@@ -88,6 +88,8 @@ Module OfflineIM
                             If result = My.Resources.Ok Then
                                 Logger("Email", $"Offline IM Email sent from {FromPerson.FirstName} {FromPerson.LastName} to {ToPerson.FirstName} {ToPerson.LastName}", "Outworldz")
                                 DeleteIM(email.Id)
+                            Else
+                                Logger("Email", $"Offline IM Email not sent from {FromPerson.FirstName} {FromPerson.LastName} to {ToPerson.FirstName} {ToPerson.LastName}: {result }", "Outworldz")
                             End If
                         End If
                     Next

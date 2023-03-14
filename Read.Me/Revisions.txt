@@ -3,6 +3,9 @@ REVISIONS FOR DREAMGRID
 
 V5.33
 
+
+Help: Added Gloebit Manual in prep for other money systems.
+PCampBot:  Added a control panel so you can add Test Bots.  See the Bots manual for details or open Settings->Bots
 Diagnostic: If two regions have the same UUID, thine system shall bitch and moan.
 Update: PHP7 updated to 7.4.33
 Ban List: add exclude by Disk ID, which is a hashed C drive ID. Also has a new syntax to differentiate MAC and DISK ID's

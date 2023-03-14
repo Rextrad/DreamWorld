@@ -21,8 +21,12 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Public ReadOnly NssmService As New ClassNssm
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
@@ -39,8 +43,12 @@ Public Class FormSetup
     Private _RestartApache As Boolean
     Private _RestartMysql As Boolean
     Private _speed As Double = 50
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private cpu As New PerformanceCounter
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private Graphs As New FormGraphs
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -261,8 +269,6 @@ Public Class FormSetup
 
     End Function
 
-#Disable Warning CA2109
-
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
@@ -472,6 +478,11 @@ Public Class FormSetup
 
         Me.Show()
 
+        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
+        Randomize()
+        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
+        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
+
         CheckForUpdates()
 
         RunningBackupName.Clear()
@@ -559,7 +570,7 @@ Public Class FormSetup
         SkipSetup = False
 
         TextPrint(My.Resources.Setup_Network)
-        SetPublicIP()
+
         SetServerType()
 
         If SetIniData() Then
@@ -577,12 +588,8 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-            Application.DoEvents()
-        End If
+            Sleep(100)
 
-        Sleep(100)
-        ' Run Diagnostics
-        If Not RunningInServiceMode() Then
             If TestPrivateLoopback(True) Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
@@ -628,6 +635,8 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
+        SetPublicIP()
+
         If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
         End If
@@ -667,11 +676,6 @@ Public Class FormSetup
 
         Joomla.CheckForjOpensimUpdate()
 
-        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
-        Randomize()
-        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
-        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
-
         Settings.SaveSettings()
 
         OfflineIMEmailThread()  ' check for any offline emails.
@@ -700,8 +704,9 @@ Public Class FormSetup
             Return
         End If
 
-        ' Start as a Service?
+        Dim I = New ClassFilewatcher
 
+        ' Start as a Service?
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
 
         If RunningInServiceMode() Then
@@ -802,7 +807,7 @@ Public Class FormSetup
 
             For Each PID In CountisRunning
                 For Each RegionUUID In RegionUuids()
-                    If ProcessID(RegionUUID) = PID Then
+                    If GetPIDFromFile(Group_Name(RegionUUID)) = PID Then
                         ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                         Application.DoEvents()
                     End If
@@ -819,8 +824,6 @@ Public Class FormSetup
         StopRobust()
         Zap("baretail")
         Zap("cports")
-
-        PropInstanceHandles.Clear()
 
         Settings.SaveSettings()
 
@@ -1020,20 +1023,10 @@ Public Class FormSetup
             If GroupList.Count > 0 Then
                 RegionUUID = GroupList(0)
 
-                PID = ProcessID(RegionUUID)
-                ProcessID(RegionUUID) = 0
+                PID = GetPIDFromFile(Group_Name(RegionUUID))
                 DelPidFile(RegionUUID) 'kill the disk PID
-
-                If PropInstanceHandles.ContainsKey(PID) Then
-                    PropInstanceHandles.TryRemove(PID, "")
-                End If
             Else
                 BreakPoint.Print("No UUID!")
-
-                If PID > 0 Then
-                    PropInstanceHandles.TryRemove(PID, "")
-                End If
-
                 Continue While
             End If
 
@@ -1150,10 +1143,8 @@ Public Class FormSetup
     End Sub
 
     ''' <summary>Event handler for Icecast</summary>
-#Disable Warning CA2109
 
     Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
-#Enable Warning CA2109
 
         If PropAborting Then Return
 
@@ -1453,13 +1444,12 @@ Public Class FormSetup
             End If
 
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-            ProcessID(RegionUUID) = 0
             DelPidFile(RegionUUID)
         Next
 
         Try
             ExitList.Clear()
-            PropInstanceHandles.Clear()
+
             WebserverList.Clear()
         Catch ex As Exception
             BreakPoint.Dump(ex)
@@ -1874,7 +1864,9 @@ Public Class FormSetup
                 If Not exists Then
                     Remove.Add(AvatarKey)
                     PropUpdateView = True
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                     If LastAvatars.ContainsKey(AvatarKey) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                         TextPrint($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                         SpeechList.Enqueue($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                     End If
@@ -2153,7 +2145,6 @@ Public Class FormSetup
         If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("Hour worker")
             TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
-            SetPublicIP()           ' Adjust to any IP changes
             ExpireLogsByAge()       ' clean up old logs
             DeleteOldVisitors()     ' can be pretty old
             ExpireLogByCount()      ' kill off old backup folders

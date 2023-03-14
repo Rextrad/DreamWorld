@@ -299,29 +299,31 @@ Partial Class FormCurrency
         '
         Me.HelpGloebitToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpGloebitToolStripMenuItem.Name = "HelpGloebitToolStripMenuItem"
-        Me.HelpGloebitToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.HelpGloebitToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
         Me.HelpGloebitToolStripMenuItem.Text = "Help Gloebit Currency"
         '
         'GloebitWebSiteToolStripMenuItem
         '
         Me.GloebitWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
         Me.GloebitWebSiteToolStripMenuItem.Name = "GloebitWebSiteToolStripMenuItem"
-        Me.GloebitWebSiteToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.GloebitWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
         Me.GloebitWebSiteToolStripMenuItem.Text = "Gloebit Web Site"
         '
         'HelptDTLCurrencyToolStripMenuItem
         '
         Me.HelptDTLCurrencyToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelptDTLCurrencyToolStripMenuItem.Name = "HelptDTLCurrencyToolStripMenuItem"
-        Me.HelptDTLCurrencyToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.HelptDTLCurrencyToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
         Me.HelptDTLCurrencyToolStripMenuItem.Text = "Help DTL Currency"
+        Me.HelptDTLCurrencyToolStripMenuItem.Visible = False
         '
         'DTLWebSiteToolStripMenuItem
         '
         Me.DTLWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
         Me.DTLWebSiteToolStripMenuItem.Name = "DTLWebSiteToolStripMenuItem"
-        Me.DTLWebSiteToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.DTLWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
         Me.DTLWebSiteToolStripMenuItem.Text = "DTL Web Site"
+        Me.DTLWebSiteToolStripMenuItem.Visible = False
         '
         'TableLayoutPanel1
         '

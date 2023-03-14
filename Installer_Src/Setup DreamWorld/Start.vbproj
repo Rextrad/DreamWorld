@@ -348,10 +348,17 @@
     <Compile Include="Clear_Cache.vb" />
     <Compile Include="Disk.vb" />
     <Compile Include="Events.vb" />
+    <Compile Include="ClassFilewatcher.vb" />
     <Compile Include="FormBlockify.Designer.vb">
       <DependentUpon>FormBlockify.vb</DependentUpon>
     </Compile>
     <Compile Include="FormBlockify.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBots.Designer.vb">
+      <DependentUpon>FormBots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBots.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBulkLoad.Designer.vb">
@@ -437,12 +444,6 @@
       <DependentUpon>FormFlotsamCache.vb</DependentUpon>
     </Compile>
     <Compile Include="FormFlotsamCache.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormFsAssets.Designer.vb">
-      <DependentUpon>FormFsAssets.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormFsAssets.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormGlobalMap.Designer.vb">
@@ -772,6 +773,9 @@
     <EmbeddedResource Include="FormBlockify.resx">
       <DependentUpon>FormBlockify.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormBots.resx">
+      <DependentUpon>FormBots.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBulkLoad.resx">
       <DependentUpon>FormBulkLoad.vb</DependentUpon>
     </EmbeddedResource>
@@ -814,9 +818,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFlotsamCache.resx">
       <DependentUpon>FormFlotsamCache.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormFsAssets.resx">
-      <DependentUpon>FormFsAssets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGlobalMap.resx">
       <DependentUpon>FormGlobalMap.vb</DependentUpon>

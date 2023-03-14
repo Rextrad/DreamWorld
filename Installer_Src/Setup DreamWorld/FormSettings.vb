@@ -10,10 +10,10 @@ Public Class FormSettings
 #Region "Declarations"
 
 #Disable Warning CA2213
-
     Private Backups As New FormAutoBackups
     Dim Banlist As New FormBanList
     Private Bird As New FormBird
+    Dim Bots As New FormBots
     Dim Email As New FormEmailSetup
     Dim FormApache As New FormApache
     Dim FormCache As New FormCaches
@@ -29,7 +29,6 @@ Public Class FormSettings
     Dim FormRestart As New FormRestart
     Dim FormServerType As New FormServerType
     Dim FormSpeech As New FormSpeech
-    Dim FsAssets As New FormFSAssets
     Dim Gloebits As New FormCurrency
     Dim Icecast As New FormIcecast
     Dim Lang As New Language
@@ -111,7 +110,7 @@ Public Class FormSettings
         DivaButton1.Text = Global.Outworldz.My.Resources.Web
         DNSButton.Text = Global.Outworldz.My.Resources.Hypergrid
         EmailButton.Text = Global.Outworldz.My.Resources.Email_word
-        FSAssetsButton.Text = Global.Outworldz.My.Resources.FSasset_word
+
         IcecastButton.Text = Global.Outworldz.My.Resources.Icecast_word
         LanguageButton.Text = Global.Outworldz.My.Resources.Language
         LoggingButton.Text = Global.Outworldz.My.Resources.Logging_word
@@ -139,7 +138,6 @@ Public Class FormSettings
         ToolTip1.SetToolTip(DivaButton1, Global.Outworldz.My.Resources.Click_Web)
         ToolTip1.SetToolTip(DNSButton, Global.Outworldz.My.Resources.Click_HG)
         ToolTip1.SetToolTip(EmailButton, Global.Outworldz.My.Resources.No_Email)
-        ToolTip1.SetToolTip(FSAssetsButton, Global.Outworldz.My.Resources.Click_Fsassets)
         ToolTip1.SetToolTip(IcecastButton, Global.Outworldz.My.Resources.Click_Icecast)
         ToolTip1.SetToolTip(JoomlaButton, Global.Outworldz.My.Resources.Click_Setup_Jopensim)
         ToolTip1.SetToolTip(LanguageButton, Global.Outworldz.My.Resources.Language)
@@ -281,6 +279,17 @@ Public Class FormSettings
 
     End Sub
 
+    Private Sub Button1_Click_3(sender As Object, e As EventArgs) Handles BotButton.Click
+
+        Bots.Close()
+        Bots.Dispose()
+        Bots = New FormBots
+        Bots.Activate()
+        Bots.Visible = True
+        Bots.Select()
+
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles PermissionsButton.Click
 
         FormPermissions.Close()
@@ -326,18 +335,6 @@ Public Class FormSettings
         FormJoomla.Visible = True
         FormJoomla.Select()
         FormJoomla.BringToFront()
-
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles FSAssetsButton.Click
-
-        FsAssets.Close()
-        FsAssets.Dispose()
-        FsAssets = New FormFSAssets
-        FsAssets.Activate()
-        FsAssets.Visible = True
-        FsAssets.Select()
-        FsAssets.BringToFront()
 
     End Sub
 

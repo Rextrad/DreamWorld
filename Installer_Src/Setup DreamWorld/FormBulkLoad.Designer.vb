@@ -31,10 +31,10 @@ Partial Class FormBulkLoad
         Me.XLabel = New System.Windows.Forms.Label()
         Me.YLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Estatenamelabel = New System.Windows.Forms.Label()
+        Me.EstateName = New System.Windows.Forms.TextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.EstateName = New System.Windows.Forms.TextBox()
-        Me.Estatenamelabel = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -127,6 +127,23 @@ Partial Class FormBulkLoad
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Load All Free Regions"
         '
+        'Estatenamelabel
+        '
+        Me.Estatenamelabel.AutoSize = True
+        Me.Estatenamelabel.Location = New System.Drawing.Point(8, 79)
+        Me.Estatenamelabel.Name = "Estatenamelabel"
+        Me.Estatenamelabel.Size = New System.Drawing.Size(37, 13)
+        Me.Estatenamelabel.TabIndex = 1909
+        Me.Estatenamelabel.Text = "Estate"
+        '
+        'EstateName
+        '
+        Me.EstateName.Location = New System.Drawing.Point(11, 95)
+        Me.EstateName.Name = "EstateName"
+        Me.EstateName.Size = New System.Drawing.Size(171, 20)
+        Me.EstateName.TabIndex = 1908
+        Me.EstateName.Text = "Outworldz"
+        '
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1})
@@ -143,22 +160,6 @@ Partial Class FormBulkLoad
         Me.ToolStripLabel1.Size = New System.Drawing.Size(48, 22)
         Me.ToolStripLabel1.Text = "Help"
         '
-        'EstateName
-        '
-        Me.EstateName.Location = New System.Drawing.Point(11, 95)
-        Me.EstateName.Name = "EstateName"
-        Me.EstateName.Size = New System.Drawing.Size(171, 20)
-        Me.EstateName.TabIndex = 1908
-        '
-        'Estatenamelabel
-        '
-        Me.Estatenamelabel.AutoSize = True
-        Me.Estatenamelabel.Location = New System.Drawing.Point(8, 79)
-        Me.Estatenamelabel.Name = "Estatenamelabel"
-        Me.Estatenamelabel.Size = New System.Drawing.Size(37, 13)
-        Me.Estatenamelabel.TabIndex = 1909
-        Me.Estatenamelabel.Text = "Estate"
-        '
         'FormBulkLoad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -167,7 +168,7 @@ Partial Class FormBulkLoad
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormBulkLoad"
-        Me.Text = "FormBulkLoad"
+        Me.Text = "Bulk Load"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)

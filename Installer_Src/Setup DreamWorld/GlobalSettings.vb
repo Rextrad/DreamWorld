@@ -13,6 +13,7 @@ Module GlobalSettings
     Public Const _MyVersion As String = "5.33"
 
     Public Const _SimVersion As String = "Opensim #1e0207b4991 2023-02-19 03:32:19"
+    Public Const DreamGrid As String = "DreamGrid"
     Public Const DTL As String = "DTL"
     Public Const FreeDiskSpaceWarn As Long = 100000000  ' 100 MB to freeze
     Public Const JOpensim As String = "JOpensim"

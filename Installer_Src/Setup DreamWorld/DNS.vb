@@ -56,10 +56,12 @@ Module DNS
         End If
 
         Dim DNS = New List(Of String) From {
+             "http://ns1.outworldz.com/dns.plx" & GetPostData(DNSName),
+             "http://ns2.outworldz.com/dns.plx" & GetPostData(DNSName),
              "http://ns1.outworldz.net/dns.plx" & GetPostData(DNSName),
              "http://ns2.outworldz.net/dns.plx" & GetPostData(DNSName),
-             "http://ns1.outworldz.com/dns.plx" & GetPostData(DNSName),
-             "http://ns2.outworldz.com/dns.plx" & GetPostData(DNSName)
+             "http://ns3.outworldz.net/dns.plx" & GetPostData(DNSName),
+             "http://ns3.outworldz.com/dns.plx" & GetPostData(DNSName)
             }
 
         Using client As New WebClient ' download client for web pages
@@ -125,6 +127,7 @@ Module DNS
         Settings.BaseHostName = Settings.PublicIP
 
         RegisterName(Settings.PublicIP)
+        Settings.SaveSettings()
 
     End Sub
 

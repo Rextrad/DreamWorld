@@ -343,7 +343,9 @@ Module SmartStart
     ''' <param name="RegionUUID">RegionUUID</param>
     Public Sub RunTaskList(RegionUUID As String)
 
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
         If ToDoList.ContainsKey(RegionUUID) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
             Try
 
                 Dim Task = ToDoList.Item(RegionUUID)
@@ -811,7 +813,7 @@ Module SmartStart
 
             ' stop if disabled
             Dim RegionUUID As String = FindRegionByName(BootName)
-
+            Dim GroupName = Group_Name(RegionUUID)
             ' must be real
             If String.IsNullOrEmpty(RegionUUID) Then
                 ErrorLog("Cannot find " & BootName & " to boot!")
@@ -824,15 +826,14 @@ Module SmartStart
                 Return True
             End If
 
-            Dim GroupName = Group_Name(RegionUUID)
-            Dim PID As Integer = GetPIDFromInstanceHandles(GroupName)
+            Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
 
             ' Detect if a region Window is already running
             ' needs to be captured into the event handler
 
             If CheckPort(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-                ProcessID(RegionUUID) = PID
+
                 PropUpdateView = True ' make form refresh
 
                 Try
@@ -912,9 +913,9 @@ Module SmartStart
             If ok Then
 
                 PID = WaitForPID(BootProcess)      ' check if it gave us a PID, if not, it failed.
+                ProcessID(RegionUUID) = PID
 
                 If PID > 0 Then
-
                     ' 0 is all cores
                     Try
                         If Cores(RegionUUID) > 0 Then
@@ -956,14 +957,7 @@ Module SmartStart
 
                     SetWindowTextCall(BootProcess, GroupName)
 
-                    If Not PropInstanceHandles.ContainsKey(PID) Then
-                        PropInstanceHandles.TryAdd(PID, GroupName)
-                    End If
-
                     AddCPU(PID, GroupName) ' get a list of running opensim processes
-                    For Each UUID As String In RegionUuidListByName(GroupName)
-                        ProcessID(UUID) = PID
-                    Next
                 Else
                     PropUpdateView = True ' make form refresh
                     Logger("Failed to boot ", BootName, "Outworldz")

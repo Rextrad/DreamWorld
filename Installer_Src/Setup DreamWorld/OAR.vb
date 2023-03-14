@@ -206,16 +206,16 @@ Module OAR
         Try
             If backMeUp = "Yes" Then
                 SendMessage(RegionUUID, Global.Outworldz.My.Resources.CPU_Intensive)
-                Dim R = New WaitForFile(RegionUUID, "Finished writing out OAR", "Save OAR")
-                ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}save oar ""{BackupPath()}/{Region_Name(RegionUUID)}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")}({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)}).oar""")
-                R.Scan()
+                Dim Result = New WaitForFile(RegionUUID, "Finished writing out OAR", "Save OAR")
+                ConsoleCommand(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""{vbCrLf}save oar ""{BackupPath()}/{Region_Name(RegionUUID)}_{Date.Now.ToString("yyyy-MM-dd_HH_mm_ss")}({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)}).oar""")
+                Result.Scan()
                 SendMessage(RegionUUID, Global.Outworldz.My.Resources.New_Content)
             End If
 
             SendMessage(RegionUUID, Global.Outworldz.My.Resources.New_Content)
-            Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
+            Dim Result1 = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
             ConsoleCommand(RegionUUID, LoadOarStr)
-            Result.Scan()
+            Result1.Scan()
         Catch ex As Exception
             BreakPoint.Dump(ex)
             ErrorLog(My.Resources.Error_word & ":" & ex.Message)

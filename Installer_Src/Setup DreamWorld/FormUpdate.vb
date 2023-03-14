@@ -103,7 +103,6 @@ Public Class FormUpdate
         Settings.VisitorsEnabled = False
         SetupPerl() ' Ditto
 
-        Settings.VisitorsEnabledModules = False
         SetupPerlModules() ' Perl Language interpreter
 
     End Sub

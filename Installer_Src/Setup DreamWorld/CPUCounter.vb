@@ -6,20 +6,12 @@ Module CPUCounter
 
     Private ReadOnly _CPUValues As New Dictionary(Of String, Double)
 
-    Private ReadOnly _regionHandles As New ConcurrentDictionary(Of Integer, String)
-
     Private _PCList As Dictionary(Of Integer, PerformanceCounter)
     Private CalcCPUIsBusy As Boolean
 
     Public ReadOnly Property CPUValues As Dictionary(Of String, Double)
         Get
             Return _CPUValues
-        End Get
-    End Property
-
-    Public ReadOnly Property PropInstanceHandles As ConcurrentDictionary(Of Integer, String)
-        Get
-            Return _regionHandles
         End Get
     End Property
 
@@ -63,7 +55,7 @@ Module CPUCounter
 
             For Each RegionUUID In RegionUuids()
 
-                Dim PID = ProcessID(RegionUUID)
+                Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
                 If PID = 0 Then
                     Continue For
                 End If
@@ -101,9 +93,7 @@ Module CPUCounter
                     Try
                         a = Convert.ToDouble(CounterList.Item(RegionName).NextValue(), Globalization.CultureInfo.InvariantCulture)
                     Catch ex As Exception
-                        If CounterList.ContainsKey(RegionName) Then
-                            CounterList.Remove(RegionName)
-                        End If
+                        CounterList.Remove(RegionName)
                     End Try
 
                     Dim b = (a / Environment.ProcessorCount)

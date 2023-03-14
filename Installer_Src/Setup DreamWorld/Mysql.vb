@@ -392,12 +392,16 @@ Public Module MysqlInterface
                 MysqlConn.Open()
 
                 Using cmd As New MySqlCommand(stm, MysqlConn)
-#Enable Warning
                     cmd.Parameters.AddWithValue("@param", id)
                     cmd.ExecuteScalar()
+                    Logger("Email", "Email Deleted from IM as it has been sent", "Outworldz")
                 End Using
             Catch ex As Exception
-                BreakPoint.Print(ex.Message)
+                Settings.EmailEnabled = False
+                If Not RunningInServiceMode() Then
+                    MsgBox("Email error - cannot delete IM! SMTP is disabled", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
+                End If
+                ErrorLog(ex.Message)
             End Try
         End Using
 
@@ -810,7 +814,7 @@ Public Module MysqlInterface
 
             End Using
         Catch ex As Exception
-            BreakPoint.Print(ex.Message)
+            Diagnostics.Debug.Print(ex.Message)
         End Try
 
         Return v
@@ -1007,6 +1011,42 @@ Public Module MysqlInterface
         End Using
 
         Return A
+
+    End Function
+
+    ''' <summary>
+    ''' Returns a local avatar UUID give a First and Last name
+    ''' </summary>
+    ''' <param name="avatarName"></param>
+    ''' <returns>Avatar UUID</returns>
+    Public Function GetAviCountByName(First As String, Last As String) As Integer
+
+        StartMySQL()
+        Dim Val As Integer
+        Dim stm = "Select count(*)  from useraccounts where FirstName = @Fname and LastName = @Lname"
+        Using MysqlConn As New MySqlConnection(Settings.RobustMysqlConnection)
+            Try
+                MysqlConn.Open()
+
+                Using cmd = New MySqlCommand(stm, MysqlConn)
+
+                    cmd.Parameters.AddWithValue("@Fname", First)
+                    cmd.Parameters.AddWithValue("@Lname", Last)
+
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            Val = reader.GetInt32(0)
+                        End If
+                    End Using
+
+                End Using
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+
+        End Using
+
+        Return Val
 
     End Function
 

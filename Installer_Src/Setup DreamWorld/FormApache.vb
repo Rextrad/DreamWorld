@@ -15,9 +15,9 @@ Public Class FormApache
     Private Const JOpensim As String = "JOpensim"
     Private Const WordPress As String = "WordPress"
     Dim initted As Boolean
-#Disable Warning CA2213
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Dim SSL As New FormSSL
-#Enable Warning CA2213
+#Enable Warning CA2213 ' Disposable fields should be disposed
 
 #End Region
 

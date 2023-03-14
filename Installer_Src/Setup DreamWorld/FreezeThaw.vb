@@ -9,15 +9,18 @@
 
     Public Sub Freeze(RegionUUID As String)
 
-        Dim PID = ProcessID(RegionUUID)
         ShowDOSWindow(RegionUUID, MaybeHideWindow())
-
-        If Smart_Suspend_Enabled(RegionUUID) Then
-            NtSuspendProcess(CachedProcess(PID).Handle)
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended
-        ElseIf Smart_Boot_Enabled(RegionUUID) Then
-            ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
-        End If
+        Try
+            If Smart_Suspend_Enabled(RegionUUID) Then
+                Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+                NtSuspendProcess(Process.GetProcessById(PID).Handle)
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended
+            ElseIf Smart_Boot_Enabled(RegionUUID) Then
+                ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+            End If
+        Catch ex As Exception
+            ErrorLog(ex.Message)
+        End Try
 
     End Sub
 
@@ -44,10 +47,10 @@
     ''' <param name="RegionUUID">Region UUID</param>
     Public Sub Thaw(RegionUUID As String)
 
-        Dim PID = ProcessID(RegionUUID)
+        Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
 
         Try
-            NtResumeProcess(CachedProcess(PID).Handle)
+            NtResumeProcess(Process.GetProcessById(PID).Handle)
         Catch
         End Try
 

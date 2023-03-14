@@ -379,14 +379,11 @@ Public Class FormBulkLoad
 
     Private Sub FormBulkLoad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.Text = "Bulk Load"
-
         SetScreen()
 
         OwnerLabel.Text = My.Resources.OwnerofNewRegions
         RegionOwnerTextBox.Text = Settings.BulkLoadOwner
         Estatenamelabel.Text = My.Resources.WhatEstate
-        EstateName.Text = "Outworldz"
 
         If RegionOwnerTextBox.Text.Length = 0 Then
             RegionOwnerTextBox.BackColor = Color.Red

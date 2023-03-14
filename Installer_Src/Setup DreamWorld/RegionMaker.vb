@@ -75,12 +75,12 @@ Module RegionMaker
             Settings.SaveSettings()
         End If
 
-        GetOpensimPIDsFromFiles()
-
         If GetAllRegions(Verbose) = 0 Then
             TextPrint($"*** FAILED** Loaded {CStr(RegionCount)} Regions")
             Return False
         End If
+
+        GetOpensimPIDsFromFiles()
 
         TextPrint($"Loaded {CStr(RegionCount)} Regions")
 
@@ -641,9 +641,7 @@ Module RegionMaker
                             ' if not, read them from the INI files.
                             ' If the iNI files have Nothing, Then  go Max
                             ' if this is after boot up, use the backed up settings.
-                            ' Adding a new region always uses
 
-                            ' Get Next Port
                             If ThisGroup = 0 Then
                                 ThisGroup = GetPort(uuid)
                                 GroupPort(uuid) = ThisGroup
@@ -651,33 +649,33 @@ Module RegionMaker
 
                             Region_Port(uuid) = ThisGroup
 
-                            Dim G = Group_Name(uuid)
-                            If GetHwnd(G) = IntPtr.Zero Then
-                                Region_Port(uuid) = GetPort(uuid)
-                                Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))}  To {fName}", "Port")
-                                Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                            Else
-                                Region_Port(uuid) = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
-                                If Region_Port(uuid) = 0 Then Region_Port(uuid) = LargestPort() + 1
-                                Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
-                                '
-                                GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
-                                Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                                '
-                                If GroupPort(uuid) = 0 Then
-                                    GroupPort(uuid) = ThisGroup
-                                    Logger("Port", $"Re-Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                                End If
+                            'Dim G = Group_Name(uuid)
+                            'If GetHwnd(G) = IntPtr.Zero Then
+                            'Region_Port(uuid) = GetPort(uuid)
+                            'Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))}  To {fName}", "Port")
+                            'Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
+                            'Else
+                            'Region_Port(uuid) = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
+                            'If Region_Port(uuid) = 0 Then Region_Port(uuid) = LargestPort() + 1
+                            'Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
+                            '
+                            'GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
+                            'Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
+                            '
+                            'If GroupPort(uuid) = 0 Then
+                            'GroupPort(uuid) = ThisGroup
+                            'Logger("Port", $"Re-Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
+                            'End If
 
-                            End If
+                            'End If
 
                             ' If region Is already set, use its port as they cannot change while up.
                             ' restore backups of transient data
                             Dim o = FindBackupByName(fName)
                             If o >= 0 Then
                                 AvatarCount(uuid) = Backup(o)._AvatarCount
-                                ProcessID(uuid) = Backup(o)._ProcessID
                                 RegionStatus(uuid) = Backup(o)._Status
+                                Region_Port(uuid) = Backup(o)._RegionPort
                                 Timer(uuid) = Backup(o)._Timer
                                 CrashCounter(uuid) = Backup(o)._CrashCounter
                             End If
@@ -1654,6 +1652,7 @@ Module RegionMaker
                     L.Add(pair.Value._UUID)
                 End If
             Next
+            Return L
         Catch ex As Exception
             BreakPoint.Dump(ex)
         End Try

@@ -32,7 +32,7 @@ Module Ports
                     End Try
 
                     For Each file As String In inis
-                        Ctr += 1
+
                         Dim fName = Path.GetFileNameWithoutExtension(file)
                         Debug.Print($"Loading {fName}")
 
@@ -56,15 +56,8 @@ Module Ports
                             MsgBox("Cannot read UUID In INI file For " & fName, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
                             Exit For
                         End If
+                        Ctr += 1
 
-                        'If CBool(GetHwnd(Groupname)) Then
-                        'Dim RegionPort = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
-                        'If RegionPortList.ContainsKey(RegionPort) Then
-                        'RegionPortList.Item(RegionPort) = RegionUUID  ' update
-                        'Else
-                        'RegionPortList.TryAdd(RegionPort, RegionUUID) ' add
-                        'End If
-                        'End If
                     Next
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
@@ -73,7 +66,7 @@ Module Ports
             Application.DoEvents()
         Next
 
-        Debug.Print($"RegionPortList count is {RegionPortList.Count}")
+        Debug.Print($"RegionPortList count is {Ctr}")
         Return Ctr
 
     End Function
@@ -90,7 +83,7 @@ Module Ports
 
     End Function
 
-    '' Get the larget Region Port
+    '' Get the largest Region Port
     Public Function LargestPort() As Integer
 
         Dim retval As Integer = Settings.FirstRegionPort ' start at 8004

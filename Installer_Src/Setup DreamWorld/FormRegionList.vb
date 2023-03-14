@@ -11,17 +11,23 @@ Imports System.Text.RegularExpressions
 
 Public Class FormRegionlist
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly colsize As New ClassScreenpos("Region List")
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly Handler As New EventHandler(AddressOf Resize_page)
     Private ReadOnly SearchArray As New List(Of String)
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private _ImageListSmall As New ImageList
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Dim _order As SortOrder
     Private _screenPosition As ClassScreenpos
     Private _SortColumn As Integer
     Private detailsinitted As Boolean
     Private initted As Boolean
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Dim RegionForm As New FormRegion
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private TotalRam As Double
     Private UseMysql As Boolean
 
@@ -906,8 +912,8 @@ Public Class FormRegionlist
             IconsButton.Text = Global.Outworldz.My.Resources.Icons_word
             ImportButton.Text = Global.Outworldz.My.Resources.Import_word
             KOT.Text = Global.Outworldz.My.Resources.Window_Word
-            OnButton.Text = Global.Outworldz.My.Resources.On_word
-            OffButton.Text = Global.Outworldz.My.Resources.Off
+            OnButton.Text = Global.Outworldz.My.Resources.Enabled_word
+            OffButton.Text = Global.Outworldz.My.Resources.Disabled_word
             OnTopToolStripMenuItem.Text = Global.Outworldz.My.Resources.On_Top
             RefreshButton.Text = Global.Outworldz.My.Resources.Refresh_word
             RestartButton.Text = Global.Outworldz.My.Resources.Restart_word
@@ -1466,8 +1472,7 @@ Public Class FormRegionlist
 
                     If OnButton.Checked And Not RegionEnabled(RegionUUID) Then Continue For
                     If OffButton.Checked And RegionEnabled(RegionUUID) Then Continue For
-                    If SmartButton.Checked And Not Smart_Suspend_Enabled(RegionUUID) Then Continue For
-                    If SmartButton.Checked And Not Smart_Boot_Enabled(RegionUUID) Then Continue For
+                    If SmartButton.Checked And (Not Smart_Suspend_Enabled(RegionUUID) And Not Smart_Boot_Enabled(RegionUUID)) Then Continue For
                     If Bootedbutton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Continue For
                     If StoppedButton.Checked And RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then Continue For
 
@@ -1504,8 +1509,8 @@ Public Class FormRegionlist
                             status = SIMSTATUSENUM.RecyclingUp Or
                             status = SIMSTATUSENUM.RecyclingDown Then
                         Try
-                            Dim PID = ProcessID(RegionUUID)
-                            Dim component1 As Process = CachedProcess(PID)
+                            Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+                            Dim component1 As Process = Process.GetProcessById(PID)
                             Dim Memory As Double = (component1.WorkingSet64 / 1024) / 1024
                             TotalRam += Memory
                             item1.SubItems.Add(Memory.ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " MB")

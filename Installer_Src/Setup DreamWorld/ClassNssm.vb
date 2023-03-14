@@ -18,7 +18,6 @@
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
-
         End If
 
     End Sub
