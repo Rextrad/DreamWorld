@@ -197,7 +197,7 @@ Public Class UPnp
                     Return Settings.DnsName
                 End If
 
-                Dim sock As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0)
+                Dim sock = New Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0)
                 Try
                     Using sock
                         sock.Connect("8.8.8.8", 65530)  ' try Google

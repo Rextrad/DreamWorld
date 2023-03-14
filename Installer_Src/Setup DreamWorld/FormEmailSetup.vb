@@ -186,7 +186,7 @@ Public Class FormEmailSetup
 
     End Sub
 
-    Private Sub email_pause_timeTextBox_TextChanged(sender As Object, e As EventArgs) Handles email_pause_timeTextBox.TextChanged
+    Private Sub Email_pause_timeTextBox_TextChanged(sender As Object, e As EventArgs) Handles email_pause_timeTextBox.TextChanged
 
         If Not initted Then Return
         Dim digitsOnly = New Regex("[^\d]")
@@ -220,14 +220,12 @@ Public Class FormEmailSetup
 
     End Sub
 
-    Private Sub enableEmailToExternalObjectsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles enableEmailToExternalObjectsCheckBox.CheckedChanged
+    Private Sub EnableEmailToExternalObjectsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles enableEmailToExternalObjectsCheckBox.CheckedChanged
 
         If Not initted Then Return
         Settings.EnableEmailToExternalObjects = enableEmailToExternalObjectsCheckBox.Checked
 
     End Sub
-
-
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
 

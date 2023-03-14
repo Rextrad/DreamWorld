@@ -15,9 +15,7 @@ Public Class FormApache
     Private Const JOpensim As String = "JOpensim"
     Private Const WordPress As String = "WordPress"
     Dim initted As Boolean
-#Disable Warning CA2213
     Dim SSL As New FormSSL
-#Enable Warning CA2213
 
 #End Region
 
