@@ -51,7 +51,9 @@ Public Class FormBots
 
             ' convert byte data to hex string
             For n As Integer = 0 To dbytes.Length - 1
+#Disable Warning CA1305 ' Specify IFormatProvider
                 sBuilder.Append(dbytes(n).ToString("X2"))
+#Enable Warning CA1305 ' Specify IFormatProvider
             Next n
 
             Return sBuilder.ToString()
