@@ -37,7 +37,7 @@ Public Class ClassFilewatcher
     Private Sub OnChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
 
         Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
-
+        Sleep(10)
         Dim I = New LoadIni(IO.Path.Combine(INI, "Settings.ini"), ";", System.Text.Encoding.UTF8)
 
     End Sub
