@@ -343,7 +343,9 @@ Module SmartStart
     ''' <param name="RegionUUID">RegionUUID</param>
     Public Sub RunTaskList(RegionUUID As String)
 
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
         If ToDoList.ContainsKey(RegionUUID) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
             Try
 
                 Dim Task = ToDoList.Item(RegionUUID)

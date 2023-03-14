@@ -261,8 +261,6 @@ Public Class FormSetup
 
     End Function
 
-#Disable Warning CA2109
-
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
@@ -1137,10 +1135,8 @@ Public Class FormSetup
     End Sub
 
     ''' <summary>Event handler for Icecast</summary>
-#Disable Warning CA2109
 
     Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
-#Enable Warning CA2109
 
         If PropAborting Then Return
 
@@ -1860,7 +1856,9 @@ Public Class FormSetup
                 If Not exists Then
                     Remove.Add(AvatarKey)
                     PropUpdateView = True
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                     If LastAvatars.ContainsKey(AvatarKey) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                         TextPrint($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                         SpeechList.Enqueue($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                     End If

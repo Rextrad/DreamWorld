@@ -9,6 +9,7 @@ Public Class FormSettings
 
 #Region "Declarations"
 
+#Disable Warning CA2213
     Private Backups As New FormAutoBackups
     Dim Banlist As New FormBanList
     Private Bird As New FormBird
@@ -28,7 +29,6 @@ Public Class FormSettings
     Dim FormRestart As New FormRestart
     Dim FormServerType As New FormServerType
     Dim FormSpeech As New FormSpeech
-    Dim FsAssets As New FormFSAssets
     Dim Gloebits As New FormCurrency
     Dim Icecast As New FormIcecast
     Dim Lang As New Language
@@ -40,6 +40,7 @@ Public Class FormSettings
     Dim Tide As New FormTide
     Dim Tos As New TosForm
     Dim Voice As New FormVoice
+#Enable Warning CA2213
 
 #End Region
 
@@ -334,18 +335,6 @@ Public Class FormSettings
         FormJoomla.Visible = True
         FormJoomla.Select()
         FormJoomla.BringToFront()
-
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs)
-
-        FsAssets.Close()
-        FsAssets.Dispose()
-        FsAssets = New FormFSAssets
-        FsAssets.Activate()
-        FsAssets.Visible = True
-        FsAssets.Select()
-        FsAssets.BringToFront()
 
     End Sub
 

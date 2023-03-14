@@ -11,8 +11,6 @@ Public Class MySettings
 
 #Region "Private Fields"
 
-    Private Const DreamGrid As String = "DreamGrid"
-    Private Const JOpensim As String = "JOpensim"
     Private _CurSlashDir As String = ""
     Private _DeleteTreesFirst As Boolean
     Private _ExternalHostName As String
@@ -43,7 +41,6 @@ Public Class MySettings
             End Try
 
             Settings = New LoadIni(_myINI, ";", System.Text.Encoding.UTF8)
-
         End If
 
     End Sub
@@ -2712,7 +2709,7 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Shared Function SCPass() As String
+    Public Function SCPass() As String
         Dim SCPasswordAdmin = New PassGen
         Return SCPasswordAdmin.GeneratePass()
     End Function
