@@ -107,7 +107,7 @@ Module Global_Properties
         ' output of  git rev-parse --short HEAD   from Perl
         Get
             Dim line As String = "None"
-            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "GitVersion")
+            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "GitVersion.txt")
             If System.IO.File.Exists(fname) Then
                 Using reader As StreamReader = System.IO.File.OpenText(fname)
                     'now loop through each line
