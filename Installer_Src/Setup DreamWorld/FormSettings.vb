@@ -31,14 +31,12 @@ Public Class FormSettings
     Dim FsAssets As New FormFSAssets
     Dim Gloebits As New FormCurrency
     Dim Icecast As New FormIcecast
-    Dim Land As New FormLandAndSea
     Dim Lang As New Language
     Dim Logging As New FormLogging
     Dim Maps As New FormMaps
     Dim Scripts As New FormScripts
     Dim Search As New FormSearch
     Dim SS As New FormSmartStart
-    Dim Terrain As New FormTerrain
     Dim Tide As New FormTide
     Dim Tos As New TosForm
     Dim Voice As New FormVoice
@@ -111,7 +109,7 @@ Public Class FormSettings
         DivaButton1.Text = Global.Outworldz.My.Resources.Web
         DNSButton.Text = Global.Outworldz.My.Resources.Hypergrid
         EmailButton.Text = Global.Outworldz.My.Resources.Email_word
-        FSAssetsButton.Text = Global.Outworldz.My.Resources.FSasset_word
+
         IcecastButton.Text = Global.Outworldz.My.Resources.Icecast_word
         LanguageButton.Text = Global.Outworldz.My.Resources.Language
         LoggingButton.Text = Global.Outworldz.My.Resources.Logging_word
@@ -139,7 +137,6 @@ Public Class FormSettings
         ToolTip1.SetToolTip(DivaButton1, Global.Outworldz.My.Resources.Click_Web)
         ToolTip1.SetToolTip(DNSButton, Global.Outworldz.My.Resources.Click_HG)
         ToolTip1.SetToolTip(EmailButton, Global.Outworldz.My.Resources.No_Email)
-        ToolTip1.SetToolTip(FSAssetsButton, Global.Outworldz.My.Resources.Click_Fsassets)
         ToolTip1.SetToolTip(IcecastButton, Global.Outworldz.My.Resources.Click_Icecast)
         ToolTip1.SetToolTip(JoomlaButton, Global.Outworldz.My.Resources.Click_Setup_Jopensim)
         ToolTip1.SetToolTip(LanguageButton, Global.Outworldz.My.Resources.Language)
@@ -304,17 +301,6 @@ Public Class FormSettings
 
     End Sub
 
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles TerrainButton.Click
-
-        Terrain.Close()
-        Terrain.Dispose()
-        Terrain = New FormTerrain
-        Terrain.Activate()
-        Terrain.Visible = True
-        Terrain.Select()
-
-    End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles RestartButton.Click
 
         FormRestart.Close()
@@ -324,17 +310,6 @@ Public Class FormSettings
         FormRestart.Visible = True
         FormRestart.Select()
         FormRestart.BringToFront()
-
-    End Sub
-
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles LandButton.Click
-
-        Land.Close()
-        Land.Dispose()
-        Land = New FormLandAndSea
-        Land.Activate()
-        Land.Visible = True
-        Land.Select()
 
     End Sub
 
@@ -362,7 +337,7 @@ Public Class FormSettings
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles FSAssetsButton.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
 
         FsAssets.Close()
         FsAssets.Dispose()
