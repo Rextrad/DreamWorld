@@ -15,6 +15,7 @@ Public Class LoadIni
 
     Private ReadOnly _parser As FileIniDataParser
     Private ReadOnly _SettingsData As IniParser.Model.IniData
+    Private ReadOnly Readlock As New Object
     Private _encoding As System.Text.Encoding
     Private _filename As String
     Private _sep As String
@@ -202,24 +203,27 @@ Public Class LoadIni
     End Sub
 
     Private Function ReadINIFile(FileName As String) As IniData
-        '{"Unknown file format. Couldn't parse the line: ''''. while parsing line number 0 with value '' - IniParser version: 2.5.2.0 while parsing line number 751 with value '''' - IniParser version: 2.5.2.0"}
-        Dim waiting As Integer = 10 ' 1 sec
-        While waiting > 0
-            Try
-                Dim Data As IniData = _parser.ReadFile(FileName, Encoding)
-                Return Data
-            Catch ex As Exception
-                BreakPoint.Dump(ex)
-                waiting -= 1
-                Sleep(100)
-            End Try
-        End While
 
-        If waiting < -0 Then
-            ErrorLog($" Cannot load INI file: FileName")
-        End If
-        Return Nothing
+        SyncLock Readlock
 
+            Dim waiting As Integer = 10 ' 1 sec
+            While waiting > 0
+                Try
+                    Dim Data As IniData = _parser.ReadFile(FileName, Encoding)
+                    Return Data
+                Catch ex As Exception
+                    BreakPoint.Dump(ex)
+                    waiting -= 1
+                    Sleep(100)
+                End Try
+            End While
+
+            If waiting < -0 Then
+                ErrorLog($" Cannot load INI file: FileName")
+            End If
+            Return Nothing
+
+        End SyncLock
     End Function
 
 End Class
