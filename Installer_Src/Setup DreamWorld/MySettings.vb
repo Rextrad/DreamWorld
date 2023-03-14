@@ -2709,7 +2709,7 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Function SCPass() As String
+    Public Shared Function SCPass() As String
         Dim SCPasswordAdmin = New PassGen
         Return SCPasswordAdmin.GeneratePass()
     End Function

@@ -21,8 +21,12 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Public ReadOnly NssmService As New ClassNssm
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
@@ -39,8 +43,12 @@ Public Class FormSetup
     Private _RestartApache As Boolean
     Private _RestartMysql As Boolean
     Private _speed As Double = 50
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private cpu As New PerformanceCounter
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private Graphs As New FormGraphs
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
