@@ -2143,7 +2143,6 @@ Public Class FormSetup
         If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("Hour worker")
             TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
-            SetPublicIP()           ' Adjust to any IP changes
             ExpireLogsByAge()       ' clean up old logs
             DeleteOldVisitors()     ' can be pretty old
             ExpireLogByCount()      ' kill off old backup folders
