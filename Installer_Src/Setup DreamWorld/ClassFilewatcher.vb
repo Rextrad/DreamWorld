@@ -37,12 +37,16 @@ Public Class ClassFilewatcher
     Private Sub OnChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
 
         Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
+        Debug.Print(Settings.LANIP)
 
         Dim _myFolder = Settings.CurrentDirectory
         Settings = New MySettings(_myFolder) With {
             .CurrentDirectory = _myFolder,
             .CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
             }
+
+        Debug.Print("IP:" & Settings.LANIP)
+
     End Sub
 
 End Class
