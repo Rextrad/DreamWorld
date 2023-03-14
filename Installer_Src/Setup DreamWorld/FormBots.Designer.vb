@@ -40,6 +40,8 @@ Partial Class FormBots
         Me.RegionButton = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.RegionLabel = New System.Windows.Forms.Label()
+        Me.SendAgentUpdatesCheckBox = New System.Windows.Forms.CheckBox()
+        Me.RequestObjectTexturesCheckBox = New System.Windows.Forms.CheckBox()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +57,8 @@ Partial Class FormBots
         '
         'TextBox1
         '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox1.Location = New System.Drawing.Point(12, 133)
         Me.TextBox1.Multiline = True
@@ -220,23 +223,45 @@ Partial Class FormBots
         Me.ComboBox1.Items.AddRange(New Object() {"Home", "Last", "(Region Name)"})
         Me.ComboBox1.Location = New System.Drawing.Point(411, 42)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(98, 21)
         Me.ComboBox1.TabIndex = 8
         '
         'RegionLabel
         '
         Me.RegionLabel.AutoSize = True
-        Me.RegionLabel.Location = New System.Drawing.Point(538, 45)
+        Me.RegionLabel.Location = New System.Drawing.Point(515, 45)
         Me.RegionLabel.Name = "RegionLabel"
-        Me.RegionLabel.Size = New System.Drawing.Size(41, 13)
+        Me.RegionLabel.Size = New System.Drawing.Size(66, 13)
         Me.RegionLabel.TabIndex = 18
-        Me.RegionLabel.Text = "Region"
+        Me.RegionLabel.Text = "Start Region"
+        '
+        'SendAgentUpdatesCheckBox
+        '
+        Me.SendAgentUpdatesCheckBox.AutoSize = True
+        Me.SendAgentUpdatesCheckBox.Location = New System.Drawing.Point(411, 77)
+        Me.SendAgentUpdatesCheckBox.Name = "SendAgentUpdatesCheckBox"
+        Me.SendAgentUpdatesCheckBox.Size = New System.Drawing.Size(125, 17)
+        Me.SendAgentUpdatesCheckBox.TabIndex = 19
+        Me.SendAgentUpdatesCheckBox.Text = "Send Agent Updates"
+        Me.SendAgentUpdatesCheckBox.UseVisualStyleBackColor = True
+        '
+        'RequestObjectTexturesCheckBox
+        '
+        Me.RequestObjectTexturesCheckBox.AutoSize = True
+        Me.RequestObjectTexturesCheckBox.Location = New System.Drawing.Point(411, 106)
+        Me.RequestObjectTexturesCheckBox.Name = "RequestObjectTexturesCheckBox"
+        Me.RequestObjectTexturesCheckBox.Size = New System.Drawing.Size(144, 17)
+        Me.RequestObjectTexturesCheckBox.TabIndex = 20
+        Me.RequestObjectTexturesCheckBox.Text = "Request Object Textures"
+        Me.RequestObjectTexturesCheckBox.UseVisualStyleBackColor = True
         '
         'FormBots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(674, 450)
+        Me.Controls.Add(Me.RequestObjectTexturesCheckBox)
+        Me.Controls.Add(Me.SendAgentUpdatesCheckBox)
         Me.Controls.Add(Me.RegionLabel)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -272,4 +297,6 @@ Partial Class FormBots
     Friend WithEvents CheckBoxPhysics As CheckBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents RegionLabel As Label
+    Friend WithEvents SendAgentUpdatesCheckBox As CheckBox
+    Friend WithEvents RequestObjectTexturesCheckBox As CheckBox
 End Class

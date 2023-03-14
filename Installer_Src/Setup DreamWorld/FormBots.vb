@@ -1,7 +1,10 @@
-﻿Public Class FormBots
+﻿Imports System.Security.Cryptography
+Imports System.Text
+
+Public Class FormBots
+    Private ReadOnly behaviour As New List(Of String)
     Private BotPID As Integer
     Private botStart As String = ""
-
     ' See http://opensimulator.org/wiki/PCampBot
 
 #Region "FormPos"
@@ -35,6 +38,36 @@
 
 #End Region
 
+    Shared Function GetHash(theInput As String) As String
+
+        Using hasher As MD5 = MD5.Create()    ' create hash object
+
+            ' Convert to byte array and get hash
+            Dim dbytes As Byte() =
+                 hasher.ComputeHash(Encoding.UTF8.GetBytes(theInput))
+
+            ' sb to create string from bytes
+            Dim sBuilder As New StringBuilder()
+
+            ' convert byte data to hex string
+            For n As Integer = 0 To dbytes.Length - 1
+                sBuilder.Append(dbytes(n).ToString("X2"))
+            Next n
+
+            Return sBuilder.ToString()
+        End Using
+
+    End Function
+
+    Public Sub AddValue(key As String)
+
+        If behaviour.Contains(key) Then
+            Return
+        End If
+        behaviour.Add(key)
+
+    End Sub
+
     Private Sub BotCommand(msg As String)
 
         If BotPID > 0 Then
@@ -44,8 +77,6 @@
                 SendKeys.Flush()
             Catch
             End Try
-        Else
-            ProgressPrint("Not running")
         End If
 
     End Sub
@@ -61,24 +92,63 @@
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxPhysics.CheckedChanged
-        BotCommand("add behaviour p")
-        ProgressPrint("Bots constantly move and jump around")
+
+        If CheckBoxPhysics.Checked Then
+            AddValue("p")
+            BotCommand("add behaviour p")
+            CheckBoxNone.Checked = False
+            ProgressPrint("Bots constantly move and jump around")
+        Else
+            ProgressPrint("Bots stop moving")
+            DeleteValue("p")
+            BotCommand("remove behaviour p")
+        End If
+
     End Sub
 
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxGrab.CheckedChanged
-        BotCommand("add behaviour g")
-        ProgressPrint("Bots randomly click prims whether set clickable or not")
+
+        If CheckBoxGrab.Checked Then
+            BotCommand("add behaviour g")
+            AddValue("g")
+            CheckBoxNone.Checked = False
+            ProgressPrint("Bots randomly click prims whether set clickable or not")
+        Else
+            BotCommand("remove behaviour g")
+            ProgressPrint("Bots Stop grabbing prims")
+            DeleteValue("g")
+        End If
+
     End Sub
 
     Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxTeleport.CheckedChanged
-        BotCommand("add behaviour t")
-        ProgressPrint("Bots regularly teleport between regions on the grid")
+
+        If CheckBoxTeleport.Checked Then
+            BotCommand("add behaviour t")
+            AddValue("t")
+            CheckBoxNone.Checked = False
+            ProgressPrint("Bots regularly teleport between regions on the grid")
+        Else
+            BotCommand("remove behaviour t")
+            ProgressPrint("Bots Stop Telporting")
+            DeleteValue("t")
+        End If
+
     End Sub
 
     Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxNone.CheckedChanged
 
-        BotCommand("remove behaviour n")
-        ProgressPrint("Bots do nothing")
+        If CheckBoxNone.Checked Then
+
+            CheckBoxTeleport.Checked = False
+            CheckBoxGrab.Checked = False
+            CheckBoxPhysics.Checked = False
+
+            BotCommand("remove behaviour n")
+            behaviour.Clear()
+            ProgressPrint("Bots do nothing")
+
+        End If
 
     End Sub
 
@@ -101,13 +171,21 @@
     Private Sub Createbots(N As Integer)
 
         While N > 0
-            Dim C = GetAviCountByName("Ima", $"Bot{N - 1}")
+            Dim C = GetAviCountByName("Iama", $"Bot{N - 1}")
             If C = 0 Then
-                ProgressPrint($"Creating Ima Bot{N - 1}")
-                ConsoleCommand(RobustName, $"create user Ima Bot{N - 1} {Settings.Password & "xyz"} not@set.yet ~~")
+                ProgressPrint($"Creating Iama Bot{N - 1}")
+                ConsoleCommand(RobustName, $"create user Iama Bot{N - 1} {GetHash(Settings.Password) } not@set.yet ~~")
             End If
             N -= 1
         End While
+
+    End Sub
+
+    Private Sub DeleteValue(key As String)
+
+        If behaviour.Contains(key) Then
+            behaviour.Remove(key)
+        End If
 
     End Sub
 
@@ -177,16 +255,33 @@
 
     End Sub
 
+    Private Sub RequestObjectTexturesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles RequestObjectTexturesCheckBox.CheckedChanged
+
+        Dim ini = IO.Path.Combine(Settings.OpensimBinPath, "pCampBot.ini")
+        Dim pCampBot = New LoadIni(ini, ";", System.Text.Encoding.UTF8)
+        pCampBot.SetIni("Bot", "RequestObjectTextures", CStr(RequestObjectTexturesCheckBox.Checked))
+        pCampBot.SaveIni()
+
+    End Sub
+
     Private Sub RunBot(RegionName As String, N As Integer)
 
         Createbots(N)
 
         ProgressPrint($"Starting up {CStr(N)} bots in {RegionName}")
 
-        Dim arguments As String = $"-botcount {CStr(N)} -c  -loginuri http://127.0.0.1:{Settings.HttpPort} {RegionName} -firstname Ima  -lastname Bot -password {Settings.Password & "xyz"}"
+        Dim behaviorlist As String
+        Dim a = behaviour.ToArray
+        If behaviour.Count > 0 Then
+            behaviorlist = "-b " & behaviorlist.Join(",", a)
+        Else
+            behaviorlist = "-b none"
+        End If
+
+        Dim arguments As String = $"-botcount {CStr(N)} -c {behaviorlist} -loginuri http://127.0.0.1:{Settings.HttpPort}  -s ""{RegionName}"" -firstname Iama  -lastname Bot -password {GetHash(Settings.Password)}"
 
         'ProgressPrint("pCambot.exe " & arguments)
-        'pCambot.exe -botcount 1 -loginuri http://127.0.0.1:6002 -start Normal -firstname Ima  -lastname Bot -password 123456xyz
+        'pCambot.exe -botcount 1 -loginuri http://127.0.0.1:6002 -start Normal -firstname Iama  -lastname Bot -password 123456xyz
 
         Dim BotProcess = New Process
 
@@ -225,25 +320,33 @@
     Private Sub RunBots()
 
         Dim out As Integer
-        Dim how As String = "home"
 
         Dim N = InputBox("How many bots?  0-100 ", "pCampBots", "1")
         If Integer.TryParse(N, out) Then
             If out > 100 Then out = 0
 
             If botStart = "home" Then
-                RunBot($"-s {Settings.WelcomeRegion}", out)
+                RunBot($"{Settings.WelcomeRegion}", out)
             ElseIf botStart = "last" Then
-                RunBot("-s last", out)
+                RunBot("last", out)
             ElseIf botStart.Length > 0 Then
-                RunBot($"-s {botStart}", out)
+                RunBot($"{botStart}", out)
             Else
                 Dim RegionName = ChooseRegion(True) ' Just running regions
                 If RegionName.Length = 0 Then Return
-                RunBot($"-s {RegionName}", out)
+                RunBot($"{RegionName}", out)
             End If
 
         End If
+
+    End Sub
+
+    Private Sub SendAgentUpdatesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles SendAgentUpdatesCheckBox.CheckedChanged
+
+        Dim ini = IO.Path.Combine(Settings.OpensimBinPath, "pCampBot.ini")
+        Dim pCampBot = New LoadIni(ini, ";", System.Text.Encoding.UTF8)
+        pCampBot.SetIni("Bot", "SendAgentUpdates", CStr(SendAgentUpdatesCheckBox.Checked))
+        pCampBot.SaveIni()
 
     End Sub
 
