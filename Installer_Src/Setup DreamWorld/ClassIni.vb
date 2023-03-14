@@ -16,6 +16,7 @@ Public Class LoadIni
     Private ReadOnly _parser As FileIniDataParser
     Private ReadOnly _SettingsData As IniParser.Model.IniData
     Private ReadOnly Readlock As New Object
+    Private ReadOnly SaveTheINI As New Object
     Private _encoding As System.Text.Encoding
     Private _filename As String
     Private _sep As String
@@ -41,7 +42,15 @@ Public Class LoadIni
         _parser.Parser.Configuration.CommentString = Sep ' Opensim uses semicolons
         _SettingsData = ReadINIFile(File)
         If _SettingsData Is Nothing Then
-            Logger("$Error", $"No Data in {FileName}", "Outworldz")
+            ErrorLog($"No Data in {File}")
+            MsgBox("Fatal Error! Cannot Read INI File!", MsgBoxStyle.Critical)
+            End
+        End If
+
+        If _SettingsData.ToString.Length = 0 Then
+            ErrorLog($"No Data in {File}")
+            MsgBox("Cannot Read INI File!", MsgBoxStyle.Critical)
+            End
         End If
 
     End Sub
@@ -119,27 +128,29 @@ Public Class LoadIni
 
     Public Sub SaveIni()
 
-        CopyFileFast(Settings.CurrentDirectory + "\OutworldzFiles\Settings.ini", Settings.CurrentDirectory + "\OutworldzFiles\Settings.bak")
-        Dim Retry As Integer = 100 ' 1 sec
-        While Retry > 0
-            Try
-                _parser.WriteFile(FileName, _SettingsData, Encoding)
-                Retry = 0
-            Catch ex As Exception
-                BreakPoint.Print("Error:" + ex.Message)
-                Retry -= 1
-                Thread.Sleep(10)
-            End Try
+        SyncLock SaveTheINI
+            CopyFileFast(Settings.CurrentDirectory + "\OutworldzFiles\Settings.ini", Settings.CurrentDirectory + "\OutworldzFiles\Settings.bak")
+            Dim Retry As Integer = 100 ' 1 sec
+            While Retry > 0
+                Try
+                    _parser.WriteFile(FileName, _SettingsData, Encoding)
+                    Retry = 0
+                Catch ex As Exception
+                    BreakPoint.Print("Error:" + ex.Message)
+                    Retry -= 1
+                    Thread.Sleep(10)
+                End Try
 
-            If Retry < 0 Then
-                ErrorLog($"Region INI filed to save: {FileName}")
-                If Not RunningInServiceMode() Then
-                    Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
-                Else
+                If Retry < 0 Then
                     ErrorLog($"Region INI filed to save: {FileName}")
+                    If Not RunningInServiceMode() Then
+                        Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
+                    Else
+                        ErrorLog($"Region INI filed to save: {FileName}")
+                    End If
                 End If
-            End If
-        End While
+            End While
+        End SyncLock
 
     End Sub
 
@@ -209,7 +220,7 @@ Public Class LoadIni
             Dim waiting As Integer = 10 ' 1 sec
             While waiting > 0
                 Try
-                    Dim Data As IniData = _parser.ReadFile(FileName, Encoding)
+                    Dim Data = _parser.ReadFile(FileName, Encoding)
                     Return Data
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
