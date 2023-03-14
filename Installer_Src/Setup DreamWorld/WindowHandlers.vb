@@ -429,7 +429,6 @@ Module WindowHandlers
                 Sleep(100)
                 Application.DoEvents()
             End While
-
         End If
 
         Return False
