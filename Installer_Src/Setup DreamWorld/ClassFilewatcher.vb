@@ -38,8 +38,11 @@ Public Class ClassFilewatcher
 
         Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
         Sleep(10)
-        Dim I = New LoadIni(IO.Path.Combine(INI, "Settings.ini"), ";", System.Text.Encoding.UTF8)
-
+        Dim _myFolder = IO.Path.Combine(INI, "Settings.ini")
+        Settings = New MySettings(_myFolder) With {
+            .CurrentDirectory = _myFolder,
+            .CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
+            }
     End Sub
 
 End Class
