@@ -119,11 +119,12 @@ Public Class FormJoomla
 
                 Try
                     JoomlaProcess.Start()
+                    Application.DoEvents()
+                    JoomlaProcess.WaitForExit()
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
                 End Try
-                Application.DoEvents()
-                JoomlaProcess.WaitForExit()
+
             End Using
 
             Dim ctr As Integer = 0

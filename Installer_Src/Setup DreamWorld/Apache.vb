@@ -190,20 +190,18 @@ Module Apache
                 Try
                     ApacheProcess.Start()
                     ApacheProcess.WaitForExit()
+                    If ApacheProcess.ExitCode <> 0 Then
+                        TextPrint(My.Resources.ApacheFailed)
+                        ApacheIcon(False)
+                    Else
+                        PropApacheUninstalling = False ' installed now, trap errors
+                    End If
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
                     ApacheIcon(False)
                 End Try
                 Application.DoEvents()
 
-                If ApacheProcess.ExitCode <> 0 Then
-                    TextPrint(My.Resources.ApacheFailed)
-                    ApacheIcon(False)
-                Else
-                    PropApacheUninstalling = False ' installed now, trap errors
-                End If
-
-                Application.DoEvents()
             End Using
 
         End If
@@ -230,27 +228,26 @@ Module Apache
                 ApacheProcess.Start()
                 response = ApacheProcess.StandardOutput.ReadToEnd() & ApacheProcess.StandardError.ReadToEnd()
                 ApacheProcess.WaitForExit()
+                If ApacheProcess.ExitCode <> 0 Then
+                    If response.Contains("has already been started") Then
+                        ApacheIcon(True)
+
+                        Settings.ApacheRev = ApacheRevision
+                        Settings.SaveSettings()
+
+                        Return
+                    End If
+                    TextPrint(My.Resources.Apache_Failed & ":" & CStr(ApacheProcess.ExitCode))
+                    ApacheIcon(False)
+                Else
+                    TextPrint(My.Resources.Apache_running & ":" & Settings.ApachePort)
+                    ApacheIcon(True)
+                End If
             Catch ex As Exception
                 BreakPoint.Dump(ex)
                 TextPrint(My.Resources.Apache_Failed & ":" & ex.Message)
             End Try
             Application.DoEvents()
-
-            If ApacheProcess.ExitCode <> 0 Then
-                If response.Contains("has already been started") Then
-                    ApacheIcon(True)
-
-                    Settings.ApacheRev = ApacheRevision
-                    Settings.SaveSettings()
-
-                    Return
-                End If
-                TextPrint(My.Resources.Apache_Failed & ":" & CStr(ApacheProcess.ExitCode))
-                ApacheIcon(False)
-            Else
-                TextPrint(My.Resources.Apache_running & ":" & Settings.ApachePort)
-                ApacheIcon(True)
-            End If
 
         End Using
 
