@@ -23,64 +23,67 @@ Module Icecast
 
     Public Function StartIcecast() As Boolean
 
-        If Not Settings.SCEnable Then
-            TextPrint(Global.Outworldz.My.Resources.IceCast_disabled)
-            IceCastIcon(False)
-            Return True
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
+            If Not Settings.SCEnable Then
+                TextPrint(Global.Outworldz.My.Resources.IceCast_disabled)
+                IceCastIcon(False)
+                Return True
+            End If
+
+            Try
+                ' Check if DOS box exists, first, if so, its running.
+                For Each p In Process.GetProcesses
+                    If p.ProcessName = "icecast" Then
+                        PropIcecastProcID = p.Id
+
+                        p.EnableRaisingEvents = True
+                        AddHandler p.Exited, AddressOf FormSetup.IceCastExited
+
+                        IceCastIcon(True)
+                        Return True
+                    End If
+                Next
+            Catch
+            End Try
+
+            DoIceCast()
+
+            DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\access.log"))
+            'Launch .\bin\icecast.exe -c .\icecast_run.xml
+
+            PropIcecastProcID = 0
+            TextPrint(My.Resources.Icecast_starting)
+            IcecastProcess.EnableRaisingEvents = True
+            IcecastProcess.StartInfo.UseShellExecute = True
+            IcecastProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\icecast\bin\icecast.exe")
+            IcecastProcess.StartInfo.CreateNoWindow = True
+            IcecastProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            IcecastProcess.StartInfo.Arguments = "-c .\icecast_run.xml"
+            IcecastProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\icecast")
+            AddHandler IcecastProcess.Exited, AddressOf FormSetup.IceCastExited
+
+            Try
+                IcecastProcess.Start()
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+                TextPrint(My.Resources.Icecast_failed & ":" & ex.Message)
+                IceCastIcon(False)
+                Return False
+            End Try
+
+            PropIcecastProcID = WaitForPID(IcecastProcess)
+            If PropIcecastProcID = 0 Then
+                BreakPoint.Print(My.Resources.Icecast_failed)
+                TextPrint(My.Resources.Icecast_failed)
+                IceCastIcon(False)
+                Return False
+            End If
+
+            IceCastIcon(True)
+
+            FormSetup.PropIceCastExited = False
         End If
 
-        Try
-            ' Check if DOS box exists, first, if so, its running.
-            For Each p In Process.GetProcesses
-                If p.ProcessName = "icecast" Then
-                    PropIcecastProcID = p.Id
-
-                    p.EnableRaisingEvents = True
-                    AddHandler p.Exited, AddressOf FormSetup.IceCastExited
-
-                    IceCastIcon(True)
-                    Return True
-                End If
-            Next
-        Catch
-        End Try
-
-        DoIceCast()
-
-        DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\access.log"))
-        'Launch .\bin\icecast.exe -c .\icecast_run.xml
-
-        PropIcecastProcID = 0
-        TextPrint(My.Resources.Icecast_starting)
-        IcecastProcess.EnableRaisingEvents = True
-        IcecastProcess.StartInfo.UseShellExecute = True
-        IcecastProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\icecast\bin\icecast.exe")
-        IcecastProcess.StartInfo.CreateNoWindow = True
-        IcecastProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-        IcecastProcess.StartInfo.Arguments = "-c .\icecast_run.xml"
-        IcecastProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\icecast")
-        AddHandler IcecastProcess.Exited, AddressOf FormSetup.IceCastExited
-
-        Try
-            IcecastProcess.Start()
-        Catch ex As Exception
-            BreakPoint.Dump(ex)
-            TextPrint(My.Resources.Icecast_failed & ":" & ex.Message)
-            IceCastIcon(False)
-            Return False
-        End Try
-
-        PropIcecastProcID = WaitForPID(IcecastProcess)
-        If PropIcecastProcID = 0 Then
-            BreakPoint.Print(My.Resources.Icecast_failed)
-            TextPrint(My.Resources.Icecast_failed)
-            IceCastIcon(False)
-            Return False
-        End If
-
-        IceCastIcon(True)
-
-        FormSetup.PropIceCastExited = False
         Return True
 
     End Function

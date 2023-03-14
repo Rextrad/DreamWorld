@@ -37,8 +37,8 @@ Public Class ClassFilewatcher
     Private Sub OnChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
 
         Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
-        Sleep(10)
-        Dim _myFolder = IO.Path.Combine(INI, "Settings.ini")
+
+        Dim _myFolder = Settings.CurrentDirectory
         Settings = New MySettings(_myFolder) With {
             .CurrentDirectory = _myFolder,
             .CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why

@@ -583,15 +583,13 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-        End If
+            Sleep(100)
 
-        Sleep(100)
-
-        ' Run Diagnostics no matter who we are
-        If TestPrivateLoopback(True) Then
-            ErrorLog("Diagnostic Listener port failed. Aborting")
-            TextPrint("Diagnostic Listener port failed. Aborting")
-            Return
+            If TestPrivateLoopback(True) Then
+                ErrorLog("Diagnostic Listener port failed. Aborting")
+                TextPrint("Diagnostic Listener port failed. Aborting")
+                Return
+            End If
         End If
 
         If IsMySqlRunning() Then
