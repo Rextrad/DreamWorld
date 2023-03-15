@@ -249,7 +249,7 @@ Module Build
     ''' <param name="RegionName"></param>
     Sub Landscape(RegionUUID As String, RegionName As String)
 
-        Dim Threaded = False
+        Dim Threaded = True
 
         ' pass the two parameters it needs as in object
         Dim c As New RegionEssentials With {
