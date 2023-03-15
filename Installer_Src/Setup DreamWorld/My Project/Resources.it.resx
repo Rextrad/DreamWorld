@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Vedi cartella</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Mostra tutte le regioni</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Si prega di leggere e accettare i nostri Termini di servizio, o sarete disconnessi.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Richiedi l'accordo per TOS con un pop-up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>non ha accettato i Termini e Condizioni</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Backup SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Tipo di backup</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Cambia cartella</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Porta Web (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Impossibile</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Impossibile eliminare il servizio</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Impossibile installare il servizio</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Impossibile avviare il servizio</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Servizio installato</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Servizio rimosso</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Avvio come servizio</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Standby</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Avviabile</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Sospeso</value>
+  </data>
 </root>

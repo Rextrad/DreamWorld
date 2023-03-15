@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>View Folder</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Show All Regions</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Please read and agree our Terms of Service, or you will be logged out.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Require Agreement to TOS with a Pop Up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>did not accept the Terms and Conditions</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Backup SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Backup Type</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Change Folder</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web Port (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Failed to</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Service Failed to Delete</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Service Failed to Install</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Service Failed to Start</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Service Installed</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Service Removed</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Starting As A Service</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Standby</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspendable</value>
+  </data>
 </root>

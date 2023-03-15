@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Voir le dossier</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Afficher toutes les régions</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Veuillez lire et accepter nos Conditions d’utilisation, sinon vous serez déconnecté.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Exiger l’accord aux conditions d’utilisation avec une fenêtre contextuelle.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>n’a pas accepté les termes et conditions</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Sauvegarde SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Type de sauvegarde</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Changer de dossier</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Port Web (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Echec de</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Le service n’a pas pu être supprimé</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Échec de l’installation du service</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Le service n’a pas pu démarrer</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Service installé</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Service supprimé</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Démarrage en tant que service</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Veille</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Démarrable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspension</value>
+  </data>
 </root>

@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Ver folder</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Mostrar todas las regiones</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Lea y acepte nuestros Términos de servicio, o se cerrará la sesión.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Requerir acuerdo a TOS con un Pop-Up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>no aceptó los Términos y Condiciones</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Copia de seguridad de SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Tipo de copia de seguridad</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Cambiar carpeta</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Puerto web (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Error al</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Error al eliminar el servicio</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Error al instalar el servicio</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Error al iniciar el servicio</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Servicio instalado</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Servicio eliminado</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Comenzar como un servicio</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Espera</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Arranque</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspendible</value>
+  </data>
 </root>

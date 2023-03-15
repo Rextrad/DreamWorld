@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>مشاهده پوشه</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>نمایش همه مناطق</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>لطفا شرایط سرویس ما را بخوانید و موافقت کنید، یا وارد سیستم می شوید.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>نیاز به توافق به TOS با پاپ آپ.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>شرایط و ضوابط را نپذیرند</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>SQL پشتیبان گیری</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>نوع پشتیبان گیری</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>تغییر پوشه</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>پورت وب (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>موفق به</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>سرویس موفق به حذف نشد</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>سرویس موفق به نصب نشد</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>سرویس موفق به شروع نشد</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>سرویس نصب شده</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>سرویس حذف شده</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>شروع به عنوان یک سرویس</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>آماده</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>بوت</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>قابل تعلیق</value>
+  </data>
 </root>

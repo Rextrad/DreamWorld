@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Ikusi karpeta</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Eskualde guztiak erakutsi</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Irakurri eta onartu gure zerbitzu-baldintzak, edo saioa itxiko da.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>TOS-i Pop-Up batekin akordioa eskatzea.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>ez zituen onartu Baldintzak eta Baldintzak</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>SQLren segurtasun-kopia</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Segurtasun-kopia mota</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Karpeta aldatu</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web portua (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Errorea</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Hutsegitea zerbitzua ezabatzean</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Hutsegitea zerbitzua instalatzean</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Hutsegitea zerbitzua hastean</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Instalatutako zerbitzua</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Ezabatutako zerbitzua</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Zerbitzu gisa hasi</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Itxaron</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Hasiera</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Etengarria</value>
+  </data>
 </root>

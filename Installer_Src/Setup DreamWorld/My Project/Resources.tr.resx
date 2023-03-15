@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Dosya görüntüle</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Tüm Bölgeleri Göster</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Lütfen Hizmet Şartlarımızı okuyun ve kabul edin, aksi takdirde oturumunuz kapatılır.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Bir açılır pencere ile TOS için anlaşma gerektir.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>Şartlar ve Koşulları kabul etmedim</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Yedekleme SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Yedekleme Türü</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Klasörü Değiştir</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web Bağlantı Noktası (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Başarısız oldu</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Hizmet Silinemedi</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Hizmet Yüklenemedi</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Hizmet başlatılamadı</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Hizmet Yüklendi</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Hizmet Kaldırıldı</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Hizmet Olarak Başlamak</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Bekleme</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Önyüklenebilir</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Askıya alınabilir</value>
+  </data>
 </root>

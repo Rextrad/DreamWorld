@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Näytä kansio</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Näytä kaikki alueet</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Lue ja hyväksy käyttöehtomme, tai sinut kirjataan ulos.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Vaadi sopimus palveluehdoista ponnahdusikkunan avulla.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>ei hyväksynyt käyttöehtoja</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Varmuuskopioi SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Varmuuskopion tyyppi</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Vaihda kansio</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web-portti (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Ei onnistunut</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Palvelun poistaminen epäonnistui</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Palvelun asennus epäonnistui</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Palvelun käynnistyminen epäonnistui</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Palvelu asennettu</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Palvelu poistettu</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Palveluna aloittaminen</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Valmiustila</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Keskeytettävä</value>
+  </data>
 </root>

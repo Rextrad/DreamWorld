@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>הצג תיקייה</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>הצג את כל האזורים</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>אנא קרא והסכים לתנאי השירות שלנו, או שתתנתק.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>דרוש הסכמה ל- TOS עם חלון קופץ.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>לא קיבל את התנאים וההתניות</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>גיבוי SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>סוג גיבוי</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>שנה תיקיה</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>יציאת אינטרנט (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>נכשל</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>מחיקת השירות נכשלה</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>התקנת השירות נכשלה</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>הפעלת השירות נכשלה</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>שירות מותקן</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>השירות הוסר</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>התחלה כשירות</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>המתנה</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>לאתחול</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>ניתן להשעיה</value>
+  </data>
 </root>
