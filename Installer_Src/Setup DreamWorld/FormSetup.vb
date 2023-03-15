@@ -711,6 +711,7 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
+            Sleep(30000)
             Startup()
             Return
         Else
@@ -877,7 +878,7 @@ Public Class FormSetup
             End If
         End If
 
-        If Settings.GraphVisible Then
+        If Settings.GraphVisible And Not RunningInServiceMode() Then
             G()
         End If
 
@@ -889,14 +890,12 @@ Public Class FormSetup
 
                 If PropOpensimIsRunning Then
                     Boot(RegionName)
-                    Application.DoEvents()
                 End If
             End If
             Application.DoEvents()
 
         Next
         CalcCPU()
-        Settings.SaveSettings()
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
