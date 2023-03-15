@@ -15,3 +15,6 @@ dotnet_diagnostic.BC42025.severity = none
 
 # CA1305: Specify IFormatProvider
 dotnet_diagnostic.CA1305.severity = suggestion
+
+# CA2213: Disposable fields should be disposed
+dotnet_diagnostic.CA2213.severity = silent

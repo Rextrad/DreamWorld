@@ -1470,10 +1470,10 @@ Public Class MySettings
 
     Public Property MacAddress() As String
         Get
-            Return GetMySetting("MachineID")
+            Return GetMySetting("MacAddress")
         End Get
         Set
-            SetMySetting("MachineID", CStr(Value))
+            SetMySetting("MacAddress", CStr(Value))
         End Set
     End Property
 

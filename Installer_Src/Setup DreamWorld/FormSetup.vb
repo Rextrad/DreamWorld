@@ -478,6 +478,11 @@ Public Class FormSetup
 
         Me.Show()
 
+        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
+        Randomize()
+        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
+        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
+
         CheckForUpdates()
 
         RunningBackupName.Clear()
@@ -565,7 +570,7 @@ Public Class FormSetup
         SkipSetup = False
 
         TextPrint(My.Resources.Setup_Network)
-        SetPublicIP()
+
         SetServerType()
 
         If SetIniData() Then
@@ -630,6 +635,8 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
+        SetPublicIP()
+
         If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
         End If
@@ -668,11 +675,6 @@ Public Class FormSetup
         End If
 
         Joomla.CheckForjOpensimUpdate()
-
-        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
-        Randomize()
-        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
-        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
 
         Settings.SaveSettings()
 
