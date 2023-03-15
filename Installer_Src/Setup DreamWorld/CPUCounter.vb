@@ -46,6 +46,8 @@ Module CPUCounter
 
     Public Sub CalcCPU()
 
+        If RunningInServiceMode() Then Return
+
         If CalcCPUIsBusy Then
             Return
         End If

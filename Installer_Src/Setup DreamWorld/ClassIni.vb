@@ -224,13 +224,14 @@ Public Class LoadIni
                     Return Data
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
+                    ErrorLog($"Cannot load INI file: {FileName} Pass N: {CStr(waiting)}")
                     waiting -= 1
                     Sleep(100)
                 End Try
             End While
 
             If waiting < -0 Then
-                ErrorLog($" Cannot load INI file: FileName")
+                ErrorLog($" Cannot load INI file: {FileName}")
             End If
             Return Nothing
 
