@@ -19,6 +19,7 @@ Module GlobalSettings
     Public Const JOpensim As String = "JOpensim"
     Public Const jOpensimRev As String = "Joomla_3.9.23-Stable-Full_Package"
     Public Const jRev As String = "3.9.23"
+    Public Const PHPRev As String = "7.4.33"
     Public Const MetroServer As String = "Metro"
     Public Const OsgridServer As String = "OsGrid"
     Public Const Outworldz As String = "Outworldz"
