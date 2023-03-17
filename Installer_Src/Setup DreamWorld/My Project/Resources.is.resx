@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Skoða möppu</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Sýna öll svæði</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Vinsamlegast lestu og samþykktu þjónustuskilmála okkar, annars verður þú skráður út.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Krefjast samkomulags við TOS með sprettiglugga.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>samþykkti ekki skilmálana</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Afritun SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Tegund öryggisafrits</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Breyta möppu</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web Port (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Gat ekki</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Þjónusta tókst ekki að eyða</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Þjónusta mistókst að setja upp</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Þjónusta tókst ekki að ræsa</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Þjónusta sett upp</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Þjónusta fjarlægð</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Byrjar sem þjónusta</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Biðstöðu</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Frestunarhæft</value>
+  </data>
 </root>

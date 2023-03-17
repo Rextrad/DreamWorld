@@ -107,130 +107,133 @@ Module Robust
 
         If Not StartMySQL() Then Return False ' prerequsite
 
-        For Each p In Process.GetProcessesByName("Robust")
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
+
+            For Each p In Process.GetProcessesByName("Robust")
+                Try
+                    If p.MainWindowTitle = RobustName() Then
+
+                        If Not IsRobustRunning() Then
+                            Sleep(10000)
+                        End If
+
+                        PropRobustProcID = p.Id
+                        Log(My.Resources.Info_word, Global.Outworldz.My.Resources.DosBoxRunning)
+                        RobustIcon(True)
+                        p.EnableRaisingEvents = True
+                        If Not RobustHandler Then
+                            AddHandler p.Exited, AddressOf RobustProcess_Exited
+                            RobustHandler = True
+                        End If
+                        PropOpensimIsRunning = True
+                        ShowDOSWindow(RobustName(), MaybeHideWindow())
+                        Return True
+
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            ' Check the HTTP port in case its on a different PC
+            If IsRobustRunning() Then
+                RobustIcon(True)
+                PropOpensimIsRunning = True
+                RobustHandler = False
+                Return True
+            End If
+
+            If Settings.ServerType <> RobustServerName Then
+                RobustIcon(True)
+                PropOpensimIsRunning = True
+                RobustHandler = False
+                Return True
+            End If
+
+            SetServerType()
+            PropRobustProcID = 0
+
+            If DoRobust() Then Return False
+
+            TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
+
+            RobustProcess.EnableRaisingEvents = True
+            RobustProcess.StartInfo.UseShellExecute = True
+            RobustProcess.StartInfo.Arguments = "-inifile Robust.HG.ini"
+
+            RobustProcess.StartInfo.FileName = Settings.OpensimBinPath & "robust.exe"
+            RobustProcess.StartInfo.CreateNoWindow = False
+            RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
+            RobustProcess.StartInfo.RedirectStandardOutput = False
+
+            ' enable console for Service mode
+            Dim args As String = ""
+            If RunningInServiceMode() Then
+                args = " -console=rest" ' space required
+                Settings.GraphVisible = False
+            End If
+
+            RobustProcess.StartInfo.Arguments &= args
+
+            Select Case Settings.ConsoleShow
+                Case "True"
+                    RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal
+                Case "False"
+                    RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal
+                Case "None"
+                    RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
+            End Select
+
             Try
-                If p.MainWindowTitle = RobustName() Then
-
-                    If Not IsRobustRunning() Then
-                        Sleep(10000)
-                    End If
-
-                    PropRobustProcID = p.Id
-                    Log(My.Resources.Info_word, Global.Outworldz.My.Resources.DosBoxRunning)
-                    RobustIcon(True)
-                    p.EnableRaisingEvents = True
-                    If Not RobustHandler Then
-                        AddHandler p.Exited, AddressOf RobustProcess_Exited
-                        RobustHandler = True
-                    End If
-                    PropOpensimIsRunning = True
-                    ShowDOSWindow(RobustName(), MaybeHideWindow())
-                    Return True
-
-                End If
+                TextPrint($"Booting Robust")
+                RobustProcess.Start()
+                RobustHandler = True
             Catch ex As Exception
-            End Try
-        Next
-
-        ' Check the HTTP port in case its on a different PC
-        If IsRobustRunning() Then
-            RobustIcon(True)
-            PropOpensimIsRunning = True
-            RobustHandler = False
-            Return True
-        End If
-
-        If Settings.ServerType <> RobustServerName Then
-            RobustIcon(True)
-            PropOpensimIsRunning = True
-            RobustHandler = False
-            Return True
-        End If
-
-        SetServerType()
-        PropRobustProcID = 0
-
-        If DoRobust() Then Return False
-
-        TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
-
-        RobustProcess.EnableRaisingEvents = True
-        RobustProcess.StartInfo.UseShellExecute = True
-        RobustProcess.StartInfo.Arguments = "-inifile Robust.HG.ini"
-
-        RobustProcess.StartInfo.FileName = Settings.OpensimBinPath & "robust.exe"
-        RobustProcess.StartInfo.CreateNoWindow = False
-        RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
-        RobustProcess.StartInfo.RedirectStandardOutput = False
-
-        ' enable console for Service mode
-        Dim args As String = ""
-        If RunningInServiceMode() Then
-            args = " -console=rest" ' space required
-            Settings.GraphVisible = False
-        End If
-
-        RobustProcess.StartInfo.Arguments &= args
-
-        Select Case Settings.ConsoleShow
-            Case "True"
-                RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal
-            Case "False"
-                RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal
-            Case "None"
-                RobustProcess.StartInfo.WindowStyle = ProcessWindowStyle.Minimized
-        End Select
-
-        Try
-            TextPrint($"Booting Robust")
-            RobustProcess.Start()
-            RobustHandler = True
-        Catch ex As Exception
-            BreakPoint.Dump(ex)
-            TextPrint($"Robust {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
-            FormSetup.KillAll()
-            FormSetup.Buttons(FormSetup.StartButton)
-            MarkRobustOffline()
-            Return False
-        End Try
-        PropRobustProcID = WaitForPID(RobustProcess)
-        If PropRobustProcID = 0 Then
-            MarkRobustOffline()
-            Log("Error", Global.Outworldz.My.Resources.Robust_failed_to_start)
-            Return False
-        End If
-
-        SetWindowTextCall(RobustProcess, RobustName)
-
-        ' Wait for Robust to start listening
-        Dim counter = 0
-        While Not IsRobustRunning() And PropOpensimIsRunning
-
-            TextPrint("Robust " & Global.Outworldz.My.Resources.isBooting)
-            counter += 1
-            ' 2 minutes to boot on bad hardware at 5 sec per spin
-            If counter > 120 Then
-                TextPrint(My.Resources.Robust_failed_to_start)
-                FormSetup.Buttons(FormSetup.StartButton)
-                If Not RunningInServiceMode() Then
-                    Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-                    If (yesno = vbYes) Then
-                        Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
-                    End If
-                End If
-
+                BreakPoint.Dump(ex)
+                TextPrint($"Robust {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
+                FormSetup.KillAll()
                 FormSetup.Buttons(FormSetup.StartButton)
                 MarkRobustOffline()
                 Return False
+            End Try
+            PropRobustProcID = WaitForPID(RobustProcess)
+            If PropRobustProcID = 0 Then
+                MarkRobustOffline()
+                Log("Error", Global.Outworldz.My.Resources.Robust_failed_to_start)
+                Return False
             End If
-            Sleep(1000) ' in ms
-        End While
-        Sleep(1000)
-        Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Robust_running)
-        ShowDOSWindow(RobustName(), MaybeHideWindow())
-        RobustIcon(True)
-        TextPrint(Global.Outworldz.My.Resources.Robust_running)
-        PropRobustExited = False
+
+            SetWindowTextCall(RobustProcess, RobustName)
+
+            ' Wait for Robust to start listening
+            Dim counter = 0
+            While Not IsRobustRunning() And PropOpensimIsRunning
+
+                TextPrint("Robust " & Global.Outworldz.My.Resources.isBooting)
+                counter += 1
+                ' 2 minutes to boot on bad hardware at 5 sec per spin
+                If counter > 120 Then
+                    TextPrint(My.Resources.Robust_failed_to_start)
+                    FormSetup.Buttons(FormSetup.StartButton)
+                    If Not RunningInServiceMode() Then
+                        Dim yesno = MsgBox(My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                        If (yesno = vbYes) Then
+                            Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
+                        End If
+                    End If
+
+                    FormSetup.Buttons(FormSetup.StartButton)
+                    MarkRobustOffline()
+                    Return False
+                End If
+                Sleep(1000) ' in ms
+            End While
+            Sleep(1000)
+            Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Robust_running)
+            ShowDOSWindow(RobustName(), MaybeHideWindow())
+            RobustIcon(True)
+            TextPrint(Global.Outworldz.My.Resources.Robust_running)
+            PropRobustExited = False
+        End If
 
         Return True
 

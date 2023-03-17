@@ -41,11 +41,9 @@ Partial Class FormDebug
         Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.RadioFalse)
         Me.GroupBox1.Controls.Add(Me.RadioTrue)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 49)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 40)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(569, 304)
+        Me.GroupBox1.Size = New System.Drawing.Size(427, 247)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Debug"
@@ -54,18 +52,16 @@ Partial Class FormDebug
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {""})
-        Me.ComboBox1.Location = New System.Drawing.Point(27, 37)
-        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ComboBox1.Location = New System.Drawing.Point(20, 30)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(197, 24)
+        Me.ComboBox1.Size = New System.Drawing.Size(149, 21)
         Me.ComboBox1.TabIndex = 0
         '
         'ApplyButton
         '
-        Me.ApplyButton.Location = New System.Drawing.Point(388, 34)
-        Me.ApplyButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ApplyButton.Location = New System.Drawing.Point(291, 28)
         Me.ApplyButton.Name = "ApplyButton"
-        Me.ApplyButton.Size = New System.Drawing.Size(128, 28)
+        Me.ApplyButton.Size = New System.Drawing.Size(96, 23)
         Me.ApplyButton.TabIndex = 3
         Me.ApplyButton.Text = "Apply"
         Me.ApplyButton.UseVisualStyleBackColor = True
@@ -74,20 +70,19 @@ Partial Class FormDebug
         '
         Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Location = New System.Drawing.Point(8, 112)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Location = New System.Drawing.Point(6, 91)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(552, 184)
+        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox1.Size = New System.Drawing.Size(415, 150)
         Me.TextBox1.TabIndex = 4
         '
         'RadioFalse
         '
         Me.RadioFalse.AutoSize = True
-        Me.RadioFalse.Location = New System.Drawing.Point(265, 54)
-        Me.RadioFalse.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RadioFalse.Location = New System.Drawing.Point(199, 44)
         Me.RadioFalse.Name = "RadioFalse"
-        Me.RadioFalse.Size = New System.Drawing.Size(63, 21)
+        Me.RadioFalse.Size = New System.Drawing.Size(50, 17)
         Me.RadioFalse.TabIndex = 2
         Me.RadioFalse.TabStop = True
         Me.RadioFalse.Text = "False"
@@ -96,10 +91,9 @@ Partial Class FormDebug
         'RadioTrue
         '
         Me.RadioTrue.AutoSize = True
-        Me.RadioTrue.Location = New System.Drawing.Point(265, 26)
-        Me.RadioTrue.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RadioTrue.Location = New System.Drawing.Point(199, 21)
         Me.RadioTrue.Name = "RadioTrue"
-        Me.RadioTrue.Size = New System.Drawing.Size(59, 21)
+        Me.RadioTrue.Size = New System.Drawing.Size(47, 17)
         Me.RadioTrue.TabIndex = 1
         Me.RadioTrue.TabStop = True
         Me.RadioTrue.Text = "True"
@@ -111,7 +105,8 @@ Partial Class FormDebug
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(609, 28)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(457, 28)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -119,18 +114,17 @@ Partial Class FormDebug
         '
         Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(75, 24)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'FormDebug
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(609, 352)
+        Me.ClientSize = New System.Drawing.Size(457, 286)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FormDebug"
         Me.Text = "Debug"
         Me.GroupBox1.ResumeLayout(False)

@@ -71,7 +71,7 @@ Public Class FormDebug
 
 #Region "Scrolling text box"
 
-    Public Sub ProgressPrint(Value As String)
+    Private Sub ProgressPrint(Value As String)
         Log(My.Resources.Info_word, Value)
         TextBox1.Text += Value & vbCrLf
         If TextBox1.Text.Length > TextBox1.MaxLength - 1000 Then
@@ -308,7 +308,7 @@ Public Class FormDebug
         End Select
 
         BootProcess.StartInfo.Arguments = arguments
-        Dim ok As Boolean = False
+        Dim ok As Boolean
 
         Try
             ok = BootProcess.Start

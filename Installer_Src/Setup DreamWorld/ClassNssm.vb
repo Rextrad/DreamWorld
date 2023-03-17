@@ -18,7 +18,6 @@
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
-
         End If
 
     End Sub
@@ -72,7 +71,7 @@
             BootProcess.Start()
             BootProcess.WaitForExit()
             Dim code = BootProcess.ExitCode
-            If code = 1 Then
+            If code = 0 Then
                 TextPrint($"{My.Resources.Failedto} {command}")
                 Return False
             End If

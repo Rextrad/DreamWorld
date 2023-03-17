@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Wyświetl folder</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Pokaż wszystkie regiony</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Przeczytaj i zaakceptuj nasze Warunki korzystania z usługi, w przeciwnym razie zostaniesz wylogowany.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Wymagaj zgody na Warunki korzystania z usługi za pomocą wyskakującego okienka.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>nie akceptował Regulaminu</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Kopia zapasowa SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Typ kopii zapasowej</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Zmień folder</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Web Port (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Nie udało się</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Usunięcie usługi nie powiodło się</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Instalacja usługi nie powiodła się</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Uruchomienie usługi nie powiodło się</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Zainstalowana usługa</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Usługa usunięta</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Uruchamianie jako usługa</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Gotowo¶ci</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Rozruchowego</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Zawieszany</value>
+  </data>
 </root>

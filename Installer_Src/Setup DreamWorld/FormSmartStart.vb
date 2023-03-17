@@ -1438,9 +1438,7 @@ Public Class FormSmartStart
 
     Private Sub Water_CheckedChanged(sender As Object, e As EventArgs) Handles Water.CheckedChanged
         Settings.TerrainType = "Water"
-#Disable Warning CA1303 ' Do not pass literals as localized parameters
-        FlatLandLevel.Text = "1"
-#Enable Warning CA1303 ' Do not pass literals as localized parameters
+        FlatLandLevel.Text = CStr(1)
         TerrainPic.Image = My.Resources.water
     End Sub
 

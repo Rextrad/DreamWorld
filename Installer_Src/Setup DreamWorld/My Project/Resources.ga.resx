@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Féach ar an bhFillteán</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Taispeáin Gach Réigiún</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Léigh agus aontaigh ár dTéarmaí Seirbhíse, nó logálfar amach thú.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Comhaontú a éileamh chuig TOS le Pop Up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>níor ghlac siad leis na Téarmaí agus na Coinníollacha</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Cúltaca SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Cineál cúltaca</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Athraigh Fillteán</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Calafort Gréasáin (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Theip air</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Theip ar an tSeirbhís Scrios</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Theip ar an tseirbhís a shuiteáil</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Theip ar an tSeirbhís tosú</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Seirbhís suiteáilte</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Seirbhís bainte</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Ag tosú mar sheirbhís</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Fuireachas</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Bootable</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspendable</value>
+  </data>
 </root>

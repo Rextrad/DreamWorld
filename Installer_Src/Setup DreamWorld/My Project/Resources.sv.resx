@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Se fil</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Visa alla regioner</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Läs och godkänn våra användarvillkor, annars kommer du att loggas ut.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Kräv samtycke till TOS med en Pop Up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>inte accepterade villkoren</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Säkerhetskopiera SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Typ av säkerhetskopia</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Ändra mapp</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Webbport (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Det gick inte att</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Tjänsten kunde inte tas bort</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Tjänsten kunde inte installeras</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Tjänsten kunde inte starta</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Tjänsten installerad</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Tjänsten har tagits bort</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Börja som en tjänst</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Standby</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Startbar</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Hängande</value>
+  </data>
 </root>

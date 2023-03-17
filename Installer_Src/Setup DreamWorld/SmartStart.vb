@@ -343,7 +343,9 @@ Module SmartStart
     ''' <param name="RegionUUID">RegionUUID</param>
     Public Sub RunTaskList(RegionUUID As String)
 
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
         If ToDoList.ContainsKey(RegionUUID) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
             Try
 
                 Dim Task = ToDoList.Item(RegionUUID)
@@ -955,9 +957,12 @@ Module SmartStart
 
                     SetWindowTextCall(BootProcess, GroupName)
 
-                    AddCPU(PID, GroupName) ' get a list of running opensim processes
+                    If Not RunningInServiceMode() Then
+                        AddCPU(PID, GroupName) ' get a list of running opensim processes
+                    End If
+
                 Else
-                    PropUpdateView = True ' make form refresh
+                        PropUpdateView = True ' make form refresh
                     Logger("Failed to boot ", BootName, "Outworldz")
                     TextPrint("Failed to boot region " & BootName)
                     Return False

@@ -4462,4 +4462,7 @@
   <data name="Suspendable" xml:space="preserve">
     <value>Suspendable</value>
   </data>
+  <data name="Starting_WebServer_word" xml:space="preserve">
+    <value>Starting WebServer</value>
+  </data>
 </root>

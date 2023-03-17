@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Ver pasta</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Mostrar todas as regiões</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Por favor, leia e concorde com nossos Termos de Serviço, ou você será desconectado.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Exigir acordo para TOS com um pop-up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>não aceitou os Termos e Condições</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Backup SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Tipo de backup</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Alterar pasta</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Porta da Web (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Falha ao</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Falha ao excluir o serviço</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Falha ao instalar o serviço</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Falha ao iniciar o serviço</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Serviço Instalado</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Serviço removido</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Iniciando como um serviço</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Espera</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Inicializável</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Suspendível</value>
+  </data>
 </root>

@@ -171,9 +171,7 @@ Public Class FormBlockify
         Sizer = CInt(RowSizeTextbox.Text)
         If Sizer < 1 Then
             Sizer = 1
-#Disable Warning CA1303 ' Do not pass literals as localized parameters
-            RowSizeTextbox.Text = "1"
-#Enable Warning CA1303 ' Do not pass literals as localized parameters
+            RowSizeTextbox.Text = CStr(1)
         End If
 
     End Sub

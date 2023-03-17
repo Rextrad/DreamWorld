@@ -56,7 +56,6 @@ Public Class FormScripts
     Private Sub LSLCheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles LSLCheckbox.CheckedChanged
 
         If initted Then
-
             Settings.LSLHTTP() = LSLCheckbox.Checked
             Settings.SaveSettings()
         End If

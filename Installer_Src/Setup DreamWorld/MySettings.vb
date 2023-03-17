@@ -11,14 +11,6 @@ Public Class MySettings
 
 #Region "Private Fields"
 
-    Private Const DreamGrid As String = "DreamGrid"
-    Private Const JOpensim As String = "JOpensim"
-    Private _CurSlashDir As String = ""
-    Private _DeleteTreesFirst As Boolean
-    Private _ExternalHostName As String
-    Private _LANIP As String
-    Private _MacAddress As String
-    Private _OarCount As Integer
     Private _RamUsed As Double
     Private _Settings As LoadIni
 
@@ -43,7 +35,6 @@ Public Class MySettings
             End Try
 
             Settings = New LoadIni(_myINI, ";", System.Text.Encoding.UTF8)
-
         End If
 
     End Sub
@@ -830,28 +821,28 @@ Public Class MySettings
         End Set
     End Property
 
-    ''' <summary>
-    ''' Mysql requires slashes in the "/" Unix style
-    ''' </summary>
-    ''' <returns>The current directory with '/'</returns>
-    Public Property CurrentSlashDir As String
+    Public Property CurrentSlashDir() As String
         Get
-            Return _CurSlashDir
+            Return GetMySetting("CurrentSlashDir", "")
         End Get
-        Set(value As String)
-            _CurSlashDir = value
+        Set
+            SetMySetting("CurrentSlashDir", Value)
         End Set
     End Property
 
     Public Property CycleTime() As Integer
         Get
-            Return CInt("0" & GetMySetting("CycleTime", "900"))
+            Return CInt("0" & GetMySetting("CycleTime", CStr(0)))
         End Get
         Set
             SetMySetting("CycleTime", CStr(Value))
         End Set
     End Property
 
+    ''' <summary>
+    ''' Mysql requires slashes in the "/" Unix style
+    ''' </summary>
+    ''' <returns>The current directory with '/'</returns>
     Public Property DeleteByDate() As Boolean
         Get
             Return CType(GetMySetting("DeleteByDate", "True"), Boolean)
@@ -872,10 +863,10 @@ Public Class MySettings
 
     Public Property DeleteTreesFirst() As Boolean
         Get
-            Return _DeleteTreesFirst
+            Return CType(GetMySetting("DeleteTreesFirst", "True"), Boolean)
         End Get
         Set
-            _DeleteTreesFirst = Value
+            SetMySetting("DeleteTreesFirst", CStr(Value))
         End Set
     End Property
 
@@ -1078,10 +1069,10 @@ Public Class MySettings
 
     Public Property ExternalHostName() As String
         Get
-            Return _ExternalHostName
+            Return GetMySetting("ExternalHostName")
         End Get
         Set
-            _ExternalHostName = Value
+            SetMySetting("ExternalHostName", Value)
         End Set
     End Property
 
@@ -1406,10 +1397,10 @@ Public Class MySettings
 
     Public Property LANIP() As String
         Get
-            Return _LANIP
+            Return GetMySetting("LanIP", "en")
         End Get
         Set
-            _LANIP = Value
+            SetMySetting("LanIP", Value)
         End Set
     End Property
 
@@ -1479,10 +1470,10 @@ Public Class MySettings
 
     Public Property MacAddress() As String
         Get
-            Return _MacAddress
+            Return GetMySetting("MacAddress")
         End Get
         Set
-            _MacAddress = Value
+            SetMySetting("MacAddress", CStr(Value))
         End Set
     End Property
 
@@ -1694,12 +1685,12 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Property OarCount() As Integer
+    Public Property OarCount() As Double
         Get
-            Return _OarCount
+            Return CDbl(GetMySetting("OarCount", CStr(0)))
         End Get
         Set
-            _OarCount = Value
+            SetMySetting("OarCount", CStr(Value))
         End Set
     End Property
 
@@ -2674,6 +2665,14 @@ Public Class MySettings
     End Property
 
     Public Property WANIP() As String
+
+        Get
+            Return GetMySetting("WANIP", "")
+        End Get
+        Set
+            SetMySetting("WANIP", Value)
+        End Set
+    End Property
 
     Public Property WelcomeMessage() As String
         Get

@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Map bekijken</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Toon alle regio's</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Lees en ga akkoord met onze Servicevoorwaarden, anders wordt u uitgelogd.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Overeenkomst met TOS vereisen met een pop-up.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>de Algemene Voorwaarden niet heeft geaccepteerd</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Back-up van SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Type back-up</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Map wijzigen</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Webpoort (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Mislukt</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Service kan niet worden verwijderd</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Service kan niet worden geïnstalleerd</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Service kan niet worden gestart</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Service geïnstalleerd</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Service verwijderd</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Beginnen als een service</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Standby</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Opstartbaar</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Opschortend</value>
+  </data>
 </root>

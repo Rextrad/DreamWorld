@@ -48,6 +48,8 @@ Partial Class FormDatabase
         Me.RobustDBUsername = New System.Windows.Forms.TextBox()
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.HelpMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FsassetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConnectToMySqlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,10 +59,20 @@ Partial Class FormDatabase
         Me.RunasaServiceCheckBox = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.FSAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.SaveButton = New System.Windows.Forms.Button()
+        Me.ShowStatsCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.DataFolder = New System.Windows.Forms.TextBox()
+        Me.EnableFsAssetsCheckbox = New System.Windows.Forms.CheckBox()
         Me.StandaloneGroup.SuspendLayout()
         Me.GridGroup.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.FSAssetsGroupBox.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StandaloneGroup
@@ -286,10 +298,23 @@ Partial Class FormDatabase
         '
         'HelpMenu
         '
+        Me.HelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseToolStripMenuItem, Me.FsassetsToolStripMenuItem})
         Me.HelpMenu.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpMenu.Name = "HelpMenu"
         Me.HelpMenu.Size = New System.Drawing.Size(68, 28)
         Me.HelpMenu.Text = Global.Outworldz.My.Resources.Resources.Help_word
+        '
+        'DatabaseToolStripMenuItem
+        '
+        Me.DatabaseToolStripMenuItem.Name = "DatabaseToolStripMenuItem"
+        Me.DatabaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DatabaseToolStripMenuItem.Text = "Database"
+        '
+        'FsassetsToolStripMenuItem
+        '
+        Me.FsassetsToolStripMenuItem.Name = "FsassetsToolStripMenuItem"
+        Me.FsassetsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FsassetsToolStripMenuItem.Text = "Fsassets"
         '
         'ConnectToMySqlToolStripMenuItem
         '
@@ -303,21 +328,21 @@ Partial Class FormDatabase
         '
         Me.StartToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
-        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.StartToolStripMenuItem.Text = "Start"
         '
         'StopToolStripMenuItem
         '
         Me.StopToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.gear_stop
         Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
-        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.StopToolStripMenuItem.Text = "Stop"
         '
         'ConsoleToolStripMenuItem
         '
         Me.ConsoleToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_text
         Me.ConsoleToolStripMenuItem.Name = "ConsoleToolStripMenuItem"
-        Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.ConsoleToolStripMenuItem.Text = "Console"
         '
         'RootPassword
@@ -332,7 +357,7 @@ Partial Class FormDatabase
         'RunasaServiceCheckBox
         '
         Me.RunasaServiceCheckBox.AutoSize = True
-        Me.RunasaServiceCheckBox.Location = New System.Drawing.Point(28, 43)
+        Me.RunasaServiceCheckBox.Location = New System.Drawing.Point(28, 52)
         Me.RunasaServiceCheckBox.Name = "RunasaServiceCheckBox"
         Me.RunasaServiceCheckBox.Size = New System.Drawing.Size(108, 17)
         Me.RunasaServiceCheckBox.TabIndex = 3
@@ -359,12 +384,93 @@ Partial Class FormDatabase
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "Password"
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Location = New System.Drawing.Point(519, 395)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(8, 8)
+        Me.GroupBox3.TabIndex = 6
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "GroupBox3"
+        '
+        'FSAssetsGroupBox
+        '
+        Me.FSAssetsGroupBox.Controls.Add(Me.ShowStatsCheckBox)
+        Me.FSAssetsGroupBox.Controls.Add(Me.Label6)
+        Me.FSAssetsGroupBox.Controls.Add(Me.PictureBox2)
+        Me.FSAssetsGroupBox.Controls.Add(Me.DataFolder)
+        Me.FSAssetsGroupBox.Controls.Add(Me.EnableFsAssetsCheckbox)
+        Me.FSAssetsGroupBox.Location = New System.Drawing.Point(22, 335)
+        Me.FSAssetsGroupBox.Name = "FSAssetsGroupBox"
+        Me.FSAssetsGroupBox.Size = New System.Drawing.Size(280, 151)
+        Me.FSAssetsGroupBox.TabIndex = 45
+        Me.FSAssetsGroupBox.TabStop = False
+        Me.FSAssetsGroupBox.Text = "File System Assets Server"
+        '
+        'SaveButton
+        '
+        Me.SaveButton.Location = New System.Drawing.Point(370, 426)
+        Me.SaveButton.Name = "SaveButton"
+        Me.SaveButton.Size = New System.Drawing.Size(101, 23)
+        Me.SaveButton.TabIndex = 1893
+        Me.SaveButton.Text = Global.Outworldz.My.Resources.Resources.Save_word
+        Me.SaveButton.UseVisualStyleBackColor = True
+        '
+        'ShowStatsCheckBox
+        '
+        Me.ShowStatsCheckBox.AutoSize = True
+        Me.ShowStatsCheckBox.Location = New System.Drawing.Point(21, 51)
+        Me.ShowStatsCheckBox.Name = "ShowStatsCheckBox"
+        Me.ShowStatsCheckBox.Size = New System.Drawing.Size(133, 17)
+        Me.ShowStatsCheckBox.TabIndex = 1892
+        Me.ShowStatsCheckBox.Text = Global.Outworldz.My.Resources.Resources.Show_Stats
+        Me.ShowStatsCheckBox.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(19, 78)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(62, 13)
+        Me.Label6.TabIndex = 1888
+        Me.Label6.Text = "Data Folder"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackgroundImage = Global.Outworldz.My.Resources.Resources.folder
+        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.PictureBox2.Location = New System.Drawing.Point(221, 94)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(38, 27)
+        Me.PictureBox2.TabIndex = 1887
+        Me.PictureBox2.TabStop = False
+        '
+        'DataFolder
+        '
+        Me.DataFolder.Location = New System.Drawing.Point(23, 94)
+        Me.DataFolder.Name = "DataFolder"
+        Me.DataFolder.Size = New System.Drawing.Size(195, 20)
+        Me.DataFolder.TabIndex = 44
+        '
+        'EnableFsAssetsCheckbox
+        '
+        Me.EnableFsAssetsCheckbox.AutoSize = True
+        Me.EnableFsAssetsCheckbox.Location = New System.Drawing.Point(21, 28)
+        Me.EnableFsAssetsCheckbox.Name = "EnableFsAssetsCheckbox"
+        Me.EnableFsAssetsCheckbox.Size = New System.Drawing.Size(59, 17)
+        Me.EnableFsAssetsCheckbox.TabIndex = 43
+        Me.EnableFsAssetsCheckbox.Text = Global.Outworldz.My.Resources.Resources.Enable_word
+        Me.EnableFsAssetsCheckbox.UseVisualStyleBackColor = True
+        '
         'FormDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(613, 341)
+        Me.ClientSize = New System.Drawing.Size(613, 498)
+        Me.Controls.Add(Me.SaveButton)
+        Me.Controls.Add(Me.FSAssetsGroupBox)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.RunasaServiceCheckBox)
         Me.Controls.Add(Me.MenuStrip2)
@@ -382,6 +488,9 @@ Partial Class FormDatabase
         Me.MenuStrip2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.FSAssetsGroupBox.ResumeLayout(False)
+        Me.FSAssetsGroupBox.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -420,4 +529,14 @@ Partial Class FormDatabase
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label3 As Label
     Friend WithEvents RootPassword As TextBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents DatabaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FsassetsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FSAssetsGroupBox As GroupBox
+    Friend WithEvents SaveButton As Button
+    Friend WithEvents ShowStatsCheckBox As CheckBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents DataFolder As TextBox
+    Friend WithEvents EnableFsAssetsCheckbox As CheckBox
 End Class

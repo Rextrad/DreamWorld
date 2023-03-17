@@ -21,8 +21,12 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Public ReadOnly NssmService As New ClassNssm
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
@@ -39,8 +43,12 @@ Public Class FormSetup
     Private _RestartApache As Boolean
     Private _RestartMysql As Boolean
     Private _speed As Double = 50
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private cpu As New PerformanceCounter
+#Enable Warning CA2213 ' Disposable fields should be disposed
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private Graphs As New FormGraphs
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
     Private speed As Double
@@ -261,8 +269,6 @@ Public Class FormSetup
 
     End Function
 
-#Disable Warning CA2109
-
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
@@ -472,6 +478,11 @@ Public Class FormSetup
 
         Me.Show()
 
+        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
+        Randomize()
+        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
+        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
+
         CheckForUpdates()
 
         RunningBackupName.Clear()
@@ -559,7 +570,7 @@ Public Class FormSetup
         SkipSetup = False
 
         TextPrint(My.Resources.Setup_Network)
-        SetPublicIP()
+
         SetServerType()
 
         If SetIniData() Then
@@ -577,15 +588,13 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-        End If
+            Sleep(100)
 
-        Sleep(100)
-
-        ' Run Diagnostics no matter who we are
-        If TestPrivateLoopback(True) Then
-            ErrorLog("Diagnostic Listener port failed. Aborting")
-            TextPrint("Diagnostic Listener port failed. Aborting")
-            Return
+            If TestPrivateLoopback(True) Then
+                ErrorLog("Diagnostic Listener port failed. Aborting")
+                TextPrint("Diagnostic Listener port failed. Aborting")
+                Return
+            End If
         End If
 
         If IsMySqlRunning() Then
@@ -626,6 +635,8 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
+        SetPublicIP()
+
         If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
         End If
@@ -665,11 +676,6 @@ Public Class FormSetup
 
         Joomla.CheckForjOpensimUpdate()
 
-        ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
-        Randomize()
-        If Settings.MachineId().Length = 0 Then Settings.MachineId() = RandomNumber.Random  ' a random machine ID may be generated.  Happens only once
-        If Settings.APIKey().Length = 0 Then Settings.APIKey() = RandomNumber.Random  ' a random API Key may be generated.  Happens only once
-
         Settings.SaveSettings()
 
         OfflineIMEmailThread()  ' check for any offline emails.
@@ -705,6 +711,7 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
+            Sleep(30000)
             Startup()
             Return
         Else
@@ -871,7 +878,7 @@ Public Class FormSetup
             End If
         End If
 
-        If Settings.GraphVisible Then
+        If Settings.GraphVisible And Not RunningInServiceMode() Then
             G()
         End If
 
@@ -883,14 +890,12 @@ Public Class FormSetup
 
                 If PropOpensimIsRunning Then
                     Boot(RegionName)
-                    Application.DoEvents()
                 End If
             End If
             Application.DoEvents()
 
         Next
         CalcCPU()
-        Settings.SaveSettings()
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
@@ -1137,10 +1142,8 @@ Public Class FormSetup
     End Sub
 
     ''' <summary>Event handler for Icecast</summary>
-#Disable Warning CA2109
 
     Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
-#Enable Warning CA2109
 
         If PropAborting Then Return
 
@@ -1860,7 +1863,9 @@ Public Class FormSetup
                 If Not exists Then
                     Remove.Add(AvatarKey)
                     PropUpdateView = True
+#Disable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                     If LastAvatars.ContainsKey(AvatarKey) Then
+#Enable Warning CA1854 ' Prefer the 'IDictionary.TryGetValue(TKey, out TValue)' method
                         TextPrint($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                         SpeechList.Enqueue($"{LastAvatars.Item(AvatarKey).AgentName} {My.Resources.leaving_word} {RegionName}")
                     End If
@@ -2139,7 +2144,6 @@ Public Class FormSetup
         If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("Hour worker")
             TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
-            SetPublicIP()           ' Adjust to any IP changes
             ExpireLogsByAge()       ' clean up old logs
             DeleteOldVisitors()     ' can be pretty old
             ExpireLogByCount()      ' kill off old backup folders

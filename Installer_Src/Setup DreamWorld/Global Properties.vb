@@ -73,13 +73,12 @@ Module Global_Properties
             End If
             Log(My.Resources.Info_word, $"{dt} {Value}{vbCrLf}")
 
-            Dim ln As Integer = FormSetup.TextBox1.Text.Length
-            FormSetup.TextBox1.SelectionStart = ln
             Dim Le As Integer = 29000
             Dim L = FormSetup.TextBox1.Text.Length - Le
             If L > 0 Then
                 FormSetup.TextBox1.Text = FormSetup.TextBox1.Text.Substring(FormSetup.TextBox1.Text.Length - Le, Le)
             End If
+
             FormSetup.TextBox1.SelectionStart = FormSetup.TextBox1.Text.Length
             FormSetup.TextBox1.ScrollToCaret()
 
@@ -107,7 +106,7 @@ Module Global_Properties
         ' output of  git rev-parse --short HEAD   from Perl
         Get
             Dim line As String = "None"
-            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "GitVersion")
+            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "GitVersion.txt")
             If System.IO.File.Exists(fname) Then
                 Using reader As StreamReader = System.IO.File.OpenText(fname)
                     'now loop through each line

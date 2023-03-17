@@ -90,7 +90,11 @@ Public Class TosForm
             HTML = HTML + Str + vbCrLf
         End While
         reader.Close()
-        Editor1.BodyHtml = HTML
+        Try
+            Editor1.BodyHtml = HTML
+        Catch ex As Exception
+            ErrorLog(ex.Message)
+        End Try
 
         SetScreen()
 

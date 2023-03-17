@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>查看文件夾</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>顯示所有地區</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>請閱讀並同意我們的服務條款，否則您將被註銷。</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>需要同意帶有彈出視窗的 TOS。</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>不接受條款和條件</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>備份 SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>備份類型</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>更改資料夾</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>網頁埠 （80）</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>未能</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>服務刪除失敗</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>服務安裝失敗</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>服務無法啟動</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>已安裝的服務</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>服務已刪除</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>作為服務啟動</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>待機</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>啟動</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>可暫停</value>
+  </data>
 </root>

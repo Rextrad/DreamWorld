@@ -3828,4 +3828,58 @@
   <data name="ViewFolder" xml:space="preserve">
     <value>Посмотреть папку</value>
   </data>
+  <data name="Show_all" xml:space="preserve">
+    <value>Показать все регионы</value>
+  </data>
+  <data name="AgreeTOS" xml:space="preserve">
+    <value>Пожалуйста, прочитайте и примите наши Условия предоставления услуг, иначе вы выйдете из системы.</value>
+  </data>
+  <data name="RequireTOS" xml:space="preserve">
+    <value>Требуйте согласования с УПУ с помощью всплывающего окна.</value>
+  </data>
+  <data name="DidNotAccept" xml:space="preserve">
+    <value>не приняли Правила и условия</value>
+  </data>
+  <data name="Backup_SQL" xml:space="preserve">
+    <value>Резервное копирование SQL</value>
+  </data>
+  <data name="backup_type" xml:space="preserve">
+    <value>Тип резервного копирования</value>
+  </data>
+  <data name="ChangeFolder" xml:space="preserve">
+    <value>Изменить папку</value>
+  </data>
+  <data name="WebPort" xml:space="preserve">
+    <value>Веб-порт (80)</value>
+  </data>
+  <data name="Failedto" xml:space="preserve">
+    <value>Не удалось</value>
+  </data>
+  <data name="ServiceFailedtoDelete" xml:space="preserve">
+    <value>Не удалось удалить службу</value>
+  </data>
+  <data name="ServiceFailedtoInstall" xml:space="preserve">
+    <value>Не удалось установить службу</value>
+  </data>
+  <data name="ServiceFailedtoStart" xml:space="preserve">
+    <value>Не удалось запустить службу</value>
+  </data>
+  <data name="ServiceInstalled" xml:space="preserve">
+    <value>Служба установлена</value>
+  </data>
+  <data name="ServiceRemoved" xml:space="preserve">
+    <value>Служба удалена</value>
+  </data>
+  <data name="StartingAsService" xml:space="preserve">
+    <value>Запуск как услуги</value>
+  </data>
+  <data name="Standby_word" xml:space="preserve">
+    <value>Резервный</value>
+  </data>
+  <data name="Bootable" xml:space="preserve">
+    <value>Загрузочный</value>
+  </data>
+  <data name="Suspendable" xml:space="preserve">
+    <value>Подвешиваемый</value>
+  </data>
 </root>

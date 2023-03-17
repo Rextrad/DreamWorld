@@ -119,11 +119,12 @@ Public Class FormJoomla
 
                 Try
                     JoomlaProcess.Start()
+                    Application.DoEvents()
+                    JoomlaProcess.WaitForExit()
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
                 End Try
-                Application.DoEvents()
-                JoomlaProcess.WaitForExit()
+
             End Using
 
             Dim ctr As Integer = 0
@@ -131,7 +132,7 @@ Public Class FormJoomla
             InstallButton.Text = Global.Outworldz.My.Resources.Busy_word
             Application.DoEvents()
             Try
-                Using zip As ZipFile = New ZipFile(m)
+                Using zip = New ZipFile(m)
                     zip.UseZip64WhenSaving = Zip64Option.AsNecessary
                     zip.ExtractAll(extractPath)
                 End Using
@@ -222,7 +223,7 @@ Public Class FormJoomla
 
     Private Sub ViewButton_Click(sender As Object, e As EventArgs) Handles ViewButton.Click
 
-        Dim webAddress As String = $"http://{Settings.PublicIP}/jOpensim/index.php?r={Random.ToString}"
+        Dim webAddress As String = $"http://{Settings.PublicIP}/jOpensim/index.php?r={Random()}"
         Try
             Process.Start(webAddress)
         Catch ex As Exception

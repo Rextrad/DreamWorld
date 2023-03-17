@@ -11,17 +11,23 @@ Imports System.Text.RegularExpressions
 
 Public Class FormRegionlist
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly colsize As New ClassScreenpos("Region List")
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly Handler As New EventHandler(AddressOf Resize_page)
     Private ReadOnly SearchArray As New List(Of String)
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private _ImageListSmall As New ImageList
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Dim _order As SortOrder
     Private _screenPosition As ClassScreenpos
     Private _SortColumn As Integer
     Private detailsinitted As Boolean
     Private initted As Boolean
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Dim RegionForm As New FormRegion
+#Enable Warning CA2213 ' Disposable fields should be disposed
     Private TotalRam As Double
     Private UseMysql As Boolean
 

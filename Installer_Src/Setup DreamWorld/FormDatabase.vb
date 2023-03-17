@@ -83,9 +83,16 @@ Public Class FormDatabase
 #Region "Load/Exit"
 
     Private Sub Form_exit() Handles Me.Closed
+
         If Changed1 Then
-            SaveAll()
+
+            Dim result As MsgBoxResult = MsgBox(My.Resources.Changes_Made, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground)
+            If result = vbOK Then
+                SaveAll()
+                Settings.SaveSettings()
+            End If
         End If
+
     End Sub
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
@@ -131,13 +138,23 @@ Public Class FormDatabase
         ToolTip1.SetToolTip(RobustDBUsername, Global.Outworldz.My.Resources.Do_NotChange)
         ToolTip1.SetToolTip(RobustServer, Global.Outworldz.My.Resources.Region_ServerName)
 
+        EnableFsAssetsCheckbox.Text = Global.Outworldz.My.Resources.Enable_word
+        Label6.Text = Global.Outworldz.My.Resources.Data_Folder_word
+        PictureBox2.BackgroundImage = Global.Outworldz.My.Resources.folder
+        SaveButton.Text = Global.Outworldz.My.Resources.Save_word
+        ShowStatsCheckBox.Text = Global.Outworldz.My.Resources.Show_Stats
+        FSAssetsGroupBox.Text = Global.Outworldz.My.Resources.FSassets_Server_word
+        EnableFsAssetsCheckbox.Checked = Settings.FSAssetsEnabled
+        DataFolder.Text = Settings.BaseDirectory
+        ShowStatsCheckBox.Checked = CType(Settings.ShowConsoleStats, Boolean)
+
         RunasaServiceCheckBox.Checked = Settings.MysqlRunasaService
 
         SetScreen()
 
         Initted1 = True
         HelpOnce("Database")
-        HelpOnce("ServerType")
+        HelpOnce("FSAssets")
 
     End Sub
 
@@ -297,8 +314,70 @@ Public Class FormDatabase
 
     End Sub
 
-    Private Sub HelpMenu_Click(sender As Object, e As EventArgs) Handles HelpMenu.Click
-        HelpManual("Database")
+    Private Sub DatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DatabaseToolStripMenuItem.Click
+        HelpManual("DataBase")
+    End Sub
+
+    Private Sub DataFolder_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub DataFolder_TextChanged_1(sender As Object, e As EventArgs) Handles DataFolder.TextChanged
+        If Not initted Then Return
+        Changed1 = True
+    End Sub
+
+    Private Sub EnableFsAssetsCheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles EnableFsAssetsCheckbox.CheckedChanged
+        If Not initted Then Return
+        Settings.FSAssetsEnabled = EnableFsAssetsCheckbox.Checked
+        Changed1 = True
+    End Sub
+
+    Private Sub FsassetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FsassetsToolStripMenuItem.Click
+        HelpManual("FSAssets")
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs)
+
+        'Create an instance of the open file dialog box.
+        Dim openFileDialog1 = New FolderBrowserDialog With {
+            .ShowNewFolderButton = True,
+            .Description = Global.Outworldz.My.Resources.Choose_a_Folder_word
+        }
+        Dim UserClickedOK As DialogResult = openFileDialog1.ShowDialog
+        openFileDialog1.Dispose()
+        ' Process input if the user clicked OK.
+        If UserClickedOK = DialogResult.OK Then
+            Dim thing = openFileDialog1.SelectedPath
+            If thing.Length > 0 Then
+                Settings.BaseDirectory = thing
+                Settings.SaveSettings()
+                DataFolder.Text = thing
+                Changed1 = True
+            End If
+        End If
+
+    End Sub
+
+    Private Sub PictureBox2_Click_1(sender As Object, e As EventArgs) Handles PictureBox2.Click
+
+        'Create an instance of the open file dialog box.
+        Dim openFileDialog1 = New FolderBrowserDialog With {
+            .ShowNewFolderButton = True,
+            .Description = Global.Outworldz.My.Resources.Choose_a_Folder_word
+        }
+        Dim UserClickedOK As DialogResult = openFileDialog1.ShowDialog
+        openFileDialog1.Dispose()
+        ' Process input if the user clicked OK.
+        If UserClickedOK = DialogResult.OK Then
+            Dim thing = openFileDialog1.SelectedPath
+            If thing.Length > 0 Then
+                Settings.BaseDirectory = thing
+                Settings.SaveSettings()
+                DataFolder.Text = thing
+                Changed1 = True
+            End If
+        End If
     End Sub
 
     Private Sub RootPassword_click(sender As Object, e As EventArgs) Handles RootPassword.Click
@@ -349,6 +428,14 @@ Public Class FormDatabase
         Else
             Settings.MysqlRunasaService = False
         End If
+
+    End Sub
+
+    Private Sub ShowStatsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShowStatsCheckBox.CheckedChanged
+
+        If Not Initted1 Then Return
+        Settings.ShowConsoleStats = ShowStatsCheckBox.Checked.ToString(Globalization.CultureInfo.InvariantCulture)
+        changed = True
 
     End Sub
 

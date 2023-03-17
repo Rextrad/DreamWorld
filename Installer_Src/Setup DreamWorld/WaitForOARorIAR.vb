@@ -75,6 +75,7 @@ Public Class WaitForFile
             If Not CheckPort(RegionUUID) Then
                 Return
             End If
+            Application.DoEvents()
 
             Try
                 'seek to the last max offset

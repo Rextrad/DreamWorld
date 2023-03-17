@@ -3,7 +3,7 @@
 Public Class IniWriter
 
     Private ReadOnly _In As New List(Of String)
-    Private _Filename As String
+    Private _Filename As String = ""
 
     Public Sub New(File As String)
 
