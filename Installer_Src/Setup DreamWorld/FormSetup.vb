@@ -704,7 +704,9 @@ Public Class FormSetup
             Return
         End If
 
-        Dim I = New ClassFilewatcher
+        If RunningInServiceMode() Then
+            Dim I = New ClassFilewatcher
+        End If
 
         ' Start as a Service?
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
@@ -2621,6 +2623,12 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub HelpToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem5.Click
+
+        HelpManual("DreamGrid Service")
+
+    End Sub
+
     Private Sub Info_Click(sender As Object, e As EventArgs) Handles Info.Click
 
         Settings.LogLevel = "INFO"
@@ -2918,6 +2926,13 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
+
+        NssmService.StopService()
+        NssmService.StartService()
+
+    End Sub
+
     Private Sub RestartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RestartRobustItem.Click
 
         PropAborting = True
@@ -3193,6 +3208,12 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
+
+        NssmService.InstallService()
+
+    End Sub
+
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
 
         Settings.ApacheEnable = True
@@ -3398,25 +3419,6 @@ Public Class FormSetup
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "xengine status")
         Next
-
-    End Sub
-
-    Private Sub HelpToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem5.Click
-
-        HelpManual("DreamGrid Service")
-
-    End Sub
-
-    Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
-
-        NssmService.InstallService()
-
-    End Sub
-
-    Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
-
-        NssmService.StopService()
-        NssmService.StartService()
 
     End Sub
 
