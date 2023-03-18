@@ -99,6 +99,7 @@ Partial Class FormSetup
         Me.AddUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangePasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowUserDetailsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KickUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SendAlertToAllUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllUsersAllSimsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JustOneRegionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -173,7 +174,12 @@ Partial Class FormSetup
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.KickUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StartDreamGridServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RestartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StoipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteServiceToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -182,9 +188,10 @@ Partial Class FormSetup
         '
         Me.AvatarLabel.AutoSize = True
         Me.AvatarLabel.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AvatarLabel.Location = New System.Drawing.Point(3, 0)
+        Me.AvatarLabel.Location = New System.Drawing.Point(4, 0)
+        Me.AvatarLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.AvatarLabel.Name = "AvatarLabel"
-        Me.AvatarLabel.Size = New System.Drawing.Size(55, 15)
+        Me.AvatarLabel.Size = New System.Drawing.Size(70, 20)
         Me.AvatarLabel.TabIndex = 0
         Me.AvatarLabel.Text = "0 Avatars"
         Me.AvatarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -193,9 +200,10 @@ Partial Class FormSetup
         '
         Me.PercentCPU.AutoSize = True
         Me.PercentCPU.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PercentCPU.Location = New System.Drawing.Point(64, 0)
+        Me.PercentCPU.Location = New System.Drawing.Point(82, 0)
+        Me.PercentCPU.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.PercentCPU.Name = "PercentCPU"
-        Me.PercentCPU.Size = New System.Drawing.Size(49, 15)
+        Me.PercentCPU.Size = New System.Drawing.Size(60, 20)
         Me.PercentCPU.TabIndex = 1
         Me.PercentCPU.Text = "0% CPU"
         Me.PercentCPU.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -204,9 +212,10 @@ Partial Class FormSetup
         '
         Me.PercentRAM.AutoSize = True
         Me.PercentRAM.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PercentRAM.Location = New System.Drawing.Point(119, 0)
+        Me.PercentRAM.Location = New System.Drawing.Point(150, 0)
+        Me.PercentRAM.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.PercentRAM.Name = "PercentRAM"
-        Me.PercentRAM.Size = New System.Drawing.Size(55, 15)
+        Me.PercentRAM.Size = New System.Drawing.Size(69, 20)
         Me.PercentRAM.TabIndex = 2
         Me.PercentRAM.Text = "0 % RAM"
         Me.PercentRAM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -214,27 +223,30 @@ Partial Class FormSetup
         'BusyButton
         '
         Me.BusyButton.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BusyButton.Location = New System.Drawing.Point(12, 31)
+        Me.BusyButton.Location = New System.Drawing.Point(15, 39)
+        Me.BusyButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BusyButton.Name = "BusyButton"
-        Me.BusyButton.Size = New System.Drawing.Size(84, 23)
+        Me.BusyButton.Size = New System.Drawing.Size(105, 29)
         Me.BusyButton.TabIndex = 1
         Me.BusyButton.Text = Global.Outworldz.My.Resources.Resources.Busy_word
         Me.BusyButton.UseVisualStyleBackColor = True
         '
         'StopButton
         '
-        Me.StopButton.Location = New System.Drawing.Point(12, 31)
+        Me.StopButton.Location = New System.Drawing.Point(15, 39)
+        Me.StopButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.StopButton.Name = "StopButton"
-        Me.StopButton.Size = New System.Drawing.Size(84, 23)
+        Me.StopButton.Size = New System.Drawing.Size(105, 29)
         Me.StopButton.TabIndex = 50
         Me.StopButton.Text = Global.Outworldz.My.Resources.Resources.Stop_word
         Me.StopButton.UseVisualStyleBackColor = True
         '
         'StartButton
         '
-        Me.StartButton.Location = New System.Drawing.Point(12, 31)
+        Me.StartButton.Location = New System.Drawing.Point(15, 39)
+        Me.StartButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.StartButton.Name = "StartButton"
-        Me.StartButton.Size = New System.Drawing.Size(84, 23)
+        Me.StartButton.Size = New System.Drawing.Size(105, 29)
         Me.StartButton.TabIndex = 49
         Me.StartButton.Text = Global.Outworldz.My.Resources.Resources.Start_word
         Me.StartButton.UseVisualStyleBackColor = True
@@ -243,9 +255,10 @@ Partial Class FormSetup
         '
         Me.DiskSize.AutoSize = True
         Me.DiskSize.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DiskSize.Location = New System.Drawing.Point(245, 0)
+        Me.DiskSize.Location = New System.Drawing.Point(309, 0)
+        Me.DiskSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DiskSize.Name = "DiskSize"
-        Me.DiskSize.Size = New System.Drawing.Size(48, 15)
+        Me.DiskSize.Size = New System.Drawing.Size(61, 20)
         Me.DiskSize.TabIndex = 4
         Me.DiskSize.Text = "0% Disk"
         Me.DiskSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -267,20 +280,22 @@ Partial Class FormSetup
         Me.TableLayoutPanel1.Controls.Add(Me.Virtual, 3, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.PercentRAM, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.MySQLSpeed, 5, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(174, 31)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(218, 39)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(350, 15)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(443, 20)
         Me.TableLayoutPanel1.TabIndex = 18611
         '
         'Virtual
         '
         Me.Virtual.AutoSize = True
         Me.Virtual.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Virtual.Location = New System.Drawing.Point(180, 0)
+        Me.Virtual.Location = New System.Drawing.Point(227, 0)
+        Me.Virtual.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Virtual.Name = "Virtual"
-        Me.Virtual.Size = New System.Drawing.Size(59, 15)
+        Me.Virtual.Size = New System.Drawing.Size(74, 20)
         Me.Virtual.TabIndex = 3
         Me.Virtual.Text = "0% VRAM"
         Me.Virtual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -289,9 +304,10 @@ Partial Class FormSetup
         '
         Me.MySQLSpeed.AutoSize = True
         Me.MySQLSpeed.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MySQLSpeed.Location = New System.Drawing.Point(299, 0)
+        Me.MySQLSpeed.Location = New System.Drawing.Point(378, 0)
+        Me.MySQLSpeed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.MySQLSpeed.Name = "MySQLSpeed"
-        Me.MySQLSpeed.Size = New System.Drawing.Size(48, 15)
+        Me.MySQLSpeed.Size = New System.Drawing.Size(61, 20)
         Me.MySQLSpeed.TabIndex = 5
         Me.MySQLSpeed.Text = "0 Q/Sec"
         Me.MySQLSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -304,11 +320,12 @@ Partial Class FormSetup
         Me.TextBox1.AutoWordSelection = True
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(12, 58)
+        Me.TextBox1.Location = New System.Drawing.Point(15, 72)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TextBox1.MaxLength = 30000
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(985, 96)
+        Me.TextBox1.Size = New System.Drawing.Size(1231, 120)
         Me.TextBox1.TabIndex = 2
         Me.TextBox1.Text = ""
         '
@@ -320,7 +337,7 @@ Partial Class FormSetup
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JustQuitToolStripMenuItem, Me.mnuExit})
         Me.FileToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.exit_icon
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(57, 24)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(66, 28)
         Me.FileToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.File_word
         '
         'JustQuitToolStripMenuItem
@@ -328,7 +345,7 @@ Partial Class FormSetup
         Me.JustQuitToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.download
         Me.JustQuitToolStripMenuItem.Name = "JustQuitToolStripMenuItem"
         Me.JustQuitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Q), System.Windows.Forms.Keys)
-        Me.JustQuitToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.JustQuitToolStripMenuItem.Size = New System.Drawing.Size(208, 26)
         Me.JustQuitToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Quit_Now_Word
         '
         'mnuExit
@@ -336,7 +353,7 @@ Partial Class FormSetup
         Me.mnuExit.Image = Global.Outworldz.My.Resources.Resources.exit_icon
         Me.mnuExit.Name = "mnuExit"
         Me.mnuExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuExit.Size = New System.Drawing.Size(168, 22)
+        Me.mnuExit.Size = New System.Drawing.Size(208, 26)
         Me.mnuExit.Text = Global.Outworldz.My.Resources.Resources.Exit__word
         '
         'mnuSettings
@@ -344,7 +361,7 @@ Partial Class FormSetup
         Me.mnuSettings.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RegionsToolStripMenuItem, Me.ConsoleToolStripMenuItem1, Me.LanguageToolStripMenuItem1, Me.KeepOnTopToolStripMenuItem, Me.AdvancedSettingsToolStripMenuItem})
         Me.mnuSettings.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.mnuSettings.Name = "mnuSettings"
-        Me.mnuSettings.Size = New System.Drawing.Size(69, 24)
+        Me.mnuSettings.Size = New System.Drawing.Size(81, 28)
         Me.mnuSettings.Text = Global.Outworldz.My.Resources.Resources.Setup_word
         '
         'RegionsToolStripMenuItem
@@ -352,7 +369,7 @@ Partial Class FormSetup
         Me.RegionsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.Server_Client
         Me.RegionsToolStripMenuItem.Name = "RegionsToolStripMenuItem"
         Me.RegionsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.RegionsToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.RegionsToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.RegionsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Regions_word
         '
         'ConsoleToolStripMenuItem1
@@ -360,7 +377,7 @@ Partial Class FormSetup
         Me.ConsoleToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHide, Me.mnuShow, Me.mnuHideAllways, Me.MinimizeAllToolStripMenuItem, Me.ShowAllToolStripMenuItem, Me.FreezAllToolStripMenuItem, Me.ThawAllToolStripMenuItem})
         Me.ConsoleToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.window_add
         Me.ConsoleToolStripMenuItem1.Name = "ConsoleToolStripMenuItem1"
-        Me.ConsoleToolStripMenuItem1.Size = New System.Drawing.Size(157, 22)
+        Me.ConsoleToolStripMenuItem1.Size = New System.Drawing.Size(196, 26)
         Me.ConsoleToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Resources.Consoles_word
         Me.ConsoleToolStripMenuItem1.ToolTipText = Global.Outworldz.My.Resources.Resources.Consoletext
         '
@@ -370,56 +387,56 @@ Partial Class FormSetup
         Me.mnuHide.CheckState = System.Windows.Forms.CheckState.Checked
         Me.mnuHide.Image = Global.Outworldz.My.Resources.Resources.navigate_down
         Me.mnuHide.Name = "mnuHide"
-        Me.mnuHide.Size = New System.Drawing.Size(225, 22)
+        Me.mnuHide.Size = New System.Drawing.Size(281, 26)
         Me.mnuHide.Text = Global.Outworldz.My.Resources.Resources.Hide
         '
         'mnuShow
         '
         Me.mnuShow.Image = Global.Outworldz.My.Resources.Resources.navigate_up
         Me.mnuShow.Name = "mnuShow"
-        Me.mnuShow.Size = New System.Drawing.Size(225, 22)
+        Me.mnuShow.Size = New System.Drawing.Size(281, 26)
         Me.mnuShow.Text = Global.Outworldz.My.Resources.Resources.Show_word
         '
         'mnuHideAllways
         '
         Me.mnuHideAllways.Image = Global.Outworldz.My.Resources.Resources.navigate_minus
         Me.mnuHideAllways.Name = "mnuHideAllways"
-        Me.mnuHideAllways.Size = New System.Drawing.Size(225, 22)
+        Me.mnuHideAllways.Size = New System.Drawing.Size(281, 26)
         Me.mnuHideAllways.Text = Global.Outworldz.My.Resources.Resources.Hide_Allways_word
         '
         'MinimizeAllToolStripMenuItem
         '
         Me.MinimizeAllToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.navigate_down2
         Me.MinimizeAllToolStripMenuItem.Name = "MinimizeAllToolStripMenuItem"
-        Me.MinimizeAllToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.MinimizeAllToolStripMenuItem.Size = New System.Drawing.Size(281, 26)
         Me.MinimizeAllToolStripMenuItem.Text = "Minimize All"
         '
         'ShowAllToolStripMenuItem
         '
         Me.ShowAllToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.navigate_up2
         Me.ShowAllToolStripMenuItem.Name = "ShowAllToolStripMenuItem"
-        Me.ShowAllToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.ShowAllToolStripMenuItem.Size = New System.Drawing.Size(281, 26)
         Me.ShowAllToolStripMenuItem.Text = "Show All "
         '
         'FreezAllToolStripMenuItem
         '
         Me.FreezAllToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.Icecastpic
         Me.FreezAllToolStripMenuItem.Name = "FreezAllToolStripMenuItem"
-        Me.FreezAllToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.FreezAllToolStripMenuItem.Size = New System.Drawing.Size(281, 26)
         Me.FreezAllToolStripMenuItem.Text = "Freeze All Regions"
         '
         'ThawAllToolStripMenuItem
         '
         Me.ThawAllToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.Icemelted
         Me.ThawAllToolStripMenuItem.Name = "ThawAllToolStripMenuItem"
-        Me.ThawAllToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.ThawAllToolStripMenuItem.Size = New System.Drawing.Size(281, 26)
         Me.ThawAllToolStripMenuItem.Text = "Thaw All"
         '
         'LanguageToolStripMenuItem1
         '
         Me.LanguageToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.users1
         Me.LanguageToolStripMenuItem1.Name = "LanguageToolStripMenuItem1"
-        Me.LanguageToolStripMenuItem1.Size = New System.Drawing.Size(157, 22)
+        Me.LanguageToolStripMenuItem1.Size = New System.Drawing.Size(196, 26)
         Me.LanguageToolStripMenuItem1.Text = "Language"
         '
         'KeepOnTopToolStripMenuItem
@@ -427,21 +444,21 @@ Partial Class FormSetup
         Me.KeepOnTopToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnTopToolStripMenuItem, Me.FloatToolStripMenuItem})
         Me.KeepOnTopToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.tables
         Me.KeepOnTopToolStripMenuItem.Name = "KeepOnTopToolStripMenuItem"
-        Me.KeepOnTopToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.KeepOnTopToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.KeepOnTopToolStripMenuItem.Text = "Window"
         '
         'OnTopToolStripMenuItem
         '
         Me.OnTopToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.tables
         Me.OnTopToolStripMenuItem.Name = "OnTopToolStripMenuItem"
-        Me.OnTopToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.OnTopToolStripMenuItem.Size = New System.Drawing.Size(144, 26)
         Me.OnTopToolStripMenuItem.Text = " On Top"
         '
         'FloatToolStripMenuItem
         '
         Me.FloatToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.table
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
-        Me.FloatToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.FloatToolStripMenuItem.Size = New System.Drawing.Size(144, 26)
         Me.FloatToolStripMenuItem.Text = "Float"
         '
         'AdvancedSettingsToolStripMenuItem
@@ -449,7 +466,7 @@ Partial Class FormSetup
         Me.AdvancedSettingsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.earth_network
         Me.AdvancedSettingsToolStripMenuItem.Name = "AdvancedSettingsToolStripMenuItem"
         Me.AdvancedSettingsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.AdvancedSettingsToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.AdvancedSettingsToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.AdvancedSettingsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Settings_word
         Me.AdvancedSettingsToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.All_Global_Settings_word
         '
@@ -458,21 +475,21 @@ Partial Class FormSetup
         Me.MnuContent.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IslandToolStripMenuItem, Me.ClothingInventoryToolStripMenuItem, Me.LoadLocalOARSToolStripMenuItem, Me.LoadIARsToolMenuItem, Me.MoreFreeIslandsandPartsContentToolStripMenuItem, Me.SearchForObjectsMenuItem, Me.ToolStripSeparator3, Me.BackupCriticalFilesToolStripMenuItem, Me.ToolStripSeparator6})
         Me.MnuContent.Image = Global.Outworldz.My.Resources.Resources.earth_network
         Me.MnuContent.Name = "MnuContent"
-        Me.MnuContent.Size = New System.Drawing.Size(82, 24)
+        Me.MnuContent.Size = New System.Drawing.Size(95, 28)
         Me.MnuContent.Text = Global.Outworldz.My.Resources.Resources.Content_word
         '
         'IslandToolStripMenuItem
         '
         Me.IslandToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.box_tall
         Me.IslandToolStripMenuItem.Name = "IslandToolStripMenuItem"
-        Me.IslandToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.IslandToolStripMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.IslandToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Load_Free_DreamGrid_OARs_word
         '
         'ClothingInventoryToolStripMenuItem
         '
         Me.ClothingInventoryToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.user1_into
         Me.ClothingInventoryToolStripMenuItem.Name = "ClothingInventoryToolStripMenuItem"
-        Me.ClothingInventoryToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.ClothingInventoryToolStripMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.ClothingInventoryToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Load_Free_Avatar_Inventory_word
         Me.ClothingInventoryToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Load_Free_Avatar_Inventory_text
         '
@@ -481,42 +498,42 @@ Partial Class FormSetup
         Me.LoadLocalOARSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadRegionOARToolStripMenuItem, Me.SaveRegionOARToolStripMenuItem1, Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem, Me.SearchForOarsAtOutworldzToolStripMenuItem, Me.LoadLocalOARToolStripMenuItem})
         Me.LoadLocalOARSToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.box_tall
         Me.LoadLocalOARSToolStripMenuItem.Name = "LoadLocalOARSToolStripMenuItem"
-        Me.LoadLocalOARSToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.LoadLocalOARSToolStripMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.LoadLocalOARSToolStripMenuItem.Text = "Region OAR Load, Save and Backup"
         '
         'LoadRegionOARToolStripMenuItem
         '
         Me.LoadRegionOARToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.data
         Me.LoadRegionOARToolStripMenuItem.Name = "LoadRegionOARToolStripMenuItem"
-        Me.LoadRegionOARToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.LoadRegionOARToolStripMenuItem.Size = New System.Drawing.Size(316, 26)
         Me.LoadRegionOARToolStripMenuItem.Text = "Load Region OAR"
         '
         'SaveRegionOARToolStripMenuItem1
         '
         Me.SaveRegionOARToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.disk_blue
         Me.SaveRegionOARToolStripMenuItem1.Name = "SaveRegionOARToolStripMenuItem1"
-        Me.SaveRegionOARToolStripMenuItem1.Size = New System.Drawing.Size(252, 22)
+        Me.SaveRegionOARToolStripMenuItem1.Size = New System.Drawing.Size(316, 26)
         Me.SaveRegionOARToolStripMenuItem1.Text = "Save Region OAR"
         '
         'SaveAllRunningRegiondsAsOARSToolStripMenuItem
         '
         Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disk_blue
         Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem.Name = "SaveAllRunningRegiondsAsOARSToolStripMenuItem"
-        Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem.Size = New System.Drawing.Size(316, 26)
         Me.SaveAllRunningRegiondsAsOARSToolStripMenuItem.Text = "Save all Running Regions to OARs"
         '
         'SearchForOarsAtOutworldzToolStripMenuItem
         '
         Me.SearchForOarsAtOutworldzToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.earth_network
         Me.SearchForOarsAtOutworldzToolStripMenuItem.Name = "SearchForOarsAtOutworldzToolStripMenuItem"
-        Me.SearchForOarsAtOutworldzToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.SearchForOarsAtOutworldzToolStripMenuItem.Size = New System.Drawing.Size(316, 26)
         Me.SearchForOarsAtOutworldzToolStripMenuItem.Text = "Search for Oars at Outworldz"
         '
         'LoadLocalOARToolStripMenuItem
         '
         Me.LoadLocalOARToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.download
         Me.LoadLocalOARToolStripMenuItem.Name = "LoadLocalOARToolStripMenuItem"
-        Me.LoadLocalOARToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.LoadLocalOARToolStripMenuItem.Size = New System.Drawing.Size(316, 26)
         Me.LoadLocalOARToolStripMenuItem.Text = "Load Local OAR"
         '
         'LoadIARsToolMenuItem
@@ -524,49 +541,49 @@ Partial Class FormSetup
         Me.LoadIARsToolMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadInventoryIARToolStripMenuItem1, Me.SaveInventoryIARToolStripMenuItem1, Me.LoadLocalIARToolStripMenuItem, Me.FindIARsOnOutworldzToolStripMenuItem, Me.BackupAllIARsToolStripMenuItem})
         Me.LoadIARsToolMenuItem.Image = Global.Outworldz.My.Resources.Resources.user1_into
         Me.LoadIARsToolMenuItem.Name = "LoadIARsToolMenuItem"
-        Me.LoadIARsToolMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.LoadIARsToolMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.LoadIARsToolMenuItem.Text = "Inventory IAR Load and Save"
         '
         'LoadInventoryIARToolStripMenuItem1
         '
         Me.LoadInventoryIARToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.data
         Me.LoadInventoryIARToolStripMenuItem1.Name = "LoadInventoryIARToolStripMenuItem1"
-        Me.LoadInventoryIARToolStripMenuItem1.Size = New System.Drawing.Size(198, 22)
+        Me.LoadInventoryIARToolStripMenuItem1.Size = New System.Drawing.Size(247, 26)
         Me.LoadInventoryIARToolStripMenuItem1.Text = "Load Inventory IAR"
         '
         'SaveInventoryIARToolStripMenuItem1
         '
         Me.SaveInventoryIARToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.disk_yellow
         Me.SaveInventoryIARToolStripMenuItem1.Name = "SaveInventoryIARToolStripMenuItem1"
-        Me.SaveInventoryIARToolStripMenuItem1.Size = New System.Drawing.Size(198, 22)
+        Me.SaveInventoryIARToolStripMenuItem1.Size = New System.Drawing.Size(247, 26)
         Me.SaveInventoryIARToolStripMenuItem1.Text = "Save Inventory IAR"
         '
         'LoadLocalIARToolStripMenuItem
         '
         Me.LoadLocalIARToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.box_tall
         Me.LoadLocalIARToolStripMenuItem.Name = "LoadLocalIARToolStripMenuItem"
-        Me.LoadLocalIARToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.LoadLocalIARToolStripMenuItem.Size = New System.Drawing.Size(247, 26)
         Me.LoadLocalIARToolStripMenuItem.Text = "Load Local IAR"
         '
         'FindIARsOnOutworldzToolStripMenuItem
         '
         Me.FindIARsOnOutworldzToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.download
         Me.FindIARsOnOutworldzToolStripMenuItem.Name = "FindIARsOnOutworldzToolStripMenuItem"
-        Me.FindIARsOnOutworldzToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.FindIARsOnOutworldzToolStripMenuItem.Size = New System.Drawing.Size(247, 26)
         Me.FindIARsOnOutworldzToolStripMenuItem.Text = "Find IARs on Outworldz"
         '
         'BackupAllIARsToolStripMenuItem
         '
         Me.BackupAllIARsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disks
         Me.BackupAllIARsToolStripMenuItem.Name = "BackupAllIARsToolStripMenuItem"
-        Me.BackupAllIARsToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+        Me.BackupAllIARsToolStripMenuItem.Size = New System.Drawing.Size(247, 26)
         Me.BackupAllIARsToolStripMenuItem.Text = "Backup All IARs"
         '
         'MoreFreeIslandsandPartsContentToolStripMenuItem
         '
         Me.MoreFreeIslandsandPartsContentToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.download
         Me.MoreFreeIslandsandPartsContentToolStripMenuItem.Name = "MoreFreeIslandsandPartsContentToolStripMenuItem"
-        Me.MoreFreeIslandsandPartsContentToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.MoreFreeIslandsandPartsContentToolStripMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.MoreFreeIslandsandPartsContentToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.More_Free_Islands_and_Parts_word
         Me.MoreFreeIslandsandPartsContentToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Free_DLC_word
         '
@@ -574,32 +591,32 @@ Partial Class FormSetup
         '
         Me.SearchForObjectsMenuItem.Image = Global.Outworldz.My.Resources.Resources.text_find
         Me.SearchForObjectsMenuItem.Name = "SearchForObjectsMenuItem"
-        Me.SearchForObjectsMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.SearchForObjectsMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.SearchForObjectsMenuItem.Text = Global.Outworldz.My.Resources.Resources.Search_Events
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(265, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(332, 6)
         '
         'BackupCriticalFilesToolStripMenuItem
         '
         Me.BackupCriticalFilesToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disk_blue
         Me.BackupCriticalFilesToolStripMenuItem.Name = "BackupCriticalFilesToolStripMenuItem"
-        Me.BackupCriticalFilesToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
+        Me.BackupCriticalFilesToolStripMenuItem.Size = New System.Drawing.Size(335, 26)
         Me.BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.System_Backup_word
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(265, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(332, 6)
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowHyperGridAddressToolStripMenuItem, Me.ToolStripSeparator1, Me.SearchHelpToolStripMenuItem, Me.HelpOnSettingsToolStripMenuItem, Me.HelpStartingUpToolStripMenuItem1, Me.LoopBackToolStripMenuItem, Me.ToolStripMenuItem1, Me.HelpOnIARSToolStripMenuItem, Me.HelpOnOARsToolStripMenuItem, Me.TroubleshootingToolStripMenuItem, Me.TechnicalInfoToolStripMenuItem, Me.ConsoleCOmmandsToolStripMenuItem1, Me.ToolStripSeparator7, Me.CommonConsoleCommandsToolStripMenuItem, Me.ToolStripSeparator2, Me.ViewLogsToolStripMenuItem, Me.ViewGoogleMapToolStripMenuItem, Me.ViewWebUI, Me.ViewVisitorMapsToolStripMenuItem, Me.DiagnosticsToolStripMenuItem, Me.SeePortsInUseToolStripMenuItem, Me.ToolStripSeparator8, Me.RevisionHistoryToolStripMenuItem, Me.CHeckForUpdatesToolStripMenuItem, Me.ToolStripSeparator5, Me.DebugToolStripMenuItem1, Me.mnuAbout})
         Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(64, 24)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(75, 28)
         Me.HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'ShowHyperGridAddressToolStripMenuItem
@@ -607,21 +624,21 @@ Partial Class FormSetup
         Me.ShowHyperGridAddressToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.window_environment
         Me.ShowHyperGridAddressToolStripMenuItem.Name = "ShowHyperGridAddressToolStripMenuItem"
         Me.ShowHyperGridAddressToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.ShowHyperGridAddressToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.ShowHyperGridAddressToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.ShowHyperGridAddressToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Show_Grid_Address
         Me.ShowHyperGridAddressToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Grid_Address_text
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(285, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(355, 6)
         '
         'SearchHelpToolStripMenuItem
         '
         Me.SearchHelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.selection_view
         Me.SearchHelpToolStripMenuItem.Name = "SearchHelpToolStripMenuItem"
         Me.SearchHelpToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.SearchHelpToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.SearchHelpToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.SearchHelpToolStripMenuItem.Text = "Search Help"
         '
         'HelpOnSettingsToolStripMenuItem
@@ -630,14 +647,14 @@ Partial Class FormSetup
         Me.HelpOnSettingsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.HelpOnSettingsToolStripMenuItem.Name = "HelpOnSettingsToolStripMenuItem"
         Me.HelpOnSettingsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
-        Me.HelpOnSettingsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.HelpOnSettingsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.HelpOnSettingsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_Manuals_word
         '
         'PDFManualToolStripMenuItem
         '
         Me.PDFManualToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.pdf
         Me.PDFManualToolStripMenuItem.Name = "PDFManualToolStripMenuItem"
-        Me.PDFManualToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.PDFManualToolStripMenuItem.Size = New System.Drawing.Size(171, 26)
         Me.PDFManualToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.PDF_Manual_word
         '
         'HelpStartingUpToolStripMenuItem1
@@ -645,7 +662,7 @@ Partial Class FormSetup
         Me.HelpStartingUpToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.box_tall
         Me.HelpStartingUpToolStripMenuItem1.Name = "HelpStartingUpToolStripMenuItem1"
         Me.HelpStartingUpToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D1), System.Windows.Forms.Keys)
-        Me.HelpStartingUpToolStripMenuItem1.Size = New System.Drawing.Size(288, 26)
+        Me.HelpStartingUpToolStripMenuItem1.Size = New System.Drawing.Size(358, 26)
         Me.HelpStartingUpToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Resources.Help_Startup
         '
         'LoopBackToolStripMenuItem
@@ -653,7 +670,7 @@ Partial Class FormSetup
         Me.LoopBackToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.refresh
         Me.LoopBackToolStripMenuItem.Name = "LoopBackToolStripMenuItem"
         Me.LoopBackToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.LoopBackToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.LoopBackToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.LoopBackToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_On_LoopBack_word
         Me.LoopBackToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_Loopback_Text
         '
@@ -662,7 +679,7 @@ Partial Class FormSetup
         Me.ToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.document_connection
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(288, 26)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(358, 26)
         Me.ToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Resources.Help_Forward
         Me.ToolStripMenuItem1.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_Forward_text
         '
@@ -671,7 +688,7 @@ Partial Class FormSetup
         Me.HelpOnIARSToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disks
         Me.HelpOnIARSToolStripMenuItem.Name = "HelpOnIARSToolStripMenuItem"
         Me.HelpOnIARSToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
-        Me.HelpOnIARSToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.HelpOnIARSToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.HelpOnIARSToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_On_IARS_word
         Me.HelpOnIARSToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_IARS_text
         '
@@ -680,7 +697,7 @@ Partial Class FormSetup
         Me.HelpOnOARsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disks
         Me.HelpOnOARsToolStripMenuItem.Name = "HelpOnOARsToolStripMenuItem"
         Me.HelpOnOARsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.HelpOnOARsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.HelpOnOARsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.HelpOnOARsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_OARS
         Me.HelpOnOARsToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_OARS_text
         '
@@ -689,7 +706,7 @@ Partial Class FormSetup
         Me.TroubleshootingToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_view
         Me.TroubleshootingToolStripMenuItem.Name = "TroubleshootingToolStripMenuItem"
         Me.TroubleshootingToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.TroubleshootingToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.TroubleshootingToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.TroubleshootingToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_Troubleshooting_word
         '
         'TechnicalInfoToolStripMenuItem
@@ -697,7 +714,7 @@ Partial Class FormSetup
         Me.TechnicalInfoToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_dirty
         Me.TechnicalInfoToolStripMenuItem.Name = "TechnicalInfoToolStripMenuItem"
         Me.TechnicalInfoToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Q), System.Windows.Forms.Keys)
-        Me.TechnicalInfoToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.TechnicalInfoToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.TechnicalInfoToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_Technical
         Me.TechnicalInfoToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_Technical_text
         '
@@ -706,14 +723,14 @@ Partial Class FormSetup
         Me.ConsoleCOmmandsToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.text_marked
         Me.ConsoleCOmmandsToolStripMenuItem1.Name = "ConsoleCOmmandsToolStripMenuItem1"
         Me.ConsoleCOmmandsToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.ConsoleCOmmandsToolStripMenuItem1.Size = New System.Drawing.Size(288, 26)
+        Me.ConsoleCOmmandsToolStripMenuItem1.Size = New System.Drawing.Size(358, 26)
         Me.ConsoleCOmmandsToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Resources.Help_Console
         Me.ConsoleCOmmandsToolStripMenuItem1.ToolTipText = Global.Outworldz.My.Resources.Resources.Help_Console_text
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(285, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(355, 6)
         '
         'CommonConsoleCommandsToolStripMenuItem
         '
@@ -721,188 +738,194 @@ Partial Class FormSetup
         Me.CommonConsoleCommandsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.text_marked
         Me.CommonConsoleCommandsToolStripMenuItem.Name = "CommonConsoleCommandsToolStripMenuItem"
         Me.CommonConsoleCommandsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.CommonConsoleCommandsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.CommonConsoleCommandsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.CommonConsoleCommandsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Issue_Commands
         '
         'UsersToolStripMenuItem
         '
         Me.UsersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUserToolStripMenuItem, Me.ChangePasswordToolStripMenuItem, Me.ShowUserDetailsToolStripMenuItem, Me.KickUserToolStripMenuItem})
         Me.UsersToolStripMenuItem.Name = "UsersToolStripMenuItem"
-        Me.UsersToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UsersToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.UsersToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Users_word
         '
         'AddUserToolStripMenuItem
         '
         Me.AddUserToolStripMenuItem.Name = "AddUserToolStripMenuItem"
-        Me.AddUserToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AddUserToolStripMenuItem.Size = New System.Drawing.Size(211, 26)
         Me.AddUserToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Add_User_word
         '
         'ChangePasswordToolStripMenuItem
         '
         Me.ChangePasswordToolStripMenuItem.Name = "ChangePasswordToolStripMenuItem"
-        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(211, 26)
         Me.ChangePasswordToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Change_Password_word
         '
         'ShowUserDetailsToolStripMenuItem
         '
         Me.ShowUserDetailsToolStripMenuItem.Name = "ShowUserDetailsToolStripMenuItem"
-        Me.ShowUserDetailsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShowUserDetailsToolStripMenuItem.Size = New System.Drawing.Size(211, 26)
         Me.ShowUserDetailsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Show_User_Details_word
+        '
+        'KickUserToolStripMenuItem
+        '
+        Me.KickUserToolStripMenuItem.Name = "KickUserToolStripMenuItem"
+        Me.KickUserToolStripMenuItem.Size = New System.Drawing.Size(211, 26)
+        Me.KickUserToolStripMenuItem.Text = "Kick User"
         '
         'SendAlertToAllUsersToolStripMenuItem
         '
         Me.SendAlertToAllUsersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllUsersAllSimsToolStripMenuItem, Me.JustOneRegionToolStripMenuItem})
         Me.SendAlertToAllUsersToolStripMenuItem.Name = "SendAlertToAllUsersToolStripMenuItem"
-        Me.SendAlertToAllUsersToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SendAlertToAllUsersToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.SendAlertToAllUsersToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Send_Alert_Message_word
         '
         'AllUsersAllSimsToolStripMenuItem
         '
         Me.AllUsersAllSimsToolStripMenuItem.Name = "AllUsersAllSimsToolStripMenuItem"
-        Me.AllUsersAllSimsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AllUsersAllSimsToolStripMenuItem.Size = New System.Drawing.Size(209, 26)
         Me.AllUsersAllSimsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.All_Users_All_Sims_word
         '
         'JustOneRegionToolStripMenuItem
         '
         Me.JustOneRegionToolStripMenuItem.Name = "JustOneRegionToolStripMenuItem"
-        Me.JustOneRegionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.JustOneRegionToolStripMenuItem.Size = New System.Drawing.Size(209, 26)
         Me.JustOneRegionToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Just_one_region_word
         '
         'DebugToolStripMenuItem
         '
         Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Debug, Me.Info, Me.Warn, Me.ErrorToolStripMenuItem, Me.Fatal1, Me.Off1})
         Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
-        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.DebugToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Log_Level
         '
         'Debug
         '
         Me.Debug.Name = "Debug"
-        Me.Debug.Size = New System.Drawing.Size(109, 22)
+        Me.Debug.Size = New System.Drawing.Size(137, 26)
         Me.Debug.Text = Global.Outworldz.My.Resources.Resources.Debug_word
         '
         'Info
         '
         Me.Info.Name = "Info"
-        Me.Info.Size = New System.Drawing.Size(109, 22)
+        Me.Info.Size = New System.Drawing.Size(137, 26)
         Me.Info.Text = Global.Outworldz.My.Resources.Resources.Info_word
         '
         'Warn
         '
         Me.Warn.Name = "Warn"
-        Me.Warn.Size = New System.Drawing.Size(109, 22)
+        Me.Warn.Size = New System.Drawing.Size(137, 26)
         Me.Warn.Text = Global.Outworldz.My.Resources.Resources.Warn_word
         '
         'ErrorToolStripMenuItem
         '
         Me.ErrorToolStripMenuItem.Name = "ErrorToolStripMenuItem"
-        Me.ErrorToolStripMenuItem.Size = New System.Drawing.Size(109, 22)
+        Me.ErrorToolStripMenuItem.Size = New System.Drawing.Size(137, 26)
         Me.ErrorToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Error_word
         '
         'Fatal1
         '
         Me.Fatal1.Name = "Fatal1"
-        Me.Fatal1.Size = New System.Drawing.Size(109, 22)
+        Me.Fatal1.Size = New System.Drawing.Size(137, 26)
         Me.Fatal1.Text = Global.Outworldz.My.Resources.Resources.Fatal_word
         '
         'Off1
         '
         Me.Off1.Name = "Off1"
-        Me.Off1.Size = New System.Drawing.Size(109, 22)
+        Me.Off1.Size = New System.Drawing.Size(137, 26)
         Me.Off1.Text = Global.Outworldz.My.Resources.Resources.Off
         '
         'RestartRegionToolStripMenuItem
         '
         Me.RestartRegionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RestartOneRegionToolStripMenuItem, Me.RestartTheInstanceToolStripMenuItem, Me.RestartAllRegionsToolStripMenuItem})
         Me.RestartRegionToolStripMenuItem.Name = "RestartRegionToolStripMenuItem"
-        Me.RestartRegionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RestartRegionToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.RestartRegionToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Restart_Region_word
         '
         'RestartOneRegionToolStripMenuItem
         '
         Me.RestartOneRegionToolStripMenuItem.Name = "RestartOneRegionToolStripMenuItem"
-        Me.RestartOneRegionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RestartOneRegionToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.RestartOneRegionToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Restart_one_region_word
         '
         'RestartTheInstanceToolStripMenuItem
         '
         Me.RestartTheInstanceToolStripMenuItem.Name = "RestartTheInstanceToolStripMenuItem"
-        Me.RestartTheInstanceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RestartTheInstanceToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.RestartTheInstanceToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Restart_one_instance_word
         '
         'RestartAllRegionsToolStripMenuItem
         '
         Me.RestartAllRegionsToolStripMenuItem.Name = "RestartAllRegionsToolStripMenuItem"
-        Me.RestartAllRegionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RestartAllRegionsToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.RestartAllRegionsToolStripMenuItem.Text = "Restart All Regions"
         '
         'ScriptsToolStripMenuItem
         '
         Me.ScriptsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ScriptsStopToolStripMenuItem, Me.ScriptsStartToolStripMenuItem, Me.ScriptsSuspendToolStripMenuItem, Me.ScriptsResumeToolStripMenuItem})
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.ScriptsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Scripts_word
         '
         'ScriptsStopToolStripMenuItem
         '
         Me.ScriptsStopToolStripMenuItem.Name = "ScriptsStopToolStripMenuItem"
-        Me.ScriptsStopToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ScriptsStopToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.ScriptsStopToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Scripts_Stop_word
         '
         'ScriptsStartToolStripMenuItem
         '
         Me.ScriptsStartToolStripMenuItem.Name = "ScriptsStartToolStripMenuItem"
-        Me.ScriptsStartToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ScriptsStartToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.ScriptsStartToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Scripts_Start_word
         '
         'ScriptsSuspendToolStripMenuItem
         '
         Me.ScriptsSuspendToolStripMenuItem.Name = "ScriptsSuspendToolStripMenuItem"
-        Me.ScriptsSuspendToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ScriptsSuspendToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.ScriptsSuspendToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Scripts_Suspend_word
         '
         'ScriptsResumeToolStripMenuItem
         '
         Me.ScriptsResumeToolStripMenuItem.Name = "ScriptsResumeToolStripMenuItem"
-        Me.ScriptsResumeToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.ScriptsResumeToolStripMenuItem.Size = New System.Drawing.Size(196, 26)
         Me.ScriptsResumeToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Scripts_Resume_word
         '
         'ShowStatusToolStripMenuItem
         '
         Me.ShowStatusToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThreadpoolsToolStripMenuItem, Me.XengineToolStripMenuItem, Me.JobEngineToolStripMenuItem})
         Me.ShowStatusToolStripMenuItem.Name = "ShowStatusToolStripMenuItem"
-        Me.ShowStatusToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShowStatusToolStripMenuItem.Size = New System.Drawing.Size(223, 26)
         Me.ShowStatusToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Show_Status_word
         '
         'ThreadpoolsToolStripMenuItem
         '
         Me.ThreadpoolsToolStripMenuItem.Name = "ThreadpoolsToolStripMenuItem"
-        Me.ThreadpoolsToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.ThreadpoolsToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
         Me.ThreadpoolsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Thread_pools_word
         '
         'XengineToolStripMenuItem
         '
         Me.XengineToolStripMenuItem.Name = "XengineToolStripMenuItem"
-        Me.XengineToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.XengineToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
         Me.XengineToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.XEngine_word
         '
         'JobEngineToolStripMenuItem
         '
         Me.JobEngineToolStripMenuItem.Name = "JobEngineToolStripMenuItem"
-        Me.JobEngineToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.JobEngineToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
         Me.JobEngineToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.JobEngine_word
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(285, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(355, 6)
         '
         'ViewLogsToolStripMenuItem
         '
         Me.ViewLogsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_view
         Me.ViewLogsToolStripMenuItem.Name = "ViewLogsToolStripMenuItem"
         Me.ViewLogsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.ViewLogsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.ViewLogsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.ViewLogsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.View_Logs
         '
         'ViewGoogleMapToolStripMenuItem
@@ -910,7 +933,7 @@ Partial Class FormSetup
         Me.ViewGoogleMapToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.download
         Me.ViewGoogleMapToolStripMenuItem.Name = "ViewGoogleMapToolStripMenuItem"
         Me.ViewGoogleMapToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.G), System.Windows.Forms.Keys)
-        Me.ViewGoogleMapToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.ViewGoogleMapToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.ViewGoogleMapToolStripMenuItem.Text = "View Google Map"
         '
         'ViewWebUI
@@ -918,7 +941,7 @@ Partial Class FormSetup
         Me.ViewWebUI.Image = Global.Outworldz.My.Resources.Resources.document_view
         Me.ViewWebUI.Name = "ViewWebUI"
         Me.ViewWebUI.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
-        Me.ViewWebUI.Size = New System.Drawing.Size(288, 26)
+        Me.ViewWebUI.Size = New System.Drawing.Size(358, 26)
         Me.ViewWebUI.Text = Global.Outworldz.My.Resources.Resources.View_Web_Interface
         Me.ViewWebUI.ToolTipText = Global.Outworldz.My.Resources.Resources.View_Web_Interface_text
         '
@@ -927,7 +950,7 @@ Partial Class FormSetup
         Me.ViewVisitorMapsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.chart
         Me.ViewVisitorMapsToolStripMenuItem.Name = "ViewVisitorMapsToolStripMenuItem"
         Me.ViewVisitorMapsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
-        Me.ViewVisitorMapsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.ViewVisitorMapsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.ViewVisitorMapsToolStripMenuItem.Text = "View Visitor Maps"
         '
         'DiagnosticsToolStripMenuItem
@@ -935,7 +958,7 @@ Partial Class FormSetup
         Me.DiagnosticsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.Server_Client
         Me.DiagnosticsToolStripMenuItem.Name = "DiagnosticsToolStripMenuItem"
         Me.DiagnosticsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.DiagnosticsToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.DiagnosticsToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.DiagnosticsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Network_Diagnostics
         Me.DiagnosticsToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.Resources.Network_Diagnostics_text
         '
@@ -944,20 +967,20 @@ Partial Class FormSetup
         Me.SeePortsInUseToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.server_connection
         Me.SeePortsInUseToolStripMenuItem.Name = "SeePortsInUseToolStripMenuItem"
         Me.SeePortsInUseToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.SeePortsInUseToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.SeePortsInUseToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.SeePortsInUseToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.See_Ports_In_Use_word
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(285, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(355, 6)
         '
         'RevisionHistoryToolStripMenuItem
         '
         Me.RevisionHistoryToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_dirty
         Me.RevisionHistoryToolStripMenuItem.Name = "RevisionHistoryToolStripMenuItem"
         Me.RevisionHistoryToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.RevisionHistoryToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.RevisionHistoryToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.RevisionHistoryToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Revision_History_word
         '
         'CHeckForUpdatesToolStripMenuItem
@@ -965,20 +988,20 @@ Partial Class FormSetup
         Me.CHeckForUpdatesToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.cube_blue_add
         Me.CHeckForUpdatesToolStripMenuItem.Name = "CHeckForUpdatesToolStripMenuItem"
         Me.CHeckForUpdatesToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
-        Me.CHeckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(288, 26)
+        Me.CHeckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(358, 26)
         Me.CHeckForUpdatesToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Check_for_Updates_word
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(285, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(355, 6)
         '
         'DebugToolStripMenuItem1
         '
         Me.DebugToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.DebugToolStripMenuItem1.Name = "DebugToolStripMenuItem1"
         Me.DebugToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.DebugToolStripMenuItem1.Size = New System.Drawing.Size(288, 26)
+        Me.DebugToolStripMenuItem1.Size = New System.Drawing.Size(358, 26)
         Me.DebugToolStripMenuItem1.Text = "Debug"
         '
         'mnuAbout
@@ -987,50 +1010,50 @@ Partial Class FormSetup
         Me.mnuAbout.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.mnuAbout.Name = "mnuAbout"
         Me.mnuAbout.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.mnuAbout.Size = New System.Drawing.Size(288, 26)
+        Me.mnuAbout.Size = New System.Drawing.Size(358, 26)
         Me.mnuAbout.Text = Global.Outworldz.My.Resources.Resources.About_word
         '
         'RestartMysqlIcon
         '
-        Me.RestartMysqlIcon.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem1, Me.RestartMysqlItem, Me.StartToolStripMenuItem1, Me.StopToolStripMenuItem1, Me.DeleteServiceToolStripMenuItem1, Me.BackupToolStripMenuItem1, Me.RestoreToolStripMenuItem1, Me.ConnectToConsoleToolStripMenuItemMySQL, Me.ShowStatsToolStripMenuItem, Me.CheckAndRepairDatbaseToolStripMenuItem, Me.CheckInventoryToolStripMenuItem})
+        Me.RestartMysqlIcon.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem1, Me.StartToolStripMenuItem1, Me.RestartMysqlItem, Me.StopToolStripMenuItem1, Me.DeleteServiceToolStripMenuItem1, Me.BackupToolStripMenuItem1, Me.RestoreToolStripMenuItem1, Me.ShowStatsToolStripMenuItem, Me.CheckAndRepairDatbaseToolStripMenuItem, Me.CheckInventoryToolStripMenuItem, Me.ConnectToConsoleToolStripMenuItemMySQL})
         Me.RestartMysqlIcon.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.RestartMysqlIcon.Name = "RestartMysqlIcon"
-        Me.RestartMysqlIcon.Size = New System.Drawing.Size(77, 24)
+        Me.RestartMysqlIcon.Size = New System.Drawing.Size(89, 28)
         Me.RestartMysqlIcon.Text = Global.Outworldz.My.Resources.Resources.Mysql_Word
         '
         'HelpToolStripMenuItem1
         '
         Me.HelpToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpToolStripMenuItem1.Name = "HelpToolStripMenuItem1"
-        Me.HelpToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.HelpToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
         Me.HelpToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'RestartMysqlItem
         '
         Me.RestartMysqlItem.Image = Global.Outworldz.My.Resources.Resources.recycle
         Me.RestartMysqlItem.Name = "RestartMysqlItem"
-        Me.RestartMysqlItem.Size = New System.Drawing.Size(179, 22)
+        Me.RestartMysqlItem.Size = New System.Drawing.Size(224, 26)
         Me.RestartMysqlItem.Text = Global.Outworldz.My.Resources.Resources.Restart_word
         '
         'StartToolStripMenuItem1
         '
         Me.StartToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.media_play
         Me.StartToolStripMenuItem1.Name = "StartToolStripMenuItem1"
-        Me.StartToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
-        Me.StartToolStripMenuItem1.Text = "Start"
+        Me.StartToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
+        Me.StartToolStripMenuItem1.Text = "Start Mtaql"
         '
         'StopToolStripMenuItem1
         '
         Me.StopToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.media_stop
         Me.StopToolStripMenuItem1.Name = "StopToolStripMenuItem1"
-        Me.StopToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.StopToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
         Me.StopToolStripMenuItem1.Text = "Stop"
         '
         'DeleteServiceToolStripMenuItem1
         '
         Me.DeleteServiceToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.media_stop_red
         Me.DeleteServiceToolStripMenuItem1.Name = "DeleteServiceToolStripMenuItem1"
-        Me.DeleteServiceToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.DeleteServiceToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
         Me.DeleteServiceToolStripMenuItem1.Text = "Delete Service"
         '
         'BackupToolStripMenuItem1
@@ -1038,21 +1061,21 @@ Partial Class FormSetup
         Me.BackupToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.disks
         Me.BackupToolStripMenuItem1.Name = "BackupToolStripMenuItem1"
         Me.BackupToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.B), System.Windows.Forms.Keys)
-        Me.BackupToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.BackupToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
         Me.BackupToolStripMenuItem1.Text = "Backup"
         '
         'RestoreToolStripMenuItem1
         '
         Me.RestoreToolStripMenuItem1.Image = Global.Outworldz.My.Resources.Resources.disk_yellow
         Me.RestoreToolStripMenuItem1.Name = "RestoreToolStripMenuItem1"
-        Me.RestoreToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.RestoreToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
         Me.RestoreToolStripMenuItem1.Text = "Restore"
         '
         'ConnectToConsoleToolStripMenuItemMySQL
         '
         Me.ConnectToConsoleToolStripMenuItemMySQL.Image = Global.Outworldz.My.Resources.Resources.data
         Me.ConnectToConsoleToolStripMenuItemMySQL.Name = "ConnectToConsoleToolStripMenuItemMySQL"
-        Me.ConnectToConsoleToolStripMenuItemMySQL.Size = New System.Drawing.Size(179, 22)
+        Me.ConnectToConsoleToolStripMenuItemMySQL.Size = New System.Drawing.Size(224, 26)
         Me.ConnectToConsoleToolStripMenuItemMySQL.Text = "Connect to Console"
         '
         'ShowStatsToolStripMenuItem
@@ -1060,26 +1083,26 @@ Partial Class FormSetup
         Me.ShowStatsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnToolStripMenuItem, Me.OffToolStripMenuItem})
         Me.ShowStatsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_chart
         Me.ShowStatsToolStripMenuItem.Name = "ShowStatsToolStripMenuItem"
-        Me.ShowStatsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ShowStatsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.ShowStatsToolStripMenuItem.Text = "Show Stats"
         '
         'OnToolStripMenuItem
         '
         Me.OnToolStripMenuItem.Name = "OnToolStripMenuItem"
-        Me.OnToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
+        Me.OnToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OnToolStripMenuItem.Text = "On"
         '
         'OffToolStripMenuItem
         '
         Me.OffToolStripMenuItem.Name = "OffToolStripMenuItem"
-        Me.OffToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
+        Me.OffToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OffToolStripMenuItem.Text = "Off"
         '
         'CheckAndRepairDatbaseToolStripMenuItem
         '
         Me.CheckAndRepairDatbaseToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.Server_Client
         Me.CheckAndRepairDatbaseToolStripMenuItem.Name = "CheckAndRepairDatbaseToolStripMenuItem"
-        Me.CheckAndRepairDatbaseToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.CheckAndRepairDatbaseToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.CheckAndRepairDatbaseToolStripMenuItem.Text = "Check And Repair"
         '
         'CheckInventoryToolStripMenuItem
@@ -1087,21 +1110,21 @@ Partial Class FormSetup
         Me.CheckInventoryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EveryoneToolStripMenuItem, Me.ChooseAUserToolStripMenuItem})
         Me.CheckInventoryToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.briefcase
         Me.CheckInventoryToolStripMenuItem.Name = "CheckInventoryToolStripMenuItem"
-        Me.CheckInventoryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.CheckInventoryToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.CheckInventoryToolStripMenuItem.Text = "Check Inventory"
         '
         'EveryoneToolStripMenuItem
         '
         Me.EveryoneToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.users2
         Me.EveryoneToolStripMenuItem.Name = "EveryoneToolStripMenuItem"
-        Me.EveryoneToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.EveryoneToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.EveryoneToolStripMenuItem.Text = "Everyone"
         '
         'ChooseAUserToolStripMenuItem
         '
         Me.ChooseAUserToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.user2
         Me.ChooseAUserToolStripMenuItem.Name = "ChooseAUserToolStripMenuItem"
-        Me.ChooseAUserToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ChooseAUserToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.ChooseAUserToolStripMenuItem.Text = "Choose a User"
         '
         'RestartRobustIcon
@@ -1109,42 +1132,42 @@ Partial Class FormSetup
         Me.RestartRobustIcon.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem2, Me.StartToolStripMenuItem2, Me.RestartRobustItem, Me.StopToolStripMenuItem2, Me.ShowConsoleToolStripMenuItem})
         Me.RestartRobustIcon.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.RestartRobustIcon.Name = "RestartRobustIcon"
-        Me.RestartRobustIcon.Size = New System.Drawing.Size(76, 24)
+        Me.RestartRobustIcon.Size = New System.Drawing.Size(89, 28)
         Me.RestartRobustIcon.Text = Global.Outworldz.My.Resources.Resources.Robust_word
         '
         'HelpToolStripMenuItem2
         '
         Me.HelpToolStripMenuItem2.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpToolStripMenuItem2.Name = "HelpToolStripMenuItem2"
-        Me.HelpToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
+        Me.HelpToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
         Me.HelpToolStripMenuItem2.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'StartToolStripMenuItem2
         '
         Me.StartToolStripMenuItem2.Image = Global.Outworldz.My.Resources.Resources.media_play
         Me.StartToolStripMenuItem2.Name = "StartToolStripMenuItem2"
-        Me.StartToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
-        Me.StartToolStripMenuItem2.Text = "Start"
+        Me.StartToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
+        Me.StartToolStripMenuItem2.Text = "Start Robust"
         '
         'RestartRobustItem
         '
         Me.RestartRobustItem.Image = Global.Outworldz.My.Resources.Resources.recycle
         Me.RestartRobustItem.Name = "RestartRobustItem"
-        Me.RestartRobustItem.Size = New System.Drawing.Size(180, 22)
+        Me.RestartRobustItem.Size = New System.Drawing.Size(224, 26)
         Me.RestartRobustItem.Text = Global.Outworldz.My.Resources.Resources.Restart_word
         '
         'StopToolStripMenuItem2
         '
         Me.StopToolStripMenuItem2.Image = Global.Outworldz.My.Resources.Resources.media_stop
         Me.StopToolStripMenuItem2.Name = "StopToolStripMenuItem2"
-        Me.StopToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
+        Me.StopToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
         Me.StopToolStripMenuItem2.Text = "Stop"
         '
         'ShowConsoleToolStripMenuItem
         '
         Me.ShowConsoleToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.window_add
         Me.ShowConsoleToolStripMenuItem.Name = "ShowConsoleToolStripMenuItem"
-        Me.ShowConsoleToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShowConsoleToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.ShowConsoleToolStripMenuItem.Text = "Connect To Console"
         '
         'RestartApacheIcon
@@ -1152,49 +1175,49 @@ Partial Class FormSetup
         Me.RestartApacheIcon.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem3, Me.StartToolStripMenuItem, Me.RestartToolStripMenuItem2, Me.StopToolStripMenuItem, Me.DeleteServiceToolStripMenuItem, Me.ConnectToWebPageToolStripMenuItemApache})
         Me.RestartApacheIcon.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.RestartApacheIcon.Name = "RestartApacheIcon"
-        Me.RestartApacheIcon.Size = New System.Drawing.Size(79, 24)
+        Me.RestartApacheIcon.Size = New System.Drawing.Size(93, 28)
         Me.RestartApacheIcon.Text = Global.Outworldz.My.Resources.Resources.Apache_word
         '
         'HelpToolStripMenuItem3
         '
         Me.HelpToolStripMenuItem3.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpToolStripMenuItem3.Name = "HelpToolStripMenuItem3"
-        Me.HelpToolStripMenuItem3.Size = New System.Drawing.Size(189, 22)
+        Me.HelpToolStripMenuItem3.Size = New System.Drawing.Size(236, 26)
         Me.HelpToolStripMenuItem3.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'StartToolStripMenuItem
         '
         Me.StartToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.media_play
         Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
-        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
-        Me.StartToolStripMenuItem.Text = "Start"
+        Me.StartToolStripMenuItem.Size = New System.Drawing.Size(236, 26)
+        Me.StartToolStripMenuItem.Text = "Start Apache Service"
         '
         'RestartToolStripMenuItem2
         '
         Me.RestartToolStripMenuItem2.Image = Global.Outworldz.My.Resources.Resources.recycle
         Me.RestartToolStripMenuItem2.Name = "RestartToolStripMenuItem2"
-        Me.RestartToolStripMenuItem2.Size = New System.Drawing.Size(189, 22)
+        Me.RestartToolStripMenuItem2.Size = New System.Drawing.Size(236, 26)
         Me.RestartToolStripMenuItem2.Text = Global.Outworldz.My.Resources.Resources.Restart_word
         '
         'StopToolStripMenuItem
         '
         Me.StopToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.media_stop
         Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
-        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(236, 26)
         Me.StopToolStripMenuItem.Text = "Stop "
         '
         'DeleteServiceToolStripMenuItem
         '
         Me.DeleteServiceToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.media_stop_red
         Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
-        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(236, 26)
         Me.DeleteServiceToolStripMenuItem.Text = "Delete Service"
         '
         'ConnectToWebPageToolStripMenuItemApache
         '
         Me.ConnectToWebPageToolStripMenuItemApache.Image = Global.Outworldz.My.Resources.Resources.window_environment
         Me.ConnectToWebPageToolStripMenuItemApache.Name = "ConnectToWebPageToolStripMenuItemApache"
-        Me.ConnectToWebPageToolStripMenuItemApache.Size = New System.Drawing.Size(189, 22)
+        Me.ConnectToWebPageToolStripMenuItemApache.Size = New System.Drawing.Size(236, 26)
         Me.ConnectToWebPageToolStripMenuItemApache.Text = "Connect to Web page"
         '
         'RestartIcecastIcon
@@ -1202,66 +1225,103 @@ Partial Class FormSetup
         Me.RestartIcecastIcon.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem4, Me.StartToolStripMenuItem3, Me.RestartIceCastItem2, Me.StopToolStripMenuItem3, Me.ConnectToIceCastToolStripMenuItemIcecast})
         Me.RestartIcecastIcon.Image = Global.Outworldz.My.Resources.Resources.gear
         Me.RestartIcecastIcon.Name = "RestartIcecastIcon"
-        Me.RestartIcecastIcon.Size = New System.Drawing.Size(77, 24)
+        Me.RestartIcecastIcon.Size = New System.Drawing.Size(90, 28)
         Me.RestartIcecastIcon.Text = "IceCast"
         '
         'HelpToolStripMenuItem4
         '
         Me.HelpToolStripMenuItem4.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpToolStripMenuItem4.Name = "HelpToolStripMenuItem4"
-        Me.HelpToolStripMenuItem4.Size = New System.Drawing.Size(174, 22)
+        Me.HelpToolStripMenuItem4.Size = New System.Drawing.Size(224, 26)
         Me.HelpToolStripMenuItem4.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'StartToolStripMenuItem3
         '
         Me.StartToolStripMenuItem3.Image = Global.Outworldz.My.Resources.Resources.media_play
         Me.StartToolStripMenuItem3.Name = "StartToolStripMenuItem3"
-        Me.StartToolStripMenuItem3.Size = New System.Drawing.Size(174, 22)
-        Me.StartToolStripMenuItem3.Text = "Start"
+        Me.StartToolStripMenuItem3.Size = New System.Drawing.Size(224, 26)
+        Me.StartToolStripMenuItem3.Text = "Start Icecast Service"
         '
         'RestartIceCastItem2
         '
         Me.RestartIceCastItem2.Image = Global.Outworldz.My.Resources.Resources.recycle
         Me.RestartIceCastItem2.Name = "RestartIceCastItem2"
-        Me.RestartIceCastItem2.Size = New System.Drawing.Size(174, 22)
+        Me.RestartIceCastItem2.Size = New System.Drawing.Size(224, 26)
         Me.RestartIceCastItem2.Text = Global.Outworldz.My.Resources.Resources.Restart_word
         '
         'StopToolStripMenuItem3
         '
         Me.StopToolStripMenuItem3.Image = Global.Outworldz.My.Resources.Resources.media_stop
         Me.StopToolStripMenuItem3.Name = "StopToolStripMenuItem3"
-        Me.StopToolStripMenuItem3.Size = New System.Drawing.Size(174, 22)
+        Me.StopToolStripMenuItem3.Size = New System.Drawing.Size(224, 26)
         Me.StopToolStripMenuItem3.Text = "Stop"
         '
         'ConnectToIceCastToolStripMenuItemIcecast
         '
         Me.ConnectToIceCastToolStripMenuItemIcecast.Image = Global.Outworldz.My.Resources.Resources.window_environment
         Me.ConnectToIceCastToolStripMenuItemIcecast.Name = "ConnectToIceCastToolStripMenuItemIcecast"
-        Me.ConnectToIceCastToolStripMenuItemIcecast.Size = New System.Drawing.Size(174, 22)
+        Me.ConnectToIceCastToolStripMenuItemIcecast.Size = New System.Drawing.Size(224, 26)
         Me.ConnectToIceCastToolStripMenuItemIcecast.Text = "Connect to IceCast"
         '
         'MenuStrip1
         '
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.mnuSettings, Me.MnuContent, Me.HelpToolStripMenuItem, Me.RestartMysqlIcon, Me.RestartRobustIcon, Me.RestartApacheIcon, Me.RestartIcecastIcon})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.mnuSettings, Me.MnuContent, Me.HelpToolStripMenuItem, Me.RestartMysqlIcon, Me.RestartRobustIcon, Me.RestartApacheIcon, Me.RestartIcecastIcon, Me.ServiceToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1009, 26)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(5, 1, 0, 1)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1261, 30)
         Me.MenuStrip1.TabIndex = 0
         '
-        'KickUserToolStripMenuItem
+        'ServiceToolStripMenuItem
         '
-        Me.KickUserToolStripMenuItem.Name = "KickUserToolStripMenuItem"
-        Me.KickUserToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.KickUserToolStripMenuItem.Text = "Kick User"
+        Me.ServiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem5, Me.StartDreamGridServiceToolStripMenuItem, Me.RestartToolStripMenuItem, Me.StoipToolStripMenuItem, Me.DeleteServiceToolStripMenuItem2})
+        Me.ServiceToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.gear_stop
+        Me.ServiceToolStripMenuItem.Name = "ServiceToolStripMenuItem"
+        Me.ServiceToolStripMenuItem.Size = New System.Drawing.Size(90, 28)
+        Me.ServiceToolStripMenuItem.Text = "Service"
+        '
+        'StartDreamGridServiceToolStripMenuItem
+        '
+        Me.StartDreamGridServiceToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.media_play
+        Me.StartDreamGridServiceToolStripMenuItem.Name = "StartDreamGridServiceToolStripMenuItem"
+        Me.StartDreamGridServiceToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
+        Me.StartDreamGridServiceToolStripMenuItem.Text = "Start DreamGrid Service"
+        '
+        'HelpToolStripMenuItem5
+        '
+        Me.HelpToolStripMenuItem5.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
+        Me.HelpToolStripMenuItem5.Name = "HelpToolStripMenuItem5"
+        Me.HelpToolStripMenuItem5.Size = New System.Drawing.Size(251, 26)
+        Me.HelpToolStripMenuItem5.Text = "Help"
+        '
+        'RestartToolStripMenuItem
+        '
+        Me.RestartToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.recycle
+        Me.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem"
+        Me.RestartToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
+        Me.RestartToolStripMenuItem.Text = "Restart"
+        '
+        'StoipToolStripMenuItem
+        '
+        Me.StoipToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.media_stop
+        Me.StoipToolStripMenuItem.Name = "StoipToolStripMenuItem"
+        Me.StoipToolStripMenuItem.Size = New System.Drawing.Size(251, 26)
+        Me.StoipToolStripMenuItem.Text = "Stop"
+        '
+        'DeleteServiceToolStripMenuItem2
+        '
+        Me.DeleteServiceToolStripMenuItem2.Image = Global.Outworldz.My.Resources.Resources.media_stop_red
+        Me.DeleteServiceToolStripMenuItem2.Name = "DeleteServiceToolStripMenuItem2"
+        Me.DeleteServiceToolStripMenuItem2.Size = New System.Drawing.Size(251, 26)
+        Me.DeleteServiceToolStripMenuItem2.Text = "Delete Service"
         '
         'FormSetup
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1009, 161)
+        Me.ClientSize = New System.Drawing.Size(1261, 201)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.BusyButton)
@@ -1270,8 +1330,9 @@ Partial Class FormSetup
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(351, 200)
+        Me.MinimumSize = New System.Drawing.Size(434, 238)
         Me.Name = "FormSetup"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "DreamGrid"
@@ -1437,4 +1498,10 @@ Partial Class FormSetup
     Friend WithEvents ShowAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShowConsoleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents KickUserToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents StartDreamGridServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RestartToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StoipToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeleteServiceToolStripMenuItem2 As ToolStripMenuItem
 End Class

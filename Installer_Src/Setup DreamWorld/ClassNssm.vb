@@ -5,47 +5,70 @@
     Public Sub New()
     End Sub
 
+    Public Sub DeleteService()
+
+        NssmCommand("stop DreamGridService")
+
+        If NssmCommand("remove DreamGridService confirm") Then
+            Settings.RunAsService = False
+            TextPrint(My.Resources.ServiceRemoved)
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
+        Else
+            TextPrint(My.Resources.ServiceFailedtoDelete)
+        End If
+
+    End Sub
+
     Public Sub Dispose() Implements IDisposable.Dispose
         ' Do not change this code. Put cleanup code in 'Dispose(disposing As Boolean)' method
         Dispose(disposing:=True)
         GC.SuppressFinalize(Me)
     End Sub
 
-    Public Sub InstallService()
+    Public Function InstallService() As Boolean
 
-        If NssmCommand($"install DreamGridService {Settings.CurrentDirectory}\Start.exe service") Then
-            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.")
+        If NssmCommand($"install DreamGridService {Settings.CurrentDirectory}\Start.exe service") AndAlso
+            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.") AndAlso
+            NssmCommand("nssm set DreamGridService Start SERVICE_DELAYED_AUTO_START") Then
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
-        End If
-
-    End Sub
-
-    Public Function StartService() As Boolean
-
-        If NssmCommand("start DreamGridService") Then
-            TextPrint(My.Resources.ServiceInstalled)
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
             Return True
         Else
-            TextPrint(My.Resources.ServiceFailedtoStart)
+            TextPrint(My.Resources.ServiceFailedtoInstall)
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_error
             Return False
         End If
 
     End Function
 
-    Public Sub StopAndDeleteService()
+    Public Function StartService() As Boolean
 
-        If NssmCommand("stop DreamGridService") Then
-            If NssmCommand("remove DreamGridService confirm") Then
-                Settings.RunAsService = False
-                TextPrint(My.Resources.ServiceRemoved)
-            Else
-                TextPrint(My.Resources.ServiceFailedtoDelete)
-            End If
+        If NssmCommand("start DreamGridService") Then
+            TextPrint(My.Resources.Running_word)
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_run
+            Return True
+        Else
+            TextPrint(My.Resources.ServiceFailedtoStart)
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_error
+            Return False
         End If
 
-    End Sub
+    End Function
+
+    Public Function StopService() As Boolean
+
+        If NssmCommand("stop DreamGridService") Then
+            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
+            TextPrint(My.Resources.Stopped_word)
+            Return True
+        Else
+            TextPrint(My.Resources.ServiceFailedtoStop)
+            Return False
+        End If
+
+    End Function
 
     Protected Overridable Sub Dispose(disposing As Boolean)
         If Not disposedValue Then

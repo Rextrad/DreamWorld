@@ -583,6 +583,8 @@ Public Class FormSetup
             Return
         End If
 
+        SetPublicIP()
+
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
         If RunningInServiceMode() Or Not Settings.RunAsService Then
@@ -634,8 +636,6 @@ Public Class FormSetup
             OffToolStripMenuItem.Checked = True
             MySQLSpeed.Text = ""
         End If
-
-        SetPublicIP()
 
         If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
@@ -3398,6 +3398,25 @@ Public Class FormSetup
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "xengine status")
         Next
+
+    End Sub
+
+    Private Sub HelpToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem5.Click
+
+        HelpManual("DreamGrid Service")
+
+    End Sub
+
+    Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
+
+        NssmService.InstallService()
+
+    End Sub
+
+    Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
+
+        NssmService.StopService()
+        NssmService.StartService()
 
     End Sub
 

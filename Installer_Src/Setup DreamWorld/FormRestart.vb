@@ -191,12 +191,14 @@ Public Class FormRestart
                 Return
             End If
 
-            FormSetup.NssmService.StopAndDeleteService()
+            FormSetup.NssmService.StopService()
+            FormSetup.NssmService.DeleteService()
             FormSetup.NssmService.InstallService()
             TextPrint("Click Start to run as a Service. No Dos Boxes will show.")
         Else
             If ServiceExists("DreamGridService") Then
-                FormSetup.NssmService.StopAndDeleteService()
+                FormSetup.NssmService.StopService()
+                FormSetup.NssmService.DeleteService()
                 TextPrint("DreamGrid Service removed")
             Else
                 TextPrint("DreamGrid Service is not installed")
