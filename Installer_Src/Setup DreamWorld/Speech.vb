@@ -17,6 +17,7 @@ Module Speech
     ''' </summary>
     Public Sub Chat2Speech()
 
+        If RunningInServiceMode() Then Return
         If SpeechList.Count = 0 Then Return
         Dim WebThread = New Thread(AddressOf SpeakArrival)
         WebThread.SetApartmentState(ApartmentState.STA)

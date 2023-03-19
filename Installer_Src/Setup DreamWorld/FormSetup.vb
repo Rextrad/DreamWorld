@@ -271,6 +271,8 @@ Public Class FormSetup
 
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
+        RestartDOSboxes()           ' Icons for failed Services
+
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
         AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
@@ -1007,6 +1009,7 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
+        If RunningInServiceMode() Then Return
         ' now look at the exit stack
         While Not ExitList.IsEmpty
 
@@ -1028,6 +1031,7 @@ Public Class FormSetup
                 DelPidFile(RegionUUID) 'kill the disk PID
             Else
                 BreakPoint.Print("No UUID!")
+                ExitList.TryRemove(GroupName, "")
                 Continue While
             End If
 
@@ -1183,6 +1187,12 @@ Public Class FormSetup
 
         If PropIceCastExited Then
             IceCastIcon(False)
+        End If
+
+        If Not ServiceExists("DreamGridService") Then
+            ServiceToolStripMenuItemDG.Image = My.Resources.gear
+        Else
+            ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
         End If
 
     End Sub
@@ -2158,7 +2168,7 @@ Public Class FormSetup
 
         ' Only runs once
         If SecondsTicker = 3600 Then
-            ExportFsAssets()
+            ExportFsAssetsOneTime()
         End If
 
         SecondsTicker += 1
@@ -2497,6 +2507,12 @@ Public Class FormSetup
                 BreakPoint.Dump(ex)
             End Try
         End Using
+    End Sub
+
+    Private Sub DeleteServiceToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles DeleteServiceToolStripMenuItem2.Click
+
+        NssmService.DeleteService()
+
     End Sub
 
     Private Sub DiagnosticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiagnosticsToolStripMenuItem.Click
@@ -3211,6 +3227,7 @@ Public Class FormSetup
     Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
 
         NssmService.InstallService()
+        NssmService.StartService()
 
     End Sub
 
@@ -3256,6 +3273,12 @@ Public Class FormSetup
         Else
             TextPrint(My.Resources.Not_Running)
         End If
+
+    End Sub
+
+    Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
+
+        NssmService.StopService()
 
     End Sub
 

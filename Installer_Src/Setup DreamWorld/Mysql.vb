@@ -916,7 +916,7 @@ Public Module MysqlInterface
     ''' <summary>
     ''' Runs once at the hour tick mark to move assets to file system
     ''' </summary>
-    Public Sub ExportFsAssets()
+    Public Sub ExportFsAssetsOneTime()
 
         If Settings.ExportAssetsOnce Then Return
         Dim export = $"import ""Data Source=localhost;Port={Settings.MySqlRobustDBPort};Database={Settings.RobustDatabaseName};User ID={Settings.RobustUserName};Password={Settings.RobustPassword};Old Guids=True;Command Timeout=300;"" assets"
