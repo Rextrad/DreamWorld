@@ -67,23 +67,16 @@ Module PublicIP
 
     End Sub
 
-    ''' <summary>
-    ''' Checks port or window handle to see if region is up
-    ''' </summary>
-    ''' <param name="RegionUUID">RegionUUID</param>
-    ''' <returns></returns>
-    Public Function CheckPort(RegionUUID As String) As Boolean
+    Public Function Checkport(RegionUUID As String) As Boolean
 
-        If RunningInServiceMode() Then
-            If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
-                Return True
-            End If
-        Else
-            If CBool(GetHwnd(Group_Name(RegionUUID))) Then
-                Return True
-            End If
-        End If
-        Return False
+        Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+        Try
+            Process.GetProcessById(PID)
+        Catch
+            Return False
+        End Try
+
+        Return True
 
     End Function
 
@@ -107,6 +100,23 @@ Module PublicIP
             End Try
             Return success
         End Using
+        Return False
+
+    End Function
+
+    ''' <summary>
+    ''' Checks port or window handle to see if region is up
+    ''' </summary>
+    ''' <param name="RegionUUID">RegionUUID</param>
+    ''' <returns></returns>
+    Public Function CheckPortold(RegionUUID As String) As Boolean
+        If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
+            Return True
+        ElseIf GetPIDFromFile(Group_Name(RegionUUID)) Then
+            Return True
+        ElseIf CBool(GetHwnd(Group_Name(RegionUUID))) Then
+            Return True
+        End If
         Return False
 
     End Function
