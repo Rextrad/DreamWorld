@@ -64,7 +64,9 @@ Module DNS
              "http://ns3.outworldz.com/dns.plx" & GetPostData(DNSName)
             }
 
-        Using client As New WebClient ' download client for web pages
+        Using client As New TimedWebClient With {
+                .Timeout = 10000
+                } ' download client for web pages
             For Each url In DNS
                 Try
                     Checkname = client.DownloadString(url)
