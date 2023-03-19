@@ -176,7 +176,7 @@ Public Class FormRegionPopup
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles ShowConsoleButton.Click
 
-        If Not RunningInServiceMode() Then
+        If Not ServiceExists("DreamGridService") Then
             gPick = "Console"
             DialogResult = DialogResult.OK
         Else
@@ -206,6 +206,7 @@ Public Class FormRegionPopup
             Try
                 ConsoleProcess.Start()
                 Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
+                'TODO lkeep jabbing until consle closes
             Catch ex As Exception
                 BreakPoint.Dump(ex)
                 TextPrint($"Console {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
