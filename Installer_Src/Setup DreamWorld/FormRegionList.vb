@@ -240,7 +240,7 @@ Public Class FormRegionlist
 
             PropAborting = False
 
-            If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+            If Checkport(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
             Else
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
@@ -279,8 +279,7 @@ Public Class FormRegionlist
             ResumeRegion(RegionUUID)
             PropUpdateView() = True
 
-            Dim hwnd = GetHwnd(Group_Name(RegionUUID))
-            If hwnd = IntPtr.Zero Then
+            If Not Checkport(RegionUUID) Then
                 ' shut down all regions in the DOS box
                 For Each UUID As String In RegionUuidListByName(Group_Name(RegionUUID))
                     RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
@@ -288,6 +287,12 @@ Public Class FormRegionlist
                 DelPidFile(RegionUUID)
                 PropUpdateView = True ' make form refresh
             Else
+
+                If ServiceExists("DreamGridService") Then
+
+                    Return
+                End If
+
                 Dim tmp As String = Settings.ConsoleShow
                 'temp show console
                 Settings.ConsoleShow = "True"

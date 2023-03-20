@@ -271,6 +271,8 @@ Public Class FormSetup
 
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
+        RestartDOSboxes()           ' Icons for failed Services
+
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
         AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
@@ -585,6 +587,10 @@ Public Class FormSetup
 
         SetPublicIP()
 
+        If Not Settings.DnsTestPassed Then
+            MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
+        End If
+
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
         If RunningInServiceMode() Or Not Settings.RunAsService Then
@@ -704,7 +710,9 @@ Public Class FormSetup
             Return
         End If
 
-        Dim I = New ClassFilewatcher
+        If RunningInServiceMode() Then
+            Dim I = New ClassFilewatcher
+        End If
 
         ' Start as a Service?
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
@@ -715,7 +723,7 @@ Public Class FormSetup
             Startup()
             Return
         Else
-            TextPrint("Starting on Desktop")
+            TextPrint("Starting in Desktop Mode")
         End If
 
         If Settings.Autostart Then
@@ -759,14 +767,15 @@ Public Class FormSetup
             (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
-                SequentialPause()
 
-                If CBool(GetHwnd(Group_Name(RegionUUID))) Then
+                SequentialPause()
+                If Checkport(RegionUUID) Then
                     TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
                     ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                 Else
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
                 End If
+
             End If
             Application.DoEvents()
         Next
@@ -1005,6 +1014,7 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
+        If RunningInServiceMode() Then Return
         ' now look at the exit stack
         While Not ExitList.IsEmpty
 
@@ -1026,6 +1036,7 @@ Public Class FormSetup
                 DelPidFile(RegionUUID) 'kill the disk PID
             Else
                 BreakPoint.Print("No UUID!")
+                ExitList.TryRemove(GroupName, "")
                 Continue While
             End If
 
@@ -1181,6 +1192,12 @@ Public Class FormSetup
 
         If PropIceCastExited Then
             IceCastIcon(False)
+        End If
+
+        If Not ServiceExists("DreamGridService") Then
+            ServiceToolStripMenuItemDG.Image = My.Resources.gear
+        Else
+            ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
         End If
 
     End Sub
@@ -2156,7 +2173,7 @@ Public Class FormSetup
 
         ' Only runs once
         If SecondsTicker = 3600 Then
-            ExportFsAssets()
+            ExportFsAssetsOneTime()
         End If
 
         SecondsTicker += 1
@@ -2497,6 +2514,12 @@ Public Class FormSetup
         End Using
     End Sub
 
+    Private Sub DeleteServiceToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles DeleteServiceToolStripMenuItem2.Click
+
+        NssmService.DeleteService()
+
+    End Sub
+
     Private Sub DiagnosticsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiagnosticsToolStripMenuItem.Click
 
         If Not PropOpensimIsRunning() Then
@@ -2618,6 +2641,12 @@ Public Class FormSetup
     Private Sub HelpToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem4.Click
 
         HelpManual("Icecast")
+
+    End Sub
+
+    Private Sub HelpToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem5.Click
+
+        HelpManual("DreamGrid Service")
 
     End Sub
 
@@ -2918,6 +2947,13 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
+
+        NssmService.StopService()
+        NssmService.StartService()
+
+    End Sub
+
     Private Sub RestartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RestartRobustItem.Click
 
         PropAborting = True
@@ -3193,6 +3229,13 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
+
+        NssmService.InstallService()
+        NssmService.StartService()
+
+    End Sub
+
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
 
         Settings.ApacheEnable = True
@@ -3235,6 +3278,12 @@ Public Class FormSetup
         Else
             TextPrint(My.Resources.Not_Running)
         End If
+
+    End Sub
+
+    Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
+
+        NssmService.StopService()
 
     End Sub
 
@@ -3398,25 +3447,6 @@ Public Class FormSetup
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "xengine status")
         Next
-
-    End Sub
-
-    Private Sub HelpToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem5.Click
-
-        HelpManual("DreamGrid Service")
-
-    End Sub
-
-    Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
-
-        NssmService.InstallService()
-
-    End Sub
-
-    Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
-
-        NssmService.StopService()
-        NssmService.StartService()
 
     End Sub
 

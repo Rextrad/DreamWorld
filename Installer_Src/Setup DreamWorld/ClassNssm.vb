@@ -7,12 +7,20 @@
 
     Public Sub DeleteService()
 
-        NssmCommand("stop DreamGridService")
+        If Not ServiceExists("DreamGridService") Then
+            TextPrint(My.Resources.ServiceRemoved)
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
+        End If
 
-        If NssmCommand("remove DreamGridService confirm") Then
+        If Not NssmCommand("stop DreamGridService") Then
+            TextPrint(My.Resources.ServiceFailedtoStop)
+            Return
+        End If
+
+        If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
             TextPrint(My.Resources.ServiceRemoved)
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_stop
         Else
             TextPrint(My.Resources.ServiceFailedtoDelete)
         End If
@@ -27,17 +35,20 @@
 
     Public Function InstallService() As Boolean
 
-        If NssmCommand($"install DreamGridService {Settings.CurrentDirectory}\Start.exe service") AndAlso
-            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.") AndAlso
-            NssmCommand("nssm set DreamGridService Start SERVICE_DELAYED_AUTO_START") Then
+        If ServiceExists("DreamGridService") Then
+            Return True
+        End If
+
+        If Not NssmCommand($"install DreamGridService ""{Settings.CurrentDirectory}\Start.exe"" service") AndAlso
+            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.") Then
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoInstall)
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_error
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
             Return False
         End If
 
@@ -45,13 +56,21 @@
 
     Public Function StartService() As Boolean
 
-        If NssmCommand("start DreamGridService") Then
+        If Not ServiceExists("DreamGridService") Then
+            If Not InstallService() Then
+                TextPrint(My.Resources.ServiceFailedtoStart)
+                FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
+                Return False
+            End If
+        End If
+
+        If Not NssmCommand("start DreamGridService") Then
             TextPrint(My.Resources.Running_word)
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_run
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoStart)
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_error
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
             Return False
         End If
 
@@ -59,14 +78,12 @@
 
     Public Function StopService() As Boolean
 
-        If NssmCommand("stop DreamGridService") Then
-            FormSetup.ServiceToolStripMenuItem.Image = My.Resources.gear_stop
-            TextPrint(My.Resources.Stopped_word)
+        If Not ServiceExists("DreamGridService") Then
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
             Return True
-        Else
-            TextPrint(My.Resources.ServiceFailedtoStop)
-            Return False
         End If
+
+        NssmCommand("stop DreamGridService")
 
     End Function
 

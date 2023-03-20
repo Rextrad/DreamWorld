@@ -960,9 +960,8 @@ Module SmartStart
                     If Not RunningInServiceMode() Then
                         AddCPU(PID, GroupName) ' get a list of running opensim processes
                     End If
-
                 Else
-                        PropUpdateView = True ' make form refresh
+                    PropUpdateView = True ' make form refresh
                     Logger("Failed to boot ", BootName, "Outworldz")
                     TextPrint("Failed to boot region " & BootName)
                     Return False
