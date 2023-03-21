@@ -10,13 +10,13 @@
         If Not ServiceExists("DreamGridService") Then
             TextPrint(My.Resources.ServiceRemoved)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
-        End If
-
-        If Not NssmCommand("stop DreamGridService") Then
-            TextPrint(My.Resources.ServiceFailedtoStop)
             Return
         End If
 
+        If NssmCommand("stop DreamGridService") Then
+            TextPrint(My.Resources.ServiceFailedtoStop)
+        End If
+        Sleep(1000)
         If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
             TextPrint(My.Resources.ServiceRemoved)
@@ -39,8 +39,9 @@
             Return True
         End If
 
-        If Not NssmCommand($"install DreamGridService ""{Settings.CurrentDirectory}\Start.exe"" service") AndAlso
-            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.") Then
+        If Not NssmCommand($"install DreamGridService ""{Settings.CurrentDirectory}\Start.exe"" service") Then
+
+            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.")
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
@@ -58,10 +59,15 @@
 
         If Not ServiceExists("DreamGridService") Then
             If Not InstallService() Then
-                TextPrint(My.Resources.ServiceFailedtoStart)
+                TextPrint(My.Resources.ServiceFailedtoInstall)
                 FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
                 Return False
             End If
+        End If
+
+        If CheckPort2(Settings.LANIP, Settings.DiagnosticPort) Then
+            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
+            Return True
         End If
 
         If Not NssmCommand("start DreamGridService") Then
@@ -83,7 +89,11 @@
             Return True
         End If
 
-        NssmCommand("stop DreamGridService")
+        If NssmCommand("stop DreamGridService") Then
+            Sleep(5000)
+            Return True
+        End If
+        Return False
 
     End Function
 
