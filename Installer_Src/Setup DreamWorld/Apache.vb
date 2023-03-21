@@ -93,165 +93,165 @@ Module Apache
     ''' </summary>
     Public Sub StartApache()
 
-        If RunningInServiceMode() Or Not Settings.RunAsService Then
-            ' Depends upon PHP for home page
-            DoPHPDBSetup()
+        If CheckPort2(Settings.PublicIP, Settings.ApachePort) Then Return
 
-            SetPath()
+        ' Depends upon PHP for home page
+        DoPHPDBSetup()
 
-            If Settings.SiteMap Then
-                Dim SiteMapContents = "<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf
-                SiteMapContents += "<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.0909"">" & vbCrLf
-                SiteMapContents += "<url>" & vbCrLf
-                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & "</loc>" & vbCrLf
+        SetPath()
 
-                If Settings.CMS = DreamGrid Then
-                    SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/DreamGrid" & "</loc>" & vbCrLf
-                ElseIf Settings.CMS = JOpensim Then
-                    SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/jOpensim" & "</loc>" & vbCrLf
-                ElseIf Settings.CMS = WordPress Then
-                    SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/WordPress" & "</loc>" & vbCrLf
-                Else
-                    SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & Settings.CMS & "</loc>" & vbCrLf
-                End If
+        If Settings.SiteMap Then
+            Dim SiteMapContents = "<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf
+            SiteMapContents += "<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.0909"">" & vbCrLf
+            SiteMapContents += "<url>" & vbCrLf
+            SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & "</loc>" & vbCrLf
 
-                SiteMapContents += "<changefreq>daily</changefreq>" & vbCrLf
-                SiteMapContents += "<priority>1.0</priority>" & vbCrLf
-                SiteMapContents += "</url>" & vbCrLf
-                SiteMapContents += "</urlset>" & vbCrLf
-
-                Using outputFile As New StreamWriter(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\htdocs\Sitemap.xml"), False)
-                    outputFile.WriteLine(SiteMapContents)
-                End Using
-
+            If Settings.CMS = DreamGrid Then
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/DreamGrid" & "</loc>" & vbCrLf
+            ElseIf Settings.CMS = JOpensim Then
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/jOpensim" & "</loc>" & vbCrLf
+            ElseIf Settings.CMS = WordPress Then
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/WordPress" & "</loc>" & vbCrLf
+            Else
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & Settings.CMS & "</loc>" & vbCrLf
             End If
 
-            If Not Settings.ApacheEnable Then
-                ApacheIcon(False)
-                TextPrint(My.Resources.Apache_Disabled)
-                Return
-            End If
+            SiteMapContents += "<changefreq>daily</changefreq>" & vbCrLf
+            SiteMapContents += "<priority>1.0</priority>" & vbCrLf
+            SiteMapContents += "</url>" & vbCrLf
+            SiteMapContents += "</urlset>" & vbCrLf
 
-            If Settings.ApachePort = 80 Then
-                ApacheProcess.StartInfo.UseShellExecute = True ' so we can redirect streams
-                ApacheProcess.StartInfo.FileName = "net"
-                ApacheProcess.StartInfo.CreateNoWindow = True
-                ApacheProcess.StartInfo.Arguments = "stop W3SVC"
-                ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-                ApacheProcess.StartInfo.CreateNoWindow = True
-                Try
-                    ApacheProcess.Start()
-                    ApacheProcess.WaitForExit()
-                Catch ex As Exception
-                    BreakPoint.Dump(ex)
-                End Try
+            Using outputFile As New StreamWriter(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\htdocs\Sitemap.xml"), False)
+                outputFile.WriteLine(SiteMapContents)
+            End Using
 
-            End If
+        End If
 
-            If Settings.CurrentDirectory <> Settings.LastDirectory Or Not ServiceExists("ApacheHTTPServer") Or ApacheRevision <> Settings.ApacheRev Then
+        If Not Settings.ApacheEnable Then
+            ApacheIcon(False)
+            TextPrint(My.Resources.Apache_Disabled)
+            Return
+        End If
 
-                ' Stop MSFT server if we are on port 80 and enabled
-                PropApacheUninstalling = True
+        If Settings.ApachePort = 80 Then
+            ApacheProcess.StartInfo.UseShellExecute = True ' so we can redirect streams
+            ApacheProcess.StartInfo.FileName = "net"
+            ApacheProcess.StartInfo.CreateNoWindow = True
+            ApacheProcess.StartInfo.Arguments = "stop W3SVC"
+            ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            ApacheProcess.StartInfo.CreateNoWindow = True
+            Try
+                ApacheProcess.Start()
+                ApacheProcess.WaitForExit()
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
 
-                ' old stuff we had named this way
-                ApacheProcess.StartInfo.Arguments = "stop " & """" & "Apache HTTP Server" & """"
-                Try
-                    ApacheProcess.Start()
-                    ApacheProcess.WaitForExit()
-                Catch ex As Exception
-                End Try
-                Application.DoEvents()
+        End If
 
-                'delete really old service
-                ApacheProcess.StartInfo.FileName = "sc"
-                ApacheProcess.StartInfo.Arguments = " delete  " & """" & "Apache HTTP Server" & """"
-                ApacheProcess.StartInfo.CreateNoWindow = True
-                ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        If Settings.CurrentDirectory <> Settings.LastDirectory Or Not ServiceExists("ApacheHTTPServer") Or ApacheRevision <> Settings.ApacheRev Then
 
-                Try
-                    ApacheProcess.Start()
-                    ApacheProcess.WaitForExit()
-                Catch ex As Exception
-                End Try
-                Application.DoEvents()
+            ' Stop MSFT server if we are on port 80 and enabled
+            PropApacheUninstalling = True
 
-                Application.DoEvents()
-                Using ApacheProcess As New Process With {
-                    .EnableRaisingEvents = False
-                }
-                    ApacheProcess.StartInfo.UseShellExecute = True ' so we can redirect streams
-                    ApacheProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\bin\httpd.exe")
-                    ApacheProcess.StartInfo.Arguments = "-k install -n " & """" & "ApacheHTTPServer" & """"
-                    ApacheProcess.StartInfo.CreateNoWindow = True
-                    ApacheProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\bin\")
-                    ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            ' old stuff we had named this way
+            ApacheProcess.StartInfo.Arguments = "stop " & """" & "Apache HTTP Server" & """"
+            Try
+                ApacheProcess.Start()
+                ApacheProcess.WaitForExit()
+            Catch ex As Exception
+            End Try
+            Application.DoEvents()
 
-                    DoApache()
+            'delete really old service
+            ApacheProcess.StartInfo.FileName = "sc"
+            ApacheProcess.StartInfo.Arguments = " delete  " & """" & "Apache HTTP Server" & """"
+            ApacheProcess.StartInfo.CreateNoWindow = True
+            ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
 
-                    Try
-                        ApacheProcess.Start()
-                        ApacheProcess.WaitForExit()
-                        If ApacheProcess.ExitCode <> 0 Then
-                            TextPrint(My.Resources.ApacheFailed)
-                            ApacheIcon(False)
-                        Else
-                            PropApacheUninstalling = False ' installed now, trap errors
-                        End If
-                    Catch ex As Exception
-                        BreakPoint.Dump(ex)
-                        ApacheIcon(False)
-                    End Try
-                    Application.DoEvents()
+            Try
+                ApacheProcess.Start()
+                ApacheProcess.WaitForExit()
+            Catch ex As Exception
+            End Try
+            Application.DoEvents()
 
-                End Using
-
-            End If
-
-            TextPrint(My.Resources.Apache_starting)
-            DoApache()
-
-            Settings.LastDirectory = Settings.CurrentDirectory
-            Settings.SaveSettings()
-
+            Application.DoEvents()
             Using ApacheProcess As New Process With {
-                        .EnableRaisingEvents = False
-                    }
-                ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-                ApacheProcess.StartInfo.FileName = "net"
-                ApacheProcess.StartInfo.Arguments = "start ApacheHTTPServer"
-                ApacheProcess.StartInfo.UseShellExecute = False
+                .EnableRaisingEvents = False
+            }
+                ApacheProcess.StartInfo.UseShellExecute = True ' so we can redirect streams
+                ApacheProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\bin\httpd.exe")
+                ApacheProcess.StartInfo.Arguments = "-k install -n " & """" & "ApacheHTTPServer" & """"
                 ApacheProcess.StartInfo.CreateNoWindow = True
-                ApacheProcess.StartInfo.RedirectStandardError = True
-                ApacheProcess.StartInfo.RedirectStandardOutput = True
-                Dim response As String = ""
+                ApacheProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Apache\bin\")
+                ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+
+                DoApache()
 
                 Try
                     ApacheProcess.Start()
-                    response = ApacheProcess.StandardOutput.ReadToEnd() & ApacheProcess.StandardError.ReadToEnd()
                     ApacheProcess.WaitForExit()
                     If ApacheProcess.ExitCode <> 0 Then
-                        If response.Contains("has already been started") Then
-                            ApacheIcon(True)
-
-                            Settings.ApacheRev = ApacheRevision
-                            Settings.SaveSettings()
-
-                            Return
-                        End If
-                        TextPrint(My.Resources.Apache_Failed & ":" & CStr(ApacheProcess.ExitCode))
+                        TextPrint(My.Resources.ApacheFailed)
                         ApacheIcon(False)
                     Else
-                        TextPrint(My.Resources.Apache_running & ":" & Settings.ApachePort)
-                        ApacheIcon(True)
+                        PropApacheUninstalling = False ' installed now, trap errors
                     End If
                 Catch ex As Exception
                     BreakPoint.Dump(ex)
-                    TextPrint(My.Resources.Apache_Failed & ":" & ex.Message)
+                    ApacheIcon(False)
                 End Try
                 Application.DoEvents()
 
             End Using
+
         End If
+
+        TextPrint(My.Resources.Apache_starting)
+        DoApache()
+
+        Settings.LastDirectory = Settings.CurrentDirectory
+        Settings.SaveSettings()
+
+        Using ApacheProcess As New Process With {
+                    .EnableRaisingEvents = False
+                }
+            ApacheProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            ApacheProcess.StartInfo.FileName = "net"
+            ApacheProcess.StartInfo.Arguments = "start ApacheHTTPServer"
+            ApacheProcess.StartInfo.UseShellExecute = False
+            ApacheProcess.StartInfo.CreateNoWindow = True
+            ApacheProcess.StartInfo.RedirectStandardError = True
+            ApacheProcess.StartInfo.RedirectStandardOutput = True
+            Dim response As String = ""
+
+            Try
+                ApacheProcess.Start()
+                response = ApacheProcess.StandardOutput.ReadToEnd() & ApacheProcess.StandardError.ReadToEnd()
+                ApacheProcess.WaitForExit()
+                If ApacheProcess.ExitCode <> 0 Then
+                    If response.Contains("has already been started") Then
+                        ApacheIcon(True)
+
+                        Settings.ApacheRev = ApacheRevision
+                        Settings.SaveSettings()
+
+                        Return
+                    End If
+                    TextPrint(My.Resources.Apache_Failed & ":" & CStr(ApacheProcess.ExitCode))
+                    ApacheIcon(False)
+                Else
+                    TextPrint(My.Resources.Apache_running & ":" & Settings.ApachePort)
+                    ApacheIcon(True)
+                End If
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+                TextPrint(My.Resources.Apache_Failed & ":" & ex.Message)
+            End Try
+            Application.DoEvents()
+
+        End Using
 
     End Sub
 
