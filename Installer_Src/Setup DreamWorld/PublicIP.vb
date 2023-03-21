@@ -104,23 +104,6 @@ Module PublicIP
 
     End Function
 
-    ''' <summary>
-    ''' Checks port or window handle to see if region is up
-    ''' </summary>
-    ''' <param name="RegionUUID">RegionUUID</param>
-    ''' <returns></returns>
-    Public Function CheckPortold(RegionUUID As String) As Boolean
-        If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
-            Return True
-        ElseIf GetPIDFromFile(Group_Name(RegionUUID)) Then
-            Return True
-        ElseIf CBool(GetHwnd(Group_Name(RegionUUID))) Then
-            Return True
-        End If
-        Return False
-
-    End Function
-
     Public Function GetHostAddresses(hostName As String) As String
 
         Try
