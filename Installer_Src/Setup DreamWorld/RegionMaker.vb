@@ -550,16 +550,20 @@ Module RegionMaker
                             uuid = CStr(INI.GetIni(fName, "RegionUUID", "", "String"))
 
                             Dim SomeUUID As New Guid
-                            If Not Guid.TryParse(uuid, SomeUUID) And Not RunningInServiceMode() Then
-                                MsgBox("Cannot read UUID In INI file For " & fName, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                            If Not Guid.TryParse(uuid, SomeUUID) Then
+
+                                If Not RunningInServiceMode() Then
+                                    MsgBox("Cannot read UUID In INI file For " & fName, vbCritical Or MsgBoxStyle.MsgBoxSetForeground)
+                                End If
+
                                 ErrorLog("Cannot read UUID In INI file For " & fName)
                                 Dim newfile = file
-                                newfile = newfile.Replace(".ini", ".bak")
-                                CopyFileFast(newfile, file)
-                                '  Auto repair this error from a backup
-                            End If
+                                    newfile = newfile.Replace(".ini", ".bak")
+                                    CopyFileFast(newfile, file)
+                                    '  Auto repair this error from a backup
+                                End If
 
-                            If U.ContainsKey(uuid) Then
+                                If U.ContainsKey(uuid) Then
                                 TextPrint($"-> Region {fName} UUID is identical to {U.Item(uuid)} - Aborting")
                                 Return 0
                             Else
@@ -687,7 +691,7 @@ Module RegionMaker
                         Next
                     Catch ex As Exception
                         BreakPoint.Dump(ex)
-                        If Not Not RunningInServiceMode() Then
+                        If Not RunningInServiceMode() Then
                             MsgBox($"{My.Resources.Error_Region}{fName}  {ex.Message}", MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
                         End If
 
