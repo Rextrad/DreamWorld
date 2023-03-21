@@ -3882,4 +3882,7 @@
   <data name="Suspendable" xml:space="preserve">
     <value>Có thể treo</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>Dịch vụ bị đình trệ</value>
+  </data>
 </root>

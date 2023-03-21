@@ -637,12 +637,6 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
-        If RunningInServiceMode() Then
-            OnToolStripMenuItem.Checked = False
-            OffToolStripMenuItem.Checked = True
-            MySQLSpeed.Text = ""
-        End If
-
         If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
             ShowRegionform()
         End If
@@ -719,6 +713,7 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
+            Settings.RestartOnCrash = True
             Sleep(30000)
             Startup()
             Return
@@ -843,15 +838,12 @@ Public Class FormSetup
 
     Public Function StartOpensimulator() As Boolean
 
-        Bench.Start("StartOpensim")
+        'Bench.Start("StartOpensim")
 
         GetOpensimPIDsFromFiles()
+
         StartTimer()
 
-        If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
-            TextPrint("Starting Service. No Opensim DOS boxes will show")
-            Return NssmService.StartService()
-        End If
 
         OpenPorts()
 
@@ -870,6 +862,13 @@ Public Class FormSetup
         DoEstates() ' has to be done after MySQL starts up.
 
         If CheckOverLap() Then Return False
+
+
+        If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
+            TextPrint("Starting Service. No Opensim DOS boxes will show")
+            NssmService.StartService()
+        End If
+
 
         If Settings.ServerType = RobustServerName Then
             StartRobust()
@@ -905,6 +904,7 @@ Public Class FormSetup
 
         Next
         CalcCPU()
+
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
@@ -1014,141 +1014,144 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
-        If RunningInServiceMode() Then Return
-        ' now look at the exit stack
-        While Not ExitList.IsEmpty
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
+            ' now look at the exit stack
+            While Not ExitList.IsEmpty
 
-            Dim GroupName = ExitList.Keys.First
-            Dim Reason = ExitList.Item(GroupName) ' NoLogin or Exit
+                Dim GroupName = ExitList.Keys.First
+                Dim Reason = ExitList.Item(GroupName) ' NoLogin or Exit
 
-            TextPrint(GroupName & " " & Reason)
-            Dim out As String = ""
+                TextPrint(GroupName & " " & Reason)
+                Dim out As String = ""
 
-            ' Need a region number and a Name. Name is either a region or a Group. For groups we need to get a region name from the group
-            Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
+                ' Need a region number and a Name. Name is either a region or a Group. For groups we need to get a region name from the group
+                Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
 
-            Dim PID As Integer
-            Dim RegionUUID As String = ""
-            If GroupList.Count > 0 Then
-                RegionUUID = GroupList(0)
+                Dim PID As Integer
+                Dim RegionUUID As String = ""
+                If GroupList.Count > 0 Then
+                    RegionUUID = GroupList(0)
 
-                PID = GetPIDFromFile(Group_Name(RegionUUID))
-                DelPidFile(RegionUUID) 'kill the disk PID
-            Else
-                BreakPoint.Print("No UUID!")
-                ExitList.TryRemove(GroupName, "")
-                Continue While
-            End If
-
-            ToDoList.Remove(RegionUUID)
-
-            If Reason = "NoLogin" Then
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
-                PropUpdateView = True
-                ExitList.TryRemove(RegionUUID, "")
-                Continue While
-            End If
-
-            Dim Status = RegionStatus(RegionUUID)
-            Dim RegionName = Region_Name(RegionUUID)
-
-            Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
-
-            If Not RegionEnabled(RegionUUID) Then
-                ExitList.TryRemove(GroupName, "")
-                Continue While
-            End If
-
-            If Status = SIMSTATUSENUM.ShuttingDownForGood Then
-                For Each UUID As String In RegionUuidListByName(GroupName)
-                    RegionStatus(UUID) = SIMSTATUSENUM.Stopped
-                Next
-
-                If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
-                    DeleteAllRegionData(RegionUUID)
+                    PID = GetPIDFromFile(Group_Name(RegionUUID))
+                    DelPidFile(RegionUUID) 'kill the disk PID
+                Else
+                    BreakPoint.Print("No UUID!")
+                    ExitList.TryRemove(GroupName, "")
+                    Continue While
                 End If
 
-                PropUpdateView = True ' make form refresh
-                ExitList.TryRemove(GroupName, "")
-                Continue While
+                ToDoList.Remove(RegionUUID)
 
-            ElseIf Status = SIMSTATUSENUM.RecyclingDown AndAlso Not PropAborting Then
-                'RecyclingDown = 4
+                If Reason = "NoLogin" Then
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
+                    PropUpdateView = True
+                    ExitList.TryRemove(RegionUUID, "")
+                    Continue While
+                End If
 
-                TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
-                For Each R In GroupList
-                    RegionStatus(R) = SIMSTATUSENUM.RestartStage2
-                Next
-                PropUpdateView = True
-                ExitList.TryRemove(GroupName, "")
-                Continue While
+                Dim Status = RegionStatus(RegionUUID)
+                Dim RegionName = Region_Name(RegionUUID)
 
-            ElseIf (Status = SIMSTATUSENUM.RecyclingUp Or
-                Status = SIMSTATUSENUM.Booting Or
-                Status = SIMSTATUSENUM.Booted Or
-                Status = SIMSTATUSENUM.Suspended) And
-                Not PropAborting Then
+                Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
 
-                ' Maybe we crashed during warm up or running. Skip prompt if auto restart on crash and restart the beast
-                Status = SIMSTATUSENUM.Error
-                PropUpdateView = True
+                If Not RegionEnabled(RegionUUID) Then
+                    ExitList.TryRemove(GroupName, "")
+                    Continue While
+                End If
 
-                Logger("Crash", GroupName & " Crashed", "Status")
-                If Settings.RestartOnCrash Then
+                If Status = SIMSTATUSENUM.ShuttingDownForGood Then
+                    For Each UUID As String In RegionUuidListByName(GroupName)
+                        RegionStatus(UUID) = SIMSTATUSENUM.Stopped
+                    Next
 
-                    If CrashCounter(RegionUUID) > 4 Then
-                        Logger("Crash", $"{GroupName} Crashed 5 times", "Status")
-                        TextPrint($"{GroupName} Crashed 5 times - Stopped with Errors")
-                        ErrorGroup(GroupName)
-                        RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
-                        If Not RunningInServiceMode() Then
-                            Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
-                            If yesno = vbYes Then
-                                Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
-                            End If
-                        End If
-
-                        ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
-                        ExitList.TryRemove(GroupName, "")
-                        Continue While
+                    If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
+                        DeleteAllRegionData(RegionUUID)
                     End If
 
-                    CrashCounter(RegionUUID) += 1
+                    PropUpdateView = True ' make form refresh
+                    ExitList.TryRemove(GroupName, "")
+                    Continue While
 
-                    ' shut down all regions in the DOS box
-                    TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " #" & CStr(CrashCounter(RegionUUID)))
-                    StopGroup(GroupName)
+                ElseIf Status = SIMSTATUSENUM.RecyclingDown AndAlso Not PropAborting Then
+                    'RecyclingDown = 4
+
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
                     For Each R In GroupList
                         RegionStatus(R) = SIMSTATUSENUM.RestartStage2
                     Next
-
+                    PropUpdateView = True
                     ExitList.TryRemove(GroupName, "")
                     Continue While
-                Else
-                    If PropAborting Then
+
+                ElseIf (Status = SIMSTATUSENUM.RecyclingUp Or
+                    Status = SIMSTATUSENUM.Booting Or
+                    Status = SIMSTATUSENUM.Booted Or
+                    Status = SIMSTATUSENUM.Suspended) And
+                    Not PropAborting Then
+
+                    ' Maybe we crashed during warm up or running. Skip prompt if auto restart on crash and restart the beast
+                    Status = SIMSTATUSENUM.Error
+                    PropUpdateView = True
+
+                    Logger("Crash", GroupName & " Crashed", "Status")
+                    If Settings.RestartOnCrash Then
+
+                        If CrashCounter(RegionUUID) > 4 Then
+                            Logger("Crash", $"{GroupName} Crashed 5 times", "Status")
+                            TextPrint($"{GroupName} Crashed 5 times - Stopped with Errors")
+                            ErrorGroup(GroupName)
+                            RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
+
+                            If Not RunningInServiceMode() Then
+                                Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
+                                If yesno = vbYes Then
+                                    Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                                End If
+                            End If
+
+                            ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
+                            ExitList.TryRemove(GroupName, "")
+                            Continue While
+                        End If
+
+                        CrashCounter(RegionUUID) += 1
+
+                        ' shut down all regions in the DOS box
+                        TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " #" & CStr(CrashCounter(RegionUUID)))
+                        StopGroup(GroupName)
+                        TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
+                        For Each R In GroupList
+                            RegionStatus(R) = SIMSTATUSENUM.RestartStage2
+                        Next
+
                         ExitList.TryRemove(GroupName, "")
                         Continue While
-                    End If
-
-                    TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
-                    ErrorGroup(GroupName)
-                    If Not RunningInServiceMode() Then
-                        Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
-                        If (yesno = vbYes) Then
-                            Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                    Else
+                        If PropAborting Then
+                            ExitList.TryRemove(GroupName, "")
+                            Continue While
                         End If
-                        ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log)
+
+                        TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly)
+                        ErrorGroup(GroupName)
+                        If Not RunningInServiceMode() Then
+                            Dim yesno = MsgBox(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
+                            If (yesno = vbYes) Then
+                                Baretail("""" & IO.Path.Combine(OpensimIniPath(RegionUUID), "Opensim.log") & """")
+                            End If
+                            ErrorLog(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log)
+                        End If
+
                     End If
-
+                Else
+                    StopGroup(GroupName)
                 End If
-            Else
-                StopGroup(GroupName)
-            End If
 
-            ExitList.TryRemove(GroupName, "")
+                ExitList.TryRemove(GroupName, "")
 
-        End While
+            End While
+        End If
+
 
     End Sub
 
@@ -1341,7 +1344,7 @@ Public Class FormSetup
             End If
         Next
 
-        If Not RunningInServiceMode() Then
+        If RunningInServiceMode() Or Not Settings.RunAsService Then
             ' create tables in case we need them
             SetupWordPress()    ' in case they want to use WordPress
             SetupSimStats()     ' Perl code
@@ -2104,14 +2107,15 @@ Public Class FormSetup
             ScanAgents()                ' update agent count
 
             '^^^^^^^^^^^^^^^^^^^^^
-            If RunningInServiceMode() Then Return
-
-            CalcDiskFree()              ' check for free disk space
-            If Settings.ShowMysqlStats Then
-                MySQLSpeed.Text = (MysqlStats() / 5).ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " Q/S"
-            Else
-                MySQLSpeed.Text = ""
+            If Not RunningInServiceMode() Then
+                CalcDiskFree()              ' check for free disk space
+                If Settings.ShowMysqlStats Then
+                    MySQLSpeed.Text = (MysqlStats() / 5).ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " Q/S"
+                Else
+                    MySQLSpeed.Text = ""
+                End If
             End If
+
             Bench.Print("5 second + worker")
         End If
 
@@ -2120,6 +2124,7 @@ Public Class FormSetup
             DeleteDirectoryTmp()    ' clean up old tmp folder
             MakeMaps()              ' Make all the large maps
             Bench.Print("60 second worker")
+
         End If
 
         If SecondsTicker Mod 60 = 0 AndAlso SecondsTicker > 0 Then
@@ -2801,6 +2806,7 @@ Public Class FormSetup
     End Sub
 
     Private Sub MnuExit_Click(sender As System.Object, e As EventArgs) Handles mnuExit.Click
+
         If Not RunningInServiceMode() Then
             Dim result = MsgBox(My.Resources.AreYouSure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
             If result = vbYes Then
@@ -3011,7 +3017,6 @@ Public Class FormSetup
         }
 
         ' Call the ShowDialog method to show the dialogbox.
-        ' Call the ShowDialog method to show the dialogbox.
         Dim UserClickedOK As DialogResult = openFileDialog1.ShowDialog
         openFileDialog1.Dispose()
         ' Process input if the user clicked OK.
@@ -3027,12 +3032,7 @@ Public Class FormSetup
                 End If
 
                 Dim yesno As MsgBoxResult
-                If RunningInServiceMode() Then
-                    yesno = MsgBoxResult.Yes
-                Else
-                    yesno = MsgBox(My.Resources.Are_You_Sure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, Global.Outworldz.My.Resources.Restore_word)
-                End If
-
+                yesno = MsgBox(My.Resources.Are_You_Sure, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, Global.Outworldz.My.Resources.Restore_word)
                 If yesno = MsgBoxResult.Yes Then
 
                     DeleteFile(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\RestoreMysql.bat"))
@@ -3133,7 +3133,7 @@ Public Class FormSetup
 
     Private Sub ShowConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowConsoleToolStripMenuItem.Click
 
-        If Not RunningInServiceMode() Then
+        If Not ServiceExists("DreamGridService") Then
             ShowDOSWindow(RobustName, SHOWWINDOWENUM.SWRESTORE)
             Return
         End If
@@ -3233,6 +3233,10 @@ Public Class FormSetup
 
         NssmService.InstallService()
         NssmService.StartService()
+
+        If CheckPort2(Settings.LANIP, Settings.DiagnosticPort) Then
+            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
+        End If
 
     End Sub
 

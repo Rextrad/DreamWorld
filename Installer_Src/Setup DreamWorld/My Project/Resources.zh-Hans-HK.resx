@@ -3882,4 +3882,7 @@
   <data name="Suspendable" xml:space="preserve">
     <value>可暂停</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>服务假装停止</value>
+  </data>
 </root>
