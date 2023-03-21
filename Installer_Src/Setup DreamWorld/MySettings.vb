@@ -2005,7 +2005,6 @@ Public Class MySettings
 
     Public Property RunAsService() As Boolean
         Get
-            Log("Service", $"{CType(GetMySetting("RunAsService", "False"), Boolean)}")
             Return CType(GetMySetting("RunAsService", "False"), Boolean)
         End Get
         Set
