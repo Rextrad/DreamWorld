@@ -4,6 +4,9 @@ Public Class ClassFilewatcher
 
     Private ReadOnly INI As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles")
 
+    Public Sub Init()
+
+    End Sub
     Public Sub New()
 
         ' Create a FileSystemWatcher object passing it the folder to watch.

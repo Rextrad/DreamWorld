@@ -3975,4 +3975,7 @@
   <data name="Realign" xml:space="preserve">
     <value>調整</value>
   </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>新區域</value>
+  </data>
 </root>

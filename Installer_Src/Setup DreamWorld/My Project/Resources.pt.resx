@@ -3975,4 +3975,7 @@
   <data name="Realign" xml:space="preserve">
     <value>Realinhar</value>
   </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>Nova Região</value>
+  </data>
 </root>

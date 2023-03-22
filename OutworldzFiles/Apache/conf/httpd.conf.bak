@@ -65,7 +65,7 @@ Define ENABLE_TLS13 "Yes"
 # prevent Apache from glomming onto all bound IP addresses.
 #
 #Listen 12.34.56.78:80
-Listen 8080
+Listen 80
 
 #
 # Dynamic Shared Object (DSO) Support
@@ -329,7 +329,7 @@ Require all granted
 Use VDir "C:/Opensim/Outworldz_Dreamgrid/OutworldzFiles/Apache/htdocs"
 
 
-<VirtualHost  *:8080>
+<VirtualHost  *:80>
 #two minutes for wp to install
 TimeOut 240
 #
@@ -343,6 +343,7 @@ TimeOut 240
 # changed by Dreamgrid
 ServerName blue.outworldz.net
 # This checks to make sure the connection is not already HTTPS
+Rewriteengine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 </IfDefine>

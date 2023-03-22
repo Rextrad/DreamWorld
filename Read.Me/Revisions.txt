@@ -1,15 +1,18 @@
 REVISIONS FOR DREAMGRID
 
-
 V5.33
 
-
-Help: Added Gloebit Manual in prep for other money systems.
-PCampBot:  Added a control panel so you can add Test Bots.  See the Bots manual for details or open Settings->Bots
+Service: Run as a Service can be enabled in Setting->Region panel.  
+	You can control the service from the Top menu bar.  
+	The region start/stop/restart buttons will signal the service to do the action.
+	Console is different in Services mode.
+	Also made a setup.exe for Melanie's Console named "Setup_Console_Client.exe to the top folder.  This lets you remotely connect to Robust and regions from any other PC with a GUI.
+Help: Added Gloebit Manual in prep for other money systems. Partial progress on DTL currency but it not enabled as it only partly works.
+PCampBot:  Added a control panel so you can add Test Bots named Iama Bot. See the Bots manual for details or open Settings->Bots.
 Diagnostic: If two regions have the same UUID, thine system shall bitch and moan.
-Update: PHP7 updated to 7.4.33
+Update: PHP7 updated to 7.4.33.
 Ban List: add exclude by Disk ID, which is a hashed C drive ID. Also has a new syntax to differentiate MAC and DISK ID's
-Bug: TOS would save correctly but the editor would always load the original Outworldz TOS. Made it harder to edit a second time.
+Bug: TOS would save correctly but the editor would always reload the original Outworldz TOS. 
 Bug: Redirect home page of Apache to /DreamGrid/Joomla/WordPress was not correct.
 Bug: Icecast did not start on new grid due to a missing log folder.
 Bug: Icon for SSL never changed state on Apache Screen.
@@ -19,13 +22,19 @@ Now allows Welcome region to be frozen/thawed.
 Emails: Offline and other Emails were not going to anyone but the sender. 
 Bug: Fixed difficult to understand Gatekeeper Alias bug where an alternate Domain Name for your grid did not work. Reason for this patch was if you changed the name of your grid then old names and landmarks would not work. As one example, my grid is named www.outworldz.com:9000. If you mistakenly went to outworldz.com without the www, it would produce a Failure To Verify Identity Error. Adding outworldz.com to the alternate DNS name was supposed to fix this. It now works as expected. 
 New Feature: Added a Kick User command to the help Console Commands Menu.
-Opensim $1e0207b4991 2023-02-19 03:32:19
+Opensim  #c27027b6a74353  useless string casts 2023-03-15.
+	Fixed possible migration fails.
+	Update libomv.
+	llGetObjectDetails (OBJECT_SIT_COUNT) always returning zero.
+	Avoid a old potential stack overflow.
+	rename llObjectGetLink as spec llGetObjectLink.
 	Fixed a region crash when being griefed.
 	Fix 2 bugs caused by nonsense xinventory fieldname.
 	Mantis 9039: Code involving permissions on attached prim won't execute for non-owner.
-	Griefer fixes: Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets..
-	add llObjectGetLinkKey(...) LSL command
+	Griefer fixes: Do not allow ForceAttachToAvatarFromInventory to attach coalesced inventory assets.
+
 	New LSL commands:
+		llObjectGetLinkKey(...) LSL command.
 		llLinkPlaySound(LSL_Integer linknumber, string sound, double volume)
 		llLinkStopSound(LSL_Integer linknumber)
 		llLinkAdjustSoundVolume(LSL_Integer linknumber, LSL_Float volume)
@@ -33,6 +42,7 @@ Opensim $1e0207b4991 2023-02-19 03:32:19
 		LSL_String llGetInventoryAcquireTime(string itemName)
 		llLinkSetSoundQueueing(int linknumber, int queue)
 		LSL_String llReplaceSubString(LSL_String src, LSL_String pattern, LSL_String replacement, int count)
+
 OAR: Gravity region is a 4X4, not a 1X1.
 OAR: All web OARS (236) and IARS now use HTTPS TLS 1.2 security you are guaranteed to be getting them from Outworldz now.
 Load OAR now prints on the DreamGrid console when the OAR is finished loading.

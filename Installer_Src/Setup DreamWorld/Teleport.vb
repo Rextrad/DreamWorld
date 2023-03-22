@@ -73,7 +73,7 @@ End Module
 Public Class TeleportAvatar
 
     ' Declare an event.
-    Public Event TeleportEvent()
+    Public Event TeleportEvent(sender As Object, e As EventArgs)
 
     Shared Sub Add(AgentID As String, Value As String)
 

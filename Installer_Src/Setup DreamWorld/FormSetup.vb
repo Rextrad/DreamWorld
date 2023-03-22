@@ -706,6 +706,7 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then
             Dim I = New ClassFilewatcher
+            I.Init()
         End If
 
         ' Start as a Service?

@@ -3975,4 +3975,7 @@
   <data name="Realign" xml:space="preserve">
     <value>יישור מחדש</value>
   </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>אזור חדש</value>
+  </data>
 </root>

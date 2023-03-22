@@ -3975,4 +3975,7 @@
   <data name="Realign" xml:space="preserve">
     <value>Επαναπροσδιορίσουμε</value>
   </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>Νέα Περιοχή</value>
+  </data>
 </root>
