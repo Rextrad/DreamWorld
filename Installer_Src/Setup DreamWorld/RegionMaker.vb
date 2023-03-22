@@ -9,6 +9,8 @@ Imports System.IO
 
 Imports System.Text.RegularExpressions
 Imports System.Threading
+Imports System.Web
+Imports System.Web.Services.Description
 Imports MySqlConnector
 Imports Newtonsoft.Json
 
@@ -284,48 +286,48 @@ Module RegionMaker
         & "; Rule2: Only one region per INI file." & vbCrLf _
         & ";" & vbCrLf _
         & "[" & RegionName & "]" & vbCrLf _
-        & "RegionUUID=" & RegionUUID & vbCrLf _
-        & "Location=" & Coord_X(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture) & "," & Coord_Y(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf _
-        & "InternalAddress=" & Settings.InternalAddress & vbCrLf _
-        & "InternalPort=" & Region_Port(RegionUUID) & vbCrLf _
-        & "GroupPort=" & GroupPort(RegionUUID) & vbCrLf _
-        & "AllowAlternatePorts = False" & vbCrLf _
-        & "ExternalHostName=" & Settings.ExternalHostName() & vbCrLf _
-        & "SizeX=" & CStr(SizeX(RegionUUID)) & vbCrLf _
-        & "SizeY=" & CStr(SizeY(RegionUUID)) & vbCrLf _
-        & "Enabled=" & CStr(RegionEnabled(RegionUUID)) & vbCrLf _
-        & "NonPhysicalPrimMax=" & CStr(NonPhysical_PrimMax(RegionUUID)) & vbCrLf _
-        & "PhysicalPrimMax=" & CStr(Physical_PrimMax(RegionUUID)) & vbCrLf _
-        & "ClampPrimSize=" & CStr(Clamp_PrimSize(RegionUUID)) & vbCrLf _
-        & "MaxPrims=" & Max_Prims(RegionUUID) & vbCrLf _
-        & "RegionType=" & Estate(RegionUUID) & vbCrLf _
+        & $"RegionUUID={RegionUUID}" & vbCrLf _
+        & $"Location={CStr(Coord_X(RegionUUID))},{CStr(Coord_Y(RegionUUID))}" & vbCrLf _
+        & $"InternalAddress={Settings.InternalAddress}" & vbCrLf _
+        & $"InternalPort={Region_Port(RegionUUID)}" & vbCrLf _
+        & $"$GroupPort={GroupPort(RegionUUID)}" & vbCrLf _
+        & "AllowAlternatePorts=False" & vbCrLf _
+        & $"ExternalHostName={Settings.ExternalHostName()}" & vbCrLf _
+        & $"SizeX={CStr(SizeX(RegionUUID)) & vbCrLf _
+        & $"SizeY={CStr(SizeY(RegionUUID))}" & vbCrLf _
+        & $"Enabled={CStr(RegionEnabled(RegionUUID))}" & vbCrLf _
+        & $"NonPhysicalPrimMax={CStr(NonPhysical_PrimMax(RegionUUID))}" & vbCrLf _
+        & $"PhysicalPrimMax={CStr(Physical_PrimMax(RegionUUID))}"}" & vbCrLf _
+        & $"ClampPrimSize={CStr(Clamp_PrimSize(RegionUUID))}" & vbCrLf _
+        & $"MaxPrims={Max_Prims(RegionUUID)}" & vbCrLf _
+        & $"RegionType={Estate(RegionUUID)}" & vbCrLf _
         & "MaxAgents = 100" & vbCrLf & vbCrLf _
         & ";# Dreamgrid extended properties" & vbCrLf _
-        & "RegionSnapShot=" & RegionSnapShot(RegionUUID) & vbCrLf _
-        & "MapType=" & MapType(RegionUUID) & vbCrLf _
-        & "Physics=" & RegionPhysics(RegionUUID) & vbCrLf _
-        & "GodDefault=" & GodDefault(RegionUUID) & vbCrLf _
-        & "AllowGods=" & AllowGods(RegionUUID) & vbCrLf _
-        & "RegionGod=" & RegionGod(RegionUUID) & vbCrLf _
-        & "ManagerGod=" & ManagerGod(RegionUUID) & vbCrLf _
-        & "Birds=" & Birds(RegionUUID) & vbCrLf _
-        & "Tides=" & Tides(RegionUUID) & vbCrLf _
-        & "Teleport=" & CStr(Teleport_Sign(RegionUUID)) & vbCrLf _
-        & "DisableGloebits=" & DisableGloebits(RegionUUID) & vbCrLf _
-        & "DisallowForeigners=" & Disallow_Foreigners(RegionUUID) & vbCrLf _
-        & "DisallowResidents=" & Disallow_Residents(RegionUUID) & vbCrLf _
-        & "MinTimerInterval=" & MinTimerInterval(RegionUUID) & vbCrLf _
-        & "Frametime=" & FrameTime(RegionUUID) & vbCrLf _
-        & "ScriptEngine=" & ScriptEngine(RegionUUID) & vbCrLf _
-        & "Publicity=" & GDPR(RegionUUID) & vbCrLf _
-        & "Concierge=" & Concierge(RegionUUID) & vbCrLf _
-        & "SmartStart=" & CStr(Smart_Suspend_Enabled(RegionUUID)) & vbCrLf _
-        & "SmartBoot=" & CStr(Smart_Boot_Enabled(RegionUUID)) & vbCrLf _
-        & "LandingSpot=" & LandingSpot(RegionUUID) & vbCrLf _
-        & "Cores=" & Cores(RegionUUID) & vbCrLf _
-        & "Priority=" & Priority(RegionUUID) & vbCrLf _
-        & "OpenSimWorldAPIKey=" & OpensimWorldAPIKey(RegionUUID) & vbCrLf _
-        & "SkipAutoBackup=" & SkipAutobackup(RegionUUID) & vbCrLf
+        & $"RegionSnapShot={RegionSnapShot(RegionUUID)}" & vbCrLf _
+        & $"MapType={MapType(RegionUUID)}" & vbCrLf _
+        & $"Physics={RegionPhysics(RegionUUID)}" & vbCrLf _
+        & $"GodDefault={GodDefault(RegionUUID)}" & vbCrLf _
+        & $"AllowGods={AllowGods(RegionUUID)}" & vbCrLf _
+        & $"RegionGod={RegionGod(RegionUUID)}" & vbCrLf _
+        & $"ManagerGod={ManagerGod(RegionUUID)}" & vbCrLf _
+        & $"Birds={Birds(RegionUUID)}" & vbCrLf _
+        & $"Tides={Tides(RegionUUID)}" & vbCrLf _
+        & $"Teleport={CStr(Teleport_Sign(RegionUUID))}" & vbCrLf _
+        & $"DisableGloebits={DisableGloebits(RegionUUID)}" & vbCrLf _
+        & $"DisallowForeigners={Disallow_Foreigners(RegionUUID)}" & vbCrLf _
+        & $"DisallowResidents={Disallow_Residents(RegionUUID)}" & vbCrLf _
+        & $"MinTimerInterval={MinTimerInterval(RegionUUID)}" & vbCrLf _
+        & $"Frametime={FrameTime(RegionUUID)}" & vbCrLf _
+        & $"ScriptEngine={ScriptEngine(RegionUUID)}" & vbCrLf _
+        & $"Publicity={GDPR(RegionUUID)}" & vbCrLf _
+        & $"Concierge={Concierge(RegionUUID)}" & vbCrLf _
+        & $"SmartStart={CStr(Smart_Suspend_Enabled(RegionUUID))}" & vbCrLf _
+        & $"SmartBoot={CStr(Smart_Boot_Enabled(RegionUUID))}" & vbCrLf _
+        & $"LandingSpot={LandingSpot(RegionUUID)}" & vbCrLf _
+        & $"Cores={Cores(RegionUUID)}" & vbCrLf _
+        & "Priority={Priority(RegionUUID)}" & vbCrLf _
+        & $"OpenSimWorldAPIKey={OpensimWorldAPIKey(RegionUUID)}" & vbCrLf _
+        & $"SkipAutoBackup={SkipAutobackup(RegionUUID)}" & vbCrLf
 
             Try
                 Using outputFile As New StreamWriter(IO.Path.Combine(pathtoRegion, $"{RegionName}.ini"), False)
@@ -371,7 +373,7 @@ Module RegionMaker
         If Settings.Skirtsize = 0 Then Return False
 
         Dim NameRegion = Region_Name(RegionUUID)
-        'Debug.Print($"Looking for nearby to {NameRegion}")
+        'Debug.Print($"Looking For nearby To {NameRegion}")
         Dim Xloc = Coord_X(RegionUUID)
         Dim Yloc = Coord_Y(RegionUUID)
 
@@ -395,7 +397,7 @@ Module RegionMaker
                         Continue For
                     End If
 
-                    ' Debug.Print($"Looking in {Region_Name(DestUUID)}")
+                    ' Debug.Print($"Looking In {Region_Name(DestUUID)}")
 
                     ' skip any offline regions, no one is in there
                     If RegionStatus(DestUUID) = SIMSTATUSENUM.Stopped _
@@ -404,7 +406,7 @@ Module RegionMaker
 
                     ' now see if anyone is in the surrounding sim
                     If IsAgentInRegion(DestUUID) Then
-                        Debug.Print($"Avatar is detected near region {NameRegion} in {DestName}")
+                        Debug.Print($"Avatar Is detected near region {NameRegion} In {DestName}")
                         Return True
                     End If
                 End If
@@ -558,13 +560,13 @@ Module RegionMaker
 
                                 ErrorLog("Cannot read UUID In INI file For " & fName)
                                 Dim newfile = file
-                                    newfile = newfile.Replace(".ini", ".bak")
-                                    CopyFileFast(newfile, file)
-                                    '  Auto repair this error from a backup
-                                End If
+                                newfile = newfile.Replace(".ini", ".bak")
+                                CopyFileFast(newfile, file)
+                                '  Auto repair this error from a backup
+                            End If
 
-                                If U.ContainsKey(uuid) Then
-                                TextPrint($"-> Region {fName} UUID is identical to {U.Item(uuid)} - Aborting")
+                            If U.ContainsKey(uuid) Then
+                                TextPrint($"-> Region {fName} UUID Is identical To {U.Item(uuid)} - Aborting")
                                 Return 0
                             Else
                                 U.Add(uuid, fName)
@@ -587,9 +589,9 @@ Module RegionMaker
                                 Group = DirName
                             Else
                                 If Not RunningInServiceMode() Then
-                                    MsgBox("Cannot locate Dos Box name for " & fName, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                                    MsgBox("Cannot locate Dos Box name For " & fName, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
                                 Else
-                                    ErrorLog("Cannot locate Dos Box name for " & fName)
+                                    ErrorLog("Cannot locate Dos Box name For " & fName)
                                 End If
 
                                 Return 0
@@ -717,7 +719,7 @@ Module RegionMaker
         Dim statestring As String
         Select Case state
             Case -1
-                statestring = "ERROR"
+                statestring = "Error"
             Case 0
                 statestring = "Stopped"
             Case 1
@@ -810,6 +812,9 @@ Module RegionMaker
     End Function
 
     Public Sub StopRegion(RegionUUID As String)
+
+
+        If SignalService($"StopRegion&RegionUUID= {RegionUUID}") Then Return
 
         Thaw(RegionUUID)
 
@@ -1680,16 +1685,16 @@ Module RegionMaker
 
         Tmp.Sort()
 
-        For Each name In Tmp
-            Out.Add(FindRegionByName(name))
+        For Each Name In Tmp
+            Out.Add(FindRegionByName(Name))
         Next
 
         Return Out
-
     End Function
 
-#End Region
 
+
+#End Region
 #Region "POST"
 
     Public Function CheckPassword(post As String, machine As String) As Boolean
@@ -1702,7 +1707,7 @@ Module RegionMaker
         If match1.Success Then
             Dim p1 As String = match1.Groups(1).Value
             If p1.Length = 0 Then Return True
-            If machine.ToUpper(Globalization.CultureInfo.InvariantCulture) = p1.ToUpper(Globalization.CultureInfo.InvariantCulture) Then
+            If machine.ToUpper = p1.ToUpper Then
                 Return True
             End If
         End If
@@ -1721,11 +1726,11 @@ Module RegionMaker
         'Enabled = True
 
         '; Channel on which to signal region readiness through a message
-        '; formatted as follows: "{server_startup|oar_file_load},{0|1},n,[oar error]"
+        '; formatted as follows: "{server_startup|oar_file_load},{0|1},n,[oar Error]"
         '; - the first field indicating whether this Is an initial server startup
         '; - the second field Is a number indicating whether the OAR file loaded ok (1 == ok, 0 == error)
         '; - the third field Is a number indicating how many scripts failed to compile
-        '; - "oar error" if supplied, provides the error message from the OAR load
+        '; - "oar Error" if supplied, provides the error message from the OAR load
         'channel_notify = -800
 
         '; - disallow logins while scripts are loading
@@ -1735,8 +1740,8 @@ Module RegionMaker
         '; - send an alert as json to a service
         'alert_uri = ${Const|BaseURL}:${Const|DiagnosticsPort}/${Const|RegionFolderName}
 
-        ' POST = "GET Region name HTTP...{server_startup|oar_file_load},{0|1},n,[oar error]"
-        '{"alert":"region_ready","login":"enabled","region_name":"Region 2","RegionId":"19f6adf0-5f35-4106-bcb8-dc3f2e846b89"}}
+        ' POST = "Get Region name HTTP...{server_startup|oar_file_load},{0|1},n,[oar Error]"
+        '{"alert":"region_ready","login":"enabled","region_name":"Region 2","RegionId":"19F6adf0-5F35-4106-bcb8-dc3f2e846b89"}}
         'POST / Region%202 HTTP/1.1
         'Content-Type: Application/json
         'Host:   tea.outworldz.net : 8001
@@ -1748,18 +1753,22 @@ Module RegionMaker
         '"{""alert"":""region_ready"",""login"":""shutdown"",""region_name"":""8021"",""region_id"":""c46ee5e5-5bb8-4cb5-8efd-eff44a0c7160""}"
         ' we want region name, UUID and server_startup could also be a probe from the outworldz to check if ports are open.
 
-        If post.Contains("""alert"":""region_ready""") Then
+        Dim myUri = New Uri(post.ToUpper)
+
+        If post.Contains("""alert"":""Region_Ready""") Then
             WebserverList.TryAdd(post, "")
-        ElseIf post.ToUpperInvariant.Contains("ALT=") Then
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("ALT") IsNot Nothing Then
             Return SmartStartParse(post)
-        ElseIf post.ToUpperInvariant.Contains("TOS") Then
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
             Return TOS(post)
-        ElseIf post.ToUpperInvariant.Contains("SET_PARTNER") Then
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
             Return SetPartner(post)
-        ElseIf post.ToUpperInvariant.Contains("GET_PARTNER") Then
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
             Return GetPartner(post)
-        ElseIf post.ToUpperInvariant.Contains("TTS") Then
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
             Return Text2Speech(post)
+        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
+            Return CommandProcess(post)
         End If
 
         Return "Test Completed"
@@ -1768,6 +1777,56 @@ Module RegionMaker
 
 #End Region
 
+#Region "Command"
+
+    Private Function CommandProcess(post As String) As String
+
+        ' Smart Start AutoStart Region mode
+        Logger("Command", "Service:" + post, "Command")
+        Dim myUri = New Uri(post)
+        Dim Command = HttpUtility.ParseQueryString(myUri.Query).Get("Command")
+        Logger("Command", $"Command={Command}", "Command")
+        Dim Password = HttpUtility.ParseQueryString(myUri.Query).Get("password")
+        Logger("Command", $"Password={Password}", "Command")
+        Dim RegionUUID = HttpUtility.ParseQueryString(myUri.Query).Get("RegionUUID")
+
+        If Password <> Settings.MachineId Then
+            Logger("ERROR", $"Bad Password {Password} for Command system. Should be the Dyn DNS password.", "Outworldz")
+            Return "NAK"
+        End If
+
+        Select Case Command
+            Case "StopMysql"
+                StopMysql()
+            Case "StopApache"
+                StopApache()
+            Case "StopRobust"
+                StopRobust()
+            Case "StopIcecast"
+                StopIcecast()
+            Case "StopRegion"
+                StopRegion(RegionUUID)
+
+            Case "StartMysql"
+                StartMySQL()
+            Case "StartApache"
+                StartApache()
+            Case "StartIcecast"
+                StartIcecast()
+            Case "StartRobust"
+                StartRobust()
+            Case "StartRegion"
+                Boot(Region_Name(RegionUUID))
+            Case Else
+                Return "NAK"
+        End Select
+        Return "ACK"
+
+
+    End Function
+
+
+#End Region
 #Region "TOS"
 
     Private Function TOS(post As String) As String
@@ -1787,7 +1846,9 @@ Module RegionMaker
                 Dim include = TosInclude(match.Groups(1).Value)
 
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
-                Using streamReader As New System.IO.FileStream(Header, FileMode.Open, FileAccess.Read, FileShare.Read)
+                Dim streamReader As System.IO.FileStream = Nothing
+                Try
+                    streamReader = New System.IO.FileStream(Header, FileMode.Open, FileAccess.Read, FileShare.Read)
                     Using S = New StreamReader(streamReader)
                         'now loop through each line and append the css to web page
                         While S.Peek <> -1
@@ -1796,8 +1857,12 @@ Module RegionMaker
                             line = line.Replace("[TOS]", include & vbCrLf)
                             webpage += line & vbCrLf
                         End While
+                        streamReader = Nothing
                     End Using
-                End Using
+                Finally
+                    streamReader?.Dispose()
+                End Try
+
                 webpage += "</style>"
                 webpage += "</head>"
                 Return webpage
@@ -1814,7 +1879,9 @@ Module RegionMaker
                 Agree2Tos(sid)  ' detect and print a response to an ACCEPT
                 Dim include = "Welcome! You can close this window."
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
-                Using streamReader As New System.IO.FileStream(Header, FileMode.Open, FileAccess.Read, FileShare.Read)
+                Dim streamReader As System.IO.FileStream = Nothing
+                Try
+                    streamReader = New System.IO.FileStream(Header, FileMode.Open, FileAccess.Read, FileShare.Read)
                     Using S = New StreamReader(streamReader)
                         'now loop through each line and append the css to web page
                         While S.Peek <> -1
@@ -1823,8 +1890,12 @@ Module RegionMaker
                             line = line.Replace("[TOS]", include & vbCrLf)
                             webpage += line & vbCrLf
                         End While
+                        streamReader = Nothing
                     End Using
-                End Using
+                Finally
+                    streamReader?.Dispose()
+                End Try
+
                 webpage += "</style>"
                 webpage += "</head>"
                 Return webpage
@@ -1843,7 +1914,9 @@ Module RegionMaker
         ' Print a TOS webpage to the client
         Dim include = ""
         Dim From = IO.Path.Combine(Settings.CurrentDirectory, "tos.html")
-        Using streamRead As New System.IO.FileStream(From, FileMode.Open, FileAccess.Read, FileShare.Read)
+        Dim streamRead As System.IO.FileStream = Nothing
+        streamRead = New System.IO.FileStream(From, FileMode.Open, FileAccess.Read, FileShare.Read)
+        Try
             Using S = New StreamReader(streamRead)
                 'now loop through each line
                 While S.Peek <> -1
@@ -1851,6 +1924,7 @@ Module RegionMaker
                     data = data.Replace("[GRIDNAME]", Settings.SimName)
                     include += data
                 End While
+                streamRead = Nothing
             End Using
             include += "<form>"
             include += "<input class='button' type='Submit' name='agree' value='Agree wth TOS'>"
@@ -1858,7 +1932,10 @@ Module RegionMaker
             include += "</form>"
             include += "</body>"
             include += "</html>"
-        End Using
+
+        Finally
+            streamRead?.Dispose()
+        End Try
 
         Return include
     End Function
@@ -2075,7 +2152,7 @@ Module RegionMaker
             ' It can be reduced To improve the simulation Of moving objects, with possible increase of CPU and network loads.
             'FrameTime = 0.0909
 
-            If INI.SetIni("Startup", "FrameTime", Convert.ToString(1 / 11, Globalization.CultureInfo.InvariantCulture)) Then Return True
+            If INI.SetIni("Startup", "FrameTime", CStr(1 / 11)) Then Return True
 
             If FrameTime(uuid).Length > 0 Then
                 If INI.SetIni("Startup", "FrameTime", CStr(FrameTime(uuid))) Then Return True

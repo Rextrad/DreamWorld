@@ -3885,4 +3885,94 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Hizmet Durduruldu</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>MySQL'i başlatın</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Tüm Bölgeleri Dondur</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Yük Bölgesi OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Bölge OAR Yükleme, Kaydetme ve Yedekleme</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Tüm Çalışan Bölgeleri OAR'lere kaydetme</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Bölgeyi Kaydet OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Envanteri Kontrol Et</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Bir Kullanıcı Seçin</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Ice Cast'e Bağlan</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Web sayfasına bağlan</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Hizmeti Sil</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Herkes</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Outworldz'de IAR'leri Bulun</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast (Buz Dökümü)</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Envanter IAR Yükleme ve Kaydetme</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Tekme Kullanıcısı</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Envanter IAR'sini Yükle</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Yerel IAR Yükleme</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Yerel OAR Yükle</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Envanter IAR'sini Kaydet</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Outworldz'de Kürekler için arayın</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>StartDream Grid Hizmeti</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Icecast Hizmetini Başlat</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Sağlam Başlayın</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Pencere Kolu alınamıyor</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Durdurma işlemi</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Apache Hizmetini Başlat</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>SSL (İngilizce)</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Gitmek</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Yeni -den düzenlemek</value>
+  </data>
 </root>

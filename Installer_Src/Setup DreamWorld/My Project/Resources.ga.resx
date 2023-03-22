@@ -3885,4 +3885,94 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Seirbhís Fauled Chun Stop</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Tosaigh MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Reo Gach Réigiún!</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Íoslódáil an OAR réigiún</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Réigiún OAR Luchtaigh, Sábháil agus Cúltaca</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Sábháil gach Réigiún Reatha chuig OARanna</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Sábháil Réigiún OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Seiceáil Fardal</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Roghnaigh Úsáideoir</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Ceangail le Ice Cast</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Ceangail leis an leathanach Gréasáin</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Scrios Seirbhís</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Gach duine</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Faigh IARs Ar Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCastGenericName</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Fardal IAR Luchtaigh agus Sábháil</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Ciceáil Úsáideoir</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Íosluchtaigh IAR fardal</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Luchtaigh IAR Logánta</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Luchtaigh OAR Logánta</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Sábháil IAR Fardal</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Cuardaigh Oars ag Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>Seirbhís Greille StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Tosaigh Seirbhís Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Tosaigh Stóinsithe</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Ní féidir láimhseáil fuinneoige a fháil</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Próiseas stoptha</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Tosaigh Seirbhís Apache</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Téigh</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Athailíniú</value>
+  </data>
 </root>

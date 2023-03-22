@@ -3885,4 +3885,94 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Službě se nepodařilo zastavit</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Spustit MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Zmrazit všechny regiony</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Oblast zatížení OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Region OAR načítání, ukládání a zálohování</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Uložení všech běžících oblastí do OAR</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Uložit oblast OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Zkontrolovat inventář</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Vybrat uživatele</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Připojení k ledovému odlitku</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Připojení k webové stránce</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Odstranit službu</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Každý</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Najděte IAR na Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>IAR zásob Načtení a uložení</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Vykopnout uživatele</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Načíst inventář IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Načíst místní IAR</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Načíst místní veslo</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Uložit inventář IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Hledat vesla na Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>StartDream Grid Service</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Spustit službu Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Robustní start</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Nelze získat popisovač okna</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Proces zastavení</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Spuštění služby Apache</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>Protokol SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Jít</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Přeskupení</value>
+  </data>
 </root>

@@ -70,8 +70,10 @@ Module PublicIP
     Public Function Checkport(RegionUUID As String) As Boolean
 
         Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+        If PID = 0 Then Return False
         Try
-            Process.GetProcessById(PID)
+            Dim Pr = Process.GetProcessById(PID)
+            If Pr.Id = 0 Then Return False
         Catch
             Return False
         End Try
@@ -86,7 +88,7 @@ Module PublicIP
     ''' <param name="ServerAddress">IP</param>
     ''' <param name="Port">Port</param>
     ''' <returns>True is in memory</returns>
-    Public Function CheckPort2(ServerAddress As String, Port As Integer) As Boolean
+    Public Function CheckPortSocket(ServerAddress As String, Port As Integer) As Boolean
 
         Dim success As Boolean
         Dim result As IAsyncResult = Nothing
@@ -103,6 +105,7 @@ Module PublicIP
         Return False
 
     End Function
+
 
     Public Function GetHostAddresses(hostName As String) As String
 

@@ -437,7 +437,7 @@ Public Class FormBulkLoad
         If BulkLoadButton.Text = My.Resources.Aborting Then
             TextPrint(My.Resources.Aborted_word)
             Sleep(1000)
-            Me.Close()
+            Close()
         End If
 
         BulkLoadButton.Text = My.Resources.BulkLoad

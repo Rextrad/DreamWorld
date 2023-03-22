@@ -356,10 +356,8 @@ Public Class FormRegionlist
             SaveOar(RegionName)
 
         End If
-        Try
-            Choices.Close()
-        Catch
-        End Try
+
+        Choices?.Close()
 
     End Sub
 
@@ -874,7 +872,7 @@ Public Class FormRegionlist
         If Not detailsinitted Then Return
 
         If e.Item.Text.Length = 0 Then Return
-        If e.Item.Text = "New Region" Then Return
+
 
         Dim c = CBool(e.Item.Checked)
 

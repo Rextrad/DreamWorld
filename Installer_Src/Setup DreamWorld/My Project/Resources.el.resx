@@ -3885,4 +3885,94 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Σφάλμα διακοπής της υπηρεσίας</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Ξεκινήστε τη MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Πάγωμα όλων των περιοχών</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Περιοχή φόρτωσης OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Φόρτωση, αποθήκευση και δημιουργία αντιγράφων ασφαλείας OAR περιοχής</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Αποθήκευση όλων των περιοχών που εκτελούνται σε OAR</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Αποθήκευση περιοχής OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Έλεγχος αποθέματος</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Επιλέξτε χρήστη</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Συνδεθείτε με χυτό πάγου</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Σύνδεση σε ιστοσελίδα</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Διαγραφή υπηρεσίας</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Καθένας</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Βρείτε τα AAR στον έξω κόσμο</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>Παγοκόπος</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Φόρτωση και αποθήκευση IAR αποθέματος</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Κλωτσιά χρήστη</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Φόρτωση αποθέματος IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Φόρτωση τοπικού IAR</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Φόρτωση τοπικού OAR</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Αποθήκευση αποθέματος IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Αναζήτηση για κουπιά στο Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>Υπηρεσία πλέγματος StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Ξεκινήστε την υπηρεσία Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Ξεκινήστε δυνατά</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Δεν είναι δυνατή η λήψη λαβής παραθύρου</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Διακοπή της διαδικασίας</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Ξεκινήστε την υπηρεσία Apache</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>ΥΓ.</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Πηγαίνω</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Επαναπροσδιορίσουμε</value>
+  </data>
 </root>

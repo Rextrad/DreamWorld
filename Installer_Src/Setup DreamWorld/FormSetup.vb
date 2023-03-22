@@ -22,7 +22,7 @@ Public Class FormSetup
 #Region "Private Declarations"
 
 #Disable Warning CA2213 ' Disposable fields should be disposed
-    Public ReadOnly NssmService As New ClassNssm
+    Public NssmService As New ClassNssm
 #Enable Warning CA2213 ' Disposable fields should be disposed
 #Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
@@ -843,7 +843,6 @@ Public Class FormSetup
         GetOpensimPIDsFromFiles()
 
         StartTimer()
-
 
         OpenPorts()
 
@@ -2813,7 +2812,9 @@ Public Class FormSetup
                 ReallyQuit()
             End If
         Else
-            ReallyQuit()
+            If Not Foreground() Then
+                ReallyQuit()
+            End If
         End If
 
     End Sub
@@ -2976,6 +2977,7 @@ Public Class FormSetup
             TextPrint(My.Resources.Apache_Disabled)
         End If
         StopApache()
+        Sleep(5000)
         StartApache()
         PropAborting = False
 
@@ -3234,7 +3236,7 @@ Public Class FormSetup
         NssmService.InstallService()
         NssmService.StartService()
 
-        If CheckPort2(Settings.LANIP, Settings.DiagnosticPort) Then
+        If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
         End If
 
@@ -3319,7 +3321,6 @@ Public Class FormSetup
 
         PropAborting = True
         StopIcecast()
-        Sleep(1000)
         PropAborting = False
 
     End Sub

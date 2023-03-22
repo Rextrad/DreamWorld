@@ -48,7 +48,7 @@ Partial Class FormBlockify
         Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
-        Me.HelpToolStripMenuItem.Text = "Help"
+        Me.HelpToolStripMenuItem.Text = My.Resources.Help_word
         '
         'SpacingTextBox
         '
@@ -64,7 +64,7 @@ Partial Class FormBlockify
         Me.GoButton.Name = "GoButton"
         Me.GoButton.Size = New System.Drawing.Size(111, 23)
         Me.GoButton.TabIndex = 2
-        Me.GoButton.Text = "Go"
+        Me.GoButton.Text = My.Resources.Go
         Me.GoButton.UseVisualStyleBackColor = True
         '
         'RowSizeTextbox
@@ -106,7 +106,7 @@ Partial Class FormBlockify
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormBlockify"
-        Me.Text = "FormBlockify"
+        Me.Text = My.Resources.Realign
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)

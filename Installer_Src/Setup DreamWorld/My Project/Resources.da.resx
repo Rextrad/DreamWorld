@@ -3885,4 +3885,94 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Tjenesten kunne ikke stoppe</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Start MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Frys alle regioner</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Indlæs Region OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Region OAR Indlæs, gem og sikkerhedskopier</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Gem alle kørende områder i OAR'er</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Gem Region OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Tjek lagerbeholdning</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Vælg en bruger</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Opret forbindelse til Ice Cast</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Oprette forbindelse til webside</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Slet tjeneste</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Find IAR'er på Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Indlæs og gem IAR på lager</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Kick bruger</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Indlæs inventar IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Indlæs lokal IAR</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Indlæs lokal OAR</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Gem lager IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Søg efter årer på Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>StartDream Grid Service</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Start Icecast Service</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Start Robust</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Kan ikke få vindueshåndtag</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Stop proces</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Start Apache-tjenesten</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Gå</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Justere</value>
+  </data>
 </root>

@@ -86,11 +86,18 @@ Public Module MysqlInterface
 
     Public Function StartMySQL() As Boolean
 
-        PropAborting = False
 
         Log("INFO", "Checking MySQL")
         If MysqlInterface.IsMySqlRunning() Then
+            MySQLIcon(True)
             Return True
+        End If
+
+        If SignalService("StartMysql") Then
+            MySQLIcon(True)
+            Return True
+        Else
+            MySQLIcon(False)
         End If
 
         Log("INFO", "MySQL is not running")

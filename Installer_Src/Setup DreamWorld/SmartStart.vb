@@ -806,13 +806,16 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
+
         SyncLock BootupLock
 
             PropOpensimIsRunning() = True
             If PropAborting Then Return True
 
-            ' stop if disabled
             Dim RegionUUID As String = FindRegionByName(BootName)
+
+            ' stop if disabled
+
             Dim GroupName = Group_Name(RegionUUID)
             ' must be real
             If String.IsNullOrEmpty(RegionUUID) Then
@@ -855,11 +858,14 @@ Module SmartStart
             End If
 
             TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
+
             Application.DoEvents()
             DoCurrency()
             SetCores(RegionUUID)
 
             If CopyOpensimProto(RegionUUID) Then Return False
+
+            If SignalService($"StartRegion&RegionUUID={RegionUUID}") Then Return True
 
             Dim BootProcess = New Process With {
                 .EnableRaisingEvents = True

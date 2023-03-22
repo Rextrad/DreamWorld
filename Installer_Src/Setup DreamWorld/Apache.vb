@@ -93,7 +93,19 @@ Module Apache
     ''' </summary>
     Public Sub StartApache()
 
-        If CheckPort2(Settings.PublicIP, Settings.ApachePort) Then Return
+        If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
+            ApacheIcon(True)
+            Return
+        End If
+
+        If SignalService("StartApache") Then
+            If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
+                ApacheIcon(True)
+                Return
+            Else
+                ApacheIcon(False)
+            End If
+        End If
 
         ' Depends upon PHP for home page
         DoPHPDBSetup()
@@ -261,6 +273,11 @@ Module Apache
     Public Sub StopApache()
 
         If Not Settings.ApacheEnable Then Return
+
+        If Foreground() Then
+            Zap("Apache")
+            Return
+        End If
 
         Using ApacheProcess As New Process()
             TextPrint(My.Resources.Stopping_Apache)

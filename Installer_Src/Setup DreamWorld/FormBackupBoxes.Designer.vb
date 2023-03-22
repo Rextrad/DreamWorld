@@ -106,7 +106,7 @@ Partial Class FormBackupBoxes
         Me.BackupOarsCheckBox.Name = "BackupOarsCheckBox"
         Me.BackupOarsCheckBox.Size = New System.Drawing.Size(94, 17)
         Me.BackupOarsCheckBox.TabIndex = 5
-        Me.BackupOarsCheckBox.Text = "Backup OARs"
+        Me.BackupOarsCheckBox.Text = My.Resources.Backup_OARs
         Me.BackupOarsCheckBox.UseVisualStyleBackColor = True
         '
         'BackupButton
@@ -151,7 +151,7 @@ Partial Class FormBackupBoxes
         Me.SettingsCheckbox.Name = "SettingsCheckbox"
         Me.SettingsCheckbox.Size = New System.Drawing.Size(104, 17)
         Me.SettingsCheckbox.TabIndex = 1
-        Me.SettingsCheckbox.Text = "Backup Settings"
+        Me.SettingsCheckbox.Text = My.Resources.Backup_Settings
         Me.SettingsCheckbox.UseVisualStyleBackColor = True
         '
         'RegionCheckBox
@@ -189,7 +189,7 @@ Partial Class FormBackupBoxes
         Me.AbortButton.Name = "AbortButton"
         Me.AbortButton.Size = New System.Drawing.Size(110, 23)
         Me.AbortButton.TabIndex = 13
-        Me.AbortButton.Text = "Abort"
+        Me.AbortButton.Text = My.Resources.Abort
         Me.AbortButton.UseVisualStyleBackColor = True
         '
         'FormBackupBoxes
@@ -203,7 +203,7 @@ Partial Class FormBackupBoxes
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormBackupBoxes"
         Me.RightToLeftLayout = True
-        Me.Text = "System Backup"
+        Me.Text = My.Resources.System_Backup_word
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)

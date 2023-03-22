@@ -65,14 +65,15 @@
             End If
         End If
 
-        If CheckPort2(Settings.LANIP, Settings.DiagnosticPort) Then
+        If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
+            ServiceIcon(True)
             Return True
         End If
 
         If Not NssmCommand("start DreamGridService") Then
             TextPrint(My.Resources.Running_word)
-            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
+            ServiceIcon(True)
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoStart)

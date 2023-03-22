@@ -23,14 +23,25 @@ Module Icecast
 
     Public Function StartIcecast() As Boolean
 
-
         If Not Settings.SCEnable Then
             TextPrint(Global.Outworldz.My.Resources.IceCast_disabled)
             IceCastIcon(False)
             Return True
         End If
 
-        If CheckPort2(Settings.PublicIP, Settings.SCPortBase) Then Return True
+        If CheckPortSocket(Settings.WANIP, Settings.SCPortBase) Then
+            IceCastIcon(True)
+            Return True
+        End If
+
+        If SignalService("StartIcecast") Then
+            If CheckPortSocket(Settings.WANIP, Settings.SCPortBase) Then
+                IceCastIcon(True)
+                Return True
+            Else
+                IceCastIcon(False)
+            End If
+        End If
 
         Try
             ' Check if DOS box exists, first, if so, its running.
