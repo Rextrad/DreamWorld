@@ -158,9 +158,6 @@ Module Robust
             If SignalService("StartRobust") Then
                 RobustIcon(True)
                 Return True
-            Else
-                RobustIcon(False)
-                Return False
             End If
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
