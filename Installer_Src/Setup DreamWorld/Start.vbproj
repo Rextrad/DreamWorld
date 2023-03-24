@@ -1202,7 +1202,9 @@
     <EmbeddedResource Include="My Project\Resources.is.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.it.resx" />
+    <EmbeddedResource Include="My Project\Resources.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.pt-BR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1224,12 +1226,18 @@
     <EmbeddedResource Include="My Project\Resources.nl-NL.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.tr.resx" />
-    <EmbeddedResource Include="My Project\Resources.vi.resx" />
+    <EmbeddedResource Include="My Project\Resources.tr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.vi.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.zh-cn.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.zh-Hans-HK.resx" />
+    <EmbeddedResource Include="My Project\Resources.zh-Hans-HK.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.zh-tw.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
