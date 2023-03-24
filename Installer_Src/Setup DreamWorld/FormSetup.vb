@@ -54,7 +54,7 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-    Private ws As NetServer
+
 
 #End Region
 
@@ -151,14 +151,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property PropWebserver As NetServer
-        Get
-            Return ws
-        End Get
-        Set(value As NetServer)
-            ws = value
-        End Set
-    End Property
 
     Public Property ScreenPosition1 As ClassScreenpos
         Get
@@ -428,8 +420,7 @@ Public Class FormSetup
         SaveInventoryIARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Inventory_IAR_word
         SaveRegionOARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Region_OAR_word
 
-        Me.Text = Global.Outworldz.My.Resources.Resources.DreamGrid_word
-
+        me.text  = Global.Outworldz.My.Resources.Resources.DreamGrid_word
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
@@ -648,12 +639,12 @@ Public Class FormSetup
             HelpOnce("License") ' license on bottom
             HelpOnce("Startup")
 
-            ' also turn on the lights for the other services.
-            IsRobustRunning()
-            IsApacheRunning()
-            IsIceCastRunning()
-
         End If
+        ' also turn on the lights for the other services.
+        IsRobustRunning()
+        IsApacheRunning()
+        StartIcecast()
+        isDreamGridServiceRunning()
 
         Joomla.CheckForjOpensimUpdate()
 
@@ -696,7 +687,7 @@ Public Class FormSetup
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
-            Sleep(30000)
+            Sleep(10000)
             Startup()
             Return
         Else
@@ -3212,10 +3203,6 @@ Public Class FormSetup
 
         NssmService.InstallService()
         NssmService.StartService()
-        Sleep(5000)
-        If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
-        End If
 
     End Sub
 
@@ -3267,6 +3254,9 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
+        ZapRegions()
+        Zap("Robust")
+        Zap("Icecast")
 
     End Sub
 
