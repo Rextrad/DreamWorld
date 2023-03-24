@@ -428,6 +428,8 @@ Public Class FormSetup
         SaveInventoryIARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Inventory_IAR_word
         SaveRegionOARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Region_OAR_word
 
+        Me.Text = Global.Outworldz.My.Resources.Resources.DreamGrid_word
+
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
@@ -845,7 +847,9 @@ Public Class FormSetup
 
         If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
-            NssmService.StartService()
+            If Not NssmService.StartService() Then
+                Return False
+            End If
         End If
 
 
@@ -3208,7 +3212,7 @@ Public Class FormSetup
 
         NssmService.InstallService()
         NssmService.StartService()
-
+        Sleep(5000)
         If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
         End If
@@ -3427,6 +3431,8 @@ Public Class FormSetup
         Next
 
     End Sub
+
+
 
 #End Region
 
