@@ -1972,7 +1972,7 @@ Public Module MysqlInterface
         Using Simstats = New Process With {
                 .StartInfo = pi
             }
-            TextPrint("Installing Perl Modules")
+
             Try
                 Simstats.Start()
                 Simstats.WaitForExit()
@@ -1989,6 +1989,7 @@ Public Module MysqlInterface
 
     Private Sub InstallModules()
 
+        TextPrint(My.Resources.InstallingnecessaryPerlModules)
         Dim pi = New ProcessStartInfo With {
                 .FileName = "InstallPerlModules.bat",
                 .UseShellExecute = True,
