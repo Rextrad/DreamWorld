@@ -289,7 +289,6 @@ Public Class FormRegionlist
             Else
 
                 If ServiceExists("DreamGridService") Then
-
                     Return
                 End If
 
