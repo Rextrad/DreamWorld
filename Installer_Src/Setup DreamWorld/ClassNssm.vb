@@ -16,7 +16,9 @@
         If NssmCommand("stop DreamGridService") Then
             TextPrint(My.Resources.ServiceFailedtoStop)
         End If
+
         Sleep(1000)
+
         If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
             TextPrint(My.Resources.ServiceRemoved)
@@ -132,7 +134,6 @@
             BootProcess.WaitForExit()
             Dim code = BootProcess.ExitCode
             If code = 0 Then
-                TextPrint($"{My.Resources.Failedto} {command}")
                 Return False
             End If
         Catch ex As Exception
