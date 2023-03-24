@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>Nýtt svæði</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Uppsetning nauðsynlegra Perl Modules</value>
+  </data>
 </root>

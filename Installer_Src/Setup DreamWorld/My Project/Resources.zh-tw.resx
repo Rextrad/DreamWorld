@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>新區域</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>安裝必要的 Perl 模組</value>
+  </data>
 </root>

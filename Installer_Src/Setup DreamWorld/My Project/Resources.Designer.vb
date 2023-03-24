@@ -5979,6 +5979,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Installing necessary Perl Modules.
+        '''</summary>
+        Friend ReadOnly Property InstallingnecessaryPerlModules() As String
+            Get
+                Return ResourceManager.GetString("InstallingnecessaryPerlModules", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Install.
         '''</summary>
         Friend ReadOnly Property InstallJoomla_word() As String

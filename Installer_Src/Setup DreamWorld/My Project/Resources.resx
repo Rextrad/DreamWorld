@@ -4564,4 +4564,7 @@
   <data name="Stoppingprocess" xml:space="preserve">
     <value>Stopping process</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Installing necessary Perl Modules</value>
+  </data>
 </root>
