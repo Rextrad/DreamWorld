@@ -39,9 +39,11 @@ Public Class ClassFilewatcher
 
     Private Sub OnChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
 
-        Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
-        Debug.Print(Settings.MachineId)
+        'Debug.Print("File changed: " & e.FullPath & " change type: " & e.ChangeType)
+        'Debug.Print(Settings.MachineId)
+        ' debug.print (e.ChangeType)
 
+        If Not RunningInServiceMode() Then Return
         Dim _myFolder = Settings.CurrentDirectory
         Settings = New MySettings(_myFolder) With {
             .CurrentDirectory = _myFolder,
