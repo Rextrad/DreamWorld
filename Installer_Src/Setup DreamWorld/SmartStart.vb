@@ -848,8 +848,28 @@ Module SmartStart
                     Return False
                 End Try
 
-                Thaw(RegionUUID)
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                If Settings.Smart_Start_Enabled And
+                    Smart_Suspend_Enabled(RegionUUID) Then
+                    Thaw(RegionUUID)
+                    Freeze(RegionUUID)
+
+                ElseIf Settings.Smart_Start_Enabled And
+                    Smart_Boot_Enabled(RegionUUID) And
+                    CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
+
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                    ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+
+                ElseIf Settings.Smart_Start_Enabled And
+                    Smart_Boot_Enabled(RegionUUID) And
+                    Not CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
+
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+
+                Else
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                End If
+
                 SendToOpensimWorld(RegionUUID, 0)
                 TextPrint($"{BootName} {My.Resources.Ready}")
                 ShowDOSWindow(RegionUUID, MaybeHideWindow())
