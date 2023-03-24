@@ -71,15 +71,27 @@
             Return True
         End If
 
-        If Not NssmCommand("start DreamGridService") Then
-            TextPrint(My.Resources.Running_word)
-            ServiceIcon(True)
-            Return True
-        Else
-            TextPrint(My.Resources.ServiceFailedtoStart)
-            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
-            Return False
-        End If
+        ' wait for port to come up in Service
+        NssmCommand("start DreamGridService")
+        Sleep(2000) ' 2 seconds 
+        Dim ctr = 100
+        While ctr > 0
+
+            If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+                TextPrint(My.Resources.Running_word)
+                ServiceIcon(True)
+                Return True
+            End If
+
+            ctr -= 1
+            Sleep(100) ' 10 seconds @ 100 ms
+
+        End While
+
+        TextPrint(My.Resources.ServiceFailedtoStart)
+        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
+        Return False
+
 
     End Function
 
