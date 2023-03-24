@@ -2839,6 +2839,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = False
         OffToolStripMenuItem.Checked = True
         Settings.ShowMysqlStats = False
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
@@ -2847,6 +2848,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = True
         OffToolStripMenuItem.Checked = False
         Settings.ShowMysqlStats = True
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
