@@ -90,11 +90,7 @@
             Return True
         End If
 
-        If NssmCommand("stop DreamGridService") Then
-            Sleep(5000)
-            Return True
-        End If
-        Return False
+        Return NssmCommand("stop DreamGridService")
 
     End Function
 

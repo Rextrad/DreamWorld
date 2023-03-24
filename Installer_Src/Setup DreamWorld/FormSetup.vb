@@ -2084,6 +2084,7 @@ Public Class FormSetup
             Bench.Start("60 second worker")
             DeleteDirectoryTmp()    ' clean up old tmp folder
             MakeMaps()              ' Make all the large maps
+            ScanOpenSimWorld(True) ' force an update at startup.
             Bench.Print("60 second worker")
 
         End If
@@ -2092,7 +2093,7 @@ Public Class FormSetup
             Bench.Start("60 second + worker")
             NewUserTimeout()        ' see if a new users has read and agreed to the tos
             DeleteOldWave()         ' clean up TTS cache
-            ScanOpenSimWorld(False) ' do not force an update unless avatar count changes
+
             RegionListHTML("Name") ' create HTML for old teleport boards
             VisitorCount()         ' For the large maps
             Bench.Print("60 second + worker")
@@ -2751,7 +2752,10 @@ Public Class FormSetup
 
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWMINIMIZE)
+            Timer(RegionUuid) = Date.Now
         Next
+
+        PropUpdateView = True
 
     End Sub
 
@@ -3095,6 +3099,8 @@ Public Class FormSetup
     Private Sub ShowAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowAllToolStripMenuItem.Click
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWRESTORE)
+            Thaw(RegionUuid)
+            Timer(RegionUuid) = DateAdd("n", 1, Date.Now) ' Add  minutes for console to do things
         Next
     End Sub
 

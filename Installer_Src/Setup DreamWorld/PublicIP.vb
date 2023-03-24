@@ -106,7 +106,6 @@ Module PublicIP
 
     End Function
 
-
     Public Function GetHostAddresses(hostName As String) As String
 
         Try

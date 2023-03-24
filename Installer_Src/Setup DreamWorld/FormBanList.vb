@@ -101,6 +101,7 @@ Public Class FormBanList
                         t = row.Cells(1).Value.ToString.Trim
                     End If
 
+
                     ' save back to Ban List
                     If (s.Length + t.Length) > 0 Then
                         BanListString += s & "=" & t & "|"
@@ -196,8 +197,6 @@ Public Class FormBanList
             }
             ' Add the column to the table.
             table.Columns.Add(column2)
-
-            'i.e, Firestorm-Release 4.6.7.42398
 
             table.Locale = CultureInfo.InvariantCulture
 
