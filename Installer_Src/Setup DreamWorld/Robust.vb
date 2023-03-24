@@ -16,8 +16,8 @@ Module Robust
     Private _RobustExited As Boolean
     Private _RobustHandler As Boolean
     Private _RobustProcID As Integer
-    ' if robust has an event handler for exiting
 
+#Region "Properties"
     Public Property PropRobustExited() As Boolean
         Get
             Return _RobustExited
@@ -54,7 +54,10 @@ Module Robust
         End Set
     End Property
 
+#End Region
+
 #Region "Robust"
+
 
     ''' <summary>
     '''  Shows a Region picker
@@ -172,6 +175,8 @@ Module Robust
             RobustProcess.StartInfo.CreateNoWindow = False
             RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
             RobustProcess.StartInfo.RedirectStandardOutput = False
+
+            AddHandler RobustProcess.Exited, AddressOf RobustProcess_Exited
 
             ' enable console for Service mode
             Dim args As String = ""
@@ -605,6 +610,7 @@ Module Robust
             }
             Dim url As String
             If Settings.ServerType = RobustServerName Then
+                'TODO see if this still exists in Opensiom code
                 url = "http://" & Settings.LANIP & ":" & Settings.HttpPort & "/index.php?version"
             Else
                 url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"
