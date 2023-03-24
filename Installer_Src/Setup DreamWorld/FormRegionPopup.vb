@@ -195,6 +195,8 @@ Public Class FormRegionPopup
             INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
             INI.SaveIni()
 
+            Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.CurrentDirectory() & $"\Regions\{Group_Name(RegionUUID)}")
+
             Dim ConsoleProcess As New Process
             ConsoleProcess.StartInfo.UseShellExecute = False
             ConsoleProcess.StartInfo.FileName = Settings.OpensimBinPath & "Opensim.ConsoleClient.exe"

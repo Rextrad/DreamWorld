@@ -21,7 +21,6 @@ Module Global_Properties
     Public BackupAbort As Boolean
     Public Bench As New Benchmark()
     Public CachedAvatars As New List(Of AvatarObject)
-    Public gEstateName As String = ""
     Public gEstateOwner As String = ""
     Public MapX As Integer = 100
     Public MapY As Integer = 100

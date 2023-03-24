@@ -35,8 +35,6 @@ Public Class FormSetup
     Private _ContentIAR As FormOAR
     Private _ContentOAR As FormOAR
     Private _DNSSTimer As Integer
-    Private _IcecastCrashCounter As Integer
-    Private _IceCastExited As Boolean
     Private _IPv4Address As String
     Private _KillSource As Boolean
     Private _regionForm As FormRegionlist
@@ -107,23 +105,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property IcecastCrashCounter As Integer
-        Get
-            Return _IcecastCrashCounter
-        End Get
-        Set(value As Integer)
-            _IcecastCrashCounter = value
-        End Set
-    End Property
-
-    Public Property PropIceCastExited() As Boolean
-        Get
-            Return _IceCastExited
-        End Get
-        Set(ByVal Value As Boolean)
-            _IceCastExited = Value
-        End Set
-    End Property
 
     Public Property PropIPv4Address() As String
         Get
@@ -547,8 +528,6 @@ Public Class FormSetup
             tmp.SetLoopback()
         End Using
 
-        Application.DoEvents()
-
         For Each RegionUUID In RegionUuids()
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
         Next
@@ -925,9 +904,13 @@ Public Class FormSetup
                 Dim response = MsgBox($"{My.Resources.backup_running} .  {My.Resources.Quit_Now_Word}?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
                 If response = vbNo Then Return
             End If
-        End If
 
-        ReallyQuit()
+            If Foreground() Then
+                End ' close as service is up
+            End If
+
+            ReallyQuit()
+        End If
 
     End Sub
 
@@ -1155,28 +1138,6 @@ Public Class FormSetup
 
     End Sub
 
-    ''' <summary>Event handler for Icecast</summary>
-
-    Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
-
-        If PropAborting Then Return
-
-        If Settings.RestartOnCrash AndAlso IcecastCrashCounter < 10 Then
-            IcecastCrashCounter += 1
-            PropIceCastExited = True
-            Return
-        End If
-        IcecastCrashCounter = 0
-
-        If Not RunningInServiceMode() Then
-            Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-            If yesno = MsgBoxResult.Yes Then
-                Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
-            End If
-            ErrorLog(My.Resources.Icecast_Exited)
-        End If
-
-    End Sub
 
     Private Sub RestartDOSboxes()
 
@@ -2815,8 +2776,11 @@ Public Class FormSetup
         Else
             If Not Foreground() Then
                 ReallyQuit()
+            Else
+                End ' close as serviuce is up
             End If
         End If
+
 
     End Sub
 
@@ -3152,6 +3116,8 @@ Public Class FormSetup
         INI.SetIni("Startup", "port", CStr(Settings.HttpPort))
         INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
         INI.SaveIni()
+
+        Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.CurrentDirectory() & "\logs")
 
         Dim ConsoleProcess As New Process
         ConsoleProcess.StartInfo.UseShellExecute = False

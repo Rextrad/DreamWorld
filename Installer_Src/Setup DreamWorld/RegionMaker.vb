@@ -2501,8 +2501,8 @@ Module RegionMaker
                 INI.SetIni("SmartStart", "MachineID", "")
             End If
 
-            If INI.SetIni("Estates", "DefaultEstateName", gEstateName) Then Return True
-            If INI.SetIni("Estates", "DefaultEstateOwnerName", gEstateOwner) Then Return True
+            If INI.SetIni("Estates", "DefaultEstateName", Settings.EstateName) Then Return True
+            If INI.SetIni("Estates", "DefaultEstateOwnerName", Settings.EstateName) Then Return True
             INI.SaveIni()
 
             '============== Region.ini =====================

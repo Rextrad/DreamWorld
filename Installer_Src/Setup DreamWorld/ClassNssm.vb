@@ -120,6 +120,7 @@
         Dim ok As Boolean = False
         Try
             BootProcess.Start()
+            Sleep(1000)
             BootProcess.WaitForExit()
             Dim code = BootProcess.ExitCode
             If code = 0 Then

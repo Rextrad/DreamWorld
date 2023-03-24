@@ -53,7 +53,6 @@ Module Apache
         Else
             FormSetup.RestartApacheIcon.Image = Global.Outworldz.My.Resources.check2
         End If
-        Application.DoEvents()
 
     End Sub
 
