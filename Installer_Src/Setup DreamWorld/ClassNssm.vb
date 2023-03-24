@@ -83,7 +83,7 @@
             Return True
         End If
 
-        NssmCommand("stop DreamGridService")
+        Return NssmCommand("stop DreamGridService")
 
     End Function
 

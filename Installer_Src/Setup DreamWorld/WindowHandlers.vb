@@ -419,9 +419,10 @@ Module WindowHandlers
 
             While Not HandleValid AndAlso ctr > 0
                 Try
-                    Dim r = SetForegroundWindow(handle)
-                    HandleValid = ShowWindow(handle, command)
-                    If HandleValid Then Return True
+                    If SetForegroundWindow(handle) Then
+                        HandleValid = ShowWindow(handle, command)
+                        If HandleValid Then Return True
+                    End If
                 Catch ex As Exception
                     BreakPoint.Print(ex.Message)
                 End Try

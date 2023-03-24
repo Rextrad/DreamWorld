@@ -112,7 +112,7 @@ Module PublicIP
     Public Function CheckPortold(RegionUUID As String) As Boolean
         If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
             Return True
-        ElseIf GetPIDFromFile(Group_Name(RegionUUID)) Then
+        ElseIf CBool(GetPIDFromFile(Group_Name(RegionUUID))) Then
             Return True
         ElseIf CBool(GetHwnd(Group_Name(RegionUUID))) Then
             Return True

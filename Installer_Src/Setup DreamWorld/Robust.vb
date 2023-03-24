@@ -318,6 +318,13 @@ Module Robust
             ' ban MAC Addresses
             'MAC:acbf6d9e97686d38d6fc1c2b335f126
 
+            Dim pattern4a = New Regex("^([0-9a-f]{32})", RegexOptions.IgnoreCase)
+            Dim match4a As Match = pattern4a.Match(s)
+            If match4a.Success Then
+                MACString += match4a.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+                Continue For
+            End If
+
             Dim pattern4 = New Regex("^MAC:([0-9a-f]{32})", RegexOptions.IgnoreCase)
             Dim match4 As Match = pattern4.Match(s)
             If match4.Success Then
@@ -339,9 +346,7 @@ Module Robust
 
         Next
 
-        ' Ban Macs
-        MACString = MACString.Replace(" ", "")
-
+        ' Ban Macs        
         INI.SetIni("LoginService", "DeniedMacs", MACString)
         INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
