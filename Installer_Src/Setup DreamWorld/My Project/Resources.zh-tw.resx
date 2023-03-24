@@ -3882,4 +3882,100 @@
   <data name="Suspendable" xml:space="preserve">
     <value>可暫停</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>服務假裝停止</value>
+  </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>啟動我的資料庫</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>凍結所有區域</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>加載區域 OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>區域 OAR 載入、保存和備份</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>將所有運行區域保存到 OAR</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>保存區域 OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>檢查庫存</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>選擇一個使用者</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>連接到冰鑄</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>連接到網頁</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>刪除服務</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>每個人 都</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>在外世界查找 IAR</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>冰鑄</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>庫存 IAR 載入和保存</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>踢使用者</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>加載庫存 IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>載入本地 IAR</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>載入本地槳</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>保存庫存 IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>在Outworldz搜索槳</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>啟夢網格服務</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>啟動冰投服務</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>啟動穩健</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>無法獲取視窗句柄</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>停止進程</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>啟動 Apache 服務</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>靜態儲存位址</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>去</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>調整</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>新區域</value>
+  </data>
 </root>

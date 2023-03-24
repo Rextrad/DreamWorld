@@ -3882,4 +3882,100 @@
   <data name="Suspendable" xml:space="preserve">
     <value>قابل تعلیق</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>خدمات Fauled برای متوقف کردن</value>
+  </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>شروع خروجی زیر</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>یخ همه مناطق!</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>بارگیری منطقه OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>منطقه OAR بار، ذخیره و پشتیبان گیری</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>ذخیره تمام مناطق در حال اجرا به OARs</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>ذخیره منطقه OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>بررسی موجودی</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>انتخاب یک کاربر</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>اتصال به یخ بازیگران</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>اتصال به صفحه وب</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>حذف سرویس</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>همه</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>پیدا کردن IARs در Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>آیس کست</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>موجودی IAR بار و ذخیره</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>پا زدن کاربر</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>IAR موجودی بار</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>بار IAR محلی</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>بار OAR محلی</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>ذخیره موجودی IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>جستجو برای Oars در Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>سرویس شبکه StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>شروع سرویس Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>شروع قوی</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>نمی توان دسته پنجره را دریافت کرد</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>توقف فرایند</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>شروع سرویس آپاچی</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>Ssl</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>رفتن</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Realign</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>منطقه جدید</value>
+  </data>
 </root>

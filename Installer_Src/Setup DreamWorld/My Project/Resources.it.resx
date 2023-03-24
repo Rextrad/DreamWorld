@@ -3882,4 +3882,100 @@
   <data name="Suspendable" xml:space="preserve">
     <value>Sospeso</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>Servizio fallito per fermarsi</value>
+  </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Avvia MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Congela tutte le regioni!</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Carica regione OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Caricamento, salvataggio e backup OAR della regione</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Salvare tutte le regioni in esecuzione nei remi</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Salva regione OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Controlla l'inventario</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Scegli un utente</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Connettiti a Ice Cast</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Connettersi alla pagina Web</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Elimina servizio</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Ciascuno</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Trova IAR su Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Caricamento e salvataggio IAR dell'inventario</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Kick Utente</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Carica inventario IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Carica IAR locale</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Carica OAR locale</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Salva inventario IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Cerca remi a Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>Servizio griglia StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Avvia il servizio Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Inizia in modo robusto</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Impossibile ottenere l'handle della finestra</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Processo di arresto</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Avviare il servizio Apache</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Andare</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Riallineare</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>Nuova regione</value>
+  </data>
 </root>

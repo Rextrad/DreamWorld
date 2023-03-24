@@ -1,5 +1,18 @@
 ﻿Module Services
 
+
+    Public Sub ServiceIcon(Running As Boolean)
+
+        If Not Running Then
+            FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.nav_plain_red
+        Else
+            FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.check2
+        End If
+        Application.DoEvents()
+
+    End Sub
+
+
     Public Function ServiceExists(name As String) As Boolean
 
         Using ServiceProcess As New Process()
@@ -28,6 +41,11 @@
     End Function
 
     Public Function StopMysql() As Boolean
+
+        If Foreground() Then
+            Zap("Mysql")
+            Return False
+        End If
 
         If Not MysqlInterface.IsMySqlRunning() Then
             Application.DoEvents()

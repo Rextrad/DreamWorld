@@ -70,8 +70,10 @@ Module PublicIP
     Public Function Checkport(RegionUUID As String) As Boolean
 
         Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+        If PID = 0 Then Return False
         Try
-            Process.GetProcessById(PID)
+            Dim Pr = Process.GetProcessById(PID)
+            If Pr.Id = 0 Then Return False
         Catch
             Return False
         End Try
@@ -86,7 +88,7 @@ Module PublicIP
     ''' <param name="ServerAddress">IP</param>
     ''' <param name="Port">Port</param>
     ''' <returns>True is in memory</returns>
-    Public Function CheckPort2(ServerAddress As String, Port As Integer) As Boolean
+    Public Function CheckPortSocket(ServerAddress As String, Port As Integer) As Boolean
 
         Dim success As Boolean
         Dim result As IAsyncResult = Nothing
@@ -100,23 +102,6 @@ Module PublicIP
             End Try
             Return success
         End Using
-        Return False
-
-    End Function
-
-    ''' <summary>
-    ''' Checks port or window handle to see if region is up
-    ''' </summary>
-    ''' <param name="RegionUUID">RegionUUID</param>
-    ''' <returns></returns>
-    Public Function CheckPortold(RegionUUID As String) As Boolean
-        If CheckPort2(Settings.PublicIP, GroupPort(RegionUUID)) Then
-            Return True
-        ElseIf CBool(GetPIDFromFile(Group_Name(RegionUUID))) Then
-            Return True
-        ElseIf CBool(GetHwnd(Group_Name(RegionUUID))) Then
-            Return True
-        End If
         Return False
 
     End Function

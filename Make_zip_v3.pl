@@ -38,6 +38,7 @@ CheckDistro();
 
 my $thumbprint = '9FC0371A50087DD2A0FD134131B0DC4A98104832'; #2022
 
+
 my $signfiles = 1;    # 0 to not authenticode sign
 
 my $Version = `git rev-parse --short HEAD `;

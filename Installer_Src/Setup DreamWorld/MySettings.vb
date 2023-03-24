@@ -154,6 +154,20 @@ Public Class MySettings
         End Set
     End Property
 
+
+    ''' <summary>
+    ''' EstateName
+    ''' </summary>
+    ''' <returns>Admin</returns>
+    Public Property EstateName() As String
+        Get
+            Return GetMySetting("EstateName", "Admin")
+        End Get
+        Set
+            SetMySetting("EstateName", Value)
+        End Set
+    End Property
+
     ''' <summary>
     ''' Diva Wifi User Name (Wifi)
     ''' </summary>
@@ -2005,7 +2019,6 @@ Public Class MySettings
 
     Public Property RunAsService() As Boolean
         Get
-            Log("Service", $"{CType(GetMySetting("RunAsService", "False"), Boolean)}")
             Return CType(GetMySetting("RunAsService", "False"), Boolean)
         End Get
         Set

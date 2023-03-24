@@ -105,6 +105,7 @@ Module Robust
 
     Public Function StartRobust() As Boolean
 
+
         If Not StartMySQL() Then Return False ' prerequsite
 
         If RunningInServiceMode() Or Not Settings.RunAsService Then
@@ -153,6 +154,14 @@ Module Robust
             PropRobustProcID = 0
 
             If DoRobust() Then Return False
+
+            If SignalService("StartRobust") Then
+                RobustIcon(True)
+                Return True
+            Else
+                RobustIcon(False)
+                Return False
+            End If
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
 
@@ -246,8 +255,9 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            If RunningInServiceMode() Then
+            If Foreground() Then
                 Zap("Robust")
+                Return
             Else
                 ConsoleCommand(RobustName, "q")
             End If

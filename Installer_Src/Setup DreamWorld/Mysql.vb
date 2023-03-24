@@ -86,11 +86,18 @@ Public Module MysqlInterface
 
     Public Function StartMySQL() As Boolean
 
-        PropAborting = False
 
         Log("INFO", "Checking MySQL")
         If MysqlInterface.IsMySqlRunning() Then
+            MySQLIcon(True)
             Return True
+        End If
+
+        If SignalService("StartMysql") Then
+            MySQLIcon(True)
+            Return True
+        Else
+            MySQLIcon(False)
         End If
 
         Log("INFO", "MySQL is not running")
@@ -955,7 +962,7 @@ Public Module MysqlInterface
         Using NewSQLConn As New MySqlConnection(Settings.RobustMysqlConnection)
             Try
                 NewSQLConn.Open()
-                Dim stm As String = "Select count(*) FROM (presence INNER JOIN useraccounts On presence.UserID = useraccounts.PrincipalID) where regionid = @UUID "
+                Dim stm As String = "Select count(*) FROM (presence INNER JOIN useraccounts On presence.UserID = useraccounts.PrincipalID) where regionid = @UUID  and useraccounts.FirstName <> ""Iama"" and useraccounts.lastname like ""Bot%"""
                 Using cmd As New MySqlCommand(stm, NewSQLConn)
                     cmd.Parameters.AddWithValue("@UUID", RegionUUID)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -2204,17 +2211,16 @@ Public Module MysqlInterface
         If files IsNot Nothing Then
             Dim yesno = MsgBoxResult.No
             If Not RunningInServiceMode() Then
-                yesno = MsgBoxResult.No
                 ErrorLog(My.Resources.MySql_Exited)
             Else
                 MsgBox(My.Resources.MySql_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+                If yesno = MsgBoxResult.Yes Then
+                    For Each FileName As String In files
+                        Baretail("""" & FileName & """")
+                    Next
+                End If
             End If
 
-            If yesno = MsgBoxResult.Yes Then
-                For Each FileName As String In files
-                    Baretail("""" & FileName & """")
-                Next
-            End If
         Else
             PropAborting = True
             If Not RunningInServiceMode() Then

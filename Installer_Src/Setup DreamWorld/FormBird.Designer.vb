@@ -84,7 +84,7 @@ Partial Class FormBird
         Me.GroupBox1.Size = New System.Drawing.Size(317, 331)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Bird Module"
+        Me.GroupBox1.Text = My.Resources.Bird_Module_word
         '
         'ToleranceLabel
         '
@@ -93,7 +93,7 @@ Partial Class FormBird
         Me.ToleranceLabel.Name = "ToleranceLabel"
         Me.ToleranceLabel.Size = New System.Drawing.Size(123, 13)
         Me.ToleranceLabel.TabIndex = 24
-        Me.ToleranceLabel.Text = "Tolerance (default=25.0)"
+        Me.ToleranceLabel.Text = My.Resources.Tolerance
         Me.ToolTip1.SetToolTip(Me.ToleranceLabel, Global.Outworldz.My.Resources.Resources.Tolerance)
         '
         'PrimNameLabel
@@ -103,7 +103,7 @@ Partial Class FormBird
         Me.PrimNameLabel.Name = "PrimNameLabel"
         Me.PrimNameLabel.Size = New System.Drawing.Size(148, 13)
         Me.PrimNameLabel.TabIndex = 23
-        Me.PrimNameLabel.Text = "Prim Name (default=SeaGull1)"
+        Me.PrimNameLabel.Text = My.Resources.Prim_Name
         Me.ToolTip1.SetToolTip(Me.PrimNameLabel, Global.Outworldz.My.Resources.Resources.How_High)
         '
         'PrimNameTextBox
@@ -122,7 +122,7 @@ Partial Class FormBird
         Me.MaxHLabel.Name = "MaxHLabel"
         Me.MaxHLabel.Size = New System.Drawing.Size(129, 13)
         Me.MaxHLabel.TabIndex = 21
-        Me.MaxHLabel.Text = "Max Height (default=45.0)"
+        Me.MaxHLabel.Text = My.Resources.Max_Height
         '
         'BirdsMaxHeightTextBox
         '
@@ -139,7 +139,7 @@ Partial Class FormBird
         Me.BorderLabel.Name = "BorderLabel"
         Me.BorderLabel.Size = New System.Drawing.Size(129, 13)
         Me.BorderLabel.TabIndex = 19
-        Me.BorderLabel.Text = "Border Size (default=25.0)"
+        Me.BorderLabel.Text = My.Resources.Border_Size
         '
         'BirdsBorderSizeTextBox
         '
@@ -172,7 +172,7 @@ Partial Class FormBird
         Me.SeparationLabel.Name = "SeparationLabel"
         Me.SeparationLabel.Size = New System.Drawing.Size(159, 13)
         Me.SeparationLabel.TabIndex = 13
-        Me.SeparationLabel.Text = "Desired Separation (default=5.0)"
+        Me.SeparationLabel.Text = My.Resources.Desired_Separation_word
         Me.ToolTip1.SetToolTip(Me.SeparationLabel, Global.Outworldz.My.Resources.Resources.How_Far)
         '
         'DesiredSeparationTextBox
@@ -191,7 +191,7 @@ Partial Class FormBird
         Me.NeighborLabel.Name = "NeighborLabel"
         Me.NeighborLabel.Size = New System.Drawing.Size(163, 13)
         Me.NeighborLabel.TabIndex = 11
-        Me.NeighborLabel.Text = "Neighbor Distance (default=25.0)"
+        Me.NeighborLabel.Text = My.Resources.Neighbor_Distance
         Me.ToolTip1.SetToolTip(Me.NeighborLabel, Global.Outworldz.My.Resources.Resources.How_Far)
         '
         'BirdsNeighbourDistanceTextBox
@@ -210,7 +210,7 @@ Partial Class FormBird
         Me.maxForceLabel.Name = "maxForceLabel"
         Me.maxForceLabel.Size = New System.Drawing.Size(119, 13)
         Me.maxForceLabel.TabIndex = 9
-        Me.maxForceLabel.Text = "Max Force (default=0.2)"
+        Me.maxForceLabel.Text = My.Resources.Max_Force
         Me.ToolTip1.SetToolTip(Me.maxForceLabel, Global.Outworldz.My.Resources.Resources.Max_Accel)
         '
         'MaxForceTextBox
@@ -229,7 +229,7 @@ Partial Class FormBird
         Me.MaxSpeedLabel.Name = "MaxSpeedLabel"
         Me.MaxSpeedLabel.Size = New System.Drawing.Size(123, 13)
         Me.MaxSpeedLabel.TabIndex = 7
-        Me.MaxSpeedLabel.Text = "Max Speed (default=1.0)"
+        Me.MaxSpeedLabel.Text = My.Resources.Max_Speed
         '
         'MaxSpeedTextBox
         '
@@ -247,7 +247,7 @@ Partial Class FormBird
         Me.ChatLabel.Name = "ChatLabel"
         Me.ChatLabel.Size = New System.Drawing.Size(71, 13)
         Me.ChatLabel.TabIndex = 5
-        Me.ChatLabel.Text = "Chat Channel"
+        Me.ChatLabel.Text = My.Resources.Chat_Channel_word
         Me.ToolTip1.SetToolTip(Me.ChatLabel, Global.Outworldz.My.Resources.Resources.Which_Channel)
         '
         'ChatChanelTextBox
@@ -265,7 +265,7 @@ Partial Class FormBird
         Me.FlockLabel.Name = "FlockLabel"
         Me.FlockLabel.Size = New System.Drawing.Size(77, 13)
         Me.FlockLabel.TabIndex = 3
-        Me.FlockLabel.Text = "Bird Flock Size"
+        Me.FlockLabel.Text = My.Resources.Bird_Flock_Size_word
         Me.ToolTip1.SetToolTip(Me.FlockLabel, Global.Outworldz.My.Resources.Resources.Num_Birds)
         '
         'BirdsFlockSize
@@ -307,7 +307,7 @@ Partial Class FormBird
         Me.MenuStrip2.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
         Me.MenuStrip2.Size = New System.Drawing.Size(345, 30)
         Me.MenuStrip2.TabIndex = 0
-        Me.MenuStrip2.Text = "0"
+        Me.MenuStrip2.Text = My.Resources._0
         '
         'HelpMenuItem
         '
@@ -328,7 +328,7 @@ Partial Class FormBird
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormBird"
-        Me.Text = "Bird Module"
+        Me.Text = My.Resources.Bird_Module_word
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip2.ResumeLayout(False)

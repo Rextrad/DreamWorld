@@ -1,7 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 14
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.AddinExample", "addon-modules\02AddinExample\Diva.AddinExample.csproj", "{D45D8560-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.Data", "addon-modules\00Data\Diva.Data.csproj", "{4A34BECA-0000-0000-0000-000000000000}"
@@ -11,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.Data.SQLite", "addon-modules\00Data\SQLite\Diva.Data.SQLite.csproj", "{08808D98-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.Interfaces", "addon-modules\00DivaInterfaces\Diva.Interfaces.csproj", "{64FF56E2-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.OnLook", "addon-modules\OnLookSupport\Diva.OnLook.csproj", "{25908CD8-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diva.OpenSimServices", "addon-modules\1DivaOpenSimServices\Diva.OpenSimServices.csproj", "{287658E5-0000-0000-0000-000000000000}"
 EndProject
@@ -25,8 +25,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gloebit", "addon-modules\Gloebit\GloebitMoneyModule\Gloebit.csproj", "{4C8A6BF4-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jOpenSimSearch.Modules", "addon-modules\jOpenSimSearch\Modules\jOpenSimSearch.Modules.csproj", "{0C6112D0-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyServer", "addon-modules\OpenSim-Grid-MoneyServer\MoneyServer.csproj", "{D9045355-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim", "OpenSim\Region\Application\OpenSim.csproj", "{AC9EB8AB-0000-0000-0000-000000000000}"
 EndProject
@@ -51,8 +49,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Data", "OpenSim\Data\OpenSim.Data.csproj", "{7E218E2D-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Data.MySQL", "OpenSim\Data\MySQL\OpenSim.Data.MySQL.csproj", "{1E894ECD-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Data.MySQL.MySQLMoneyDataWrapper", "addon-modules\OpenSim-Data-MySQL-MySQLMoneyDataWrapper\OpenSim.Data.MySQL.MySQLMoneyDataWrapper.csproj", "{D1DCB456-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Data.Null", "OpenSim\Data\Null\OpenSim.Data.Null.csproj", "{8D314DCC-0000-0000-0000-000000000000}"
 EndProject
@@ -81,8 +77,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Framework.Servers.Tests", "OpenSim\Framework\Servers\Tests\OpenSim.Framework.Servers.Tests.csproj", "{743E90C2-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Framework.Tests", "OpenSim\Framework\Tests\OpenSim.Framework.Tests.csproj", "{FA62D900-0000-0000-0000-000000000000}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Modules.Currency", "addon-modules\OpenSim-Modules-Currency\OpenSim.Modules.Currency.csproj", "{C52EEEA1-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSim.Region.ClientStack.LindenCaps", "OpenSim\Region\ClientStack\Linden\Caps\OpenSim.Region.ClientStack.LindenCaps.csproj", "{574BCA63-0000-0000-0000-000000000000}"
 EndProject
@@ -250,6 +244,10 @@ Global
 		{64FF56E2-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FF56E2-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64FF56E2-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25908CD8-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25908CD8-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25908CD8-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25908CD8-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{287658E5-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{287658E5-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{287658E5-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -278,10 +276,6 @@ Global
 		{0C6112D0-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C6112D0-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C6112D0-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9045355-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9045355-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9045355-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9045355-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC9EB8AB-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC9EB8AB-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC9EB8AB-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -330,10 +324,6 @@ Global
 		{1E894ECD-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E894ECD-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E894ECD-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1DCB456-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1DCB456-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1DCB456-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1DCB456-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D314DCC-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D314DCC-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D314DCC-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -390,10 +380,6 @@ Global
 		{FA62D900-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA62D900-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA62D900-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C52EEEA1-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C52EEEA1-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C52EEEA1-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C52EEEA1-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{574BCA63-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{574BCA63-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574BCA63-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -674,11 +660,5 @@ Global
 		{A23E7F0E-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A23E7F0E-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A23E7F0E-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FBAA8D2C-BE33-42E6-8E1A-666EDF88D0D3}
 	EndGlobalSection
 EndGlobal

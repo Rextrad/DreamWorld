@@ -785,6 +785,78 @@
     <EmbeddedResource Include="FormEditUser.resx">
       <DependentUpon>FormEditUser.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.ar-SA.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.ar.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.ca.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.cs.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.da.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.de.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.el.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.en.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.es-ES.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.es-MX.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.eu.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.fa-IR.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.fa.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.fi.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.fr.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.ga.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.he.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.is.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.it.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.nl-NL.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.no.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.pl.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.pt-BR.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.pt.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEmail.resx">
       <DependentUpon>FormEmail.vb</DependentUpon>
     </EmbeddedResource>
@@ -809,6 +881,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDisplacement.resx">
       <DependentUpon>FormDisplacement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.ru.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.sv.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.tr.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.vi.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.zh-CN.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.zh-Hans-HK.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmail.zh-TW.resx">
+      <DependentUpon>FormEmail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmailSetup.resx">
       <DependentUpon>FormEmailSetup.vb</DependentUpon>
@@ -974,7 +1067,76 @@
     <EmbeddedResource Include="FormTOS.en.resx">
       <DependentUpon>FormTOS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.es-ES.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.es-MX.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.eu.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.fa-IR.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.fa.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.fi.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.fr.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.ga.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.he.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.is.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.it.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.nl-NL.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.no.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.pl.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.pt-BR.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.pt.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTOS.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.ru.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.sv.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.tr.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.vi.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.zh-CN.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.zh-Hans-HK.resx">
+      <DependentUpon>FormTOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTOS.zh-TW.resx">
       <DependentUpon>FormTOS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUpdate.resx">

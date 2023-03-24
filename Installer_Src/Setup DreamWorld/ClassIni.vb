@@ -136,7 +136,6 @@ Public Class LoadIni
                     _parser.WriteFile(FileName, _SettingsData, Encoding)
                     Retry = 0
                 Catch ex As Exception
-                    BreakPoint.Print("Error:" + ex.Message)
                     Retry -= 1
                     Thread.Sleep(10)
                 End Try

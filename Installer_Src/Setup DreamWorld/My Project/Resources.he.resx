@@ -3882,4 +3882,100 @@
   <data name="Suspendable" xml:space="preserve">
     <value>ניתן להשעיה</value>
   </data>
+  <data name="ServiceFailedtoStop" xml:space="preserve">
+    <value>השירות התפוגג כדי להפסיק</value>
+  </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>הפעל את MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>הקפיאו את כל האזורים!</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>טען אזור OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>אזור OAR עומס, שמירה וגיבוי</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>שמור את כל האזורים הפועלים ב- OARs</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>שמור אזור OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>בדיקת מלאי</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>בחר משתמש</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>התחברו ליציקת קרח</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>התחברות לדף אינטרנט</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>מחק שירות</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>כולם</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>מצא IARs ב- Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>מלאי IAR טען ושמור</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>בעיטת משתמש</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>טען מלאי IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>טען IAR מקומי</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>טען OAR מקומי</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>שמור מלאי IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>חפש משוטים באאוטוורלדז</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>שירות רשת StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>הפעל את שירות Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>התחל חזק</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>לא ניתן לקבל את נקודת האחיזה של החלון</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>עצירת תהליך</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>התחל שירות אפאצ'י</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>תעודת SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>הלך</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>יישור מחדש</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>אזור חדש</value>
+  </data>
 </root>
