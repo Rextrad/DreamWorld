@@ -160,6 +160,7 @@ Module Robust
                 Return True
             Else
                 RobustIcon(False)
+                Return False
             End If
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
