@@ -305,8 +305,8 @@ Module WindowHandlers
         'Log("Service", $"RunAsService = {RunAsService}")
 
         If ServiceExists("DreamGridService") And
-        CBool(Param.ToLower <> "service") And
-        CheckPortSocket(Settings.WANIP, Settings.DiagnosticPort) Then
+                CBool(Param.ToLower <> "service") And
+                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             Return True
         Else
             Return False
