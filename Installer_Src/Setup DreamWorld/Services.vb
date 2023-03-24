@@ -1,5 +1,17 @@
 ﻿Module Services
 
+    Public Function isDreamGridServiceRunning() As Boolean
+
+        If ServiceExists("DreamGridService") And
+                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
 
     Public Sub ServiceIcon(Running As Boolean)
 
