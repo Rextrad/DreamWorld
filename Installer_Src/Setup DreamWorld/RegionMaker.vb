@@ -2692,6 +2692,15 @@ Module RegionMaker
         End If
 
     End Sub
+    Public Sub ZapRegions()
+
+        Dim L = Process.GetProcessesByName("Opensim")
+
+        For Each Process In L
+            Process.Kill()
+        Next
+
+    End Sub
 
 #End Region
 
