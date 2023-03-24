@@ -301,12 +301,17 @@ Public Module MysqlInterface
 
         End If
 
+        TextPrint(My.Resources.ClearingLogs)
+        QuerySuper("TRUNCATE table mysql.general_log;")
+
         UpgradeMysql()
 
         TextPrint(Global.Outworldz.My.Resources.Mysql_is_Running)
         MySQLIcon(True)
 
         PropMysqlExited = False
+
+
 
         Return True
 
