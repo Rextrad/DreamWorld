@@ -409,6 +409,7 @@ Public Class FormBulkLoad
 
     End Sub
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Sub StartBulkLoading()
 
         If BulkLoadButton.Text = My.Resources.Abort Then

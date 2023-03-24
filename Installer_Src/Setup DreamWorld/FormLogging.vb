@@ -298,6 +298,7 @@ Public Class FormLogging
                                 Lookat(l, outputFile)
                                 LookatMac(l, outputFile)
                             End While
+
                         End Using
                         F = Nothing
                     Finally
