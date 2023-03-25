@@ -41,7 +41,23 @@
 
         If Not NssmCommand($"install DreamGridService ""{Settings.CurrentDirectory}\Start.exe"" service") Then
 
-            NssmCommand("set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.")
+            '"set DreamGridService AppStopMethodThreads 1500", ' Post WM_Quit to threads
+            ' "set DreamGridService AppStopMethodConsole 1500",  ' Generate  Ctrl-C 
+
+
+            Dim cmds As New List(Of String) From {
+                "set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.",
+                "set DreamGridService AppStopMethodSkip 0",  ' Terminate process
+                "set DreamGridService AppStopMethodWindow 12000",  ' Send WM_close to windows, quit in 2 minutes
+                "set DreamGridService AppThrottle 15000",          ' delay restart if it runs less than 15 seconds
+                "set DreamGridService AppExit Default Restart", ' if it crashes, restart
+                "set DreamGridService AppRestartDelay 1000" ' delay restart by 1 second
+            }
+            For Each item In cmds
+                If Not NssmCommand(item) Then
+                    Return False
+                End If
+            Next
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)

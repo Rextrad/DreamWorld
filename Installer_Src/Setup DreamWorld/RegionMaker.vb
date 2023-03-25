@@ -1787,7 +1787,6 @@ Module RegionMaker
         Dim Command = HttpUtility.ParseQueryString(myUri.Query).Get("Command")
         Logger("Command", $"Command={Command}", "Command")
         Dim Password = HttpUtility.ParseQueryString(myUri.Query).Get("password")
-        Logger("Command", $"Password={Password}", "Command")
         Dim RegionUUID = HttpUtility.ParseQueryString(myUri.Query).Get("RegionUUID")
 
         If Password <> Settings.MachineId Then
