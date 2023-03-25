@@ -131,6 +131,27 @@ Module WindowHandlers
 
     End Function
 
+    ''' <summary>
+    ''' Returns if Service is running and we are foreground App
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function Foreground() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
+
+        If ServiceExists("DreamGridService") And
+                CBool(Param.ToLower <> "service") And
+                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
     Public Function GetHwnd(Groupname As String) As IntPtr
 
         If Groupname <> RobustName() Then
@@ -293,55 +314,6 @@ Module WindowHandlers
         End If
 
     End Function
-    ''' <summary>
-    ''' Returns if Service is running and we are foreground App
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function Foreground() As Boolean
-
-        Dim Param = Command()
-        'Log("Service", $"Startup param = {Param}")
-        'Log("Service", $"Environment path = {Environment.CommandLine}")
-        'Log("Service", $"RunAsService = {RunAsService}")
-
-        If ServiceExists("DreamGridService") And
-                CBool(Param.ToLower <> "service") And
-                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-            Return True
-        Else
-            Return False
-        End If
-
-    End Function
-
-
-    ''' <summary>
-    ''' Send a message to the service
-    ''' </summary>
-    ''' <param name="Command">A string command</param>
-    Public Function SignalService(Command As String) As Boolean
-
-        If Not Foreground() Then Return False
-
-
-        Using client As New TimedWebClient With {
-                .Timeout = 10000
-                } ' download client for web pages
-            Try
-                Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
-                Diagnostics.Debug.Print(Url)
-                Dim result = client.DownloadString(Url)
-
-                If result = "ACK" Then Return True
-            Catch ex As Exception
-                BreakPoint.Print(ex.Message)
-                Return False
-            End Try
-        End Using
-        Return False
-
-    End Function
-
 
     Public Sub SendMsg(msg As String)
 
@@ -438,7 +410,7 @@ Module WindowHandlers
             End Try
 
             WindowCounter += 1
-            If WindowCounter > 6000 Then '  1 minute                
+            If WindowCounter > 6000 Then '  1 minute
                 Return
             End If
 
@@ -482,6 +454,32 @@ Module WindowHandlers
             End While
         End If
 
+        Return False
+
+    End Function
+
+    ''' <summary>
+    ''' Send a message to the service
+    ''' </summary>
+    ''' <param name="Command">A string command</param>
+    Public Function SignalService(Command As String) As Boolean
+
+        If Not Foreground() Then Return False
+
+        Using client As New TimedWebClient With {
+                .Timeout = 2000
+                } ' download client for web pages
+            Try
+                Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
+                Diagnostics.Debug.Print(Url)
+                Dim result = client.DownloadString(Url)
+
+                If result = "ACK" Then Return True
+            Catch ex As Exception
+                BreakPoint.Print(ex.Message)
+                Return False
+            End Try
+        End Using
         Return False
 
     End Function
