@@ -3234,10 +3234,6 @@ Public Class FormSetup
         NssmService.InstallService()
         NssmService.StartService()
 
-        If CheckPort2(Settings.LANIP, Settings.DiagnosticPort) Then
-            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
-        End If
-
     End Sub
 
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
