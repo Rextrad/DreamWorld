@@ -55,7 +55,6 @@ Public Class FormSetup
     Private speed3 As Double
     Private TimerisBusy As Integer
 
-
 #End Region
 
 #Region "Properties"
@@ -105,7 +104,6 @@ Public Class FormSetup
         End Set
     End Property
 
-
     Public Property PropIPv4Address() As String
         Get
             Return _IPv4Address
@@ -150,7 +148,6 @@ Public Class FormSetup
             _RestartMysql = Value
         End Set
     End Property
-
 
     Public Property ScreenPosition1 As ClassScreenpos
         Get
@@ -420,7 +417,7 @@ Public Class FormSetup
         SaveInventoryIARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Inventory_IAR_word
         SaveRegionOARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Region_OAR_word
 
-        me.text  = Global.Outworldz.My.Resources.Resources.DreamGrid_word
+        Me.Text = Global.Outworldz.My.Resources.Resources.DreamGrid_word
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
@@ -568,7 +565,7 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-            Sleep(100)
+            Thread.Sleep(100)
 
             If TestPrivateLoopback(True) Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
@@ -835,7 +832,6 @@ Public Class FormSetup
 
         If CheckOverLap() Then Return False
 
-
         If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
             If Not NssmService.StartService() Then
@@ -843,9 +839,8 @@ Public Class FormSetup
             End If
         End If
 
-
         If Settings.ServerType = RobustServerName Then
-            StartRobust()
+
             Dim ctr = 60
             While Not IsRobustRunning() AndAlso ctr > 0
                 Sleep(1000)
@@ -878,7 +873,6 @@ Public Class FormSetup
 
         Next
         CalcCPU()
-
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
@@ -1130,9 +1124,7 @@ Public Class FormSetup
             End While
         End If
 
-
     End Sub
-
 
     Private Sub RestartDOSboxes()
 
@@ -2780,7 +2772,6 @@ Public Class FormSetup
             End If
         End If
 
-
     End Sub
 
     Private Sub MnuHide_Click(sender As System.Object, e As EventArgs) Handles mnuHide.Click
@@ -3423,8 +3414,6 @@ Public Class FormSetup
         Next
 
     End Sub
-
-
 
 #End Region
 
