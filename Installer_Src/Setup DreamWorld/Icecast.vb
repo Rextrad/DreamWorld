@@ -9,6 +9,28 @@ Module Icecast
 
     Public WithEvents IcecastProcess As New Process()
     Private _IcecastProcID As Integer
+    Private _IcecastCrashCounter As Integer
+    Private _IceCastExited As Boolean
+
+#Region "Properties"
+
+    Public Property IcecastCrashCounter As Integer
+        Get
+            Return _IcecastCrashCounter
+        End Get
+        Set(value As Integer)
+            _IcecastCrashCounter = value
+        End Set
+    End Property
+
+    Public Property PropIceCastExited() As Boolean
+        Get
+            Return _IceCastExited
+        End Get
+        Set(ByVal Value As Boolean)
+            _IceCastExited = Value
+        End Set
+    End Property
 
     Public Property PropIcecastProcID As Integer
         Get
@@ -19,10 +41,34 @@ Module Icecast
         End Set
     End Property
 
+#End Region
+
 #Region "Icecast"
 
-    Public Function StartIcecast() As Boolean
+    ''' <summary>Event handler for Icecast</summary>
 
+    Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
+
+        If PropAborting Then Return
+
+        If Settings.RestartOnCrash AndAlso IcecastCrashCounter < 10 Then
+            IcecastCrashCounter += 1
+            PropIceCastExited = True
+            Return
+        End If
+        IcecastCrashCounter = 0
+
+        If Not RunningInServiceMode() Then
+            Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
+            If yesno = MsgBoxResult.Yes Then
+                Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
+            End If
+            ErrorLog(My.Resources.Icecast_Exited)
+        End If
+
+    End Sub
+
+    Public Function StartIcecast() As Boolean
 
         If Not Settings.SCEnable Then
             TextPrint(Global.Outworldz.My.Resources.IceCast_disabled)
@@ -30,16 +76,15 @@ Module Icecast
             Return True
         End If
 
-        If CheckPort2(Settings.PublicIP, Settings.SCPortBase) Then Return True
 
         Try
             ' Check if DOS box exists, first, if so, its running.
-            For Each p In Process.GetProcesses
+            For Each p In Process.GetProcessesByName("icecast")
                 If p.ProcessName = "icecast" Then
                     PropIcecastProcID = p.Id
 
                     p.EnableRaisingEvents = True
-                    AddHandler p.Exited, AddressOf FormSetup.IceCastExited
+                    AddHandler p.Exited, AddressOf IceCastExited
 
                     IceCastIcon(True)
                     Return True
@@ -62,7 +107,7 @@ Module Icecast
         IcecastProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
         IcecastProcess.StartInfo.Arguments = "-c .\icecast_run.xml"
         IcecastProcess.StartInfo.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\icecast")
-        AddHandler IcecastProcess.Exited, AddressOf FormSetup.IceCastExited
+        AddHandler IcecastProcess.Exited, AddressOf IceCastExited
 
         Try
             IcecastProcess.Start()
@@ -83,7 +128,7 @@ Module Icecast
 
         IceCastIcon(True)
 
-        FormSetup.PropIceCastExited = False
+        PropIceCastExited = False
 
 
         Return True
@@ -103,29 +148,6 @@ Module Icecast
 
     End Sub
 
-    Public Function IsIceCastRunning() As Boolean
-        ''' <summary>Check is Icecast port 8081 is up</summary>
-        ''' <returns>boolean</returns>
-        '''
-        Dim Up As String
-        Using TimedClient As New TimedWebClient With {
-               .Timeout = 1000
-           }
-            Try
-                Up = TimedClient.DownloadString("http://" & Settings.PublicIP & ":" & Settings.SCPortBase & "/?_Opensim=" & RandomNumber.Random())
-            Catch ex As Exception
-                IceCastIcon(False)
-                Return False
-            End Try
-
-            If Up.Length = 0 Then
-                Return False
-            End If
-        End Using
-        IceCastIcon(True)
-        Return True
-
-    End Function
 
     Public Sub StopIcecast()
 

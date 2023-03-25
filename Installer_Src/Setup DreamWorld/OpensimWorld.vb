@@ -11,7 +11,7 @@ Module OpensimWorld
             If Not RegionEnabled(RegionUUID) Then Continue For
 
             If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
-                ((Smart_Suspend_Enabled(RegionUUID) AndAlso Smart_Boot_Enabled(RegionUUID)) And Settings.Smart_Start_Enabled) Then
+                ((Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID)) And Settings.Smart_Start_Enabled) Then
 
                 Dim Avatars = GetAgentsInRegion(RegionUUID)
                 If Avatars <> InRegion(RegionUUID) Then
@@ -56,7 +56,9 @@ Module OpensimWorld
 
                 'Debug.Print($"{vbCrLf}The HttpHeaders are {vbCrLf}Name {0}", myHttpWebRequest.Headers)
                 ' Print the HTML contents of the page to the console.
-                Using streamResponse As Stream = myHttpWebResponse.GetResponseStream()
+                Dim streamResponse As Stream = Nothing
+                Try
+                    streamResponse = myHttpWebResponse.GetResponseStream()
                     Using streamRead As New StreamReader(streamResponse)
                         Dim readBuff As Char() = New Char(255) {}
                         Dim count As Integer = streamRead.Read(readBuff, 0, 256)
@@ -64,8 +66,11 @@ Module OpensimWorld
                         While count > 0
                             count = streamRead.Read(readBuff, 0, 256)
                         End While
+                        streamResponse = Nothing
                     End Using
-                End Using
+                Finally
+                    streamResponse?.Dispose()
+                End Try
             End Using
         Catch
         End Try

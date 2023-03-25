@@ -212,7 +212,7 @@ precision = 14
 ; Development Value: 4096
 ; Production Value: 4096
 ; http://php.net/output-buffering
-output_buffering = Off
+output_buffering = 4096
 
 ; You can redirect all of the output of your scripts to a function.  For
 ; example, if you set output_handler to "mb_output_handler", character
@@ -479,7 +479,7 @@ error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
 ; Development Value: On
 ; Production Value: Off
 ; http://php.net/display-errors
-display_errors = On
+display_errors = Off
 
 ; The display of errors which occur during PHP's startup sequence are handled
 ; separately from display_errors. PHP's default behavior is to suppress those
@@ -490,7 +490,7 @@ display_errors = On
 ; Development Value: On
 ; Production Value: Off
 ; http://php.net/display-startup-errors
-display_startup_errors = On
+display_startup_errors = Off
 
 ; Besides displaying errors, PHP can also log errors to locations such as a
 ; server-specific log, STDERR, or a location specified by the error_log

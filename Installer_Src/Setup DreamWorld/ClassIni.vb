@@ -136,7 +136,6 @@ Public Class LoadIni
                     _parser.WriteFile(FileName, _SettingsData, Encoding)
                     Retry = 0
                 Catch ex As Exception
-                    BreakPoint.Print("Error:" + ex.Message)
                     Retry -= 1
                     Thread.Sleep(10)
                 End Try
@@ -217,21 +216,19 @@ Public Class LoadIni
 
         SyncLock Readlock
 
-            Dim waiting As Integer = 10 ' 1 sec
-            While waiting > 0
+            Dim waiting As Integer = 0
+            While waiting < 100
                 Try
                     Dim Data = _parser.ReadFile(FileName, Encoding)
                     Return Data
                 Catch ex As Exception
-                    BreakPoint.Dump(ex)
-                    ErrorLog($"Cannot load INI file: {FileName} Pass N: {CStr(waiting)}")
-                    waiting -= 1
+                    waiting += 1 ' 10 sec
                     Sleep(100)
                 End Try
             End While
 
-            If waiting < -0 Then
-                ErrorLog($" Cannot load INI file: {FileName}")
+            If waiting = 100 Then
+                ErrorLog($" Timeout loading INI file: {FileName}")
             End If
             Return Nothing
 

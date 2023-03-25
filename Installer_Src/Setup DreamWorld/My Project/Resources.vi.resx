@@ -3885,4 +3885,100 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>Dịch vụ bị đình trệ</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>Khởi động MySQL</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>Cố định tất cả các khu vực</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>Tải vùng OAR</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>Khu vực OAR Tải, lưu và sao lưu</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>Lưu tất cả các Vùng đang chạy vào OAR</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>Lưu OAR khu vực</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>Kiểm tra hàng tồn kho</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>Chọn người dùng</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>Kết nối với Ice Cast</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>Kết nối với trang Web</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>Xóa dịch vụ</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>Ai ai</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>Tìm IAR trên Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>IceCast</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>Hàng tồn kho IAR Tải và tiết kiệm</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>Người dùng đá</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>Tải IAR khoảng không quảng cáo</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>Tải IAR cục bộ</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>Tải OAR cục bộ</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>Lưu IAR khoảng không quảng cáo</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>Tìm kiếm mái chèo tại Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>Dịch vụ lưới điện StartDream</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>Bắt đầu dịch vụ Icecast</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>Bắt đầu mạnh mẽ</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>Không thể có được Xử lý Cửa sổ</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>Quá trình dừng</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>Bắt đầu dịch vụ Apache</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>SSL</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Đi</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>Realign</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>Khu vực mới</value>
+  </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Cài đặt các mô-đun Perl cần thiết</value>
+  </data>
 </root>

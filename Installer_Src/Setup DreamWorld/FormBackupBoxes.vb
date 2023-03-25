@@ -46,6 +46,7 @@ Public Class FormBackupBoxes
     ''' <summary>
     ''' Backup Run Button
     ''' </summary>
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BackupButton.Click
 
         If BackupAbort = True Then

@@ -806,13 +806,16 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
+
         SyncLock BootupLock
 
             PropOpensimIsRunning() = True
             If PropAborting Then Return True
 
-            ' stop if disabled
             Dim RegionUUID As String = FindRegionByName(BootName)
+
+            ' stop if disabled
+
             Dim GroupName = Group_Name(RegionUUID)
             ' must be real
             If String.IsNullOrEmpty(RegionUUID) Then
@@ -845,8 +848,28 @@ Module SmartStart
                     Return False
                 End Try
 
-                Thaw(RegionUUID)
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                If Settings.Smart_Start_Enabled And
+                    Smart_Suspend_Enabled(RegionUUID) Then
+                    Thaw(RegionUUID)
+                    Freeze(RegionUUID)
+
+                ElseIf Settings.Smart_Start_Enabled And
+                    Smart_Boot_Enabled(RegionUUID) And
+                    CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
+
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                    ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+
+                ElseIf Settings.Smart_Start_Enabled And
+                    Smart_Boot_Enabled(RegionUUID) And
+                    Not CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
+
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+
+                Else
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                End If
+
                 SendToOpensimWorld(RegionUUID, 0)
                 TextPrint($"{BootName} {My.Resources.Ready}")
                 ShowDOSWindow(RegionUUID, MaybeHideWindow())
@@ -855,11 +878,14 @@ Module SmartStart
             End If
 
             TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
+
             Application.DoEvents()
             DoCurrency()
             SetCores(RegionUUID)
 
             If CopyOpensimProto(RegionUUID) Then Return False
+
+            If SignalService($"StartRegion&RegionUUID={RegionUUID}") Then Return True
 
             Dim BootProcess = New Process With {
                 .EnableRaisingEvents = True

@@ -166,6 +166,7 @@ Public Class FormRestart
         Settings.RestartOnCrash = RestartOnCrash.Checked
 
     End Sub
+#End Region
 
 #Region "Help"
 
@@ -191,6 +192,8 @@ Public Class FormRestart
                 Return
             End If
 
+            If PropWebserver IsNot Nothing Then PropWebserver.StopWebserver()
+
             FormSetup.NssmService.StopService()
             FormSetup.NssmService.DeleteService()
             FormSetup.NssmService.InstallService()
@@ -199,6 +202,12 @@ Public Class FormRestart
             If ServiceExists("DreamGridService") Then
                 FormSetup.NssmService.StopService()
                 FormSetup.NssmService.DeleteService()
+                ZapRegions()
+
+                ' Must start the local diagnostics server
+                PropWebserver = NetServer.GetWebServer
+                PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
+
                 TextPrint("DreamGrid Service removed")
             Else
                 TextPrint("DreamGrid Service is not installed")
@@ -237,6 +246,6 @@ Public Class FormRestart
 
 #End Region
 
-#End Region
+
 
 End Class

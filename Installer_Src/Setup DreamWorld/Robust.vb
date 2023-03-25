@@ -16,8 +16,8 @@ Module Robust
     Private _RobustExited As Boolean
     Private _RobustHandler As Boolean
     Private _RobustProcID As Integer
-    ' if robust has an event handler for exiting
 
+#Region "Properties"
     Public Property PropRobustExited() As Boolean
         Get
             Return _RobustExited
@@ -54,7 +54,10 @@ Module Robust
         End Set
     End Property
 
+#End Region
+
 #Region "Robust"
+
 
     ''' <summary>
     '''  Shows a Region picker
@@ -105,6 +108,7 @@ Module Robust
 
     Public Function StartRobust() As Boolean
 
+
         If Not StartMySQL() Then Return False ' prerequsite
 
         If RunningInServiceMode() Or Not Settings.RunAsService Then
@@ -154,6 +158,13 @@ Module Robust
 
             If DoRobust() Then Return False
 
+            If SignalService("StartRobust") Then
+                RobustIcon(True)
+                Return True
+            Else
+                RobustIcon(False)
+            End If
+
             TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
 
             RobustProcess.EnableRaisingEvents = True
@@ -164,6 +175,8 @@ Module Robust
             RobustProcess.StartInfo.CreateNoWindow = False
             RobustProcess.StartInfo.WorkingDirectory = Settings.OpensimBinPath
             RobustProcess.StartInfo.RedirectStandardOutput = False
+
+            AddHandler RobustProcess.Exited, AddressOf RobustProcess_Exited
 
             ' enable console for Service mode
             Dim args As String = ""
@@ -246,8 +259,9 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            If RunningInServiceMode() Then
+            If Foreground() Then
                 Zap("Robust")
+                Return
             Else
                 ConsoleCommand(RobustName, "q")
             End If
@@ -318,7 +332,14 @@ Module Robust
             ' ban MAC Addresses
             'MAC:acbf6d9e97686d38d6fc1c2b335f126
 
-            Dim pattern4 = New Regex("^MAC:([0-9a-f]{32})", RegexOptions.IgnoreCase)
+            Dim pattern4a = New Regex("^([0-9a-f-]{32})", RegexOptions.IgnoreCase)
+            Dim match4a As Match = pattern4a.Match(s)
+            If match4a.Success Then
+                MACString += match4a.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+                Continue For
+            End If
+
+            Dim pattern4 = New Regex("^MAC:([0-9a-f-]{32})", RegexOptions.IgnoreCase)
             Dim match4 As Match = pattern4.Match(s)
             If match4.Success Then
                 MACString += match4.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
@@ -339,9 +360,7 @@ Module Robust
 
         Next
 
-        ' Ban Macs
-        MACString = MACString.Replace(" ", "")
-
+        ' Ban Macs        
         INI.SetIni("LoginService", "DeniedMacs", MACString)
         INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
 
@@ -591,6 +610,7 @@ Module Robust
             }
             Dim url As String
             If Settings.ServerType = RobustServerName Then
+                'TODO see if this still exists in Opensiom code
                 url = "http://" & Settings.LANIP & ":" & Settings.HttpPort & "/index.php?version"
             Else
                 url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"

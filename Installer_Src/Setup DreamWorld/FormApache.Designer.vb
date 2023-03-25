@@ -57,7 +57,7 @@ Partial Class FormApache
         Me.GroupBox2.Size = New System.Drawing.Size(197, 156)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Apache"
+        Me.GroupBox2.Text = My.Resources.Apache_word
         '
         'SSLButton
         '
@@ -70,7 +70,7 @@ Partial Class FormApache
         Me.SSLButton.Name = "SSLButton"
         Me.SSLButton.Size = New System.Drawing.Size(128, 33)
         Me.SSLButton.TabIndex = 30
-        Me.SSLButton.Text = "SSL"
+        Me.SSLButton.Text = My.Resources.SSL
         Me.ToolTip1.SetToolTip(Me.SSLButton, "!!!")
         Me.SSLButton.UseVisualStyleBackColor = True
         '
@@ -202,7 +202,7 @@ Partial Class FormApache
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.Name = "FormApache"
-        Me.Text = "Apache"
+        Me.Text = My.Resources.Apache_word
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)

@@ -13,8 +13,10 @@ Public Class FormRegions
 
 #Region "Forms"
 
+#Disable Warning CA2213 ' Disposable fields should be disposed
     Private BlockifyForm As New FormBlockify
     Private RegionForm As New FormRegion
+#Enable Warning CA2213 ' Disposable fields should be disposed
 
 #End Region
 

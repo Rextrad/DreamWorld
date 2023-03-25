@@ -22,7 +22,7 @@ Public Class FormSetup
 #Region "Private Declarations"
 
 #Disable Warning CA2213 ' Disposable fields should be disposed
-    Public ReadOnly NssmService As New ClassNssm
+    Public NssmService As New ClassNssm
 #Enable Warning CA2213 ' Disposable fields should be disposed
 #Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
@@ -35,8 +35,6 @@ Public Class FormSetup
     Private _ContentIAR As FormOAR
     Private _ContentOAR As FormOAR
     Private _DNSSTimer As Integer
-    Private _IcecastCrashCounter As Integer
-    Private _IceCastExited As Boolean
     Private _IPv4Address As String
     Private _KillSource As Boolean
     Private _regionForm As FormRegionlist
@@ -56,7 +54,7 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-    Private ws As NetServer
+
 
 #End Region
 
@@ -107,23 +105,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property IcecastCrashCounter As Integer
-        Get
-            Return _IcecastCrashCounter
-        End Get
-        Set(value As Integer)
-            _IcecastCrashCounter = value
-        End Set
-    End Property
-
-    Public Property PropIceCastExited() As Boolean
-        Get
-            Return _IceCastExited
-        End Get
-        Set(ByVal Value As Boolean)
-            _IceCastExited = Value
-        End Set
-    End Property
 
     Public Property PropIPv4Address() As String
         Get
@@ -170,14 +151,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property PropWebserver As NetServer
-        Get
-            Return ws
-        End Get
-        Set(value As NetServer)
-            ws = value
-        End Set
-    End Property
 
     Public Property ScreenPosition1 As ClassScreenpos
         Get
@@ -447,6 +420,7 @@ Public Class FormSetup
         SaveInventoryIARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Inventory_IAR_word
         SaveRegionOARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Region_OAR_word
 
+        me.text  = Global.Outworldz.My.Resources.Resources.DreamGrid_word
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
@@ -546,8 +520,6 @@ Public Class FormSetup
         Using tmp As New ClassLoopback
             tmp.SetLoopback()
         End Using
-
-        Application.DoEvents()
 
         For Each RegionUUID In RegionUuids()
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
@@ -667,12 +639,12 @@ Public Class FormSetup
             HelpOnce("License") ' license on bottom
             HelpOnce("Startup")
 
-            ' also turn on the lights for the other services.
-            IsRobustRunning()
-            IsApacheRunning()
-            IsIceCastRunning()
-
         End If
+        ' also turn on the lights for the other services.
+        IsRobustRunning()
+        IsApacheRunning()
+        StartIcecast()
+        isDreamGridServiceRunning()
 
         Joomla.CheckForjOpensimUpdate()
 
@@ -706,6 +678,7 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then
             Dim I = New ClassFilewatcher
+            I.Init()
         End If
 
         ' Start as a Service?
@@ -714,7 +687,7 @@ Public Class FormSetup
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
-            Sleep(30000)
+            Sleep(10000)
             Startup()
             Return
         Else
@@ -844,7 +817,6 @@ Public Class FormSetup
 
         StartTimer()
 
-
         OpenPorts()
 
         Dim ini = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\OpenSim.exe.config")
@@ -866,7 +838,9 @@ Public Class FormSetup
 
         If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
-            NssmService.StartService()
+            If Not NssmService.StartService() Then
+                Return False
+            End If
         End If
 
 
@@ -925,9 +899,13 @@ Public Class FormSetup
                 Dim response = MsgBox($"{My.Resources.backup_running} .  {My.Resources.Quit_Now_Word}?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Agents_word)
                 If response = vbNo Then Return
             End If
-        End If
 
-        ReallyQuit()
+            If Foreground() Then
+                End ' close as service is up
+            End If
+
+            ReallyQuit()
+        End If
 
     End Sub
 
@@ -1155,28 +1133,6 @@ Public Class FormSetup
 
     End Sub
 
-    ''' <summary>Event handler for Icecast</summary>
-
-    Public Sub IceCastExited(ByVal sender As Object, ByVal e As EventArgs)
-
-        If PropAborting Then Return
-
-        If Settings.RestartOnCrash AndAlso IcecastCrashCounter < 10 Then
-            IcecastCrashCounter += 1
-            PropIceCastExited = True
-            Return
-        End If
-        IcecastCrashCounter = 0
-
-        If Not RunningInServiceMode() Then
-            Dim yesno = MsgBox(My.Resources.Icecast_Exited, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Error_word)
-            If yesno = MsgBoxResult.Yes Then
-                Baretail("""" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Icecast\log\error.log") & """")
-            End If
-            ErrorLog(My.Resources.Icecast_Exited)
-        End If
-
-    End Sub
 
     Private Sub RestartDOSboxes()
 
@@ -2123,6 +2079,7 @@ Public Class FormSetup
             Bench.Start("60 second worker")
             DeleteDirectoryTmp()    ' clean up old tmp folder
             MakeMaps()              ' Make all the large maps
+            ScanOpenSimWorld(True) ' force an update at startup.
             Bench.Print("60 second worker")
 
         End If
@@ -2131,7 +2088,7 @@ Public Class FormSetup
             Bench.Start("60 second + worker")
             NewUserTimeout()        ' see if a new users has read and agreed to the tos
             DeleteOldWave()         ' clean up TTS cache
-            ScanOpenSimWorld(False) ' do not force an update unless avatar count changes
+
             RegionListHTML("Name") ' create HTML for old teleport boards
             VisitorCount()         ' For the large maps
             Bench.Print("60 second + worker")
@@ -2790,7 +2747,10 @@ Public Class FormSetup
 
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWMINIMIZE)
+            Timer(RegionUuid) = Date.Now
         Next
+
+        PropUpdateView = True
 
     End Sub
 
@@ -2813,8 +2773,13 @@ Public Class FormSetup
                 ReallyQuit()
             End If
         Else
-            ReallyQuit()
+            If Not Foreground() Then
+                ReallyQuit()
+            Else
+                End ' close as serviuce is up
+            End If
         End If
+
 
     End Sub
 
@@ -2874,6 +2839,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = False
         OffToolStripMenuItem.Checked = True
         Settings.ShowMysqlStats = False
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
@@ -2882,6 +2848,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = True
         OffToolStripMenuItem.Checked = False
         Settings.ShowMysqlStats = True
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
@@ -2976,6 +2943,7 @@ Public Class FormSetup
             TextPrint(My.Resources.Apache_Disabled)
         End If
         StopApache()
+        Sleep(5000)
         StartApache()
         PropAborting = False
 
@@ -3128,6 +3096,8 @@ Public Class FormSetup
     Private Sub ShowAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowAllToolStripMenuItem.Click
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWRESTORE)
+            Thaw(RegionUuid)
+            Timer(RegionUuid) = DateAdd("n", 1, Date.Now) ' Add  minutes for console to do things
         Next
     End Sub
 
@@ -3149,6 +3119,8 @@ Public Class FormSetup
         INI.SetIni("Startup", "port", CStr(Settings.HttpPort))
         INI.SetIni("Startup", "host", CStr(Settings.PublicIP))
         INI.SaveIni()
+
+        Environment.SetEnvironmentVariable("OSIM_LOGPATH", Settings.CurrentDirectory() & "\logs")
 
         Dim ConsoleProcess As New Process
         ConsoleProcess.StartInfo.UseShellExecute = False
@@ -3284,6 +3256,9 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
+        ZapRegions()
+        Zap("Robust")
+        Zap("Icecast")
 
     End Sub
 
@@ -3315,7 +3290,6 @@ Public Class FormSetup
 
         PropAborting = True
         StopIcecast()
-        Sleep(1000)
         PropAborting = False
 
     End Sub
@@ -3449,6 +3423,8 @@ Public Class FormSetup
         Next
 
     End Sub
+
+
 
 #End Region
 

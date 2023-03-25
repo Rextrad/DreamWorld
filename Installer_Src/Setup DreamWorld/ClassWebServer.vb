@@ -17,7 +17,6 @@ Public Class NetServer
     Private Shared singleWebserver As NetServer
     Dim listen As Boolean = True
     Private MyPort As String
-    Private running As Boolean
     Private WebThread As Thread
 
 #End Region
@@ -32,7 +31,6 @@ Public Class NetServer
         MyPort = CStr(settings.DiagnosticPort)
         settings.CurrentDirectory = pathinfo
 
-        If running Then Return
 
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Starting_DiagPort_Webserver)
         WebThread = New Thread(AddressOf Looper)
@@ -44,8 +42,6 @@ Public Class NetServer
         End Try
         WebThread.Priority = ThreadPriority.Highest
         WebThread.Start()
-
-        running = True
 
     End Sub
 
@@ -165,7 +161,7 @@ Public Class NetServer
 
         End Using
 
-        running = False
+
 
     End Sub
 

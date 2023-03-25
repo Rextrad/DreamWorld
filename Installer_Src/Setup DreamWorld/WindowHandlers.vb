@@ -6,6 +6,7 @@
 #End Region
 
 Imports System.Collections.Concurrent
+Imports System.Security.Policy
 Imports System.Threading
 
 Module WindowHandlers
@@ -95,7 +96,8 @@ Module WindowHandlers
                 AppActivate(PID)
                 SendKeys.Send("{ENTER}" & command & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
                 SendKeys.Flush()
-            Catch
+            Catch ex As ArithmeticException
+                BreakPoint.Print(ex.Message)
             End Try
             Return
         End If
@@ -291,6 +293,55 @@ Module WindowHandlers
         End If
 
     End Function
+    ''' <summary>
+    ''' Returns if Service is running and we are foreground App
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function Foreground() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
+
+        If ServiceExists("DreamGridService") And
+                CBool(Param.ToLower <> "service") And
+                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
+
+    ''' <summary>
+    ''' Send a message to the service
+    ''' </summary>
+    ''' <param name="Command">A string command</param>
+    Public Function SignalService(Command As String) As Boolean
+
+        If Not Foreground() Then Return False
+
+
+        Using client As New TimedWebClient With {
+                .Timeout = 10000
+                } ' download client for web pages
+            Try
+                Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
+                Diagnostics.Debug.Print(Url)
+                Dim result = client.DownloadString(Url)
+
+                If result = "ACK" Then Return True
+            Catch ex As Exception
+                BreakPoint.Print(ex.Message)
+                Return False
+            End Try
+        End Using
+        Return False
+
+    End Function
+
 
     Public Sub SendMsg(msg As String)
 
@@ -352,7 +403,7 @@ Module WindowHandlers
             While myhandle = IntPtr.Zero
                 WindowCounter += 1
                 If WindowCounter > 600 Then '  60 seconds for process to start
-                    ErrorLog("SetWindowTextCall cannot get MainWindowHandle for " & windowName)
+                    ErrorLog($"{My.Resources.CannotgetWindowHandle} : {windowName}")
                     Return
                 End If
                 Thread.Sleep(100)
@@ -360,7 +411,7 @@ Module WindowHandlers
                 myhandle = myProcess.MainWindowHandle
             End While
         Catch ex As Exception
-            BreakPoint.Print(windowName & ":" & ex.Message)
+            BreakPoint.Print($"{windowName} {ex.Message}")
             Return
         End Try
 
@@ -387,8 +438,7 @@ Module WindowHandlers
             End Try
 
             WindowCounter += 1
-            If WindowCounter > 6000 Then '  1 minute
-                ErrorLog("SetWindowTextCall " & windowName & " timeout setting title")
+            If WindowCounter > 6000 Then '  1 minute                
                 Return
             End If
 
@@ -419,9 +469,10 @@ Module WindowHandlers
 
             While Not HandleValid AndAlso ctr > 0
                 Try
-                    Dim r = SetForegroundWindow(handle)
-                    HandleValid = ShowWindow(handle, command)
-                    If HandleValid Then Return True
+                    If SetForegroundWindow(handle) Then
+                        HandleValid = ShowWindow(handle, command)
+                        If HandleValid Then Return True
+                    End If
                 Catch ex As Exception
                     BreakPoint.Print(ex.Message)
                 End Try
@@ -438,7 +489,6 @@ Module WindowHandlers
     Public Function WaitForPID(myProcess As Process) As Integer
 
         If myProcess Is Nothing Then
-            BreakPoint.Print("No Process!")
             Return 0
         End If
 
@@ -456,7 +506,7 @@ Module WindowHandlers
             Sleep(100)
             TooMany += 1
         Loop
-        BreakPoint.Print("No Pid")
+
         Return 0
 
     End Function
@@ -467,16 +517,21 @@ Module WindowHandlers
         ''' <param name="processName"></param>
         ''' <returns></returns>
 
+        If SignalService($"Stop{processName}") Then Return
+
+        PropAborting = True
+
         ' Kill process by name
         For Each P As Process In System.Diagnostics.Process.GetProcessesByName(processName)
-            Log(My.Resources.Info_word, "Stopping process " & processName)
+            Log(My.Resources.Info_word, $"{My.Resources.Stoppingprocess} {processName}")
             Try
                 P.Kill()
             Catch ex As Exception
-                BreakPoint.Dump(ex)
+                BreakPoint.Print(ex.Message)
             End Try
-            Application.DoEvents()
         Next
+
+        PropAborting = False
 
     End Sub
 

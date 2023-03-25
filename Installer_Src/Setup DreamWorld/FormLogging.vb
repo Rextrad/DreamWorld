@@ -287,7 +287,9 @@ Public Class FormLogging
 
                 Dim Robust = IO.Path.Combine(Settings.OpensimBinPath, "Robust.log")
                 If System.IO.File.Exists(Robust) Then
-                    Using F As New FileStream(Robust, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                    Dim F As FileStream = Nothing
+                    Try
+                        F = New FileStream(Robust, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
                         Using S = New StreamReader(F)
                             'now loop through each line
                             While S.Peek <> -1
@@ -296,8 +298,13 @@ Public Class FormLogging
                                 Lookat(l, outputFile)
                                 LookatMac(l, outputFile)
                             End While
+
                         End Using
-                    End Using
+                        F = Nothing
+                    Finally
+                        F?.Dispose()
+                    End Try
+
                 End If
                 outputFile.WriteLine("</table>")
             End Using
@@ -313,7 +320,9 @@ Public Class FormLogging
         Try
             Dim Region = IO.Path.Combine(Settings.OpensimBinPath, $"Regions\{GroupName}\Opensim.log")
             If System.IO.File.Exists(Region) Then
-                Using F = New FileStream(Region, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                Dim F As FileStream = Nothing
+                Try
+                    F = New FileStream(Region, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
                     Using S = New StreamReader(F)
                         'now loop through each line
                         While S.Peek <> -1
@@ -323,8 +332,12 @@ Public Class FormLogging
                             LookatYengine(line, outputfile, RegionName)
                             Application.DoEvents()
                         End While
+                        F = Nothing
                     End Using
-                End Using
+                Finally
+                    F?.Dispose()
+                End Try
+
             End If
         Catch ex As Exception
             MsgBox(ex.Message, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)

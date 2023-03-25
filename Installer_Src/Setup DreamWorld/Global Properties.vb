@@ -21,7 +21,6 @@ Module Global_Properties
     Public BackupAbort As Boolean
     Public Bench As New Benchmark()
     Public CachedAvatars As New List(Of AvatarObject)
-    Public gEstateName As String = ""
     Public gEstateOwner As String = ""
     Public MapX As Integer = 100
     Public MapY As Integer = 100
@@ -45,6 +44,7 @@ Module Global_Properties
 #Region "Subs"
 
     Private ReadOnly TextLock As New Object
+    Private ws As NetServer
 
     Public Sub Sleep(value As Integer)
         ''' <summary>Sleep(ms)</summary>
@@ -101,6 +101,15 @@ Module Global_Properties
 #End Region
 
 #Region "Properties"
+
+    Public Property PropWebserver As NetServer
+        Get
+            Return ws
+        End Get
+        Set(value As NetServer)
+            ws = value
+        End Set
+    End Property
 
     Public ReadOnly Property GitVersion As String
         ' output of  git rev-parse --short HEAD   from Perl

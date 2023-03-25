@@ -287,7 +287,6 @@ Public Class FormBulkLoad
 
     Private Sub ResetRun()
 
-        gEstateName = ""
         FormSetup.Buttons(FormSetup.StopButton)
         StopLoading = "Stopped"
 
@@ -343,7 +342,7 @@ Public Class FormBulkLoad
 
     Private Sub BulkLoadButton_Click(sender As Object, e As EventArgs) Handles BulkLoadButton.Click
 
-        If gEstateName.Length = 0 Then
+        If Settings.EstateName.Length = 0 Then
             MsgBox(My.Resources.TryAgain)
             Return
         End If
@@ -359,7 +358,8 @@ Public Class FormBulkLoad
 
     Private Sub EstateName_TextChanged(sender As Object, e As EventArgs) Handles EstateName.TextChanged
 
-        gEstateName = EstateName.Text
+        Settings.EstateName = EstateName.Text
+        Settings.SaveSettings()
 
     End Sub
 
@@ -368,8 +368,6 @@ Public Class FormBulkLoad
         If StopLoading = "Running" Then
             If (MsgBox("Abort Loading?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, "") = DialogResult.No) Then
                 e.Cancel = True
-            Else
-                gEstateName = ""
             End If
         End If
 
@@ -411,6 +409,7 @@ Public Class FormBulkLoad
 
     End Sub
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Sub StartBulkLoading()
 
         If BulkLoadButton.Text = My.Resources.Abort Then
@@ -437,7 +436,7 @@ Public Class FormBulkLoad
         If BulkLoadButton.Text = My.Resources.Aborting Then
             TextPrint(My.Resources.Aborted_word)
             Sleep(1000)
-            Me.Close()
+            Close()
         End If
 
         BulkLoadButton.Text = My.Resources.BulkLoad

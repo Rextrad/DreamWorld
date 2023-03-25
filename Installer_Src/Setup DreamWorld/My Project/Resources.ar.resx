@@ -3885,4 +3885,100 @@
   <data name="ServiceFailedtoStop" xml:space="preserve">
     <value>تأمر الخدمة بالتوقف</value>
   </data>
+  <data name="StartMysql" xml:space="preserve">
+    <value>بدء تشغيل الخلية</value>
+  </data>
+  <data name="Freeze_All_Regions" xml:space="preserve">
+    <value>تجميد جميع المناطق</value>
+  </data>
+  <data name="LoadRegionOar" xml:space="preserve">
+    <value>تحميل منطقة المجذاف</value>
+  </data>
+  <data name="Region_OAR_Load" xml:space="preserve">
+    <value>تحميل OAR للمنطقة وحفظها ونسخها احتياطيا</value>
+  </data>
+  <data name="SaveallRunningRegionstoOARs" xml:space="preserve">
+    <value>احفظ جميع المناطق قيد التشغيل في OARs</value>
+  </data>
+  <data name="SaveRegionOAR" xml:space="preserve">
+    <value>حفظ المنطقة OAR</value>
+  </data>
+  <data name="CheckInventory" xml:space="preserve">
+    <value>تحقق من المخزون</value>
+  </data>
+  <data name="ChooseAUser" xml:space="preserve">
+    <value>اختر مستخدما</value>
+  </data>
+  <data name="ConnecttoIceCast" xml:space="preserve">
+    <value>الاتصال بالجليد المصبوب</value>
+  </data>
+  <data name="ConnecttoWebpage" xml:space="preserve">
+    <value>الاتصال بصفحة ويب</value>
+  </data>
+  <data name="DeleteService" xml:space="preserve">
+    <value>حذف الخدمة</value>
+  </data>
+  <data name="Everyone" xml:space="preserve">
+    <value>كل</value>
+  </data>
+  <data name="FindIARsOnOutworldz" xml:space="preserve">
+    <value>ابحث عن IARs على Outworldz</value>
+  </data>
+  <data name="IceCast" xml:space="preserve">
+    <value>آيس كاست</value>
+  </data>
+  <data name="InventoryIARLoadAndSave" xml:space="preserve">
+    <value>تحميل المخزون IAR وحفظه</value>
+  </data>
+  <data name="KickUser" xml:space="preserve">
+    <value>ركلة المستخدم</value>
+  </data>
+  <data name="LoadInventoryIAR" xml:space="preserve">
+    <value>تحميل المخزون IAR</value>
+  </data>
+  <data name="LoadLocalIAR" xml:space="preserve">
+    <value>تحميل IAR المحلي</value>
+  </data>
+  <data name="LoadLocalOAR" xml:space="preserve">
+    <value>تحميل OAR المحلي</value>
+  </data>
+  <data name="SaveInventoryIAR" xml:space="preserve">
+    <value>حفظ المخزون IAR</value>
+  </data>
+  <data name="SearchforOarsatOutworldz" xml:space="preserve">
+    <value>ابحث عن المجاذيف في Outworldz</value>
+  </data>
+  <data name="StartDreamGridService" xml:space="preserve">
+    <value>خدمة شبكة ستارت دريم</value>
+  </data>
+  <data name="StartIcecastService" xml:space="preserve">
+    <value>ابدأ خدمة آيس كاست</value>
+  </data>
+  <data name="StartRobust" xml:space="preserve">
+    <value>ابدأ بقوة</value>
+  </data>
+  <data name="CannotgetWindowHandle" xml:space="preserve">
+    <value>لا يمكن الحصول على مقبض النافذة</value>
+  </data>
+  <data name="Stoppingprocess" xml:space="preserve">
+    <value>عملية التوقف</value>
+  </data>
+  <data name="StartApacheService" xml:space="preserve">
+    <value>بدء خدمة اباتشي</value>
+  </data>
+  <data name="SSL" xml:space="preserve">
+    <value>إس إس إل</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>ذهب</value>
+  </data>
+  <data name="Realign" xml:space="preserve">
+    <value>اعاده</value>
+  </data>
+  <data name="NewRegion" xml:space="preserve">
+    <value>منطقة جديدة</value>
+  </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>تركيب وحدات بيرل الضرورية</value>
+  </data>
 </root>
