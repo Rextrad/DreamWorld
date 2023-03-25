@@ -73,6 +73,7 @@
         If Not NssmCommand("start DreamGridService") Then
             TextPrint(My.Resources.Running_word)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
+            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoStart)
