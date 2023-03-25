@@ -155,7 +155,7 @@ Public Class FormBulkLoad
                         ResetRun()
                         Return
                     End If
-                    RegionUUID = CreateRegionStruct(shortname)
+                    RegionUUID = CreateRegionStruct(shortname, shortname)
 
                     ' bump across 50 regions, then move up the Max size of that row +1
                     If SizeRegion > MaxSizeThisRow Then

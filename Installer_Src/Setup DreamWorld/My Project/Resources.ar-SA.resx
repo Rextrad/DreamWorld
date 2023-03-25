@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>منطقة جديدة</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>تركيب وحدات بيرل الضرورية</value>
+  </data>
 </root>

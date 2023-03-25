@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>Новый регион</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Установка необходимых модулей Perl</value>
+  </data>
 </root>

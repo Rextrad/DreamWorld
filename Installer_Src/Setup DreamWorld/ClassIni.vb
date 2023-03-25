@@ -222,7 +222,6 @@ Public Class LoadIni
                     Dim Data = _parser.ReadFile(FileName, Encoding)
                     Return Data
                 Catch ex As Exception
-                    BreakPoint.Dump(ex)
                     waiting += 1 ' 10 sec
                     Sleep(100)
                 End Try

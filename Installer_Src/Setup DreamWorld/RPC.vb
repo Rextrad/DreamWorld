@@ -69,7 +69,7 @@ Module RPC
 
         Dim Group = Group_Name(RegionUUID)
 
-        For Each RegionUUID In RegionUuidListByName(Group)
+        For Each RegionUUID In RegionUuidListFromGroup(Group)
             RegionStatus(RegionUUID) = nextstate
         Next
 
@@ -204,7 +204,7 @@ Module RPC
 
         Dim Group = Group_Name(RegionUUID)
 
-        For Each RegionUUID In RegionUuidListByName(Group)
+        For Each RegionUUID In RegionUuidListFromGroup(Group)
             RegionStatus(RegionUUID) = nextstate
         Next
 

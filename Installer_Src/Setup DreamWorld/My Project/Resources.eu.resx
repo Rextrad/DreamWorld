@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>Eskualde berria</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Perl moduluak instalatzea</value>
+  </data>
 </root>

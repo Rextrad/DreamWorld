@@ -255,7 +255,7 @@ Public Class FormRegionlist
 
             ' if any avatars in any region, give them a choice.
             Dim StopIt As Boolean = True
-            For Each num In RegionUuidListByName(Group_Name(RegionUUID))
+            For Each num In RegionUuidListFromGroup(Group_Name(RegionUUID))
                 ' Ask before killing any people
                 If AvatarCount(num) > 0 Then
                     Dim response As MsgBoxResult
@@ -281,7 +281,7 @@ Public Class FormRegionlist
 
             If Not Checkport(RegionUUID) Then
                 ' shut down all regions in the DOS box
-                For Each UUID As String In RegionUuidListByName(Group_Name(RegionUUID))
+                For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
                     RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
                 Next
                 DelPidFile(RegionUUID)
@@ -289,7 +289,6 @@ Public Class FormRegionlist
             Else
 
                 If ServiceExists("DreamGridService") Then
-
                     Return
                 End If
 
@@ -298,14 +297,14 @@ Public Class FormRegionlist
                 Settings.ConsoleShow = "True"
                 If Not ShowDOSWindow(RegionUUID, SHOWWINDOWENUM.SWRESTORE) Then
                     ' shut down all regions in the DOS box
-                    For Each UUID As String In RegionUuidListByName(Group_Name(RegionUUID))
+                    For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
                         RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
                         DelPidFile(RegionUUID)
                     Next
 
                     Return
                 Else
-                    For Each UUID As String In RegionUuidListByName(Group_Name(RegionUUID))
+                    For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
                         RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                         Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
                     Next
@@ -873,14 +872,13 @@ Public Class FormRegionlist
 
         If e.Item.Text.Length = 0 Then Return
 
-
         Dim c = CBool(e.Item.Checked)
 
         Dim RegionUUID As String = FindRegionByName(e.Item.Text)
         Dim GroupName = Group_Name(RegionUUID)
 
         ' Set all regions in Group on or off if one changed to on or off
-        Dim L = RegionUuidListByName(GroupName)
+        Dim L = RegionUuidListFromGroup(GroupName)
         For Each RegionUUID In L
             RegionEnabled(RegionUUID) = c
             If RegionIniFilePath(RegionUUID).Length > 0 Then

@@ -54,7 +54,6 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-    Private ws As NetServer
 
 #End Region
 
@@ -105,7 +104,6 @@ Public Class FormSetup
         End Set
     End Property
 
-
     Public Property PropIPv4Address() As String
         Get
             Return _IPv4Address
@@ -151,15 +149,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property PropWebserver As NetServer
-        Get
-            Return ws
-        End Get
-        Set(value As NetServer)
-            ws = value
-        End Set
-    End Property
-
     Public Property ScreenPosition1 As ClassScreenpos
         Get
             Return ScreenPosition
@@ -202,7 +191,7 @@ Public Class FormSetup
 
     Public Shared Sub ErrorGroup(Groupname As String)
 
-        For Each RegionUUID As String In RegionUuidListByName(Groupname)
+        For Each RegionUUID As String In RegionUuidListFromGroup(Groupname)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
             PokeRegionTimer(RegionUUID)
         Next
@@ -229,7 +218,7 @@ Public Class FormSetup
 
     Public Shared Sub StopGroup(Groupname As String)
 
-        For Each RegionUUID As String In RegionUuidListByName(Groupname)
+        For Each RegionUUID As String In RegionUuidListFromGroup(Groupname)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
             PokeRegionTimer(RegionUUID)
         Next
@@ -429,7 +418,6 @@ Public Class FormSetup
         SaveRegionOARToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Save_Region_OAR_word
 
         Me.Text = Global.Outworldz.My.Resources.Resources.DreamGrid_word
-
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
@@ -568,6 +556,12 @@ Public Class FormSetup
 
         SetPublicIP()
 
+        Dim UUID = FindRegionByName(Settings.ParkingLot)
+        If UUID.Length > 0 Then
+            Smart_Boot_Enabled(UUID) = False
+            Smart_Suspend_Enabled(UUID) = False
+        End If
+
         If Not Settings.DnsTestPassed Then
             MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
         End If
@@ -577,7 +571,7 @@ Public Class FormSetup
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
-            Sleep(100)
+            Thread.Sleep(100)
 
             If TestPrivateLoopback(True) Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
@@ -648,12 +642,12 @@ Public Class FormSetup
             HelpOnce("License") ' license on bottom
             HelpOnce("Startup")
 
-            ' also turn on the lights for the other services.
-            IsRobustRunning()
-            IsApacheRunning()
-            IsIceCastRunning()
-
         End If
+        ' also turn on the lights for the other services.
+        IsRobustRunning()
+        IsApacheRunning()
+        StartIcecast()
+        isDreamGridServiceRunning()
 
         Joomla.CheckForjOpensimUpdate()
 
@@ -696,7 +690,7 @@ Public Class FormSetup
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
-            Sleep(30000)
+            Sleep(10000)
             Startup()
             Return
         Else
@@ -844,7 +838,6 @@ Public Class FormSetup
 
         If CheckOverLap() Then Return False
 
-
         If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
             TextPrint("Starting Service. No Opensim DOS boxes will show")
             If Not NssmService.StartService() Then
@@ -852,9 +845,8 @@ Public Class FormSetup
             End If
         End If
 
-
         If Settings.ServerType = RobustServerName Then
-            StartRobust()
+
             Dim ctr = 60
             While Not IsRobustRunning() AndAlso ctr > 0
                 Sleep(1000)
@@ -887,7 +879,6 @@ Public Class FormSetup
 
         Next
         CalcCPU()
-
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
@@ -1005,40 +996,17 @@ Public Class FormSetup
             ' now look at the exit stack
             While Not ExitList.IsEmpty
 
-                Dim GroupName = ExitList.Keys.First
-                Dim Reason = ExitList.Item(GroupName) ' NoLogin or Exit
+                Dim RegionName = ExitList.Keys.First
+                Dim RegionUUID = ExitList(RegionName)
+                Dim GroupName = Group_Name(RegionUUID)
+                Dim Status = RegionStatus(RegionUUID)
+                Dim Grouplist = RegionUuidListFromGroup(GroupName)
 
-                TextPrint(GroupName & " " & Reason)
-                Dim out As String = ""
-
-                ' Need a region number and a Name. Name is either a region or a Group. For groups we need to get a region name from the group
-                Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
-
-                Dim PID As Integer
-                Dim RegionUUID As String = ""
-                If GroupList.Count > 0 Then
-                    RegionUUID = GroupList(0)
-
-                    PID = GetPIDFromFile(Group_Name(RegionUUID))
-                    DelPidFile(RegionUUID) 'kill the disk PID
-                Else
-                    BreakPoint.Print("No UUID!")
-                    ExitList.TryRemove(GroupName, "")
-                    Continue While
-                End If
-
+                DelPidFile(RegionUUID) 'kill the disk PID
                 ToDoList.Remove(RegionUUID)
 
-                If Reason = "NoLogin" Then
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
-                    PropUpdateView = True
-                    ExitList.TryRemove(RegionUUID, "")
-                    Continue While
-                End If
-
-                Dim Status = RegionStatus(RegionUUID)
-                Dim RegionName = Region_Name(RegionUUID)
-
+                TextPrint($"{GroupName} {My.Resources.Quit_unexpectedly}")
+                Dim out As String = ""
                 Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
 
                 If Not RegionEnabled(RegionUUID) Then
@@ -1047,7 +1015,7 @@ Public Class FormSetup
                 End If
 
                 If Status = SIMSTATUSENUM.ShuttingDownForGood Then
-                    For Each UUID As String In RegionUuidListByName(GroupName)
+                    For Each UUID As String In RegionUuidListFromGroup(GroupName)
                         RegionStatus(UUID) = SIMSTATUSENUM.Stopped
                     Next
 
@@ -1063,7 +1031,7 @@ Public Class FormSetup
                     'RecyclingDown = 4
 
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
-                    For Each R In GroupList
+                    For Each R In Grouplist
                         RegionStatus(R) = SIMSTATUSENUM.RestartStage2
                     Next
                     PropUpdateView = True
@@ -1071,10 +1039,10 @@ Public Class FormSetup
                     Continue While
 
                 ElseIf (Status = SIMSTATUSENUM.RecyclingUp Or
-                    Status = SIMSTATUSENUM.Booting Or
-                    Status = SIMSTATUSENUM.Booted Or
-                    Status = SIMSTATUSENUM.Suspended) And
-                    Not PropAborting Then
+                Status = SIMSTATUSENUM.Booting Or
+                Status = SIMSTATUSENUM.Booted Or
+                Status = SIMSTATUSENUM.Suspended) And
+                Not PropAborting Then
 
                     ' Maybe we crashed during warm up or running. Skip prompt if auto restart on crash and restart the beast
                     Status = SIMSTATUSENUM.Error
@@ -1107,7 +1075,7 @@ Public Class FormSetup
                         TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " #" & CStr(CrashCounter(RegionUUID)))
                         StopGroup(GroupName)
                         TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
-                        For Each R In GroupList
+                        For Each R In Grouplist
                             RegionStatus(R) = SIMSTATUSENUM.RestartStage2
                         Next
 
@@ -1134,14 +1102,12 @@ Public Class FormSetup
                     StopGroup(GroupName)
                 End If
 
-                ExitList.TryRemove(GroupName, "")
+                ExitList.TryRemove(RegionName, "")
 
             End While
         End If
 
-
     End Sub
-
 
     Private Sub RestartDOSboxes()
 
@@ -2789,7 +2755,6 @@ Public Class FormSetup
             End If
         End If
 
-
     End Sub
 
     Private Sub MnuHide_Click(sender As System.Object, e As EventArgs) Handles mnuHide.Click
@@ -2848,6 +2813,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = False
         OffToolStripMenuItem.Checked = True
         Settings.ShowMysqlStats = False
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
@@ -2856,6 +2822,7 @@ Public Class FormSetup
         OnToolStripMenuItem.Checked = True
         OffToolStripMenuItem.Checked = False
         Settings.ShowMysqlStats = True
+        QuerySuper("TRUNCATE table mysql.general_log;")
 
     End Sub
 
@@ -3212,10 +3179,6 @@ Public Class FormSetup
 
         NssmService.InstallService()
         NssmService.StartService()
-        Sleep(5000)
-        If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-            Logger("Services", "DreamGrid Is Running As a service", "Outworldz")
-        End If
 
     End Sub
 
@@ -3267,6 +3230,9 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
+        ZapRegions()
+        Zap("Robust")
+        Zap("Icecast")
 
     End Sub
 
@@ -3431,8 +3397,6 @@ Public Class FormSetup
         Next
 
     End Sub
-
-
 
 #End Region
 

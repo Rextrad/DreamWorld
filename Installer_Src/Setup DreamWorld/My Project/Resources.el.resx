@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>Νέα Περιοχή</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Εγκατάσταση των απαραίτητων μονάδων Perl</value>
+  </data>
 </root>

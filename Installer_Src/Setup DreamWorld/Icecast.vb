@@ -76,23 +76,10 @@ Module Icecast
             Return True
         End If
 
-        If CheckPortSocket(Settings.WANIP, Settings.SCPortBase) Then
-            IceCastIcon(True)
-            Return True
-        End If
-
-        If SignalService("StartIcecast") Then
-            If CheckPortSocket(Settings.WANIP, Settings.SCPortBase) Then
-                IceCastIcon(True)
-                Return True
-            Else
-                IceCastIcon(False)
-            End If
-        End If
 
         Try
             ' Check if DOS box exists, first, if so, its running.
-            For Each p In Process.GetProcesses
+            For Each p In Process.GetProcessesByName("icecast")
                 If p.ProcessName = "icecast" Then
                     PropIcecastProcID = p.Id
 
@@ -161,29 +148,6 @@ Module Icecast
 
     End Sub
 
-    Public Function IsIceCastRunning() As Boolean
-        ''' <summary>Check is Icecast port 8081 is up</summary>
-        ''' <returns>boolean</returns>
-        '''
-        Dim Up As String
-        Using TimedClient As New TimedWebClient With {
-               .Timeout = 1000
-           }
-            Try
-                Up = TimedClient.DownloadString("http://" & Settings.PublicIP & ":" & Settings.SCPortBase & "/?_Opensim=" & RandomNumber.Random())
-            Catch ex As Exception
-                IceCastIcon(False)
-                Return False
-            End Try
-
-            If Up.Length = 0 Then
-                Return False
-            End If
-        End Using
-        IceCastIcon(True)
-        Return True
-
-    End Function
 
     Public Sub StopIcecast()
 

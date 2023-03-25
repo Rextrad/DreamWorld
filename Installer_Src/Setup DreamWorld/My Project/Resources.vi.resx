@@ -3978,4 +3978,7 @@
   <data name="NewRegion" xml:space="preserve">
     <value>Khu vực mới</value>
   </data>
+  <data name="InstallingnecessaryPerlModules" xml:space="preserve">
+    <value>Cài đặt các mô-đun Perl cần thiết</value>
+  </data>
 </root>

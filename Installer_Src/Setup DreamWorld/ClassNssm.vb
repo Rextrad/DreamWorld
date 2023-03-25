@@ -16,7 +16,9 @@
         If NssmCommand("stop DreamGridService") Then
             TextPrint(My.Resources.ServiceFailedtoStop)
         End If
+
         Sleep(1000)
+
         If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
             TextPrint(My.Resources.ServiceRemoved)
@@ -89,7 +91,7 @@
 
         ' wait for port to come up in Service
         NssmCommand("start DreamGridService")
-        Sleep(2000) ' 2 seconds 
+        Sleep(2000) ' 2 seconds
         Dim ctr = 100
         While ctr > 0
 
@@ -107,7 +109,6 @@
         TextPrint(My.Resources.ServiceFailedtoStart)
         FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
         Return False
-
 
     End Function
 
@@ -148,7 +149,6 @@
             BootProcess.WaitForExit()
             Dim code = BootProcess.ExitCode
             If code = 0 Then
-                TextPrint($"{My.Resources.Failedto} {command}")
                 Return False
             End If
         Catch ex As Exception

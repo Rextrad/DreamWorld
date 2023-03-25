@@ -29,7 +29,7 @@ Public Class IniWriter
 
         ' make a backup
         DeleteFile($"{_Filename}.bak")
-        Sleep(10)
+        Threading.Thread.Sleep(10)
         Try
             My.Computer.FileSystem.RenameFile(_Filename, $"{name}.bak")
         Catch ex As Exception

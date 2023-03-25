@@ -32,7 +32,7 @@
 
         If Smart_Suspend_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
             Dim Groupname = Group_Name(RegionUUID)
-            For Each UUID As String In RegionUuidListByName(Groupname)
+            For Each UUID As String In RegionUuidListFromGroup(Groupname)
                 Logger("State", $"Pausing {Region_Name(UUID)}", "Outworldz")
                 Freeze(UUID)
             Next
@@ -48,11 +48,12 @@
     Public Sub Thaw(RegionUUID As String)
 
         Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
-
-        Try
-            NtResumeProcess(Process.GetProcessById(PID).Handle)
-        Catch
-        End Try
+        If PID > 0 Then
+            Try
+                NtResumeProcess(Process.GetProcessById(PID).Handle)
+            Catch
+            End Try
+        End If
 
     End Sub
 

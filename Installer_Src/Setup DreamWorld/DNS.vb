@@ -94,6 +94,8 @@ Module DNS
 
     Public Sub SetPublicIP()
 
+        TextPrint(My.Resources.Public_IP_Setup_Word)
+
         If PropMyUPnpMap Is Nothing Then Return
 
         Settings.WANIP = WANIP()

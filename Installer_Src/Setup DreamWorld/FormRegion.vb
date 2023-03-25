@@ -273,7 +273,7 @@ Public Class FormRegion
             ConciergeCheckBox.Checked = False
             MaxPrims.Text = 45000.ToString(Globalization.CultureInfo.InvariantCulture)
             MaxAgents.Text = 100.ToString(Globalization.CultureInfo.InvariantCulture)
-            RegionUUID = CreateRegionStruct("")
+            RegionUUID = CreateRegionStruct("", "")
             UUID.Text = RegionUUID
             Gods_Use_Default.Checked = True
 
@@ -753,12 +753,12 @@ Public Class FormRegion
             Dim RegionUUID As String = FindRegionByName(RegionName.Text)
             If RegionUUID.Length > 0 Then
 
-                If CheckPort(RegionUUID) Then
+                If Checkport(RegionUUID) Then
                     ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                 End If
 
                 Dim loopctr = 120 ' wait 2 minutes
-                While CheckPort(RegionUUID) And loopctr > 0
+                While Checkport(RegionUUID) And loopctr > 0
                     Sleep(1000)
                     loopctr -= 1
                 End While
