@@ -101,7 +101,7 @@ Module Robust
     Public Sub RobustIcon(Running As Boolean)
 
         If Not Running Then
-            FormSetup.RestartRobustIcon.Image = Global.Outworldz.My.Resources.gear
+            FormSetup.RestartRobustIcon.Image = Global.Outworldz.My.Resources.nav_plain_red
         Else
             FormSetup.RestartRobustIcon.Image = Global.Outworldz.My.Resources.check2
         End If

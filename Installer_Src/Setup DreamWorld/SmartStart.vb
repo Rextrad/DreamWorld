@@ -179,7 +179,7 @@ Module SmartStart
                                 ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                             Else
                                 PauseRegion(RegionUUID)
-                                For Each UUID In RegionUuidListByName(GroupName)
+                                For Each UUID In RegionUuidListFromGroup(GroupName)
                                     RegionStatus(UUID) = SIMSTATUSENUM.Suspended
                                 Next
                             End If
@@ -240,7 +240,7 @@ Module SmartStart
                     If Not PropOpensimIsRunning() Then Continue For
 
                     Logger("State", "State Is RestartPending", "Outworldz")
-                    Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
+                    Dim GroupList As List(Of String) = RegionUuidListFromGroup(GroupName)
                     For Each R As String In GroupList
                         PokeRegionTimer(RegionUUID)
                         Boot(RegionName)
@@ -257,7 +257,7 @@ Module SmartStart
                     If Not PropOpensimIsRunning() Then Continue For
 
                     Logger("State", $"{GroupName} Is Resuming", "Outworldz")
-                    Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
+                    Dim GroupList As List(Of String) = RegionUuidListFromGroup(GroupName)
                     For Each R As String In GroupList
                         If RegionEnabled(RegionUUID) Then
                             Boot(RegionName)
@@ -273,7 +273,7 @@ Module SmartStart
                     If Not PropOpensimIsRunning() Then Continue For
 
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Pending_word)
-                    Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
+                    Dim GroupList As List(Of String) = RegionUuidListFromGroup(GroupName)
                     For Each R In GroupList
                         RegionStatus(R) = SIMSTATUSENUM.RestartPending
                         PokeRegionTimer(RegionUUID)
@@ -806,7 +806,6 @@ Module SmartStart
     '''
     Public Function Boot(BootName As String) As Boolean
 
-
         SyncLock BootupLock
 
             PropOpensimIsRunning() = True
@@ -831,13 +830,11 @@ Module SmartStart
 
             Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
 
-            ' Detect if a region Window is already running
+            ' Detect if a region  is already running
             ' needs to be captured into the event handler
 
-            If CheckPort(RegionUUID) Then
+            If Checkport(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-
-                PropUpdateView = True ' make form refresh
 
                 Try
                     Dim P = Process.GetProcessById(PID)
@@ -847,6 +844,8 @@ Module SmartStart
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
                     Return False
                 End Try
+
+                PropUpdateView = True ' make form refresh
 
                 If Settings.Smart_Start_Enabled And
                     Smart_Suspend_Enabled(RegionUUID) Then
@@ -865,7 +864,6 @@ Module SmartStart
                     Not CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
 
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-
                 Else
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 End If
@@ -920,7 +918,7 @@ Module SmartStart
             Dim ok As Boolean = False
 
             ' Mark them before we boot as a crash will immediately trigger the event that it exited
-            For Each UUID As String In RegionUuidListByName(GroupName)
+            For Each UUID As String In RegionUuidListFromGroup(GroupName)
                 RegionStatus(UUID) = SIMSTATUSENUM.Booting
                 Timer(RegionUUID) = Date.Now
             Next
@@ -1014,14 +1012,14 @@ Module SmartStart
     Public Sub ResumeRegion(RegionUUID As String)
 
         ' smart boot Freeze/Thaw type
-        For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
+        For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
             Thaw(RegionUUID)
             RunTaskList(RegionUUID)
             PokeRegionTimer(RegionUUID)
         Next
 
-        If CheckPort(RegionUUID) Then
-            For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
+        If Checkport(RegionUUID) Then
+            For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 PokeRegionTimer(RegionUUID)
                 RunTaskList(RegionUUID)
@@ -1035,7 +1033,7 @@ Module SmartStart
                  RegionStatus(RegionUUID) = SIMSTATUSENUM.ShuttingDownForGood Then
 
             PokeRegionTimer(RegionUUID)
-            For Each RegionUUID In RegionUuidListByName(Group_Name(RegionUUID))
+            For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
             Next
             PropUpdateView = True ' make form refresh

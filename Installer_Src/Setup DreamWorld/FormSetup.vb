@@ -191,7 +191,7 @@ Public Class FormSetup
 
     Public Shared Sub ErrorGroup(Groupname As String)
 
-        For Each RegionUUID As String In RegionUuidListByName(Groupname)
+        For Each RegionUUID As String In RegionUuidListFromGroup(Groupname)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Error
             PokeRegionTimer(RegionUUID)
         Next
@@ -218,7 +218,7 @@ Public Class FormSetup
 
     Public Shared Sub StopGroup(Groupname As String)
 
-        For Each RegionUUID As String In RegionUuidListByName(Groupname)
+        For Each RegionUUID As String In RegionUuidListFromGroup(Groupname)
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
             PokeRegionTimer(RegionUUID)
         Next
@@ -555,6 +555,12 @@ Public Class FormSetup
         End If
 
         SetPublicIP()
+
+        Dim UUID = FindRegionByName(Settings.ParkingLot)
+        If UUID.Length > 0 Then
+            Smart_Boot_Enabled(UUID) = False
+            Smart_Suspend_Enabled(UUID) = False
+        End If
 
         If Not Settings.DnsTestPassed Then
             MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
@@ -990,40 +996,17 @@ Public Class FormSetup
             ' now look at the exit stack
             While Not ExitList.IsEmpty
 
-                Dim GroupName = ExitList.Keys.First
-                Dim Reason = ExitList.Item(GroupName) ' NoLogin or Exit
+                Dim RegionName = ExitList.Keys.First
+                Dim RegionUUID = ExitList(RegionName)
+                Dim GroupName = Group_Name(RegionUUID)
+                Dim Status = RegionStatus(RegionUUID)
+                Dim Grouplist = RegionUuidListFromGroup(GroupName)
 
-                TextPrint(GroupName & " " & Reason)
-                Dim out As String = ""
-
-                ' Need a region number and a Name. Name is either a region or a Group. For groups we need to get a region name from the group
-                Dim GroupList As List(Of String) = RegionUuidListByName(GroupName)
-
-                Dim PID As Integer
-                Dim RegionUUID As String = ""
-                If GroupList.Count > 0 Then
-                    RegionUUID = GroupList(0)
-
-                    PID = GetPIDFromFile(Group_Name(RegionUUID))
-                    DelPidFile(RegionUUID) 'kill the disk PID
-                Else
-                    BreakPoint.Print("No UUID!")
-                    ExitList.TryRemove(GroupName, "")
-                    Continue While
-                End If
-
+                DelPidFile(RegionUUID) 'kill the disk PID
                 ToDoList.Remove(RegionUUID)
 
-                If Reason = "NoLogin" Then
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.NoLogin
-                    PropUpdateView = True
-                    ExitList.TryRemove(RegionUUID, "")
-                    Continue While
-                End If
-
-                Dim Status = RegionStatus(RegionUUID)
-                Dim RegionName = Region_Name(RegionUUID)
-
+                TextPrint($"{GroupName} {My.Resources.Quit_unexpectedly}")
+                Dim out As String = ""
                 Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
 
                 If Not RegionEnabled(RegionUUID) Then
@@ -1032,7 +1015,7 @@ Public Class FormSetup
                 End If
 
                 If Status = SIMSTATUSENUM.ShuttingDownForGood Then
-                    For Each UUID As String In RegionUuidListByName(GroupName)
+                    For Each UUID As String In RegionUuidListFromGroup(GroupName)
                         RegionStatus(UUID) = SIMSTATUSENUM.Stopped
                     Next
 
@@ -1048,7 +1031,7 @@ Public Class FormSetup
                     'RecyclingDown = 4
 
                     TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
-                    For Each R In GroupList
+                    For Each R In Grouplist
                         RegionStatus(R) = SIMSTATUSENUM.RestartStage2
                     Next
                     PropUpdateView = True
@@ -1056,10 +1039,10 @@ Public Class FormSetup
                     Continue While
 
                 ElseIf (Status = SIMSTATUSENUM.RecyclingUp Or
-                    Status = SIMSTATUSENUM.Booting Or
-                    Status = SIMSTATUSENUM.Booted Or
-                    Status = SIMSTATUSENUM.Suspended) And
-                    Not PropAborting Then
+                Status = SIMSTATUSENUM.Booting Or
+                Status = SIMSTATUSENUM.Booted Or
+                Status = SIMSTATUSENUM.Suspended) And
+                Not PropAborting Then
 
                     ' Maybe we crashed during warm up or running. Skip prompt if auto restart on crash and restart the beast
                     Status = SIMSTATUSENUM.Error
@@ -1092,7 +1075,7 @@ Public Class FormSetup
                         TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Quit_unexpectedly & " #" & CStr(CrashCounter(RegionUUID)))
                         StopGroup(GroupName)
                         TextPrint(GroupName & " " & Global.Outworldz.My.Resources.Restart_Queued_word)
-                        For Each R In GroupList
+                        For Each R In Grouplist
                             RegionStatus(R) = SIMSTATUSENUM.RestartStage2
                         Next
 
@@ -1119,7 +1102,7 @@ Public Class FormSetup
                     StopGroup(GroupName)
                 End If
 
-                ExitList.TryRemove(GroupName, "")
+                ExitList.TryRemove(RegionName, "")
 
             End While
         End If

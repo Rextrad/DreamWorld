@@ -371,7 +371,7 @@ Module Build
         DeregisterPosition(X, Y)
 
         ' build it
-        Dim RegionUUID = CreateRegionStruct(shortname, "")
+        Dim RegionUUID = CreateRegionStruct(shortname, Group)
         ' Set the defaults for a Landfill
         CrashCounter(RegionUUID) = 0
         Coord_X(RegionUUID) = X

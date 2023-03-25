@@ -31,7 +31,6 @@ Public Class NetServer
         MyPort = CStr(settings.DiagnosticPort)
         settings.CurrentDirectory = pathinfo
 
-
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Starting_DiagPort_Webserver)
         WebThread = New Thread(AddressOf Looper)
         Try
@@ -54,6 +53,7 @@ Public Class NetServer
     End Sub
 
     Private Sub ListenerCallback(ByVal result As IAsyncResult)
+
         If result Is Nothing Then Return
         Try
             Dim listener As HttpListener = CType(result.AsyncState, HttpListener)
@@ -160,8 +160,6 @@ Public Class NetServer
             End While
 
         End Using
-
-
 
     End Sub
 

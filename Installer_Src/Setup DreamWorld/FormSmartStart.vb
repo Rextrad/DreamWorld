@@ -947,6 +947,10 @@ Public Class FormSmartStart
         Try
             Settings.ParkingLot = ParkingSpot.SelectedItem.ToString
             TextPrint($"{My.Resources.arrivals} {ParkingSpot.SelectedItem}")
+            Dim RegionUUID = FindRegionByName(Settings.ParkingLot)
+            Smart_Boot_Enabled(regionuuid) = False
+            Smart_Suspend_Enabled(regionUUID) = False
+
             Settings.SaveSettings()
         Catch
 

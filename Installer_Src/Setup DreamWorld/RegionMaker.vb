@@ -71,7 +71,7 @@ Module RegionMaker
     Public Function Init(Verbose As Boolean) As Boolean
 
         If GetAlreadyUsedPorts() = 0 Then
-            CreateRegionStruct("Welcome")
+            CreateRegionStruct("Welcome", "Welcome")
             Settings.WelcomeRegion = "Welcome"
             WriteRegionObject("Welcome", "Welcome")
             Settings.SaveSettings()
@@ -165,7 +165,7 @@ Module RegionMaker
 
     Private ReadOnly CreateRegionLock As New Object
 
-    Public Function CreateRegionStruct(name As String, Optional UUID As String = "") As String
+    Public Function CreateRegionStruct(name As String, Group As String, Optional UUID As String = "") As String
 
         SyncLock CreateRegionLock
 
@@ -187,7 +187,7 @@ Module RegionMaker
                     ._DisableGloebits = "",
                     ._FrameTime = "",
                     ._GodDefault = "",
-                    ._Group = name,
+                    ._Group = Group,
                     ._GroupPort = 0,
                     ._ManagerGod = "",
                     ._MapType = "",
@@ -424,7 +424,7 @@ Module RegionMaker
     ''' <returns>true if avatar is present</returns>
     Public Function AvatarsIsInGroup(groupname As String) As Boolean
 
-        For Each RegionUUID As String In RegionUuidListByName(groupname)
+        For Each RegionUUID As String In RegionUuidListFromGroup(groupname)
 
             If RegionStatus(RegionUUID) <> SIMSTATUSENUM.Booted Then Return False
 
@@ -573,7 +573,8 @@ Module RegionMaker
                             End If
 
                             If Verbose Then TextPrint("-> " & fName)
-                            CreateRegionStruct(fName, uuid)
+                            Dim DirName = Path.GetFileName(FolderName)
+                            CreateRegionStruct(fName, DirName, uuid)
 
                             RegionEnabled(uuid) = CBool(INI.GetIni(fName, "Enabled", "True", "Boolean"))
 
@@ -583,7 +584,6 @@ Module RegionMaker
                             Dim theEnd As Integer = RegionIniFolderPath(uuid).LastIndexOf("\", StringComparison.OrdinalIgnoreCase)
                             OpensimIniPath(uuid) = RegionIniFolderPath(uuid).Substring(0, theEnd + 1)
 
-                            Dim DirName = Path.GetFileName(FolderName)
                             If DirName.Length > 0 Then
                                 Group_Name(uuid) = DirName
                                 Group = DirName
@@ -791,7 +791,7 @@ Module RegionMaker
 
     Public Sub PokeGroupTimer(GroupName As String)
 
-        For Each RegionUUID In RegionUuidListByName(GroupName)
+        For Each RegionUUID In RegionUuidListFromGroup(GroupName)
             If Timer(RegionUUID) < Date.Now() Then
                 Timer(RegionUUID) = Date.Now()
             End If
@@ -813,7 +813,6 @@ Module RegionMaker
 
     Public Sub StopRegion(RegionUUID As String)
 
-
         If SignalService($"StopRegion&RegionUUID= {RegionUUID}") Then Return
 
         Thaw(RegionUUID)
@@ -823,7 +822,7 @@ Module RegionMaker
             ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
         Else
             ' shut down all regions in the DOS box
-            For Each UUID As String In RegionUuidListByName(Group_Name(RegionUUID))
+            For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
                 RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
             Next
         End If
@@ -1651,13 +1650,13 @@ Module RegionMaker
     ''' </summary>
     ''' <param name="Gname">Group Name</param>
     ''' <returns>List of Region UUID's</returns>
-    Public Function RegionUuidListByName(Gname As String) As List(Of String)
+    Public Function RegionUuidListFromGroup(Gname As String) As List(Of String)
 
         Dim L As New List(Of String)
         Try
             Dim pair As KeyValuePair(Of String, Region_data)
             For Each pair In RegionList
-                If pair.Value._Group = Gname Or Gname = "*" Then
+                If pair.Value._Group = Gname Then
                     L.Add(pair.Value._UUID)
                 End If
             Next
@@ -1692,9 +1691,8 @@ Module RegionMaker
         Return Out
     End Function
 
-
-
 #End Region
+
 #Region "POST"
 
     Public Function CheckPassword(post As String, machine As String) As Boolean
@@ -1753,22 +1751,28 @@ Module RegionMaker
         '"{""alert"":""region_ready"",""login"":""shutdown"",""region_name"":""8021"",""region_id"":""c46ee5e5-5bb8-4cb5-8efd-eff44a0c7160""}"
         ' we want region name, UUID and server_startup could also be a probe from the outworldz to check if ports are open.
 
-        Dim myUri = New Uri(post.ToUpper)
-
-        If post.Contains("""alert"":""Region_Ready""") Then
+        If post.Contains("""alert"":""region_ready""") Then
             WebserverList.TryAdd(post, "")
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("ALT") IsNot Nothing Then
-            Return SmartStartParse(post)
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
-            Return TOS(post)
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
-            Return SetPartner(post)
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
-            Return GetPartner(post)
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
-            Return Text2Speech(post)
-        ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
-            Return CommandProcess(post)
+        Else
+            Dim myUri As Uri
+            Try
+                myUri = New Uri(post.ToUpper)
+            Catch
+            End Try
+
+            If HttpUtility.ParseQueryString(myUri.Query).Get("ALT") IsNot Nothing Then
+                Return SmartStartParse(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
+                Return TOS(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
+                Return SetPartner(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
+                Return GetPartner(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
+                Return Text2Speech(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
+                Return CommandProcess(post)
+            End If
         End If
 
         Return "Test Completed"
@@ -1822,11 +1826,10 @@ Module RegionMaker
         End Select
         Return "ACK"
 
-
     End Function
 
-
 #End Region
+
 #Region "TOS"
 
     Private Function TOS(post As String) As String
@@ -1932,7 +1935,6 @@ Module RegionMaker
             include += "</form>"
             include += "</body>"
             include += "</html>"
-
         Finally
             streamRead?.Dispose()
         End Try
@@ -2508,7 +2510,7 @@ Module RegionMaker
             '============== Region.ini =====================
             ' Region.ini in Region Folder specific to this region
 
-            For Each uuid In RegionUuidListByName(Group)
+            For Each uuid In RegionUuidListFromGroup(Group)
 
                 Dim regionINI = New LoadIni(RegionIniFilePath(uuid), ";", System.Text.Encoding.UTF8)
 
@@ -2628,6 +2630,16 @@ Module RegionMaker
 
     End Function
 
+    Public Sub ZapRegions()
+
+        Dim L = Process.GetProcessesByName("Opensim")
+
+        For Each Process In L
+            Process.Kill()
+        Next
+
+    End Sub
+
     Private Sub SetupOpensimIM(INI As LoadIni)
 
         Dim URL = "http://" & Settings.PublicIP & ":" & Settings.ApachePort
@@ -2690,15 +2702,6 @@ Module RegionMaker
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
         End If
-
-    End Sub
-    Public Sub ZapRegions()
-
-        Dim L = Process.GetProcessesByName("Opensim")
-
-        For Each Process In L
-            Process.Kill()
-        Next
 
     End Sub
 

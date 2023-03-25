@@ -188,7 +188,7 @@ Module WindowHandlers
             Dim GroupName = Folder.Name
             Dim PID = GetPIDFromFile(GroupName)
 
-            For Each RegionUUID In RegionUuidListByName(GroupName)
+            For Each RegionUUID In RegionUuidListFromGroup(GroupName)
                 ProcessID(RegionUUID) = PID
             Next
 
@@ -292,7 +292,7 @@ Module WindowHandlers
             Return
         End If
 
-        ExitList.TryAdd(Region_Name(RegionUUID), "Exit")
+        ExitList.TryAdd(Region_Name(RegionUUID), RegionUUID)
 
     End Sub
 
