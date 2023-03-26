@@ -1399,7 +1399,6 @@ Public Class FormSetup
 
         Try
             ExitList.Clear()
-
             WebserverList.Clear()
         Catch ex As Exception
             BreakPoint.Dump(ex)

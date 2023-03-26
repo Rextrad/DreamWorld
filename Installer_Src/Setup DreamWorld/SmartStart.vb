@@ -1018,26 +1018,26 @@ Module SmartStart
             PokeRegionTimer(RegionUUID)
         Next
 
-        If Checkport(RegionUUID) Then
-            For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-                PokeRegionTimer(RegionUUID)
-                RunTaskList(RegionUUID)
-            Next
-        End If
+        '  If CheckPortSocket(Settings.PublicIP, Region_Port(RegionUUID)) Then
+        ' For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
+        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+        'PokeRegionTimer(RegionUUID)
+        'RunTaskList(RegionUUID)
+        'Next
+        'End If
 
         ' not smart boot Freeze/Thaw
-        If RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Or
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
-                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Error Or
-                 RegionStatus(RegionUUID) = SIMSTATUSENUM.ShuttingDownForGood Then
+        'If RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Or
+        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
+        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Error Or
+        'egionStatus(RegionUUID) = SIMSTATUSENUM.ShuttingDownForGood Then
 
-            PokeRegionTimer(RegionUUID)
-            For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
-                RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
-            Next
-            PropUpdateView = True ' make form refresh
-        End If
+        PokeRegionTimer(RegionUUID)
+        For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
+        Next
+        PropUpdateView = True ' make form refresh
+        'End If
 
         Application.DoEvents()
 
