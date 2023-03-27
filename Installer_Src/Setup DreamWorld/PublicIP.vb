@@ -127,24 +127,39 @@ Module PublicIP
 
     End Function
 
-    Public Function WANIP() As String
+    Public Sub WANIP()
 
-        Dim ipaddress As String = "127.0.0.1"
+        Dim O As New Object
         Using client As New System.Net.WebClient ' download client for web page
 
             Try
-                ipaddress = client.DownloadString("https://api.ipify.org")
+                Dim U = New Uri("https://api.ipify.org")
+                AddHandler client.DownloadStringCompleted, AddressOf WANIPCompleteEvent
+                client.DownloadStringAsync(U, O)
+
             Catch ex1 As Exception
                 Try
-                    ipaddress = client.DownloadString("https://api.ip.sb/ip")
+                    Dim U = New Uri("https://api.ip.sb/ip")
+                    client.DownloadStringAsync(U, O)
                 Catch ex2 As Exception
                 End Try
             End Try
 
         End Using
-        Return ipaddress
 
-    End Function
+
+    End Sub
+
+    Private Sub WANIPCompleteEvent(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
+
+        If e.Error Is Nothing Then
+            Settings.WANIP = e.Result
+        Else
+            Settings.WANIP = Settings.LANIP
+        End If
+
+
+    End Sub
 
     Private Sub Bitch(msg As String)
 
