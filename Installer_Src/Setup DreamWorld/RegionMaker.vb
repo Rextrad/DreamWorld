@@ -1754,7 +1754,7 @@ Module RegionMaker
         If post.Contains("""alert"":""region_ready""") Then
             WebserverList.TryAdd(post, "")
         Else
-            Dim myUri As Uri
+            Dim myUri As Uri = Nothing
             Try
                 myUri = New Uri(post.ToUpper)
             Catch
