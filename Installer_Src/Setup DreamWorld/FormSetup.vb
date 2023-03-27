@@ -55,6 +55,7 @@ Public Class FormSetup
     Private speed3 As Double
     Private TimerisBusy As Integer
 
+
 #End Region
 
 #Region "Properties"
@@ -183,7 +184,20 @@ Public Class FormSetup
     Private Sub Resize_page(ByVal sender As Object, ByVal e As EventArgs)
         ScreenPosition1.SaveXY(Me.Left, Me.Top)
         ScreenPosition1.SaveHW(Me.Height, Me.Width)
+
     End Sub
+    Private Sub SetLoading(displayLoader As Boolean)
+
+        If displayLoader Then
+            PictureBox1.Visible = True
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Else
+            PictureBox1.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.[Default]
+        End If
+
+    End Sub
+
 
 #End Region
 
@@ -241,13 +255,16 @@ Public Class FormSetup
 
     Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
+        SetScreen()     ' move Form to fit screen from SetXY.ini
+
+        SetLoading(True)
+
         RestartDOSboxes()           ' Icons for failed Services
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
         AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
 
-        SetScreen()     ' move Form to fit screen from SetXY.ini
 
         AddUserToolStripMenuItem.Text = Global.Outworldz.My.Resources.Add_User_word
         AdvancedSettingsToolStripMenuItem.Image = Global.Outworldz.My.Resources.earth_network
@@ -551,10 +568,9 @@ Public Class FormSetup
             ErrorLog("Failed to setup INI files")
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
+            SetLoading(False)
             Return
         End If
-
-        SetPublicIP()
 
         Dim UUID = FindRegionByName(Settings.ParkingLot)
         If UUID.Length > 0 Then
@@ -566,6 +582,8 @@ Public Class FormSetup
             MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
         End If
 
+        Settings.DiagFailed = False
+
         ' Boot Port 8001 Server
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
         If RunningInServiceMode() Or Not Settings.RunAsService Then
@@ -573,12 +591,17 @@ Public Class FormSetup
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Thread.Sleep(100)
 
-            If TestPrivateLoopback(True) Then
+            TestPrivateLoopback()
+            Sleep(1000)
+            If Settings.DiagFailed Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
+                SetLoading(False)
                 Return
             End If
         End If
+
+        SetPublicIP()
 
         If IsMySqlRunning() Then
             ' clear any temp regions on boot.
@@ -676,6 +699,7 @@ Public Class FormSetup
 
         If failedload Then
             TextPrint($"*** FAILED to load ALL regions! ** ")
+            SetLoading(False)
             Return
         End If
 
@@ -692,6 +716,7 @@ Public Class FormSetup
             Settings.RestartOnCrash = True
             Sleep(10000)
             Startup()
+            SetLoading(False)
             Return
         Else
             TextPrint("Starting in Desktop Mode")
@@ -707,6 +732,7 @@ Public Class FormSetup
         End If
 
         ToolBar(True)
+        SetLoading(False)
 
     End Sub
 
@@ -2464,7 +2490,7 @@ Public Class FormSetup
         End If
 
         DoDiag()
-        If Settings.DiagFailed = "True" Then
+        If Settings.DiagFailed Then
             TextPrint(My.Resources.HG_Failed)
         Else
             TextPrint(My.Resources.HG_Works)
@@ -3229,9 +3255,7 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
-        ZapRegions()
-        Zap("Robust")
-        Zap("Icecast")
+
 
     End Sub
 
