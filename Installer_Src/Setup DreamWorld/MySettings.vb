@@ -916,12 +916,12 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Property DiagFailed() As String
+    Public Property DiagFailed() As Boolean
         Get
-            Return GetMySetting("DiagFailed", "False")
+            Return CBool(GetMySetting("DiagFailed", "False"))
         End Get
         Set
-            SetMySetting("DiagFailed", Value)
+            SetMySetting("DiagFailed", CStr(Value))
         End Set
     End Property
 
