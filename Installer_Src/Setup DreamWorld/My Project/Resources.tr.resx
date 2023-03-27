@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>Gerekli Perl Modüllerinin kurulması</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>Mysql Günlüklerini Temizleme</value>
+  </data>
 </root>

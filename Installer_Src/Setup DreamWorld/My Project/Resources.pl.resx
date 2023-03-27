@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>Instalowanie niezbędnych modułów Perla</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>Czyszczenie dzienników MySQL</value>
+  </data>
 </root>

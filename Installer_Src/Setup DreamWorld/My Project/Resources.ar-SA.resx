@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>تركيب وحدات بيرل الضرورية</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>مسح سجلات Mysql</value>
+  </data>
 </root>

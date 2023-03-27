@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>Instalace potřebných Perl modulů</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>Vymazání protokolů MySQL</value>
+  </data>
 </root>

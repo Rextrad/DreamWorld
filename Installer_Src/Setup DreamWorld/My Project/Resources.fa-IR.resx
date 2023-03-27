@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>نصب ماژول های پرل لازم</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>پاکسازی سیاهههای مربوط به خروجی زیر</value>
+  </data>
 </root>

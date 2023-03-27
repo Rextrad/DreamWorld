@@ -3981,4 +3981,7 @@
   <data name="InstallingnecessaryPerlModules" xml:space="preserve">
     <value>安装必要的 Perl 模块</value>
   </data>
+  <data name="ClearingLogs" xml:space="preserve">
+    <value>清除 Mysql 日志</value>
+  </data>
 </root>
