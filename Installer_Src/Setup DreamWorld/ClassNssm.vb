@@ -22,7 +22,11 @@
         If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
             TextPrint(My.Resources.ServiceRemoved)
-            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_stop
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
+            ZapRegions()
+            Zap("Robust")
+            Zap("Icecast")
+
         Else
             TextPrint(My.Resources.ServiceFailedtoDelete)
         End If
@@ -53,17 +57,17 @@
                 "set DreamGridService AppStopMethodWindow 12000",  ' Send WM_close to windows, quit in 2 minutes
                 "set DreamGridService AppThrottle 15000",          ' delay restart if it runs less than 15 seconds
                 "set DreamGridService AppExit Default Restart", ' if it crashes, restart
-                "set DreamGridService AppRestartDelay 1000" ' delay restart by 1 second
+                "set DreamGridService AppRestartDelay 10000" ' delay restart by 1 second
             }
             For Each item In cmds
-                If Not NssmCommand(item) Then
+                If NssmCommand(item) Then
                     Return False
                 End If
             Next
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
-            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
+            FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoInstall)
@@ -156,6 +160,7 @@
             Return False
         End Try
 
+        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.nav_plain_red
         Return True
 
     End Function
