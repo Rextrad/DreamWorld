@@ -1,0 +1,203 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<title>Outworldz Shoutcast And Icecast Server</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Calibri Light";
+	panose-1:2 15 3 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Arial Unicode MS";
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"\@Arial Unicode MS";
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:10.0pt;
+	font-family:"Calibri",sans-serif;}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	line-height:115%;
+	background:#5B9BD5;
+	border:none;
+	padding:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	color:white;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	font-weight:normal;}
+h2
+	{mso-style-link:"Heading 2 Char";
+	margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	line-height:115%;
+	background:#DEEAF6;
+	border:none;
+	padding:0in;
+	font-size:10.0pt;
+	font-family:"Calibri",sans-serif;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	font-weight:normal;}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	color:white;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	background:#5B9BD5;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	background:#DEEAF6;}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<div style='border:solid #5B9BD5 3.0pt;padding:0in 0in 0in 0in;background:#5B9BD5'>
+
+<h1><a name="OLE_LINK6"></a><a name="OLE_LINK3">Dreamgrid Service</a></h1>
+
+</div>
+
+<p class=MsoNormal>All of Outworldz DreamGrid can run as a service.  Services
+start on Power up.  This solves many problems with power loss, Updates, and
+crashes.</p>
+
+<p class=MsoNormal>You should only enable the DreamGrid Service when DreamGrid
+is not running.  </p>
+
+<p class=MsoNormal><img width=343 height=260 id="Picture 1"
+src="DreamGrid%20Service_files/image001.png"
+alt="Graphical user interface, text, application&#10;&#10;Description automatically generated"></p>
+
+<p class=MsoNormal>The service receives commands such as stop/start/restart
+from the same code you are currently running as a GUI.&nbsp; You do not need to
+run the DreamGrid GUI after starting the Service.  You can use this GUI to
+control the background service.</p>
+
+<p class=MsoNormal>If you save a setting in the foreground GUI, the service
+instantly reloads the settings file.&nbsp; </p>
+
+<div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
+
+<h2 style='background:#DEEAF6'><span style='color:black'>Disabling the Service</span></h2>
+
+</div>
+
+<p class=MsoNormal>You must remove the service to disable it. There is also a
+checkbox in Setup-Settings-Restart to disable or enable the service.</p>
+
+<p class=MsoNormal><img width=249 height=297 id="Picture 2"
+src="DreamGrid%20Service_files/image002.png"></p>
+
+<p class=MsoNormal>If you click the checkbox to turn off the service, it
+re-enables some essential foreground things, and when you click [Start], DreamGrid
+will boot the foreground DOS boxes, as usual.</p>
+
+<div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
+
+<h2 style='background:#DEEAF6'><span style='color:black'>Technical Ifo</span></h2>
+
+</div>
+
+<p class=MsoNormal>The service is just DreamGrid's Start.exe with a command
+line parameter.&nbsp; It starts as a service, boots the grid, reboots on any
+crash, restart or update, and waits for the regions to close when stopping. We
+should be safe from Windows updates, at last! No need to remain logged in,
+either.</p>
+
+<p class=MsoNormal>You can manually control a service with the command Services.msc.
+You will see this window:</p>
+
+<p class=MsoNormal><img width=522 height=275 id="Picture 3"
+src="DreamGrid%20Service_files/image003.png"
+alt="Graphical user interface, text, application, email&#10;&#10;Description automatically generated"></p>
+
+<p class=MsoNormal>Double clicking the DreamGrid Service will open up a control
+panel where you can start, stop, enable or disable the Service.</p>
+
+<p class=MsoNormal><img width=472 height=517 id="Picture 4"
+src="DreamGrid%20Service_files/image004.png"
+alt="Graphical user interface, text, application&#10;&#10;Description automatically generated"></p>
+
+<div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
+
+<h2 style='background:#DEEAF6'><span style='color:black'>Manual operation</span></h2>
+
+</div>
+
+<p class=MsoNormal>There are batch files that will remove a service or install
+it.</p>
+
+<p class=MsoNormal>DreamGridInstallService.bat will install the service</p>
+
+<p class=MsoNormal> DreamGridDeleteService.bat will Delete the service.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>
