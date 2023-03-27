@@ -1110,6 +1110,7 @@ Module SmartStart
         Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
         RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
         RPC_Region_Command(RegionUUID, $"load oar --force-terrain --force-parcels ""{File}""")
+        RPC_Region_Command(RegionUUID, $"quit")
         Result.Scan()
 
         If Not AvatarsIsInGroup(Group_Name(RegionUUID)) Then
