@@ -405,7 +405,7 @@ Public Class FormBulkLoad
 
     Private Sub RegionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
-        HelpManual("Bulk Region Loader")
+        HelpManual("Bulk Load")
 
     End Sub
 
@@ -444,4 +444,9 @@ Public Class FormBulkLoad
 
     End Sub
 
+    Private Sub ToolStripLabel1_Click(sender As Object, e As EventArgs) Handles ToolStripLabel1.Click
+
+        HelpManual("Bulk Load")
+
+    End Sub
 End Class
