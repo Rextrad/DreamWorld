@@ -467,7 +467,7 @@ Module WindowHandlers
         If Not Foreground() Then Return False
 
         Using client As New TimedWebClient With {
-                .Timeout = 2000
+                .Timeout = 3000
                 } ' download client for web pages
             Try
                 Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
