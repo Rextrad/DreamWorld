@@ -160,9 +160,9 @@ Public Class FormDnsName
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
 
         Dim address As System.Net.IPAddress = Nothing
-        If DNSNameBox.Text.Length = 0 Then
-            Settings.PublicIP = WANIP()
-        Else
+        If DNSNameBox.Text.Length <> 0 Then
+
+
             Settings.PublicIP = DNSNameBox.Text
             RegisterName(Settings.PublicIP)    ' force it to register
 

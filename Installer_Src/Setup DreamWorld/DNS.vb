@@ -98,7 +98,6 @@ Module DNS
 
         If PropMyUPnpMap Is Nothing Then Return
 
-        Settings.WANIP = WANIP()
         Settings.LANIP = PropMyUPnpMap.LocalIP
         Settings.MacAddress = GetMacByIP(Settings.LANIP)
 

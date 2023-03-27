@@ -26,15 +26,15 @@ Module Diags
         TextPrint("___DIAG_START_______")
         TextPrint(My.Resources.Running_Network)
         Logger("INFO", Global.Outworldz.My.Resources.Running_Network, "Diagnostics")
-        Settings.DiagFailed = "False"
+        Settings.DiagFailed = False
 
         OpenPorts() ' Open router ports with UPnp
         ProbePublicPort() ' Probe using Outworldz like Canyouseeme.org does on HTTP port
-        TestPrivateLoopback(True)   ' Diagnostics
+        TestPrivateLoopback()   ' Diagnostics
         TestPublicLoopback()    ' Http port
         TestAllRegionPorts()    ' All Dos boxes, actually
 
-        If Settings.DiagFailed = "True" Then
+        If Settings.DiagFailed Then
             Logger("Error", Global.Outworldz.My.Resources.Diags_Failed, "Diagnostics")
             Dim answer = MsgBox(My.Resources.Diags_Failed, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground)
             If answer = vbYes Then
@@ -259,43 +259,46 @@ Module Diags
         If result.Contains("<html") Or result.Contains("Ooops!") Or result.Length = 0 Then
             Logger("INFO", Global.Outworldz.My.Resources.Loopback_Passed & " " & Port.ToString(Globalization.CultureInfo.InvariantCulture), "Diagnostics")
             TextPrint(My.Resources.Loopback_Passed & " " & Port.ToString(Globalization.CultureInfo.InvariantCulture))
+            Settings.LoopbackDiag = True
         Else
             TextPrint(My.Resources.Loopback_Failed & " " & Weblink)
             Logger("INFO", Global.Outworldz.My.Resources.Loopback_Failed & " " & Weblink, "Diagnostics")
             Settings.LoopbackDiag = False
-            Settings.DiagFailed = "True"
+            Settings.DiagFailed = True
         End If
 
     End Sub
 
-    Public Function TestPrivateLoopback(verbose As Boolean) As Boolean
+    Private Sub TestPrivateLoopbackLoopbackCallback(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
+
+        If e.Result = "Test Completed" Then
+            Logger("INFO", Global.Outworldz.My.Resources.Failed_LAN, "Diagnostics")
+            Settings.LoopbackDiag = False
+        Else
+            Settings.LoopbackDiag = True
+            Settings.DiagFailed = True
+        End If
+
+    End Sub
+    Public Sub TestPrivateLoopback()
 
         Dim result As String = ""
-        If verbose Then TextPrint(My.Resources.Checking_LAN_Loopback_word)
-        If verbose Then Logger("Info", Global.Outworldz.My.Resources.Checking_LAN_Loopback_word, "Diagnostics")
+        TextPrint(My.Resources.Checking_LAN_Loopback_word)
         Dim weblink = $"http://{Settings.LANIP()}:{Settings.DiagnosticPort}/?_TestLoopback={RandomNumber.Random()}"
-        If verbose Then Logger("Info", "URL= " & weblink, "Diagnostics")
+        Logger("Info", "URL= " & weblink, "Diagnostics")
+        Dim O As New Object
         Using client As New WebClient
             Try
-                result = client.DownloadString(weblink)
+                Dim U As New Uri(weblink)
+                AddHandler client.DownloadStringCompleted, AddressOf TestPrivateLoopbackLoopbackCallback
+                client.DownloadStringAsync(U, O)
             Catch ex As Exception
-                If verbose Then Logger("Error", ex.Message, "Diagnostics")
+                Logger("Error", ex.Message, "Diagnostics")
             End Try
         End Using
 
-        If result = "Test Completed" Then
-            If verbose Then Logger("INFO", Global.Outworldz.My.Resources.Passed_LAN, "Diagnostics")
-            If verbose Then TextPrint(My.Resources.Passed_LAN)
-            Return False
-        Else
-            If verbose Then Logger("INFO", Global.Outworldz.My.Resources.Failed_LAN & " " & weblink & " result was " & result, "Diagnostics")
-            If verbose Then TextPrint(My.Resources.Failed_LAN & " " & weblink)
-            Settings.LoopbackDiag = False
-            Settings.DiagFailed = "True"
-            Return True
-        End If
+    End Sub
 
-    End Function
 
     Public Sub TestPublicLoopback()
 
@@ -345,7 +348,7 @@ Module Diags
             TextPrint(My.Resources.Incoming_Works)
         Else
             Settings.LoopbackDiag = False
-            Settings.DiagFailed = "True"
+            Settings.DiagFailed = True
             Logger("INFO", $"{Global.Outworldz.My.Resources.Internet_address} {Settings.PublicIP}:{Settings.HttpPort}{Global.Outworldz.My.Resources.Not_Forwarded}", "Diagnostics")
             TextPrint(My.Resources.Internet_address & " " & Settings.PublicIP & ":" & Settings.HttpPort & Global.Outworldz.My.Resources.Not_Forwarded)
         End If
@@ -399,7 +402,7 @@ Module Diags
                 Loop While count > 0
             Catch e As Exception
                 Settings.LoopbackDiag = False
-                Settings.DiagFailed = "True"
+                Settings.DiagFailed = True
             End Try
         End Using
 
