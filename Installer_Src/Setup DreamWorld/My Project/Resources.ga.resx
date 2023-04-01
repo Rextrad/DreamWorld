@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Logchomhaid MySQL a Ghlanadh</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Cúltaca an Chórais</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Ag tosú sa Mhód Deisce</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>An Ísiltír</value>
+  </data>
 </root>

@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Очистка журналов Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Резервное копирование системы</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Запуск в режиме рабочего стола</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Нидерланды</value>
+  </data>
 </root>

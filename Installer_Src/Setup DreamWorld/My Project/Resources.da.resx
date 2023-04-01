@@ -642,9 +642,6 @@
   <data name="Network_Diagnostics" xml:space="preserve">
     <value>Netværksdiagnostik</value>
   </data>
-  <data name="Asset_Cache_word" xml:space="preserve">
-    <value>Asset Cache</value>
-  </data>
   <data name="Load_Terrain" xml:space="preserve">
     <value>Indlæs terræn</value>
   </data>
@@ -2043,9 +2040,6 @@
   <data name="HelpPlantEditor" xml:space="preserve">
     <value>Hjælp Plant Editor</value>
   </data>
-  <data name="Backup_word" xml:space="preserve">
-    <value>Backup</value>
-  </data>
   <data name="Choose_Where" xml:space="preserve">
     <value>Vælg, hvor OAR'en skal placeres:</value>
   </data>
@@ -3030,9 +3024,6 @@
   <data name="Row_note" xml:space="preserve">
     <value>Klik på en række for at kontrollere området. Marker afkrydsningsfeltet for at aktivere/deaktivere.</value>
   </data>
-  <data name="AnalyzeLogButton" xml:space="preserve">
-    <value>Analyser log</value>
-  </data>
   <data name="Contact_Name_word" xml:space="preserve">
     <value>Kontakt navn</value>
   </data>
@@ -3983,5 +3974,23 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Rydning af MySQL-logfiler</value>
+  </data>
+  <data name="Backup_word" xml:space="preserve">
+    <value>Sikkerhedskopi</value>
+  </data>
+  <data name="Asset_Cache_word" xml:space="preserve">
+    <value>Cache af aktiver</value>
+  </data>
+  <data name="AnalyzeLogButton" xml:space="preserve">
+    <value>Analysér log</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sikkerhedskopiering af system</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Start i skrivebordstilstand</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Holland</value>
   </data>
 </root>

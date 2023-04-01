@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>پاکسازی سیاهههای مربوط به خروجی زیر</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>پشتیبان گیری سیستم</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>شروع در حالت دسکتاپ</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>هلند</value>
+  </data>
 </root>

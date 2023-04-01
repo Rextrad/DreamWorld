@@ -2225,9 +2225,6 @@
   <data name="ViewVisitorMaps" xml:space="preserve">
     <value>View Visitor Maps</value>
   </data>
-  <data name="System_Backup_word" xml:space="preserve">
-    <value>System Backup</value>
-  </data>
   <data name="Bird_Flock_Size_word" xml:space="preserve">
     <value>Bird Flock Size</value>
   </data>
@@ -4569,5 +4566,14 @@
   </data>
   <data name="ErrUpdate" xml:space="preserve">
     <value>Error: Could Not Launch DreamGridUpdater.exe.  Perhaps you can launch it manually?</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Netherlands</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starting in Desktop Mode</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>System Backup</value>
   </data>
 </root>

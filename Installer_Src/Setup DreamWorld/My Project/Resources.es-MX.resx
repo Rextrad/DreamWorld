@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Borrar registros de Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Copia de seguridad del sistema</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Iniciar en modo escritorio</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Países Bajos</value>
+  </data>
 </root>

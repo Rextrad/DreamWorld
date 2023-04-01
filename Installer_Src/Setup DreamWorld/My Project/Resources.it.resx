@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Cancellazione dei registri MySQL</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Backup del sistema</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Avvio in modalità desktop</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Paesi Bassi</value>
+  </data>
 </root>

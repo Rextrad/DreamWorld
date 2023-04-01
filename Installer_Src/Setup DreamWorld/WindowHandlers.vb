@@ -143,6 +143,7 @@ Module WindowHandlers
         'Log("Service", $"RunAsService = {RunAsService}")
 
         If ServiceExists("DreamGridService") And
+                Settings.RunAsService And
                 CBool(Param.ToLower <> "service") And
                 CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             Return True
@@ -307,7 +308,9 @@ Module WindowHandlers
         'Log("Service", $"Environment path = {Environment.CommandLine}")
         'Log("Service", $"RunAsService = {RunAsService}")
 
-        If ServiceExists("DreamGridService") And CBool(Param.ToLower = "service") Then
+        If ServiceExists("DreamGridService") And
+            CBool(Param.ToLower = "service") And
+            Settings.RunAsService Then
             Return True
         Else
             Return False
@@ -464,7 +467,7 @@ Module WindowHandlers
     ''' <param name="Command">A string command</param>
     Public Function SignalService(Command As String) As Boolean
 
-        If Not Foreground() Then Return False
+        If Not Foreground() And Not Settings.RunAsService Then Return False
 
         Using client As New TimedWebClient With {
                 .Timeout = 3000

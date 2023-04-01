@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Effacement des journaux Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sauvegarde du système</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Démarrage en mode Bureau</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Pays-Bas</value>
+  </data>
 </root>

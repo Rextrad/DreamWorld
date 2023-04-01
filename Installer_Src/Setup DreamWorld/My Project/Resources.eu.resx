@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Mysql-en erregistroak ezabatu</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sistemaren segurtasun-kopia</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Idazmahai moduan hastea</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Herbehereak</value>
+  </data>
 </root>

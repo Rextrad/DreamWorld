@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Εκκαθάριση αρχείων καταγραφής Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Δημιουργία αντιγράφων ασφαλείας συστήματος</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Εκκίνηση σε λειτουργία επιφάνειας εργασίας</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Ολλανδία</value>
+  </data>
 </root>

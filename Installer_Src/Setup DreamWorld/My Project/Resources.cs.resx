@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Vymazání protokolů MySQL</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Zálohování systému</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Spuštění v režimu plochy</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Nizozemsko</value>
+  </data>
 </root>

@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>ניקוי יומני Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>גיבוי מערכת</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>הפעלה במצב שולחן עבודה</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>הולנד</value>
+  </data>
 </root>

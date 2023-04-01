@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Esborrant els registres de Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Còpia de seguretat del sistema</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Inici del mode d'escriptori</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Els Països Baixos</value>
+  </data>
 </root>

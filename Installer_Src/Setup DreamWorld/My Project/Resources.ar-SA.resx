@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>مسح سجلات Mysql</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>النسخ الاحتياطي للنظام</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>البدء في وضع سطح المكتب</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>هولندا</value>
+  </data>
 </root>

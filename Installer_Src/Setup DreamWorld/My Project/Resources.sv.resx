@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Rensa Mysql-loggar</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Säkerhetskopiering av systemet</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starta i skrivbordsläge</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Nederländerna</value>
+  </data>
 </root>

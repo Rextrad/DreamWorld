@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Mysql Günlüklerini Temizleme</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sistem Yedekleme</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Masaüstü Modunda Başlatma</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Hollanda</value>
+  </data>
 </root>

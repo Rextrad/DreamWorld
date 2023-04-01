@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Clearing Mysql Logs</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>System Backup</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starting in Desktop Mode</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Netherlands</value>
+  </data>
 </root>

@@ -7712,6 +7712,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Netherlands.
+        '''</summary>
+        Friend ReadOnly Property Netherlands() As String
+            Get
+                Return ResourceManager.GetString("Netherlands", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to A network change occured. A restart may be necessary..
         '''</summary>
         Friend ReadOnly Property Network_Change() As String
@@ -11471,6 +11480,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Starting in Desktop Mode.
+        '''</summary>
+        Friend ReadOnly Property StartinginDesktopMode() As String
+            Get
+                Return ResourceManager.GetString("StartinginDesktopMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Starting Location?.
         '''</summary>
         Friend ReadOnly Property StartingLocation() As String
@@ -11752,9 +11770,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to System Backup.
         '''</summary>
-        Friend ReadOnly Property System_Backup_word() As String
+        Friend ReadOnly Property System_Backup_words() As String
             Get
-                Return ResourceManager.GetString("System_Backup_word", resourceCulture)
+                Return ResourceManager.GetString("System_Backup_words", resourceCulture)
             End Get
         End Property
         

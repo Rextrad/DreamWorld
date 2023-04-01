@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Hreinsa Mysql logs</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Kerfi öryggisafrit</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Ræsi í skjáborðsham</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Holland</value>
+  </data>
 </root>

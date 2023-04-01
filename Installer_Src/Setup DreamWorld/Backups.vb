@@ -341,7 +341,9 @@ Public Class Backups
         If diff > 0 Then
             Settings.StartDate = currentdatetime ' wait another interval
             Settings.SaveSettings()
-            If Settings.AutoBackup And RunningInServiceMode() Or Not Settings.RunAsService Then
+            If Settings.AutoBackup And
+                    RunningInServiceMode() Or
+                    Not Settings.RunAsService Then
                 RunFullBackupThread()
             End If
 

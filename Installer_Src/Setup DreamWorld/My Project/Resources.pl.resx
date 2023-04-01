@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>Czyszczenie dzienników MySQL</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Kopia zapasowa systemu</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Uruchamianie w trybie pulpitu</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Holandia</value>
+  </data>
 </root>

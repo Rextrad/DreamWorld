@@ -16,7 +16,9 @@ Module Diags
         End Set
     End Property
 
-    Public Sub DoDiag()
+#Disable Warning VSTHRD100 ' Avoid async void methods
+    Public Async Sub DoDiag()
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         If IPCheck.IsPrivateIP(Settings.DnsName) Then
             Logger("INFO", Global.Outworldz.My.Resources.LAN_IP, "Diagnostics")
@@ -31,7 +33,7 @@ Module Diags
 
         OpenPorts() ' Open router ports with UPnp
         ProbePublicPort() ' Probe using Outworldz like Canyouseeme.org does on HTTP port
-        TestPrivateLoopbackAsync()   ' Diagnostics
+        Await TestPrivateLoopbackAsync()   ' Diagnostics
         TestPublicLoopback()    ' Http port
         TestAllRegionPorts()    ' All Dos boxes, actually
 

@@ -141,7 +141,9 @@ Public Class FormDnsName
 
     End Function
 
+#Disable Warning VSTHRD100 ' Avoid async void methods
     Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         Dim r = Await SaveAllAsync()
         Close()
@@ -159,7 +161,9 @@ Public Class FormDnsName
 
     End Sub
 
+#Disable Warning VSTHRD100 ' Avoid async void methods
     Private Async Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         PictureBox.Visible = True
         Application.DoEvents()
@@ -167,7 +171,6 @@ Public Class FormDnsName
 
         Dim address As System.Net.IPAddress = Nothing
         If DNSNameBox.Text.Length <> 0 Then
-
 
             Settings.PublicIP = DNSNameBox.Text
             Dim r = Await RegisterNameAsync(Settings.PublicIP)    ' force it to register

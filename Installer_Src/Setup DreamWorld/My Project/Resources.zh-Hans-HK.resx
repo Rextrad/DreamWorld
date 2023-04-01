@@ -3984,4 +3984,13 @@
   <data name="ClearingLogs" xml:space="preserve">
     <value>清除 Mysql 日志</value>
   </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>系统备份</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>以桌面模式启动</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>荷兰</value>
+  </data>
 </root>

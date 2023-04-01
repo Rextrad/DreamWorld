@@ -531,7 +531,7 @@ Module RegionMaker
                 Application.DoEvents()
 
                 For Each FileName As String In regionfolders
-                    Application.DoEvents()
+
                     If FileName.EndsWith("DataSnapshot", StringComparison.OrdinalIgnoreCase) Then Continue For
 
                     Dim fName = ""

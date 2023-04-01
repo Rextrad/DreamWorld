@@ -2016,7 +2016,10 @@ Public Class MySettings
             SetMySetting("RootMysqlPassword", Value)
         End Set
     End Property
-
+    ''' <summary>
+    ''' Settings set to run as a service. 
+    ''' </summary>
+    ''' <returns>True or false is service is checked to be run</returns>
     Public Property RunAsService() As Boolean
         Get
             Return CType(GetMySetting("RunAsService", "False"), Boolean)
