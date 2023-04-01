@@ -96,6 +96,7 @@ Module PublicIP
             Try
                 result = ClientSocket.BeginConnect(ServerAddress, Port, Nothing, Nothing)
                 success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2))
+                Application.DoEvents()
                 ClientSocket.EndConnect(result)
             Catch ex As Exception
                 Return False

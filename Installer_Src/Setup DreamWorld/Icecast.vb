@@ -82,11 +82,10 @@ Module Icecast
             For Each p In Process.GetProcessesByName("icecast")
                 If p.ProcessName = "icecast" Then
                     PropIcecastProcID = p.Id
-
                     p.EnableRaisingEvents = True
                     AddHandler p.Exited, AddressOf IceCastExited
-
                     IceCastIcon(True)
+                    Application.DoEvents()
                     Return True
                 End If
             Next
@@ -111,6 +110,7 @@ Module Icecast
 
         Try
             IcecastProcess.Start()
+            Application.DoEvents()
         Catch ex As Exception
             BreakPoint.Dump(ex)
             TextPrint(My.Resources.Icecast_failed & ":" & ex.Message)
@@ -129,8 +129,6 @@ Module Icecast
         IceCastIcon(True)
 
         PropIceCastExited = False
-
-
         Return True
 
     End Function

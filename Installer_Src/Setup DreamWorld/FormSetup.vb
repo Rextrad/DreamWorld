@@ -9,6 +9,7 @@ Imports System.IO
 Imports System.Management
 Imports System.Text.RegularExpressions
 Imports System.Threading
+Imports System.Threading.Tasks
 Imports IWshRuntimeLibrary
 
 Public Class FormSetup
@@ -248,12 +249,11 @@ Public Class FormSetup
         If Not KillAll() Then Return False
         Buttons(StartButton)
         TextPrint(My.Resources.Stopped_word)
-
         Return True
 
     End Function
 
-    Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
+    Public Async Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
 
         SetScreen()     ' move Form to fit screen from SetXY.ini
 
@@ -467,6 +467,7 @@ Public Class FormSetup
         Adv1 = New FormSettings
 
         Me.Show()
+        Application.DoEvents()
 
         ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
         Randomize()
@@ -591,8 +592,8 @@ Public Class FormSetup
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Thread.Sleep(100)
 
-            TestPrivateLoopback()
-            Sleep(1000)
+            Dim res = TestPrivateLoopbackAsync()
+            Await res
             If Settings.DiagFailed Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
@@ -601,7 +602,7 @@ Public Class FormSetup
             End If
         End If
 
-        SetPublicIP()
+        Dim r = IPPublicAsync()
 
         If IsMySqlRunning() Then
             ' clear any temp regions on boot.
@@ -934,6 +935,15 @@ Public Class FormSetup
         End If
 
     End Sub
+
+
+    Private Async Function IPPublicAsync() As Task(Of Boolean)
+
+        Dim r = Await SetPublicIPAsync()
+        Return r
+
+    End Function
+
 
     ''' <summary>Form Load is main() for all DreamGrid</summary>
     ''' <param name="sender">Unused</param>
@@ -1589,6 +1599,8 @@ Public Class FormSetup
         Try
             folders = Directory.GetFiles(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Help"))
             For Each aline As String In folders
+                Application.DoEvents()
+
                 If aline.EndsWith(".htm", StringComparison.OrdinalIgnoreCase) Then
                     aline = System.IO.Path.GetFileNameWithoutExtension(aline)
                     Dim HelpMenu As New ToolStripMenuItem With {
@@ -1617,6 +1629,7 @@ Public Class FormSetup
         For Each RegionUUID In RegionUuids()
             Dim Name = Region_Name(RegionUUID)
             AddLog("Region " & Name)
+            Application.DoEvents()
         Next
 
     End Sub

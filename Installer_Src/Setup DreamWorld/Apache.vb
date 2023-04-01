@@ -68,6 +68,7 @@ Module Apache
             }
             Try
                 Up = TimedClient.DownloadString($"http://{Settings.LANIP}:{CStr(Settings.ApachePort)}/?_Opensim={RandomNumber.Random}")
+                Application.DoEvents()
             Catch ex As Exception
                 If ex.Message.Contains("200 OK") Then
                     ApacheIcon(True)

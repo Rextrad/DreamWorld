@@ -618,6 +618,7 @@ Module Robust
 
             Try
                 Up = TimedClient.DownloadString(url)
+                Application.DoEvents()
             Catch ex As Exception
                 If ex.Message.Contains("404") Then
                     Log("INFO", "Robust is running")

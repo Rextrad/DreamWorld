@@ -1937,9 +1937,6 @@
   <data name="Maps_X" xml:space="preserve">
     <value>Map  X:</value>
   </data>
-  <data name="ErrUpdate" xml:space="preserve">
-    <value>Error: Could Not Launch DreamGridUpdater.exe.  Perhaps you can launch it manually?</value>
-  </data>
   <data name="Apache_Disabled" xml:space="preserve">
     <value>Web server is not enabled</value>
   </data>
@@ -4569,5 +4566,8 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Clearing Mysql Logs</value>
+  </data>
+  <data name="ErrUpdate" xml:space="preserve">
+    <value>Error: Could Not Launch DreamGridUpdater.exe.  Perhaps you can launch it manually?</value>
   </data>
 </root>

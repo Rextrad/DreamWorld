@@ -12,6 +12,7 @@ Imports System.IO.Compression
 
 Public Class UpdateGrid
     Private WithEvents ApacheProcess As New Process()
+    Public NssmService As New ClassNssm
 
 #Region "Private Fields"
 
@@ -66,6 +67,10 @@ Public Class UpdateGrid
             Else
 
                 Application.DoEvents()
+
+                Label1.Text = "Stopping Service"
+                NssmService.StopService()
+                ProgressBar1.Value = 15
 
                 Label1.Text = "Stopping MySQL"
                 StopMYSQL()
@@ -291,5 +296,8 @@ Public Class UpdateGrid
         End Try
 
     End Sub
+
+
+
 #End Region
 End Class

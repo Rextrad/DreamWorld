@@ -7,6 +7,7 @@
 
 Imports System.Net
 Imports System.Text.RegularExpressions
+Imports System.Threading.Tasks
 
 Public Class FormDnsName
 
@@ -112,32 +113,37 @@ Public Class FormDnsName
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
         DNSNameBox.Text = String.Empty
         Application.DoEvents()
-        Dim newname = GetNewDnsName()
+        Dim newname = GetNewDnsNameAsync()
+        Dim n = newname.ToString
         NextNameButton.Text = Global.Outworldz.My.Resources.Next1
-        If newname.Length = 0 Then
+        If n.Length = 0 Then
             MsgBox(My.Resources.Please_enter, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)
             NextNameButton.Enabled = False
         Else
             NextNameButton.Enabled = True
-            DNSNameBox.Text = newname
+            DNSNameBox.Text = n
         End If
 
     End Sub
 
-    Private Sub SaveAll()
+
+    Private Async Function SaveAllAsync() As Task(Of Boolean)
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
 
         Settings.SaveSettings()
-        SetPublicIP()
+        Await SetPublicIPAsync()
 
         If Settings.DnsTestPassed Then Me.Close()
 
-    End Sub
+        Return True
 
-    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
 
-        SaveAll()
+    End Function
+
+    Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
+
+        Dim r = Await SaveAllAsync()
         Close()
 
     End Sub
@@ -153,7 +159,7 @@ Public Class FormDnsName
 
     End Sub
 
-    Private Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
+    Private Async Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
 
         PictureBox.Visible = True
         Application.DoEvents()
@@ -164,7 +170,7 @@ Public Class FormDnsName
 
 
             Settings.PublicIP = DNSNameBox.Text
-            RegisterName(Settings.PublicIP)    ' force it to register
+            Dim r = Await RegisterNameAsync(Settings.PublicIP)    ' force it to register
 
             Try
                 If IPAddress.TryParse(DNSNameBox.Text, address) Then
@@ -194,7 +200,7 @@ Public Class FormDnsName
                     Dim array As String() = Settings.AltDnsName.Split(",".ToCharArray())
                     For Each part As String In array
 
-                        RegisterName(part)
+                        Dim rr = Await RegisterNameAsync(part)
                         PictureBox.Visible = False
                         If IPAddress.TryParse(part, address) Then
                             MsgBox(Global.Outworldz.My.Resources.resolved & " " & part, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)

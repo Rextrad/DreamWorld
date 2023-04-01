@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.Threading.Tasks
 
 Module Diags
 
@@ -30,7 +31,7 @@ Module Diags
 
         OpenPorts() ' Open router ports with UPnp
         ProbePublicPort() ' Probe using Outworldz like Canyouseeme.org does on HTTP port
-        TestPrivateLoopback()   ' Diagnostics
+        TestPrivateLoopbackAsync()   ' Diagnostics
         TestPublicLoopback()    ' Http port
         TestAllRegionPorts()    ' All Dos boxes, actually
 
@@ -269,6 +270,7 @@ Module Diags
 
     End Sub
 
+    ' todo delete
     Private Sub TestPrivateLoopbackLoopbackCallback(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
 
         If e.Result = "Test Completed" Then
@@ -280,24 +282,24 @@ Module Diags
         End If
 
     End Sub
-    Public Sub TestPrivateLoopback()
+    Public Async Function TestPrivateLoopbackAsync() As Task(Of Boolean)
 
-        Dim result As String = ""
         TextPrint(My.Resources.Checking_LAN_Loopback_word)
         Dim weblink = $"http://{Settings.LANIP()}:{Settings.DiagnosticPort}/?_TestLoopback={RandomNumber.Random()}"
         Logger("Info", "URL= " & weblink, "Diagnostics")
-        Dim O As New Object
-        Using client As New WebClient
-            Try
-                Dim U As New Uri(weblink)
-                AddHandler client.DownloadStringCompleted, AddressOf TestPrivateLoopbackLoopbackCallback
-                client.DownloadStringAsync(U, O)
-            Catch ex As Exception
-                Logger("Error", ex.Message, "Diagnostics")
-            End Try
-        End Using
+        Try
+            Dim rr = Await GetURLContentsAsync(weblink)
+            Dim msg = System.Text.Encoding.ASCII.GetString(rr)
+            If msg = "Test Completed" Then
+                Return True
+            End If
+        Catch ex As Exception
+            Logger("Error", ex.Message, "Diagnostics")
+        End Try
 
-    End Sub
+        Return False
+
+    End Function
 
 
     Public Sub TestPublicLoopback()
