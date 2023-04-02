@@ -85,7 +85,7 @@ Public Class FormPorts
         ToolTip1.SetToolTip(OverrideNameLabel, Global.Outworldz.My.Resources.External_text)
         ToolTip1.SetToolTip(PrivatePort, Global.Outworldz.My.Resources.Default_8003_word)
         ToolTip1.SetToolTip(uPnPEnabled, Global.Outworldz.My.Resources.UPnP_Enabled_text)
-        Upnp.Image = Global.Outworldz.My.Resources.about
+
         uPnPEnabled.Text = Global.Outworldz.My.Resources.UPnP_Enabled_word
 
         SetScreen()
@@ -216,11 +216,7 @@ Public Class FormPorts
 
     End Sub
 
-    Private Sub Upnp_Click(sender As Object, e As EventArgs) Handles Upnp.Click
 
-        HelpManual("Ports")
-
-    End Sub
 
 #End Region
 

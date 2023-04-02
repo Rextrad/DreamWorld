@@ -30,7 +30,7 @@ Global
 		RESX_DuplicateKeyHandling = Fail
 		RESX_ShowPerformanceTraces = False
 		RESX_TaskErrorCategory = Message
-		RESX_Rules = {"EnabledRules":["StringFormat","WhiteSpaceLead","WhiteSpaceTail","PunctuationLead","PunctuationTail"]}
+		RESX_Rules = {"EnabledRules":["StringFormat","WhiteSpaceLead"]}
 		RESX_TranslatorConfiguration = {"Azure":"{\"AutoDetectHtml\":true,\"MaxCharactersPerMinute\":33300,\"AuthenticationKey\":null,\"Region\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","Baidu":"{\"AppId\":null,\"SecretKey\":null,\"ApiUrl\":null,\"Domain\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","DeepL":"{\"ApiKey\":\"03aa3281-c6b3-e845-d92f-c479dc6d1cbd\",\"ApiUrl\":\"https://api.deepl.com/v2/translate\",\"IsEnabled\":false,\"SaveCredentials\":true,\"Ranking\":1.0}","Google":"{\"ApiKey\":\"AIzaSyCMfdvhQ_xd9fP288DMmGd7p_HPw-IPuVg\",\"IsEnabled\":true,\"SaveCredentials\":true,\"Ranking\":1.0}","MSTerm":"{\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}","MyMemory":"{\"Key\":null,\"Mail\":null,\"IsEnabled\":false,\"SaveCredentials\":false,\"Ranking\":1.0}"}
 		RESX_EnableXlifSync = False
 	EndGlobalSection

@@ -592,8 +592,7 @@ Public Class FormSetup
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Thread.Sleep(100)
 
-            Dim res = TestPrivateLoopbackAsync()
-            Await res
+            Await TestPrivateLoopbackAsync()
             If Settings.DiagFailed Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
@@ -602,7 +601,7 @@ Public Class FormSetup
             End If
         End If
 
-        Dim r = IPPublicAsync()
+        Await IPPublicAsync()
 
         If IsMySqlRunning() Then
             ' clear any temp regions on boot.

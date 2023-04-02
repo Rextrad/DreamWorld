@@ -151,12 +151,6 @@ Module DNS
             Settings.PublicIP = Settings.LANIP
         ElseIf Settings.DnsName.Length > 0 Then
             Settings.PublicIP = Settings.DnsName()
-        ElseIf IsPrivateIP(Settings.PublicIP) Then
-            ' NAT'd ROUTER
-            Settings.PublicIP = Settings.LANIP
-        Else
-            ' WAN IP such as Contabo without a NAT
-            Settings.PublicIP = Settings.WANIP
         End If
 
         Settings.BaseHostName = Settings.PublicIP
