@@ -10,9 +10,8 @@ Module GlobalSettings
 #Region "Const"
 
     Public Const _httpsDomain As String = "https://www.outworldz.com"
-    Public Const _MyVersion As String = "5.33"
-
-    Public Const _SimVersion As String = "Opensim #1e0207b4991 2023-02-19 03:32:19"
+    Public Const _MyVersion As String = "5.34"
+    Public Const _SimVersion As String = "Opensim 0.9.2.2 2023-03-31"
     Public Const DreamGrid As String = "DreamGrid"
     Public Const DTL As String = "DTL"
     Public Const FreeDiskSpaceWarn As Long = 100000000  ' 100 MB to freeze
