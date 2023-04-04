@@ -5,8 +5,6 @@
 
 #End Region
 
-Imports System.IO
-
 Public Class TosForm
 
 #Region "ScreenSize"

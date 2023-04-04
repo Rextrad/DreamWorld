@@ -54,7 +54,6 @@ Public Class FormRestart
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         ARTimerBox.Text = Global.Outworldz.My.Resources.Restart_Periodically_word
         AutoStart.Text = Global.Outworldz.My.Resources.Auto_Startup_word
         AutoStartCheckbox.Text = Global.Outworldz.My.Resources.EnableOneClickStart_word
@@ -170,6 +169,7 @@ Public Class FormRestart
         Settings.RestartOnCrash = RestartOnCrash.Checked
 
     End Sub
+
 #End Region
 
 #Region "Help"
@@ -249,7 +249,5 @@ Public Class FormRestart
     End Sub
 
 #End Region
-
-
 
 End Class

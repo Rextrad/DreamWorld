@@ -1,6 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Threading
-Imports EmailValidation
 Imports MimeKit
 
 Module OfflineIM

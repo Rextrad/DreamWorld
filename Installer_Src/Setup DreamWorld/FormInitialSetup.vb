@@ -56,10 +56,8 @@ Public Class FormInitialSetup
 
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
-
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
-
 
         GroupBox1.Text = Global.Outworldz.My.Resources.Enter_the_Grid_Owner_Information_word
         Label1.Text = Global.Outworldz.My.Resources.First_name_word

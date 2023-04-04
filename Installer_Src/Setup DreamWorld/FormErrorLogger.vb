@@ -43,7 +43,6 @@
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         QuitButton.Text = My.Resources.Cancel_word
         SendButton.Text = My.Resources.Send_report
         TextBox2.Text = My.Resources.Quit_Message0

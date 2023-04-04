@@ -86,7 +86,6 @@ Public Module MysqlInterface
 
     Public Function StartMySQL() As Boolean
 
-
         Log("INFO", "Checking MySQL")
         If MysqlInterface.IsMySqlRunning() Then
             MySQLIcon(True)
@@ -310,8 +309,6 @@ Public Module MysqlInterface
         MySQLIcon(True)
 
         PropMysqlExited = False
-
-
 
         Return True
 
@@ -2226,7 +2223,6 @@ Public Module MysqlInterface
                     Next
                 End If
             End If
-
         Else
             PropAborting = True
             If Not RunningInServiceMode() Then

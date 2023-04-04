@@ -22,7 +22,6 @@ Public Class FormScripts
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         GroupBox1.Text = Global.Outworldz.My.Resources.Script_Engine_word '"Script Engine"
         GroupBox8.Text = Global.Outworldz.My.Resources.Allow_LSL
         LSLCheckbox.Text = Global.Outworldz.My.Resources.Enable_word

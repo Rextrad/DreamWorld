@@ -55,7 +55,6 @@ Public Class FormDnsName
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         PictureBox.Visible = False
         EnableHypergrid.Text = Global.Outworldz.My.Resources.Enable_Hypergrid_word
         HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer
@@ -130,7 +129,6 @@ Public Class FormDnsName
 
     End Sub
 
-
     Private Async Function SaveAllAsync() As Task(Of Boolean)
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
@@ -142,10 +140,10 @@ Public Class FormDnsName
 
         Return True
 
-
     End Function
 
 #Disable Warning VSTHRD100 ' Avoid async void methods
+
     Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
@@ -166,6 +164,7 @@ Public Class FormDnsName
     End Sub
 
 #Disable Warning VSTHRD100 ' Avoid async void methods
+
     Private Async Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
 #Enable Warning VSTHRD100 ' Avoid async void methods
 

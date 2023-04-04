@@ -6,7 +6,6 @@
 
 Imports System.IO
 Imports System.Text.RegularExpressions
-Imports System.Threading
 
 Module SmartStart
     Public ReadOnly BootedList As New List(Of String)
@@ -1241,12 +1240,6 @@ Module SmartStart
 
 #End Region
 
-    ' TODO make a list of these to have multiple commands
-    Public Class TaskQue
-        Public RegionUUID As String
-        Public T As TaskObject
-    End Class
-
     Public Class TaskObject
 
         Public backMeUp As String
@@ -1255,6 +1248,12 @@ Module SmartStart
         Public TaskName As TaskName
         Public Type As String
 
+    End Class
+
+    ' TODO make a list of these to have multiple commands
+    Public Class TaskQue
+        Public RegionUUID As String
+        Public T As TaskObject
     End Class
 
 End Module

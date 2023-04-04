@@ -109,7 +109,6 @@ Public Class FormIcecast
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         AdminPassword.Text = Settings.SCAdminPassword
         Button1.Text = Global.Outworldz.My.Resources.Start_word
         GroupBox1.Text = Global.Outworldz.My.Resources.IceCast_Server_word

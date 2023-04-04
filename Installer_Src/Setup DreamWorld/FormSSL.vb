@@ -251,7 +251,6 @@ Public Class FormSSL
                 PictureBox1.Image = My.Resources.lock_time
                 StopApache()
                 StartApache()
-
             Else
                 If Status = -1 Then Logger("Error", "Failed to make the Certificate", "SSL")
                 If Status = 1 Then Logger("Error", "Non-recognized command", "SSL")

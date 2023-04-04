@@ -252,7 +252,6 @@ Public Class FormRegionPopup
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         ViewLog.Image = Global.Outworldz.My.Resources.document_view
         ViewLog.Text = Global.Outworldz.My.Resources.View_Log_word
         EditButton1.Image = Global.Outworldz.My.Resources.document_dirty

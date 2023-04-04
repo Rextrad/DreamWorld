@@ -154,20 +154,6 @@ Public Class MySettings
         End Set
     End Property
 
-
-    ''' <summary>
-    ''' EstateName
-    ''' </summary>
-    ''' <returns>Admin</returns>
-    Public Property EstateName() As String
-        Get
-            Return GetMySetting("EstateName", "Admin")
-        End Get
-        Set
-            SetMySetting("EstateName", Value)
-        End Set
-    End Property
-
     ''' <summary>
     ''' Diva Wifi User Name (Wifi)
     ''' </summary>
@@ -1066,6 +1052,19 @@ Public Class MySettings
             SetMySetting("EnableHypergrid", CStr(Value))
         End Set
 
+    End Property
+
+    ''' <summary>
+    ''' EstateName
+    ''' </summary>
+    ''' <returns>Admin</returns>
+    Public Property EstateName() As String
+        Get
+            Return GetMySetting("EstateName", "Admin")
+        End Get
+        Set
+            SetMySetting("EstateName", Value)
+        End Set
     End Property
 
     ''' <summary>
@@ -2016,8 +2015,9 @@ Public Class MySettings
             SetMySetting("RootMysqlPassword", Value)
         End Set
     End Property
+
     ''' <summary>
-    ''' Settings set to run as a service. 
+    ''' Settings set to run as a service.
     ''' </summary>
     ''' <returns>True or false is service is checked to be run</returns>
     Public Property RunAsService() As Boolean

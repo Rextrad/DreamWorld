@@ -102,15 +102,6 @@ Module Global_Properties
 
 #Region "Properties"
 
-    Public Property PropWebserver As NetServer
-        Get
-            Return ws
-        End Get
-        Set(value As NetServer)
-            ws = value
-        End Set
-    End Property
-
     Public ReadOnly Property GitVersion As String
         ' output of  git rev-parse --short HEAD   from Perl
         Get
@@ -199,6 +190,15 @@ Module Global_Properties
         Set(ByVal Value As Boolean)
             'If Debugger.IsAttached Then Breakpoint.Print("View refresh")
             _UpdateView = Value
+        End Set
+    End Property
+
+    Public Property PropWebserver As NetServer
+        Get
+            Return ws
+        End Get
+        Set(value As NetServer)
+            ws = value
         End Set
     End Property
 

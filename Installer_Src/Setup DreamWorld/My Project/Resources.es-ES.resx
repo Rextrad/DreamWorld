@@ -4152,4 +4152,7 @@
   <data name="Testing" xml:space="preserve">
     <value>Ensayo</value>
   </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Clasificación X</value>
+  </data>
 </root>

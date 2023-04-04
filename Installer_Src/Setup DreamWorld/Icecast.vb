@@ -8,9 +8,9 @@
 Module Icecast
 
     Public WithEvents IcecastProcess As New Process()
-    Private _IcecastProcID As Integer
     Private _IcecastCrashCounter As Integer
     Private _IceCastExited As Boolean
+    Private _IcecastProcID As Integer
 
 #Region "Properties"
 
@@ -75,7 +75,6 @@ Module Icecast
             IceCastIcon(False)
             Return True
         End If
-
 
         Try
             ' Check if DOS box exists, first, if so, its running.
@@ -145,7 +144,6 @@ Module Icecast
         Application.DoEvents()
 
     End Sub
-
 
     Public Sub StopIcecast()
 

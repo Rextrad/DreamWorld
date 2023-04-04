@@ -41,7 +41,6 @@ Public Class FormPermissions
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         AllowGods.Text = Global.Outworldz.My.Resources.Allow_Or_Disallow_Gods_word
         EnableMaxPrims.Text = Global.Outworldz.My.Resources.Max_Prims
         GroupBox1.Text = Global.Outworldz.My.Resources.Export_Permission_word '"Export Permission"

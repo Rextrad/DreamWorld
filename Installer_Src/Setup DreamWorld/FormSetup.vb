@@ -56,7 +56,6 @@ Public Class FormSetup
     Private speed3 As Double
     Private TimerisBusy As Integer
 
-
 #End Region
 
 #Region "Properties"
@@ -187,6 +186,7 @@ Public Class FormSetup
         ScreenPosition1.SaveHW(Me.Height, Me.Width)
 
     End Sub
+
     Private Sub SetLoading(displayLoader As Boolean)
 
         If displayLoader Then
@@ -198,7 +198,6 @@ Public Class FormSetup
         End If
 
     End Sub
-
 
 #End Region
 
@@ -738,7 +737,6 @@ Public Class FormSetup
         SetLoading(False)
         Return True
 
-
     End Function
 
     Public Function KillAll() As Boolean
@@ -944,22 +942,11 @@ Public Class FormSetup
 
     End Sub
 
-
-    Private Async Function IPPublicAsync() As Task(Of Boolean)
-
-        Dim r = Await SetPublicIPAsync()
-        Return r
-
-    End Function
-
-
-#Disable Warning VSTHRD100 ' Avoid async void methods
     ''' <summary>Form Load is main() for all DreamGrid</summary>
     ''' <param name="sender">Unused</param>
     ''' <param name="e">Unused</param>
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 #Enable Warning VSTHRD100 ' Avoid async void methods
-
 
         Application.EnableVisualStyles()
 
@@ -1003,6 +990,15 @@ Public Class FormSetup
         Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again so it will be translated
 
     End Sub
+
+    Private Async Function IPPublicAsync() As Task(Of Boolean)
+
+        Dim r = Await SetPublicIPAsync()
+        Return r
+
+    End Function
+
+#Disable Warning VSTHRD100 ' Avoid async void methods
 #Disable Warning VSTHRD100 ' Avoid async void methods
 
     Private Async Sub Language(sender As Object, e As EventArgs)
@@ -1384,7 +1380,6 @@ Public Class FormSetup
         SetLoading(False)
         ' done with boot up
 
-
     End Sub
 
     Private Shared Sub ForceBackupOnce()
@@ -1450,30 +1445,6 @@ Public Class FormSetup
         Else
             Visitor.Item(Avatar) = RegionName
         End If
-
-    End Sub
-
-    Private Sub ClearAllRegions()
-
-        SetLoading(True)
-        For Each RegionUUID In RegionUuids()
-            If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
-                DeleteAllRegionData(RegionUUID)
-                PropChangedRegionSettings = True
-            End If
-
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-            DelPidFile(RegionUUID)
-        Next
-
-        Try
-            ExitList.Clear()
-            WebserverList.Clear()
-        Catch ex As Exception
-            BreakPoint.Dump(ex)
-        End Try
-
-        SetLoading(False)
 
     End Sub
 
@@ -1606,6 +1577,30 @@ Public Class FormSetup
             BreakPoint.Dump(ex)
             ErrorLog("Chart 3 " & ex.Message)
         End Try
+
+    End Sub
+
+    Private Sub ClearAllRegions()
+
+        SetLoading(True)
+        For Each RegionUUID In RegionUuids()
+            If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
+                DeleteAllRegionData(RegionUUID)
+                PropChangedRegionSettings = True
+            End If
+
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+            DelPidFile(RegionUUID)
+        Next
+
+        Try
+            ExitList.Clear()
+            WebserverList.Clear()
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
+
+        SetLoading(False)
 
     End Sub
 
@@ -2329,7 +2324,6 @@ Public Class FormSetup
 
     Private Sub BusyButton_Click(sender As Object, e As EventArgs) Handles BusyButton.Click
 
-
         PropAborting = True
         PropUpdateView = True ' make form refresh
 
@@ -2346,7 +2340,6 @@ Public Class FormSetup
     End Sub
 
     Private Sub CheckAndRepairDatbaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckAndRepairDatbaseToolStripMenuItem.Click
-
 
         If Not StartMySQL() Then
             ToolBar(False)
@@ -3305,7 +3298,6 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
-
 
     End Sub
 

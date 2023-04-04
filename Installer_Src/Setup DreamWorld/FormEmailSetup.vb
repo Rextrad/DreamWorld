@@ -48,8 +48,6 @@ Public Class FormEmailSetup
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
-
         Me.Text = Global.Outworldz.My.Resources.SMTP
         EmailPassword.Text = Settings.SmtpPassword
         EmailPassword.UseSystemPasswordChar = True

@@ -27,7 +27,6 @@ Public Class FormHelp
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
     End Sub
 
     'The following detects  the location of the form in screen coordinates

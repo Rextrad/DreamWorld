@@ -104,7 +104,6 @@ Public Class FormBanList
                         t = row.Cells(1).Value.ToString.Trim
                     End If
 
-
                     ' save back to Ban List
                     If (s.Length + t.Length) > 0 Then
                         BanListString += s & "=" & t & "|"

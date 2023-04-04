@@ -73,15 +73,15 @@ Public Class FormPublicity
         ViewOutworldz.Text = Global.Outworldz.My.Resources.View_word
 
         CategoryCheckbox.Items.AddRange(New Object() {My.Resources.Adult, My.Resources.Art, My.Resources.Charity,
-                                   My.Resources.ChildFriendly, My.Resources.Commercial, My.Resources.Educational,
-                                  My.Resources.EducationSchool, My.Resources.EducationCollege,
-                                 My.Resources.Experimental, My.Resources.Fantasy, My.Resources.Freebies,
-                                My.Resources.FreeLand, My.Resources.Furry, My.Resources.Hideout, My.Resources.Hyperport,
-                               My.Resources.Gaming, My.Resources.LGBT, My.Resources.Personal, My.Resources.NewcomerFriendly,
-                              My.Resources.ParksNature, My.Resources.RRated, My.Resources.Rental, My.Resources.Residential,
-                             My.Resources.Roleplay, My.Resources.Romance, My.Resources.Sandbox, My.Resources.SciFi,
-                            My.Resources.Science, My.Resources.Scripting, My.Resources.Shopping, My.Resources.Testing,
-                                       My.Resources.XRated})
+                My.Resources.ChildFriendly, My.Resources.Commercial, My.Resources.Educational,
+                My.Resources.EducationSchool, My.Resources.EducationCollege,
+                My.Resources.Experimental, My.Resources.Fantasy, My.Resources.Freebies,
+                My.Resources.FreeLand, My.Resources.Furry, My.Resources.Hideout, My.Resources.Hyperport,
+                My.Resources.Gaming, My.Resources.LGBT, My.Resources.Personal, My.Resources.NewcomerFriendly,
+                My.Resources.ParksNature, My.Resources.RRated, My.Resources.Rental, My.Resources.Residential,
+                My.Resources.Roleplay, My.Resources.Romance, My.Resources.Sandbox, My.Resources.SciFi,
+                My.Resources.Science, My.Resources.Scripting, My.Resources.Shopping, My.Resources.Testing,
+                My.Resources.XRated})
 
         SetScreen()
 
@@ -116,7 +116,7 @@ Public Class FormPublicity
 
     End Sub
 
-#End #Region
+#End Region
 
 #Region "Clicks"
 
@@ -196,10 +196,6 @@ Public Class FormPublicity
     Private Sub ToolStripMenuItem30_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem30.Click
         HelpManual("Publicity")
     End Sub
-
-#End Region
-
-End Class
 
 #End Region
 

@@ -72,7 +72,7 @@ Public Class WaitForFile
         Dim timeout = 30 * 60 * sleeptime ' 30 minutes to save
         While CTR < timeout
             PokeRegionTimer(RegionUUID)
-            If Not CheckPort(RegionUUID) Then
+            If Not Checkport(RegionUUID) Then
                 Return
             End If
             Application.DoEvents()

@@ -1,6 +1,5 @@
 ﻿Imports EmailValidation
 Imports MimeKit
-Imports MailKit
 
 Public Class FormEmail
 
@@ -121,11 +120,8 @@ Public Class FormEmail
 
     Private Sub Email_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
-
-
 
         EditorBox.DocumentText = "<html><body></body></html>"
         SubjectLabel.Text = My.Resources.Subject_word

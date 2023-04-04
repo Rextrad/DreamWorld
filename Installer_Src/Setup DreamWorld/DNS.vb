@@ -34,8 +34,8 @@ Module DNS
 
         Return ""
 
-
     End Function
+
     Public Async Function GetURLContentsAsync(url As String) As Task(Of Byte())
 
         Dim content = New MemoryStream()
@@ -55,7 +55,6 @@ Module DNS
         Return content.ToArray()
 
     End Function
-
 
     Public Sub NewDNSName()
 
@@ -96,7 +95,6 @@ Module DNS
              "http://ns3.outworldz.net/dns.plx" & GetPostData(DNSName),
              "http://ns3.outworldz.com/dns.plx" & GetPostData(DNSName)
             }
-
 
         For Each url In DNS
             Try

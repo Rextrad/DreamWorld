@@ -6,7 +6,6 @@
 #End Region
 
 Imports System.Collections.Concurrent
-Imports System.Security.Policy
 Imports System.Threading
 
 Module WindowHandlers

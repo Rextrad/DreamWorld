@@ -75,7 +75,6 @@ Public Class FormDiva
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         AccountConfirmationRequired.Text = Global.Outworldz.My.Resources.AccountConfirm
         ApacheToolStripMenuItem.Image = Global.Outworldz.My.Resources.window_environment
         ApacheToolStripMenuItem.Text = Global.Outworldz.My.Resources.Apache_word

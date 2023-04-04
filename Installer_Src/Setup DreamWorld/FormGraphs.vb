@@ -52,7 +52,6 @@
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         SetScreen()
 
         TimerGraph.Interval = 1000

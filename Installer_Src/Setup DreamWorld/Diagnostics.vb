@@ -1,8 +1,7 @@
-﻿Imports System.Text
-Imports System.Net
+﻿Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text
 Imports System.Threading.Tasks
-Imports System.Windows.Interop
 
 Module Diags
 
@@ -18,6 +17,7 @@ Module Diags
     End Property
 
 #Disable Warning VSTHRD100 ' Avoid async void methods
+
     Public Async Sub DoDiag()
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
@@ -267,7 +267,6 @@ Module Diags
 
     End Sub
 
-
     Public Async Function TestPrivateLoopbackAsync() As Task(Of Boolean)
 
         TextPrint(My.Resources.Checking_LAN_Loopback_word)
@@ -286,7 +285,6 @@ Module Diags
         Return False
 
     End Function
-
 
     Public Sub TestPublicLoopback()
 

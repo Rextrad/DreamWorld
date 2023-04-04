@@ -7,8 +7,6 @@
 
 Imports System.Net
 Imports System.Net.Sockets
-Imports System.Security.Policy
-Imports System.Threading.Tasks
 Imports System.Web.Services.Description
 
 Module PublicIP
@@ -152,7 +150,6 @@ Module PublicIP
         Return ""
 
     End Function
-
 
     Private Sub Bitch(msg As String)
 

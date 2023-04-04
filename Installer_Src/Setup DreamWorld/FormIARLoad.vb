@@ -44,7 +44,6 @@
 
     Private Sub FormIARLoad_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 

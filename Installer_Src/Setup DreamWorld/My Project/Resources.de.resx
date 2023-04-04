@@ -4152,4 +4152,7 @@
   <data name="Testing" xml:space="preserve">
     <value>Testen</value>
   </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Bewertet X</value>
+  </data>
 </root>

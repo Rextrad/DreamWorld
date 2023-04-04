@@ -66,7 +66,6 @@ Public Class FormServerType
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         GridRegionButton.Text = Global.Outworldz.My.Resources.Region_Server_word
         GridServerButton.Text = Global.Outworldz.My.Resources.Grid_Server_With_Robust_word
         GroupBox1.Text = Global.Outworldz.My.Resources.Server_Type_word

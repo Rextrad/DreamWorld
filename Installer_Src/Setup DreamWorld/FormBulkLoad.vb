@@ -452,4 +452,5 @@ Public Class FormBulkLoad
         HelpManual("Bulk Load")
 
     End Sub
+
 End Class

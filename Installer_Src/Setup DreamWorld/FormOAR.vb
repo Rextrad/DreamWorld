@@ -341,7 +341,6 @@ Public Class FormOAR
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
         PictureBox1.Image = Global.Outworldz.My.Resources.view
         RefreshToolStripMenuItem.Image = Global.Outworldz.My.Resources.refresh
