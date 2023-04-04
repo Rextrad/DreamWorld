@@ -571,6 +571,7 @@ Module SmartStart
         Logger("Teleport Request", Region_Name(RegionUUID) & ":" & AgentID, "Teleport")
 
         ResumeRegion(RegionUUID) ' Wait for it to start booting
+        PokeRegionTimer(RegionUUID)
 
         If Teleport Then
             TPQueue.Add(AgentID, RegionUUID)
@@ -727,15 +728,19 @@ Module SmartStart
                         If TeleportType.ToUpperInvariant = "UUID" Then
                             If Smart_Boot_Enabled(RegionUUID) Then
                                 Logger("SmartStart", $"{Region_Name(RegionUUID)} Is Smart Boot", "Teleport")
+                                Dim ParkingLot = FindRegionByName(Settings.ParkingLot)
 
-                                Dim uuid = FindRegionByName(Settings.ParkingLot)
-                                AddEm(uuid, AgentID, True) ' Wait for it to start booting
-                                Application.DoEvents()
+                                ' TODO fix this boot issue
+                                If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
+                                    AddEm(ParkingLot, AgentID, True) ' Wait for it to start booting
+                                    RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
+                                    Application.DoEvents()
+                                    Sleep(5000) ' no good as tp shuts down. Needs to be a promise
+                                End If
+
                                 AddEm(RegionUUID, AgentID, True)
                                 Logger("SmartStart", $"{Name}{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
-                                RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
-
-                                Return uuid
+                                Return ParkingLot
                             Else
                                 AddEm(RegionUUID, AgentID, True)
                                 Logger("SmartStart", $"Suspend type UUID Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
@@ -1235,6 +1240,12 @@ Module SmartStart
     End Sub
 
 #End Region
+
+    ' TODO make a list of these to have multiple commands
+    Public Class TaskQue
+        Public RegionUUID As String
+        Public T As TaskObject
+    End Class
 
     Public Class TaskObject
 
