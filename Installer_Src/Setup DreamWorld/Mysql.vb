@@ -47,7 +47,7 @@ Public Module MysqlInterface
 
 #Region "Stats"
 
-    ' TODO
+    ' TODO SQL
 
     'Select Case COUNT(*), SUBSTRING( argument, 1, 7), SUBSTRING_INDEX(SUBSTRING_INDEX(argument, "values", -1), "'", 3) As arg    FROM mysql.general_log    WHERE SUBSTRING( argument, 1, 21) = "insert into primitems"    GROUP BY arg    ORDER BY 1 DESC
 
