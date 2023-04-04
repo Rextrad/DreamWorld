@@ -607,9 +607,9 @@ Module Robust
             Dim url As String
             If Settings.ServerType = RobustServerName Then
                 'TODO see if this still exists in Opensim code
-                url = "http://" & Settings.LANIP & ":" & Settings.HttpPort & "/index.php?version"
+                url = "http://" & Settings.LANIP & ":" & Settings.HttpPort ' /index.php?version"
             Else
-                url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"
+                url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort ' /index.php?version"
             End If
 
             Try
