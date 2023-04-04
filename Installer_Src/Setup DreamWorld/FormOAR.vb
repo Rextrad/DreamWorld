@@ -320,6 +320,7 @@ Public Class FormOAR
 
     Private Function DoWork() As JSONResult
 
+        PictureBox.Show()
         SearchBusy = True
         json = GetData()
         If json IsNot Nothing Then
@@ -332,12 +333,14 @@ Public Class FormOAR
 
         _initted = True
         SearchBusy = False
+        PictureBox.Hide()
         Return Nothing
 
     End Function
 
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
+        PictureBox.Show()
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
@@ -373,6 +376,7 @@ Public Class FormOAR
 
     Private Sub InitiateThread()
 
+        PictureBox.Show()
         SearchBusy = True
         WebThread = New Thread(DirectCast(Function() DoWork(), ThreadStart))
 
@@ -552,6 +556,7 @@ Public Class FormOAR
 
         Settings.NameOrDate = NameRadioButton.Checked
         If NameRadioButton.Checked Then Search()
+
     End Sub
 
     Private Sub RadioOldestRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AscendRadioButton.CheckedChanged
@@ -578,6 +583,8 @@ Public Class FormOAR
 
         If SearchBusy = True Then Return
         SearchBusy = True
+
+        PictureBox.Show()
         Dim searchterm = TextBox1.Text
         Try
             'If searchterm.Length > 0 Then
@@ -649,19 +656,12 @@ Public Class FormOAR
             ErrorLog(ex.Message)
         End Try
 
+        PictureBox.Hide()
         SearchBusy = False
     End Sub
 
     Private Sub TbSecurity_KeyPress(sender As System.Object, e As System.EventArgs) Handles TextBox1.KeyUp
 
-        Search()
-
-    End Sub
-
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles Timer1.Tick
-
-        If WebThread.IsAlive Then Return
-        Timer1.Stop()
         Search()
 
     End Sub

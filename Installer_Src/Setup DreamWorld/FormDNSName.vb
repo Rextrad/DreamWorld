@@ -52,10 +52,10 @@ Public Class FormDnsName
 
     Private Sub DNS_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        PictureBox.Visible = True
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
-        PictureBox.Visible = False
         EnableHypergrid.Text = Global.Outworldz.My.Resources.Enable_Hypergrid_word
         HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer
         HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Help_word
@@ -93,6 +93,7 @@ Public Class FormDnsName
         DNSAliasTextBox.Text = Settings.AltDnsName
         HelpOnce("DNS")
         initted = True
+        PictureBox.Visible = False
 
     End Sub
 
@@ -113,6 +114,7 @@ Public Class FormDnsName
 
     Private Sub NextNameButton_Click(sender As Object, e As EventArgs) Handles NextNameButton.Click
 
+        PictureBox.Visible = True
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
         DNSNameBox.Text = String.Empty
         Application.DoEvents()
@@ -126,16 +128,17 @@ Public Class FormDnsName
             NextNameButton.Enabled = True
             DNSNameBox.Text = n
         End If
+        PictureBox.Visible = False
 
     End Sub
 
     Private Async Function SaveAllAsync() As Task(Of Boolean)
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
-
+        PictureBox.Visible = True
         Settings.SaveSettings()
         Await SetPublicIPAsync()
-
+        PictureBox.Visible = False
         If Settings.DnsTestPassed Then Me.Close()
 
         Return True
@@ -147,7 +150,9 @@ Public Class FormDnsName
     Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
+        PictureBox.Visible = True
         Dim r = Await SaveAllAsync()
+        PictureBox.Visible = False
         Close()
 
     End Sub
@@ -270,6 +275,7 @@ Public Class FormDnsName
 
         If Not initted Then Return
         Settings.MachineId() = UniqueId.Text
+
     End Sub
 
 #End Region

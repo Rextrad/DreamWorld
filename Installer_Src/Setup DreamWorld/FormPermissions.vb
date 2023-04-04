@@ -113,7 +113,7 @@ Public Class FormPermissions
     Private Sub HGExportCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles OutBoundPermissionsCheckbox.CheckedChanged
 
         If Not initted Then Return
-        Settings.OutboundPermissions = OutBoundPermissionsCheckbox.Checked
+        Settings.AllowExport = OutBoundPermissionsCheckbox.Checked
         Settings.SaveSettings()
 
     End Sub

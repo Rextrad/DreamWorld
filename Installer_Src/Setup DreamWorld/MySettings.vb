@@ -168,6 +168,20 @@ Public Class MySettings
     End Property
 
     ''' <summary>
+    ''' Allow export to other grids
+    ''' </summary>
+    ''' <returns>Boolean</returns>
+    Public Property AllowExport() As Boolean
+        Get
+            Return CType(GetMySetting("AllowExport", "True"), Boolean)
+        End Get
+        Set
+            SetMySetting("AllowExport", CStr(Value))
+        End Set
+
+    End Property
+
+    ''' <summary>
     ''' Allow Gods - without this no gods are possible
     ''' </summary>
     ''' <returns>Boolean</returns>

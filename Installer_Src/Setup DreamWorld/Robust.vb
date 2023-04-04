@@ -430,6 +430,14 @@ Module Robust
 
             Dim INI = New LoadIni(Settings.OpensimBinPath & "Robust.HG.ini", ";", System.Text.Encoding.UTF8)
 
+            Dim Disallow = "Unknown,Texture,Sound,CallingCard,Landmark,Clothing,Object,Notecard,LSLText,LSLBytecode,TextureTGA,Bodypart,SoundWAV,ImageTGA,ImageJPEG,Animation,Gesture,Mesh"
+
+            If Settings.AllowExport Then
+                If INI.SetIni("HGAssetService", "DisallowExport", "") Then Return True
+            Else
+                If INI.SetIni("HGAssetService", "DisallowExport", Disallow) Then Return True
+            End If
+
             If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
             If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
             If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True

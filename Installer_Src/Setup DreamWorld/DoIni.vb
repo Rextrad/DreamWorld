@@ -350,14 +350,22 @@ Module DoIni
 
             Dim INI = New LoadIni(d, ";", System.Text.Encoding.UTF8)
 
-            INI.SetIni("HGInventoryAccessModule", "OutboundPermission", CStr(Settings.OutboundPermissions))
             INI.SetIni("DatabaseService", "ConnectionString", Settings.RegionDBConnection)
 
-            ' ;; Send visual reminder to local users that their inventories are unavailable while they are traveling ;; and available when they return. True by default.
-            If Settings.Suitcase Then
-                INI.SetIni("HGInventoryAccessModule", "RestrictInventoryAccessAbroad", "True")
+            ' Send visual reminder to local users that their inventories are unavailable while they are traveling and available when they return. True by default.
+            INI.SetIni("HGInventoryAccessModule", "RestrictInventoryAccessAbroad", CStr(Settings.Suitcase))
+
+            ' If you want to protect your assets from being copied by foreign visitors
+            ' set this to false. You may want to do this on sims that have licensed content.
+            ' Default Is true.
+            INI.SetIni("HGInventoryAccessModule", "OutboundPermission", CStr(Settings.AllowExport))
+
+            Dim Disallow = "Unknown,Texture,Sound,CallingCard,Landmark,Clothing,Object,Notecard,LSLText,LSLBytecode,TextureTGA,Bodypart,SoundWAV,ImageTGA,ImageJPEG,Animation,Gesture,Mesh"
+
+            If Settings.AllowExport Then
+                If INI.SetIni("HGAssetService", "DisallowExport", "") Then Return True
             Else
-                INI.SetIni("HGInventoryAccessModule", "RestrictInventoryAccessAbroad", "False")
+                If INI.SetIni("HGAssetService", "DisallowExport", Disallow) Then Return True
             End If
 
             INI.SaveIni()

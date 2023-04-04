@@ -39,11 +39,13 @@ Partial Class FormOAR
         Me.DescendRadioButton = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.ExclusiveCheckbox = New System.Windows.Forms.CheckBox()
+        Me.PictureBox = New System.Windows.Forms.PictureBox()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView
@@ -111,9 +113,6 @@ Partial Class FormOAR
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 1892
         Me.PictureBox1.TabStop = False
-        '
-        'Timer1
-        '
         '
         'NameRadioButton
         '
@@ -199,11 +198,23 @@ Partial Class FormOAR
         Me.ExclusiveCheckbox.Text = "Exclusive OARs"
         Me.ExclusiveCheckbox.UseVisualStyleBackColor = True
         '
+        'PictureBox
+        '
+        Me.PictureBox.Image = Global.Outworldz.My.Resources.Resources.loader
+        Me.PictureBox.Location = New System.Drawing.Point(34, 30)
+        Me.PictureBox.Name = "PictureBox"
+        Me.PictureBox.Size = New System.Drawing.Size(40, 35)
+        Me.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox.TabIndex = 18622
+        Me.PictureBox.TabStop = False
+        Me.PictureBox.Visible = False
+        '
         'FormOAR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(686, 433)
+        Me.Controls.Add(Me.PictureBox)
         Me.Controls.Add(Me.ExclusiveCheckbox)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -223,6 +234,7 @@ Partial Class FormOAR
         Me.TableLayoutPanel1.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
+        CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -242,4 +254,5 @@ Partial Class FormOAR
     Friend WithEvents DescendRadioButton As RadioButton
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents ExclusiveCheckbox As CheckBox
+    Friend WithEvents PictureBox As PictureBox
 End Class
