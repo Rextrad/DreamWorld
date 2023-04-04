@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Nederländerna</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Lägga till ett beteende i en robot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Läger bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Anslut robotar</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Koppla bort robotar</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Om du vill ha mer information skriver du</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Gripa</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Ta bort ett beteende från en robot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Texturer för begärandeobjekt</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Ange en inställning för alla robotar</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Visa regioner som är kända för robotar</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Visar detaljerad status och inställningar för en viss robot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Visar status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Visar status för alla robotar</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Stäng av bots och avsluta</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Stäng av bots och avsluta</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sitt alla bots på marken</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sitta</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Ställ alla bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stå</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Startregion</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>för att få en lista över alla kommandon, eller skriv</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>där &lt;item&gt; är något av följande&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Skicka agentuppdateringar</value>
+  </data>
 </root>

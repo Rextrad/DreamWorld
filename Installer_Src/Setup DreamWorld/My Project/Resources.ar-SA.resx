@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>هولندا</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>إضافة سلوك إلى روبوت</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>كامب بوت</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>ربط الروبوتات</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>قطع اتصال الروبوتات</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>لمزيد من المعلومات، اكتب</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>خطف</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>إزالة سلوك من روبوت</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>طلب قوام الكائن</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>تعيين إعداد لجميع برامج التتبع</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>إظهار المناطق المعروفة للروبوتات</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>يعرض الحالة والإعدادات التفصيلية لروبوت معين</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>يظهر الحالة</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>يظهر حالة جميع برامج الروبوت</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>اغلاق الروبوتات والخروج</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>اغلاق الروبوتات والخروج</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>اجلس جميع الروبوتات على الأرض</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>جلس</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>الوقوف على جميع الروبوتات</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>وقف</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>منطقة البداية</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>للحصول على قائمة بجميع الأوامر، أو اكتب</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>حيث &lt;item&gt; هو واحد مما يلي&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>إرسال تحديثات الوكلاء</value>
+  </data>
 </root>

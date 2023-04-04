@@ -1274,9 +1274,6 @@
   <data name="WinterAspen1" xml:space="preserve">
     <value>Winter Aspen</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="navigate_cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\navigate_cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -4578,5 +4575,74 @@
   </data>
   <data name="System_Backup_word" xml:space="preserve">
     <value>System Backup</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Add a behaviour to a bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Camp bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Connect bots</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Disconnect bots</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>For more information, type</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Grab</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Remove a behaviour from a bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Request Object Textures</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Set a setting for all bots</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Show regions known to bots</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Shows the detailed status and settings of a particular bot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Shows status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Shows the status of all bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Shutdown bots and exit</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Shutdown bots and exit</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sit all bots on the ground</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sit</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Stand all bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stand</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Starting Region</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>to get a list of all commands, or type</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>where &lt;item&gt; is one of the following</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Send Agents Updates</value>
   </data>
 </root>

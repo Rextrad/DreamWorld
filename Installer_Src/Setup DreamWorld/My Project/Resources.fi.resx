@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Alankomaat</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Käyttäytymisen lisääminen bottiin</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Leirin botti</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Yhdistä botit</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Katkaise bottien yhteys</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Jos haluat lisätietoja, kirjoita</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Anastaa</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Botin toiminnan poistaminen</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Pyydä objektin tekstuureja</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Aseta asetus kaikille boteille</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Näytä bottien tuntemat alueet</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Näyttää tietyn botin yksityiskohtaisen tilan ja asetukset</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Näyttää tilan</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Näyttää kaikkien bottien tilan</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Sammuta botit ja poistu</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Sammuta botit ja poistu</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Istuta kaikki botit maassa</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Istua</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Seiso kaikki botit</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Seisoa</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Lähtöalue</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>saadaksesi luettelon kaikista komennoista tai kirjoittamalla</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>missä &lt;item&gt; on jokin seuraavista&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Lähetä asiakaspalvelijoille päivityksiä</value>
+  </data>
 </root>

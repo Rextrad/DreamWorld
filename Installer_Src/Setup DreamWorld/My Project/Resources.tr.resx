@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Hollanda</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Bota davranış ekleme</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Kamp botu</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Botları bağlama</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Botların bağlantısını kesme</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Daha fazla bilgi için</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Tutmak</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Bottan davranış kaldırma</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Nesne Dokuları İsteme</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Tüm botlar için bir ayar belirleme</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Botlar tarafından bilinen bölgeleri göster</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Belirli bir botun ayrıntılı durumunu ve ayarlarını gösterir</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Durumu gösterir</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Tüm botların durumunu gösterir</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Botları kapatma ve çıkış</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Botları kapatma ve çıkış</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Tüm botları yere oturtun</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Oturmak</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Tüm botları ayakta tutun</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Ayakta durmak</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Başlangıç Bölgesi</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>Tüm komutların listesini almak için veya</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>aşağıdakilerden &lt;item&gt; biri nerede&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Aracılar Güncelleştirmeleri Gönderme</value>
+  </data>
 </root>

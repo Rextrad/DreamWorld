@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Holland</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Bættu hegðun við láni</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Camp bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Tengdu vélmenni</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Aftengdu vélmenni</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Fyrir frekari upplýsingar, sláðu inn</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Grípa</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Fjarlægðu hegðun úr láni</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Biðja um áferð hlutar</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Stilltu stillingu fyrir alla vélmenni</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Sýna svæði sem vélmennin þekkja</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Sýnir nákvæma stöðu og stillingar tiltekins botns</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Sýnir stöðu</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Sýnir stöðu allra vélmenna</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Slökktu á vélmennum og hættu</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Slökktu á vélmennum og hættu</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sitjið öll vélmenni á jörðinni</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sitja</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Standið öll vélmenni</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Standa</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Upphafssvæði</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>til að fá lista yfir allar skipanir, eða slá inn</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>hvar &lt;item&gt; er eitt af eftirfarandi&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Senda umboðsmönnum uppfærslur</value>
+  </data>
 </root>

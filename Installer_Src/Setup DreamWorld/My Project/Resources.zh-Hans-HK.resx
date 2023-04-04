@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>荷兰</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>向机器人添加行为</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>营地机器人</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>连接机器人</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>断开机器人连接</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>有关详细信息，请键入</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>抓</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>从机器人中删除行为</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>请求对象纹理</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>为所有机器人设置设置</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>显示机器人已知的区域</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>显示特定机器人的详细状态和设置</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>显示状态</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>显示所有机器人的状态</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>关闭机器人并退出</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>关闭机器人并退出</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>将所有机器人坐在地上</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>坐</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>支持所有机器人</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>站</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>起始区域</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>以获取所有命令的列表，或键入</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>其中 &lt;item&gt; 是以下之一&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>发送代理更新</value>
+  </data>
 </root>

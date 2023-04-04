@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Ολλανδία</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Προσθήκη συμπεριφοράς σε bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Κατασκήνωση bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Σύνδεση bots</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Αποσυνδέστε τα bots</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Για περισσότερες πληροφορίες, πληκτρολογήστε</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Αρπάζω</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Κατάργηση συμπεριφοράς από bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Αίτημα υφών αντικειμένου</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Ορίστε μια ρύθμιση για όλα τα bot</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Εμφάνιση περιοχών που είναι γνωστές στα bot</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Εμφανίζει τη λεπτομερή κατάσταση και τις ρυθμίσεις ενός συγκεκριμένου bot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Εμφανίζει την κατάσταση</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Εμφανίζει την κατάσταση όλων των bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Τερματισμός bots και έξοδος</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Τερματισμός bots και έξοδος</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Καθίστε όλα τα bots στο έδαφος</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Κάθομαι</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Σταθείτε όλα τα bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Στέκομαι</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Περιοχή εκκίνησης</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>Για να λάβετε μια λίστα με όλες τις εντολές ή πληκτρολογήστε</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>όπου &lt;item&gt; είναι ένα από τα ακόλουθα&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Αποστολή ενημερώσεων πρακτόρων</value>
+  </data>
 </root>

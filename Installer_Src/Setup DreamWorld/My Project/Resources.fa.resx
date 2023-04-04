@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>هلند</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>اضافه کردن یک رفتار به یک ربات</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>ربات کمپ</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>اتصال رباتها</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>رباتها قطع ارتباط</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>برای کسب اطلاعات بیشتر، نوع</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>گرفتن</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>حذف یک رفتار از یک ربات</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>درخواست بافت شیء</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>تنظیم یک تنظیم برای همه رباتها</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>نمایش مناطق شناخته شده به رباتها</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>وضعیت و تنظیمات دقیق یک ربات خاص را نشان می دهد</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>وضعیت را نشان می دهد</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>وضعیت همه ربات ها را نشان می دهد</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>خاموش کردن رباتها و خروج</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>خاموش کردن رباتها و خروج</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>همه رباتها را روی زمین بنشینید</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>نشستن</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>ایستادن تمام رباتها</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>ایستاده</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>منطقه شروع</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>برای بدست آوردن یک لیست از همه دستورات ، و یا نوع</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>که در &lt;item&gt; آن یکی از موارد زیر است&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>ارسال به روز رسانی عوامل</value>
+  </data>
 </root>

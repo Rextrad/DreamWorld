@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Herbehereak</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Bot bati portaera bat erantsi</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Kanpamenduko bota</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Bot-ak konektatu</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Bot deskonektatu</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Informazio gehiago lortzeko, idatzi</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Heldu</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Bot baten portaera kendu</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Objektuaren ehundurak eskatzea</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Bot guztientzat konfigurazioa ezartzea</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Bot-ek ezagutzen dituzten eskualdeak erakutsi</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Ea erakusten dituen bot baten egoera xehatua eta konfigurazioa</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Egoera erakusten du</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Bot guztien egoera erakusten du</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Bot-ak itzali eta irten</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Bot-ak itzali eta irten</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Bot guztiak lurrean sentitzen ditu</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Eseri</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Stand bot guztiak</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Zutik egotea</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Hasierako eskualdea</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>Komando guztien zerrenda bat lortzeko, edo idatzi</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>non &lt;item&gt; hurrengoetako bat den&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Eragileei eguneratzeak bidaltzea</value>
+  </data>
 </root>

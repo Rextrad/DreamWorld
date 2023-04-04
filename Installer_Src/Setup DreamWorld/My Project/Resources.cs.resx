@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Nizozemsko</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Přidání chování do robota</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Táborový bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Připojení robotů</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Odpojení robotů</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Chcete-li získat další informace, zadejte</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Uchopit</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Odebrání chování z robota</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Požadavek na textury objektů</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Nastavení pro všechny roboty</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Zobrazit oblasti známé robotům</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Zobrazuje podrobný stav a nastavení konkrétního robota</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Zobrazuje stav</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Zobrazuje stav všech robotů</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Vypnutí robotů a ukončení</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Vypnutí robotů a ukončení</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Posaďte všechny roboty na zem</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sedět</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Postavte všechny roboty</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stát</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Startovní region</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>zobrazíte seznam všech příkazů nebo zadejte</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>v případě, že &lt;item&gt; je jedna z následujících možností&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Odesílání aktualizací agentů</value>
+  </data>
 </root>

@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Países Baixos</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Adicionar um comportamento a um bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot de acampamento</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Conectar bots</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Desconectar bots</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Para obter mais informações, digite</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Agarrar</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Remover um comportamento de um bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Solicitar texturas de objeto</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Definir uma configuração para todos os bots</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Mostrar regiões conhecidas por bots</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Mostra o status detalhado e as configurações de um bot específico</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Mostra o status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Mostra o status de todos os bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Desligue bots e saia</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Desligue bots e saia</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sente-se todos os bots no chão</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sentar</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Fique com todos os bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Estar em pé</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Região inicial</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>para obter uma lista de todos os comandos ou digite</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>onde &lt;item&gt; é um dos seguintes&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Enviar atualizações aos agentes</value>
+  </data>
 </root>

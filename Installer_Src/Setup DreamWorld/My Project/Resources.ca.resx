@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Els Països Baixos</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Afegir un comportament a un bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot de campament</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Connectar bots</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Desconnecta els bots</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Per a més informació, escriviu</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Agafar</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Suprimir un comportament d'un bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Sol·liciteu textures d'objectes</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Definir una configuració per a tots els bots</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Mostrar regions conegudes pels bots</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Mostra l'estat detallat i la configuració d'un bot concret</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Mostra l'estat</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Mostra l'estat de tots els bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Bots d'aturada i sortida</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Bots d'aturada i sortida</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Asseure tots els bots a terra</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Seure</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Posa tots els bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Estar dret</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Regió inicial</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>per obtenir una llista de totes les ordres, o escriviu</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>on &lt;item&gt; és un dels següents&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Enviar actualitzacions d'agents</value>
+  </data>
 </root>

@@ -3993,4 +3993,73 @@
   <data name="Netherlands" xml:space="preserve">
     <value>Holandia</value>
   </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Dodawanie zachowania do bota</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot obozowy</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Połącz boty</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Rozłącz boty</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Aby uzyskać więcej informacji, wpisz</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Chwycić</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Usuwanie zachowania z bota</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Żądanie tekstur obiektów</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Ustawianie ustawienia dla wszystkich botów</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Pokaż regiony znane botom</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Pokazuje szczegółowy stan i ustawienia konkretnego bota</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Pokazuje stan</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Pokazuje stan wszystkich botów</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Zamykanie botów i wyjście</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Zamykanie botów i wyjście</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Usiądź wszystkie boty na ziemi</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Siedzieć</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Stand all bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stać</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Region początkowy</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>, aby uzyskać listę wszystkich poleceń, lub wpisz</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>gdzie &lt;item&gt; jest jedną z następujących pozycji&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Wysyłanie aktualizacji agentów</value>
+  </data>
 </root>
