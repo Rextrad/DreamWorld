@@ -1,7 +1,7 @@
 <?php 
 /* General Domain */
 $CONF_domain        = "blue.outworldz.net"; 
-$CONF_port          = "8002"; 
+$CONF_port          = "7502"; 
 $CONF_sim_domain    = "http://blue.outworldz.net/";
 $CONF_install_path  = "/Metromap";   // Installation path 
 /* MySQL Database */ 

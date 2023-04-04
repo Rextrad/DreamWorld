@@ -27,7 +27,7 @@ Module Teleport
 
                 ElseIf status = SIMSTATUSENUM.Booted Then
                     ShowDOSWindow(RegionToUUID, MaybeShowWindow())
-                    If CheckPort(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
+                    If Checkport(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
                         Dim DestinationName = Region_Name(RegionToUUID)
                         Dim FromRegionUUID As String = GetRegionFromAgentId(AgentID)
                         Dim fromName = Region_Name(FromRegionUUID)
@@ -79,7 +79,6 @@ Public Class TeleportAvatar
 
         Delete(AgentID)
         TeleportAvatarDict.TryAdd(AgentID, Value)
-        TP(AgentID)
 
     End Sub
 
@@ -87,14 +86,6 @@ Public Class TeleportAvatar
         If TeleportAvatarDict.ContainsKey(AgentID) Then
             TeleportAvatarDict.TryRemove(AgentID, "")
         End If
-    End Sub
-
-    Public Shared Sub TP(AgentID As String)
-
-        If TeleportAvatarDict.ContainsKey(AgentID) Then
-            TeleportAvatarDict.TryRemove(AgentID, "")
-        End If
-
     End Sub
 
 End Class

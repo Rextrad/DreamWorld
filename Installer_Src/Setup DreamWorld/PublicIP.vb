@@ -7,6 +7,7 @@
 
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.Web.Services.Description
 
 Module PublicIP
 
@@ -96,6 +97,7 @@ Module PublicIP
             Try
                 result = ClientSocket.BeginConnect(ServerAddress, Port, Nothing, Nothing)
                 success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2))
+                Application.DoEvents()
                 ClientSocket.EndConnect(result)
             Catch ex As Exception
                 Return False
@@ -127,39 +129,27 @@ Module PublicIP
 
     End Function
 
-    Public Sub WANIP()
+    Public Function WANIP() As String
 
-        Dim O As New Object
-        Using client As New System.Net.WebClient ' download client for web page
+        Dim Providers As New List(Of String) From {
+            "https://api.ipify.org",
+            "https://api.ip.sb/ip"
+        }
 
-            Try
-                Dim U = New Uri("https://api.ipify.org")
-                AddHandler client.DownloadStringCompleted, AddressOf WANIPCompleteEvent
-                client.DownloadStringAsync(U, O)
-
-            Catch ex1 As Exception
+        For Each U In Providers
+            Using client As New WebClient
                 Try
-                    Dim U = New Uri("https://api.ip.sb/ip")
-                    client.DownloadStringAsync(U, O)
-                Catch ex2 As Exception
+                    Dim r = client.DownloadString(U)
+                    Return r
+                Catch ex As Exception
+                    Return ""
                 End Try
-            End Try
 
-        End Using
+            End Using
+        Next
+        Return ""
 
-
-    End Sub
-
-    Private Sub WANIPCompleteEvent(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
-
-        If e.Error Is Nothing Then
-            Settings.WANIP = e.Result
-        Else
-            Settings.WANIP = Settings.LANIP
-        End If
-
-
-    End Sub
+    End Function
 
     Private Sub Bitch(msg As String)
 

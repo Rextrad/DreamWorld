@@ -437,6 +437,9 @@ Public Class FormSmartStart
 
     Private Sub Loading(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         _initialized = False
         SetScreen()
 
@@ -948,8 +951,8 @@ Public Class FormSmartStart
             Settings.ParkingLot = ParkingSpot.SelectedItem.ToString
             TextPrint($"{My.Resources.arrivals} {ParkingSpot.SelectedItem}")
             Dim RegionUUID = FindRegionByName(Settings.ParkingLot)
-            Smart_Boot_Enabled(regionuuid) = False
-            Smart_Suspend_Enabled(regionUUID) = False
+            Smart_Boot_Enabled(RegionUUID) = False
+            Smart_Suspend_Enabled(RegionUUID) = False
 
             Settings.SaveSettings()
         Catch

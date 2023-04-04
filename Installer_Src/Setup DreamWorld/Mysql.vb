@@ -47,7 +47,7 @@ Public Module MysqlInterface
 
 #Region "Stats"
 
-    ' TODO
+    ' TODO SQL
 
     'Select Case COUNT(*), SUBSTRING( argument, 1, 7), SUBSTRING_INDEX(SUBSTRING_INDEX(argument, "values", -1), "'", 3) As arg    FROM mysql.general_log    WHERE SUBSTRING( argument, 1, 21) = "insert into primitems"    GROUP BY arg    ORDER BY 1 DESC
 
@@ -85,7 +85,6 @@ Public Module MysqlInterface
 #Region "StartMysql"
 
     Public Function StartMySQL() As Boolean
-
 
         Log("INFO", "Checking MySQL")
         If MysqlInterface.IsMySqlRunning() Then
@@ -310,8 +309,6 @@ Public Module MysqlInterface
         MySQLIcon(True)
 
         PropMysqlExited = False
-
-
 
         Return True
 
@@ -2226,7 +2223,6 @@ Public Module MysqlInterface
                     Next
                 End If
             End If
-
         Else
             PropAborting = True
             If Not RunningInServiceMode() Then

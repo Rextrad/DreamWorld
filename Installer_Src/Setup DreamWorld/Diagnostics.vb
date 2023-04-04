@@ -1,6 +1,7 @@
-﻿Imports System.Text
-Imports System.Net
+﻿Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text
+Imports System.Threading.Tasks
 
 Module Diags
 
@@ -15,13 +16,10 @@ Module Diags
         End Set
     End Property
 
-    Public Sub DoDiag()
+#Disable Warning VSTHRD100 ' Avoid async void methods
 
-        If IPCheck.IsPrivateIP(Settings.DnsName) Then
-            Logger("INFO", Global.Outworldz.My.Resources.LAN_IP, "Diagnostics")
-            TextPrint(My.Resources.LAN_IP)
-            Return
-        End If
+    Public Async Sub DoDiag()
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         TextPrint("___DIAG_START_______")
         TextPrint(My.Resources.Running_Network)
@@ -30,7 +28,7 @@ Module Diags
 
         OpenPorts() ' Open router ports with UPnp
         ProbePublicPort() ' Probe using Outworldz like Canyouseeme.org does on HTTP port
-        TestPrivateLoopback()   ' Diagnostics
+        Await TestPrivateLoopbackAsync()   ' Diagnostics
         TestPublicLoopback()    ' Http port
         TestAllRegionPorts()    ' All Dos boxes, actually
 
@@ -269,36 +267,24 @@ Module Diags
 
     End Sub
 
-    Private Sub TestPrivateLoopbackLoopbackCallback(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
+    Public Async Function TestPrivateLoopbackAsync() As Task(Of Boolean)
 
-        If e.Result = "Test Completed" Then
-            Logger("INFO", Global.Outworldz.My.Resources.Failed_LAN, "Diagnostics")
-            Settings.LoopbackDiag = False
-        Else
-            Settings.LoopbackDiag = True
-            Settings.DiagFailed = True
-        End If
-
-    End Sub
-    Public Sub TestPrivateLoopback()
-
-        Dim result As String = ""
         TextPrint(My.Resources.Checking_LAN_Loopback_word)
         Dim weblink = $"http://{Settings.LANIP()}:{Settings.DiagnosticPort}/?_TestLoopback={RandomNumber.Random()}"
         Logger("Info", "URL= " & weblink, "Diagnostics")
-        Dim O As New Object
-        Using client As New WebClient
-            Try
-                Dim U As New Uri(weblink)
-                AddHandler client.DownloadStringCompleted, AddressOf TestPrivateLoopbackLoopbackCallback
-                client.DownloadStringAsync(U, O)
-            Catch ex As Exception
-                Logger("Error", ex.Message, "Diagnostics")
-            End Try
-        End Using
+        Try
+            Dim rr = Await GetURLContentsAsync(weblink)
+            Dim msg = System.Text.Encoding.ASCII.GetString(rr)
+            If msg = "Test Completed" Then
+                Return True
+            End If
+        Catch ex As Exception
+            Logger("Error", ex.Message, "Diagnostics")
+        End Try
 
-    End Sub
+        Return False
 
+    End Function
 
     Public Sub TestPublicLoopback()
 
@@ -313,6 +299,11 @@ Module Diags
         End If
 
         TextPrint(My.Resources.Checking_Loopback_word)
+
+        Dim U = WANIP()
+
+        PortTest($"http://{U}", Settings.HttpPort)
+
         'Logger("INFO", Global.Outworldz.My.Resources.Checking_Loopback_word, "Diagnostics")
         PortTest("http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/?_TestLoopback=" & RandomNumber.Random, Settings.HttpPort)
 

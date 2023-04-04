@@ -104,7 +104,6 @@ Partial Class FormPublicity
         'CategoryCheckbox
         '
         Me.CategoryCheckbox.FormattingEnabled = True
-        Me.CategoryCheckbox.Items.AddRange(New Object() {"Adult", "Art", "Charity", "Child Friendly", "Commercial", "Educational", "Education - School", "Education - College", "Experimental", "Fantasy", "Freebies", "Free Land", "Furry", "Hideout", "Hyperport", "Gaming", "LGBT", "Personal", "Newcomer Friendly", "Parks & Nature", "R-Rated", "Rental", "Residential", "Role play", "Romance", "Sandbox", "Sci-Fi", "Science", "Scripting", "Shopping", "Testing", "X-Rated"})
         Me.CategoryCheckbox.Location = New System.Drawing.Point(11, 19)
         Me.CategoryCheckbox.Name = "CategoryCheckbox"
         Me.CategoryCheckbox.Size = New System.Drawing.Size(204, 154)

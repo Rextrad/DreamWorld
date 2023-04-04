@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormBots
+Partial Class CampBots
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -39,7 +39,6 @@ Partial Class FormBots
         Me.StatusButton = New System.Windows.Forms.Button()
         Me.RegionButton = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.RegionLabel = New System.Windows.Forms.Label()
         Me.SendAgentUpdatesCheckBox = New System.Windows.Forms.CheckBox()
         Me.RequestObjectTexturesCheckBox = New System.Windows.Forms.CheckBox()
         Me.MenuStrip1.SuspendLayout()
@@ -113,12 +112,15 @@ Partial Class FormBots
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.AutoSize = True
-        Me.TableLayoutPanel1.ColumnCount = 4
+        Me.TableLayoutPanel1.ColumnCount = 5
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.RequestObjectTexturesCheckBox, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBoxNone, 3, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.SendAgentUpdatesCheckBox, 4, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBoxTeleport, 2, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBoxGrab, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBoxPhysics, 0, 2)
@@ -130,48 +132,56 @@ Partial Class FormBots
         Me.TableLayoutPanel1.Controls.Add(Me.StartButton, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.ConnectButton, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.DisconnectButton, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.ComboBox1, 4, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 37)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.16518!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.16518!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.66964!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(368, 90)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(518, 90)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'CheckBoxNone
         '
+        Me.CheckBoxNone.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBoxNone.AutoSize = True
         Me.CheckBoxNone.Location = New System.Drawing.Point(279, 69)
         Me.CheckBoxNone.Name = "CheckBoxNone"
-        Me.CheckBoxNone.Size = New System.Drawing.Size(52, 17)
+        Me.CheckBoxNone.Size = New System.Drawing.Size(86, 17)
         Me.CheckBoxNone.TabIndex = 17
         Me.CheckBoxNone.Text = "None"
         Me.CheckBoxNone.UseVisualStyleBackColor = True
         '
         'CheckBoxTeleport
         '
+        Me.CheckBoxTeleport.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBoxTeleport.AutoSize = True
         Me.CheckBoxTeleport.Location = New System.Drawing.Point(187, 69)
         Me.CheckBoxTeleport.Name = "CheckBoxTeleport"
-        Me.CheckBoxTeleport.Size = New System.Drawing.Size(65, 17)
+        Me.CheckBoxTeleport.Size = New System.Drawing.Size(86, 17)
         Me.CheckBoxTeleport.TabIndex = 16
         Me.CheckBoxTeleport.Text = "Teleport"
         Me.CheckBoxTeleport.UseVisualStyleBackColor = True
         '
         'CheckBoxGrab
         '
+        Me.CheckBoxGrab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBoxGrab.AutoSize = True
         Me.CheckBoxGrab.Location = New System.Drawing.Point(95, 69)
         Me.CheckBoxGrab.Name = "CheckBoxGrab"
-        Me.CheckBoxGrab.Size = New System.Drawing.Size(49, 17)
+        Me.CheckBoxGrab.Size = New System.Drawing.Size(86, 17)
         Me.CheckBoxGrab.TabIndex = 15
         Me.CheckBoxGrab.Text = "Grab"
         Me.CheckBoxGrab.UseVisualStyleBackColor = True
         '
         'CheckBoxPhysics
         '
-        Me.CheckBoxPhysics.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CheckBoxPhysics.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBoxPhysics.AutoSize = True
         Me.CheckBoxPhysics.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.CheckBoxPhysics.Location = New System.Drawing.Point(3, 69)
@@ -183,7 +193,7 @@ Partial Class FormBots
         '
         'SitButton
         '
-        Me.SitButton.Location = New System.Drawing.Point(187, 36)
+        Me.SitButton.Location = New System.Drawing.Point(279, 36)
         Me.SitButton.Name = "SitButton"
         Me.SitButton.Size = New System.Drawing.Size(86, 23)
         Me.SitButton.TabIndex = 14
@@ -192,7 +202,7 @@ Partial Class FormBots
         '
         'StandButton
         '
-        Me.StandButton.Location = New System.Drawing.Point(279, 36)
+        Me.StandButton.Location = New System.Drawing.Point(187, 36)
         Me.StandButton.Name = "StandButton"
         Me.StandButton.Size = New System.Drawing.Size(86, 23)
         Me.StandButton.TabIndex = 13
@@ -221,24 +231,15 @@ Partial Class FormBots
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Home", "Last", "(Region Name)"})
-        Me.ComboBox1.Location = New System.Drawing.Point(411, 42)
+        Me.ComboBox1.Location = New System.Drawing.Point(371, 3)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(98, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(134, 21)
         Me.ComboBox1.TabIndex = 8
-        '
-        'RegionLabel
-        '
-        Me.RegionLabel.AutoSize = True
-        Me.RegionLabel.Location = New System.Drawing.Point(515, 45)
-        Me.RegionLabel.Name = "RegionLabel"
-        Me.RegionLabel.Size = New System.Drawing.Size(66, 13)
-        Me.RegionLabel.TabIndex = 18
-        Me.RegionLabel.Text = "Start Region"
         '
         'SendAgentUpdatesCheckBox
         '
         Me.SendAgentUpdatesCheckBox.AutoSize = True
-        Me.SendAgentUpdatesCheckBox.Location = New System.Drawing.Point(411, 77)
+        Me.SendAgentUpdatesCheckBox.Location = New System.Drawing.Point(371, 36)
         Me.SendAgentUpdatesCheckBox.Name = "SendAgentUpdatesCheckBox"
         Me.SendAgentUpdatesCheckBox.Size = New System.Drawing.Size(125, 17)
         Me.SendAgentUpdatesCheckBox.TabIndex = 19
@@ -248,27 +249,23 @@ Partial Class FormBots
         'RequestObjectTexturesCheckBox
         '
         Me.RequestObjectTexturesCheckBox.AutoSize = True
-        Me.RequestObjectTexturesCheckBox.Location = New System.Drawing.Point(411, 106)
+        Me.RequestObjectTexturesCheckBox.Location = New System.Drawing.Point(371, 69)
         Me.RequestObjectTexturesCheckBox.Name = "RequestObjectTexturesCheckBox"
         Me.RequestObjectTexturesCheckBox.Size = New System.Drawing.Size(144, 17)
         Me.RequestObjectTexturesCheckBox.TabIndex = 20
         Me.RequestObjectTexturesCheckBox.Text = "Request Object Textures"
         Me.RequestObjectTexturesCheckBox.UseVisualStyleBackColor = True
         '
-        'FormBots
+        'CampBots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(674, 450)
-        Me.Controls.Add(Me.RequestObjectTexturesCheckBox)
-        Me.Controls.Add(Me.SendAgentUpdatesCheckBox)
-        Me.Controls.Add(Me.RegionLabel)
-        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.TextBox1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Name = "FormBots"
+        Me.Name = "CampBots"
         Me.Text = "FormBots"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -296,7 +293,6 @@ Partial Class FormBots
     Friend WithEvents CheckBoxGrab As CheckBox
     Friend WithEvents CheckBoxPhysics As CheckBox
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents RegionLabel As Label
     Friend WithEvents SendAgentUpdatesCheckBox As CheckBox
     Friend WithEvents RequestObjectTexturesCheckBox As CheckBox
 End Class

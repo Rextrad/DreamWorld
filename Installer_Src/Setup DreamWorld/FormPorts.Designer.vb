@@ -26,6 +26,8 @@ Partial Class FormPorts
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPorts))
         Me.GroupBoxA = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.MoneyTextBox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.intIP = New System.Windows.Forms.TextBox()
         Me.FirstRegionPort = New System.Windows.Forms.TextBox()
@@ -33,7 +35,6 @@ Partial Class FormPorts
         Me.Label26 = New System.Windows.Forms.Label()
         Me.OverrideName = New System.Windows.Forms.TextBox()
         Me.MaxP = New System.Windows.Forms.Label()
-        Me.Upnp = New System.Windows.Forms.PictureBox()
         Me.uPnPEnabled = New System.Windows.Forms.CheckBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -44,10 +45,7 @@ Partial Class FormPorts
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem30 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.MoneyTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBoxA.SuspendLayout()
-        CType(Me.Upnp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,7 +60,6 @@ Partial Class FormPorts
         Me.GroupBoxA.Controls.Add(Me.Label26)
         Me.GroupBoxA.Controls.Add(Me.OverrideName)
         Me.GroupBoxA.Controls.Add(Me.MaxP)
-        Me.GroupBoxA.Controls.Add(Me.Upnp)
         Me.GroupBoxA.Controls.Add(Me.uPnPEnabled)
         Me.GroupBoxA.Controls.Add(Me.Label7)
         Me.GroupBoxA.Controls.Add(Me.Label5)
@@ -76,6 +73,25 @@ Partial Class FormPorts
         Me.GroupBoxA.TabIndex = 0
         Me.GroupBoxA.TabStop = False
         Me.GroupBoxA.Text = "Ports"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(20, 51)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(73, 13)
+        Me.Label2.TabIndex = 1862
+        Me.Label2.Text = "Money Server"
+        Me.Label2.Visible = False
+        '
+        'MoneyTextBox
+        '
+        Me.MoneyTextBox.Location = New System.Drawing.Point(166, 47)
+        Me.MoneyTextBox.Name = "MoneyTextBox"
+        Me.MoneyTextBox.Size = New System.Drawing.Size(47, 20)
+        Me.MoneyTextBox.TabIndex = 1863
+        Me.ToolTip1.SetToolTip(Me.MoneyTextBox, Global.Outworldz.My.Resources.Resources.Default_8001_word)
+        Me.MoneyTextBox.Visible = False
         '
         'Label1
         '
@@ -138,18 +154,6 @@ Partial Class FormPorts
         Me.MaxP.Size = New System.Drawing.Size(72, 13)
         Me.MaxP.TabIndex = 5
         Me.MaxP.Text = "Highest used:"
-        '
-        'Upnp
-        '
-        Me.Upnp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Upnp.Image = Global.Outworldz.My.Resources.Resources.about
-        Me.Upnp.Location = New System.Drawing.Point(183, 17)
-        Me.Upnp.MinimumSize = New System.Drawing.Size(16, 16)
-        Me.Upnp.Name = "Upnp"
-        Me.Upnp.Size = New System.Drawing.Size(17, 17)
-        Me.Upnp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.Upnp.TabIndex = 1859
-        Me.Upnp.TabStop = False
         '
         'uPnPEnabled
         '
@@ -231,23 +235,6 @@ Partial Class FormPorts
         Me.ToolStripMenuItem30.Size = New System.Drawing.Size(68, 28)
         Me.ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(20, 51)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(73, 13)
-        Me.Label2.TabIndex = 1862
-        Me.Label2.Text = "Money Server"
-        '
-        'MoneyTextBox
-        '
-        Me.MoneyTextBox.Location = New System.Drawing.Point(166, 47)
-        Me.MoneyTextBox.Name = "MoneyTextBox"
-        Me.MoneyTextBox.Size = New System.Drawing.Size(47, 20)
-        Me.MoneyTextBox.TabIndex = 1863
-        Me.ToolTip1.SetToolTip(Me.MoneyTextBox, Global.Outworldz.My.Resources.Resources.Default_8001_word)
-        '
         'FormPorts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -261,7 +248,6 @@ Partial Class FormPorts
         Me.Text = "Region Ports"
         Me.GroupBoxA.ResumeLayout(False)
         Me.GroupBoxA.PerformLayout()
-        CType(Me.Upnp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
@@ -273,7 +259,6 @@ Partial Class FormPorts
     Friend WithEvents MaxP As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents FirstRegionPort As TextBox
-    Friend WithEvents Upnp As PictureBox
     Friend WithEvents uPnPEnabled As CheckBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label5 As Label

@@ -1,5 +1,4 @@
-﻿
-Imports System.Threading
+﻿Imports System.Threading
 
 Module Maps
     Public ReadOnly Map As New Dictionary(Of String, String)

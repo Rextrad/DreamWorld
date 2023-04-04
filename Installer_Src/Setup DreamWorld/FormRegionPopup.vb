@@ -208,7 +208,7 @@ Public Class FormRegionPopup
             Try
                 ConsoleProcess.Start()
                 Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
-                'TODO lkeep jabbing until consle closes
+                'TODO lkeep jabbing until console closes
             Catch ex As Exception
                 BreakPoint.Dump(ex)
                 TextPrint($"Console {Global.Outworldz.My.Resources.did_not_start_word} {ex.Message}")
@@ -248,6 +248,9 @@ Public Class FormRegionPopup
     End Sub
 
     Private Sub Popup_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
 
         ViewLog.Image = Global.Outworldz.My.Resources.document_view
         ViewLog.Text = Global.Outworldz.My.Resources.View_Log_word

@@ -53,6 +53,9 @@ Public Class FormVoice
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         GroupBox1.Text = Global.Outworldz.My.Resources.Setup_Voice_Service
         Label1.Text = Global.Outworldz.My.Resources.User_ID_word
         Label2.Text = Global.Outworldz.My.Resources.Password_word

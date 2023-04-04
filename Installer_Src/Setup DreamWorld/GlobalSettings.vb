@@ -10,19 +10,18 @@ Module GlobalSettings
 #Region "Const"
 
     Public Const _httpsDomain As String = "https://www.outworldz.com"
-    Public Const _MyVersion As String = "5.33"
-
-    Public Const _SimVersion As String = "Opensim #1e0207b4991 2023-02-19 03:32:19"
+    Public Const _MyVersion As String = "5.34"
+    Public Const _SimVersion As String = "Opensim 0.9.2.2 2023-03-31"
     Public Const DreamGrid As String = "DreamGrid"
     Public Const DTL As String = "DTL"
     Public Const FreeDiskSpaceWarn As Long = 100000000  ' 100 MB to freeze
     Public Const JOpensim As String = "JOpensim"
     Public Const jOpensimRev As String = "Joomla_3.9.23-Stable-Full_Package"
     Public Const jRev As String = "3.9.23"
-    Public Const PHPRev As String = "7.4.33"
     Public Const MetroServer As String = "Metro"
     Public Const OsgridServer As String = "OsGrid"
     Public Const Outworldz As String = "Outworldz"
+    Public Const PHPRev As String = "7.4.33"
     Public Const RegionServerName As String = "Region"
     Public Const RobustServerName As String = "Robust"
     Public Const WordPress As String = "WordPress"
@@ -32,7 +31,7 @@ Module GlobalSettings
 
 #End Region
 
-    ' TODO
+    ' TODO SQL
     'SELECT -- DISTINCT
     'parent1.folderName AS Parent, child1.type , child1.folderName AS Child,
     'child2.folderName AS GrandChild, child3.folderName AS GGChild , child4.folderName AS GGGChild,

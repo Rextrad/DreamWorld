@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>bir Avatar olarak başlamak yakında</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Hiçbiri</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Numara</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Mysql Günlüklerini Temizleme</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sistem Yedekleme</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Masaüstü Modunda Başlatma</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Hollanda</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Bota davranış ekleme</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Kamp botu</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Botları bağlama</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Botların bağlantısını kesme</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Daha fazla bilgi için</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Tutmak</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Bottan davranış kaldırma</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Nesne Dokuları İsteme</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Tüm botlar için bir ayar belirleme</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Botlar tarafından bilinen bölgeleri göster</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Belirli bir botun ayrıntılı durumunu ve ayarlarını gösterir</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Durumu gösterir</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Tüm botların durumunu gösterir</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Botları kapatma ve çıkış</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Botları kapatma ve çıkış</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Tüm botları yere oturtun</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Oturmak</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Tüm botları ayakta tutun</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Ayakta durmak</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Başlangıç Bölgesi</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>Tüm komutların listesini almak için veya</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>aşağıdakilerden &lt;item&gt; biri nerede&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Aracılar Güncelleştirmeleri Gönderme</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Yetişkin</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Sanat</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Sadaka</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Çocuk Dostu</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Ticari</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Eğitim</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Eğitim - Üniversite</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Eğitim - Okul</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Deneysel</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantezi</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Serbest Arazi</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Kürklü</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Oyun</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Hideout</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hiperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Yeni Gelen Dostu</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parklar ve Doğa</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Kişisel</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Kiralama</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Konut</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rol Yapma Oyunu</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romantizm</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Sınıfı</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandbox</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Bilim</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Bilim - Kurgu</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Komut dosyası</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Alışveriş</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Test etme</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>On sekiz yaşından küçükler için uygunsuz</value>
   </data>
 </root>

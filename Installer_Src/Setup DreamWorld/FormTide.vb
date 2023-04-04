@@ -56,6 +56,9 @@ Public Class FormTide
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         BroadcastTideInfo.Text = Global.Outworldz.My.Resources.Broadcast_Tide_Info
         TideEnabledCheckbox.Text = Global.Outworldz.My.Resources.Enable_word
         TideInfoDebugCheckBox.Text = Global.Outworldz.My.Resources.Send_Debug_Info

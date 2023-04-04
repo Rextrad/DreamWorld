@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>מתחיל כאווטאר נמצא בקרבת מקום</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>אף אחד</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>לא</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>ניקוי יומני Mysql</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>גיבוי מערכת</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>הפעלה במצב שולחן עבודה</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>הולנד</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>הוספת התנהגות לבוט</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>בוט מחנה</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>חיבור בוטים</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>ניתוק בוטים</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>לקבלת מידע נוסף, הקלד</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>לתפוס</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>הסרת התנהגות מבוט</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>בקש מרקמים של אובייקטים</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>הגדרת הגדרה עבור כל תוכניות ה- Bot</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>הצגת אזורים המוכרים לתוכניות Bot</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>מציג את המצב וההגדרות המפורטים של בוט מסוים</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>הצגת מצב</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>הצגת המצב של כל תוכניות ה- Bot</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>כיבוי בוטים ויציאה</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>כיבוי בוטים ויציאה</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>הושיבו את כל הבוטים על הקרקע</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>ישב</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>לעמוד כל הבוטים</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>דוכן</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>אזור התחלה</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>כדי לקבל רשימה של כל הפקודות, או הקלד</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>כאשר &lt;item&gt; הוא אחד מהבאים:&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>שלח לסוכנים עדכונים</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>מבוגר</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>אמנות</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>צדקה</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>ידידותי לילדים</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>מסחרי</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>חינוכי</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>השכלה - מכללה</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>חינוך - בית ספר</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>ניסיוני</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>פנטזיה</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>מתנות חינם</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>ארץ חופשית</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>פרוותי</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>המשחקים</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>המחבוא</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>היפרפורט</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>להט"ב</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>ידידותי לעולים חדשים</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>פארקים וטבע</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>אישי</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>השכרת</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>מגורים</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>משחק תפקידים</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>רומנטיקה</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>מדורג R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>ארגז חול</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>מדע</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>מדע בדיוני - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>סקריפטים</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>קניות</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>בדיקות</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>למבוגרים בלבד</value>
   </data>
 </root>

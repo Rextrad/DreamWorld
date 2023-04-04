@@ -119,7 +119,7 @@ Partial Class Language
         Me.Dutch.Name = "Dutch"
         Me.Dutch.Size = New System.Drawing.Size(186, 37)
         Me.Dutch.TabIndex = 19
-        Me.Dutch.Text = "Netherlands"
+        Me.Dutch.Text = My.Resources.Netherlands
         Me.Dutch.UseVisualStyleBackColor = True
         '
         'Khazak

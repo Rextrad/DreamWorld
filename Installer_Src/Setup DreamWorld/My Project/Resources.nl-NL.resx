@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>beginnen als een Avatar in de buurt is</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Geen</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nee</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Mysql-logboeken wissen</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Systeemback-up</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starten in de bureaubladmodus</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Nederland</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Een gedrag toevoegen aan een bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Kamp bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Bots verbinden</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Bots loskoppelen</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Typ voor meer informatie</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Grijpen</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Een gedrag van een bot verwijderen</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Objecttexturen aanvragen</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Een instelling instellen voor alle bots</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Regio's weergeven die bekend zijn bij bots</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Toont de gedetailleerde status en instellingen van een bepaalde bot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Toont status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Toont de status van alle bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Bots afsluiten en afsluiten</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Bots afsluiten en afsluiten</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Zet alle bots op de grond</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Zitten</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Sta alle bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Staan</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Startregio</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>om een lijst met alle opdrachten op te halen of typt u</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>waarbij &lt;item&gt; een van de volgende&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Agents-updates verzenden</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Volwassene</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Kunst</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Naastenliefde</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Kindvriendelijk</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Commercieel</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Educatief</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Onderwijs - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Onderwijs - School</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimenteel</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasie</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Vrije Grond</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Harige</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Schuilplaats</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperpoort</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LHBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nieuwkomer vriendelijk</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parken &amp;Natuur</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Persoonlijk</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Verhuur</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Residentiële</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rollenspel</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romaans</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Rated</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Zandbak</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Wetenschap</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Winkelen</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testing</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>X-rated</value>
   </data>
 </root>

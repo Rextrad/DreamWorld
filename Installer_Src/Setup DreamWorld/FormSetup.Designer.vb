@@ -595,7 +595,7 @@ Partial Class FormSetup
         Me.BackupCriticalFilesToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.disk_blue
         Me.BackupCriticalFilesToolStripMenuItem.Name = "BackupCriticalFilesToolStripMenuItem"
         Me.BackupCriticalFilesToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
-        Me.BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.System_Backup_word
+        Me.BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.System_Backup_words
         '
         'ToolStripSeparator6
         '

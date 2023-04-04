@@ -8,9 +8,9 @@
 Module Icecast
 
     Public WithEvents IcecastProcess As New Process()
-    Private _IcecastProcID As Integer
     Private _IcecastCrashCounter As Integer
     Private _IceCastExited As Boolean
+    Private _IcecastProcID As Integer
 
 #Region "Properties"
 
@@ -76,17 +76,15 @@ Module Icecast
             Return True
         End If
 
-
         Try
             ' Check if DOS box exists, first, if so, its running.
             For Each p In Process.GetProcessesByName("icecast")
                 If p.ProcessName = "icecast" Then
                     PropIcecastProcID = p.Id
-
                     p.EnableRaisingEvents = True
                     AddHandler p.Exited, AddressOf IceCastExited
-
                     IceCastIcon(True)
+                    Application.DoEvents()
                     Return True
                 End If
             Next
@@ -111,6 +109,7 @@ Module Icecast
 
         Try
             IcecastProcess.Start()
+            Application.DoEvents()
         Catch ex As Exception
             BreakPoint.Dump(ex)
             TextPrint(My.Resources.Icecast_failed & ":" & ex.Message)
@@ -129,8 +128,6 @@ Module Icecast
         IceCastIcon(True)
 
         PropIceCastExited = False
-
-
         Return True
 
     End Function
@@ -147,7 +144,6 @@ Module Icecast
         Application.DoEvents()
 
     End Sub
-
 
     Public Sub StopIcecast()
 

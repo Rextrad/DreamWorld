@@ -9,6 +9,7 @@ Imports System.IO
 Imports System.Management
 Imports System.Text.RegularExpressions
 Imports System.Threading
+Imports System.Threading.Tasks
 Imports IWshRuntimeLibrary
 
 Public Class FormSetup
@@ -54,7 +55,6 @@ Public Class FormSetup
     Private speed2 As Double
     Private speed3 As Double
     Private TimerisBusy As Integer
-
 
 #End Region
 
@@ -186,6 +186,7 @@ Public Class FormSetup
         ScreenPosition1.SaveHW(Me.Height, Me.Width)
 
     End Sub
+
     Private Sub SetLoading(displayLoader As Boolean)
 
         If displayLoader Then
@@ -197,7 +198,6 @@ Public Class FormSetup
         End If
 
     End Sub
-
 
 #End Region
 
@@ -248,12 +248,14 @@ Public Class FormSetup
         If Not KillAll() Then Return False
         Buttons(StartButton)
         TextPrint(My.Resources.Stopped_word)
-
         Return True
 
     End Function
 
-    Public Sub FrmHome_Load(ByVal sender As Object, ByVal e As EventArgs)
+    Public Async Function FrmHomeLoadAsync(ByVal sender As Object, ByVal e As EventArgs) As Task(Of Boolean)
+
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
 
         SetScreen()     ' move Form to fit screen from SetXY.ini
 
@@ -265,14 +267,13 @@ Public Class FormSetup
 
         AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
 
-
         AddUserToolStripMenuItem.Text = Global.Outworldz.My.Resources.Add_User_word
         AdvancedSettingsToolStripMenuItem.Image = Global.Outworldz.My.Resources.earth_network
         AdvancedSettingsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Settings_word
         AdvancedSettingsToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.All_Global_Settings_word
         AllUsersAllSimsToolStripMenuItem.Text = Global.Outworldz.My.Resources.All_Users_All_Sims_word
         BackupCriticalFilesToolStripMenuItem.Image = Global.Outworldz.My.Resources.disk_blue
-        BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.System_Backup_word
+        BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.System_Backup_words
         BackupToolStripMenuItem1.Image = Global.Outworldz.My.Resources.disk_blue
         BackupToolStripMenuItem1.Text = Global.Outworldz.My.Resources.Backup_Databases
 
@@ -467,6 +468,7 @@ Public Class FormSetup
         Adv1 = New FormSettings
 
         Me.Show()
+        Application.DoEvents()
 
         ' Save a random machine ID - we don't want any data to be sent that's personal or identifiable, but it needs to be unique
         Randomize()
@@ -569,7 +571,7 @@ Public Class FormSetup
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
             SetLoading(False)
-            Return
+            Return False
         End If
 
         Dim UUID = FindRegionByName(Settings.ParkingLot)
@@ -588,20 +590,20 @@ Public Class FormSetup
         TextPrint(My.Resources.Starting_DiagPort_Webserver)
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             PropWebserver = NetServer.GetWebServer
+            PropWebserver.StopWebserver()
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Thread.Sleep(100)
 
-            TestPrivateLoopback()
-            Sleep(1000)
+            Await TestPrivateLoopbackAsync()
             If Settings.DiagFailed Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
                 SetLoading(False)
-                Return
+                Return False
             End If
         End If
 
-        SetPublicIP()
+        Await IPPublicAsync()
 
         If IsMySqlRunning() Then
             ' clear any temp regions on boot.
@@ -700,7 +702,7 @@ Public Class FormSetup
         If failedload Then
             TextPrint($"*** FAILED to load ALL regions! ** ")
             SetLoading(False)
-            Return
+            Return False
         End If
 
         If RunningInServiceMode() Then
@@ -717,9 +719,9 @@ Public Class FormSetup
             Sleep(10000)
             Startup()
             SetLoading(False)
-            Return
+            Return True
         Else
-            TextPrint("Starting in Desktop Mode")
+            TextPrint(My.Resources.StartinginDesktopMode)
         End If
 
         If Settings.Autostart Then
@@ -733,8 +735,9 @@ Public Class FormSetup
 
         ToolBar(True)
         SetLoading(False)
+        Return True
 
-    End Sub
+    End Function
 
     Public Function KillAll() As Boolean
 
@@ -749,8 +752,8 @@ Public Class FormSetup
 
         PropAborting = True
 
+        Sleep(1000)
         ' close everything as gracefully as possible.
-
         StopIcecast()
 
         Dim n As Integer = RegionCount()
@@ -840,7 +843,7 @@ Public Class FormSetup
 
     Public Function StartOpensimulator() As Boolean
 
-        'Bench.Start("StartOpensim")
+        Bench.Start("StartOpensim")
 
         GetOpensimPIDsFromFiles()
 
@@ -864,7 +867,10 @@ Public Class FormSetup
 
         If CheckOverLap() Then Return False
 
-        If Not RunningInServiceMode() And Settings.RunAsService And ServiceExists("DreamGridService") Then
+        If Not RunningInServiceMode() And
+            Settings.RunAsService And
+            ServiceExists("DreamGridService") Then
+
             TextPrint("Starting Service. No Opensim DOS boxes will show")
             If Not NssmService.StartService() Then
                 Return False
@@ -873,6 +879,7 @@ Public Class FormSetup
 
         If Settings.ServerType = RobustServerName Then
 
+            StartRobust()
             Dim ctr = 60
             While Not IsRobustRunning() AndAlso ctr > 0
                 Sleep(1000)
@@ -938,7 +945,8 @@ Public Class FormSetup
     ''' <summary>Form Load is main() for all DreamGrid</summary>
     ''' <param name="sender">Unused</param>
     ''' <param name="e">Unused</param>
-    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         Application.EnableVisualStyles()
 
@@ -979,14 +987,25 @@ Public Class FormSetup
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
         Application.DoEvents()
-        FrmHome_Load(sender, e) 'Load everything in your form load event again so it will be translated
+        Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again so it will be translated
 
     End Sub
 
-    Private Sub Language(sender As Object, e As EventArgs)
+    Private Async Function IPPublicAsync() As Task(Of Boolean)
+
+        Dim r = Await SetPublicIPAsync()
+        Return r
+
+    End Function
+
+#Disable Warning VSTHRD100 ' Avoid async void methods
+#Disable Warning VSTHRD100 ' Avoid async void methods
+
+    Private Async Sub Language(sender As Object, e As EventArgs)
+#Enable Warning VSTHRD100 ' Avoid async void methods
         Settings.SaveSettings()
 
-        'For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+        '    For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
         'Breakpoint.Print("")
         'Breakpoint.Print(ci.Name)
         'Breakpoint.Print(ci.TwoLetterISOLanguageName)
@@ -1000,7 +1019,7 @@ Public Class FormSetup
         My.Application.ChangeCulture(Settings.Language)
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
-        FrmHome_Load(sender, e) 'Load everything in your form load event again
+        Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again
     End Sub
 
     Private Sub Link_Clicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkClickedEventArgs) Handles TextBox1.LinkClicked
@@ -1018,10 +1037,18 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
+        If PropAborting Then
+            ExitList.Clear()
+            Return
+        End If
+
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             ' now look at the exit stack
             While Not ExitList.IsEmpty
-
+                If PropAborting Then
+                    ExitList.Clear()
+                    Return
+                End If
                 Dim RegionName = ExitList.Keys.First
                 Dim RegionUUID = ExitList(RegionName)
                 Dim GroupName = Group_Name(RegionUUID)
@@ -1191,7 +1218,7 @@ Public Class FormSetup
         If Not StartRobust() Then Return
 
         StartTimer()
-
+        SetLoading(True)
         For Each RegionUUID In RegionUuids()
 
             If PropAborting Then
@@ -1219,6 +1246,7 @@ Public Class FormSetup
             End If
             Application.DoEvents()
         Next
+        SetLoading(False)
 
     End Sub
 
@@ -1230,6 +1258,7 @@ Public Class FormSetup
     Public Sub Startup()
 
         Buttons(BusyButton)
+        SetLoading(True)
 
         Dim DefaultName As String = ""
 
@@ -1245,6 +1274,7 @@ Public Class FormSetup
                 FormRegions.BringToFront()
                 Buttons(StartButton)
             End If
+            SetLoading(False)
             Return
         End If
 
@@ -1283,12 +1313,14 @@ Public Class FormSetup
             ToolBar(False)
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
+            SetLoading(False)
             Return
         End If
 
         If Not StartRobust() Then
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
+            SetLoading(False)
             Return
         End If
 
@@ -1319,6 +1351,7 @@ Public Class FormSetup
                 If ret = DialogResult.Cancel Then
                     Buttons(StartButton)
                     TextPrint(My.Resources.Stopped_word)
+                    SetLoading(False)
                     Return
                 End If
                 ' Read the chosen sim name
@@ -1338,11 +1371,13 @@ Public Class FormSetup
         If Not StartOpensimulator() Then
             Buttons(StartButton)
             TextPrint(My.Resources.Stopped_word)
+            SetLoading(False)
             Return
         End If
 
         Buttons(StopButton)
         TextPrint(My.Resources.Finished_word)
+        SetLoading(False)
         ' done with boot up
 
     End Sub
@@ -1360,6 +1395,7 @@ Public Class FormSetup
     Private Sub ReallyQuit()
 
         If Not KillAll() Then Return
+        SetLoading(True)
 
         Try
             If cpu IsNot Nothing Then cpu.Dispose()
@@ -1382,6 +1418,7 @@ Public Class FormSetup
         Settings.SaveSettings()
 
         TextPrint("Zzzz...")
+        SetLoading(False)
         Thread.Sleep(1000)
         End
 
@@ -1408,27 +1445,6 @@ Public Class FormSetup
         Else
             Visitor.Item(Avatar) = RegionName
         End If
-
-    End Sub
-
-    Private Shared Sub ClearAllRegions()
-
-        For Each RegionUUID In RegionUuids()
-            If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
-                DeleteAllRegionData(RegionUUID)
-                PropChangedRegionSettings = True
-            End If
-
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
-            DelPidFile(RegionUUID)
-        Next
-
-        Try
-            ExitList.Clear()
-            WebserverList.Clear()
-        Catch ex As Exception
-            BreakPoint.Dump(ex)
-        End Try
 
     End Sub
 
@@ -1564,6 +1580,30 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub ClearAllRegions()
+
+        SetLoading(True)
+        For Each RegionUUID In RegionUuids()
+            If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
+                DeleteAllRegionData(RegionUUID)
+                PropChangedRegionSettings = True
+            End If
+
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+            DelPidFile(RegionUUID)
+        Next
+
+        Try
+            ExitList.Clear()
+            WebserverList.Clear()
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
+
+        SetLoading(False)
+
+    End Sub
+
     Private Sub G()
 
         Graphs.Close()
@@ -1589,6 +1629,8 @@ Public Class FormSetup
         Try
             folders = Directory.GetFiles(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Help"))
             For Each aline As String In folders
+                Application.DoEvents()
+
                 If aline.EndsWith(".htm", StringComparison.OrdinalIgnoreCase) Then
                     aline = System.IO.Path.GetFileNameWithoutExtension(aline)
                     Dim HelpMenu As New ToolStripMenuItem With {
@@ -1617,6 +1659,7 @@ Public Class FormSetup
         For Each RegionUUID In RegionUuids()
             Dim Name = Region_Name(RegionUUID)
             AddLog("Region " & Name)
+            Application.DoEvents()
         Next
 
     End Sub
@@ -2282,7 +2325,6 @@ Public Class FormSetup
     Private Sub BusyButton_Click(sender As Object, e As EventArgs) Handles BusyButton.Click
 
         PropAborting = True
-
         PropUpdateView = True ' make form refresh
 
         PropOpensimIsRunning() = False
@@ -2306,9 +2348,10 @@ Public Class FormSetup
             Return
         End If
 
+        SetLoading(True)
         Dim pi = New ProcessStartInfo()
 
-        ChDir(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin"))
+        pi.WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin")
         pi.WindowStyle = ProcessWindowStyle.Normal
         pi.Arguments = CStr(Settings.MySqlRobustDBPort)
         If Settings.RootMysqlPassword.Length > 0 Then
@@ -2327,7 +2370,7 @@ Public Class FormSetup
             pMySqlDiag1.WaitForExit()
         End Using
 
-        ChDir(Settings.CurrentDirectory)
+        SetLoading(False)
 
     End Sub
 
@@ -3255,7 +3298,6 @@ Public Class FormSetup
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
         NssmService.StopService()
-
 
     End Sub
 

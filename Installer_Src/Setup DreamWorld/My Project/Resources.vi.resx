@@ -1920,9 +1920,6 @@
   <data name="None" xml:space="preserve">
     <value>không ai</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>không ai</value>
-  </data>
   <data name="Nonphysical_Prim" xml:space="preserve">
     <value>Kích thước nguyên thủy phi vật lý</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Xóa nhật ký Mysql</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sao lưu hệ thống</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Bắt đầu từ Chế độ Máy tính để bàn</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Hà Lan</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Thêm hành vi vào bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot trại</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Kết nối bot</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Ngắt kết nối bot</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Để biết thêm thông tin, hãy nhập</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Chộp</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Xóa hành vi khỏi bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Yêu cầu kết cấu đối tượng</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Đặt cài đặt cho tất cả bot</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Hiển thị các khu vực mà bot đã biết</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Hiển thị trạng thái và cài đặt chi tiết của một bot cụ thể</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Hiển thị trạng thái</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Hiển thị trạng thái của tất cả các bot</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Tắt bot và thoát</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Tắt bot và thoát</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Ngồi tất cả các bot trên mặt đất</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Ngồi</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Đứng tất cả các bot</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Đứng</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Khu vực bắt đầu</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>để lấy danh sách tất cả các lệnh hoặc nhập</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>trong đó &lt;item&gt; là một trong những điều sau đây&lt;/item&gt;:</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Gửi thông tin cập nhật về tổng đài viên</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Người lớn</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Thuật</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Charity</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Thân thiện với trẻ em</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Thương mại</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Giáo dục</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Giáo dục - Cao đẳng</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Giáo dục - Trường học</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Thực nghiệm</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Tưởng tượng</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Đất miễn phí</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Lông</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Hideout</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Siêu cổng</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Thân thiện với người mới đến</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Công viên &amp;; Thiên nhiên</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Cá nhân</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Cho thuê</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Khu dân cư</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Nhập vai</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Lãng mạn</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>Xếp hạng R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandbox</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Khoa học</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Khoa học viễn tưởng - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Kịch bản</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Mua sắm</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Thử nghiệm</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Chuyện người lớn</value>
   </data>
 </root>

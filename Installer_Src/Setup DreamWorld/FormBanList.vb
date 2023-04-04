@@ -65,6 +65,9 @@ Public Class FormBanList
 
     Public Sub LoadCollectionData() Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer
         HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Help_word
         Text = Global.Outworldz.My.Resources.Ban_List_word
@@ -100,7 +103,6 @@ Public Class FormBanList
                     Else
                         t = row.Cells(1).Value.ToString.Trim
                     End If
-
 
                     ' save back to Ban List
                     If (s.Length + t.Length) > 0 Then

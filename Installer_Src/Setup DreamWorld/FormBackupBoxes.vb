@@ -95,6 +95,9 @@ Public Class FormBackupBoxes
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         BackupButton.Text = Global.Outworldz.My.Resources.System_Backup_Now_word
         BackupIARsCheckBox.Text = Global.Outworldz.My.Resources.Backup_IARs
         BackupOarsCheckBox.Text = Global.Outworldz.My.Resources.Backup_OARs
@@ -107,7 +110,7 @@ Public Class FormBackupBoxes
         RegionCheckBox.Text = Global.Outworldz.My.Resources.Backup_Region
         SettingsCheckbox.Text = Global.Outworldz.My.Resources.Backup_Settings_word
         ShowFsassets.Text = Global.Outworldz.My.Resources.Show_Status_word
-        Me.Text = Global.Outworldz.My.Resources.System_Backup_word
+        Me.Text = Global.Outworldz.My.Resources.System_Backup_words
 
         ' tool tips
         ToolTip1.SetToolTip(BackupButton, Global.Outworldz.My.Resources.tt_Backup_Now)

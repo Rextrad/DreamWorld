@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>從附近的頭像開始</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>沒有任何</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>不</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>清除 Mysql 紀錄</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>系統備份</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>以桌面模式啟動</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>荷蘭</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>向機器人添加行為</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>營地機器人</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>連接機器人</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>斷開機器人連接</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>有關詳細資訊，請鍵入</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>抓</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>從機器人中刪除行為</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>請求物件紋理</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>為所有機器人設置設置</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>顯示機器人已知的區域</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>顯示特定機器人的詳細狀態和設置</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>顯示狀態</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>顯示所有機器人的狀態</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>關閉機器人並退出</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>關閉機器人並退出</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>將所有機器人坐在地上</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>坐</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>支援所有機器人</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>站</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>起始區域</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>以獲取所有命令的清單，或鍵入</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>其中 &lt;item&gt; 是以下之一&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>發送代理更新</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>成人</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>藝術</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>慈善</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>兒童友好</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>商業</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>教育</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>教育 - 學院</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>教育 - 學校</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>實驗的</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>幻想</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>贈品</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>免費土地</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>毛茸茸</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>賭博</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>隱匿處</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>超級埠</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>男女同性戀、雙性戀和變</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>新移民友好</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>公園與自然</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>個人</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>租賃</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>住宅</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>角色扮演</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>浪漫</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R 級</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>沙箱</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>科學</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>科幻 - 菲</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>腳本</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>購物</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>測試</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>限制級</value>
   </data>
 </root>

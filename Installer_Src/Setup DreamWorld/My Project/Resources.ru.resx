@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>начиная с того, что рядом находится Аватар</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Никто</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Очистка журналов Mysql</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Резервное копирование системы</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Запуск в режиме рабочего стола</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Нидерланды</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Добавление поведения к боту</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Лагерный бот</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Подключение ботов</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Отключение ботов</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Для получения дополнительных сведений введите</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Хватать</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Удаление поведения бота</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Запрос текстур объектов</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Установка настроек для всех ботов</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Показать регионы, известные ботам</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Показывает подробный статус и настройки конкретного бота</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Показывает статус</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Показывает статус всех ботов</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Выключение ботов и выход</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Выключение ботов и выход</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Посадите всех ботов на землю</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Сидеть</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Стоять на всех ботах</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Стоять</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Стартовый регион</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>, чтобы получить список всех команд, или введите</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>где &lt;item&gt; — одно из следующих&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Отправка обновлений агентам</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Взрослый</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Искусство</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Благотворительность</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Детский дружественный</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Торговый</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Образовательный</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Образование - Колледж</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Образование - Школа</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Экспериментальный</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Фантазия</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Бесплатная</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Свободная земля</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Меховой</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Игровой</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Убежище</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Гиперпорт</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>ЛГБТ</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Дружелюбный к новичкам</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Парки и природа</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Личный</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Прокат</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Жилой</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Ролевая игра</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Романский</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>Рейтинг R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Песочница</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Наука</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Научная фантастика</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Сценариев</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Шоппинг</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Тестирование</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Непристойный</value>
   </data>
 </root>

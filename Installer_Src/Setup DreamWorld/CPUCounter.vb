@@ -1,5 +1,3 @@
-Imports System.Collections.Concurrent
-
 Module CPUCounter
 
     Private ReadOnly _counterList As New Dictionary(Of String, PerformanceCounter)

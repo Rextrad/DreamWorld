@@ -23,6 +23,9 @@
 
     Private Sub SetScreen()
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ScreenPosition = New ClassScreenpos(Me.Name)
         AddHandler ResizeEnd, Handler
         Dim xy As List(Of Integer) = ScreenPosition.GetXY()
@@ -188,6 +191,9 @@
 
     Private Sub L(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Arabic_Saudi.Text = Global.Outworldz.My.Resources.Arabic_Saudi
         English.Text = Global.Outworldz.My.Resources.English
         Arabic_Saudi.Text = Global.Outworldz.My.Resources.Arabic_Saudi
@@ -217,7 +223,10 @@
 
     End Sub
 
-    Private Sub Language(sender As Object, e As EventArgs)
+#Disable Warning VSTHRD100 ' Avoid async void methods
+
+    Private Async Sub Language(sender As Object, e As EventArgs)
+#Enable Warning VSTHRD100 ' Avoid async void methods
         Settings.SaveSettings()
 
         'For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
@@ -232,9 +241,10 @@
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
+
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
-        FormSetup.FrmHome_Load(sender, e) 'Load everything in your form load event again
+        Await FormSetup.FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again
     End Sub
 
     Private Sub Turkish_Click(sender As Object, e As EventArgs) Handles Turkish.Click

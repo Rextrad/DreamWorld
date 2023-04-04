@@ -52,6 +52,9 @@ Public Class FormPhysics
 
     Private Sub Physics_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         GroupBox1.Text = Global.Outworldz.My.Resources.Physics_Engine
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
 

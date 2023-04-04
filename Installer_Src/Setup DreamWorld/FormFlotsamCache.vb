@@ -15,6 +15,9 @@ Public Class FormFlotsamCache
 
     Private Sub Form_Load() Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Button1.Text = Global.Outworldz.My.Resources.Clear_Cache_word
         GroupBox1.Text = Global.Outworldz.My.Resources.Asset_Cache_word
         Label1.Text = Global.Outworldz.My.Resources.Cache_Directory_word

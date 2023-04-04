@@ -10,7 +10,6 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Web
-Imports System.Web.Services.Description
 Imports MySqlConnector
 Imports Newtonsoft.Json
 

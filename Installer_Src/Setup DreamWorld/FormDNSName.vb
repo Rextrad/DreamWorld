@@ -7,6 +7,7 @@
 
 Imports System.Net
 Imports System.Text.RegularExpressions
+Imports System.Threading.Tasks
 
 Public Class FormDnsName
 
@@ -51,7 +52,10 @@ Public Class FormDnsName
 
     Private Sub DNS_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        PictureBox.Visible = False
+        PictureBox.Visible = True
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         EnableHypergrid.Text = Global.Outworldz.My.Resources.Enable_Hypergrid_word
         HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer
         HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Help_word
@@ -89,6 +93,7 @@ Public Class FormDnsName
         DNSAliasTextBox.Text = Settings.AltDnsName
         HelpOnce("DNS")
         initted = True
+        PictureBox.Visible = False
 
     End Sub
 
@@ -109,35 +114,45 @@ Public Class FormDnsName
 
     Private Sub NextNameButton_Click(sender As Object, e As EventArgs) Handles NextNameButton.Click
 
+        PictureBox.Visible = True
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
         DNSNameBox.Text = String.Empty
         Application.DoEvents()
-        Dim newname = GetNewDnsName()
+        Dim newname = GetNewDnsNameAsync()
+        Dim n = newname.ToString
         NextNameButton.Text = Global.Outworldz.My.Resources.Next1
-        If newname.Length = 0 Then
+        If n.Length = 0 Then
             MsgBox(My.Resources.Please_enter, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)
             NextNameButton.Enabled = False
         Else
             NextNameButton.Enabled = True
-            DNSNameBox.Text = newname
+            DNSNameBox.Text = n
         End If
+        PictureBox.Visible = False
 
     End Sub
 
-    Private Sub SaveAll()
+    Private Async Function SaveAllAsync() As Task(Of Boolean)
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
-
+        PictureBox.Visible = True
         Settings.SaveSettings()
-        SetPublicIP()
-
+        Await SetPublicIPAsync()
+        PictureBox.Visible = False
         If Settings.DnsTestPassed Then Me.Close()
 
-    End Sub
+        Return True
 
-    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
+    End Function
 
-        SaveAll()
+#Disable Warning VSTHRD100 ' Avoid async void methods
+
+    Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
+#Enable Warning VSTHRD100 ' Avoid async void methods
+
+        PictureBox.Visible = True
+        Dim r = Await SaveAllAsync()
+        PictureBox.Visible = False
         Close()
 
     End Sub
@@ -153,7 +168,10 @@ Public Class FormDnsName
 
     End Sub
 
-    Private Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
+#Disable Warning VSTHRD100 ' Avoid async void methods
+
+    Private Async Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
+#Enable Warning VSTHRD100 ' Avoid async void methods
 
         PictureBox.Visible = True
         Application.DoEvents()
@@ -162,9 +180,8 @@ Public Class FormDnsName
         Dim address As System.Net.IPAddress = Nothing
         If DNSNameBox.Text.Length <> 0 Then
 
-
             Settings.PublicIP = DNSNameBox.Text
-            RegisterName(Settings.PublicIP)    ' force it to register
+            Dim r = Await RegisterNameAsync(Settings.PublicIP)    ' force it to register
 
             Try
                 If IPAddress.TryParse(DNSNameBox.Text, address) Then
@@ -194,7 +211,7 @@ Public Class FormDnsName
                     Dim array As String() = Settings.AltDnsName.Split(",".ToCharArray())
                     For Each part As String In array
 
-                        RegisterName(part)
+                        Dim rr = Await RegisterNameAsync(part)
                         PictureBox.Visible = False
                         If IPAddress.TryParse(part, address) Then
                             MsgBox(Global.Outworldz.My.Resources.resolved & " " & part, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)
@@ -258,6 +275,7 @@ Public Class FormDnsName
 
         If Not initted Then Return
         Settings.MachineId() = UniqueId.Text
+
     End Sub
 
 #End Region

@@ -234,6 +234,7 @@ Module Build
                     Dim part = IO.Path.GetFileName(n)
                     part = part.Replace(".xml", "")
                     TreeList.Add(part)
+                    Application.DoEvents()
                 End If
             Next
             Debug.Print($"{TreeList.Count} Trees")
@@ -307,6 +308,7 @@ Module Build
                 If n.EndsWith(".r32", StringComparison.OrdinalIgnoreCase) Then
                     Terrains.Add(fileSystemInfo.FullName)
                 End If
+                Application.DoEvents()
             Next
             Debug.Print($"{Terrains.Count} Terrains")
 
@@ -316,6 +318,7 @@ Module Build
                 Using reader As StreamReader = System.IO.File.OpenText(names)
                     While reader.Peek <> -1
                         l.Add(reader.ReadLine.Trim)
+                        Application.DoEvents()
                     End While
                 End Using
             End If

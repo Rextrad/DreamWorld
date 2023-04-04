@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>börjar som en Avatar är i närheten</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Ingen</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nej</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Rensa Mysql-loggar</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Säkerhetskopiering av systemet</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starta i skrivbordsläge</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Nederländerna</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Lägga till ett beteende i en robot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Läger bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Anslut robotar</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Koppla bort robotar</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Om du vill ha mer information skriver du</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Gripa</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Ta bort ett beteende från en robot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Texturer för begärandeobjekt</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Ange en inställning för alla robotar</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Visa regioner som är kända för robotar</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Visar detaljerad status och inställningar för en viss robot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Visar status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Visar status för alla robotar</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Stäng av bots och avsluta</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Stäng av bots och avsluta</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sitt alla bots på marken</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sitta</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Ställ alla bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stå</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Startregion</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>för att få en lista över alla kommandon, eller skriv</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>där &lt;item&gt; är något av följande&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Skicka agentuppdateringar</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Vuxen</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Konst</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Välgörenhet</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Barnvänligt</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Kommersiell</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Pedagogisk</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Utbildning - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Utbildning - Skola</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimentell</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasi</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Fri mark</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Furry</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Spel</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Gömställe</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>HBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nykomlingsvänligt</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parker &amp;; Natur</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personlig</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Hyra</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Bostads</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rollspel</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romans</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-klassad</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandlåda</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Vetenskap</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skript</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Provning</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Barnförbjuden</value>
   </data>
 </root>

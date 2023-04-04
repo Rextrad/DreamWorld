@@ -203,7 +203,7 @@ Partial Class FormBackupBoxes
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormBackupBoxes"
         Me.RightToLeftLayout = True
-        Me.Text = My.Resources.System_Backup_word
+        Me.Text = My.Resources.System_Backup_words
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)

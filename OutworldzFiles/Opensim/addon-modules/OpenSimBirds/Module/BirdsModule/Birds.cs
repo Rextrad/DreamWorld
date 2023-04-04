@@ -72,7 +72,7 @@ namespace Flocking
             m_regionZ = m_flowMap.LengthZ;
             m_regionBorder = m_flowMap.Border;
 		}
-		
+		      
 		public Vector3 Location {
 			get { return m_loc;}
 			set { m_loc = value; }

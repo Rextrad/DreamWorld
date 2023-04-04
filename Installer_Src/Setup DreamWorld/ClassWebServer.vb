@@ -48,7 +48,9 @@ Public Class NetServer
 
         Log(My.Resources.Info_word, Global.Outworldz.My.Resources.Stopping_Webserver)
         listen = False
-        WebThread.Abort()
+        If WebThread IsNot Nothing Then
+            WebThread.Abort()
+        End If
 
     End Sub
 

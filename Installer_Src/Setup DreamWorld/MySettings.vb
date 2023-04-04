@@ -154,20 +154,6 @@ Public Class MySettings
         End Set
     End Property
 
-
-    ''' <summary>
-    ''' EstateName
-    ''' </summary>
-    ''' <returns>Admin</returns>
-    Public Property EstateName() As String
-        Get
-            Return GetMySetting("EstateName", "Admin")
-        End Get
-        Set
-            SetMySetting("EstateName", Value)
-        End Set
-    End Property
-
     ''' <summary>
     ''' Diva Wifi User Name (Wifi)
     ''' </summary>
@@ -179,6 +165,20 @@ Public Class MySettings
         Set
             SetMySetting("AdminLast", Value)
         End Set
+    End Property
+
+    ''' <summary>
+    ''' Allow export to other grids
+    ''' </summary>
+    ''' <returns>Boolean</returns>
+    Public Property AllowExport() As Boolean
+        Get
+            Return CType(GetMySetting("AllowExport", "True"), Boolean)
+        End Get
+        Set
+            SetMySetting("AllowExport", CStr(Value))
+        End Set
+
     End Property
 
     ''' <summary>
@@ -1066,6 +1066,19 @@ Public Class MySettings
             SetMySetting("EnableHypergrid", CStr(Value))
         End Set
 
+    End Property
+
+    ''' <summary>
+    ''' EstateName
+    ''' </summary>
+    ''' <returns>Admin</returns>
+    Public Property EstateName() As String
+        Get
+            Return GetMySetting("EstateName", "Admin")
+        End Get
+        Set
+            SetMySetting("EstateName", Value)
+        End Set
     End Property
 
     ''' <summary>
@@ -2017,6 +2030,10 @@ Public Class MySettings
         End Set
     End Property
 
+    ''' <summary>
+    ''' Settings set to run as a service.
+    ''' </summary>
+    ''' <returns>True or false is service is checked to be run</returns>
     Public Property RunAsService() As Boolean
         Get
             Return CType(GetMySetting("RunAsService", "False"), Boolean)
@@ -2733,6 +2750,13 @@ Public Class MySettings
         Dim SCPasswordAdmin As New PassGen()
         Return SCPasswordAdmin.GeneratePass()
     End Function
+
+#End Region
+
+#Region "Export"
+
+    'Unknown, Texture, Sound, CallingCard, Landmark, Clothing, Object, Notecard, LSLText,
+    ' LSLBytecode, TextureTGA, Bodypart, SoundWAV, ImageTGA, ImageJPEG, Animation, Gesture, Mesh
 
 #End Region
 

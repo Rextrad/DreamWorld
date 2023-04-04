@@ -43,6 +43,9 @@ Public Class FormJoomla
 
     Public Sub LoadSub() Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         AdminButton.Text = Global.Outworldz.My.Resources.AdministerJoomla_word
         ButtonBox.Text = Global.Outworldz.My.Resources.Settings_word
 

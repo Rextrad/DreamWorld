@@ -145,13 +145,6 @@ Module Robust
                     Return True
                 End If
 
-                If Settings.ServerType <> RobustServerName Then
-                    RobustIcon(True)
-                    PropOpensimIsRunning = True
-                    RobustHandler = False
-                    Return True
-                End If
-
                 SetServerType()
                 PropRobustProcID = 0
 
@@ -437,11 +430,22 @@ Module Robust
 
             Dim INI = New LoadIni(Settings.OpensimBinPath & "Robust.HG.ini", ";", System.Text.Encoding.UTF8)
 
+            Dim Disallow = "Unknown,Texture,Sound,CallingCard,Landmark,Clothing,Object,Notecard,LSLText,LSLBytecode,TextureTGA,Bodypart,SoundWAV,ImageTGA,ImageJPEG,Animation,Gesture,Mesh"
+
+            If Settings.AllowExport Then
+                If INI.SetIni("HGAssetService", "DisallowExport", "") Then Return True
+            Else
+                If INI.SetIni("HGAssetService", "DisallowExport", Disallow) Then Return True
+            End If
+
             If INI.SetIni("Network", "ConsolePass", CStr(Settings.Password)) Then Return True
             If INI.SetIni("Network", "ConsoleUser", $"{Settings.AdminFirst} {Settings.AdminLast}") Then Return True
             If INI.SetIni("Network", "ConsolePort", CStr(Settings.HttpPort)) Then Return True
 
-            If WelcomeUUID.Length = 0 And Settings.ServerType = RobustServerName And Not RunningInServiceMode() Then
+            If WelcomeUUID.Length = 0 AndAlso
+                Settings.ServerType = RobustServerName AndAlso
+                Not RunningInServiceMode() Then
+
                 MsgBox(My.Resources.Cannot_locate, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
                 Dim RegionName = ChooseRegion(False)
 
@@ -610,14 +614,15 @@ Module Robust
             }
             Dim url As String
             If Settings.ServerType = RobustServerName Then
-                'TODO see if this still exists in Opensiom code
-                url = "http://" & Settings.LANIP & ":" & Settings.HttpPort & "/index.php?version"
+                'TODO see if this still exists in Opensim code
+                url = "http://" & Settings.LANIP & ":" & Settings.HttpPort ' /index.php?version"
             Else
-                url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"
+                url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort ' /index.php?version"
             End If
 
             Try
                 Up = TimedClient.DownloadString(url)
+                Application.DoEvents()
             Catch ex As Exception
                 If ex.Message.Contains("404") Then
                     Log("INFO", "Robust is running")

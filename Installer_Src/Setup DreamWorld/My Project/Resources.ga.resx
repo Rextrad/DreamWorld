@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>ag tosú mar Avatar in aice láimhe</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Dada</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Níl</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Logchomhaid MySQL a Ghlanadh</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Cúltaca an Chórais</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Ag tosú sa Mhód Deisce</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>An Ísiltír</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Cuir iompar le bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot campa</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Ceangail róbónna</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Dícheangail róbónna</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Le haghaidh tuilleadh eolais, cineál</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Grab</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Bain iompar ó róbat</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Iarr uigeachtaí oibiachta</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Socraigh socrú do gach róbat</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Taispeáin réigiúin ar a dtugtar róbónna</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Taispeáin stádas agus socruithe mionsonraithe bot ar leith</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Taispeáin stádas</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Taispeáin stádas gach róbónna</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Róbónna múchta agus scoir</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Róbónna múchta agus scoir</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Suigh gach bots ar an talamh</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Suigh</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Seas gach bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Seastán</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Réigiún Tosaigh</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>chun liosta de na horduithe go léir a fháil, nó cineál</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>i gcás ina &lt;item&gt; bhfuil ceann de na&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Seol Nuashonruithe Gníomhairí</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Duine Fásta</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Ealaín</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Carthanas</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>ChildFriendlyName</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Tráchtáil</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Oideachasúil</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Oideachas - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Oideachas - School</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Turgnamhach</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantaisíocht</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Talamh Saor</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Fionnadh</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Cearrbhachas</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Folaigh</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>HyperportName</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LADT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Newcomer Friendly</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Páirceanna &amp; Dúlra</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Pearsanta</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Cíos</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Cónaithe</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rólghníomhaíocht</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Rómánsachas</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Rátáil</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Bosca Gainimh</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Eolaíocht</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scriptiú</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Siopadóireacht</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Tástáil</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>X-Rátáil</value>
   </data>
 </root>

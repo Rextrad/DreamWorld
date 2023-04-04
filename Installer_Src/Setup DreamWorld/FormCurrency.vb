@@ -59,6 +59,9 @@ Public Class FormCurrency
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()
 
         ' suppress two tab pages as they do not yet work

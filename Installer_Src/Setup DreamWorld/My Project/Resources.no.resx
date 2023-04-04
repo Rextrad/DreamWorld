@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>starter som en Avatar er i nærheten</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Ingen</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nei</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Fjerne Mysql-logger</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Sikkerhetskopiering av systemet</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Starte i skrivebordsmodus</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Nederland</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Legge til en virkemåte i en robot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Camp bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Koble til roboter</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Koble fra roboter</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Hvis du vil ha mer informasjon, skriver du inn</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Gripe</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Fjerne en atferd fra en robot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Be om objektteksturer</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Angi en innstilling for alle roboter</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Vis områder som er kjent for roboter</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Viser detaljert status og innstillinger for en bestemt robot</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Viser status</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Viser statusen for alle roboter</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Avslutt roboter og avslutt</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Avslutt roboter og avslutt</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sett alle roboter på bakken</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sitte</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Stå alle roboter</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Stå</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Startområde</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>for å få en liste over alle kommandoer, eller skriv inn</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>hvor &lt;item&gt; er ett av følgende:&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Send agenter oppdateringer</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Voksen</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Kunst</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Veldedighet</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Barnevennlig</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Kommersiell</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Pedagogisk</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Utdanning - Høyskole</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Utdanning - Skole</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Eksperimentell</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasi</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Fritt land</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Furry</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Gjemmested</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LHBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nykommer vennlig</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parker og natur</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personlig</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Leie</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Bolig</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rollespill</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romanse</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-klassifisert</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandkasse</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Vitenskap</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testing</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>X-klassifisert</value>
   </data>
 </root>

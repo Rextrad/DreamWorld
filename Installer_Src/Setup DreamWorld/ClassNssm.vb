@@ -26,7 +26,6 @@
             ZapRegions()
             Zap("Robust")
             Zap("Icecast")
-
         Else
             TextPrint(My.Resources.ServiceFailedtoDelete)
         End If
@@ -48,8 +47,7 @@
         If Not NssmCommand($"install DreamGridService ""{Settings.CurrentDirectory}\Start.exe"" service") Then
 
             '"set DreamGridService AppStopMethodThreads 1500", ' Post WM_Quit to threads
-            ' "set DreamGridService AppStopMethodConsole 1500",  ' Generate  Ctrl-C 
-
+            ' "set DreamGridService AppStopMethodConsole 1500",  ' Generate  Ctrl-C
 
             Dim cmds As New List(Of String) From {
                 "set DreamGridService Description DreamGridService DreamGridInstallService.bat=Install, DreamGridDeleteService.bat=Delete the service.",

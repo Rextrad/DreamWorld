@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>comenzando como un Avatar está cerca</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Ninguna</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Borrar registros de Mysql</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Copia de seguridad del sistema</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Iniciar en modo escritorio</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Países Bajos</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Agregar un comportamiento a un bot</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Bot de campamento</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Conectar bots</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Desconectar bots</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Para obtener más información, escriba</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Agarrar</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Quitar un comportamiento de un bot</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Solicitar texturas de objeto</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Establecer una configuración para todos los bots</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Mostrar regiones conocidas por los bots</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Muestra el estado detallado y la configuración de un bot en particular</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Muestra el estado</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Muestra el estado de todos los bots</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Apagar bots y salir</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Apagar bots y salir</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Siente a todos los bots en el suelo</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sentarse</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Stand todos los bots</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Estar de pie</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Región de inicio</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>Para obtener una lista de todos los comandos, o escriba</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>donde &lt;item&gt; es uno de los siguientes&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Enviar actualizaciones a los agentes</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Adulto</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Arte</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Caridad</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Apto para niños.</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Comercial</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Educativo</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Educación - Universidad</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Educación - Escuela</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasía</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Regalos</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Tierra Libre</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Peludo</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Juego</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Guarida</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hiperpuerto</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Recién llegado amigable</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parques y Naturaleza</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Alquiler</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Residencial</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Juego de roles</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romance</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>Clasificación R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Arenero</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Ciencia</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Ciencia - Ficción</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Compras</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Ensayo</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Clasificación X</value>
   </data>
 </root>

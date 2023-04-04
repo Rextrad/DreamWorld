@@ -1920,9 +1920,6 @@
   <data name="None" xml:space="preserve">
     <value>Enginn</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Enginn</value>
-  </data>
   <data name="Nonphysical_Prim" xml:space="preserve">
     <value>Nonphysical Prim Stærð</value>
   </data>
@@ -3983,5 +3980,179 @@
   </data>
   <data name="ClearingLogs" xml:space="preserve">
     <value>Hreinsa Mysql logs</value>
+  </data>
+  <data name="System_Backup_words" xml:space="preserve">
+    <value>Kerfi öryggisafrit</value>
+  </data>
+  <data name="StartinginDesktopMode" xml:space="preserve">
+    <value>Ræsi í skjáborðsham</value>
+  </data>
+  <data name="Netherlands" xml:space="preserve">
+    <value>Holland</value>
+  </data>
+  <data name="AddBehaviour" xml:space="preserve">
+    <value>Bættu hegðun við láni</value>
+  </data>
+  <data name="Campbot" xml:space="preserve">
+    <value>Camp bot</value>
+  </data>
+  <data name="Connectbots" xml:space="preserve">
+    <value>Tengdu vélmenni</value>
+  </data>
+  <data name="Disconnectbots" xml:space="preserve">
+    <value>Aftengdu vélmenni</value>
+  </data>
+  <data name="Formoreinformation" xml:space="preserve">
+    <value>Fyrir frekari upplýsingar, sláðu inn</value>
+  </data>
+  <data name="Grab_word" xml:space="preserve">
+    <value>Grípa</value>
+  </data>
+  <data name="Removebehaviour" xml:space="preserve">
+    <value>Fjarlægðu hegðun úr láni</value>
+  </data>
+  <data name="RequestObjectTextures" xml:space="preserve">
+    <value>Biðja um áferð hlutar</value>
+  </data>
+  <data name="Setasetting" xml:space="preserve">
+    <value>Stilltu stillingu fyrir alla vélmenni</value>
+  </data>
+  <data name="Showregionsknown" xml:space="preserve">
+    <value>Sýna svæði sem vélmennin þekkja</value>
+  </data>
+  <data name="Showsdetailedstatus" xml:space="preserve">
+    <value>Sýnir nákvæma stöðu og stillingar tiltekins botns</value>
+  </data>
+  <data name="Showsstatus" xml:space="preserve">
+    <value>Sýnir stöðu</value>
+  </data>
+  <data name="Showthesstatus" xml:space="preserve">
+    <value>Sýnir stöðu allra vélmenna</value>
+  </data>
+  <data name="Shutdownbots" xml:space="preserve">
+    <value>Slökktu á vélmennum og hættu</value>
+  </data>
+  <data name="Shutdownbotsandexit" xml:space="preserve">
+    <value>Slökktu á vélmennum og hættu</value>
+  </data>
+  <data name="SitAllBots" xml:space="preserve">
+    <value>Sitjið öll vélmenni á jörðinni</value>
+  </data>
+  <data name="sit_word" xml:space="preserve">
+    <value>Sitja</value>
+  </data>
+  <data name="Standallbots" xml:space="preserve">
+    <value>Standið öll vélmenni</value>
+  </data>
+  <data name="Stand_word" xml:space="preserve">
+    <value>Standa</value>
+  </data>
+  <data name="Starting_Region" xml:space="preserve">
+    <value>Upphafssvæði</value>
+  </data>
+  <data name="Toget" xml:space="preserve">
+    <value>til að fá lista yfir allar skipanir, eða slá inn</value>
+  </data>
+  <data name="whereitem" xml:space="preserve">
+    <value>hvar &lt;item&gt; er eitt af eftirfarandi&lt;/item&gt;</value>
+  </data>
+  <data name="SendAgentUpdate" xml:space="preserve">
+    <value>Senda umboðsmönnum uppfærslur</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Fullorðinn</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Góðgerðarstarfsemi</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Barnvænt</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Auglýsing</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Menntunar</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Menntun - Háskóli</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Menntun - Skóli</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Tilrauna</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasy</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Framborð</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Frjálst land</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Loðinn</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Fylgsni</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nýliði vingjarnlegur</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Almenningsgarðar og náttúra</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Persónulegur</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Leiga</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Íbúðabyggð</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Hlutverkaleikur</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Rómanskur</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-riðill</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandkassi</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Vísindi</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skrifletur</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Innkaup</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Prófun</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Dónalegur</value>
   </data>
 </root>

@@ -72,6 +72,9 @@ Public Class FormDiva
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         AccountConfirmationRequired.Text = Global.Outworldz.My.Resources.AccountConfirm
         ApacheToolStripMenuItem.Image = Global.Outworldz.My.Resources.window_environment
         ApacheToolStripMenuItem.Text = Global.Outworldz.My.Resources.Apache_word

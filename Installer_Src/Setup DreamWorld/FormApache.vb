@@ -63,6 +63,9 @@ Public Class FormApache
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ApacheCheckbox.Text = Global.Outworldz.My.Resources.EnableApache
         EnableDiva.Text = Global.Outworldz.My.Resources.EnableDiva
         EnableJOpensim.Text = Global.Outworldz.My.Resources.JOpensim_word

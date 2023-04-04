@@ -894,6 +894,9 @@ Public Class FormRegionlist
 
     Private Sub LoadForm(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ' Set the view to show whatever
         TheView1 = Settings.RegionListView()
 

@@ -50,6 +50,9 @@ Public Class FormBlockify
 
     Private Sub FormBlockify_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         GoButton.Text = My.Resources.Packregions
         Label1.Text = My.Resources.Spacing
         Label2.Text = My.Resources.Width

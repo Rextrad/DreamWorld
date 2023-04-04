@@ -86,10 +86,8 @@ Public Class Downloader
         'Creating the request and getting the response
         Label1.Text = "Downloading DreamGrid.zip"
 
-        Dim client As New WebClient()
         ' Holds the current folder that we are running in
         Dim gFileName As String = "http://www.outworldz.com/Outworldz_Installer/Grid/DreamGrid.zip?r=" & Random()
-
 
         Dim urlContents As Byte() = Await GetURLContentsAsync(gFileName)
 
@@ -121,6 +119,7 @@ Public Class Downloader
         Return content.ToArray()
 
     End Function
+
 
 #End Region
 

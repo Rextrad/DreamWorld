@@ -34,15 +34,15 @@ Partial Class FormDnsName
         Me.SaveButton1 = New System.Windows.Forms.Button()
         Me.DNSAliasTextBox = New System.Windows.Forms.TextBox()
         Me.OsGridButton = New System.Windows.Forms.GroupBox()
+        Me.PictureBox = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox = New System.Windows.Forms.PictureBox()
         Me.OsGridButton.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SuitcaseCheckbox
@@ -141,6 +141,18 @@ Partial Class FormDnsName
         Me.OsGridButton.TabIndex = 1
         Me.OsGridButton.TabStop = False
         '
+        'PictureBox
+        '
+        Me.PictureBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox.Image = Global.Outworldz.My.Resources.Resources.loader
+        Me.PictureBox.Location = New System.Drawing.Point(219, 171)
+        Me.PictureBox.Name = "PictureBox"
+        Me.PictureBox.Size = New System.Drawing.Size(38, 34)
+        Me.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox.TabIndex = 18621
+        Me.PictureBox.TabStop = False
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -185,18 +197,6 @@ Partial Class FormDnsName
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(72, 32)
         Me.HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'PictureBox
-        '
-        Me.PictureBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox.Image = Global.Outworldz.My.Resources.Resources.loader
-        Me.PictureBox.Location = New System.Drawing.Point(174, 192)
-        Me.PictureBox.Name = "PictureBox"
-        Me.PictureBox.Size = New System.Drawing.Size(38, 34)
-        Me.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox.TabIndex = 18621
-        Me.PictureBox.TabStop = False
-        '
         'FormDnsName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -212,9 +212,9 @@ Partial Class FormDnsName
         Me.ToolTip1.SetToolTip(Me, Global.Outworldz.My.Resources.Resources.Help_word)
         Me.OsGridButton.ResumeLayout(False)
         Me.OsGridButton.PerformLayout()
+        CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

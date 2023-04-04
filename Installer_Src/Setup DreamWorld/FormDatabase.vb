@@ -97,6 +97,9 @@ Public Class FormDatabase
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ' Robust DB
         ConnectToMySqlToolStripMenuItem.Text = Global.Outworldz.My.Resources.Connect2Console
         Dbnameindex.Text = Global.Outworldz.My.Resources.DBName_word

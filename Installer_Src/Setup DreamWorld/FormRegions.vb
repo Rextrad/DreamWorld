@@ -207,6 +207,9 @@ Public Class FormRegions
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         BulkLoadButton.Text = My.Resources.BulkLoad
         Button_AddRegion.Text = Global.Outworldz.My.Resources.Add_Region_word
         Button_Clear.Text = Global.Outworldz.My.Resources.ClearReg

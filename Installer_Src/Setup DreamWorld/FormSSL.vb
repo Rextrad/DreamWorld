@@ -251,7 +251,6 @@ Public Class FormSSL
                 PictureBox1.Image = My.Resources.lock_time
                 StopApache()
                 StartApache()
-
             Else
                 If Status = -1 Then Logger("Error", "Failed to make the Certificate", "SSL")
                 If Status = 1 Then Logger("Error", "Non-recognized command", "SSL")
@@ -276,6 +275,9 @@ Public Class FormSSL
     End Sub
 
     Private Sub SSL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
 
         'If Debugger.IsAttached Then Settings.SSLIsInstalled = False
 
