@@ -44,6 +44,10 @@
 
     Private Sub FormIARLoad_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Label1.Text = My.Resources.Enter_1_2
         Label2.Text = My.Resources.Folder_To_Save_To_word
 

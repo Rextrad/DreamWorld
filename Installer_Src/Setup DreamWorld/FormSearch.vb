@@ -34,6 +34,9 @@
 
     Private Sub FormSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         OutworldzRadioButton.Text = Global.Outworldz.My.Resources.HypericaSearch_word
         JOpensimRadioButton.Text = Global.Outworldz.My.Resources.JOpensimSearch_word
         SearchBox.Text = Global.Outworldz.My.Resources.SearchOptions_word

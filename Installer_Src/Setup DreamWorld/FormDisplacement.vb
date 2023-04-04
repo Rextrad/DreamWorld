@@ -104,6 +104,10 @@ Public Class FormDisplacement
 
     Private Sub FormDisplacement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         TerrainToolstrip.Text = Global.Outworldz.My.Resources.Terrain_word
         ClearObjects.Text = Global.Outworldz.My.Resources.Clear_and_Load_word
         LoadTerrainMenu.Text = Global.Outworldz.My.Resources.Load_Terrain

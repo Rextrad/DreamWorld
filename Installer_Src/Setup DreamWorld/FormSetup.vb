@@ -255,6 +255,9 @@ Public Class FormSetup
 
     Public Async Function FrmHomeLoadAsync(ByVal sender As Object, ByVal e As EventArgs) As Task(Of Boolean)
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()     ' move Form to fit screen from SetXY.ini
 
         SetLoading(True)
@@ -751,8 +754,8 @@ Public Class FormSetup
 
         PropAborting = True
 
+        Sleep(1000)
         ' close everything as gracefully as possible.
-
         StopIcecast()
 
         Dim n As Integer = RegionCount()
@@ -957,6 +960,7 @@ Public Class FormSetup
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
+
         Application.EnableVisualStyles()
 
         Dim _myFolder As String = My.Application.Info.DirectoryPath
@@ -1037,10 +1041,18 @@ Public Class FormSetup
 
     Public Shared Sub ProcessQuit()
 
+        If PropAborting Then
+            ExitList.Clear()
+            Return
+        End If
+
         If RunningInServiceMode() Or Not Settings.RunAsService Then
             ' now look at the exit stack
             While Not ExitList.IsEmpty
-
+                If PropAborting Then
+                    ExitList.Clear()
+                    Return
+                End If
                 Dim RegionName = ExitList.Keys.First
                 Dim RegionUUID = ExitList(RegionName)
                 Dim GroupName = Group_Name(RegionUUID)

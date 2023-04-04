@@ -377,6 +377,9 @@ Public Class FormBulkLoad
 
     Private Sub FormBulkLoad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()
 
         OwnerLabel.Text = My.Resources.OwnerofNewRegions

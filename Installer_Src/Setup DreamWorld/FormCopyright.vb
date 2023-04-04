@@ -2,6 +2,9 @@
 
     Public Sub N() Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Label1.Text = ("Version " & PropMyVersion)
 
     End Sub

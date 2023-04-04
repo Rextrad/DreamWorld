@@ -23,6 +23,9 @@
 
     Private Sub SetScreen()
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ScreenPosition = New ClassScreenpos(Me.Name)
         AddHandler ResizeEnd, Handler
         Dim xy As List(Of Integer) = ScreenPosition.GetXY()
@@ -188,6 +191,9 @@
 
     Private Sub L(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Arabic_Saudi.Text = Global.Outworldz.My.Resources.Arabic_Saudi
         English.Text = Global.Outworldz.My.Resources.English
         Arabic_Saudi.Text = Global.Outworldz.My.Resources.Arabic_Saudi
@@ -234,6 +240,7 @@
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
+
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
         Await FormSetup.FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again

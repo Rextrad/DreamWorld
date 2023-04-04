@@ -13,7 +13,7 @@ Public Class FormSettings
     Private Backups As New FormAutoBackups
     Dim Banlist As New FormBanList
     Private Bird As New FormBird
-    Dim Bots As New FormBots
+    Dim Bots As New CampBots
     Dim Email As New FormEmailSetup
     Dim FormApache As New FormApache
     Dim FormCache As New FormCaches
@@ -166,6 +166,9 @@ Public Class FormSettings
 
     Private Sub Advanced_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()
         Init()
 
@@ -283,7 +286,7 @@ Public Class FormSettings
 
         Bots.Close()
         Bots.Dispose()
-        Bots = New FormBots
+        Bots = New CampBots
         Bots.Activate()
         Bots.Visible = True
         Bots.Select()

@@ -51,6 +51,10 @@ Public Class FormRestart
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         ARTimerBox.Text = Global.Outworldz.My.Resources.Restart_Periodically_word
         AutoStart.Text = Global.Outworldz.My.Resources.Auto_Startup_word
         AutoStartCheckbox.Text = Global.Outworldz.My.Resources.EnableOneClickStart_word

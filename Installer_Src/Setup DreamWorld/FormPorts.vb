@@ -67,6 +67,10 @@ Public Class FormPorts
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         GroupBoxA.Text = Global.Outworldz.My.Resources.Ports
         Label26.Text = Global.Outworldz.My.Resources.Region_Port_Start
         Label4.Text = Global.Outworldz.My.Resources.Http_Port_word

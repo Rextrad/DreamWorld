@@ -31,7 +31,7 @@ Module GlobalSettings
 
 #End Region
 
-    ' TODO
+    ' TODO SQL
     'SELECT -- DISTINCT
     'parent1.folderName AS Parent, child1.type , child1.folderName AS Child,
     'child2.folderName AS GrandChild, child3.folderName AS GGChild , child4.folderName AS GGGChild,

@@ -267,18 +267,7 @@ Module Diags
 
     End Sub
 
-    ' todo delete
-    Private Sub TestPrivateLoopbackLoopbackCallback(ByVal sender As Object, ByVal e As DownloadStringCompletedEventArgs)
 
-        If e.Result = "Test Completed" Then
-            Logger("INFO", Global.Outworldz.My.Resources.Failed_LAN, "Diagnostics")
-            Settings.LoopbackDiag = False
-        Else
-            Settings.LoopbackDiag = True
-            Settings.DiagFailed = True
-        End If
-
-    End Sub
     Public Async Function TestPrivateLoopbackAsync() As Task(Of Boolean)
 
         TextPrint(My.Resources.Checking_LAN_Loopback_word)

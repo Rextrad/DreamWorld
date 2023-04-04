@@ -44,6 +44,9 @@ Public Class FormAutoBackups
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         ' tool tips
         AutoBackup.Text = Global.Outworldz.My.Resources.Enabled_word
 

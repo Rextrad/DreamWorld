@@ -145,6 +145,10 @@ Public Class FormMaps
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         ViewRegionMapsButton.Text = Global.Outworldz.My.Resources.View_Maps
         GroupBox2.Text = Global.Outworldz.My.Resources.Maps_word
         Label1.Text = Global.Outworldz.My.Resources.Map_Center_Location_word

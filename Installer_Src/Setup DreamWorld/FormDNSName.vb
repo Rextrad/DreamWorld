@@ -52,6 +52,10 @@ Public Class FormDnsName
 
     Private Sub DNS_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         PictureBox.Visible = False
         EnableHypergrid.Text = Global.Outworldz.My.Resources.Enable_Hypergrid_word
         HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer

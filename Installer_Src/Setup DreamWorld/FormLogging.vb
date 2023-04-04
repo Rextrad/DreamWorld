@@ -82,6 +82,9 @@ Public Class FormLogging
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         AnalyzeButton.Text = Global.Outworldz.My.Resources.AnalyzeLogButton
         Date_Time_Checkbox.Checked = Settings.ShowDateandTimeinLogs
         Date_Time_Checkbox.Text = Global.Outworldz.My.Resources.ShowDateTime

@@ -111,6 +111,9 @@ Public Class FormCaches
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Button1.Text = Global.Outworldz.My.Resources.Clear_Selected_Caches_word
         ScriptCheckBox1.Text = Global.Outworldz.My.Resources.Script_cache_word
         AvatarCheckBox2.Text = Global.Outworldz.My.Resources.Avatar_Bakes_Cache_word

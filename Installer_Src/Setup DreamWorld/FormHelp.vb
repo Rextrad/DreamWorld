@@ -24,6 +24,10 @@ Public Class FormHelp
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
     End Sub
 
     'The following detects  the location of the form in screen coordinates

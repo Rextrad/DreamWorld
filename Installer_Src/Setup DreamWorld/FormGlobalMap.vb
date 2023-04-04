@@ -33,6 +33,10 @@
 
     Private Sub FormGlobalMap_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         Me.Text = My.Resources.Global_Map
 
     End Sub

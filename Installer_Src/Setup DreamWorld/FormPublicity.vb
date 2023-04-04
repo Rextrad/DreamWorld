@@ -86,6 +86,10 @@ Public Class FormPublicity
 
     Private Sub Publicity_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
+
         GDPRCheckBox.Text = Global.Outworldz.My.Resources.Publish_grid
         GroupBoxCategory.Text = Global.Outworldz.My.Resources.Category_word
         GroupBoxPhoto.Text = Global.Outworldz.My.Resources.Photo_Word

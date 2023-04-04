@@ -60,6 +60,9 @@ Public Class FormBird
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         Text = Global.Outworldz.My.Resources.Bird_Module_word
         HelpMenuItem.Image = Global.Outworldz.My.Resources.question_and_answer
         HelpMenuItem.Text = Global.Outworldz.My.Resources.Help_word

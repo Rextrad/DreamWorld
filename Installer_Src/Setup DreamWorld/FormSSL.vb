@@ -277,6 +277,9 @@ Public Class FormSSL
 
     Private Sub SSL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         'If Debugger.IsAttached Then Settings.SSLIsInstalled = False
 
         LogFile = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\SSL.log")

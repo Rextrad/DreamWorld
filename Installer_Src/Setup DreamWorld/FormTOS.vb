@@ -72,6 +72,9 @@ Public Class TosForm
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SaveButton.Text = My.Resources.Save_changes_word
         ApplyButton.Text = My.Resources.Apply_word
         PreviewButton.Text = My.Resources.Preview_in_Browser

@@ -62,6 +62,9 @@ Public Class FormSpeech
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()
 
         APILabel.Text = My.Resources.APIKey

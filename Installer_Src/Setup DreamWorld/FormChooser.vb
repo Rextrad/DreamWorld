@@ -127,6 +127,9 @@ Public Class FormChooser
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         CancelButton1.Text = Global.Outworldz.My.Resources.Cancel_word
         Group.HeaderText = Global.Outworldz.My.Resources.Group_word
         Group.Name = Global.Outworldz.My.Resources.Group_word

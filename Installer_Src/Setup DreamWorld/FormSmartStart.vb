@@ -437,6 +437,9 @@ Public Class FormSmartStart
 
     Private Sub Loading(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         _initialized = False
         SetScreen()
 

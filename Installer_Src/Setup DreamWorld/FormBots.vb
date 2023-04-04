@@ -1,7 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Text
 
-Public Class FormBots
+Public Class CampBots
     Private ReadOnly behaviour As New List(Of String)
     Private BotPID As Integer
     Private botStart As String = ""
@@ -205,36 +205,58 @@ Public Class FormBots
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
+
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         SetScreen()
         ComboBox1.SelectedIndex = 2
-        HelpOnce("Bots")
+
+        StartButton.Text = My.Resources.Start_word
+        StopButton.Text = My.Resources.Stop_word
+        StatusButton.Text = My.Resources.Status_word
+        RegionButton.Text = My.Resources.Regions_word
+        ConnectButton.Text = My.Resources.Connectbots
+        DisconnectButton.Text = My.Resources.Disconnectbots
+
+        SitButton.Text = My.Resources.sit_word
+        StandButton.Text = My.Resources.Stand_word
+        CheckBoxPhysics.Text = My.Resources.Physics_word
+        CheckBoxGrab.Text = My.Resources.Grab_word
+        CheckBoxTeleport.Text = My.Resources.Teleport_word
+        CheckBoxNone.Text = My.Resources.None
+        SendAgentUpdatesCheckBox.Text = My.Resources.SendAgentUpdate
+        RequestObjectTexturesCheckBox.Text = My.Resources.RequestObjectTextures
+        Me.Text = My.Resources.Campbot
+
+        HelpOnce("DreamBots")
         PrintBotHelp()
 
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
 
-        HelpManual("Bots")
+        HelpManual("DreamBots")
 
     End Sub
 
     Private Sub PrintBotHelp()
 
         Dim help As New List(Of String) From {
-                "For more information, type 'help all' to get a list of all commands,or type help <item>' where <item> is one of the following:",
-                "add behaviour <abbreviated-name> [<bot-number>] - Add a behaviour to a bot.",
-                "connect [<n>] - Connect bots.",
-                "disconnect [<n>] - Disconnect bots.",
-                "quit - Shutdown bots and exit.",
-                "remove behaviour <abbreviated-name> [<bot-number>] - Remove a behaviour from a bot.",
-                "set bots <key> <value> - Set a setting for all bots.",
-                "show bot <bot-number> - Shows the detailed status And settings of a particular bot.",
-                "show bots - Shows the status of all bots.",
-                "show regions - Show regions known to bots.",
-                "show status - Shows status.",
-                "shutdown - Shutdown bots And exit.",
-                "sit - Sit all bots on the ground.",
-                "stand - Stand all bots."
+                $"{My.Resources.Formoreinformation} 'help all' {My.Resources.Toget} 'help <item>' {My.Resources.whereitem}:",
+                $"add behaviour <abbreviated-name> [<bot-number>] - {My.Resources.AddBehaviour}.",
+                $"connect [<n>] - {My.Resources.Connectbots}.",
+                $"disconnect [<n>] - {My.Resources.Disconnectbots}.",
+                $"quit - {My.Resources.Shutdownbots}.",
+                $"remove behaviour <abbreviated-name> [<bot-number>] - {My.Resources.Removebehaviour}.",
+                $"set bots <key> <value> - {My.Resources.Setasetting}.",
+                $"show bot <bot-number> - {My.Resources.Showsdetailedstatus}.",
+                $"show bots - {My.Resources.Showthesstatus}.",
+                $"show regions - {My.Resources.Showregionsknown}.",
+                $"show status - {My.Resources.Showsstatus}.",
+                $"shutdown - {My.Resources.Shutdownbotsandexit}.",
+                $"sit - {My.Resources.SitAllBots}",
+                $"stand - {My.Resources.Standallbots}."
             }
 
         For Each line In help

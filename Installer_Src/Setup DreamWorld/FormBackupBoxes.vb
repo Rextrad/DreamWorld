@@ -95,6 +95,9 @@ Public Class FormBackupBoxes
 
     Private Sub Loaded(sender As Object, e As EventArgs) Handles Me.Load
 
+        My.Application.ChangeUICulture(Settings.Language)
+        My.Application.ChangeCulture(Settings.Language)
+
         BackupButton.Text = Global.Outworldz.My.Resources.System_Backup_Now_word
         BackupIARsCheckBox.Text = Global.Outworldz.My.Resources.Backup_IARs
         BackupOarsCheckBox.Text = Global.Outworldz.My.Resources.Backup_OARs
