@@ -1757,22 +1757,25 @@ Module RegionMaker
             Dim myUri As Uri = Nothing
             Try
                 myUri = New Uri(post.ToUpper)
+                If myUri IsNot Nothing Then
+                    If HttpUtility.ParseQueryString(myUri.Query).Get("ALT") IsNot Nothing Then
+                        Return SmartStartParse(post)
+                    ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
+                        Return TOS(post)
+                    ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
+                        Return SetPartner(post)
+                    ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
+                        Return GetPartner(post)
+                    ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
+                        Return Text2Speech(post)
+                    ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
+                        Return CommandProcess(post)
+                    End If
+                End If
+
             Catch
             End Try
 
-            If HttpUtility.ParseQueryString(myUri.Query).Get("ALT") IsNot Nothing Then
-                Return SmartStartParse(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
-                Return TOS(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
-                Return SetPartner(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
-                Return GetPartner(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
-                Return Text2Speech(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
-                Return CommandProcess(post)
-            End If
         End If
 
         Return "Test Completed"
