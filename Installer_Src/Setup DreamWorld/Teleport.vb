@@ -79,7 +79,6 @@ Public Class TeleportAvatar
 
         Delete(AgentID)
         TeleportAvatarDict.TryAdd(AgentID, Value)
-        TP(AgentID)
 
     End Sub
 
@@ -89,12 +88,5 @@ Public Class TeleportAvatar
         End If
     End Sub
 
-    Public Shared Sub TP(AgentID As String)
-
-        If TeleportAvatarDict.ContainsKey(AgentID) Then
-            TeleportAvatarDict.TryRemove(AgentID, "")
-        End If
-
-    End Sub
 
 End Class
