@@ -100,7 +100,7 @@ Public Class WaitForFile
                         lastMaxOffset += line.Length
                     End If
                     CTR += 1
-                    PokeRegionTimer(RegionUUID)
+
                     Sleep(sleeptime)
                 End While
             Catch ex As Exception
