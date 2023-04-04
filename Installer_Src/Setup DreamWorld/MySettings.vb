@@ -2739,6 +2739,13 @@ Public Class MySettings
 
 #End Region
 
+#Region "Export"
+
+    'Unknown, Texture, Sound, CallingCard, Landmark, Clothing, Object, Notecard, LSLText,
+    ' LSLBytecode, TextureTGA, Bodypart, SoundWAV, ImageTGA, ImageJPEG, Animation, Gesture, Mesh
+
+#End Region
+
 #Region "Robust"
 
     Public Function RegionDBConnection() As String
