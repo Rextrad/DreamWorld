@@ -1920,9 +1920,6 @@
   <data name="None" xml:space="preserve">
     <value>Enginn</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Enginn</value>
-  </data>
   <data name="Nonphysical_Prim" xml:space="preserve">
     <value>Nonphysical Prim Stærð</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Senda umboðsmönnum uppfærslur</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Fullorðinn</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Góðgerðarstarfsemi</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Barnvænt</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Auglýsing</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Menntunar</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Menntun - Háskóli</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Menntun - Skóli</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Tilrauna</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasy</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Framborð</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Frjálst land</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Loðinn</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Fylgsni</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nýliði vingjarnlegur</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Almenningsgarðar og náttúra</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Persónulegur</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Leiga</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Íbúðabyggð</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Hlutverkaleikur</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Rómanskur</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-riðill</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandkassi</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Vísindi</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skrifletur</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Innkaup</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Prófun</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Dónalegur</value>
   </data>
 </root>

@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>začínající jako Avatar je poblíž</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Žádný</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Ne</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Odesílání aktualizací agentů</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Dospělý</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Umění</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Dobročinnost</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Přátelské k dětem</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Komerční</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Vzdělávací</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Vzdělání - vysoká škola</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Vzdělávání - škola</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Pokusný</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantazie</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Pozornosti podniku</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Svobodná půda</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Srstnatý</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Hraní</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Úkryt</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Přátelský k nováčkům</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parky a příroda</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Osobní</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Pronájem</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Obytný</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Hraní rolí</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romance</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>S hodnocením R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Pískoviště</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Věda</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skriptování</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Nakupování</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testování</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>S hvězdičkou</value>
   </data>
 </root>

@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>Alkaen Avatar on lähellä</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Ei mitään</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Ei</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Lähetä asiakaspalvelijoille päivityksiä</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Aikuinen</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Taide</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Hyväntekeväisyys</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Lapsiystävällinen</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Kaupallinen</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Koulutuksellinen</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Koulutus - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Koulutus - Koulu</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Kokeellinen</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasia</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Vapaa maa</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Karvainen</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Pelaamista</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Piilopaikka</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperportti</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Uusi tulokas ystävällinen</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Puistot ja luonto</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Henkilökohtainen</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Vuokraus</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Asunto</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Roolipeli</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romanssi</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-luokiteltu</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Hiekkalaatikko</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Tiede</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Ostokset</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testaus</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Lapsilta kielletty</value>
   </data>
 </root>

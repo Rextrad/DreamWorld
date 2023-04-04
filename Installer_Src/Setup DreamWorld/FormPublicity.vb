@@ -10,16 +10,24 @@ Imports System.Text.RegularExpressions
 
 Public Class FormPublicity
 
-#Region "GLobals"
-
     Private initted As Boolean
-
-#End Region
 
 #Region "ScreenSize"
 
     Private ReadOnly Handler As New EventHandler(AddressOf Resize_page)
+
     Private _screenPosition As ClassScreenpos
+
+    Public Property Initted2 As Boolean
+        Get
+            Return Initted3
+        End Get
+        Set(value As Boolean)
+            Initted3 = value
+        End Set
+    End Property
+
+    Public Property Initted3 As Boolean
 
     Public Property ScreenPosition As ClassScreenpos
         Get
@@ -32,6 +40,7 @@ Public Class FormPublicity
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
+        'Me.Text = "Form screen position = " + Me.Location.ToString
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -46,49 +55,12 @@ Public Class FormPublicity
 
 #End Region
 
-#Region "Publicity Checkbox"
-
-    Private Sub GDPRCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles GDPRCheckBox.CheckedChanged
-
-        If initted Then
-            Settings.Gdpr() = GDPRCheckBox.Checked
-            Settings.SaveSettings()
-        End If
-
-    End Sub
-
-#End Region
-
-#Region "Start/Stop"
-
-    Private Sub Publicity_Close(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Closed
-
-        Dim category As String = ""
-        For Each i In CategoryCheckbox.CheckedItems
-            If i.ToString.Length > 0 Then category += CStr(i) & ","
-        Next
-
-        GroupBoxPhoto.Text = My.Resources.Photo_Word
-        GDPRCheckBox.Text = My.Resources.PublishToOutworldz
-        GroupBoxCategory.Text = My.Resources.Category_word
-        GroupBoxDescription.Text = My.Resources.Description_word
-        ViewOutworldz.Text = My.Resources.View_word
-
-        Settings.Categories = category
-
-        Dim tmp = DescriptionBox.Text.Replace(vbCrLf, "<br>")
-        Settings.Description = tmp
-
-        UploadCategory()
-        Settings.SaveSettings()
-
-    End Sub
+#Region "Load"
 
     Private Sub Publicity_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
-
 
         GDPRCheckBox.Text = Global.Outworldz.My.Resources.Publish_grid
         GroupBoxCategory.Text = Global.Outworldz.My.Resources.Category_word
@@ -99,6 +71,17 @@ Public Class FormPublicity
         Text = Global.Outworldz.My.Resources.Publicity_Word
         ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Help_word
         ViewOutworldz.Text = Global.Outworldz.My.Resources.View_word
+
+        CategoryCheckbox.Items.AddRange(New Object() {My.Resources.Adult, My.Resources.Art, My.Resources.Charity,
+                                   My.Resources.ChildFriendly, My.Resources.Commercial, My.Resources.Educational,
+                                  My.Resources.EducationSchool, My.Resources.EducationCollege,
+                                 My.Resources.Experimental, My.Resources.Fantasy, My.Resources.Freebies,
+                                My.Resources.FreeLand, My.Resources.Furry, My.Resources.Hideout, My.Resources.Hyperport,
+                               My.Resources.Gaming, My.Resources.LGBT, My.Resources.Personal, My.Resources.NewcomerFriendly,
+                              My.Resources.ParksNature, My.Resources.RRated, My.Resources.Rental, My.Resources.Residential,
+                             My.Resources.Roleplay, My.Resources.Romance, My.Resources.Sandbox, My.Resources.SciFi,
+                            My.Resources.Science, My.Resources.Scripting, My.Resources.Shopping, My.Resources.Testing,
+                                       My.Resources.XRated})
 
         SetScreen()
 
@@ -133,7 +116,7 @@ Public Class FormPublicity
 
     End Sub
 
-#End Region
+#End #Region
 
 #Region "Clicks"
 
@@ -162,10 +145,10 @@ Public Class FormPublicity
 
     Private Sub PictureBox9_Click(sender As Object, e As EventArgs) Handles PictureBox9.Click
         Using ofd As New OpenFileDialog With {
-            .Filter = Global.Outworldz.My.Resources.picfilter,
-            .FilterIndex = 1,
-            .Multiselect = False
-        }
+    .Filter = Global.Outworldz.My.Resources.picfilter,
+    .FilterIndex = 1,
+    .Multiselect = False
+}
             If ofd.ShowDialog = DialogResult.OK Then
                 If ofd.FileName.Length > 0 Then
 
@@ -213,6 +196,10 @@ Public Class FormPublicity
     Private Sub ToolStripMenuItem30_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem30.Click
         HelpManual("Publicity")
     End Sub
+
+#End Region
+
+End Class
 
 #End Region
 

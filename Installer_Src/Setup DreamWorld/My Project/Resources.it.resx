@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>iniziando come un Avatar è nelle vicinanze</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Nessuno</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Invia aggiornamenti agli agenti</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Adulto</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Arte</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Carità</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Adatto ai bambini</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Commerciale</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Educativo</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Istruzione - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Istruzione - Scuola</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Sperimentale</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasia</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Terra libera</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Peloso</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gioco</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Nascondiglio</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Iperporto</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Amichevole per i nuovi arrivati</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parchi &amp; Natura</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personale</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Noleggio</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Residenziale</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Giochi di ruolo</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romanzo</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Rated</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandbox</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Scienza</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Compere</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Collaudo</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Vietato ai minori</value>
   </data>
 </root>

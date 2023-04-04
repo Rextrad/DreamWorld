@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>bir Avatar olarak başlamak yakında</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Hiçbiri</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Numara</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Aracılar Güncelleştirmeleri Gönderme</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Yetişkin</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Sanat</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Sadaka</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Çocuk Dostu</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Ticari</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Eğitim</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Eğitim - Üniversite</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Eğitim - Okul</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Deneysel</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantezi</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Serbest Arazi</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Kürklü</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Oyun</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Hideout</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hiperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Yeni Gelen Dostu</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parklar ve Doğa</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Kişisel</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Kiralama</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Konut</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rol Yapma Oyunu</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romantizm</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Sınıfı</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandbox</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Bilim</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Bilim - Kurgu</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Komut dosyası</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Alışveriş</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Test etme</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>On sekiz yaşından küçükler için uygunsuz</value>
   </data>
 </root>

@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>从附近的头像开始</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>没有任何</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>不</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>发送代理更新</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>成人</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>艺术</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>慈善</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>儿童友好</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>商业</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>教育</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>教育 - 学院</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>教育 - 学校</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>实验的</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>幻想</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>赠品</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>免费土地</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>毛茸茸</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>赌博</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>隐匿处</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>超级端口</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>男女同性恋、双性恋和变</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>新移民友好</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>公园与自然</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>个人</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>租赁</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>住宅</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>角色扮演</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>浪漫</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R 级</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>沙盒</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>科学</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>科幻 - 菲</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>脚本</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>购物</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>测试</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>限制级</value>
   </data>
 </root>

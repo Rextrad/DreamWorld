@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>börjar som en Avatar är i närheten</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Ingen</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nej</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Skicka agentuppdateringar</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Vuxen</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Konst</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Välgörenhet</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Barnvänligt</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Kommersiell</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Pedagogisk</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Utbildning - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Utbildning - Skola</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimentell</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasi</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Fri mark</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Furry</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Spel</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Gömställe</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>HBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nykomlingsvänligt</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parker &amp;; Natur</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personlig</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Hyra</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Bostads</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rollspel</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romans</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-klassad</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sandlåda</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Vetenskap</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Skript</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Provning</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Barnförbjuden</value>
   </data>
 </root>

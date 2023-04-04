@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>ξεκινώντας καθώς ένα Avatar είναι κοντά</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Κανένας</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Οχι</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Αποστολή ενημερώσεων πρακτόρων</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Ενήλικος</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Τέχνη</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Φιλανθρωπία</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Φιλικό προς τα παιδιά</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Εμπορικός</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Εκπαιδευτικός</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Εκπαίδευση - Κολλέγιο</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Εκπαίδευση - Σχολείο</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Πειραματικός</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Φαντασία</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Δωρεάν</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Ελεύθερη Γη</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Γούνινος</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Τυχερών παιχνιδιών</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Κρυψώνα</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Υπερμεταφορά</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>ΛΟΑΤ</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Φιλικό προς τους νεοφερμένους</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Πάρκα &amp;; Φύση</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Προσωπικός</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Μίσθωμα</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Κατοικημένος</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Παιχνίδι ρόλων</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Ειδύλλιο</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>Βαθμολογία R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Αμμοβολή</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Επιστήμη</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Δέσμης ενεργειών</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Ψώνισμα</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Δοκιμή</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>Πορνογραφικός</value>
   </data>
 </root>

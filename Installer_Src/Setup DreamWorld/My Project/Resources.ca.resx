@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>començant com un Avatar és a prop</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Cap</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Enviar actualitzacions d'agents</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Adult</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Art</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Caritat</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>ChildFriendly</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Comercial</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Educatiu</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Educació - Col·legi</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Educació - Escola</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasia</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Terra Lliure</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Peluts</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Joc</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Amagatall</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hiperport</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LGTB</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Amic nouvingut</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parcs i Natura</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Lloguer</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Residencial</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Jocs de rol</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romànic</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>Classificació R</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Sorrera</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Ciència</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Ciència - Ficció</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Compres</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testatge</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>No apte per menors</value>
   </data>
 </root>

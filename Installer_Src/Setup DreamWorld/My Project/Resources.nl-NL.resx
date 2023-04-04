@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>beginnen als een Avatar in de buurt is</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>Geen</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>Nee</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>Agents-updates verzenden</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Volwassene</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Kunst</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Naastenliefde</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>Kindvriendelijk</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>Commercieel</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>Educatief</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>Onderwijs - College</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>Onderwijs - School</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimenteel</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>Fantasie</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>Vrije Grond</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>Harige</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>Schuilplaats</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>Hyperpoort</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>LHBT</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>Nieuwkomer vriendelijk</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parken &amp;Natuur</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Persoonlijk</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Verhuur</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>Residentiële</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>Rollenspel</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>Romaans</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Rated</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>Zandbak</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>Wetenschap</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>Scripting</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Winkelen</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>Testing</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>X-rated</value>
   </data>
 </root>

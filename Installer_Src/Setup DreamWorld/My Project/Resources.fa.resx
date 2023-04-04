@@ -2940,9 +2940,6 @@
   <data name="StartingNearby" xml:space="preserve">
     <value>شروع به عنوان آواتار نزدیک است</value>
   </data>
-  <data name="None1" xml:space="preserve">
-    <value>هیچ یک</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>خیر</value>
   </data>
@@ -4061,5 +4058,101 @@
   </data>
   <data name="SendAgentUpdate" xml:space="preserve">
     <value>ارسال به روز رسانی عوامل</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>بزرگسالان</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>هنر</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>خیریه</value>
+  </data>
+  <data name="ChildFriendly" xml:space="preserve">
+    <value>ChildFriendly</value>
+  </data>
+  <data name="Commercial" xml:space="preserve">
+    <value>تجاری</value>
+  </data>
+  <data name="Educational" xml:space="preserve">
+    <value>آموزشی</value>
+  </data>
+  <data name="EducationCollege" xml:space="preserve">
+    <value>آموزش و پرورش - کالج</value>
+  </data>
+  <data name="EducationSchool" xml:space="preserve">
+    <value>آموزش و پرورش - مدرسه</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>تجربی</value>
+  </data>
+  <data name="Fantasy" xml:space="preserve">
+    <value>فانتزی</value>
+  </data>
+  <data name="Freebies" xml:space="preserve">
+    <value>Freebies</value>
+  </data>
+  <data name="FreeLand" xml:space="preserve">
+    <value>سرزمین آزاد</value>
+  </data>
+  <data name="Furry" xml:space="preserve">
+    <value>خزدار</value>
+  </data>
+  <data name="Gaming" xml:space="preserve">
+    <value>بازی</value>
+  </data>
+  <data name="Hideout" xml:space="preserve">
+    <value>مخفیگاه</value>
+  </data>
+  <data name="Hyperport" xml:space="preserve">
+    <value>هایپرپورت</value>
+  </data>
+  <data name="LGBT" xml:space="preserve">
+    <value>همجنسگرایان</value>
+  </data>
+  <data name="NewcomerFriendly" xml:space="preserve">
+    <value>تازه وارد دوستانه</value>
+  </data>
+  <data name="ParksNature" xml:space="preserve">
+    <value>Parks &amp; Nature</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>شخصی</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>اجاره</value>
+  </data>
+  <data name="Residential" xml:space="preserve">
+    <value>مسکونی</value>
+  </data>
+  <data name="Roleplay" xml:space="preserve">
+    <value>نقش بازی</value>
+  </data>
+  <data name="Romance" xml:space="preserve">
+    <value>عاشقانه</value>
+  </data>
+  <data name="RRated" xml:space="preserve">
+    <value>R-Rated</value>
+  </data>
+  <data name="Sandbox" xml:space="preserve">
+    <value>کاربران</value>
+  </data>
+  <data name="Science" xml:space="preserve">
+    <value>علم</value>
+  </data>
+  <data name="SciFi" xml:space="preserve">
+    <value>Sci - Fi</value>
+  </data>
+  <data name="Scripting" xml:space="preserve">
+    <value>برنامه نویسی</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>خرید</value>
+  </data>
+  <data name="Testing" xml:space="preserve">
+    <value>تست</value>
+  </data>
+  <data name="XRated" xml:space="preserve">
+    <value>هجده سال به بالا</value>
   </data>
 </root>
