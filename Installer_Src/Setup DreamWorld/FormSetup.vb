@@ -619,7 +619,6 @@ Public Class FormSetup
             Next
         End If
 
-
         mnuSettings.Visible = True
 
         LoadHelp()      ' Help loads once
@@ -1517,31 +1516,32 @@ Public Class FormSetup
         Dim Counters As ManagementObjectCollection = SearcherCPU.Get()
 
         speed = 0
-        For Each result In Counters
-            speed += CDbl(result("PercentProcessorTime"))
-        Next
+        Try
+            For Each result In Counters
+                speed += CDbl(result("PercentProcessorTime"))
+            Next
+        Catch
+        End Try
+
         speed /= coreCount
 
         ' Graph https://github.com/sinairv/MSChartWrapper
-        Try
-            ' running average
-            speed3 = speed2
-            speed2 = speed1
-            speed1 = speed
 
-            CPUAverageSpeed = (speed + speed1 + speed2 + speed3) / 4
-            If CPUAverageSpeed > 100 Then
-                CPUAverageSpeed = 100
-            End If
-            MyCPUCollection.Add(speed)
+        ' running average
+        speed3 = speed2
+        speed2 = speed1
+        speed1 = speed
 
-            If MyCPUCollection.Count > 180 Then MyCPUCollection.RemoveAt(0)
+        CPUAverageSpeed = (speed + speed1 + speed2 + speed3) / 4
+        If CPUAverageSpeed > 100 Then
+            CPUAverageSpeed = 100
+        End If
+        MyCPUCollection.Add(speed)
 
-            PercentCPU.Text = $"CPU {(speed / 100).ToString("0.0", Globalization.CultureInfo.CurrentCulture)} %"
-        Catch ex As Exception
-            BreakPoint.Dump(ex)
-            ErrorLog("Chart 2 " & ex.Message)
-        End Try
+        If MyCPUCollection.Count > 180 Then MyCPUCollection.RemoveAt(0)
+
+        PercentCPU.Text = $"CPU {speed.ToString("0.0", Globalization.CultureInfo.CurrentCulture)} %"
+
         'RAM
 
         Try
@@ -1566,7 +1566,7 @@ Public Class FormSetup
                 r = Math.Round(r)
                 v = Math.Round(v)
                 Settings.Ramused = r
-                PercentRAM.Text = $"{r / 100} RAM"
+                PercentRAM.Text = $"{r / 100:p1} RAM"
                 Virtual.Text = $"VRAM {v}MB"
             Next
             results.Dispose()
