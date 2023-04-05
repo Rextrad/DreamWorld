@@ -6,16 +6,18 @@
 
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Web
 
 Module SmartStart
     Public ReadOnly BootedList As New List(Of String)
 
     Public MyCPUCollection As New List(Of Double)
     Public MyRAMCollection As New List(Of Double)
+    Public TeleportQ As New TPQueue()
     Public ToDoList As New Dictionary(Of String, TaskObject)
     Public Visitor As New Dictionary(Of String, String)
-
     Private ReadOnly ToDoCount As New Dictionary(Of String, Integer)
+    Private ReadOnly TPQueueStore As New List(Of AvatarTeleportData)
 
     ''' <summary>
     ''' The list of commands
@@ -198,7 +200,7 @@ Module SmartStart
 
                 ' auto restart timer
 
-                Dim time2restart = Timer(RegionUUID).AddMinutes(Convert.ToDouble(Settings.AutoRestartInterval, Globalization.CultureInfo.InvariantCulture))
+                Dim time2restart = Timer(RegionUUID).AddMinutes(Convert.ToDouble(Settings.AutoRestartInterval))
                 Dim Expired As Integer = DateTime.Compare(Date.Now, time2restart)
                 If Expired < 0 Then Expired = 0
 
@@ -522,6 +524,19 @@ Module SmartStart
 
     End Sub
 
+    ''' <summary>
+    ''' Where the desired destination is
+    ''' Its a list as they go in order, to Parking lot, then final destination
+    ''' </summary>
+    Public Class AvatarTeleportData
+
+        Public AvatarUUID As String = ""
+        Public DateAdded As Date = Now
+        Public DestinationUUID As String = ""
+        Public ID As Guid
+
+    End Class
+
 #Region "StartStart"
 
     ''' <summary>
@@ -553,6 +568,13 @@ Module SmartStart
 
     End Sub
 
+    ''' <summary>
+    ''' Send avatar to a destination. If its an old sign, don't teleport.
+    ''' </summary>
+    ''' <param name="RegionUUID"></param>
+    ''' <param name="AgentID"></param>
+    ''' <param name="Teleport"></param>
+    ''' <returns></returns>
     Private Function AddEm(RegionUUID As String, AgentID As String, Teleport As Boolean) As Boolean
 
         If RegionUUID = "00000000-0000-0000-0000-000000000000" Then
@@ -568,12 +590,18 @@ Module SmartStart
         End If
 
         Logger("Teleport Request", Region_Name(RegionUUID) & ":" & AgentID, "Teleport")
-
         ResumeRegion(RegionUUID) ' Wait for it to start booting
         PokeRegionTimer(RegionUUID)
 
         If Teleport Then
-            TPQueue.Add(AgentID, RegionUUID)
+            Dim o As New AvatarTeleportData With {
+                .AvatarUUID = AgentID,
+                .DestinationUUID = RegionUUID,
+                .DateAdded = Now(),
+                .ID = Guid.NewGuid()
+            }
+
+            TeleportQ.Add(o)
         End If
 
         Return False
@@ -665,132 +693,126 @@ Module SmartStart
     ''' </summary>
     ''' <param name="post"></param>
     ''' <returns></returns>
-    Public Function SmartStartParse(post As String) As String
+    Public Function SmartStartParse(post As Uri) As String
 
         ' Smart Start AutoStart Region mode
-        Logger("Teleport", "Smart Start:" + post, "Teleport")
+        'Smart Start:http://192.168.2.140:8999/?alt=Welcome&agent=test%20user&AgentID=6f285c43-e656-42d9-b0e9-a78684fee15d&password=XYZZY
 
-        'Smart Start:http://192.168.2.140:8999/?alt=Deliverance_of_JarJar_Binks__Fred_Beckhusen_1X1&agent=Ferd%20Frederix&AgentID=6f285c43-e656-42d9-b0e9-a78684fee15d&password=XYZZY
+        Dim Name As String = ""
+        Name = HttpUtility.ParseQueryString(post.Query).Get("Alt")
 
-        Dim pattern = New Regex("alt=(.*?)&agent=(.*?)&agentid=(.*?)&password=(.*)", RegexOptions.IgnoreCase)
-        Dim match As Match = pattern.Match(post)
-        If match.Success Then
-            Dim Name As String = Uri.UnescapeDataString(match.Groups(1).Value)
-            'Logger("Teleport", $"Name={Name}", "Teleport")
+        Dim TeleportType As String = ""
+        TeleportType = HttpUtility.ParseQueryString(post.Query).Get("Agent")
 
-            Dim TeleportType As String = Uri.UnescapeDataString(match.Groups(2).Value)
-            'Logger("Teleport", $"TeleportType={TeleportType}", "Teleport")
+        Dim AgentID As String
+        AgentID = HttpUtility.ParseQueryString(post.Query).Get("AgentID")
 
-            Dim AgentID As String = Uri.UnescapeDataString(match.Groups(3).Value)
-            'Logger("Teleport", $"AgentID={AgentID}", "Teleport")
+        Dim Password As String
+        Password = HttpUtility.ParseQueryString(post.Query).Get("password")
 
-            Dim Password As String = Uri.UnescapeDataString(match.Groups(4).Value)
-            'Logger("Teleport", $"Password={Password}", "Teleport")
+        If Name.Length = 0 Then Return ""
+        If TeleportType.Length = 0 Then Return ""
+        If AgentID.Length = 0 Then Return ""
+        If Password.Length = 0 Then Return ""
 
-            If Password <> Settings.MachineId Then
-                Logger("ERROR", $"Bad Password {Password} for Teleport system. Should be the Dyn DNS password.", "Outworldz")
-                Return ""
+        ' Region may be a name or a Region UUID
+        Dim RegionUUID = FindRegionByName(Name)
+        If RegionUUID.Length = 0 Then
+            RegionUUID = Name ' Its a UUID
+        Else
+            Name = Region_Name(RegionUUID)
+            If Name.Length = 0 Then
+                Return RegionUUID
             End If
+        End If
 
-            ' Region may be a name or a Region UUID
-            Dim RegionUUID = FindRegionByName(Name)
-            If RegionUUID.Length = 0 Then
-                RegionUUID = Name ' Its a UUID
-            Else
-                Name = Region_Name(RegionUUID)
-                If Name.Length = 0 Then
-                    Return RegionUUID
-                End If
-            End If
+        Debug.Print("Teleport to " & Name)
 
-            Debug.Print("Teleport to " & Name)
+        ' Smart Start below here
+        If Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
+            Logger("SmartStart", $" Teleport Request for {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
+            If RegionEnabled(RegionUUID) Then
+                Logger("SmartStart", $"{Region_Name(RegionUUID)} is Enabled ", "Teleport")
+                ' smart, and up
+                If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
+                    Logger("SmartStart", $"{Region_Name(RegionUUID)} is Booted ", "Teleport")
+                    If TeleportType.ToUpperInvariant = "UUID" Then
+                        Logger("SmartStart", $"Already Booted UUID Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
+                        Return RegionUUID
+                    ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
+                        Logger("SmartStart", $"Already Booted Named Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
+                        Return Name
+                    Else ' Its a sign!
+                        Logger("SmartStart", $"Already Booted TP Sign Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
+                        Return Name & "|0"
+                    End If
+                Else  ' requires booting
+                    If TeleportType.ToUpperInvariant = "UUID" Then
+                        If Smart_Boot_Enabled(RegionUUID) Then
+                            Logger("SmartStart", $"{Region_Name(RegionUUID)} Is Smart Boot", "Teleport")
+                            Dim ParkingLot = FindRegionByName(Settings.ParkingLot)
 
-            ' Smart Start below here
-            If Smart_Suspend_Enabled(RegionUUID) Or Smart_Boot_Enabled(RegionUUID) AndAlso Settings.Smart_Start_Enabled Then
-                Logger("SmartStart", $" Teleport Request for {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
-                If RegionEnabled(RegionUUID) Then
-                    Logger("SmartStart", $"{Region_Name(RegionUUID)} is Enabled ", "Teleport")
-                    ' smart, and up
-                    If RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
-                        Logger("SmartStart", $"{Region_Name(RegionUUID)} is Booted ", "Teleport")
-                        If TeleportType.ToUpperInvariant = "UUID" Then
-                            Logger("SmartStart", $"Already Booted UUID Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
-                            Return RegionUUID
-                        ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
-                            Logger("SmartStart", $"Already Booted Named Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
-                            Return Name
-                        Else ' Its a sign!
-                            Logger("SmartStart", $"Already Booted TP Sign Teleport {Region_Name(RegionUUID)}:{AgentID}", "Teleport")
-                            Return Name & "|0"
-                        End If
-                    Else  ' requires booting
-                        If TeleportType.ToUpperInvariant = "UUID" Then
-                            If Smart_Boot_Enabled(RegionUUID) Then
-                                Logger("SmartStart", $"{Region_Name(RegionUUID)} Is Smart Boot", "Teleport")
-                                Dim ParkingLot = FindRegionByName(Settings.ParkingLot)
-
-                                ' TODO fix this boot issue
-                                If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
-                                    AddEm(ParkingLot, AgentID, True) ' Wait for it to start booting
-                                    RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
-                                    Application.DoEvents()
-                                    Sleep(5000) ' no good as tp shuts down. Needs to be a promise
-                                End If
-
-                                AddEm(RegionUUID, AgentID, True)
-                                Logger("SmartStart", $"{Name}{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
-                                Return ParkingLot
-                            Else
-                                AddEm(RegionUUID, AgentID, True)
-                                Logger("SmartStart", $"Suspend type UUID Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
-                                Return RegionUUID
-                            End If
-                        ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
-                            If Smart_Boot_Enabled(RegionUUID) Then
-                                AddEm(RegionUUID, AgentID, True)
-                                Logger("SmartStart", $"Boot Type Named Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            ' TODO fix this boot issue
+                            If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
+                                AddEm(ParkingLot, AgentID, True) ' Wait for it to start booting
                                 RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
-                                Return Settings.ParkingLot
-                            Else
-                                Logger("SmartStart", $"Suspend Type Named Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
-                                AddEm(RegionUUID, AgentID, True)
-                                Return Name
+                                Application.DoEvents()
+                                Sleep(5000) ' no good as tp shuts down. Needs to be a promise
                             End If
-                        Else ' Its a v4 sign
-                            Dim time As String
-                            If Settings.MapType = "None" AndAlso MapType(RegionUUID).Length = 0 Then
-                                time = "|" & CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)
-                            Else
-                                time = "|" & CStr(MapTime(RegionUUID) + Settings.TeleportSleepTime)
-                            End If
-                            If Smart_Boot_Enabled(RegionUUID) Then
-                                RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(time)} seconds.")
-                                Logger("SmartStart", "Sign Boot, Agent {Name}:{AgentID} to {Settings.ParkingLot}", "Teleport")
-                                Return Settings.ParkingLot
-                            Else
-                                Logger("SmartStart", $"Sign Suspend, Agent {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
-                                Return RegionUUID
-                            End If
+
+                            AddEm(RegionUUID, AgentID, True)
+                            Logger("SmartStart", $"{Name}{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            Return ParkingLot
+                        Else ' Smart Suspend
+                            AddEm(RegionUUID, AgentID, True)
+                            Logger("SmartStart", $"Suspend type UUID Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            Return RegionUUID
+                        End If
+                    ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
+                        If Smart_Boot_Enabled(RegionUUID) Then
+                            AddEm(RegionUUID, AgentID, True)
+                            Logger("SmartStart", $"Boot Type Named Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
+                            Return Settings.ParkingLot
+                        Else
+                            Logger("SmartStart", $"Suspend Type Named Teleport {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            AddEm(RegionUUID, AgentID, True)
+                            Return Name
+                        End If
+                    Else ' Its a v4 sign
+                        Dim time As String
+                        If Settings.MapType = "None" AndAlso MapType(RegionUUID).Length = 0 Then
+                            time = "|" & CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)
+                        Else
+                            time = "|" & CStr(MapTime(RegionUUID) + Settings.TeleportSleepTime)
+                        End If
+                        If Smart_Boot_Enabled(RegionUUID) Then
+                            RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(time)} seconds.")
+                            Logger("SmartStart", "Sign Boot, Agent {Name}:{AgentID} to {Settings.ParkingLot}", "Teleport")
+                            Return Settings.ParkingLot
+                        Else
+                            Logger("SmartStart", $"Sign Suspend, Agent {Name}:{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
+                            Return RegionUUID
                         End If
                     End If
-                Else
-                    ' not enabled
-                    RPC_admin_dialog(AgentID, $"Destination {Region_Name(RegionUUID)} is disabled.")
-                    Logger("SmartStart", $"Destination {Region_Name(RegionUUID)} is disabled.", "Teleport")
-                    Return Settings.ParkingLot
                 End If
-            Else ' Non Smart Start
-                If TeleportType.ToUpperInvariant = "UUID" Then
-                    Logger("Not SmartStart", $"Teleport Non Smart {Name}:{AgentID}", "Teleport")
-                    Return RegionUUID
-                ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
-                    Logger("Not SmartStart", $"Teleport Non Smart {Name}: {AgentID}", "Teleport")
-                    Return Name
-                Else     ' Its a sign!
-                    Logger("Not SmartStart", $"Teleport Sign {Name}:{AgentID}", "Teleport")
-                    AddEm(RegionUUID, AgentID, False)
-                    Return Name
-                End If
+            Else
+                ' not enabled
+                RPC_admin_dialog(AgentID, $"Destination {Region_Name(RegionUUID)} is disabled.")
+                Logger("SmartStart", $"Destination {Region_Name(RegionUUID)} is disabled.", "Teleport")
+                Return Settings.ParkingLot
+            End If
+        Else ' Non Smart Start
+            If TeleportType.ToUpperInvariant = "UUID" Then
+                Logger("Not SmartStart", $"Teleport Non Smart {Name}:{AgentID}", "Teleport")
+                Return RegionUUID
+            ElseIf TeleportType.ToUpperInvariant = "REGIONNAME" Then
+                Logger("Not SmartStart", $"Teleport Non Smart {Name}: {AgentID}", "Teleport")
+                Return Name
+            Else     ' Its a sign!
+                Logger("Not SmartStart", $"Teleport Sign {Name}:{AgentID}", "Teleport")
+                AddEm(RegionUUID, AgentID, False)
+                Return Name
             End If
         End If
 
@@ -1017,31 +1039,14 @@ Module SmartStart
 
         ' smart boot Freeze/Thaw type
         For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
+            RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
+            Application.DoEvents()
             Thaw(RegionUUID)
             RunTaskList(RegionUUID)
             PokeRegionTimer(RegionUUID)
         Next
 
-        '  If CheckPortSocket(Settings.PublicIP, Region_Port(RegionUUID)) Then
-        ' For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
-        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
-        'PokeRegionTimer(RegionUUID)
-        'RunTaskList(RegionUUID)
-        'Next
-        'End If
-
-        ' not smart boot Freeze/Thaw
-        'If RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped Or
-        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
-        'RegionStatus(RegionUUID) = SIMSTATUSENUM.Error Or
-        'egionStatus(RegionUUID) = SIMSTATUSENUM.ShuttingDownForGood Then
-
-        PokeRegionTimer(RegionUUID)
-        For Each RegionUUID In RegionUuidListFromGroup(Group_Name(RegionUUID))
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
-        Next
         PropUpdateView = True ' make form refresh
-        'End If
 
         Application.DoEvents()
 
@@ -1254,6 +1259,34 @@ Module SmartStart
     Public Class TaskQue
         Public RegionUUID As String
         Public T As TaskObject
+    End Class
+
+    ''' <summary>
+    ''' Class to fake an event to scan teleport changes, makea a List.Add fake an event
+    ''' </summary>
+    Public Class TPQueue
+
+        Public Sub Add(o As AvatarTeleportData)
+            TPQueueStore.Add(o)
+            TeleportAgents() 'send them on
+        End Sub
+
+        Public Function Count() As Integer
+            Return TPQueueStore.Count
+        End Function
+
+        Public Function Data() As List(Of AvatarTeleportData)
+            Return TPQueueStore
+        End Function
+
+        Public Function ID(index As Integer) As Guid
+            Return TPQueueStore(index).ID
+        End Function
+
+        Public Sub RemoveAt(index As Integer)
+            TPQueueStore.RemoveAt(index)
+        End Sub
+
     End Class
 
 End Module
