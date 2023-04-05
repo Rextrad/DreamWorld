@@ -482,10 +482,6 @@ Module RegionMaker
 
     End Function
 
-    ''' <summary>
-    ''' Check Overlap of any region including Var
-    ''' </summary>
-    ''' <returns>True is a region overlaps another</returns>
     Public Function FindBackupByName(Name As String) As Integer
 
         Dim i As Integer = 0
