@@ -10,6 +10,7 @@ Imports System.Management
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Threading.Tasks
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
 Imports IWshRuntimeLibrary
 
 Public Class FormSetup
@@ -22,12 +23,11 @@ Public Class FormSetup
 
 #Region "Private Declarations"
 
-#Disable Warning CA2213 ' Disposable fields should be disposed
     Public NssmService As New ClassNssm
-#Enable Warning CA2213 ' Disposable fields should be disposed
-#Disable Warning CA2213 ' Disposable fields should be disposed
     ReadOnly BackupThread As New Backups
-#Enable Warning CA2213 ' Disposable fields should be disposed
+    Private ReadOnly cql As New ObjectQuery("select *  from Win32_PerfFormattedData_PerfOS_Processor ")
+
+    'where name = '_Total'
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
@@ -42,14 +42,17 @@ Public Class FormSetup
     Private _RestartApache As Boolean
     Private _RestartMysql As Boolean
     Private _speed As Double = 50
+    Private coreCount As Integer
 #Disable Warning CA2213 ' Disposable fields should be disposed
-    Private cpu As New PerformanceCounter
-#Enable Warning CA2213 ' Disposable fields should be disposed
+    '#Disable Warning CA2213 ' Disposable fields should be disposed
+    'Private cpu As New PerformanceCounter
+    '#Enable Warning CA2213 ' Disposable fields should be disposed
 #Disable Warning CA2213 ' Disposable fields should be disposed
     Private Graphs As New FormGraphs
 #Enable Warning CA2213 ' Disposable fields should be disposed
     Private ScreenPosition As ClassScreenpos
     Private searcher As ManagementObjectSearcher
+    Private searcher2 As ManagementObjectSearcher
     Private speed As Double
     Private speed1 As Double
     Private speed2 As Double
@@ -87,14 +90,14 @@ Public Class FormSetup
         End Set
     End Property
 
-    Public Property Cpu1 As PerformanceCounter
-        Get
-            Return cpu
-        End Get
-        Set(value As PerformanceCounter)
-            cpu = value
-        End Set
-    End Property
+    'Public Property Cpu1 As PerformanceCounter
+    'Get
+    'Return cpu
+    'End Get
+    'Set(value As PerformanceCounter)
+    '       cpu = value
+    'End Set
+    'End Property
 
     Public Property CPUAverageSpeed As Double
         Get
@@ -165,6 +168,15 @@ Public Class FormSetup
         End Get
         Set(value As ManagementObjectSearcher)
             searcher = value
+        End Set
+    End Property
+
+    Public Property SearcherCPU As ManagementObjectSearcher
+        Get
+            Return searcher2
+        End Get
+        Set(value As ManagementObjectSearcher)
+            searcher2 = value
         End Set
     End Property
 
@@ -264,8 +276,6 @@ Public Class FormSetup
         RestartDOSboxes()           ' Icons for failed Services
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
-
-        AddHandler TPQueue.TeleportEvent, AddressOf TeleportAgents
 
         AddUserToolStripMenuItem.Text = Global.Outworldz.My.Resources.Add_User_word
         AdvancedSettingsToolStripMenuItem.Image = Global.Outworldz.My.Resources.earth_network
@@ -502,8 +512,9 @@ Public Class FormSetup
 
         AddVoices() ' add eva and mark voices
 
-        ' Boot RAM Query
+        ' Boot RAM and CPU Query
         Searcher1 = New ManagementObjectSearcher(wql)
+        SearcherCPU = New ManagementObjectSearcher(cql)
 
         CopyWifi() 'Make the two folders in Wifi and Wifi bin for Diva
 
@@ -606,6 +617,7 @@ Public Class FormSetup
         Await IPPublicAsync()
 
         If IsMySqlRunning() Then
+            TextPrint("Mysql is running")
             ' clear any temp regions on boot.
             For Each RegionUUID In RegionUuids()
                 If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
@@ -616,11 +628,11 @@ Public Class FormSetup
             Next
         End If
 
-        With Cpu1
-            .CategoryName = "Processor Information"
-            .CounterName = "% Processor Utility"
-            .InstanceName = "_Total"
-        End With
+        'With Cpu1
+        '.CategoryName = "Processor Information"
+        '.CounterName = "% Processor Time"
+        '.InstanceName = "_Total"
+        'End With
 
         mnuSettings.Visible = True
 
@@ -942,10 +954,13 @@ Public Class FormSetup
 
     End Sub
 
+#Disable Warning VSTHRD100 ' Avoid async void methods
+
     ''' <summary>Form Load is main() for all DreamGrid</summary>
     ''' <param name="sender">Unused</param>
     ''' <param name="e">Unused</param>
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+#Enable Warning VSTHRD100 ' Avoid async void methods
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
         Application.EnableVisualStyles()
@@ -983,6 +998,10 @@ Public Class FormSetup
         End Try
 
         Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture
+
+        For Each item In New System.Management.ManagementObjectSearcher("Select * from Win32_Processor").[Get]()
+            coreCount += Integer.Parse(item("NumberOfCores").ToString())
+        Next
 
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
@@ -1397,10 +1416,10 @@ Public Class FormSetup
         If Not KillAll() Then Return
         SetLoading(True)
 
-        Try
-            If cpu IsNot Nothing Then cpu.Dispose()
-        Catch
-        End Try
+        'Try
+        'If cpu IsNot Nothing Then cpu.Dispose()
+        'Catch
+        'End Try
         Try
             If Searcher1 IsNot Nothing Then Searcher1.Dispose()
         Catch
@@ -1505,32 +1524,20 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then Return
 
+        Dim Counters As ManagementObjectCollection = SearcherCPU.Get()
+
+        speed = 0
+        For Each result In Counters
+            speed += CDbl(result("PercentProcessorTime"))
+        Next
+        speed /= coreCount
+
         ' Graph https://github.com/sinairv/MSChartWrapper
         Try
             ' running average
             speed3 = speed2
             speed2 = speed1
             speed1 = speed
-            Try
-                speed = Me.Cpu1.NextValue()
-                If speed > 100 Then speed = 100
-            Catch ex As Exception
-                ErrorLog("Chart 1 " & ex.Message)
-                BreakPoint.Dump(ex)
-                If Not Settings.CpuPatched Then
-                    Dim pUpdate = New Process()
-                    Dim pi = New ProcessStartInfo With {
-                        .Arguments = "/ R",
-                        .FileName = "loadctr"
-                    }
-                    pUpdate.StartInfo = pi
-                    pUpdate.Start()
-                    pUpdate.WaitForExit()
-                    pUpdate.Dispose()
-                    Settings.CpuPatched = True
-                End If
-
-            End Try
 
             CPUAverageSpeed = (speed + speed1 + speed2 + speed3) / 4
             If CPUAverageSpeed > 100 Then
@@ -1569,7 +1576,7 @@ Public Class FormSetup
                 r = Math.Round(r)
                 v = Math.Round(v)
                 Settings.Ramused = r
-                PercentRAM.Text = $"{r / 100:p1} RAM"
+                PercentRAM.Text = $"{r / 100} RAM"
                 Virtual.Text = $"VRAM {v}MB"
             Next
             results.Dispose()
@@ -1826,7 +1833,7 @@ Public Class FormSetup
 
                     Dim UUID = System.Guid.NewGuid.ToString
 
-                    Dim URL = $"http://{Settings.PublicIP}{Settings.DiagnosticPort}/TOS?uid={UUID}"
+                    Dim URL = $"http//{Settings.PublicIP}{Settings.DiagnosticPort}?TOS=1&uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
@@ -2094,7 +2101,7 @@ Public Class FormSetup
         Chart()                     ' do charts collection
 
         CheckPost()                 ' see if anything arrived in the web server
-        TeleportAgents()
+        TeleportAgents()            ' periodically check for booted sims and send them onward
         CheckForBootedRegions()     ' task to scan for anything that just came on line
         ProcessQuit()               ' check if any processes exited
         PrintBackups()              ' print if backups are running
