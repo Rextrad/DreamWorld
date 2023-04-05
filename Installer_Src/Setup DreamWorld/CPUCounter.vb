@@ -91,7 +91,7 @@ Module CPUCounter
                 Else
                     Dim a As Double
                     Try
-                        a = Convert.ToDouble(CounterList.Item(RegionName).NextValue(), Globalization.CultureInfo.InvariantCulture)
+                        a = CDbl(CounterList.Item(RegionName).NextValue())
                     Catch ex As Exception
                         CounterList.Remove(RegionName)
                     End Try
