@@ -32,14 +32,14 @@ Partial Class FormOAR
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.NameRadioButton = New System.Windows.Forms.RadioButton()
-        Me.DateRadioButton = New System.Windows.Forms.RadioButton()
-        Me.AscendRadioButton = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.DescendRadioButton = New System.Windows.Forms.RadioButton()
+        Me.NameCheckBox = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.DateCheckbox = New System.Windows.Forms.CheckBox()
         Me.ExclusiveCheckbox = New System.Windows.Forms.CheckBox()
         Me.PictureBox = New System.Windows.Forms.PictureBox()
+        Me.AscendingCheckBox = New System.Windows.Forms.CheckBox()
+        Me.DescendingCheckBox = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,47 +114,14 @@ Partial Class FormOAR
         Me.PictureBox1.TabIndex = 1892
         Me.PictureBox1.TabStop = False
         '
-        'NameRadioButton
-        '
-        Me.NameRadioButton.AutoSize = True
-        Me.NameRadioButton.Location = New System.Drawing.Point(3, 3)
-        Me.NameRadioButton.Name = "NameRadioButton"
-        Me.NameRadioButton.Size = New System.Drawing.Size(89, 17)
-        Me.NameRadioButton.TabIndex = 1893
-        Me.NameRadioButton.TabStop = True
-        Me.NameRadioButton.Text = "Sort by Name"
-        Me.NameRadioButton.UseVisualStyleBackColor = True
-        '
-        'DateRadioButton
-        '
-        Me.DateRadioButton.AutoSize = True
-        Me.DateRadioButton.Location = New System.Drawing.Point(124, 3)
-        Me.DateRadioButton.Name = "DateRadioButton"
-        Me.DateRadioButton.Size = New System.Drawing.Size(48, 17)
-        Me.DateRadioButton.TabIndex = 1894
-        Me.DateRadioButton.TabStop = True
-        Me.DateRadioButton.Text = "Date"
-        Me.DateRadioButton.UseVisualStyleBackColor = True
-        '
-        'AscendRadioButton
-        '
-        Me.AscendRadioButton.AutoSize = True
-        Me.AscendRadioButton.Location = New System.Drawing.Point(3, 3)
-        Me.AscendRadioButton.Name = "AscendRadioButton"
-        Me.AscendRadioButton.Size = New System.Drawing.Size(75, 17)
-        Me.AscendRadioButton.TabIndex = 1895
-        Me.AscendRadioButton.TabStop = True
-        Me.AscendRadioButton.Text = "Ascending"
-        Me.AscendRadioButton.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.AutoSize = True
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.NameRadioButton, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.DateRadioButton, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.AscendingCheckBox, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.NameCheckBox, 0, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(425, 7)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
@@ -162,16 +129,15 @@ Partial Class FormOAR
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(243, 29)
         Me.TableLayoutPanel1.TabIndex = 1896
         '
-        'DescendRadioButton
+        'NameCheckBox
         '
-        Me.DescendRadioButton.AutoSize = True
-        Me.DescendRadioButton.Location = New System.Drawing.Point(124, 3)
-        Me.DescendRadioButton.Name = "DescendRadioButton"
-        Me.DescendRadioButton.Size = New System.Drawing.Size(82, 17)
-        Me.DescendRadioButton.TabIndex = 1897
-        Me.DescendRadioButton.TabStop = True
-        Me.DescendRadioButton.Text = "Descending"
-        Me.DescendRadioButton.UseVisualStyleBackColor = True
+        Me.NameCheckBox.AutoSize = True
+        Me.NameCheckBox.Location = New System.Drawing.Point(3, 3)
+        Me.NameCheckBox.Name = "NameCheckBox"
+        Me.NameCheckBox.Size = New System.Drawing.Size(81, 17)
+        Me.NameCheckBox.TabIndex = 18623
+        Me.NameCheckBox.Text = "CheckBox1"
+        Me.NameCheckBox.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
         '
@@ -179,14 +145,24 @@ Partial Class FormOAR
         Me.TableLayoutPanel2.ColumnCount = 2
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.DescendRadioButton, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.AscendRadioButton, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.DescendingCheckBox, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.DateCheckbox, 0, 0)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(425, 37)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(243, 28)
         Me.TableLayoutPanel2.TabIndex = 1897
+        '
+        'DateCheckbox
+        '
+        Me.DateCheckbox.AutoSize = True
+        Me.DateCheckbox.Location = New System.Drawing.Point(3, 3)
+        Me.DateCheckbox.Name = "DateCheckbox"
+        Me.DateCheckbox.Size = New System.Drawing.Size(81, 17)
+        Me.DateCheckbox.TabIndex = 18623
+        Me.DateCheckbox.Text = "CheckBox1"
+        Me.DateCheckbox.UseVisualStyleBackColor = True
         '
         'ExclusiveCheckbox
         '
@@ -208,6 +184,26 @@ Partial Class FormOAR
         Me.PictureBox.TabIndex = 18622
         Me.PictureBox.TabStop = False
         Me.PictureBox.Visible = False
+        '
+        'AscendingCheckBox
+        '
+        Me.AscendingCheckBox.AutoSize = True
+        Me.AscendingCheckBox.Location = New System.Drawing.Point(124, 3)
+        Me.AscendingCheckBox.Name = "AscendingCheckBox"
+        Me.AscendingCheckBox.Size = New System.Drawing.Size(81, 17)
+        Me.AscendingCheckBox.TabIndex = 18623
+        Me.AscendingCheckBox.Text = "CheckBox1"
+        Me.AscendingCheckBox.UseVisualStyleBackColor = True
+        '
+        'DescendingCheckBox
+        '
+        Me.DescendingCheckBox.AutoSize = True
+        Me.DescendingCheckBox.Location = New System.Drawing.Point(124, 3)
+        Me.DescendingCheckBox.Name = "DescendingCheckBox"
+        Me.DescendingCheckBox.Size = New System.Drawing.Size(81, 17)
+        Me.DescendingCheckBox.TabIndex = 18623
+        Me.DescendingCheckBox.Text = "CheckBox1"
+        Me.DescendingCheckBox.UseVisualStyleBackColor = True
         '
         'FormOAR
         '
@@ -247,12 +243,12 @@ Partial Class FormOAR
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents RefreshToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents NameRadioButton As RadioButton
-    Friend WithEvents DateRadioButton As RadioButton
-    Friend WithEvents AscendRadioButton As RadioButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents DescendRadioButton As RadioButton
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents ExclusiveCheckbox As CheckBox
     Friend WithEvents PictureBox As PictureBox
+    Friend WithEvents NameCheckBox As CheckBox
+    Friend WithEvents DateCheckbox As CheckBox
+    Friend WithEvents AscendingCheckBox As CheckBox
+    Friend WithEvents DescendingCheckBox As CheckBox
 End Class

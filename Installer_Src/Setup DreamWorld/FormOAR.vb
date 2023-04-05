@@ -320,7 +320,6 @@ Public Class FormOAR
 
     Private Function DoWork() As JSONResult
 
-        PictureBox.Show()
         SearchBusy = True
         json = GetData()
         If json IsNot Nothing Then
@@ -333,7 +332,7 @@ Public Class FormOAR
 
         _initted = True
         SearchBusy = False
-        PictureBox.Hide()
+
         Return Nothing
 
     End Function
@@ -351,17 +350,17 @@ Public Class FormOAR
         ToolStripMenuItem30.Image = Global.Outworldz.My.Resources.question_and_answer
         ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Help_word
 
-        NameRadioButton.Text = My.Resources.SortbyName
-        DateRadioButton.Text = My.Resources.SortbyDate
-        AscendRadioButton.Text = My.Resources.Ascending
-        DescendRadioButton.Text = My.Resources.Descending
+        NameCheckBox.Text = My.Resources.SortbyName
+        DateCheckbox.Text = My.Resources.SortbyDate
+        AscendingCheckBox.Text = My.Resources.Ascending
+        DescendingCheckBox.Text = My.Resources.Descending
 
         SetScreen()
 
-        NameRadioButton.Checked = Settings.NameOrDate
-        DateRadioButton.Checked = Not Settings.NameOrDate
-        AscendRadioButton.Checked = Settings.AscendOrDescend
-        DescendRadioButton.Checked = Not Settings.AscendOrDescend
+        NameCheckBox.Checked = Settings.NameOrDate
+        DateCheckbox.Checked = Not Settings.NameOrDate
+        AscendingCheckBox.Checked = Settings.AscendOrDescend
+        DescendingCheckBox.Checked = Not Settings.AscendOrDescend
         Application.DoEvents()
         Search()
 
@@ -542,26 +541,37 @@ Public Class FormOAR
 
     End Sub
 
-    Private Sub RadioDateRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles DateRadioButton.CheckedChanged
-        Settings.NameOrDate = DateRadioButton.Checked
-        If DateRadioButton.Checked Then Search()
+    Private Sub RadioDateRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles DateCheckbox.CheckedChanged
+        Settings.NameOrDate = Not DateCheckbox.Checked
+        If DateCheckbox.Checked Then
+            NameCheckBox.Checked = False
+            Search()
+        End If
     End Sub
 
-    Private Sub RadioDecendRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles DescendRadioButton.CheckedChanged
-        Settings.AscendOrDescend = DescendRadioButton.Checked
-        If DescendRadioButton.Checked Then Search()
+    Private Sub RadioDecendRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles DescendingCheckBox.CheckedChanged
+        If DescendingCheckBox.Checked Then
+            AscendingCheckBox.Checked = False
+            Search()
+        End If
     End Sub
 
-    Private Sub RadioNameRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles NameRadioButton.CheckedChanged
+    Private Sub RadioNameRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles NameCheckBox.CheckedChanged
 
-        Settings.NameOrDate = NameRadioButton.Checked
-        If NameRadioButton.Checked Then Search()
+        Settings.NameOrDate = NameCheckBox.Checked
+        If NameCheckBox.Checked Then
+            DateCheckbox.Checked = False
+            Search()
+        End If
 
     End Sub
 
-    Private Sub RadioOldestRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AscendRadioButton.CheckedChanged
-        Settings.AscendOrDescend = AscendRadioButton.Checked
-        If AscendRadioButton.Checked Then Search()
+    Private Sub RadioOldestRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles AscendingCheckBox.CheckedChanged
+        Settings.AscendOrDescend = AscendingCheckBox.Checked
+        If AscendingCheckBox.Checked Then
+            DescendingCheckBox.Checked = False
+            Search()
+        End If
     End Sub
 
     Private Sub RefreshToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshToolStripMenuItem.Click
@@ -629,19 +639,19 @@ Public Class FormOAR
                 End If
             End If
 
-            If DateRadioButton.Checked And AscendRadioButton.Checked Then
+            If DateCheckbox.Checked And AscendingCheckBox.Checked Then
                 Dim NewArray = From thing In SearchArray
                                Order By thing.Date Descending
                 SearchArray = NewArray.ToArray()
-            ElseIf DateRadioButton.Checked And DescendRadioButton.Checked Then
+            ElseIf DateCheckbox.Checked And DescendingCheckBox.Checked Then
                 Dim NewArray = From thing In SearchArray
                                Order By thing.Date Ascending
                 SearchArray = NewArray.ToArray()
-            ElseIf NameRadioButton.Checked And AscendRadioButton.Checked Then
+            ElseIf NameCheckBox.Checked And AscendingCheckBox.Checked Then
                 Dim NewArray = From thing In SearchArray
                                Order By thing.Name Descending
                 SearchArray = NewArray.ToArray()
-            ElseIf NameRadioButton.Checked And DescendRadioButton.Checked Then
+            ElseIf NameCheckBox.Checked And DescendingCheckBox.Checked Then
                 Dim NewArray = From thing In SearchArray
                                Order By thing.Name Ascending
                 SearchArray = NewArray.ToArray()
