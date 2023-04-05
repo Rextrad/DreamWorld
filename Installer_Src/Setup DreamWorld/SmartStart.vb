@@ -834,6 +834,8 @@ Module SmartStart
 
         SyncLock BootupLock
 
+            TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
+
             PropOpensimIsRunning() = True
             If PropAborting Then Return True
 
@@ -859,7 +861,7 @@ Module SmartStart
             ' Detect if a region  is already running
             ' needs to be captured into the event handler
 
-            If Checkport(RegionUUID) Then
+            If CheckPID(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
 
                 Try
@@ -876,6 +878,7 @@ Module SmartStart
                 If Settings.Smart_Start_Enabled And
                     Smart_Suspend_Enabled(RegionUUID) Then
                     Thaw(RegionUUID)
+                    Sleep(100)
                     Freeze(RegionUUID)
 
                 ElseIf Settings.Smart_Start_Enabled And
@@ -900,8 +903,6 @@ Module SmartStart
                 Return True
                 '^^^^^^^^^^^^^^^
             End If
-
-            TextPrint(BootName & " " & Global.Outworldz.My.Resources.Starting_word)
 
             Application.DoEvents()
             DoCurrency()

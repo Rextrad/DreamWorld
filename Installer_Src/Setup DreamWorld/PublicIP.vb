@@ -68,7 +68,7 @@ Module PublicIP
 
     End Sub
 
-    Public Function Checkport(RegionUUID As String) As Boolean
+    Public Function CheckPID(RegionUUID As String) As Boolean
 
         Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
         If PID = 0 Then Return False

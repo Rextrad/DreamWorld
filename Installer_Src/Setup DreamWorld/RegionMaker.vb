@@ -439,7 +439,7 @@ Module RegionMaker
 
         Dim FailedCheck As Boolean
         Dim Regions As New List(Of Region_Mapping)
-
+        TextPrint(My.Resources.CheckOverlap)
         For Each RegionUUID In RegionUuids()
             Dim Name = Region_Name(RegionUUID)
 

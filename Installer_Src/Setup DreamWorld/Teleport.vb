@@ -54,7 +54,7 @@ Module Teleport
 
                     ShowDOSWindow(RegionToUUID, MaybeShowWindow())
 
-                    If Checkport(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
+                    If CheckPID(RegionToUUID) And RegionIsRegisteredOnline(RegionToUUID) Then
 
                         Dim DestinationName = Region_Name(RegionToUUID)
                         Dim FromRegionUUID As String = GetRegionFromAgentId(AgentID)

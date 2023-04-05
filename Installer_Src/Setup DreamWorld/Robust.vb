@@ -157,8 +157,6 @@ Module Robust
                     RobustIcon(False)
                 End If
 
-                TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
-
                 RobustProcess.EnableRaisingEvents = True
                 RobustProcess.StartInfo.UseShellExecute = True
                 RobustProcess.StartInfo.Arguments = "-inifile Robust.HG.ini"
