@@ -90,15 +90,6 @@ Public Class FormSetup
         End Set
     End Property
 
-    'Public Property Cpu1 As PerformanceCounter
-    'Get
-    'Return cpu
-    'End Get
-    'Set(value As PerformanceCounter)
-    '       cpu = value
-    'End Set
-    'End Property
-
     Public Property CPUAverageSpeed As Double
         Get
             Return _speed
@@ -628,11 +619,6 @@ Public Class FormSetup
             Next
         End If
 
-        'With Cpu1
-        '.CategoryName = "Processor Information"
-        '.CounterName = "% Processor Time"
-        '.InstanceName = "_Total"
-        'End With
 
         mnuSettings.Visible = True
 
@@ -1422,6 +1408,10 @@ Public Class FormSetup
         'End Try
         Try
             If Searcher1 IsNot Nothing Then Searcher1.Dispose()
+        Catch
+        End Try
+        Try
+            If SearcherCPU IsNot Nothing Then Searcher1.Dispose()
         Catch
         End Try
         Try
