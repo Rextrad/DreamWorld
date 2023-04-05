@@ -753,12 +753,12 @@ Public Class FormRegion
             Dim RegionUUID As String = FindRegionByName(RegionName.Text)
             If RegionUUID.Length > 0 Then
 
-                If Checkport(RegionUUID) Then
+                If CheckPID(RegionUUID) Then
                     ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                 End If
 
                 Dim loopctr = 120 ' wait 2 minutes
-                While Checkport(RegionUUID) And loopctr > 0
+                While CheckPID(RegionUUID) And loopctr > 0
                     Sleep(1000)
                     loopctr -= 1
                 End While

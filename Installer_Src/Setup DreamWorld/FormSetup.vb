@@ -766,7 +766,7 @@ Public Class FormSetup
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
 
                 SequentialPause()
-                If Checkport(RegionUUID) Then
+                If CheckPID(RegionUUID) Then
                     TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
                     ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
                 Else
@@ -876,6 +876,7 @@ Public Class FormSetup
 
         If Settings.ServerType = RobustServerName Then
 
+            TextPrint("Robust " & Global.Outworldz.My.Resources.Starting_word)
             StartRobust()
             Dim ctr = 60
             While Not IsRobustRunning() AndAlso ctr > 0
@@ -893,6 +894,7 @@ Public Class FormSetup
 
         If Settings.GraphVisible And Not RunningInServiceMode() Then
             G()
+            CalcCPU() ' bootstrap the graph
         End If
 
         For Each RegionUUID In RegionUuids()
@@ -908,7 +910,6 @@ Public Class FormSetup
             Application.DoEvents()
 
         Next
-        CalcCPU()
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)

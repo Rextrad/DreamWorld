@@ -240,7 +240,7 @@ Public Class FormRegionlist
 
             PropAborting = False
 
-            If Checkport(RegionUUID) Then
+            If CheckPID(RegionUUID) Then
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
             Else
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Resume
@@ -279,7 +279,7 @@ Public Class FormRegionlist
             ResumeRegion(RegionUUID)
             PropUpdateView() = True
 
-            If Not Checkport(RegionUUID) Then
+            If Not CheckPID(RegionUUID) Then
                 ' shut down all regions in the DOS box
                 For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
                     RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
