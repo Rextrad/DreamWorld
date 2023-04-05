@@ -2437,11 +2437,6 @@ namespace OpenSim.Framework.Servers.HttpServer
                 httpResponse.Redirect("http://opensimulator.org/wiki/0.9.2.2_Release");
                 return;
             }
-            if (!httpRequest.QueryAsDictionary.TryGetValue("method", out string methods) || string.IsNullOrWhiteSpace(methods))
-            {
-                httpResponse.StatusCode = (int)HttpStatusCode.NotFound; ;
-                return;
-            }
             // Smartstart
             if (httpRequest.QueryFlags.Contains("version"))
             {
@@ -2449,6 +2444,12 @@ namespace OpenSim.Framework.Servers.HttpServer
                 httpResponse.RawBuffer = Encoding.ASCII.GetBytes(VersionInfo.Version);
                 return;
             }
+            if (!httpRequest.QueryAsDictionary.TryGetValue("method", out string methods) || string.IsNullOrWhiteSpace(methods))
+            {
+                httpResponse.StatusCode = (int)HttpStatusCode.NotFound; ;
+                return;
+            }
+            
 
             string[] splited = methods.Split(new char[] { ',' });
             string method = splited[0];
