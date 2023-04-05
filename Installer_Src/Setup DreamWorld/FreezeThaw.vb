@@ -51,6 +51,11 @@
         If PID > 0 Then
             Try
                 NtResumeProcess(Process.GetProcessById(PID).Handle)
+
+                If Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID) Then
+                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
+                End If
+
             Catch
             End Try
         End If
