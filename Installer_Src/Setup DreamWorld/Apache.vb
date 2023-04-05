@@ -93,7 +93,7 @@ Module Apache
     ''' </summary>
     Public Sub StartApache()
 
-        If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
+        If CheckPortSocket(Settings.LANIP, Settings.ApachePort) Then
             ApacheIcon(True)
             Return
         End If
