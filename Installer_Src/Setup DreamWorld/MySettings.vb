@@ -817,15 +817,6 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Property CpuPatched() As Boolean
-        Get
-            Return CType(GetMySetting("CPUPatched", "False"), Boolean)
-        End Get
-        Set
-            SetMySetting("CPUPatched", CStr(Value))
-        End Set
-    End Property
-
     Public Property CurrentDirectory() As String
         Get
             Return GetMySetting("Myfolder") ' no default
