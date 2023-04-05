@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>Chuyện người lớn</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Kiểm tra các khu vực chồng chéo</value>
+  </data>
 </root>

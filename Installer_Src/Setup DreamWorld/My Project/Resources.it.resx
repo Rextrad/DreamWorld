@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>Vietato ai minori</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Verificare la presenza di regioni sovrapposte</value>
+  </data>
 </root>

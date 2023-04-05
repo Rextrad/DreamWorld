@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>Dónalegur</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Athugaðu hvort svæði skarast</value>
+  </data>
 </root>

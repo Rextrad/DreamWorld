@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>S hvězdičkou</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Kontrola překrývajících se oblastí</value>
+  </data>
 </root>

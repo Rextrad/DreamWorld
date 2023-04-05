@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>Непристойный</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Проверка перекрывающихся областей</value>
+  </data>
 </root>

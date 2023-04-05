@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>למבוגרים בלבד</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>חיפוש אזורים חופפים</value>
+  </data>
 </root>

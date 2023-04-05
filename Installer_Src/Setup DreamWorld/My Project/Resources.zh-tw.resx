@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>限制級</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>檢查重疊區域</value>
+  </data>
 </root>

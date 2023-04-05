@@ -1954,6 +1954,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Check for Overlapping Regions.
+        '''</summary>
+        Friend ReadOnly Property CheckOverlap() As String
+            Get
+                Return ResourceManager.GetString("CheckOverlap", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to ChildFriendly.
         '''</summary>
         Friend ReadOnly Property ChildFriendly() As String

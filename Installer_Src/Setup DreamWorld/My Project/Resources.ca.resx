@@ -4155,4 +4155,7 @@
   <data name="XRated" xml:space="preserve">
     <value>No apte per menors</value>
   </data>
+  <data name="CheckOverlap" xml:space="preserve">
+    <value>Comproveu si hi ha regions superposades</value>
+  </data>
 </root>
