@@ -440,6 +440,14 @@ Public Class FormSetup
         'Search Help
         SearchHelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Search_Help
 
+        If Not Settings.ShowMysqlStats Then
+            OnToolStripMenuItem.Checked = False
+            OffToolStripMenuItem.Checked = True
+        Else
+            OnToolStripMenuItem.Checked = True
+            OffToolStripMenuItem.Checked = False
+        End If
+
         ' show box styled nicely.
         Application.EnableVisualStyles()
         Buttons(BusyButton)
@@ -454,15 +462,15 @@ Public Class FormSetup
             OnTopToolStripMenuItem.Image = My.Resources.tables
         End If
 
-        TextBox1.BackColor = Me.BackColor
-
-        TextBox1.SelectAll()
-        TextBox1.SelectionIndent += 15 ' play With this values To match yours
-        TextBox1.SelectionRightIndent += 15 ' this too
-        TextBox1.SelectionLength = 0
+        'TextBox1.BackColor = Me.BackColor
+        ActiveControl = Nothing
+        'TextBox1.SelectAll()
+        'TextBox1.SelectionIndent += 15 ' play With this values To match yours
+        'TextBox1.SelectionRightIndent += 15 ' this too
+        'TextBox1.SelectionLength = 0
         ' this Is a little hack because without this
         ' I've got the first line of my richTB selected anyway.
-        TextBox1.SelectionBackColor = TextBox1.BackColor
+        'TextBox1.SelectionBackColor = TextBox1.BackColor
 
         ' initialize the scrolling text box
 
@@ -713,7 +721,7 @@ Public Class FormSetup
         If RunningInServiceMode() Then
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
-            Sleep(10000)
+            Sleep(1000)
             Startup()
             SetLoading(False)
             Return True
@@ -751,11 +759,8 @@ Public Class FormSetup
 
         Sleep(1000)
         ' close everything as gracefully as possible.
-        StopIcecast()
 
         Dim n As Integer = RegionCount()
-
-        ' only wait if the port 8001 is working
 
         If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
 
@@ -764,7 +769,6 @@ Public Class FormSetup
             (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
             RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
-
                 SequentialPause()
                 If CheckPID(RegionUUID) Then
                     TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
@@ -821,9 +825,9 @@ Public Class FormSetup
                 Next
             Next
 
-            Sleep(1000)
+            Sleep(100)
         End While
-
+        StopIcecast()
         PropOpensimIsRunning() = False
         PropUpdateView = True ' make form refresh
         TimerMain.Stop()
@@ -1428,7 +1432,7 @@ Public Class FormSetup
 
         TextPrint("Zzzz...")
         SetLoading(False)
-        Thread.Sleep(1000)
+        Thread.Sleep(100)
         End
 
     End Sub
@@ -1569,6 +1573,7 @@ Public Class FormSetup
                 Settings.Ramused = r
                 PercentRAM.Text = $"{r / 100:p1} RAM"
                 Virtual.Text = $"VRAM {v}MB"
+                Application.DoEvents()
             Next
             results.Dispose()
         Catch ex As Exception
@@ -2089,8 +2094,6 @@ Public Class FormSetup
 
         TimerisBusy += 1
 
-        Chart()                     ' do charts collection
-
         CheckPost()                 ' see if anything arrived in the web server
         TeleportAgents()            ' periodically check for booted sims and send them onward
         CheckForBootedRegions()     ' task to scan for anything that just came on line
@@ -2099,18 +2102,20 @@ Public Class FormSetup
         Chat2Speech()               ' speak of the devil
         RestartDOSboxes()           ' Icons for failed Services
 
-        If SecondsTicker Mod 5 = 0 AndAlso SecondsTicker > 0 Then
+        If SecondsTicker Mod 2 = 0 AndAlso SecondsTicker > 0 Then
             Bench.Start("5 second + worker")
             ScanAgents()                ' update agent count
-
+            Chart()                     ' do charts collection
+            CalcDiskFree()              ' check for free disk space
             '^^^^^^^^^^^^^^^^^^^^^
             If Not RunningInServiceMode() Then
-                CalcDiskFree()              ' check for free disk space
                 If Settings.ShowMysqlStats Then
                     MySQLSpeed.Text = (MysqlStats() / 5).ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " Q/S"
                 Else
                     MySQLSpeed.Text = ""
                 End If
+            Else
+                QuerySuper("SET GLOBAL general_log = 'OFF'")
             End If
 
             Bench.Print("5 second + worker")
@@ -2983,7 +2988,7 @@ Public Class FormSetup
             TextPrint(My.Resources.Apache_Disabled)
         End If
         StopApache()
-        Sleep(5000)
+        Sleep(100)
         StartApache()
         PropAborting = False
 
