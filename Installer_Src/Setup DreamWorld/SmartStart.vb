@@ -320,9 +320,6 @@ Module SmartStart
 
         'BreakPoint.Print($"{Region_Name(RegionUUID)} task {TObj.TaskName}")
 
-        ' TODO add task queue
-        ' so we can have more than one command
-        'TaskQue.Add(TObj)
         If ToDoList.ContainsKey(RegionUUID) Then
             ToDoList(RegionUUID) = TObj
         Else
@@ -554,8 +551,7 @@ Module SmartStart
 
         While PropOpensimIsRunning AndAlso
             RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped AndAlso
-            RegionStatus(RegionUUID) <> SIMSTATUSENUM.Error AndAlso
-            RegionStatus(RegionUUID) <> SIMSTATUSENUM.ShuttingDownForGood
+            RegionStatus(RegionUUID) <> SIMSTATUSENUM.Error
             Sleep(1000)
             ctr -= 1
             If ctr = 0 Then Exit While
@@ -756,8 +752,7 @@ Module SmartStart
                             If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
                                 AddEm(ParkingLot, AgentID, True) ' Wait for it to start booting
                                 RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
-                                Application.DoEvents()
-                                Sleep(5000) ' no good as tp shuts down. Needs to be a promise
+                                Sleep(100)
                             End If
 
                             AddEm(RegionUUID, AgentID, True)
@@ -875,21 +870,20 @@ Module SmartStart
 
                 PropUpdateView = True ' make form refresh
 
-                If Settings.Smart_Start_Enabled And
+                If Settings.Smart_Start_Enabled AndAlso
                     Smart_Suspend_Enabled(RegionUUID) Then
                     Thaw(RegionUUID)
-                    Sleep(100)
                     Freeze(RegionUUID)
 
-                ElseIf Settings.Smart_Start_Enabled And
-                    Smart_Boot_Enabled(RegionUUID) And
+                ElseIf Settings.Smart_Start_Enabled AndAlso
+                    Smart_Boot_Enabled(RegionUUID) AndAlso
                     CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
 
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                     ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
 
-                ElseIf Settings.Smart_Start_Enabled And
-                    Smart_Boot_Enabled(RegionUUID) And
+                ElseIf Settings.Smart_Start_Enabled AndAlso
+                    Smart_Boot_Enabled(RegionUUID) AndAlso
                     Not CheckPortSocket(Settings.WANIP, Region_Port(RegionUUID)) Then
 
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
@@ -1117,10 +1111,10 @@ Module SmartStart
         PokeRegionTimer(RegionUUID)
         TextPrint($"{Region_Name(RegionUUID)}: load oar {File}")
 
-        Dim Result = New WaitForFile(RegionUUID, "Successfully loaded archive", "Load OAR")
+        Dim Result = New WaitForFile(RegionUUID, "objects to the scene", "Load OAR")
         RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
+        Sleep(100)
         RPC_Region_Command(RegionUUID, $"load oar --force-terrain --force-parcels ""{File}""")
-        RPC_Region_Command(RegionUUID, $"quit")
         Result.Scan()
 
         If Not AvatarsIsInGroup(Group_Name(RegionUUID)) Then
