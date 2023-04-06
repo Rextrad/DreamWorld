@@ -65,6 +65,7 @@ Module Teleport
                             If Settings.TeleportSleepTime > 0 And Smart_Boot_Enabled(RegionToUUID) Then
                                 RPC_admin_dialog(AgentID, $"{ Region_Name(RegionToUUID)} will be ready in {CStr(Settings.TeleportSleepTime)} seconds.")
                                 Sleep(Settings.TeleportSleepTime * 1000)
+                                'TODO make this sleep a future promise
                             End If
 
                             If TeleportTo(FromRegionUUID, DestinationName, AgentID) Then
