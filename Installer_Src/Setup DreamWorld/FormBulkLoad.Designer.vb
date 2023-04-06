@@ -35,6 +35,9 @@ Partial Class FormBulkLoad
         Me.EstateName = New System.Windows.Forms.TextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.RadioButtonNone = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonBoot = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonSuspend = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -59,24 +62,24 @@ Partial Class FormBulkLoad
         '
         Me.BulkLoadButton.Image = Global.Outworldz.My.Resources.Resources.package_add
         Me.BulkLoadButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.BulkLoadButton.Location = New System.Drawing.Point(19, 186)
+        Me.BulkLoadButton.Location = New System.Drawing.Point(4, 254)
         Me.BulkLoadButton.Margin = New System.Windows.Forms.Padding(1)
         Me.BulkLoadButton.Name = "BulkLoadButton"
-        Me.BulkLoadButton.Size = New System.Drawing.Size(185, 35)
+        Me.BulkLoadButton.Size = New System.Drawing.Size(200, 35)
         Me.BulkLoadButton.TabIndex = 1900
         Me.BulkLoadButton.Text = "Bulk Load Regions"
         Me.BulkLoadButton.UseVisualStyleBackColor = True
         '
         'CoordX
         '
-        Me.CoordX.Location = New System.Drawing.Point(44, 149)
+        Me.CoordX.Location = New System.Drawing.Point(29, 138)
         Me.CoordX.Name = "CoordX"
         Me.CoordX.Size = New System.Drawing.Size(42, 20)
         Me.CoordX.TabIndex = 1903
         '
         'CoordY
         '
-        Me.CoordY.Location = New System.Drawing.Point(125, 149)
+        Me.CoordY.Location = New System.Drawing.Point(110, 138)
         Me.CoordY.Name = "CoordY"
         Me.CoordY.Size = New System.Drawing.Size(42, 20)
         Me.CoordY.TabIndex = 1904
@@ -84,7 +87,7 @@ Partial Class FormBulkLoad
         'StartingLabel
         '
         Me.StartingLabel.AutoSize = True
-        Me.StartingLabel.Location = New System.Drawing.Point(27, 133)
+        Me.StartingLabel.Location = New System.Drawing.Point(12, 122)
         Me.StartingLabel.Name = "StartingLabel"
         Me.StartingLabel.Size = New System.Drawing.Size(87, 13)
         Me.StartingLabel.TabIndex = 1905
@@ -93,7 +96,7 @@ Partial Class FormBulkLoad
         'XLabel
         '
         Me.XLabel.AutoSize = True
-        Me.XLabel.Location = New System.Drawing.Point(27, 152)
+        Me.XLabel.Location = New System.Drawing.Point(12, 141)
         Me.XLabel.Name = "XLabel"
         Me.XLabel.Size = New System.Drawing.Size(14, 13)
         Me.XLabel.TabIndex = 1906
@@ -102,7 +105,7 @@ Partial Class FormBulkLoad
         'YLabel
         '
         Me.YLabel.AutoSize = True
-        Me.YLabel.Location = New System.Drawing.Point(105, 152)
+        Me.YLabel.Location = New System.Drawing.Point(90, 141)
         Me.YLabel.Name = "YLabel"
         Me.YLabel.Size = New System.Drawing.Size(14, 13)
         Me.YLabel.TabIndex = 1907
@@ -110,6 +113,9 @@ Partial Class FormBulkLoad
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.RadioButtonSuspend)
+        Me.GroupBox1.Controls.Add(Me.RadioButtonBoot)
+        Me.GroupBox1.Controls.Add(Me.RadioButtonNone)
         Me.GroupBox1.Controls.Add(Me.Estatenamelabel)
         Me.GroupBox1.Controls.Add(Me.EstateName)
         Me.GroupBox1.Controls.Add(Me.BulkLoadButton)
@@ -122,7 +128,7 @@ Partial Class FormBulkLoad
         Me.GroupBox1.Controls.Add(Me.CoordY)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 39)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(208, 234)
+        Me.GroupBox1.Size = New System.Drawing.Size(208, 293)
         Me.GroupBox1.TabIndex = 1908
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Load All Free Regions"
@@ -130,7 +136,7 @@ Partial Class FormBulkLoad
         'Estatenamelabel
         '
         Me.Estatenamelabel.AutoSize = True
-        Me.Estatenamelabel.Location = New System.Drawing.Point(8, 79)
+        Me.Estatenamelabel.Location = New System.Drawing.Point(8, 68)
         Me.Estatenamelabel.Name = "Estatenamelabel"
         Me.Estatenamelabel.Size = New System.Drawing.Size(37, 13)
         Me.Estatenamelabel.TabIndex = 1909
@@ -138,7 +144,7 @@ Partial Class FormBulkLoad
         '
         'EstateName
         '
-        Me.EstateName.Location = New System.Drawing.Point(11, 95)
+        Me.EstateName.Location = New System.Drawing.Point(11, 84)
         Me.EstateName.Name = "EstateName"
         Me.EstateName.Size = New System.Drawing.Size(171, 20)
         Me.EstateName.TabIndex = 1908
@@ -160,11 +166,45 @@ Partial Class FormBulkLoad
         Me.ToolStripLabel1.Size = New System.Drawing.Size(48, 22)
         Me.ToolStripLabel1.Text = "Help"
         '
+        'RadioButtonNone
+        '
+        Me.RadioButtonNone.AutoSize = True
+        Me.RadioButtonNone.Location = New System.Drawing.Point(11, 175)
+        Me.RadioButtonNone.Name = "RadioButtonNone"
+        Me.RadioButtonNone.Size = New System.Drawing.Size(51, 17)
+        Me.RadioButtonNone.TabIndex = 1910
+        Me.RadioButtonNone.TabStop = True
+        Me.RadioButtonNone.Text = "None"
+        Me.RadioButtonNone.UseVisualStyleBackColor = True
+        '
+        'RadioButtonBoot
+        '
+        Me.RadioButtonBoot.AutoSize = True
+        Me.RadioButtonBoot.Location = New System.Drawing.Point(11, 198)
+        Me.RadioButtonBoot.Name = "RadioButtonBoot"
+        Me.RadioButtonBoot.Size = New System.Drawing.Size(77, 17)
+        Me.RadioButtonBoot.TabIndex = 1911
+        Me.RadioButtonBoot.TabStop = True
+        Me.RadioButtonBoot.Text = "Smart Boot"
+        Me.RadioButtonBoot.UseVisualStyleBackColor = True
+        '
+        'RadioButtonSuspend
+        '
+        Me.RadioButtonSuspend.AutoSize = True
+        Me.RadioButtonSuspend.Checked = True
+        Me.RadioButtonSuspend.Location = New System.Drawing.Point(11, 221)
+        Me.RadioButtonSuspend.Name = "RadioButtonSuspend"
+        Me.RadioButtonSuspend.Size = New System.Drawing.Size(97, 17)
+        Me.RadioButtonSuspend.TabIndex = 1912
+        Me.RadioButtonSuspend.TabStop = True
+        Me.RadioButtonSuspend.Text = "Smart Suspend"
+        Me.RadioButtonSuspend.UseVisualStyleBackColor = True
+        '
         'FormBulkLoad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(241, 285)
+        Me.ClientSize = New System.Drawing.Size(241, 344)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormBulkLoad"
@@ -191,4 +231,7 @@ Partial Class FormBulkLoad
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents Estatenamelabel As Label
     Friend WithEvents EstateName As TextBox
+    Friend WithEvents RadioButtonSuspend As RadioButton
+    Friend WithEvents RadioButtonBoot As RadioButton
+    Friend WithEvents RadioButtonNone As RadioButton
 End Class

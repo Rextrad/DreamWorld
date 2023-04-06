@@ -141,6 +141,18 @@ Public Class FormBulkLoad
                         Else
                             TextPrint($"{J.Name} needs content")
                             regionList.Add(J.Name, RegionUUID)
+
+                            If RadioButtonNone.Checked Then
+                                Smart_Boot_Enabled(RegionUUID) = False
+                                Smart_Suspend_Enabled(RegionUUID) = False
+                            ElseIf RadioButtonBoot.Checked Then
+                                Smart_Boot_Enabled(RegionUUID) = True
+                                Smart_Suspend_Enabled(RegionUUID) = False
+                            ElseIf RadioButtonSuspend.Checked Then
+                                Smart_Boot_Enabled(RegionUUID) = False
+                                Smart_Suspend_Enabled(RegionUUID) = True
+                            End If
+
                         End If
                     Else
                         BreakPoint.Print("Bad Region UUID " & RegionUUID)
@@ -182,7 +194,17 @@ Public Class FormBulkLoad
                     Coord_X(RegionUUID) = CoordinateX
                     Coord_Y(RegionUUID) = CoordinateY
 
-                    Smart_Boot_Enabled(RegionUUID) = True
+                    If RadioButtonNone.Checked Then
+                        Smart_Boot_Enabled(RegionUUID) = False
+                        Smart_Suspend_Enabled(RegionUUID) = False
+                    ElseIf RadioButtonBoot.Checked Then
+                        Smart_Boot_Enabled(RegionUUID) = True
+                        Smart_Suspend_Enabled(RegionUUID) = False
+                    ElseIf RadioButtonSuspend.Checked Then
+                        Smart_Boot_Enabled(RegionUUID) = False
+                        Smart_Suspend_Enabled(RegionUUID) = True
+                    End If
+
                     Teleport_Sign(RegionUUID) = True
 
                     SizeX(RegionUUID) = SizeRegion * 256
@@ -444,6 +466,8 @@ Public Class FormBulkLoad
 
         BulkLoadButton.Text = My.Resources.BulkLoad
         TextPrint("Stopped")
+        Sleep(2000)
+        Me.Close()
 
     End Sub
 
