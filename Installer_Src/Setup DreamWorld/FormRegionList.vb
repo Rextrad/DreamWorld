@@ -1223,7 +1223,10 @@ Public Class FormRegionlist
 
     Private Sub LoadMyListView()
 
-        If SearchBusy = True Then Return
+        If SearchBusy = True Then
+            Application.DoEvents()
+            Return
+        End If
         SearchBusy = True
 
         BringToFront()
@@ -1454,7 +1457,7 @@ Public Class FormRegionlist
 
         SyncLock regionLock
             ShowTitle()
-            CalcCPU()
+
             AllNone.Visible = True
 
             PictureBox1.Visible = True
@@ -1689,6 +1692,8 @@ Public Class FormRegionlist
             PropUpdateView() = False
 
         End SyncLock
+        SearchBusy = False
+
 
     End Sub
 
