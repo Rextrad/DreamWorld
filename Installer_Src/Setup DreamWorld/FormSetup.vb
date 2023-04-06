@@ -528,10 +528,6 @@ Public Class FormSetup
         ' Get Opensimulator Scripts to date if needed
         If Settings.DeleteScriptsOnStartupLevel <> PropSimVersion Then
             WipeScripts(True)
-            WipeBakes()
-            WipeAssets()
-            WipeMesh()
-            TextPrint(My.Resources.All_Caches_Cleared_word)
             Settings.DeleteScriptsOnStartupLevel() = PropSimVersion ' we have scripts cleared to proper Opensim Version
         End If
 
@@ -1067,7 +1063,6 @@ Public Class FormSetup
                 DelPidFile(RegionUUID) 'kill the disk PID
                 ToDoList.Remove(RegionUUID)
 
-                TextPrint($"{GroupName} {My.Resources.Quit_unexpectedly}")
                 Dim out As String = ""
                 Logger("State", $"{RegionName} {GetStateString(Status)}", "Outworldz")
 
@@ -1109,6 +1104,8 @@ Public Class FormSetup
                     ' Maybe we crashed during warm up or running. Skip prompt if auto restart on crash and restart the beast
                     Status = SIMSTATUSENUM.Error
                     PropUpdateView = True
+
+                    TextPrint($"{GroupName} {My.Resources.Quit_unexpectedly}")
 
                     Logger("Crash", GroupName & " Crashed", "Status")
                     If Settings.RestartOnCrash Then
@@ -1529,6 +1526,10 @@ Public Class FormSetup
         End Try
 
         speed /= coreCount
+
+        If speed > 100 Then
+            speed = 100
+        End If
 
         ' Graph https://github.com/sinairv/MSChartWrapper
 
