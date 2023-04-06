@@ -65,39 +65,41 @@ Module CPUCounter
 
                 Dim Status = RegionStatus(RegionUUID)
                 If Status = SIMSTATUSENUM.Stopped Or Status = SIMSTATUSENUM.Suspended Then
-                    CPUValues.Item(RegionName) = 0
+                    CPUValues.Item(Group_Name(RegionUUID)) = 0
                     Continue For
                 End If
 
-                If Not CounterList.ContainsKey(RegionName) Then
+                If Not CounterList.ContainsKey(Group_Name(RegionUUID)) Then
                     Try
                         Using counter As PerformanceCounter = GetPerfCounterForProcessId(PID)
                             If counter IsNot Nothing Then
                                 Debug.Print($"> Creating new CPU counter for {RegionName}")
-                                CounterList.Add(RegionName, counter)
+                                CounterList.Add(Group_Name(RegionUUID), counter)
                                 counter.NextValue() ' start the counter
                             End If
                         End Using
                     Catch ex As Exception
-                        CounterList.Item(RegionName).Close()
-                        CounterList.Remove(RegionName)
-                        CPUValues.Remove(RegionName)
+                        CounterList.Item(Group_Name(RegionUUID)).Close()
+                        CounterList.Remove(Group_Name(RegionUUID))
+                        CPUValues.Remove(Group_Name(RegionUUID))
                         Continue For
                     End Try
+                Else
+                    'Debug.Print("ctr exists")
                 End If
 
-                If Not CPUValues.ContainsKey(RegionName) Then
-                    CPUValues.Add(RegionName, 0)
+                If Not CPUValues.ContainsKey(Group_Name(RegionUUID)) Then
+                    CPUValues.Add(Group_Name(RegionUUID), 0)
                 Else
                     Dim a As Double
                     Try
-                        a = CDbl(CounterList.Item(RegionName).NextValue())
+                        a = CDbl(CounterList.Item(Group_Name(RegionUUID)).NextValue())
                     Catch ex As Exception
-                        CounterList.Remove(RegionName)
+                        CounterList.Remove(Group_Name(RegionUUID))
                     End Try
 
                     Dim b = (a / Environment.ProcessorCount)
-                    CPUValues.Item(RegionName) = Math.Round(b, 3)
+                    CPUValues.Item(Group_Name(RegionUUID)) = Math.Round(b, 3)
                     ' Debug.Print($"> CPU {RegionName} = {CStr(Math.Round(b, 3))}")
                 End If
             Next
