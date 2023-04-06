@@ -67,9 +67,9 @@ Module Global_Properties
 
             Dim dt = Date.Now.ToString(Globalization.CultureInfo.CurrentCulture)
             If Settings.ShowDateandTimeinLogs Then
-                FormSetup.TextBox1.Text += $"{dt} {Value}{vbCrLf}"
+                FormSetup.TextBox1.AppendText($"{dt} {Value}{vbCrLf}")
             Else
-                FormSetup.TextBox1.Text += $"{Value}{vbCrLf}"
+                FormSetup.TextBox1.AppendText($"{Value}{vbCrLf}")
             End If
             Log(My.Resources.Info_word, $"{dt} {Value}{vbCrLf}")
 
