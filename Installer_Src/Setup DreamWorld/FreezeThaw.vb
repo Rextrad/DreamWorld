@@ -9,11 +9,14 @@
 
     Public Sub Freeze(RegionUUID As String)
 
-        ShowDOSWindow(RegionUUID, MaybeHideWindow())
         Try
             If Smart_Suspend_Enabled(RegionUUID) Then
                 Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
-                NtSuspendProcess(Process.GetProcessById(PID).Handle)
+                Dim retval = NtSuspendProcess(Process.GetProcessById(PID).Handle)
+                If CBool(retval) Then
+                    ErrorLog($"Cannot freeze {Region_Name(RegionUUID)}")
+                End If
+                ShowDOSWindow(RegionUUID, MaybeHideWindow())
                 RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended
             ElseIf Smart_Boot_Enabled(RegionUUID) Then
                 ShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
@@ -55,7 +58,6 @@
                 If Settings.Smart_Start_Enabled And Smart_Suspend_Enabled(RegionUUID) Then
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 End If
-
             Catch
             End Try
         End If
