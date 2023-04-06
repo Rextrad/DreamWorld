@@ -650,25 +650,6 @@ Module RegionMaker
 
                             Region_Port(uuid) = ThisGroup
 
-                            'Dim G = Group_Name(uuid)
-                            'If GetHwnd(G) = IntPtr.Zero Then
-                            'Region_Port(uuid) = GetPort(uuid)
-                            'Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))}  To {fName}", "Port")
-                            'Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                            'Else
-                            'Region_Port(uuid) = CInt("0" + INI.GetIni(fName, "InternalPort", "", "Integer"))
-                            'If Region_Port(uuid) = 0 Then Region_Port(uuid) = LargestPort() + 1
-                            'Logger("Port", $"Assign Region Port {CStr(Region_Port(uuid))} To {fName}", "Port")
-                            '
-                            'GroupPort(uuid) = CInt("0" + INI.GetIni(fName, "GroupPort", "", "Integer"))
-                            'Logger("Port", $"Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                            '
-                            'If GroupPort(uuid) = 0 Then
-                            'GroupPort(uuid) = ThisGroup
-                            'Logger("Port", $"Re-Assign Group Port {CStr(GroupPort(uuid))} To {fName}", "Port")
-                            'End If
-
-                            'End If
 
                             ' If region Is already set, use its port as they cannot change while up.
                             ' restore backups of transient data
@@ -1755,6 +1736,7 @@ Module RegionMaker
             Catch
             End Try
 
+            post = post.ToUpper
             If HttpUtility.ParseQueryString(myUri.Query).Get("Alt") IsNot Nothing Then
                 Return SmartStartParse(myUri)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
