@@ -309,15 +309,16 @@ Partial Class FormSetup
         Me.TextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.AutoWordSelection = True
+        Me.TextBox1.BackColor = System.Drawing.Color.White
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(12, 58)
         Me.TextBox1.MaxLength = 30000
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.TextBox1.Size = New System.Drawing.Size(985, 96)
-        Me.TextBox1.TabIndex = 2
+        Me.TextBox1.TabIndex = 99
+        Me.TextBox1.TabStop = False
         Me.TextBox1.Text = ""
         '
         'TimerMain
@@ -1068,7 +1069,7 @@ Partial Class FormSetup
         Me.ShowStatsToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.document_chart
         Me.ShowStatsToolStripMenuItem.Name = "ShowStatsToolStripMenuItem"
         Me.ShowStatsToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
-        Me.ShowStatsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Show_Stats
+        Me.ShowStatsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Show_Status_word
         '
         'OnToolStripMenuItem
         '
