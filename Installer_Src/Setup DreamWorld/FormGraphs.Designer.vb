@@ -102,7 +102,7 @@ Partial Class FormGraphs
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "FormGraphs"
-        Me.Text = "FormGraphs"
+        Me.Text = "Graph"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
