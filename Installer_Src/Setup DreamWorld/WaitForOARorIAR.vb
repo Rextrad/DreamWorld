@@ -69,7 +69,7 @@ Public Class WaitForFile
         Dim RegionUUID As String = o.RegionUUID
         Dim text = o.text
         Dim sleeptime As Integer = 100
-        Dim timeout = 30 * 60 * sleeptime ' 30 minutes to save
+        Dim timeout = 30 * 60 * sleeptime ' 30 minutes to save or load
         While CTR < timeout
             PokeRegionTimer(RegionUUID)
             If Not CheckPID(RegionUUID) Then
@@ -88,7 +88,11 @@ Public Class WaitForFile
                         If line.Contains(text) Then
                             If o.Type = "Load OAR" Then
                                 DoLandOneRegion(RegionUUID) ' set region to no rez, no scripts
+                                RPC_Region_Command(RegionUUID, "backup")
+                                Timer(RegionUUID) = DateAdd("n", 1, Date.Now) ' Add  5 minutes for console to do things
                                 RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Loaded_word}", "")
+                                PropUpdateView = True
+                                ShowDOSWindow(RegionUUID, MaybeHideWindow())
                             Else
                                 RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.Finished_word}", "")
                             End If
@@ -100,7 +104,7 @@ Public Class WaitForFile
                         lastMaxOffset += line.Length
                     End If
                     CTR += 1
-
+                    PokeRegionTimer(RegionUUID)
                     Sleep(sleeptime)
                 End While
             Catch ex As Exception
