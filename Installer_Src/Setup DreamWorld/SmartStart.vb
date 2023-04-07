@@ -13,11 +13,9 @@ Module SmartStart
 
     Public MyCPUCollection As New List(Of Double)
     Public MyRAMCollection As New List(Of Double)
-    Public TeleportQ As New TPQueue()
     Public ToDoList As New Dictionary(Of String, TaskObject)
     Public Visitor As New Dictionary(Of String, String)
     Private ReadOnly ToDoCount As New Dictionary(Of String, Integer)
-    Private ReadOnly TPQueueStore As New List(Of AvatarTeleportData)
 
     ''' <summary>
     ''' The list of commands
@@ -89,7 +87,6 @@ Module SmartStart
                 RegionUUID = BootedList(0)
                 BootedList.RemoveAt(0)
 
-                If PropAborting Then Return
                 If Not PropOpensimIsRunning() Then Return
                 If Not RegionEnabled(RegionUUID) Then Continue While
 
@@ -521,19 +518,6 @@ Module SmartStart
 
     End Sub
 
-    ''' <summary>
-    ''' Where the desired destination is
-    ''' Its a list as they go in order, to Parking lot, then final destination
-    ''' </summary>
-    Public Class AvatarTeleportData
-
-        Public AvatarUUID As String = ""
-        Public DateAdded As Date = Now
-        Public DestinationUUID As String = ""
-        Public ID As Guid
-
-    End Class
-
 #Region "StartStart"
 
     ''' <summary>
@@ -592,12 +576,10 @@ Module SmartStart
         If Teleport Then
             Dim o As New AvatarTeleportData With {
                 .AvatarUUID = AgentID,
-                .DestinationUUID = RegionUUID,
-                .DateAdded = Now(),
-                .ID = Guid.NewGuid()
+                .DestinationUUID = RegionUUID
             }
+            Dim i = New ClassTeleport(o)
 
-            TeleportQ.Add(o)
         End If
 
         Return False
@@ -747,14 +729,6 @@ Module SmartStart
                         If Smart_Boot_Enabled(RegionUUID) Then
                             Logger("SmartStart", $"{Region_Name(RegionUUID)} Is Smart Boot", "Teleport")
                             Dim ParkingLot = FindRegionByName(Settings.ParkingLot)
-
-                            ' TODO fix this boot issue
-                            If Not RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Then
-                                AddEm(ParkingLot, AgentID, True) ' Wait for it to start booting
-                                RPC_admin_dialog(AgentID, $"Booting your region {Region_Name(RegionUUID)}.{vbCrLf}Region will be ready in {CStr(BootTime(RegionUUID) + Settings.TeleportSleepTime)} seconds. Please wait in this region.")
-                                Sleep(100)
-                            End If
-
                             AddEm(RegionUUID, AgentID, True)
                             Logger("SmartStart", $"{Name}{AgentID} to {Region_Name(RegionUUID)}", "Teleport")
                             Return ParkingLot
@@ -888,10 +862,10 @@ Module SmartStart
 
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
                 Else
+                    SendToOpensimWorld(RegionUUID, 0)
                     RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted
                 End If
 
-                SendToOpensimWorld(RegionUUID, 0)
                 TextPrint($"{BootName} {My.Resources.Ready}")
                 ShowDOSWindow(RegionUUID, MaybeHideWindow())
                 Return True
@@ -1254,34 +1228,6 @@ Module SmartStart
     Public Class TaskQue
         Public RegionUUID As String
         Public T As TaskObject
-    End Class
-
-    ''' <summary>
-    ''' Class to fake an event to scan teleport changes, makea a List.Add fake an event
-    ''' </summary>
-    Public Class TPQueue
-
-        Public Sub Add(o As AvatarTeleportData)
-            TPQueueStore.Add(o)
-            TeleportAgents() 'send them on
-        End Sub
-
-        Public Function Count() As Integer
-            Return TPQueueStore.Count
-        End Function
-
-        Public Function Data() As List(Of AvatarTeleportData)
-            Return TPQueueStore
-        End Function
-
-        Public Function ID(index As Integer) As Guid
-            Return TPQueueStore(index).ID
-        End Function
-
-        Public Sub RemoveAt(index As Integer)
-            TPQueueStore.RemoveAt(index)
-        End Sub
-
     End Class
 
 End Module

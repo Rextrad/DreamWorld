@@ -345,6 +345,7 @@
     <Compile Include="ClassINIWriter.vb" />
     <Compile Include="ClassLoopback.vb" />
     <Compile Include="ClassNssm.vb" />
+    <Compile Include="ClassTeleport.vb" />
     <Compile Include="Clear_Cache.vb" />
     <Compile Include="Disk.vb" />
     <Compile Include="Events.vb" />
@@ -762,7 +763,6 @@
     <Compile Include="Speech.vb" />
     <Compile Include="SslCertificateValidation.vb" />
     <Compile Include="TaskObject.vb" />
-    <Compile Include="Teleport.vb" />
     <Compile Include="Updater.vb" />
     <Compile Include="UploadImage.vb" />
     <Compile Include="WaitForOARorIAR.vb" />

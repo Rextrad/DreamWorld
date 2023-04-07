@@ -531,8 +531,6 @@ Module WindowHandlers
             End Try
         Next
 
-        PropAborting = False
-
     End Sub
 
     Private Function ToLowercaseKeys(Str As String) As String

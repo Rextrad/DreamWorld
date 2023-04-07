@@ -777,8 +777,6 @@ Public Class FormSetup
         Dim LastCount As Integer = 0
         Dim counter As Integer = 3000 ' 5 minutes to quit all regions
 
-        If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
-
         While (counter > 0 AndAlso PropOpensimIsRunning())
             Application.DoEvents()
             counter -= 1
@@ -828,6 +826,7 @@ Public Class FormSetup
         StopRobust()
         Zap("baretail")
         Zap("cports")
+        Zap("pCampBot")
 
         Settings.SaveSettings()
 
@@ -904,7 +903,6 @@ Public Class FormSetup
                     Boot(RegionName)
                 End If
             End If
-            Application.DoEvents()
 
         Next
 
@@ -2094,7 +2092,7 @@ Public Class FormSetup
             TimerisBusy += 1
 
             CheckPost()                 ' see if anything arrived in the web server
-            TeleportAgents()            ' periodically check for booted sims and send them onward
+
             CheckForBootedRegions()     ' task to scan for anything that just came on line
             ProcessQuit()               ' check if any processes exited
             PrintBackups()              ' print if backups are running
@@ -2992,7 +2990,6 @@ Public Class FormSetup
         StopApache()
         Sleep(100)
         StartApache()
-        PropAborting = False
 
     End Sub
 

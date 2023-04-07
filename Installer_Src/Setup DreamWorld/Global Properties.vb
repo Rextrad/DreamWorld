@@ -241,4 +241,15 @@ Module Global_Properties
 
 #End Region
 
+    ''' <summary>
+    ''' Where the desired destination is
+    ''' Its a list as they go in order, to Parking lot, then final destination
+    ''' </summary>
+    Public Class AvatarTeleportData
+
+        Public AvatarUUID As String = ""
+        Public DestinationUUID As String = ""
+
+    End Class
+
 End Module
