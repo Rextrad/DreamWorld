@@ -43,6 +43,7 @@ Module OpensimWorld
 
     End Sub
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")>
     Private Function Poke(URL As String) As Integer
 
         ' Create a New 'HttpWebRequest' Object to the mentioned URL.
@@ -69,7 +70,7 @@ Module OpensimWorld
                         streamResponse = Nothing
                     End Using
                 Finally
-                    streamResponse?.Dispose()
+                    myHttpWebResponse?.Dispose()
                 End Try
             End Using
         Catch

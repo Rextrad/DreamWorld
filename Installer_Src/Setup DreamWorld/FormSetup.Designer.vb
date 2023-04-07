@@ -8,6 +8,8 @@ Partial Class FormSetup
         Try
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
+                BackupThread.Dispose()
+                NssmService.Dispose()
             End If
             If disposing AndAlso PropMyUPnpMap IsNot Nothing Then
                 PropMyUPnpMap.Dispose()

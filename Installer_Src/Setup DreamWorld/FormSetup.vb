@@ -24,6 +24,7 @@ Public Class FormSetup
 #Region "Private Declarations"
 
     Public NssmService As New ClassNssm
+
     ReadOnly BackupThread As New Backups
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
@@ -156,15 +157,6 @@ Public Class FormSetup
         End Get
         Set(value As ManagementObjectSearcher)
             searcher = value
-        End Set
-    End Property
-
-    Public Property SearcherCPU As ManagementObjectSearcher
-        Get
-            Return searcher2
-        End Get
-        Set(value As ManagementObjectSearcher)
-            searcher2 = value
         End Set
     End Property
 
@@ -1397,19 +1389,16 @@ Public Class FormSetup
 
         If Not KillAll() Then Return
         SetLoading(True)
+        Try
+            If BackupThread IsNot Nothing Then BackupThread.Dispose()
+        Catch
+        End Try
 
-        'Try
-        'If cpu IsNot Nothing Then cpu.Dispose()
-        'Catch
-        'End Try
         Try
             If Searcher1 IsNot Nothing Then Searcher1.Dispose()
         Catch
         End Try
-        Try
-            If SearcherCPU IsNot Nothing Then Searcher1.Dispose()
-        Catch
-        End Try
+
         Try
             If Graphs IsNot Nothing Then Graphs.Dispose()
         Catch

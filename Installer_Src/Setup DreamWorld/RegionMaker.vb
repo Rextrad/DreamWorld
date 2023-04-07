@@ -650,7 +650,6 @@ Module RegionMaker
 
                             Region_Port(uuid) = ThisGroup
 
-
                             ' If region Is already set, use its port as they cannot change while up.
                             ' restore backups of transient data
                             Dim o = FindBackupByName(fName)

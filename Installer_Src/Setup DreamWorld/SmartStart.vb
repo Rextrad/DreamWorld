@@ -555,6 +555,7 @@ Module SmartStart
     ''' <param name="AgentID"></param>
     ''' <param name="Teleport"></param>
     ''' <returns></returns>
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId:="Outworldz.ClassTeleport")>
     Private Function AddEm(RegionUUID As String, AgentID As String, Teleport As Boolean) As Boolean
 
         If RegionUUID = "00000000-0000-0000-0000-000000000000" Then

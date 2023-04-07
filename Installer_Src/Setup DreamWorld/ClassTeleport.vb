@@ -12,6 +12,7 @@ Public Class ClassTeleport
 
     End Sub
 
+    <CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId:="Outworldz.ClassTeleport")>
     Private Sub TPLoop(o As Object)
 
         Dim AgentID = o.AvatarUUID.ToString

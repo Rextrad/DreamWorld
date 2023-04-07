@@ -356,8 +356,6 @@ Public Class FormRegionlist
 
         End If
 
-        Choices?.Close()
-
     End Sub
 
     Private Sub Addregion_Click(sender As Object, e As EventArgs) Handles AddRegionButton.Click
@@ -1693,7 +1691,6 @@ Public Class FormRegionlist
 
         End SyncLock
         SearchBusy = False
-
 
     End Sub
 
