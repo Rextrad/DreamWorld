@@ -25,7 +25,7 @@ Public Class FormSetup
 
     Public NssmService As New ClassNssm
     ReadOnly BackupThread As New Backups
-    Private ReadOnly cql As New ObjectQuery("select *  from Win32_PerfFormattedData_PerfOS_Processor ")
+    Private ReadOnly cql As New ObjectQuery("select PercentProcessorTime  from Win32_PerfFormattedData_PerfOS_Processor ")
 
     'where name = '_Total'
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
@@ -463,7 +463,7 @@ Public Class FormSetup
         End If
 
         'TextBox1.BackColor = Me.BackColor
-        ActiveControl = Nothing
+        'ActiveControl = Nothing
         'TextBox1.SelectAll()
         'TextBox1.SelectionIndent += 15 ' play With this values To match yours
         'TextBox1.SelectionRightIndent += 15 ' this too
@@ -2066,6 +2066,14 @@ Public Class FormSetup
 
 #Region "Timers"
 
+    ''' <summary>
+    ''' Timer runs every second looks for web server stuff that arrives, restarts any sims , updates lists of agents builds teleports.html for older teleport checks for crashed regions
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    '''
+    Dim timerObject As New Object
+
     Public Sub StartTimer()
 
         TimerMain.Interval = 1000
@@ -2074,118 +2082,116 @@ Public Class FormSetup
 
     End Sub
 
-    ''' <summary>
-    ''' Timer runs every second looks for web server stuff that arrives, restarts any sims , updates lists of agents builds teleports.html for older teleport checks for crashed regions
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles TimerMain.Tick
 
         If Not PropOpensimIsRunning() Then
             Return
         End If
+        SyncLock timerObject
 
-        If TimerisBusy > 0 And TimerisBusy < 30 Then
-            TimerisBusy += 1
-            Application.DoEvents()
-            Return
-        Else
-            TimerisBusy = 0
-        End If
-
-        TimerisBusy += 1
-
-        CheckPost()                 ' see if anything arrived in the web server
-        TeleportAgents()            ' periodically check for booted sims and send them onward
-        CheckForBootedRegions()     ' task to scan for anything that just came on line
-        ProcessQuit()               ' check if any processes exited
-        PrintBackups()              ' print if backups are running
-        Chat2Speech()               ' speak of the devil
-        RestartDOSboxes()           ' Icons for failed Services
-
-        If SecondsTicker Mod 2 = 0 AndAlso SecondsTicker > 0 Then
-            Bench.Start("5 second + worker")
-            ScanAgents()                ' update agent count
-            Chart()                     ' do charts collection
-            CalcDiskFree()              ' check for free disk space
-            '^^^^^^^^^^^^^^^^^^^^^
-            If Not RunningInServiceMode() Then
-                If Settings.ShowMysqlStats Then
-                    MySQLSpeed.Text = (MysqlStats() / 5).ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " Q/S"
-                Else
-                    MySQLSpeed.Text = ""
-                End If
+            If TimerisBusy > 0 And TimerisBusy < 30 Then
+                TimerisBusy += 1
+                Application.DoEvents()
+                Return
             Else
-                QuerySuper("SET GLOBAL general_log = 'OFF'")
+                TimerisBusy = 0
             End If
 
-            Bench.Print("5 second + worker")
-        End If
+            TimerisBusy += 1
 
-        If SecondsTicker = 60 Then
-            Bench.Start("60 second worker")
-            DeleteDirectoryTmp()    ' clean up old tmp folder
-            MakeMaps()              ' Make all the large maps
-            ScanOpenSimWorld(True) ' force an update at startup.
-            Bench.Print("60 second worker")
+            CheckPost()                 ' see if anything arrived in the web server
+            TeleportAgents()            ' periodically check for booted sims and send them onward
+            CheckForBootedRegions()     ' task to scan for anything that just came on line
+            ProcessQuit()               ' check if any processes exited
+            PrintBackups()              ' print if backups are running
+            Chat2Speech()               ' speak of the devil
+            RestartDOSboxes()           ' Icons for failed Services
 
-        End If
+            If SecondsTicker Mod 2 = 0 AndAlso SecondsTicker > 0 Then
+                Bench.Start("5 second + worker")
+                ScanAgents()                ' update agent count
+                Chart()                     ' do charts collection
+                CalcDiskFree()              ' check for free disk space
+                '^^^^^^^^^^^^^^^^^^^^^
+                If Not RunningInServiceMode() Then
+                    If Settings.ShowMysqlStats Then
+                        MySQLSpeed.Text = (MysqlStats() / 5).ToString("0.0", Globalization.CultureInfo.CurrentCulture) & " Q/S"
+                    Else
+                        MySQLSpeed.Text = ""
+                    End If
+                Else
+                    QuerySuper("SET GLOBAL general_log = 'OFF'")
+                End If
 
-        If SecondsTicker Mod 60 = 0 AndAlso SecondsTicker > 0 Then
-            Bench.Start("60 second + worker")
-            NewUserTimeout()        ' see if a new users has read and agreed to the tos
-            DeleteOldWave()         ' clean up TTS cache
+                Bench.Print("5 second + worker")
+            End If
 
-            RegionListHTML("Name") ' create HTML for old teleport boards
-            VisitorCount()         ' For the large maps
-            Bench.Print("60 second + worker")
-        End If
+            If SecondsTicker = 60 Then
+                Bench.Start("60 second worker")
+                DeleteDirectoryTmp()    ' clean up old tmp folder
+                MakeMaps()              ' Make all the large maps
+                ScanOpenSimWorld(True) ' force an update at startup.
+                Bench.Print("60 second worker")
 
-        ' Run Search and events once at 5 minute mark
-        If SecondsTicker = 300 Then
-            Bench.Start("300 second worker")
-            RunParser()     ' PHP parse for Publicity
-            GetEvents()     ' fetch events from Outworldz
-            ScanOpenSimWorld(True)
-            Bench.Print("300 second worker")
-        End If
+            End If
 
-        If SecondsTicker Mod 300 = 0 AndAlso SecondsTicker > 0 Then
-            Bench.Start("300 second + worker")
-            BackupThread.RunTimedBackups() ' run background right now, assuming its been long enough
-            Bench.Print("300 second + worker")
-        End If
+            If SecondsTicker Mod 60 = 0 AndAlso SecondsTicker > 0 Then
+                Bench.Start("60 second + worker")
+                NewUserTimeout()        ' see if a new users has read and agreed to the tos
+                DeleteOldWave()         ' clean up TTS cache
 
-        ' half hour
-        If SecondsTicker Mod 1800 = 0 AndAlso SecondsTicker > 0 Then
-            Bench.Start("Half hour worker")
-            ScanOpenSimWorld(True)
-            GetEvents()             ' fetch events from Outworldz
-            RunParser()             ' PHP parse for Publicity
-            MakeMaps()              ' Make all the large maps
-            Bench.Print("Half hour worker")
-        End If
+                RegionListHTML("Name") ' create HTML for old teleport boards
+                VisitorCount()         ' For the large maps
+                Bench.Print("60 second + worker")
+            End If
 
-        ' print hourly marks on console
-        If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
-            Bench.Start("Hour worker")
-            TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
-            ExpireLogsByAge()       ' clean up old logs
-            DeleteOldVisitors()     ' can be pretty old
-            ExpireLogByCount()      ' kill off old backup folders
-            ' Dynamically adjust Mysql for size of DB
-            ' set mysql for amount of buffer to use now that it running.
-            ' Will take effect next time Mysql is started.
-            Settings.Total_InnoDB_GBytes = Total_InnoDB_Bytes()
-            Bench.Print("Hour worker")
-        End If
+            ' Run Search and events once at 5 minute mark
+            If SecondsTicker = 300 Then
+                Bench.Start("300 second worker")
+                RunParser()     ' PHP parse for Publicity
+                GetEvents()     ' fetch events from Outworldz
+                ScanOpenSimWorld(True)
+                Bench.Print("300 second worker")
+            End If
 
-        ' Only runs once
-        If SecondsTicker = 3600 Then
-            ExportFsAssetsOneTime()
-        End If
+            If SecondsTicker Mod 300 = 0 AndAlso SecondsTicker > 0 Then
+                Bench.Start("300 second + worker")
+                BackupThread.RunTimedBackups() ' run background right now, assuming its been long enough
+                Bench.Print("300 second + worker")
+            End If
 
-        SecondsTicker += 1
+            ' half hour
+            If SecondsTicker Mod 1800 = 0 AndAlso SecondsTicker > 0 Then
+                Bench.Start("Half hour worker")
+                ScanOpenSimWorld(True)
+                GetEvents()             ' fetch events from Outworldz
+                RunParser()             ' PHP parse for Publicity
+                MakeMaps()              ' Make all the large maps
+                Bench.Print("Half hour worker")
+            End If
+
+            ' print hourly marks on console
+            If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
+                Bench.Start("Hour worker")
+                TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
+                ExpireLogsByAge()       ' clean up old logs
+                DeleteOldVisitors()     ' can be pretty old
+                ExpireLogByCount()      ' kill off old backup folders
+                ' Dynamically adjust Mysql for size of DB
+                ' set mysql for amount of buffer to use now that it running.
+                ' Will take effect next time Mysql is started.
+                Settings.Total_InnoDB_GBytes = Total_InnoDB_Bytes()
+                Bench.Print("Hour worker")
+            End If
+
+            ' Only runs once
+            If SecondsTicker = 3600 Then
+                ExportFsAssetsOneTime()
+            End If
+
+            SecondsTicker += 1
+
+        End SyncLock
 
         TimerisBusy = 0
 
