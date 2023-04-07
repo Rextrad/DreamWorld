@@ -6,6 +6,58 @@ Public Class FormSSL
     Private initted As Boolean
     Private LogFile As String = ""
 
+#Region "ScreenSize"
+
+    Private ReadOnly Handler As New EventHandler(AddressOf Resize_page)
+    Private _screenPosition As ClassScreenpos
+
+    Public Property ScreenPosition As ClassScreenpos
+        Get
+            Return _screenPosition
+        End Get
+        Set(value As ClassScreenpos)
+            _screenPosition = value
+        End Set
+    End Property
+
+    'The following detects  the location of the form in screen coordinates
+    Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        ScreenPosition.SaveXY(Me.Left, Me.Top)
+        ScreenPosition.SaveHW(Me.Height, Me.Width)
+    End Sub
+
+    Private Sub SetScreen()
+
+        Try
+            ScreenPosition = New ClassScreenpos(Me.Name)
+            AddHandler ResizeEnd, Handler
+            Dim xy As List(Of Integer) = ScreenPosition.GetXY()
+            Me.Left = xy.Item(0)
+            Me.Top = xy.Item(1)
+            Dim hw As List(Of Integer) = ScreenPosition.GetHW()
+
+            If hw.Item(0) = 0 Then
+                Me.Height = 500
+            Else
+                Me.Height = hw.Item(0)
+            End If
+            If hw.Item(1) = 0 Then
+                Me.Width = 600
+            Else
+                Me.Width = hw.Item(1)
+            End If
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+            Me.Height = 500
+            Me.Width = 600
+            Me.Left = 100
+            Me.Top = 100
+        End Try
+    End Sub
+
+#End Region
+
     Private Shared Function MakeSSLbatch(stuff As String) As String
 
         Dim filename = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\SSL\InstallSSL.bat")
@@ -36,6 +88,8 @@ Public Class FormSSL
     'https://www.win-acme.com/manual/advanced-use/examples/apache
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
 
+        SetLoading(True)
+
         If Settings.SSLIsInstalled = True Then
             Dim result = MsgBox(My.Resources.AreYouSureSSL, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, "SSL")
             If result <> vbYes Then
@@ -60,11 +114,13 @@ Public Class FormSSL
 
         If changed Then Settings.SaveSettings()
         InstallSSL()
+        SetLoading(False)
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles StopButton.Click
 
+        SetLoading(True)
         StartButton.Enabled = False
         StopButton.Enabled = False
         RestartButton.Enabled = False
@@ -79,6 +135,7 @@ Public Class FormSSL
             PictureBox2.Image = My.Resources.gear_stop
             StartButton.Enabled = True
         End If
+        SetLoading(False)
 
     End Sub
 
@@ -110,6 +167,7 @@ Public Class FormSSL
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles RestartButton.Click
 
+        SetLoading(True)
         StopButton.Enabled = False
         StartButton.Enabled = False
         RestartButton.Enabled = False
@@ -125,6 +183,7 @@ Public Class FormSSL
         StartButton.Enabled = False
         StopButton.Enabled = True
         RestartButton.Enabled = True
+        SetLoading(False)
 
     End Sub
 
@@ -145,6 +204,7 @@ Public Class FormSSL
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles StartButton.Click
 
+        SetLoading(True)
         StartButton.Enabled = False
         RestartButton.Enabled = False
         StopButton.Enabled = False
@@ -158,6 +218,7 @@ Public Class FormSSL
             PictureBox2.Image = My.Resources.gear_stop
             StartButton.Enabled = True
         End If
+        SetLoading(False)
 
     End Sub
 
@@ -274,7 +335,22 @@ Public Class FormSSL
         Return
     End Sub
 
+    Private Sub SetLoading(displayLoader As Boolean)
+
+        If displayLoader Then
+            PictureBox3.Visible = True
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Else
+            PictureBox3.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.[Default]
+        End If
+
+    End Sub
+
     Private Sub SSL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SetScreen()
+        SetLoading(False)
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)

@@ -55,11 +55,13 @@ Partial Class FormRegions
         Me.TextBox_Shout_Distance = New System.Windows.Forms.TextBox()
         Me.GroupBoxChat = New System.Windows.Forms.GroupBox()
         Me.ClearFarmButton = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBoxRegion.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.GroupBoxConcierge.SuspendLayout()
         Me.GroupBoxChat.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBoxRegion
@@ -292,13 +294,13 @@ Partial Class FormRegions
         'TextToSpeechToolStripMenuItem
         '
         Me.TextToSpeechToolStripMenuItem.Name = "TextToSpeechToolStripMenuItem"
-        Me.TextToSpeechToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TextToSpeechToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.TextToSpeechToolStripMenuItem.Text = "Text To Speech"
         '
         'RegionsToolStripMenuItem
         '
         Me.RegionsToolStripMenuItem.Name = "RegionsToolStripMenuItem"
-        Me.RegionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RegionsToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.RegionsToolStripMenuItem.Text = "Regions"
         '
         'GroupBoxConcierge
@@ -392,6 +394,22 @@ Partial Class FormRegions
         Me.ClearFarmButton.Text = "Clean Satyr Farm"
         Me.ClearFarmButton.UseVisualStyleBackColor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = Global.Outworldz.My.Resources.Resources.loader
+        Me.PictureBox1.Location = New System.Drawing.Point(274, 293)
+        Me.PictureBox1.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 18613
+        Me.PictureBox1.TabStop = False
+        '
         'FormRegions
         '
         Me.AllowDrop = True
@@ -399,6 +417,7 @@ Partial Class FormRegions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(464, 439)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BulkLoadButton)
         Me.Controls.Add(Me.ClearFarmButton)
         Me.Controls.Add(Me.GroupBoxChat)
@@ -419,6 +438,7 @@ Partial Class FormRegions
         Me.GroupBoxConcierge.PerformLayout()
         Me.GroupBoxChat.ResumeLayout(False)
         Me.GroupBoxChat.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -456,4 +476,5 @@ Partial Class FormRegions
     Friend WithEvents BlockButton As Button
     Friend WithEvents BulkLoadButton As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
