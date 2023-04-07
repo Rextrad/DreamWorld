@@ -306,10 +306,10 @@ Public Class FormRegions
             Dim RegionUUID = FindRegionByName(chosen)
             Dim File = IO.Path.Combine(Settings.OpensimBinPath, "SFCleanup.txt")
             Dim fileReader = My.Computer.FileSystem.ReadAllText(File, System.Text.Encoding.ASCII)
-            Dim Commands As String() = fileReader.Split("\n".ToCharArray())
+            Dim Commands As String() = fileReader.Split(vbCrLf.ToCharArray())
 
             For Each line In Commands
-                RPC_Region_Command(RegionUUID, line)
+                ConsoleCommand(RegionUUID, $"{line}{vbCrLf}Y")
             Next
         End If
 
