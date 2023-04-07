@@ -65,7 +65,11 @@
 
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
+
+            StartService()
+
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
+            Settings.RunAsService = True
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoInstall)
@@ -100,6 +104,7 @@
             If CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
                 TextPrint(My.Resources.Running_word)
                 ServiceIcon(True)
+                TextPrint(My.Resources.Running_word)
                 Return True
             End If
 
@@ -142,6 +147,7 @@
         BootProcess.StartInfo.UseShellExecute = True
         BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
         BootProcess.StartInfo.CreateNoWindow = True
+        BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
         BootProcess.StartInfo.Arguments = command
 
         Dim ok As Boolean = False
