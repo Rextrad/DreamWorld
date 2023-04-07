@@ -266,7 +266,7 @@ Partial Class CampBots
         Me.Controls.Add(Me.TextBox1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "CampBots"
-        Me.Text = "FormBots"
+        Me.Text = ""
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)

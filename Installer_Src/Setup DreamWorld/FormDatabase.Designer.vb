@@ -479,7 +479,7 @@ Partial Class FormDatabase
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormDatabase"
-        Me.Text = "Database"
+        Me.Text = ""
         Me.StandaloneGroup.ResumeLayout(False)
         Me.StandaloneGroup.PerformLayout()
         Me.GridGroup.ResumeLayout(False)

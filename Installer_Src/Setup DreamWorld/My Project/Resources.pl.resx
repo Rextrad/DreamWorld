@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Sprawdź, czy nie nakładają się regiony</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Ponowne instalowanie zależności</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Prawo autorskie</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Statystyki wszystkich regionów</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Ile botów?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Załaduj boty</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Powiedz nam, co mogło być tego przyczyną.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Nie ma to wpływu na system i inne aplikacje. Utworzono raport, który można wysłać, aby pomóc w zidentyfikowaniu tego problemu.</value>
+  </data>
 </root>

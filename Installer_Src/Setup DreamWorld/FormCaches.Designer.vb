@@ -254,7 +254,7 @@ Partial Class FormCaches
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormCaches"
-        Me.Text = "Cache Control"
+        Me.Text = ""
         Me.GridUsers.ResumeLayout(False)
         Me.GridUsers.PerformLayout()
         CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).EndInit()

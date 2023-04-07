@@ -95,7 +95,7 @@ Partial Class FormUpdate
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(198, 37)
         Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Renstall Dependencies"
+        Me.Button1.Text = "Reinstall Dependencies"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'FormUpdate

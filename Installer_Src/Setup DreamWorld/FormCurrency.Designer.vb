@@ -511,7 +511,7 @@ Partial Class FormCurrency
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormCurrency"
-        Me.Text = "Gloebit"
+        Me.Text = ""
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)

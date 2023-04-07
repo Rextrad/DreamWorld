@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Se etter overlappende områder</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Installer avhengigheter på nytt</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Opphavsrett</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>All statistikk for alle områder</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Hvor mange roboter?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Last inn roboter</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Fortell oss hva som kan ha forårsaket dette.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Systemet og andre applikasjoner har ikke blitt påvirket. Det er opprettet en rapport som du kan sende for å identifisere dette problemet.</value>
+  </data>
 </root>

@@ -410,6 +410,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to All region stats.
+        '''</summary>
+        Friend ReadOnly Property Allregionstats() As String
+            Get
+                Return ResourceManager.GetString("Allregionstats", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Alpha-Numeric plus minus sign and space character.
         '''</summary>
         Friend ReadOnly Property AlphaNum() As String
@@ -2725,6 +2734,15 @@ Namespace My.Resources
         Friend ReadOnly Property Copy_Word() As String
             Get
                 Return ResourceManager.GetString("Copy_Word", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Copyright.
+        '''</summary>
+        Friend ReadOnly Property Copyright() As String
+            Get
+                Return ResourceManager.GetString("Copyright", resourceCulture)
             End Get
         End Property
         
@@ -5831,6 +5849,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to How many bots?.
+        '''</summary>
+        Friend ReadOnly Property Howmany() As String
+            Get
+                Return ResourceManager.GetString("Howmany", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Http Port.
         '''</summary>
         Friend ReadOnly Property Http_Port_word() As String
@@ -6762,6 +6789,15 @@ Namespace My.Resources
         Friend ReadOnly Property Load_Terrain_tooltip() As String
             Get
                 Return ResourceManager.GetString("Load_Terrain_tooltip", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Load Bots.
+        '''</summary>
+        Friend ReadOnly Property LoadBots() As String
+            Get
+                Return ResourceManager.GetString("LoadBots", resourceCulture)
             End Get
         End Property
         
@@ -9574,6 +9610,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Please tell us what may have caused this..
+        '''</summary>
+        Friend ReadOnly Property ReasonText() As String
+            Get
+                Return ResourceManager.GetString("ReasonText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property recycle() As System.Drawing.Bitmap
@@ -9961,6 +10006,15 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("registry", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reinstall Dependencies.
+        '''</summary>
+        Friend ReadOnly Property ReinstallDependencies() As String
+            Get
+                Return ResourceManager.GetString("ReinstallDependencies", resourceCulture)
             End Get
         End Property
         
@@ -12169,6 +12223,15 @@ Namespace My.Resources
         Friend ReadOnly Property Subject_word() As String
             Get
                 Return ResourceManager.GetString("Subject_word", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The system and other applications have not been affected. A report has been created that you can send to help identify this problem..
+        '''</summary>
+        Friend ReadOnly Property Subtitle() As String
+            Get
+                Return ResourceManager.GetString("Subtitle", resourceCulture)
             End Get
         End Property
         

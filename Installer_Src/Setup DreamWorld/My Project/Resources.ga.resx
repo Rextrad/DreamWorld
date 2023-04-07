@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Seiceáil le haghaidh Réigiúin Fhorluiteacha</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Athshuiteáil Spleáchríocha</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Cóipcheart</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Gach stats réigiún</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Cé mhéad bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Luchtaigh Róbónna</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Inis dúinn cad ba chúis leis seo.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Níor cuireadh isteach ar an gcóras ná ar iarratais eile. Cruthaíodh tuairisc gur féidir leat a sheoladh chun cabhrú leis an bhfadhb seo a aithint.</value>
+  </data>
 </root>

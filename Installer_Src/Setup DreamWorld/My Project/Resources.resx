@@ -4744,4 +4744,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Check for Overlapping Regions</value>
   </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>All region stats</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>How many bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Load Bots</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Please tell us what may have caused this.</value>
+  </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Reinstall Dependencies</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>The system and other applications have not been affected. A report has been created that you can send to help identify this problem.</value>
+  </data>
 </root>

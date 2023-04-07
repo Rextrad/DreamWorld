@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Gainjarritako eskualderik ba ote dagoen egiaztatu</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Bulegoak berrezartzea</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Egile eskubideak</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Eskualde guztietako estatistikak</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Zenbat bot?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Bot-ak kargatu</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Mesedez, esaiguzu zerk eragin ote duen horrek.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Sistemak eta beste aplikazio batzuek ez dute eraginik izan. Txosten bat sortu da, arazo hori identifikatzen laguntzeko.</value>
+  </data>
 </root>

@@ -126,7 +126,7 @@ Partial Class FormDebug
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormDebug"
-        Me.Text = "Debug"
+        Me.Text = ""
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)

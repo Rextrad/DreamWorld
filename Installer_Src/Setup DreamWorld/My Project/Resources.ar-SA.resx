@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>تحقق من المناطق المتداخلة</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>إعادة تثبيت التبعيات</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>حقوق النشر</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>جميع احصائيات المنطقة</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>كم عدد الروبوتات؟</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>تحميل الروبوتات</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>من فضلك قل لنا ما قد يكون سبب هذا.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>لم يتأثر النظام والتطبيقات الأخرى. تم إنشاء تقرير يمكنك إرساله للمساعدة في تحديد هذه المشكلة.</value>
+  </data>
 </root>

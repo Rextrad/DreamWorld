@@ -2,13 +2,14 @@ Public Class FormUpdate
 
     Public Sub Init()
 
+        Button1.Text = My.Resources.ReinstallDependencies
         InstallButton.Text = My.Resources.UpdateNow
         Button2.Text = My.Resources.RemindMeLater
         RichTextBox3.SelectAll()
-        RichTextBox3.SelectionIndent += 15 ' play With this values To match yours
+        RichTextBox3.SelectionIndent += 15 ' play with this values
         RichTextBox3.SelectionRightIndent += 15 ' this too
         RichTextBox3.SelectionLength = 0
-        ' this Is a little hack because without this
+        ' this is a little hack because without this
         ' I've got the first line of my richTB selected anyway.
         RichTextBox3.SelectionBackColor = RichTextBox3.BackColor
 

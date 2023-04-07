@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>חיפוש אזורים חופפים</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>התקנה מחדש של יחסי תלות</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>זכויות יוצרים</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>כל הנתונים הסטטיסטיים של האזור</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>כמה בוטים?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>טען בוטים</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>אנא ספר לנו מה גרם לכך.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>המערכת ויישומים אחרים לא הושפעו. נוצר דוח שבאפשרותך לשלוח כדי לסייע בזיהוי בעיה זו.</value>
+  </data>
 </root>

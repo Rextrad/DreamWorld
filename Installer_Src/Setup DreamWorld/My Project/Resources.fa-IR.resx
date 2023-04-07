@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>بررسی مناطق همپوشان</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>وابستگی ها را دوباره نصب کنید</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>حق تکثیر</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>تمام آمار منطقه</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>چند تا ربات؟</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>رباتها بار</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>لطفا به ما بگویید چه چیزی ممکن است باعث این شده است.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>سیستم و دیگر برنامه های کاربردی تحت تاثیر قرار نگرفته اند. گزارشی ایجاد شده است که می توانید برای کمک به شناسایی این مشکل ارسال کنید.</value>
+  </data>
 </root>

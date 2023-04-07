@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Проверка перекрывающихся областей</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Переустановка зависимостей</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Авторское право</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Вся статистика по регионам</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Сколько ботов?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Загрузка ботов</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Расскажите, пожалуйста, что могло быть причиной этого.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Система и другие приложения не пострадали. Создан отчет, который можно отправить для выявления этой проблемы.</value>
+  </data>
 </root>

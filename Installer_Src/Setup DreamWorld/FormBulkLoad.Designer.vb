@@ -227,7 +227,7 @@ Partial Class FormBulkLoad
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormBulkLoad"
-        Me.Text = "Bulk Load"
+        Me.Text = ""
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)

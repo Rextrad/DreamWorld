@@ -30,7 +30,7 @@ Partial Class FormErrorLogger
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PrivacyButton = New System.Windows.Forms.Button()
         Me.EmailTextBox = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.EmailLabel = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -113,16 +113,16 @@ Partial Class FormErrorLogger
         Me.EmailTextBox.Size = New System.Drawing.Size(230, 20)
         Me.EmailTextBox.TabIndex = 1
         '
-        'Label5
+        'EmailLabel
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(36, 244)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(42, 17)
-        Me.Label5.TabIndex = 12
-        Me.Label5.Text = "Email"
+        Me.EmailLabel.AutoSize = True
+        Me.EmailLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EmailLabel.Location = New System.Drawing.Point(36, 244)
+        Me.EmailLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.EmailLabel.Name = "EmailLabel"
+        Me.EmailLabel.Size = New System.Drawing.Size(42, 17)
+        Me.EmailLabel.TabIndex = 12
+        Me.EmailLabel.Text = "Email"
         '
         'TextBox1
         '
@@ -175,7 +175,7 @@ Partial Class FormErrorLogger
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.EmailLabel)
         Me.Controls.Add(Me.EmailTextBox)
         Me.Controls.Add(Me.PrivacyButton)
         Me.Controls.Add(Me.PictureBox1)
@@ -200,7 +200,7 @@ Partial Class FormErrorLogger
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PrivacyButton As Button
     Friend WithEvents EmailTextBox As TextBox
-    Friend WithEvents Label5 As Label
+    Friend WithEvents EmailLabel As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Button1 As Button

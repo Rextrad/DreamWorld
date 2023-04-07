@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Çakışan Bölgeleri Kontrol Edin</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Bağımlılıkları Yeniden Yükleme</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Telif hakkı</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Tüm bölge istatistikleri</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Kaç bot var?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Botları Yükle</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Lütfen bize buna neyin neden olmuş olabileceğini söyleyin.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Sistem ve diğer uygulamalar etkilenmedi. Bu sorunu tanımlamaya yardımcı olmak için gönderebileceğiniz bir rapor oluşturulmuştur.</value>
+  </data>
 </root>

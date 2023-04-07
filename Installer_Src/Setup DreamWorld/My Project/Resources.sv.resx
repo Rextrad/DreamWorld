@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Kontrollera om det finns överlappande regioner</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Installera om beroenden</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Upphovsrätt</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>All regionstatistik</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Hur många bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Ladda robotar</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Berätta vad som kan ha orsakat detta.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Systemet och andra applikationer har inte påverkats. En rapport har skapats som du kan skicka för att identifiera problemet.</value>
+  </data>
 </root>

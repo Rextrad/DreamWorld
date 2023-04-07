@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Kontroller, om der er overlappende områder</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Geninstaller afhængigheder</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Ophavsret</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Alle regionale statistikker</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Hvor mange bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Indlæs bots</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Fortæl os, hvad der kan have forårsaget dette.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Systemet og andre applikationer er ikke blevet påvirket. Der er oprettet en rapport, som du kan sende for at hjælpe med at identificere dette problem.</value>
+  </data>
 </root>

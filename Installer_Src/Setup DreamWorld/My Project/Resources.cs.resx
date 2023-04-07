@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Kontrola překrývajících se oblastí</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Přeinstalace závislostí</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Autorské právo</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Statistiky všech regionů</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Kolik robotů?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Načítací roboti</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Prosím, řekněte nám, co to mohlo způsobit.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Systém a další aplikace nebyly ovlivněny. Byla vytvořena sestava, kterou můžete zaslat, abyste pomohli identifikovat tento problém.</value>
+  </data>
 </root>

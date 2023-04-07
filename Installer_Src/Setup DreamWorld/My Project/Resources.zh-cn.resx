@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>检查重叠区域</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>重新安装依赖项</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>版权</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>所有区域统计信息</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>有多少机器人？</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>加载机器人</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>请告诉我们可能导致这种情况的原因。</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>系统和其他应用程序未受到影响。已创建一份报告，您可以发送该报告以帮助识别此问题。</value>
+  </data>
 </root>

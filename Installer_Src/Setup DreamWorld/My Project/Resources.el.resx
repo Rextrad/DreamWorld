@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Έλεγχος για επικαλυπτόμενες περιοχές</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Επανεγκατάσταση εξαρτήσεων</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Πνευματικά δικαιώματα</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Όλα τα στατιστικά περιοχής</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Πόσα bots;</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Φόρτωση Bots</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Πείτε μας τι μπορεί να το προκάλεσε αυτό.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Το σύστημα και άλλες εφαρμογές δεν έχουν επηρεαστεί. Έχει δημιουργηθεί μια αναφορά που μπορείτε να στείλετε για να σας βοηθήσει να προσδιορίσετε αυτό το πρόβλημα.</value>
+  </data>
 </root>

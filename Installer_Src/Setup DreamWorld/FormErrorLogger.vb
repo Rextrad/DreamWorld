@@ -48,7 +48,8 @@
         TextBox2.Text = My.Resources.Quit_Message0
         Label1.Text = My.Resources.Quit_Message1
         PrivacyButton.Text = My.Resources.Privacy_policy
-
+        EmailLabel.Text = My.Resources.Email_word
+        ReasonText.Text = My.Resources.ReasonText
         Application.DoEvents()
 
     End Sub

@@ -93,7 +93,7 @@ Partial Class FormChooser
         Me.Controls.Add(Me.DataGridView)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormChooser"
-        Me.Text = "Choose Region"
+        Me.Text = ""
         Me.TopMost = True
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

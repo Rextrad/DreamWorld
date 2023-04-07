@@ -42,7 +42,7 @@ Partial Class FormPhysics
         Me.GroupBox1.Controls.Add(Me.Physics3_Separate)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 33)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(215, 138)
+        Me.GroupBox1.Size = New System.Drawing.Size(215, 144)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Physics Engine"
@@ -50,7 +50,7 @@ Partial Class FormPhysics
         'Physics5_Hybrid
         '
         Me.Physics5_Hybrid.AutoSize = True
-        Me.Physics5_Hybrid.Location = New System.Drawing.Point(6, 50)
+        Me.Physics5_Hybrid.Location = New System.Drawing.Point(6, 58)
         Me.Physics5_Hybrid.Name = "Physics5_Hybrid"
         Me.Physics5_Hybrid.Size = New System.Drawing.Size(55, 17)
         Me.Physics5_Hybrid.TabIndex = 5
@@ -61,7 +61,7 @@ Partial Class FormPhysics
         'Physics4_UbODE
         '
         Me.Physics4_UbODE.AutoSize = True
-        Me.Physics4_UbODE.Location = New System.Drawing.Point(6, 27)
+        Me.Physics4_UbODE.Location = New System.Drawing.Point(6, 35)
         Me.Physics4_UbODE.Name = "Physics4_UbODE"
         Me.Physics4_UbODE.Size = New System.Drawing.Size(153, 17)
         Me.Physics4_UbODE.TabIndex = 2
@@ -72,7 +72,7 @@ Partial Class FormPhysics
         'Physics2_Bullet
         '
         Me.Physics2_Bullet.AutoSize = True
-        Me.Physics2_Bullet.Location = New System.Drawing.Point(6, 72)
+        Me.Physics2_Bullet.Location = New System.Drawing.Point(6, 80)
         Me.Physics2_Bullet.Name = "Physics2_Bullet"
         Me.Physics2_Bullet.Size = New System.Drawing.Size(92, 17)
         Me.Physics2_Bullet.TabIndex = 3
@@ -83,7 +83,7 @@ Partial Class FormPhysics
         'Physics3_Separate
         '
         Me.Physics3_Separate.AutoSize = True
-        Me.Physics3_Separate.Location = New System.Drawing.Point(6, 93)
+        Me.Physics3_Separate.Location = New System.Drawing.Point(6, 101)
         Me.Physics3_Separate.Name = "Physics3_Separate"
         Me.Physics3_Separate.Size = New System.Drawing.Size(177, 17)
         Me.Physics3_Separate.TabIndex = 4

@@ -31,7 +31,7 @@ Public Class FormHelp
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " + Me.Location.ToString
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -70,7 +70,19 @@ Public Class FormHelp
 
         Dim u As New Uri(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Help\" & Webpage + ".htm"))
         WebBrowser1.Navigate(u)
-        Me.Show()
+
+        If Settings.Language <> "en" Then
+
+            Dim webAddress As String = PropHttpsDomain & $"/Outworldz_installer/Help/{Webpage}.htm"
+            Try
+                Process.Start(webAddress)
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+            Close()
+        Else
+            Me.Show()
+        End If
 
     End Sub
 

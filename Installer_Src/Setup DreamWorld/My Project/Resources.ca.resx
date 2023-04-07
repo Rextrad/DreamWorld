@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Comproveu si hi ha regions superposades</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Tornar a instal·lar dependències</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Drets d’autor</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Totes les estadístiques de la regió</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Quants bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Carregar bots</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Si us plau, digueu-nos què pot haver provocat això.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>El sistema i altres aplicacions no s'han vist afectats. S'ha creat un informe que podeu enviar per ajudar a identificar aquest problema.</value>
+  </data>
 </root>

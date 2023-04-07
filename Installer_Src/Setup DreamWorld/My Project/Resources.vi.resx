@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Kiểm tra các khu vực chồng chéo</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Cài đặt lại Dependencies</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Bản quyền</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Tất cả số liệu thống kê theo khu vực</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Có bao nhiêu bot?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Tải Bots</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Xin vui lòng cho chúng tôi biết những gì có thể đã gây ra điều này.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Hệ thống và các ứng dụng khác không bị ảnh hưởng. Một báo cáo đã được tạo mà bạn có thể gửi để giúp xác định vấn đề này.</value>
+  </data>
 </root>

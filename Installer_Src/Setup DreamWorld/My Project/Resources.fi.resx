@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Tarkista päällekkäiset alueet</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Asenna riippuvuudet uudelleen</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Tekijänoikeus</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Kaikki aluetilastot</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Kuinka monta bottia?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Lataa botit</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Kerro meille, mikä on saattanut aiheuttaa tämän.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Tämä ei ole vaikuttanut järjestelmään ja muihin sovelluksiin. On luotu raportti, jonka voit lähettää ongelman tunnistamiseksi.</value>
+  </data>
 </root>

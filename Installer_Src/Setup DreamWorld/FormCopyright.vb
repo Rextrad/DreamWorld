@@ -6,6 +6,7 @@
         My.Application.ChangeCulture(Settings.Language)
 
         Label1.Text = ("Version " & PropMyVersion)
+        Text = My.Resources.Copyright
 
     End Sub
 

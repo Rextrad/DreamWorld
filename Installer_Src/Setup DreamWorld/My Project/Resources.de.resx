@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Auf überlappende Bereiche prüfen</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Neuinstallation von Abhängigkeiten</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Urheberrecht</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Alle Regionsstatistiken</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Wie viele Bots?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Bots laden</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Bitte teilen Sie uns mit, woran dies gelegen haben könnte.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Das System und andere Anwendungen sind nicht betroffen. Es wurde ein Bericht erstellt, den Sie senden können, um dieses Problem zu identifizieren.</value>
+  </data>
 </root>

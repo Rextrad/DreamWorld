@@ -4158,4 +4158,25 @@
   <data name="CheckOverlap" xml:space="preserve">
     <value>Athugaðu hvort svæði skarast</value>
   </data>
+  <data name="ReinstallDependencies" xml:space="preserve">
+    <value>Settu aftur upp ósjálfstæði</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Höfundarréttur</value>
+  </data>
+  <data name="Allregionstats" xml:space="preserve">
+    <value>Tölfræði fyrir öll svæði</value>
+  </data>
+  <data name="Howmany" xml:space="preserve">
+    <value>Hve margir vélmenni?</value>
+  </data>
+  <data name="LoadBots" xml:space="preserve">
+    <value>Hlaða vélmenni</value>
+  </data>
+  <data name="ReasonText" xml:space="preserve">
+    <value>Segðu okkur hvað gæti hafa valdið þessu.</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Þetta hefur ekki áhrif á kerfið og önnur notkunarsvið. Skýrsla hefur verið stofnuð sem hægt er að senda til að hjálpa til við að auðkenna þetta vandamál.</value>
+  </data>
 </root>

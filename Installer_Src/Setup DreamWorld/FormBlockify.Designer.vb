@@ -125,7 +125,7 @@ Partial Class FormBlockify
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormBlockify"
-        Me.Text = "Realign"
+        Me.Text = My.Resources.Realign
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
