@@ -70,11 +70,7 @@ Module Icecast
 
     Public Function StartIcecast() As Boolean
 
-        If Not Settings.SCEnable Then
-            TextPrint(Global.Outworldz.My.Resources.IceCast_disabled)
-            IceCastIcon(False)
-            Return True
-        End If
+        Settings.SCEnable = True
 
         Try
             ' Check if DOS box exists, first, if so, its running.
@@ -125,6 +121,7 @@ Module Icecast
             Return False
         End If
 
+        TextPrint(My.Resources.Running_word)
         IceCastIcon(True)
 
         PropIceCastExited = False
@@ -149,6 +146,7 @@ Module Icecast
 
         Zap("icecast")
         IceCastIcon(False)
+        TextPrint(My.Resources.Stopped_word)
 
     End Sub
 

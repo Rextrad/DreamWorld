@@ -126,7 +126,7 @@ Public Class LoadIni
 
     End Function
 
-    Public Sub SaveIni()
+    Public Function SaveIni() As Boolean
 
         SyncLock SaveTheINI
             CopyFileFast(Settings.CurrentDirectory + "\OutworldzFiles\Settings.ini", Settings.CurrentDirectory + "\OutworldzFiles\Settings.bak")
@@ -146,12 +146,14 @@ Public Class LoadIni
                         Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
                     Else
                         ErrorLog($"Region INI filed to save: {FileName}")
+                        Return True
                     End If
                 End If
             End While
         End SyncLock
+        Return False
 
-    End Sub
+    End Function
 
     ''' <summary>Save to the ini the name value pair.</summary>
     ''' <param name="section"></param>

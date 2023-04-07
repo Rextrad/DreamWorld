@@ -31,7 +31,9 @@ Partial Class FormBlockify
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -48,7 +50,7 @@ Partial Class FormBlockify
         Me.HelpToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.about
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
-        Me.HelpToolStripMenuItem.Text = My.Resources.Help_word
+        Me.HelpToolStripMenuItem.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
         'SpacingTextBox
         '
@@ -64,7 +66,7 @@ Partial Class FormBlockify
         Me.GoButton.Name = "GoButton"
         Me.GoButton.Size = New System.Drawing.Size(111, 23)
         Me.GoButton.TabIndex = 2
-        Me.GoButton.Text = My.Resources.Go
+        Me.GoButton.Text = Global.Outworldz.My.Resources.Resources.Go
         Me.GoButton.UseVisualStyleBackColor = True
         '
         'RowSizeTextbox
@@ -93,11 +95,28 @@ Partial Class FormBlockify
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Label2"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = Global.Outworldz.My.Resources.Resources.loader
+        Me.PictureBox1.Location = New System.Drawing.Point(157, 105)
+        Me.PictureBox1.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 18613
+        Me.PictureBox1.TabStop = False
+        '
         'FormBlockify
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(217, 156)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.RowSizeTextbox)
@@ -106,9 +125,10 @@ Partial Class FormBlockify
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormBlockify"
-        Me.Text = My.Resources.Realign
+        Me.Text = "Realign"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -122,4 +142,5 @@ Partial Class FormBlockify
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

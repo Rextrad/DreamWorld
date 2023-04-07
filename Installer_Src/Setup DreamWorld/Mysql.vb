@@ -105,45 +105,7 @@ Public Module MysqlInterface
 
         MySQLIcon(False)
         ' Start MySql in background.
-
-        ' SAVE INI file
-        Dim INI = New LoadIni(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\my.ini"), "#", System.Text.Encoding.ASCII)
-
-        INI.SetIni("mysqld", "innodb_buffer_pool_size", $"{Settings.Total_InnoDB_GBytes()}G")
-
-        Dim Connections = 200 + 2 * RegionCount
-
-        INI.SetIni("mysqld", "max_connections", $"{CStr(Connections)}")
-
-        If Settings.MysqlRunasaService Or RunningInServiceMode() Then
-            INI.SetIni("mysqld", "innodb_max_dirty_pages_pct", "75")
-            INI.SetIni("mysqld", "innodb_flush_log_at_trx_commit", "2")
-        Else
-            ' when we are a service we can wait until we have 75 % of the buffer full before we flush
-            ' if not, too dangerous, so we always write at 0% for ACID behavior.
-            ' InnoDB tries to flush data from the buffer pool so that the percentage of dirty pages does Not exceed this value. The default value Is 75.
-            ' The innodb_max_dirty_pages_pct setting establishes a target for flushing activity. It does Not affect the rate of flushing.
-
-            INI.SetIni("mysqld", "innodb_max_dirty_pages_pct", "0")
-
-            ' If set To 1, InnoDB will flush (fsync) the transaction logs To the
-            ' disk at Each commit, which offers full ACID behavior. If you are
-            ' willing To compromise this safety, And you are running small
-            ' transactions, you may Set this To 0 Or 2 To reduce disk I/O To the
-            ' logs. Value 0 means that the log Is only written To the log file And
-            ' the log file flushed To disk approximately once per second. Value 2
-            ' means the log Is written To the log file at Each commit, but the log
-            ' file Is only flushed To disk approximately once per second.
-
-            INI.SetIni("mysqld", "innodb_flush_log_at_trx_commit", "1")
-        End If
-
-        INI.SetIni("mysqld", "basedir", $"""{Settings.CurrentSlashDir}/OutworldzFiles/MySQL""")
-        INI.SetIni("mysqld", "datadir", $"""{Settings.CurrentSlashDir}/OutworldzFiles/MySQL/Data""")
-        INI.SetIni("mysqld", "port", CStr(Settings.MySqlRobustDBPort))
-        INI.SetIni("client", "port", CStr(Settings.MySqlRobustDBPort))
-
-        INI.SaveIni()
+        DoMysql()
 
         ' create test program slants the other way:
         Dim testProgram As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\MySQL\bin\StartManually.bat")
