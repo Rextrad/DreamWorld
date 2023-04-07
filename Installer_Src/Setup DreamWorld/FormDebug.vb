@@ -129,6 +129,12 @@ Public Class FormDebug
         If Command = My.Resources.MakeNewMap Then
             MakeMap()
 
+        ElseIf Command = My.Resources.TextToSpeech Then
+
+            If Value Then
+                TTSTest()
+            End If
+
         ElseIf Command = My.Resources.TeleportAPI Then
 
             TPAPITest()
@@ -222,6 +228,7 @@ Public Class FormDebug
         RadioFalse.Text = My.Resources.False_word
 
         ComboBox1.Items.Add(My.Resources.Allregionstats)
+        ComboBox1.Items.Add(My.Resources.TextToSpeech)
         ComboBox1.Items.Add(My.Resources.LoadBots)
         ComboBox1.Items.Add(My.Resources.TeleportAPI)
         ComboBox1.Items.Add($"{My.Resources.Debug_word} {My.Resources.Off}")
@@ -372,6 +379,24 @@ Public Class FormDebug
                 ProgressPrint($"{My.Resources.Aborted_word} ")
             End If
         End If
+
+    End Sub
+
+    Private Sub TTSTest()
+
+        Dim tospeak = TextBox1.Text
+        Dim Url = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}?TTS=1&ApiKey={Settings.MachineId}&TTS={tospeak}"
+
+        Logger("INFO", "Using URL " & Url, "Diagnostics")
+        Using client As New WebClient ' download client for web pages
+            Try
+                client.DownloadString(Url)
+            Catch ex As WebException  ' not an error as could be a 404 from Diva being off
+                BreakPoint.Dump(ex)
+                Logger("Error", Global.Outworldz.My.Resources.Wrong & " " & ex.Message, "TTS")
+                ErrorLog($"{My.Resources.Wrong} {ex.Message}")
+            End Try
+        End Using
 
     End Sub
 

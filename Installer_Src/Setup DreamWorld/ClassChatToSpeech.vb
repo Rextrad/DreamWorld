@@ -73,7 +73,7 @@ Public Class ChatToSpeech
                 End If
 
                 ' Make path to Cache
-                HttpPathInfo = $"http://{Settings.PublicIP}:{Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture)}/TTS/Audio"
+                HttpPathInfo = $"http://{Settings.PublicIP}:{CStr(Settings.ApachePort)}/TTS/Audio"
                 HttpPathInfo = IO.Path.Combine(HttpPathInfo, fname)
                 HttpPathInfo = HttpPathInfo.Replace("\", "/")
                 HttpPathInfo = HttpPathInfo.Replace(".wav", ".mp3")
@@ -148,8 +148,9 @@ Public Class ChatToSpeech
             End If
 
         End SyncLock
+        If Params.SaveWave Then Return HttpPathInfo
+        Return "Spoken"
 
-        Return HttpPathInfo
 
     End Function
 
