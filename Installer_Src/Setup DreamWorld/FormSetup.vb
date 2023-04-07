@@ -511,7 +511,6 @@ Public Class FormSetup
 
         ' Boot RAM and CPU Query
         Searcher1 = New ManagementObjectSearcher(wql)
-        SearcherCPU = New ManagementObjectSearcher(cql)
 
         CopyWifi() 'Make the two folders in Wifi and Wifi bin for Diva
 
