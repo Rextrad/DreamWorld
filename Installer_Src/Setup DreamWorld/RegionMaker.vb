@@ -1735,7 +1735,7 @@ Module RegionMaker
             Catch
             End Try
 
-            post = post.ToUpper
+            Dim Upost = post.ToUpper
             If HttpUtility.ParseQueryString(myUri.Query).Get("Alt") IsNot Nothing Then
                 Return SmartStartParse(myUri)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
@@ -1746,8 +1746,8 @@ Module RegionMaker
                 Return GetPartner(post)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
                 Return Text2Speech(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("COMMAND") IsNot Nothing Then
-                Return CommandProcess(post)
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("Command") IsNot Nothing Then
+                Return CommandProcess(myUri)
             End If
         End If
 
@@ -1759,17 +1759,16 @@ Module RegionMaker
 
 #Region "Command"
 
-    Private Function CommandProcess(post As String) As String
+    Private Function CommandProcess(myURI As Uri) As String
 
         ' Smart Start AutoStart Region mode
-        Logger("Command", "Service:" + post, "Command")
-        Dim myUri = New Uri(post)
-        Dim Command = HttpUtility.ParseQueryString(myUri.Query).Get("Command")
+        Logger("Command", "Service:" + myURI.ToString, "Command")
+        Dim Command = HttpUtility.ParseQueryString(myURI.Query).Get("Command")
         Logger("Command", $"Command={Command}", "Command")
-        Dim Password = HttpUtility.ParseQueryString(myUri.Query).Get("password")
-        Dim RegionUUID = HttpUtility.ParseQueryString(myUri.Query).Get("RegionUUID")
+        Dim Password = HttpUtility.ParseQueryString(myURI.Query).Get("password")
+        Dim RegionUUID = HttpUtility.ParseQueryString(myURI.Query).Get("RegionUUID")
 
-        If Password <> Settings.MachineId Then
+        If Password.ToUpper <> Settings.MachineId.ToUpper Then
             Logger("ERROR", $"Bad Password {Password} for Command system. Should be the Dyn DNS password.", "Outworldz")
             Return "NAK"
         End If
