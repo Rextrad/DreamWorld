@@ -236,10 +236,11 @@ Public Class FormSetup
 
         TextPrint(My.Resources.Stopping_word)
         Buttons(BusyButton)
-
+        SetLoading(True)
         If Not KillAll() Then Return False
         Buttons(StartButton)
         TextPrint(My.Resources.Stopped_word)
+        SetLoading(False)
         Return True
 
     End Function
@@ -829,7 +830,7 @@ Public Class FormSetup
     Public Function StartOpensimulator() As Boolean
 
         Bench.Start("StartOpensim")
-
+        SetLoading(True)
         GetOpensimPIDsFromFiles()
 
         StartTimer()
@@ -858,6 +859,7 @@ Public Class FormSetup
 
             TextPrint("Starting Service. No Opensim DOS boxes will show")
             If Not NssmService.StartService() Then
+                SetLoading(False)
                 Return False
             End If
         End If
@@ -882,7 +884,6 @@ Public Class FormSetup
 
         If Settings.GraphVisible And Not RunningInServiceMode() Then
             G()
-
         End If
 
         For Each RegionUUID In RegionUuids()
@@ -900,6 +901,7 @@ Public Class FormSetup
 
         Buttons(StopButton)
         TextPrint(My.Resources.Ready)
+        SetLoading(False)
         Bench.Print("StartOpensim")
         Return True
 
@@ -1200,13 +1202,12 @@ Public Class FormSetup
 
 #End Region
 
-#Region "Scanner"
-
 #Region "Booting"
 
     Public Sub RestartAllRegions()
 
         PropOpensimIsRunning() = True
+
         If Not StartMySQL() Then Return
         If Not StartRobust() Then Return
 
@@ -1443,6 +1444,7 @@ Public Class FormSetup
     End Sub
 
     Private Shared Sub Create_ShortCut(ByVal sTargetPath As String)
+
         ' Requires reference to Windows Script Host Object Model
         Dim WshShell = New WshShellClass
         Dim MyShortcut As IWshShortcut
@@ -1896,19 +1898,27 @@ Public Class FormSetup
     End Function
 
     Private Sub ScriptsResumeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsResumeToolStripMenuItem.Click
+        SetLoading(True)
         SendScriptCmd("scripts resume")
+        SetLoading(False)
     End Sub
 
     Private Sub ScriptsStartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsStartToolStripMenuItem.Click
+        SetLoading(True)
         SendScriptCmd("scripts start")
+        SetLoading(False)
     End Sub
 
     Private Sub ScriptsStopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsStopToolStripMenuItem.Click
+        SetLoading(True)
         SendScriptCmd("scripts stop")
+        SetLoading(False)
     End Sub
 
     Private Sub ScriptsSuspendToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsSuspendToolStripMenuItem.Click
+        SetLoading(True)
         SendScriptCmd("scripts suspend")
+        SetLoading(False)
     End Sub
 
     Private Sub SearchForOarsAtOutworldzToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchForOarsAtOutworldzToolStripMenuItem.Click
@@ -1983,29 +1993,7 @@ Public Class FormSetup
 
 #End Region
 
-#Region "Globals"
-
-#End Region
-
-#Region "Events"
-
-#End Region
-
-#Region "Public Properties"
-
-#End Region
-
-#Region "Public Function"
-
-#End Region
-
-#Region "ExitList"
-
-#End Region
-
 #Region "Misc"
-
-#End Region
 
     Private Shared Sub PrintBackups()
 
@@ -2182,6 +2170,15 @@ Public Class FormSetup
 #End Region
 
 #Region "Clicks"
+
+    Public Sub StartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem1.Click
+
+        SetLoading(True)
+        DoMysql()
+        StartMySQL()
+        SetLoading(False)
+
+    End Sub
 
     Private Shared Sub RunCheck(type As String)
         Using p = New Process()
@@ -2450,8 +2447,10 @@ Public Class FormSetup
 
     Private Sub Debug_Click(sender As Object, e As EventArgs) Handles Debug.Click
 
+        SetLoading(True)
         Settings.LogLevel = "DEBUG"
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
@@ -2491,14 +2490,15 @@ Public Class FormSetup
 
     Private Sub DeleteServiceToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DeleteServiceToolStripMenuItem1.Click
 
+        SetLoading(True)
         StopMysql()
         Dim win = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "sc.exe")
         Dim pi = New ProcessStartInfo With {
-    .WindowStyle = ProcessWindowStyle.Hidden,
-    .CreateNoWindow = True,
-    .FileName = win,
-    .Arguments = "delete MySQLDreamGrid"
-}
+            .WindowStyle = ProcessWindowStyle.Hidden,
+            .CreateNoWindow = True,
+            .FileName = win,
+            .Arguments = "delete MySQLDreamGrid"
+        }
         Using p As New Process
             p.StartInfo = pi
             Try
@@ -2509,11 +2509,15 @@ Public Class FormSetup
                 BreakPoint.Dump(ex)
             End Try
         End Using
+        SetLoading(False)
+
     End Sub
 
     Private Sub DeleteServiceToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles DeleteServiceToolStripMenuItem2.Click
 
+        SetLoading(True)
         NssmService.DeleteService()
+        SetLoading(False)
 
     End Sub
 
@@ -2523,8 +2527,9 @@ Public Class FormSetup
             TextPrint(My.Resources.Click_Start)
             Return
         End If
-
+        SetLoading(True)
         DoDiag()
+        SetLoading(False)
         If Settings.DiagFailed Then
             TextPrint(My.Resources.HG_Failed)
         Else
@@ -2536,20 +2541,26 @@ Public Class FormSetup
     Private Sub ErrorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ErrorToolStripMenuItem.Click
 
         Settings.LogLevel = "ERROR"
+        SetLoading(True)
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
     Private Sub EveryoneToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EveryoneToolStripMenuItem.Click
 
+        SetLoading(True)
         RunCheck("everyone")
+        SetLoading(False)
 
     End Sub
 
     Private Sub Fatal1_Click(sender As Object, e As EventArgs) Handles Fatal1.Click
 
+        SetLoading(True)
         Settings.LogLevel = "FATAL"
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
@@ -2576,10 +2587,11 @@ Public Class FormSetup
 
     Private Sub FreezAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreezAllToolStripMenuItem.Click
 
+        SetLoading(True)
         For Each RegionUUID In RegionUuids()
             FreezeThaw.Freeze(RegionUUID)
         Next
-
+        SetLoading(False)
         PropUpdateView = True
 
     End Sub
@@ -2649,15 +2661,21 @@ Public Class FormSetup
 
     Private Sub Info_Click(sender As Object, e As EventArgs) Handles Info.Click
 
+        SetLoading(True)
         Settings.LogLevel = "INFO"
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
     Private Sub JobEngineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles JobEngineToolStripMenuItem.Click
+
+        SetLoading(True)
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "debug jobengine status")
         Next
+        SetLoading(False)
+
     End Sub
 
     Private Sub JustOneRegionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllUsersAllSimsToolStripMenuItem.Click
@@ -2667,6 +2685,7 @@ Public Class FormSetup
             Return
         End If
 
+        SetLoading(True)
         Dim HowManyAreOnline As Integer = 0
         Dim Message = InputBox(My.Resources.What_2_say_To_all)
         If Message.Length > 0 Then
@@ -2682,6 +2701,7 @@ Public Class FormSetup
                 TextPrint($"{My.Resources.Message_sent_word} {CStr(HowManyAreOnline)} regions")
             End If
         End If
+        SetLoading(False)
 
     End Sub
 
@@ -2780,11 +2800,12 @@ Public Class FormSetup
 
     Private Sub MinimizeAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MinimizeAllToolStripMenuItem.Click
 
+        SetLoading(True)
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWMINIMIZE)
             Timer(RegionUuid) = Date.Now
         Next
-
+        SetLoading(False)
         PropUpdateView = True
 
     End Sub
@@ -2830,6 +2851,7 @@ Public Class FormSetup
     End Sub
 
     Private Sub MnuHideAllways_Click(sender As Object, e As EventArgs) Handles mnuHideAllways.Click
+
         TextPrint(My.Resources.Not_Shown)
         mnuShow.Checked = False
         mnuHide.Checked = False
@@ -2851,20 +2873,12 @@ Public Class FormSetup
 
     End Sub
 
-    Private Sub MysqlPictureBox_Click(sender As Object, e As EventArgs)
-
-        If MysqlInterface.IsMySqlRunning() Then
-            StopMysql()
-        Else
-            StartMySQL()
-        End If
-
-    End Sub
-
     Private Sub Off1_Click(sender As Object, e As EventArgs) Handles Off1.Click
 
+        SetLoading(True)
         Settings.LogLevel = "OFF"
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
@@ -2912,7 +2926,9 @@ Public Class FormSetup
 
     Private Sub RestartAllRegionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestartAllRegionsToolStripMenuItem.Click
 
+        SetLoading(True)
         RestartAllRegions()
+        SetLoading(False)
 
     End Sub
 
@@ -2947,17 +2963,21 @@ Public Class FormSetup
 
     Private Sub RestartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestartMysqlItem.Click
 
+        SetLoading(True)
         PropAborting = True
         StopMysql()
         StartMySQL()
         PropAborting = False
+        SetLoading(False)
 
     End Sub
 
     Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
 
+        SetLoading(True)
         NssmService.StopService()
         NssmService.StartService()
+        SetLoading(False)
 
     End Sub
 
@@ -2972,6 +2992,7 @@ Public Class FormSetup
 
     Private Sub RestartToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem2.Click
 
+        SetLoading(True)
         If Not Settings.ApacheEnable Then
             ApacheIcon(False)
             TextPrint(My.Resources.Apache_Disabled)
@@ -2979,11 +3000,13 @@ Public Class FormSetup
         StopApache()
         Sleep(100)
         StartApache()
+        SetLoading(False)
 
     End Sub
 
     Private Sub RestartToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles RestartIceCastItem2.Click
 
+        SetLoading(True)
         If Not Settings.SCEnable Then
             Settings.SCEnable = True
         End If
@@ -2992,6 +3015,7 @@ Public Class FormSetup
         StopIcecast()
         StartIcecast()
         PropAborting = False
+        SetLoading(False)
 
     End Sub
 
@@ -3084,16 +3108,6 @@ Public Class FormSetup
 
     End Sub
 
-    Private Sub RobustPictureBox_Click(sender As Object, e As EventArgs)
-
-        If Not IsRobustRunning() Then
-            StartRobust()
-        Else
-            StopRobust()
-        End If
-
-    End Sub
-
     Private Sub SaveAllRunningRegiondsAsOARSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAllRunningRegiondsAsOARSToolStripMenuItem.Click
 
         If Not PropOpensimIsRunning() Then
@@ -3129,11 +3143,15 @@ Public Class FormSetup
     End Sub
 
     Private Sub ShowAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowAllToolStripMenuItem.Click
+
+        SetLoading(True)
         For Each RegionUuid In RegionUuids()
             ShowDOSWindow(RegionUuid, SHOWWINDOWENUM.SWRESTORE)
             Thaw(RegionUuid)
             Timer(RegionUuid) = DateAdd("n", 1, Date.Now) ' Add  minutes for console to do things
         Next
+        SetLoading(False)
+
     End Sub
 
     Private Sub ShowConsoleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowConsoleToolStripMenuItem.Click
@@ -3207,10 +3225,12 @@ Public Class FormSetup
     End Sub
 
     Private Sub ShowUserDetailsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowUserDetailsToolStripMenuItem.Click
+
         Dim person = InputBox(My.Resources.Enter_1_2)
         If person.Length > 0 Then
             ConsoleCommand(RobustName, "show account " & person)
         End If
+
     End Sub
 
     Private Sub SimulatorStatsToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -3238,36 +3258,39 @@ Public Class FormSetup
 
     Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
 
+        SetLoading(True)
         NssmService.InstallService()
         NssmService.StartService()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
 
         Settings.ApacheEnable = True
+        DoApache()
         Settings.SaveSettings()
         StartApache()
 
     End Sub
 
-    Private Sub StartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem1.Click
-
-        StartMySQL()
-
-    End Sub
-
     Private Sub StartToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem2.Click
 
+        SetLoading(True)
+        DoRobust()
         StartRobust()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StartToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem3.Click
 
+        SetLoading(True)
         Settings.SCEnable = True
+        DoIceCast()
         Settings.SaveSettings()
         StartIcecast()
+        SetLoading(False)
 
     End Sub
 
@@ -3290,39 +3313,51 @@ Public Class FormSetup
 
     Private Sub StoipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoipToolStripMenuItem.Click
 
+        SetLoading(True)
         NssmService.StopService()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StopButton_Click_1(sender As System.Object, e As EventArgs) Handles StopButton.Click
 
+        SetLoading(True)
         DoStopActions()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem.Click
 
+        SetLoading(True)
         StopApache()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StopToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem1.Click
 
+        SetLoading(True)
         StopMysql()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StopToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem2.Click
 
+        SetLoading(True)
         StopRobust()
+        SetLoading(False)
 
     End Sub
 
     Private Sub StopToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem3.Click
 
+        SetLoading(True)
         PropAborting = True
         StopIcecast()
         PropAborting = False
+        SetLoading(False)
 
     End Sub
 
@@ -3339,19 +3374,23 @@ Public Class FormSetup
 
     Private Sub ThawAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThawAllToolStripMenuItem.Click
 
+        SetLoading(True)
         For Each RegionUUID In RegionUuids()
             Thaw(RegionUUID)
             Timer(RegionUUID) = DateAdd("n", 5, Date.Now) ' Add  5 minutes for console to do things
         Next
         PropUpdateView = True
+        SetLoading(False)
 
     End Sub
 
     Private Sub ThreadpoolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThreadpoolsToolStripMenuItem.Click
 
+        SetLoading(True)
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "show threads")
         Next
+        SetLoading(False)
 
     End Sub
 
@@ -3443,16 +3482,21 @@ Public Class FormSetup
 
     Private Sub Warn_Click(sender As Object, e As EventArgs) Handles Warn.Click
 
+        SetLoading(True)
         Settings.LogLevel = "WARN"
+
         SendMsg(Settings.LogLevel)
+        SetLoading(False)
 
     End Sub
 
     Private Sub XengineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles XengineToolStripMenuItem.Click
 
+        SetLoading(True)
         For Each RegionUUID As String In RegionUuids()
             ConsoleCommand(RegionUUID, "xengine status")
         Next
+        SetLoading(False)
 
     End Sub
 

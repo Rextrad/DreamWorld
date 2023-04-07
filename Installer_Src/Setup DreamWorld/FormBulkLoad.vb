@@ -36,6 +36,18 @@ Public Class FormBulkLoad
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
+    Private Sub SetLoading(displayLoader As Boolean)
+
+        If displayLoader Then
+            PictureBox1.Visible = True
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Else
+            PictureBox1.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.[Default]
+        End If
+
+    End Sub
+
     Private Sub SetScreen()
 
         ScreenPosition = New ClassScreenpos(Me.Name)
@@ -373,8 +385,9 @@ Public Class FormBulkLoad
             MsgBox(My.Resources.TryAgain)
             Return
         End If
-
+        SetLoading(True)
         StartBulkLoading()
+        SetLoading(False)
 
     End Sub
 
@@ -403,6 +416,7 @@ Public Class FormBulkLoad
         My.Application.ChangeCulture(Settings.Language)
 
         SetScreen()
+        SetLoading(False)
 
         OwnerLabel.Text = My.Resources.OwnerofNewRegions
         RegionOwnerTextBox.Text = Settings.BulkLoadOwner

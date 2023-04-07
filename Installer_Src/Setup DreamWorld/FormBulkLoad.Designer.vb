@@ -31,15 +31,17 @@ Partial Class FormBulkLoad
         Me.XLabel = New System.Windows.Forms.Label()
         Me.YLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RadioButtonSuspend = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonBoot = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonNone = New System.Windows.Forms.RadioButton()
         Me.Estatenamelabel = New System.Windows.Forms.Label()
         Me.EstateName = New System.Windows.Forms.TextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.RadioButtonNone = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonBoot = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonSuspend = New System.Windows.Forms.RadioButton()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RegionOwnerTextBox
@@ -113,6 +115,7 @@ Partial Class FormBulkLoad
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.Controls.Add(Me.RadioButtonSuspend)
         Me.GroupBox1.Controls.Add(Me.RadioButtonBoot)
         Me.GroupBox1.Controls.Add(Me.RadioButtonNone)
@@ -132,6 +135,40 @@ Partial Class FormBulkLoad
         Me.GroupBox1.TabIndex = 1908
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Load All Free Regions"
+        '
+        'RadioButtonSuspend
+        '
+        Me.RadioButtonSuspend.AutoSize = True
+        Me.RadioButtonSuspend.Checked = True
+        Me.RadioButtonSuspend.Location = New System.Drawing.Point(11, 221)
+        Me.RadioButtonSuspend.Name = "RadioButtonSuspend"
+        Me.RadioButtonSuspend.Size = New System.Drawing.Size(97, 17)
+        Me.RadioButtonSuspend.TabIndex = 1912
+        Me.RadioButtonSuspend.TabStop = True
+        Me.RadioButtonSuspend.Text = "Smart Suspend"
+        Me.RadioButtonSuspend.UseVisualStyleBackColor = True
+        '
+        'RadioButtonBoot
+        '
+        Me.RadioButtonBoot.AutoSize = True
+        Me.RadioButtonBoot.Location = New System.Drawing.Point(11, 198)
+        Me.RadioButtonBoot.Name = "RadioButtonBoot"
+        Me.RadioButtonBoot.Size = New System.Drawing.Size(77, 17)
+        Me.RadioButtonBoot.TabIndex = 1911
+        Me.RadioButtonBoot.TabStop = True
+        Me.RadioButtonBoot.Text = "Smart Boot"
+        Me.RadioButtonBoot.UseVisualStyleBackColor = True
+        '
+        'RadioButtonNone
+        '
+        Me.RadioButtonNone.AutoSize = True
+        Me.RadioButtonNone.Location = New System.Drawing.Point(11, 175)
+        Me.RadioButtonNone.Name = "RadioButtonNone"
+        Me.RadioButtonNone.Size = New System.Drawing.Size(51, 17)
+        Me.RadioButtonNone.TabIndex = 1910
+        Me.RadioButtonNone.TabStop = True
+        Me.RadioButtonNone.Text = "None"
+        Me.RadioButtonNone.UseVisualStyleBackColor = True
         '
         'Estatenamelabel
         '
@@ -166,39 +203,21 @@ Partial Class FormBulkLoad
         Me.ToolStripLabel1.Size = New System.Drawing.Size(48, 22)
         Me.ToolStripLabel1.Text = "Help"
         '
-        'RadioButtonNone
+        'PictureBox1
         '
-        Me.RadioButtonNone.AutoSize = True
-        Me.RadioButtonNone.Location = New System.Drawing.Point(11, 175)
-        Me.RadioButtonNone.Name = "RadioButtonNone"
-        Me.RadioButtonNone.Size = New System.Drawing.Size(51, 17)
-        Me.RadioButtonNone.TabIndex = 1910
-        Me.RadioButtonNone.TabStop = True
-        Me.RadioButtonNone.Text = "None"
-        Me.RadioButtonNone.UseVisualStyleBackColor = True
-        '
-        'RadioButtonBoot
-        '
-        Me.RadioButtonBoot.AutoSize = True
-        Me.RadioButtonBoot.Location = New System.Drawing.Point(11, 198)
-        Me.RadioButtonBoot.Name = "RadioButtonBoot"
-        Me.RadioButtonBoot.Size = New System.Drawing.Size(77, 17)
-        Me.RadioButtonBoot.TabIndex = 1911
-        Me.RadioButtonBoot.TabStop = True
-        Me.RadioButtonBoot.Text = "Smart Boot"
-        Me.RadioButtonBoot.UseVisualStyleBackColor = True
-        '
-        'RadioButtonSuspend
-        '
-        Me.RadioButtonSuspend.AutoSize = True
-        Me.RadioButtonSuspend.Checked = True
-        Me.RadioButtonSuspend.Location = New System.Drawing.Point(11, 221)
-        Me.RadioButtonSuspend.Name = "RadioButtonSuspend"
-        Me.RadioButtonSuspend.Size = New System.Drawing.Size(97, 17)
-        Me.RadioButtonSuspend.TabIndex = 1912
-        Me.RadioButtonSuspend.TabStop = True
-        Me.RadioButtonSuspend.Text = "Smart Suspend"
-        Me.RadioButtonSuspend.UseVisualStyleBackColor = True
+        Me.PictureBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Image = Global.Outworldz.My.Resources.Resources.loader
+        Me.PictureBox1.Location = New System.Drawing.Point(141, 214)
+        Me.PictureBox1.MaximumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.MinimumSize = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(24, 24)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 18613
+        Me.PictureBox1.TabStop = False
         '
         'FormBulkLoad
         '
@@ -213,6 +232,7 @@ Partial Class FormBulkLoad
         Me.GroupBox1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -234,4 +254,5 @@ Partial Class FormBulkLoad
     Friend WithEvents RadioButtonSuspend As RadioButton
     Friend WithEvents RadioButtonBoot As RadioButton
     Friend WithEvents RadioButtonNone As RadioButton
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

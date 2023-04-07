@@ -25,6 +25,18 @@ Public Class FormBlockify
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
+    Private Sub SetLoading(displayLoader As Boolean)
+
+        If displayLoader Then
+            PictureBox1.Visible = True
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Else
+            PictureBox1.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.[Default]
+        End If
+
+    End Sub
+
     Private Sub SetScreen()
 
         ScreenPosition = New ClassScreenpos(Me.Name)
@@ -44,8 +56,9 @@ Public Class FormBlockify
             Return
         End If
 
+        SetLoading(True)
         MakeBlock()
-
+        SetLoading(False)
     End Sub
 
     Private Sub FormBlockify_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -64,7 +77,7 @@ Public Class FormBlockify
         ToolTip1.SetToolTip(SpacingTextBox, Global.Outworldz.My.Resources.SpacingTT)
 
         SetScreen()
-
+        SetLoading(False)
         HelpOnce("Rearrange")
 
     End Sub
@@ -151,8 +164,9 @@ Public Class FormBlockify
                 End If
 
                 Delete_Region_Map(RegionUUID)
-            End If
 
+            End If
+            Application.DoEvents()
         Next
 
         PropChangedRegionSettings = True
