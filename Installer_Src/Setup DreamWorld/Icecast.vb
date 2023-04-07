@@ -68,6 +68,33 @@ Module Icecast
 
     End Sub
 
+    Public Function IsIceCastRunning() As Boolean
+
+        Dim Up As String
+        Using TimedClient As New TimedWebClient With {
+              .Timeout = 1000
+            }
+            Try
+                Up = TimedClient.DownloadString($"http://{Settings.LANIP}:{CStr(Settings.SCPortBase)}/?_Opensim={RandomNumber.Random}")
+                Application.DoEvents()
+            Catch ex As Exception
+                If ex.Message.Contains("200 OK") Then
+                    IceCastIcon(True)
+                    Return True
+                End If
+                IceCastIcon(False)
+                Return False
+            End Try
+            If Up.Length = 0 Then
+                IceCastIcon(False)
+                Return False
+            End If
+
+        End Using
+        IceCastIcon(True)
+        Return True
+    End Function
+
     Public Function StartIcecast() As Boolean
 
         Settings.SCEnable = True
