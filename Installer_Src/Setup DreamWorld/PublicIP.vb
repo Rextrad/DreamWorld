@@ -96,9 +96,10 @@ Module PublicIP
         Using ClientSocket As New TcpClient
             Try
                 result = ClientSocket.BeginConnect(ServerAddress, Port, Nothing, Nothing)
-                success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1))
-                Application.DoEvents()
-                ClientSocket.EndConnect(result)
+                success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2))
+                If success Then
+                    ClientSocket.EndConnect(result)
+                End If
             Catch ex As Exception
                 Return False
             End Try
