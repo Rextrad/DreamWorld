@@ -113,7 +113,7 @@ Public Class FormRestart
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " + Me.Location.ToString
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 

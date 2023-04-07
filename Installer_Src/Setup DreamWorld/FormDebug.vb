@@ -23,7 +23,7 @@ Public Class FormDebug
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " + Me.Location.ToString
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -133,11 +133,11 @@ Public Class FormDebug
 
             TPAPITest()
 
-        ElseIf Command = "All region stats" Then
+        ElseIf Command = My.Resources.Allregionstats Then
 
             Poketest()
 
-        ElseIf Command = "Load Bots" Then
+        ElseIf Command = My.Resources.LoadBots Then
 
             If Value Then
                 LoadBots()
@@ -221,8 +221,8 @@ Public Class FormDebug
         RadioTrue.Text = My.Resources.True_word
         RadioFalse.Text = My.Resources.False_word
 
-        ComboBox1.Items.Add("All region stats")
-        ComboBox1.Items.Add("Load Bots")
+        ComboBox1.Items.Add(My.Resources.Allregionstats)
+        ComboBox1.Items.Add(My.Resources.LoadBots)
         ComboBox1.Items.Add(My.Resources.TeleportAPI)
         ComboBox1.Items.Add($"{My.Resources.Debug_word} {My.Resources.Off}")
         ComboBox1.Items.Add($"{My.Resources.Debug_word} 1 {My.Resources.Minute}")
@@ -243,7 +243,7 @@ Public Class FormDebug
         PrintBotHelp()
 
         Dim out As Integer
-        Dim N = InputBox("How many bots?  0-100 ", "pCampBots", "1")
+        Dim N = InputBox($"{My.Resources.Howmany} 0-100 ", "pCampBots", "1")
         If Integer.TryParse(N, out) Then
             If out > 100 Then out = 0
 
@@ -263,20 +263,20 @@ Public Class FormDebug
         'pCambot.exe -botcount 1 -loginuri http://127.0.0.1:6002 -start Normal -firstname Ima  -lastname Bot -password 123xyz
 
         Dim help As New List(Of String) From {
-                "For more information, type 'help all' to get a list of all commands,or type help <item>' where <item> is one of the following:",
-                "add behaviour <abbreviated-name> [<bot-number>] - Add a behaviour to a bot.",
-                "connect [<n>] - Connect bots.",
-                "disconnect [<n>] - Disconnect bots.",
-                "quit - Shutdown bots and exit.",
-                "remove behaviour <abbreviated-name> [<bot-number>] - Remove a behaviour from a bot.",
-                "set bots <key> <value> - Set a setting for all bots.",
-                "show bot <bot-number> - Shows the detailed status And settings of a particular bot.",
-                "show bots - Shows the status of all bots.",
-                "show regions - Show regions known to bots.",
-                "show status - Shows pCampbot status.",
-                "shutdown - Shutdown bots And exit.",
-                "sit - Sit all bots on the ground.",
-                "stand - Stand all bots."
+                $"{My.Resources.Formoreinformation} 'help all' {My.Resources.Toget} 'help <item>' {My.Resources.whereitem}:",
+                $"add behaviour <abbreviated-name> [<bot-number>] - {My.Resources.AddBehaviour}.",
+                $"connect [<n>] - {My.Resources.Connectbots}.",
+                $"disconnect [<n>] - {My.Resources.Disconnectbots}.",
+                $"quit - {My.Resources.Shutdownbots}.",
+                $"remove behaviour <abbreviated-name> [<bot-number>] - {My.Resources.Removebehaviour}.",
+                $"set bots <key> <value> - {My.Resources.Setasetting}.",
+                $"show bot <bot-number> - {My.Resources.Showsdetailedstatus}.",
+                $"show bots - {My.Resources.Showthesstatus}.",
+                $"show regions - {My.Resources.Showregionsknown}.",
+                $"show status - {My.Resources.Showsstatus}.",
+                $"shutdown - {My.Resources.Shutdownbotsandexit}.",
+                $"sit - {My.Resources.SitAllBots}",
+                $"stand - {My.Resources.Standallbots}."
             }
 
         For Each line In help

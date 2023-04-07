@@ -32,7 +32,7 @@ Public Class FormBulkLoad
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " & Me.Location.ToString
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -417,6 +417,8 @@ Public Class FormBulkLoad
 
         SetScreen()
         SetLoading(False)
+
+        Me.Text = My.Resources.BulkLoadRegions
 
         OwnerLabel.Text = My.Resources.OwnerofNewRegions
         RegionOwnerTextBox.Text = Settings.BulkLoadOwner

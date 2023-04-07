@@ -1157,7 +1157,7 @@ Public Class FormSmartStart
     End Sub
 
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " + Me.Location.ToString
+        
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 

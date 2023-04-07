@@ -36,8 +36,20 @@ Public Class FormRegions
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.Text = "Form screen position = " & Me.Location.ToString
+        
         ScreenPosition.SaveXY(Me.Left, Me.Top)
+    End Sub
+
+    Private Sub SetLoading(displayLoader As Boolean)
+
+        If displayLoader Then
+            PictureBox1.Visible = True
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
+        Else
+            PictureBox1.Visible = False
+            Me.Cursor = System.Windows.Forms.Cursors.[Default]
+        End If
+
     End Sub
 
     Private Sub SetScreen()
@@ -210,6 +222,8 @@ Public Class FormRegions
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
 
+        SetLoading(False)
+
         BulkLoadButton.Text = My.Resources.BulkLoad
         Button_AddRegion.Text = Global.Outworldz.My.Resources.Add_Region_word
         Button_Clear.Text = Global.Outworldz.My.Resources.ClearReg
@@ -303,14 +317,17 @@ Public Class FormRegions
 
         Dim chosen = ChooseRegion(True) ' all regions, running or not
         If chosen.Length > 0 Then
+            SetLoading(True)
             Dim RegionUUID = FindRegionByName(chosen)
             Dim File = IO.Path.Combine(Settings.OpensimBinPath, "SFCleanup.txt")
             Dim fileReader = My.Computer.FileSystem.ReadAllText(File, System.Text.Encoding.ASCII)
             Dim Commands As String() = fileReader.Split(vbCrLf.ToCharArray())
 
             For Each line In Commands
-                ConsoleCommand(RegionUUID, $"{line}{vbCrLf}Y")
+                ConsoleCommand(RegionUUID, $"{line}{vbCr}Y")
+                Application.DoEvents()
             Next
+            SetLoading(False)
         End If
 
     End Sub
