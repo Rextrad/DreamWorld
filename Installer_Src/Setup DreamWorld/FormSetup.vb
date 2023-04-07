@@ -25,9 +25,6 @@ Public Class FormSetup
 
     Public NssmService As New ClassNssm
     ReadOnly BackupThread As New Backups
-    Private ReadOnly cql As New ObjectQuery("select PercentProcessorTime  from Win32_PerfFormattedData_PerfOS_Processor ")
-
-    'where name = '_Total'
     Private ReadOnly CurrentLocation As New Dictionary(Of String, String)
 
     Private ReadOnly HandlerSetup As New EventHandler(AddressOf Resize_page)
@@ -491,6 +488,7 @@ Public Class FormSetup
         Dim v = Reflection.Assembly.GetExecutingAssembly().GetName().Version
         Dim buildDate = New DateTime(2000, 1, 1).AddDays(v.Build).AddSeconds(v.Revision * 2)
         Dim displayableVersion = $"{v} ({buildDate})"
+
         AssemblyV = "Assembly version " + displayableVersion
         TextPrint(AssemblyV)
         TextPrint($"{My.Resources.Version_word} {PropSimVersion}")
@@ -894,7 +892,7 @@ Public Class FormSetup
 
         If Settings.GraphVisible And Not RunningInServiceMode() Then
             G()
-            CalcCPU() ' bootstrap the graph
+
         End If
 
         For Each RegionUUID In RegionUuids()
@@ -1515,17 +1513,14 @@ Public Class FormSetup
 
         If RunningInServiceMode() Then Return
 
-        Dim Counters As ManagementObjectCollection = SearcherCPU.Get()
-
+        Dim Counters = New ManagementObjectSearcher("SELECT PercentProcessorTime FROM Win32_PerfFormattedData_PerfOS_Processor WHERE Name='_Total'").Get()
         speed = 0
-        Try
-            For Each result In Counters
-                speed += CDbl(result("PercentProcessorTime"))
-            Next
-        Catch
-        End Try
 
-        speed /= coreCount
+        For Each result In Counters
+            speed += CDbl(result("PercentProcessorTime"))
+        Next
+
+        'speed /= coreCount
 
         If speed > 100 Then
             speed = 100
@@ -2106,6 +2101,7 @@ Public Class FormSetup
             PrintBackups()              ' print if backups are running
             Chat2Speech()               ' speak of the devil
             RestartDOSboxes()           ' Icons for failed Services
+            CalcCPU() ' bootstrap the graph
 
             If SecondsTicker Mod 2 = 0 AndAlso SecondsTicker > 0 Then
                 Bench.Start("5 second + worker")
@@ -3074,12 +3070,14 @@ Public Class FormSetup
                     End Try
 
                     Using pMySqlRestore = New Process()
+
                         ' pi.Arguments = thing
                         Dim pi = New ProcessStartInfo With {
                             .WindowStyle = ProcessWindowStyle.Normal,
                             .WorkingDirectory = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\"),
                             .FileName = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\RestoreMysql.bat")
                         }
+
                         pMySqlRestore.StartInfo = pi
                         TextPrint(My.Resources.Do_Not_Interrupt_word)
                         Try

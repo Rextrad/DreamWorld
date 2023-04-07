@@ -1,3 +1,5 @@
+Imports System.Threading
+
 Module CPUCounter
 
     Private ReadOnly _counterList As New Dictionary(Of String, PerformanceCounter)
@@ -46,67 +48,11 @@ Module CPUCounter
 
         If RunningInServiceMode() Then Return
 
-        If CalcCPUIsBusy Then
-            Return
-        End If
-        CalcCPUIsBusy = True
-
-        If PropOpensimIsRunning Then
-
-            For Each RegionUUID In RegionUuids()
-
-                Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
-                If PID = 0 Then
-                    Continue For
-                End If
-
-                'Dim c As PerformanceCounter = Nothing
-                Dim RegionName = Region_Name(RegionUUID)
-
-                Dim Status = RegionStatus(RegionUUID)
-                If Status = SIMSTATUSENUM.Stopped Or Status = SIMSTATUSENUM.Suspended Then
-                    CPUValues.Item(Group_Name(RegionUUID)) = 0
-                    Continue For
-                End If
-
-                If Not CounterList.ContainsKey(Group_Name(RegionUUID)) Then
-                    Try
-                        Using counter As PerformanceCounter = GetPerfCounterForProcessId(PID)
-                            If counter IsNot Nothing Then
-                                Debug.Print($"> Creating new CPU counter for {RegionName}")
-                                CounterList.Add(Group_Name(RegionUUID), counter)
-                                counter.NextValue() ' start the counter
-                            End If
-                        End Using
-                    Catch ex As Exception
-                        CounterList.Item(Group_Name(RegionUUID)).Close()
-                        CounterList.Remove(Group_Name(RegionUUID))
-                        CPUValues.Remove(Group_Name(RegionUUID))
-                        Continue For
-                    End Try
-                Else
-                    'Debug.Print("ctr exists")
-                End If
-
-                If Not CPUValues.ContainsKey(Group_Name(RegionUUID)) Then
-                    CPUValues.Add(Group_Name(RegionUUID), 0)
-                Else
-                    Dim a As Double
-                    Try
-                        a = CDbl(CounterList.Item(Group_Name(RegionUUID)).NextValue())
-                    Catch ex As Exception
-                        CounterList.Remove(Group_Name(RegionUUID))
-                    End Try
-
-                    Dim b = (a / Environment.ProcessorCount)
-                    CPUValues.Item(Group_Name(RegionUUID)) = Math.Round(b, 3)
-                    ' Debug.Print($"> CPU {RegionName} = {CStr(Math.Round(b, 3))}")
-                End If
-            Next
-
-        End If
-
-        CalcCPUIsBusy = False
+        Dim threadDelegate = New ThreadStart(AddressOf Graphs)
+        Dim newThread = New Thread(threadDelegate) With {
+            .Priority = ThreadPriority.BelowNormal
+        }
+        newThread.Start()
 
     End Sub
 
@@ -146,5 +92,69 @@ Module CPUCounter
         Return PC
 
     End Function
+
+    Private Sub Graphs()
+
+        If CalcCPUIsBusy Then
+            Return
+        End If
+        CalcCPUIsBusy = True
+
+        While PropOpensimIsRunning
+
+            For Each RegionUUID In RegionUuids()
+
+                Dim PID = GetPIDFromFile(Group_Name(RegionUUID))
+                If PID = 0 Then
+                    Continue For
+                End If
+
+                Dim RegionName = Region_Name(RegionUUID)
+
+                Dim Status = RegionStatus(RegionUUID)
+                If Status = SIMSTATUSENUM.Stopped Or Status = SIMSTATUSENUM.Suspended Then
+                    CPUValues.Item(Group_Name(RegionUUID)) = 0
+                    Continue For
+                End If
+
+                If Not CounterList.ContainsKey(Group_Name(RegionUUID)) Then
+                    Try
+                        Using counter As PerformanceCounter = GetPerfCounterForProcessId(PID)
+                            If counter IsNot Nothing Then
+                                Debug.Print($"> Creating new CPU counter for {RegionName}")
+                                CounterList.Add(Group_Name(RegionUUID), counter)
+                                counter.NextValue() ' start the counter
+                            End If
+                        End Using
+                    Catch ex As Exception
+                        CounterList.Item(Group_Name(RegionUUID)).Close()
+                        CounterList.Remove(Group_Name(RegionUUID))
+                        CPUValues.Remove(Group_Name(RegionUUID))
+                        Continue For
+                    End Try
+
+                End If
+
+                If Not CPUValues.ContainsKey(Group_Name(RegionUUID)) Then
+                    CPUValues.Add(Group_Name(RegionUUID), 0)
+                Else
+                    Dim a As Double
+                    Try
+                        a = CDbl(CounterList.Item(Group_Name(RegionUUID)).NextValue())
+                    Catch ex As Exception
+                        CounterList.Remove(Group_Name(RegionUUID))
+                    End Try
+
+                    Dim b = (a / Environment.ProcessorCount)
+                    CPUValues.Item(Group_Name(RegionUUID)) = Math.Round(b, 3)
+                    ' Debug.Print($"> CPU {RegionName} = {CStr(Math.Round(b, 3))}")
+                End If
+            Next
+            Sleep(1000)
+        End While
+
+        CalcCPUIsBusy = False
+
+    End Sub
 
 End Module
