@@ -254,7 +254,7 @@ Public Class FormSetup
 
         SetLoading(True)
 
-        RestartDOSboxes()           ' Icons for failed Services
+        ShowIcons()           ' Icons for failed Services
 
         TextPrint("Language Is " & CultureInfo.CurrentCulture.Name)
 
@@ -263,6 +263,8 @@ Public Class FormSetup
         AdvancedSettingsToolStripMenuItem.Text = Global.Outworldz.My.Resources.Settings_word
         AdvancedSettingsToolStripMenuItem.ToolTipText = Global.Outworldz.My.Resources.All_Global_Settings_word
         AllUsersAllSimsToolStripMenuItem.Text = Global.Outworldz.My.Resources.All_Users_All_Sims_word
+        StartToolStripMenuItem.Text = My.Resources.StartApacheService
+        DeleteServiceToolStripMenuItem.Text = My.Resources.DeleteService
         BackupCriticalFilesToolStripMenuItem.Image = Global.Outworldz.My.Resources.disk_blue
         BackupCriticalFilesToolStripMenuItem.Text = Global.Outworldz.My.Resources.System_Backup_words
         BackupToolStripMenuItem1.Image = Global.Outworldz.My.Resources.disk_blue
@@ -662,7 +664,7 @@ Public Class FormSetup
         ' also turn on the lights for the other services.
         IsRobustRunning()
         IsApacheRunning()
-        StartIcecast()
+        IsIceCastRunning()
         isDreamGridServiceRunning()
 
         Joomla.CheckForjOpensimUpdate()
@@ -705,8 +707,10 @@ Public Class FormSetup
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
 
         If RunningInServiceMode() Then
+
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
+            PropWebserver.StopWebserver()
             Sleep(1000)
             Startup()
             SetLoading(False)
@@ -1157,7 +1161,7 @@ Public Class FormSetup
 
     End Sub
 
-    Private Sub RestartDOSboxes()
+    Public Sub ShowIcons()
 
         If RunningInServiceMode() Then Return
         If PropRobustExited = True Then
@@ -2074,7 +2078,7 @@ Public Class FormSetup
             ProcessQuit()               ' check if any processes exited
             PrintBackups()              ' print if backups are running
             Chat2Speech()               ' speak of the devil
-            RestartDOSboxes()           ' Icons for failed Services
+            ShowIcons()           ' Icons for failed Services
             CalcCPU() ' bootstrap the graph
 
             If SecondsTicker Mod 2 = 0 AndAlso SecondsTicker > 0 Then
@@ -3259,6 +3263,9 @@ Public Class FormSetup
     Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
 
         SetLoading(True)
+
+        PropWebserver = NetServer.GetWebServer
+        PropWebserver.StopWebserver()
         NssmService.InstallService()
         NssmService.StartService()
         SetLoading(False)
