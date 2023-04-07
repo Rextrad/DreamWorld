@@ -32,6 +32,17 @@
 
 #End Region
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim webAddress As String = PropHttpsDomain & "/DestinationGuide"
+        Try
+            Process.Start(webAddress)
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
+
+    End Sub
+
     Private Sub FormSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         My.Application.ChangeUICulture(Settings.Language)
@@ -105,6 +116,17 @@
             Settings.SearchOptions = "None"
             Settings.SaveSettings()
         End If
+
+    End Sub
+
+    Private Sub ShowSearchButton_Click(sender As Object, e As EventArgs) Handles ShowSearchButton.Click
+
+        Dim webAddress As String = PropHttpsDomain & "/Search"
+        Try
+            Process.Start(webAddress)
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+        End Try
 
     End Sub
 
