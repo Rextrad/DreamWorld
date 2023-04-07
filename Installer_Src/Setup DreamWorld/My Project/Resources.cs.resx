@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Systém a další aplikace nebyly ovlivněny. Byla vytvořena sestava, kterou můžete zaslat, abyste pomohli identifikovat tento problém.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Převod textu na řeč</value>
+  </data>
 </root>

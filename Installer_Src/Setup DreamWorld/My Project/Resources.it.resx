@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Il sistema e le altre applicazioni non sono state interessate. È stato creato un report che è possibile inviare per identificare il problema.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Sintesi vocale</value>
+  </data>
 </root>

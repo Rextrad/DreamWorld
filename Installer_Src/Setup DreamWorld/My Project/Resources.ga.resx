@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Níor cuireadh isteach ar an gcóras ná ar iarratais eile. Cruthaíodh tuairisc gur féidir leat a sheoladh chun cabhrú leis an bhfadhb seo a aithint.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Téacs go Caint</value>
+  </data>
 </root>

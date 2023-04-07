@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>سیستم و دیگر برنامه های کاربردی تحت تاثیر قرار نگرفته اند. گزارشی ایجاد شده است که می توانید برای کمک به شناسایی این مشکل ارسال کنید.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>متن به گفتار</value>
+  </data>
 </root>

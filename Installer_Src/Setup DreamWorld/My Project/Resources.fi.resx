@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Tämä ei ole vaikuttanut järjestelmään ja muihin sovelluksiin. On luotu raportti, jonka voit lähettää ongelman tunnistamiseksi.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Teksti puheeksi</value>
+  </data>
 </root>

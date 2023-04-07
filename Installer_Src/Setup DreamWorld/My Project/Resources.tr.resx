@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Sistem ve diğer uygulamalar etkilenmedi. Bu sorunu tanımlamaya yardımcı olmak için gönderebileceğiniz bir rapor oluşturulmuştur.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Metin Okuma</value>
+  </data>
 </root>

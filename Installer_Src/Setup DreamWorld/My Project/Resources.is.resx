@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Þetta hefur ekki áhrif á kerfið og önnur notkunarsvið. Skýrsla hefur verið stofnuð sem hægt er að senda til að hjálpa til við að auðkenna þetta vandamál.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Texti í tal</value>
+  </data>
 </root>

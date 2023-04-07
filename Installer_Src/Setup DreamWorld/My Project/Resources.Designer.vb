@@ -12532,6 +12532,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Text To Speech.
+        '''</summary>
+        Friend ReadOnly Property TextToSpeech() As String
+            Get
+                Return ResourceManager.GetString("TextToSpeech", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Thaw All Regions.
         '''</summary>
         Friend ReadOnly Property ThawAllRegions() As String

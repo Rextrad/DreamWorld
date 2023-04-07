@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Het systeem en andere toepassingen zijn niet getroffen. Er is een rapport gemaakt dat u kunt verzenden om dit probleem te identificeren.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Tekst naar spraak</value>
+  </data>
 </root>

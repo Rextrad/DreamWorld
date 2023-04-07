@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Sistemak eta beste aplikazio batzuek ez dute eraginik izan. Txosten bat sortu da, arazo hori identifikatzen laguntzeko.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Testua ahotsez</value>
+  </data>
 </root>

@@ -4179,4 +4179,7 @@
   <data name="Subtitle" xml:space="preserve">
     <value>Hệ thống và các ứng dụng khác không bị ảnh hưởng. Một báo cáo đã được tạo mà bạn có thể gửi để giúp xác định vấn đề này.</value>
   </data>
+  <data name="TextToSpeech" xml:space="preserve">
+    <value>Chuyển văn bản thành giọng nói</value>
+  </data>
 </root>
