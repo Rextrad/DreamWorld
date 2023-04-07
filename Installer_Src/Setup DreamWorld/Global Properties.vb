@@ -64,6 +64,11 @@ Module Global_Properties
     Public Sub TextPrint(Value As String)
 
         SyncLock TextLock
+            Dim Le As Integer = 29000
+            Dim L = FormSetup.TextBox1.Text.Length - Le
+            If L > 0 Then
+                FormSetup.TextBox1.Text = FormSetup.TextBox1.Text.Substring(FormSetup.TextBox1.Text.Length - Le, Le)
+            End If
 
             Dim dt = Date.Now.ToString(Globalization.CultureInfo.CurrentCulture)
             If Settings.ShowDateandTimeinLogs Then
@@ -73,13 +78,7 @@ Module Global_Properties
             End If
             Log(My.Resources.Info_word, $"{dt} {Value}{vbCrLf}")
 
-            Dim Le As Integer = 29000
-            Dim L = FormSetup.TextBox1.Text.Length - Le
-            If L > 0 Then
-                FormSetup.TextBox1.Text = FormSetup.TextBox1.Text.Substring(FormSetup.TextBox1.Text.Length - Le, Le)
-            End If
-
-            FormSetup.TextBox1.SelectionStart = FormSetup.TextBox1.Text.Length
+            'FormSetup.TextBox1.SelectionStart = FormSetup.TextBox1.Text.Length
             FormSetup.TextBox1.ScrollToCaret()
 
         End SyncLock
@@ -87,6 +86,8 @@ Module Global_Properties
     End Sub
 
 #End Region
+
+    'bdbbdbdddb
 
 #Region "Classes and Enums"
 

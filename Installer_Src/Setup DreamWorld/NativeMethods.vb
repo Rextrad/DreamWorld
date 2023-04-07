@@ -10,6 +10,7 @@ Imports System.Runtime.InteropServices
 Friend Module NativeMethods
 
     '// Constants
+
     Const HWND_TOP As Integer = 0
 
     'Const HWND_TOPMOST As Integer = -1
@@ -58,6 +59,16 @@ SetWindowOnTop_Err:
 
     <DllImport("user32.dll", CharSet:=CharSet.Unicode)>
     Public Function SetWindowText(ByVal hwnd As IntPtr, ByVal windowName As String) As Boolean
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Function GetScrollRange(ByVal hWnd As IntPtr, ByVal nBar As Integer, <Out> ByRef lpMinPos As Integer, <Out> ByRef lpMaxPos As Integer) As Boolean
+
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Function SetScrollPos(ByVal hWnd As IntPtr, ByVal nBar As Integer, ByVal nPos As Integer, ByVal bRedraw As Boolean) As Integer
+
     End Function
 
     Public Declare Function ShowWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal nCmdShow As SHOWWINDOWENUM) As Boolean
