@@ -133,18 +133,18 @@ Partial Class FormSearch
         '
         'ShowSearchButton
         '
-        Me.ShowSearchButton.Location = New System.Drawing.Point(22, 119)
+        Me.ShowSearchButton.Location = New System.Drawing.Point(5, 133)
         Me.ShowSearchButton.Name = "ShowSearchButton"
-        Me.ShowSearchButton.Size = New System.Drawing.Size(133, 23)
+        Me.ShowSearchButton.Size = New System.Drawing.Size(150, 23)
         Me.ShowSearchButton.TabIndex = 4
         Me.ShowSearchButton.Text = "ShowSearch"
         Me.ShowSearchButton.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(22, 148)
+        Me.Button1.Location = New System.Drawing.Point(5, 162)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(133, 23)
+        Me.Button1.Size = New System.Drawing.Size(150, 23)
         Me.Button1.TabIndex = 5
         Me.Button1.Text = "DestinationGuide"
         Me.Button1.UseVisualStyleBackColor = True
