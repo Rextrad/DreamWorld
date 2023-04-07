@@ -93,7 +93,7 @@ Module WindowHandlers
             End If
             Try
                 AppActivate(PID)
-                SendKeys.Send("{ENTER}" & command & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
+                SendKeys.SendWait("{ENTER}" & command & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
                 SendKeys.Flush()
             Catch ex As ArithmeticException
                 BreakPoint.Print(ex.Message)
@@ -446,8 +446,7 @@ Module WindowHandlers
                 Try
 
                     HandleValid = ShowWindow(handle, command)
-                        If HandleValid Then Return True
-
+                    If HandleValid Then Return True
                 Catch ex As Exception
                     BreakPoint.Print(ex.Message)
                 End Try
