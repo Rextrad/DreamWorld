@@ -4,10 +4,10 @@
 
         If ServiceExists("DreamGridService") And
                 CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-
+            ServiceIcon(True)
             Return True
         End If
-
+        ServiceIcon(False)
         Return False
 
     End Function
