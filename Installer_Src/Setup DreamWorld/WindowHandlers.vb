@@ -341,6 +341,7 @@ Module WindowHandlers
             TextPrint(My.Resources.Not_Running)
             Return
         End If
+
         Dim rname = ChooseRegion(False)
         Dim RegionUUID As String = FindRegionByName(rname)
         If RegionUUID.Length > 0 Then
@@ -443,10 +444,10 @@ Module WindowHandlers
 
             While Not HandleValid AndAlso ctr > 0
                 Try
-                    If SetForegroundWindow(handle) Then
-                        HandleValid = ShowWindow(handle, command)
+
+                    HandleValid = ShowWindow(handle, command)
                         If HandleValid Then Return True
-                    End If
+
                 Catch ex As Exception
                     BreakPoint.Print(ex.Message)
                 End Try
