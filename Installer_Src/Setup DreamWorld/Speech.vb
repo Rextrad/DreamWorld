@@ -55,8 +55,8 @@ Module Speech
     Public Function Text2Speech(POST As String) As String
 
         Dim P = GetParam(POST, "APIKey")
-        Dim M = Settings.MachineId
-        If M.ToUpper <> P.ToUpper Then Return $"Bad Password {P}"
+        Dim M = Settings.APIKey
+        If M <> P Then Return $"Bad Password {P}"
         Dim OutLoud = GetParam(POST, "Save")
         Dim Save2File As Boolean
         If OutLoud.Length > 0 Then
