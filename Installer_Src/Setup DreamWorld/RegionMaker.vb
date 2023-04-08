@@ -788,7 +788,7 @@ Module RegionMaker
 
     Public Sub StopRegion(RegionUUID As String)
 
-        If SignalService($"StopRegion&RegionUUID= {RegionUUID}") Then Return
+        If CBool(SignalService($"StopRegion&RegionUUID= {RegionUUID}")) Then Return
 
         Thaw(RegionUUID)
 

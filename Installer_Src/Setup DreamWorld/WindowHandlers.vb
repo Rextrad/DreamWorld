@@ -464,7 +464,7 @@ Module WindowHandlers
     ''' Send a message to the service
     ''' </summary>
     ''' <param name="Command">A string command</param>
-    Public Function SignalService(Command As String) As Boolean
+    Public Function SignalService(Command As String) As String
 
         If Not Foreground() And Not Settings.RunAsService Then Return False
 
@@ -475,14 +475,13 @@ Module WindowHandlers
                 Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
                 Diagnostics.Debug.Print(Url)
                 Dim result = client.DownloadString(Url)
-
-                If result = "ACK" Then Return True
+                Return result
             Catch ex As Exception
                 BreakPoint.Print(ex.Message)
-                Return False
+                Return "0"
             End Try
         End Using
-        Return False
+        Return "0"
 
     End Function
 
@@ -517,7 +516,7 @@ Module WindowHandlers
         ''' <param name="processName"></param>
         ''' <returns></returns>
 
-        If SignalService($"Stop{processName}") Then Return
+        If CBool(SignalService($"Stop{processName}")) Then Return
 
         PropAborting = True
 

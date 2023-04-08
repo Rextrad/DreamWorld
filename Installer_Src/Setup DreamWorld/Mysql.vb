@@ -92,7 +92,7 @@ Public Module MysqlInterface
             Return True
         End If
 
-        If SignalService("StartMysql") Then
+        If CBool(SignalService("StartMysql")) Then
             MySQLIcon(True)
             Return True
         Else

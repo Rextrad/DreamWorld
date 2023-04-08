@@ -150,7 +150,7 @@ Module Robust
 
                 If DoRobust() Then Return False
 
-                If SignalService("StartRobust") Then
+                If CBool(SignalService("StartRobust")) Then
                     RobustIcon(True)
                     Return True
                 Else

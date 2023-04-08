@@ -98,7 +98,7 @@ Module Apache
             Return
         End If
 
-        If SignalService("StartApache") Then
+        If CBool(SignalService("StartApache")) Then
             If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
                 ApacheIcon(True)
                 Return
