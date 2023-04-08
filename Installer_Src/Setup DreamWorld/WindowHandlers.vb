@@ -317,7 +317,7 @@ Module WindowHandlers
 
     End Function
 
-    Public Sub SendMsg(msg As String)
+    Public Sub SendLogLevel(msg As String)
 
         Dim l As New List(Of String)
         If PropOpensimIsRunning() Then

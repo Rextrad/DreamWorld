@@ -2453,7 +2453,7 @@ Public Class FormSetup
 
         SetLoading(True)
         Settings.LogLevel = "DEBUG"
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
@@ -2546,7 +2546,7 @@ Public Class FormSetup
 
         Settings.LogLevel = "ERROR"
         SetLoading(True)
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
@@ -2563,7 +2563,7 @@ Public Class FormSetup
 
         SetLoading(True)
         Settings.LogLevel = "FATAL"
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
@@ -2667,7 +2667,7 @@ Public Class FormSetup
 
         SetLoading(True)
         Settings.LogLevel = "INFO"
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
@@ -2881,7 +2881,7 @@ Public Class FormSetup
 
         SetLoading(True)
         Settings.LogLevel = "OFF"
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
@@ -3492,7 +3492,7 @@ Public Class FormSetup
         SetLoading(True)
         Settings.LogLevel = "WARN"
 
-        SendMsg(Settings.LogLevel)
+        SendLogLevel(Settings.LogLevel)
         SetLoading(False)
 
     End Sub
