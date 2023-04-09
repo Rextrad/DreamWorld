@@ -130,28 +130,6 @@ Module WindowHandlers
 
     End Function
 
-    ''' <summary>
-    ''' Returns if Service is running and we are foreground App
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function Foreground() As Boolean
-
-        Dim Param = Command()
-        'Log("Service", $"Startup param = {Param}")
-        'Log("Service", $"Environment path = {Environment.CommandLine}")
-        'Log("Service", $"RunAsService = {RunAsService}")
-
-        If ServiceExists("DreamGridService") And
-                Settings.RunAsService And
-                CBool(Param.ToLower <> "service") And
-                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-            Return True
-        Else
-            Return False
-        End If
-
-    End Function
-
     Public Function GetHwnd(Groupname As String) As IntPtr
 
         If Groupname <> RobustName() Then
@@ -296,27 +274,6 @@ Module WindowHandlers
 
     End Sub
 
-    ''' <summary>
-    ''' Returns if we started with the Server param and service is installed, which means run as a Service.
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function RunningInServiceMode() As Boolean
-
-        Dim Param = Command()
-        'Log("Service", $"Startup param = {Param}")
-        'Log("Service", $"Environment path = {Environment.CommandLine}")
-        'Log("Service", $"RunAsService = {RunAsService}")
-
-        If ServiceExists("DreamGridService") And
-            CBool(Param.ToLower = "service") And
-            Settings.RunAsService Then
-            Return True
-        Else
-            Return False
-        End If
-
-    End Function
-
     Public Sub SendLogLevel(msg As String)
 
         Dim l As New List(Of String)
@@ -460,31 +417,6 @@ Module WindowHandlers
 
     End Function
 
-    ''' <summary>
-    ''' Send a message to the service
-    ''' </summary>
-    ''' <param name="Command">A string command</param>
-    Public Function SignalService(Command As String) As String
-
-        If Not Foreground() And Not Settings.RunAsService Then Return False
-
-        Using client As New TimedWebClient With {
-                .Timeout = 3000
-                } ' download client for web pages
-            Try
-                Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&password={Settings.MachineId}"
-                Diagnostics.Debug.Print(Url)
-                Dim result = client.DownloadString(Url)
-                Return result
-            Catch ex As Exception
-                BreakPoint.Print(ex.Message)
-                Return "0"
-            End Try
-        End Using
-        Return "0"
-
-    End Function
-
     Public Function WaitForPID(myProcess As Process) As Integer
 
         If myProcess Is Nothing Then
@@ -516,8 +448,7 @@ Module WindowHandlers
         ''' <param name="processName"></param>
         ''' <returns></returns>
 
-        If CBool(SignalService($"Stop{processName}")) Then Return
-
+        If SignalService($"Stop{processName}") <> "OK" Then Return
         PropAborting = True
 
         ' Kill process by name

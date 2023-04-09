@@ -197,7 +197,7 @@ Module RPC
 
     Public Sub ShutDown(RegionUUID As String, nextstate As SIMSTATUSENUM)
 
-        If CBool(SignalService($"StopRegion&RegionUUID={RegionUUID}")) Then Return
+        If SignalService($"StopRegion&RegionUUID={RegionUUID}") <> "OK" Then Return
 
         Thaw(RegionUUID)
         ConsoleCommand(RegionUUID, "q")

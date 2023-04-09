@@ -3267,7 +3267,7 @@ Public Class FormSetup
         PropWebserver = NetServer.GetWebServer
         PropWebserver.StopWebserver()
         NssmService.InstallService()
-        NssmService.StartService()
+        Settings.SaveSettings()
         SetLoading(False)
 
     End Sub

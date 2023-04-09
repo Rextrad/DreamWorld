@@ -98,14 +98,14 @@ Module Apache
             Return
         End If
 
-        If CBool(SignalService("StartApache")) Then
-            If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
-                ApacheIcon(True)
-                Return
-            Else
-                ApacheIcon(False)
-            End If
+        If CheckPortSocket(Settings.WANIP, Settings.ApachePort) Then
+            ApacheIcon(True)
+            Return
+        Else
+            ApacheIcon(False)
         End If
+
+        If SignalService("StartApache") <> "OK" Then Return
 
         ' Depends upon PHP for home page
         DoPHPDBSetup()

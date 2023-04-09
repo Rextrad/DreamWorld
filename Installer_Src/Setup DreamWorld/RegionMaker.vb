@@ -788,7 +788,7 @@ Module RegionMaker
 
     Public Sub StopRegion(RegionUUID As String)
 
-        If CBool(SignalService($"StopRegion&RegionUUID= {RegionUUID}")) Then Return
+        If SignalService($"StopRegion&RegionUUID={RegionUUID}") <> "OK" Then Return
 
         Thaw(RegionUUID)
 
@@ -1765,8 +1765,7 @@ Module RegionMaker
         Logger("Command", "Service:" + myURI.ToString, "Command")
         Dim Command = HttpUtility.ParseQueryString(myURI.Query).Get("Command")
         Logger("Command", $"Command={Command}", "Command")
-        Dim Password = HttpUtility.ParseQueryString(myURI.Query).Get("password")
-        Dim RegionUUID = HttpUtility.ParseQueryString(myURI.Query).Get("RegionUUID")
+        Dim Password = HttpUtility.ParseQueryString(myURI.Query).Get("Password")
 
         If Password.ToUpper <> Settings.MachineId.ToUpper Then
             Logger("ERROR", $"Bad Password {Password} for Command system. Should be the Dyn DNS password.", "Outworldz")
@@ -1783,8 +1782,8 @@ Module RegionMaker
             Case "StopIcecast"
                 StopIcecast()
             Case "StopRegion"
+                Dim RegionUUID = HttpUtility.ParseQueryString(myURI.Query).Get("RegionUUID")
                 StopRegion(RegionUUID)
-
             Case "StartMysql"
                 StartMySQL()
             Case "StartApache"
@@ -1794,11 +1793,29 @@ Module RegionMaker
             Case "StartRobust"
                 StartRobust()
             Case "StartRegion"
+                Dim RegionUUID = HttpUtility.ParseQueryString(myURI.Query).Get("RegionUUID")
                 Boot(Region_Name(RegionUUID))
+            Case "RegionList"
+                Return GetRegionList()
+
             Case Else
                 Return "NAK"
         End Select
         Return "ACK"
+
+    End Function
+
+#End Region
+
+#Region "RegionList"
+
+    Private Function GetRegionList() As String
+
+        Dim output As String = ""
+        For Each RegionUUID In RegionUuids()
+            output += $"{RegionUUID},{CStr(RegionStatus(RegionUUID))}|"
+        Next
+        Return output
 
     End Function
 

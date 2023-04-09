@@ -1,14 +1,57 @@
 ﻿Module Services
 
-    Public Function isDreamGridServiceRunning() As Boolean
+    ''' <summary>
+    ''' Returns if Service is running and we are foreground App
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function Foreground() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
 
         If ServiceExists("DreamGridService") And
+                Settings.RunAsService And
+                CBool(Param.ToLower <> "service") And
+                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
+    Public Function isDreamGridServiceRunning() As Boolean
+
+        If ServiceExists("DreamGridService") AndAlso
                 CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
             ServiceIcon(True)
             Return True
         End If
         ServiceIcon(False)
         Return False
+
+    End Function
+
+    ''' <summary>
+    ''' Returns if we started with the Server param and service is installed, which means run as a Service.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function RunningInServiceMode() As Boolean
+
+        Dim Param = Command()
+        'Log("Service", $"Startup param = {Param}")
+        'Log("Service", $"Environment path = {Environment.CommandLine}")
+        'Log("Service", $"RunAsService = {RunAsService}")
+
+        If ServiceExists("DreamGridService") And
+            CBool(Param.ToLower = "service") And
+            Settings.RunAsService Then
+            Return True
+        Else
+            Return False
+        End If
 
     End Function
 
@@ -50,94 +93,29 @@
 
     End Sub
 
-    Public Function StopMysql() As Boolean
+    ''' <summary>
+    ''' Send a message to the service
+    ''' </summary>
+    ''' <param name="Command">A string command</param>
+    Public Function SignalService(Command As String) As String
 
-        If Foreground() Then
-            Zap("Mysql")
-            Return False
-        End If
+        If Not Foreground() And Not Settings.RunAsService Then Return "NO"
 
-        If Not MysqlInterface.IsMySqlRunning() Then
-            Application.DoEvents()
-            MySQLIcon(False)
-            Return True
-        End If
-
-        PropAborting = True
-
-        TextPrint($"MySQL {Global.Outworldz.My.Resources.Stopping_word}")
-
-        If Settings.MysqlRunasaService Then
-
-            Using MysqlProcess As New Process With {
-                       .EnableRaisingEvents = False
-                   }
-                MysqlProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-                MysqlProcess.StartInfo.FileName = "net"
-                MysqlProcess.StartInfo.Arguments = "stop MySQLDreamGrid"
-                MysqlProcess.StartInfo.UseShellExecute = False
-                MysqlProcess.StartInfo.CreateNoWindow = True
-                MysqlProcess.StartInfo.RedirectStandardError = True
-                MysqlProcess.StartInfo.RedirectStandardOutput = True
-                Dim response As String = ""
-
-                Try
-                    MysqlProcess.Start()
-                    response = MysqlProcess.StandardOutput.ReadToEnd() & MysqlProcess.StandardError.ReadToEnd()
-                    MysqlProcess.WaitForExit()
-                Catch ex As Exception
-                    BreakPoint.Dump(ex)
-                End Try
-                Application.DoEvents()
-
-                If MysqlProcess.ExitCode <> 0 Then
-                    TextPrint(My.Resources.Error_word & ":" & CStr(MysqlProcess.ExitCode) & ":" & response)
-                    MsgBox(My.Resources.MySQLDidNotStop, vbCritical Or vbMsgBoxSetForeground)
-                    MySQLIcon(True)
-                    Return False
-                Else
-                    TextPrint(My.Resources.Mysql_Word & " " & My.Resources.Stopped_word)
-                    MySQLIcon(False)
-                    Return True
-                End If
-            End Using
-
-        End If
-
-        Dim addon As String = ""
-        If Settings.RootMysqlPassword.Length > 0 Then
-            addon = $" -p{Settings.RootMysqlPassword} "
-        End If
-
-        Using p As New Process()
-            Dim pi As New ProcessStartInfo With {
-                .Arguments = $"--port {CStr(Settings.MySqlRobustDBPort)} -u root {addon} shutdown",
-                .FileName = """" & IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\bin\mysqladmin.exe") & """",
-                .UseShellExecute = True, ' so we can redirect streams and minimize
-                .WindowStyle = ProcessWindowStyle.Hidden
-            }
-            p.StartInfo = pi
+        Using client As New TimedWebClient With {
+                .Timeout = 3000
+                } ' download client for web pages
             Try
-                p.Start()
-                Application.DoEvents()
-                p.WaitForExit()
-            Catch
+                Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&Password={Settings.MachineId}"
+                Diagnostics.Debug.Print(Url)
+                Dim result = client.DownloadString(Url)
+
+                Return result
+            Catch ex As Exception
+                BreakPoint.Print(ex.Message)
+                Return "0"
             End Try
         End Using
-
-        Dim ctr = 30
-
-        While MysqlInterface.IsMySqlRunning() And ctr >= 0
-            Sleep(1000)
-            ctr -= 1
-        End While
-
-        If ctr <= 0 Then
-            MySQLIcon(True)
-            MsgBox(My.Resources.MySQLDidNotStop, vbCritical Or vbMsgBoxSetForeground)
-            Return False
-        End If
-        Return True
+        Return "0"
 
     End Function
 

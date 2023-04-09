@@ -191,7 +191,10 @@ Public Class FormRestart
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles RunAsServiceCheckbox.CheckedChanged
 
         If RunAsServiceCheckbox.Checked Then
+
             If ServiceExists("DreamGridService") Then
+                Settings.RunAsService = True
+                Settings.SaveSettings()
                 TextPrint("Service is already installed")
                 Return
             End If
@@ -203,10 +206,11 @@ Public Class FormRestart
             FormSetup.NssmService.InstallService()
             TextPrint("Click Start to run as a Service. No Dos Boxes will show.")
         Else
+            Settings.RunAsService = False
+            Settings.SaveSettings()
             If ServiceExists("DreamGridService") Then
                 FormSetup.NssmService.StopService()
                 FormSetup.NssmService.DeleteService()
-                ZapRegions()
 
                 ' Must start the local diagnostics server
                 PropWebserver = NetServer.GetWebServer

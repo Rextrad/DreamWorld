@@ -10,24 +10,19 @@ Imports System.Reflection
 Imports System.Text.RegularExpressions
 
 Public Class FormRegionlist
-
-#Disable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly colsize As New ClassScreenpos("Region List")
-#Enable Warning CA2213 ' Disposable fields should be disposed
     Private ReadOnly Handler As New EventHandler(AddressOf Resize_page)
     Private ReadOnly SearchArray As New List(Of String)
-#Disable Warning CA2213 ' Disposable fields should be disposed
     Private _ImageListSmall As New ImageList
-#Enable Warning CA2213 ' Disposable fields should be disposed
     Dim _order As SortOrder
     Private _screenPosition As ClassScreenpos
     Private _SortColumn As Integer
     Private detailsinitted As Boolean
+    Private Fore As Boolean
     Private initted As Boolean
-
-#Disable Warning CA2213 ' Disposable fields should be disposed
     Dim RegionForm As New FormRegion
-#Enable Warning CA2213 ' Disposable fields should be disposed
+    Private RegionStats As New Dictionary(Of String, Integer)
+    Private ServiceStatusString As String
     Private TotalRam As Double
     Private UseMysql As Boolean
 
@@ -719,7 +714,12 @@ Public Class FormRegionlist
 
     Private Function GetStatus(RegionUUID As String, ByRef Num As Integer, ByRef Letter As String) As Integer
 
-        Dim Status As Integer = RegionStatus(RegionUUID)
+        Dim Status As Integer
+        If Fore Then
+            Status = RegionStats(RegionUUID)
+        Else
+            Status = RegionStatus(RegionUUID)
+        End If
 
         ' Get Estate name (cached)
         Dim MyEstate = Estate(RegionUUID)
@@ -897,6 +897,8 @@ Public Class FormRegionlist
 
         ' Set the view to show whatever
         TheView1 = Settings.RegionListView()
+
+        Fore = Foreground()
 
         SetScreen(TheView1)
         PictureBox1.Visible = True
@@ -1226,10 +1228,29 @@ Public Class FormRegionlist
             Return
         End If
         SearchBusy = True
-
         BringToFront()
-
         SearchArray.Clear()
+
+        If isDreamGridServiceRunning() Or True Then
+
+            ServiceStatusString = SignalService("RegionStatus")
+
+            'For Each uuid In RegionUuids()
+            'ServiceStatusString += uuid & "," & Int((12 * Rnd()) + 1) & "|"   ' Generate random value between 1 and 12.
+            'Next
+
+            Try
+                ' UUID,int|UUID,int|
+                Dim regions = ServiceStatusString.Split(New Char() {"|"c}) ' split at the |
+                For Each Region As String In regions
+                    Dim R = Region.Split(New Char() {","c}) ' split at the comma
+                    Dim uuid = R(0).Trim
+                    Dim S = CInt("0" & R(1).Trim)
+                    RegionStats.Add(uuid, S)
+                Next
+            Catch ex As Exception
+            End Try
+        End If
 
         Select Case TheView1
             Case ViewType.Avatars

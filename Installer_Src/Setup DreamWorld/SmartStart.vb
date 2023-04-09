@@ -879,7 +879,7 @@ Module SmartStart
 
             If CopyOpensimProto(RegionUUID) Then Return False
 
-            If CBool(SignalService($"StartRegion&RegionUUID={RegionUUID}")) Then Return True
+            If SignalService($"StartRegion&RegionUUID={RegionUUID}") <> "OK" Then Return True
 
             Dim BootProcess = New Process With {
                 .EnableRaisingEvents = True
