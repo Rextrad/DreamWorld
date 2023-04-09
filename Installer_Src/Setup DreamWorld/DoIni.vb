@@ -464,7 +464,7 @@ Module DoIni
 
     Public Function DoMysql() As Boolean
 
-        ' SAVE INI file
+
         Dim INI = New LoadIni(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\my.ini"), "#", System.Text.Encoding.ASCII)
 
         INI.SetIni("mysqld", "innodb_buffer_pool_size", $"{Settings.Total_InnoDB_GBytes()}G")
@@ -642,7 +642,6 @@ Module DoIni
             INI.SaveIni()
 
             INI = New LoadIni(IO.Path.Combine(Settings.OpensimBinPath, "Wifi.ini"), ";", System.Text.Encoding.UTF8)
-
             INI.SetIni("DatabaseService", "ConnectionString", Settings.RobustDBConnection)
 
             If Settings.ServerType = RobustServerName Then ' wifi could be on or off
