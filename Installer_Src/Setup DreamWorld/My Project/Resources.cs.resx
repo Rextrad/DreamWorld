@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Převod textu na řeč</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Vytváření čteček protokolů</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>Nepodařilo se načíst VŠECHNY regiony!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Povolené e-maily z objektů</value>
+  </data>
 </root>

@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>טקסט לדיבור</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>יצירת קוראי יומנים</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>טעינת כל האזורים נכשלה!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>דואר אלקטרוני מאובייקטים זמינים</value>
+  </data>
 </root>

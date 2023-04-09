@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Texti í tal</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Búa til annálalesara</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>MISTÓKST að hlaða ÖLL svæði!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Tölvupóstur frá hlutum virkur</value>
+  </data>
 </root>

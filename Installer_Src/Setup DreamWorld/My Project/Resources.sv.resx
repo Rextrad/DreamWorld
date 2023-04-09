@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Text till tal</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Skapa loggläsare</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>Det gick inte att ladda ALLA regioner!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>E-post från objekt aktiverat</value>
+  </data>
 </root>

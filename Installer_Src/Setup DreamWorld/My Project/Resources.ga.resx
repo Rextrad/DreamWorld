@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Téacs go Caint</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Léitheoirí Loga a Chruthú</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>THEIP ar GACH réigiún a luchtú!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Ríomhphost Ó Réada Cumasaithe</value>
+  </data>
 </root>

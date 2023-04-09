@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>文本到語音轉換</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>創建紀錄讀取器</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>無法載入所有區域！</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>已啟用來自物件的電子郵件</value>
+  </data>
 </root>

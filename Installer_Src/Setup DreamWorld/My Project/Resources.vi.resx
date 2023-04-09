@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Chuyển văn bản thành giọng nói</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Tạo trình đọc nhật ký</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>KHÔNG THỂ tải TẤT CẢ các khu vực!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Email từ các đối tượng được bật</value>
+  </data>
 </root>

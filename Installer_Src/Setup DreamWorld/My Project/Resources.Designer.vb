@@ -2810,6 +2810,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Creating Log Readers.
+        '''</summary>
+        Friend ReadOnly Property CreatingLogReaders() As String
+            Get
+                Return ResourceManager.GetString("CreatingLogReaders", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Current Size on Disk.
         '''</summary>
         Friend ReadOnly Property CSOD() As String
@@ -4435,6 +4444,15 @@ Namespace My.Resources
         Friend ReadOnly Property Failed_LAN() As String
             Get
                 Return ResourceManager.GetString("Failed_LAN", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to FAILED to load ALL regions!.
+        '''</summary>
+        Friend ReadOnly Property Failed2Load() As String
+            Get
+                Return ResourceManager.GetString("Failed2Load", resourceCulture)
             End Get
         End Property
         
@@ -8711,6 +8729,15 @@ Namespace My.Resources
         Friend ReadOnly Property OSGrid_Region_Server() As String
             Get
                 Return ResourceManager.GetString("OSGrid_Region_Server", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Email From Objects Enabled.
+        '''</summary>
+        Friend ReadOnly Property Outboundenabled() As String
+            Get
+                Return ResourceManager.GetString("Outboundenabled", resourceCulture)
             End Get
         End Property
         

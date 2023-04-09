@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Metin Okuma</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Günlük Okuyucuları Oluşturma</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>TÜM bölgeler yüklenemedi!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Etkin Nesnelerden E-posta</value>
+  </data>
 </root>

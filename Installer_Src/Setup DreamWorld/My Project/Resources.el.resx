@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Μετατροπή κειμένου σε ομιλία</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Δημιουργία προγραμμάτων ανάγνωσης αρχείων καταγραφής</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>ΑΠΈΤΥΧΕ να φορτώσει ΟΛΕΣ τις περιοχές!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Ηλεκτρονικό ταχυδρομείο από αντικείμενα ενεργοποιημένη</value>
+  </data>
 </root>

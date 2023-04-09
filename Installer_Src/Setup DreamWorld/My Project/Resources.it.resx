@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Sintesi vocale</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Creazione di lettori di log</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>Impossibile caricare TUTTE le regioni!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>E-mail da oggetti abilitati</value>
+  </data>
 </root>

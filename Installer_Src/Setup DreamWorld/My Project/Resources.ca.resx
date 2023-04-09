@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Text a veu</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Creació de lectors de registre</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>NO S'HA POGUT carregar TOTES les regions!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Correu electrònic d'objectes habilitats</value>
+  </data>
 </root>

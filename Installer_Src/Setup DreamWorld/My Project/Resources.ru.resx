@@ -4182,4 +4182,13 @@
   <data name="TextToSpeech" xml:space="preserve">
     <value>Преобразование текста в речь</value>
   </data>
+  <data name="CreatingLogReaders" xml:space="preserve">
+    <value>Создание считывателей журналов</value>
+  </data>
+  <data name="Failed2Load" xml:space="preserve">
+    <value>НЕ удалось загрузить ВСЕ регионы!</value>
+  </data>
+  <data name="Outboundenabled" xml:space="preserve">
+    <value>Электронная почта из объектов включена</value>
+  </data>
 </root>
