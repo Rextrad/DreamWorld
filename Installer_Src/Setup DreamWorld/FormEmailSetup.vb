@@ -20,7 +20,7 @@ Public Class FormEmailSetup
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -61,6 +61,7 @@ Public Class FormEmailSetup
         SMTPSendEmailAccountBox.Text = My.Resources.enableEmailToSMTP
         EmailEnabledCheckBox.Checked = Settings.EmailEnabled
         EmailEnabledCheckBox.Text = Global.Outworldz.My.Resources.EmailEnabled
+        EmailFromCheckBox.Text = Global.Outworldz.My.Resources.Outboundenabled
         ToolTip1.SetToolTip(EmailEnabledCheckBox, Global.Outworldz.My.Resources.tt_EmailEnabled)
 
         EmailHostLabel.Text = Global.Outworldz.My.Resources.SMTPHost_word
@@ -150,6 +151,8 @@ Public Class FormEmailSetup
         RadioButtonStartTlsWhenAvailable.Text = Global.Outworldz.My.Resources.StartTlsWhenAvailable
         ToolTip1.SetToolTip(RadioButtonStartTlsWhenAvailable, Global.Outworldz.My.Resources.tt_StartTlsWhenAvailable)
 
+        EmailFromCheckBox.Checked = Settings.OutboundEnabled
+
         TestButton.Text = My.Resources.Test_word
         HelpOnce("Email")
 
@@ -202,6 +205,13 @@ Public Class FormEmailSetup
 
         If Not initted Then Return
         Settings.EmailEnabled = EmailEnabledCheckBox.Checked
+
+    End Sub
+
+    Private Sub EmailFromCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles EmailFromCheckBox.CheckedChanged
+
+        If Not initted Then Return
+        Settings.OutboundEnabled = EmailFromCheckBox.Checked
 
     End Sub
 

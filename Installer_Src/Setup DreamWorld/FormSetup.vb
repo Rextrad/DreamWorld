@@ -535,6 +535,7 @@ Public Class FormSetup
             tmp.SetLoopback()
         End Using
 
+        TextPrint(My.Resources.CreatingLogReaders)
         For Each RegionUUID In RegionUuids()
             If Not LogResults.ContainsKey(RegionUUID) Then LogResults.Add(RegionUUID, New LogReader(RegionUUID))
         Next
@@ -574,9 +575,10 @@ Public Class FormSetup
 
         Dim UUID = FindRegionByName(Settings.ParkingLot)
         If UUID.Length > 0 Then
-            Smart_Boot_Enabled(UUID) = False
-            Smart_Suspend_Enabled(UUID) = False
+            Settings.ParkingLot = Settings.WelcomeRegion
         End If
+
+        GetServiceList()
 
         If Not Settings.DnsTestPassed Then
             MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
@@ -603,18 +605,6 @@ Public Class FormSetup
 
         Await IPPublicAsync()
 
-        If IsMySqlRunning() Then
-            TextPrint("Mysql is running")
-            ' clear any temp regions on boot.
-            For Each RegionUUID In RegionUuids()
-                If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
-                    TextPrint($"{My.Resources.DeletingTempRegion} {Region_Name(RegionUUID)}")
-                    DeleteAllRegionData(RegionUUID)
-                    PropChangedRegionSettings = True
-                End If
-            Next
-        End If
-
         mnuSettings.Visible = True
 
         LoadHelp()      ' Help loads once
@@ -630,7 +620,7 @@ Public Class FormSetup
             MySQLSpeed.Text = ""
         End If
 
-        If Settings.ShowRegionListOnBoot And Not RunningInServiceMode() Then
+        If Settings.ShowRegionListOnBoot Then
             ShowRegionform()
         End If
 
@@ -640,7 +630,7 @@ Public Class FormSetup
         End If
 
         TextPrint(My.Resources.RefreshingOAR)
-        If Not Settings.RunAsService Then
+        If Not RunningInServiceMode() Then
             ContentOAR = New FormOAR
             ContentOAR.Init("OAR")
             TextPrint(My.Resources.RefreshingIAR)
@@ -669,17 +659,15 @@ Public Class FormSetup
 
         Joomla.CheckForjOpensimUpdate()
 
-        Settings.SaveSettings()
-
         OfflineIMEmailThread()  ' check for any offline emails.
 
         Dim n = Settings.DnsName
         If n.Length = 0 Then n = "(none)"
-        TextPrint("--> WAN IP = " & Settings.WANIP)
+        TextPrint("--> WAN = " & Settings.WANIP)
         TextPrint("--> DNS = " & n)
         TextPrint("--> WAN = " & Settings.PublicIP)
-        TextPrint("--> LAN IP = " & Settings.LANIP())
-        TextPrint("--> Region IP= " & Settings.ExternalHostName)
+        TextPrint("--> LAN = " & Settings.LANIP())
+        TextPrint("--> Region = " & Settings.ExternalHostName)
         If Settings.ServerType = RobustServerName Then
             TextPrint("--> Login = " & "http://" & Settings.BaseHostName & ":" & Settings.HttpPort)
         ElseIf Settings.ServerType = RegionServerName Then
@@ -693,25 +681,20 @@ Public Class FormSetup
         Application.DoEvents() ' let any tasks run
 
         If failedload Then
-            TextPrint($"*** FAILED to load ALL regions! ** ")
+            TextPrint($"*** {My.Resources.Failed2Load} ** ")
             SetLoading(False)
             Return False
-        End If
-
-        If RunningInServiceMode() Then
-            Dim I = New ClassFilewatcher
-            I.Init()
         End If
 
         ' Start as a Service?
         Log("Service", $"Service is {CStr(RunningInServiceMode())}")
 
         If RunningInServiceMode() Then
+            Dim I = New ClassFilewatcher
+            I.Init()
 
             TextPrint(My.Resources.StartingAsService)
             Settings.RestartOnCrash = True
-            PropWebserver.StopWebserver()
-            Sleep(1000)
             Startup()
             SetLoading(False)
             Return True
@@ -754,23 +737,28 @@ Public Class FormSetup
 
         If PropOpensimIsRunning Then TextPrint(My.Resources.Waiting_text)
 
-        For Each RegionUUID In RegionUuids()
-            If RegionEnabled(RegionUUID) And
-            (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
-            RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
-                SequentialPause()
-                If CheckPID(RegionUUID) Then
-                    TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
-                    ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
-                Else
-                    RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+        If RunningInServiceMode() Then
+            Zap("Opensim")
+            For Each RegionUUID In RegionUuids()
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+            Next
+        Else
+            For Each RegionUUID In RegionUuids()
+                If RegionEnabled(RegionUUID) And
+                (RegionStatus(RegionUUID) = SIMSTATUSENUM.Booted Or
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Suspended Or
+                RegionStatus(RegionUUID) = SIMSTATUSENUM.Booting) Then
+                    SequentialPause()
+                    If CheckPID(RegionUUID) Then
+                        TextPrint(Group_Name(RegionUUID) & " " & Global.Outworldz.My.Resources.Stopping_word)
+                        ReallyShutDown(RegionUUID, SIMSTATUSENUM.ShuttingDownForGood)
+                    Else
+                        RegionStatus(RegionUUID) = SIMSTATUSENUM.Stopped
+                    End If
                 End If
-
-            End If
-            Application.DoEvents()
-        Next
-
+                Application.DoEvents()
+            Next
+        End If
         Dim LastCount As Integer = 0
         Dim counter As Integer = 3000 ' 5 minutes to quit all regions
 
@@ -834,8 +822,23 @@ Public Class FormSetup
     Public Function StartOpensimulator() As Boolean
 
         Bench.Start("StartOpensim")
+
         SetLoading(True)
+
         GetOpensimPIDsFromFiles()
+
+        ForeGND() ' see if we are running in foreground
+
+        If Not StartMySQL() Then Return False
+
+        ' clear any temp regions on boot.
+        For Each RegionUUID In RegionUuids()
+            If Settings.TempRegion AndAlso EstateName(RegionUUID) = "SimSurround" Then
+                TextPrint($"{My.Resources.DeletingTempRegion} {Region_Name(RegionUUID)}")
+                DeleteAllRegionData(RegionUUID)
+                PropChangedRegionSettings = True
+            End If
+        Next
 
         StartTimer()
 
@@ -924,7 +927,7 @@ Public Class FormSetup
                 If response = vbNo Then Return
             End If
 
-            If Foreground() Then
+            If ForeGND() Then
                 End ' close as service is up
             End If
 
@@ -1257,7 +1260,7 @@ Public Class FormSetup
 
         Buttons(BusyButton)
         SetLoading(True)
-
+        GetServiceList()
         Dim DefaultName As String = ""
 
         Dim RegionUUID As String = FindRegionByName(Settings.WelcomeRegion)
@@ -2015,6 +2018,8 @@ Public Class FormSetup
 
     Private Sub ShowRegionform()
 
+        If RunningInServiceMode() Then Return
+
         Try
             If PropRegionForm IsNot Nothing Then
                 PropRegionForm.Close()
@@ -2098,6 +2103,10 @@ Public Class FormSetup
                 End If
 
                 Bench.Print("5 second + worker")
+            End If
+
+            If SecondsTicker Mod 5 = 0 Then
+                GetServiceList()
             End If
 
             If SecondsTicker = 60 Then
@@ -2833,7 +2842,7 @@ Public Class FormSetup
                 ReallyQuit()
             End If
         Else
-            If Not Foreground() Then
+            If Not Fore() Then
                 ReallyQuit()
             Else
                 End ' close as serviuce is up
