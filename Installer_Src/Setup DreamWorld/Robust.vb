@@ -114,36 +114,36 @@ Module Robust
 
         SyncLock RobustBlock
 
-            If RunningInServiceMode() Or Not Settings.RunAsService Then
+            For Each p In Process.GetProcessesByName("Robust")
+                Try
+                    If Not IsRobustRunning() Then
+                        Sleep(1000)
+                    End If
 
-                For Each p In Process.GetProcessesByName("Robust")
-                    Try
-                        If Not IsRobustRunning() Then
-                            Sleep(1000)
-                        End If
-
-                        PropRobustProcID = p.Id
-                        Log(My.Resources.Info_word, Global.Outworldz.My.Resources.DosBoxRunning)
-                        RobustIcon(True)
-                        p.EnableRaisingEvents = True
-                        If Not RobustHandler Then
-                            AddHandler p.Exited, AddressOf RobustProcess_Exited
-                            RobustHandler = True
-                        End If
-                        PropOpensimIsRunning = True
-                        ShowDOSWindow(RobustName(), MaybeHideWindow())
-                        Return True
-                    Catch ex As Exception
-                    End Try
-                Next
-
-                ' Check the HTTP port in case its on a different PC
-                If IsRobustRunning() Then
+                    PropRobustProcID = p.Id
+                    Log(My.Resources.Info_word, Global.Outworldz.My.Resources.DosBoxRunning)
                     RobustIcon(True)
+                    p.EnableRaisingEvents = True
+                    If Not RobustHandler Then
+                        AddHandler p.Exited, AddressOf RobustProcess_Exited
+                        RobustHandler = True
+                    End If
                     PropOpensimIsRunning = True
-                    RobustHandler = False
+                    ShowDOSWindow(RobustName(), MaybeHideWindow())
                     Return True
-                End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            ' Check the HTTP port in case its on a different PC
+            If IsRobustRunning() Then
+                RobustIcon(True)
+                PropOpensimIsRunning = True
+                RobustHandler = False
+                Return True
+            End If
+
+            If RunningInServiceMode() Or Not Settings.RunAsService Then
 
                 SetServerType()
                 PropRobustProcID = 0
@@ -250,7 +250,7 @@ Module Robust
 
             TextPrint("Robust " & Global.Outworldz.My.Resources.Stopping_word)
 
-            If Foreground() Then
+            If Fore() Then
                 Zap("Robust")
                 Return
             Else
