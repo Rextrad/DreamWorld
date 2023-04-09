@@ -20,6 +20,7 @@ Public Class LoadIni
     Private _encoding As System.Text.Encoding
     Private _filename As String
     Private _sep As String
+    Private SaveBusy As Boolean
 
     Public Sub New(File As String, arg As String, encoding As System.Text.Encoding)
 
@@ -85,8 +86,7 @@ Public Class LoadIni
     Public Function GetIni(section As String, key As String, Value As String, Optional V As String = Nothing) As Object
 
         If _SettingsData Is Nothing Then
-            ErrorLog($"No Settings for {section} {key}")
-            Return Nothing
+            Return CurDir()
         End If
 
         Dim Variable = Stripqq(_SettingsData(section)(key))
@@ -128,6 +128,14 @@ Public Class LoadIni
 
     Public Function SaveIni() As Boolean
 
+        Dim ctr = 10
+        While SaveBusy And ctr > 0
+            Sleep(10)
+            ctr -= 1
+            If ctr = 0 Then Return False
+        End While
+        SaveBusy = True
+
         SyncLock SaveTheINI
             Dim F = FileName.Replace(".ini", ".bak")
             CopyFileFast(FileName, F)
@@ -142,7 +150,7 @@ Public Class LoadIni
                 End Try
 
                 If Retry < 0 Then
-                    ErrorLog($"Region INI filed to save: {FileName}")
+                    ErrorLog($" INI filed to save: {FileName}")
                     If Not RunningInServiceMode() Then
                         Dim result = MsgBox($"Region INI filed to save: {FileName}", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Exclamation, My.Resources.Quit_Now_Word)
                     Else
@@ -152,6 +160,7 @@ Public Class LoadIni
                 End If
             End While
         End SyncLock
+        SaveBusy = False
         Return False
 
     End Function
