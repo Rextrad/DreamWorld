@@ -254,7 +254,7 @@ Module SmartStart
                     If PropAborting Then Continue For
                     If Not PropOpensimIsRunning() Then Continue For
 
-                    Logger("State", $"{GroupName} Is Resuming", "Outworldz")
+                    Logger("State", $"{GroupName} is Resuming", "Outworldz")
                     Dim GroupList As List(Of String) = RegionUuidListFromGroup(GroupName)
                     For Each R As String In GroupList
                         If RegionEnabled(RegionUUID) Then

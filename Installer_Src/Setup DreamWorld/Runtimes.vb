@@ -9,7 +9,7 @@ Module Runtimes
 
     Public Sub AddVoices()
 
-        If Environment.OSVersion.Version.Build > 1000 Then
+        If Environment.OSVersion.Version.Build > 1000 And Settings.VoicesInstalled = False Then
             Dim Registry = IO.Path.Combine(Settings.CurrentDirectory, "MSFT_Runtimes\eva.reg")
             Dim regeditProcess = Process.Start("regedit.exe", "/s " & """" & Registry & """")
             regeditProcess.WaitForExit()
@@ -43,9 +43,9 @@ Module Runtimes
                     BreakPoint.Dump(ex)
                 End Try
             End Using
+            Settings.VisitorsEnabled = True
+            Settings.SaveSettings()
         End If
-        Settings.VisitorsEnabled = True
-        Settings.SaveSettings()
 
     End Sub
 
@@ -106,7 +106,6 @@ Module Runtimes
         End If
 
         Settings.OperatingSystem = V
-        Settings.SaveSettings()
 
         If Settings.DotnetUpgraded() Then Return
 
