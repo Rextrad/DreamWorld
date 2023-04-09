@@ -273,7 +273,7 @@ Public Module MysqlInterface
 
     Public Function StopMysql() As Boolean
 
-        If Foreground() Then
+        If Fore() Then
             Zap("Mysql")
             Return False
         End If

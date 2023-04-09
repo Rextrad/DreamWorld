@@ -1,10 +1,21 @@
 ﻿Module Services
 
+    Public RegionStats As New Dictionary(Of String, Integer)
+
+    Private _fore As Boolean
+    ''' <summary>
+    ''' Cached copy of ForeGND for speed
+    ''' </summary>
+    ''' <returns>true is in foreground</returns>
+    Public Function Fore() As Boolean
+        Return _fore
+    End Function
+
     ''' <summary>
     ''' Returns if Service is running and we are foreground App
     ''' </summary>
     ''' <returns></returns>
-    Public Function Foreground() As Boolean
+    Public Function ForeGND() As Boolean
 
         Dim Param = Command()
         'Log("Service", $"Startup param = {Param}")
@@ -13,14 +24,39 @@
 
         If ServiceExists("DreamGridService") And
                 Settings.RunAsService And
-                CBool(Param.ToLower <> "service") And
-                CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
+                CBool(Param.ToLower <> "service") Then
+            _fore = True
             Return True
         Else
+            _fore = False
             Return False
         End If
 
     End Function
+
+    Public Sub GetServiceList()
+
+        If Not RunningInServiceMode() Then
+
+            Dim ServiceStatusString = SignalService("RegionList")
+
+            'For Each uuid In RegionUuids()
+            'ServiceStatusString += uuid & "," & Int((12 * Rnd()) + 1) & "|"   ' Generate random value between 1 and 12.
+            'Next
+
+            Try
+                ' UUID,int|UUID,int|
+                Dim regions = ServiceStatusString.Split(New Char() {"|"c}) ' split at the |
+                For Each Region As String In regions
+                    Dim R = Region.Split(New Char() {","c}) ' split at the comma
+                    Dim uuid = R(0).Trim
+                    Dim S = CInt("0" & R(1).Trim)
+                    RegionStats.Add(uuid, S)
+                Next
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
 
     Public Function isDreamGridServiceRunning() As Boolean
 
@@ -99,14 +135,14 @@
     ''' <param name="Command">A string command</param>
     Public Function SignalService(Command As String) As String
 
-        If Not Foreground() And Not Settings.RunAsService Then Return "NO"
+        If RunningInServiceMode() Then Return "OK"
 
         Using client As New TimedWebClient With {
                 .Timeout = 3000
                 } ' download client for web pages
             Try
                 Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&Password={Settings.MachineId}"
-                Diagnostics.Debug.Print(Url)
+                'Diagnostics.Debug.Print(Url)
                 Dim result = client.DownloadString(Url)
 
                 Return result
