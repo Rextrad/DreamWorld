@@ -131,9 +131,14 @@ Module DNS
         Settings.LANIP = PropMyUPnpMap.LocalIP
         Settings.MacAddress = GetMacByIP(Settings.LANIP)
 
+        Settings.BaseHostName = Settings.PublicIP
+        Await RegisterNameAsync(Settings.PublicIP)
+        TextPrint($"WAN->{Settings.PublicIP}")
+
         ' Region Name override
         If Settings.OverrideName.Length > 0 Then
             Await RegisterNameAsync(Settings.OverrideName)
+            TextPrint($"REGION->{Settings.OverrideName}")
         End If
 
         ' set up the alternate DNS names
@@ -141,6 +146,7 @@ Module DNS
         For Each part As String In a
             If part.Length > 0 Then
                 Await RegisterNameAsync(part)
+                TextPrint($"ALT->{part}")
             End If
         Next
 
@@ -149,11 +155,9 @@ Module DNS
             Settings.PublicIP = Settings.LANIP
         ElseIf Settings.DnsName.Length > 0 Then
             Settings.PublicIP = Settings.DnsName()
+            TextPrint($"DNS->{Settings.DnsName}")
         End If
 
-        Settings.BaseHostName = Settings.PublicIP
-
-        Await RegisterNameAsync(Settings.PublicIP)
         Settings.SaveSettings()
 
         Return True
