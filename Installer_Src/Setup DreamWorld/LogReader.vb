@@ -64,6 +64,7 @@ Public Class LogReader
     End Sub
 
     Private Sub ScanIssues(line As String, RegionUUID As String)
+        If line Is Nothing Then Return
 
         For Each thing In Errors
             If line.Length > 0 Then
