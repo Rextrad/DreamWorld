@@ -5,11 +5,13 @@
 #End Region
 
 Imports System.Collections.Concurrent
+Imports System.Composition.Hosting
 Imports System.IO
 
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Web
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports MySqlConnector
 Imports Newtonsoft.Json
 
@@ -788,7 +790,10 @@ Module RegionMaker
 
     Public Sub StopRegion(RegionUUID As String)
 
-        If SignalService($"StopRegion&RegionUUID={RegionUUID}") <> "OK" Then Return
+        If SignalService($"StopRegion&RegionUUID={RegionUUID}") <> "OK" Then
+            PropUpdateView = True ' make form refresh
+            Return
+        End If
 
         Thaw(RegionUUID)
 
@@ -1199,6 +1204,12 @@ Module RegionMaker
 
     Public Property RegionStatus(RegionUUID As String) As Integer
         Get
+
+            'get status from the service
+            If Fore() And RegionStats.ContainsKey(RegionUUID) Then
+                Return RegionStats(RegionUUID)
+            End If
+
             If RegionList.ContainsKey(RegionUUID) Then
                 Return RegionList(RegionUUID)._Status
             End If
@@ -1210,6 +1221,11 @@ Module RegionMaker
             If Debugger.IsAttached Then
                 Logger(Region_Name(RegionUUID), $"Status => {GetStateString(Value)}", "Status")
             End If
+
+            If Fore() And RegionStats.ContainsKey(RegionUUID) Then
+                SignalService($"SetStatus&Status={Value}&RegionUUID={RegionUUID}")
+            End If
+
             RegionList(RegionUUID)._Status = Value
         End Set
     End Property
@@ -1797,6 +1813,8 @@ Module RegionMaker
                 Boot(Region_Name(RegionUUID))
             Case "RegionList"
                 Return GetRegionList()
+            Case "SetStatus"
+                Return Assert(myURI)
 
             Case Else
                 Return "NAK"
@@ -1808,6 +1826,15 @@ Module RegionMaker
 #End Region
 
 #Region "RegionList"
+
+    Private Function Assert(MyURI As Uri) As String
+
+        Dim RegionUUID = HttpUtility.ParseQueryString(MyURI.Query).Get("RegionUUID")
+        Dim Status = HttpUtility.ParseQueryString(MyURI.Query).Get("Status")
+        RegionStatus(RegionUUID) = CInt(0 & Status)
+        Return "ACK"
+
+    End Function
 
     Private Function GetRegionList() As String
 
@@ -2223,7 +2250,7 @@ Module RegionMaker
                 If INI.SetIni("Economy", "CurrencyURL", $"{Settings.PublicIP}:{Settings.DiagnosticPort}") Then Return True
             End If
 
-            If INI.SetIni("SMTP", "enabled", CStr(Settings.EmailEnabled)) Then Return True
+            If INI.SetIni("SMTP", "enabled", CStr(Settings.OutboundEnabled)) Then Return True
 
             ' LSL emails
             If INI.SetIni("SMTP", "SMTP_SERVER_HOSTNAME", Settings.SmtpHost) Then Return True
@@ -2238,7 +2265,7 @@ Module RegionMaker
             If INI.SetIni("SMTP", "SMTP_VerifyCertNames", CStr(Settings.VerifyCertCheckBox)) Then Return True
             If INI.SetIni("SMTP", "SMTP_VerifyCertChain", CStr(Settings.VerifyCertCheckBox)) Then Return True
             If INI.SetIni("SMTP", "enableEmailToExternalObjects", CStr(Settings.EnableEmailToExternalObjects)) Then Return True
-            If INI.SetIni("SMTP", "enableEmailToSMTP", CStr(Settings.EmailEnabled)) Then Return True
+            If INI.SetIni("SMTP", "enableEmailToSMTP", CStr(Settings.OutboundEnabled)) Then Return True
             If INI.SetIni("SMTP", "MailsFromOwnerPerHour", CStr(Settings.MailsFromOwnerPerHour)) Then Return True
             If INI.SetIni("SMTP", "MailsToPrimAddressPerHour", CStr(Settings.MailsToPrimAddressPerHour)) Then Return True
             If INI.SetIni("SMTP", "SMTP_MailsPerDay", CStr(Settings.MailsPerDay)) Then Return True
