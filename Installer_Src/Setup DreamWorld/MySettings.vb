@@ -111,10 +111,6 @@ Public Class MySettings
 #Region "Properties"
 
     ''' <summary>
-    ''' Run as a service
-    ''' </summary>
-
-    ''' <summary>
     ''' Diva will set Logins to disabled (-1) if this switch is set
     ''' </summary>
     ''' <returns>AccountConfirmationRequired as boolean</returns>
@@ -1737,6 +1733,15 @@ Public Class MySettings
         End Get
         Set
             SetMySetting("OtherCMS", Value)
+        End Set
+    End Property
+
+    Public Property OutboundEnabled() As Boolean
+        Get
+            Return CType(GetMySetting("OutboundEnabled", "False"), Boolean)
+        End Get
+        Set
+            SetMySetting("OutboundEnabled", CStr(Value))
         End Set
     End Property
 
