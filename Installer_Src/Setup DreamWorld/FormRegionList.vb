@@ -18,11 +18,8 @@ Public Class FormRegionlist
     Private _screenPosition As ClassScreenpos
     Private _SortColumn As Integer
     Private detailsinitted As Boolean
-    Private Fore As Boolean
     Private initted As Boolean
     Dim RegionForm As New FormRegion
-    Private RegionStats As New Dictionary(Of String, Integer)
-    Private ServiceStatusString As String
     Private TotalRam As Double
     Private UseMysql As Boolean
 
@@ -714,12 +711,7 @@ Public Class FormRegionlist
 
     Private Function GetStatus(RegionUUID As String, ByRef Num As Integer, ByRef Letter As String) As Integer
 
-        Dim Status As Integer
-        If Fore Then
-            Status = RegionStats(RegionUUID)
-        Else
-            Status = RegionStatus(RegionUUID)
-        End If
+        Dim Status = RegionStatus(RegionUUID)
 
         ' Get Estate name (cached)
         Dim MyEstate = Estate(RegionUUID)
@@ -897,8 +889,6 @@ Public Class FormRegionlist
 
         ' Set the view to show whatever
         TheView1 = Settings.RegionListView()
-
-        Fore = Foreground()
 
         SetScreen(TheView1)
         PictureBox1.Visible = True
@@ -1228,29 +1218,9 @@ Public Class FormRegionlist
             Return
         End If
         SearchBusy = True
+        Fore()
         BringToFront()
         SearchArray.Clear()
-
-        If isDreamGridServiceRunning() Or True Then
-
-            ServiceStatusString = SignalService("RegionStatus")
-
-            'For Each uuid In RegionUuids()
-            'ServiceStatusString += uuid & "," & Int((12 * Rnd()) + 1) & "|"   ' Generate random value between 1 and 12.
-            'Next
-
-            Try
-                ' UUID,int|UUID,int|
-                Dim regions = ServiceStatusString.Split(New Char() {"|"c}) ' split at the |
-                For Each Region As String In regions
-                    Dim R = Region.Split(New Char() {","c}) ' split at the comma
-                    Dim uuid = R(0).Trim
-                    Dim S = CInt("0" & R(1).Trim)
-                    RegionStats.Add(uuid, S)
-                Next
-            Catch ex As Exception
-            End Try
-        End If
 
         Select Case TheView1
             Case ViewType.Avatars

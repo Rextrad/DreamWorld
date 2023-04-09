@@ -274,7 +274,7 @@ Module Apache
 
         If Not Settings.ApacheEnable Then Return
 
-        If Foreground() Then
+        If Fore() Then
             Zap("Apache")
             Return
         End If

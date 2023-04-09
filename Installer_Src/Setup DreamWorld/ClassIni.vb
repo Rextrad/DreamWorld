@@ -129,7 +129,8 @@ Public Class LoadIni
     Public Function SaveIni() As Boolean
 
         SyncLock SaveTheINI
-            CopyFileFast(Settings.CurrentDirectory + "\OutworldzFiles\Settings.ini", Settings.CurrentDirectory + "\OutworldzFiles\Settings.bak")
+            Dim F = FileName.Replace(".ini", ".bak")
+            CopyFileFast(FileName, F)
             Dim Retry As Integer = 100 ' 1 sec
             While Retry > 0
                 Try

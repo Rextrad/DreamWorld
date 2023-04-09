@@ -10,6 +10,7 @@
         If Not ServiceExists("DreamGridService") Then
             TextPrint(My.Resources.ServiceRemoved)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
+            ForeGND()
             Return
         End If
 
@@ -30,6 +31,8 @@
             TextPrint(My.Resources.ServiceFailedtoDelete)
         End If
 
+        ForeGND()
+
     End Sub
 
     Public Sub Dispose() Implements IDisposable.Dispose
@@ -41,6 +44,7 @@
     Public Function InstallService() As Boolean
 
         If ServiceExists("DreamGridService") Then
+            ForeGND()
             Return True
         End If
 
@@ -55,7 +59,7 @@
                 "set DreamGridService AppStopMethodWindow 12000",  ' Send WM_close to windows, quit in 2 minutes
                 "set DreamGridService AppThrottle 15000",          ' delay restart if it runs less than 15 seconds
                 "set DreamGridService AppExit Default Restart", ' if it crashes, restart
-                "set DreamGridService AppRestartDelay 10000" ' delay restart by 1 second
+                "set DreamGridService AppRestartDelay 50000" ' delay restart by 5 second
             }
             For Each item In cmds
                 If NssmCommand(item) Then
@@ -70,10 +74,12 @@
 
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
             Settings.RunAsService = True
+            ForeGND()
             Return True
         Else
             TextPrint(My.Resources.ServiceFailedtoInstall)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
+            ForeGND()
             Return False
         End If
 
