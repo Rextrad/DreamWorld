@@ -22,6 +22,8 @@
 
         If Not NssmCommand("remove DreamGridService confirm") Then
             Settings.RunAsService = False
+            Settings.SaveSettings()
+
             TextPrint(My.Resources.ServiceRemoved)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear
             ZapRegions()
