@@ -580,10 +580,6 @@ Public Class FormSetup
 
         GetServiceList()
 
-        If Not Settings.DnsTestPassed Then
-            MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
-        End If
-
         Settings.DiagFailed = False
 
         ' Boot Port 8001 Server
@@ -604,6 +600,10 @@ Public Class FormSetup
         End If
 
         Await IPPublicAsync()
+
+        If Not Settings.DnsTestPassed Then
+            MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
+        End If
 
         mnuSettings.Visible = True
 
