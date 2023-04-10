@@ -36,7 +36,7 @@
 
     Public Sub GetServiceList()
 
-        If Not RunningInServiceMode() Then
+        If ForeGND() Then
 
             Dim ServiceStatusString = SignalService("RegionList")
 
@@ -111,7 +111,10 @@
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
-            If console.Contains("does not exist") Then Return False
+            '"[SC] EnumQueryServicesStatus:OpenService FAILED 1060:" & vbCrLf & vbCrLf & "The specified service does not exist as an installed service." & vbCrLf & vbCrLf
+            If console.Contains("FAILED") Or console.Contains("does not exist") Then
+                Return False
+            End If
             Return True
 
         End Using
@@ -135,7 +138,9 @@
     ''' <param name="Command">A string command</param>
     Public Function SignalService(Command As String) As String
 
-        If RunningInServiceMode() Then Return "OK"
+        If Not RunningInServiceMode() Or Not Fore() Then
+            Return "OK"
+        End If
 
         Using client As New TimedWebClient With {
                 .Timeout = 3000
