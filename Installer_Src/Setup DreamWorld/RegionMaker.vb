@@ -791,6 +791,9 @@ Module RegionMaker
     Public Sub StopRegion(RegionUUID As String)
 
         If SignalService($"StopRegion&RegionUUID={RegionUUID}") <> "OK" Then
+            For Each UUID As String In RegionUuidListFromGroup(Group_Name(RegionUUID))
+                RegionStatus(UUID) = SIMSTATUSENUM.Stopped ' already shutting down
+            Next
             PropUpdateView = True ' make form refresh
             Return
         End If
@@ -1751,7 +1754,6 @@ Module RegionMaker
             Catch
             End Try
 
-            Dim Upost = post.ToUpper
             If HttpUtility.ParseQueryString(myUri.Query).Get("Alt") IsNot Nothing Then
                 Return SmartStartParse(myUri)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
@@ -1830,8 +1832,9 @@ Module RegionMaker
     Private Function Assert(MyURI As Uri) As String
 
         Dim RegionUUID = HttpUtility.ParseQueryString(MyURI.Query).Get("RegionUUID")
-        Dim Status = HttpUtility.ParseQueryString(MyURI.Query).Get("Status")
-        RegionStatus(RegionUUID) = CInt(0 & Status)
+        Dim State = HttpUtility.ParseQueryString(MyURI.Query).Get("Status")
+        Logger("Command", $"Asserting State = {GetStateString(CInt(0 & State))}", "Command")
+        RegionStatus(RegionUUID) = CInt(0 & State)
         Return "ACK"
 
     End Function
