@@ -578,8 +578,6 @@ Public Class FormSetup
             Settings.ParkingLot = Settings.WelcomeRegion
         End If
 
-        GetServiceList()
-
         Settings.DiagFailed = False
 
         ' Boot Port 8001 Server
@@ -599,10 +597,11 @@ Public Class FormSetup
             End If
         End If
 
+        GetServiceList()
         Await IPPublicAsync()
 
         If Not Settings.DnsTestPassed Then
-            MsgBox("Unable to Connect to Dyn DNS. Only IP Addresses will work.", vbCritical)
+            MsgBox("Unable to Connect to Dyn DNS.", vbCritical)
         End If
 
         mnuSettings.Visible = True
@@ -2105,9 +2104,9 @@ Public Class FormSetup
                 Bench.Print("5 second + worker")
             End If
 
-            If SecondsTicker Mod 5 = 0 Then
-                GetServiceList()
-            End If
+            ' If SecondsTicker Mod 5 = 0 Then
+            'GetServiceList()
+            'End If
 
             If SecondsTicker = 60 Then
                 Bench.Start("60 second worker")
