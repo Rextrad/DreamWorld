@@ -448,7 +448,7 @@ Module WindowHandlers
         ''' <param name="processName"></param>
         ''' <returns></returns>
 
-        If SignalService($"Stop{processName}") <> "OK" Then Return
+
         PropAborting = True
 
         ' Kill process by name
