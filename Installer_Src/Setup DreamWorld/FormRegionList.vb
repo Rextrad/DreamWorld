@@ -1219,6 +1219,7 @@ Public Class FormRegionlist
         End If
         SearchBusy = True
         Fore()
+        GetServiceList()
         BringToFront()
         SearchArray.Clear()
 
