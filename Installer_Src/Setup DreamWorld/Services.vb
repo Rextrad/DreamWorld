@@ -3,6 +3,7 @@
     Public RegionStats As New Dictionary(Of String, Integer)
 
     Private _fore As Boolean
+
     ''' <summary>
     ''' Cached copy of ForeGND for speed
     ''' </summary>
@@ -37,21 +38,21 @@
     Public Sub GetServiceList()
 
         If ForeGND() Then
-
-            Dim ServiceStatusString = SignalService("RegionList")
-
-            'For Each uuid In RegionUuids()
-            'ServiceStatusString += uuid & "," & Int((12 * Rnd()) + 1) & "|"   ' Generate random value between 1 and 12.
-            'Next
-
             Try
                 ' UUID,int|UUID,int|
-                Dim regions = ServiceStatusString.Split(New Char() {"|"c}) ' split at the |
+                Dim regions = SignalService("RegionList").Split(New Char() {"|"c}) ' split at the |
                 For Each Region As String In regions
                     Dim R = Region.Split(New Char() {","c}) ' split at the comma
-                    Dim uuid = R(0).Trim
-                    Dim S = CInt("0" & R(1).Trim)
-                    RegionStats.Add(uuid, S)
+                    If R.Length > 1 Then
+                        Dim uuid = R(0).Trim
+                        If uuid.Length > 0 Then
+                            If RegionStats.ContainsKey(uuid) Then
+                                RegionStats(uuid) = CInt("0" & R(1).Trim)
+                            Else
+                                RegionStats.Add(uuid, CInt("0" & R(1).Trim))
+                            End If
+                        End If
+                    End If
                 Next
             Catch ex As Exception
             End Try
@@ -138,18 +139,17 @@
     ''' <param name="Command">A string command</param>
     Public Function SignalService(Command As String) As String
 
-        If Not RunningInServiceMode() Or Not Fore() Then
+        If RunningInServiceMode() Or Not Fore() Then
             Return "OK"
         End If
 
         Using client As New TimedWebClient With {
-                .Timeout = 3000
+                .Timeout = 10000
                 } ' download client for web pages
             Try
                 Dim Url = $"http://{Settings.LANIP}:{Settings.DiagnosticPort}?Command={Command}&Password={Settings.MachineId}"
-                'Diagnostics.Debug.Print(Url)
                 Dim result = client.DownloadString(Url)
-
+                Application.DoEvents()
                 Return result
             Catch ex As Exception
                 BreakPoint.Print(ex.Message)
