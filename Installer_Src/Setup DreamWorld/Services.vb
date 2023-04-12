@@ -1,4 +1,7 @@
-﻿Module Services
+﻿Imports Renci.SshNet.Messages
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+Module Services
 
     Public RegionStats As New Dictionary(Of String, Integer)
 
@@ -89,36 +92,12 @@
         Else
             Return False
         End If
-
     End Function
 
     Public Function ServiceExists(name As String) As Boolean
 
-        Using ServiceProcess As New Process()
-            ServiceProcess.StartInfo.RedirectStandardOutput = True
-            ServiceProcess.StartInfo.RedirectStandardError = True
-            ServiceProcess.StartInfo.RedirectStandardInput = True
-            ServiceProcess.StartInfo.UseShellExecute = False
-            ServiceProcess.StartInfo.FileName = "sc.exe"
-            ServiceProcess.StartInfo.Arguments = "query " & name
-            ServiceProcess.StartInfo.CreateNoWindow = True
-            ServiceProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-
-            Dim console As String = ""
-            Try
-                ServiceProcess.Start()
-                console = ServiceProcess.StandardOutput.ReadToEnd()
-                ServiceProcess.WaitForExit()
-            Catch ex As Exception
-                BreakPoint.Dump(ex)
-            End Try
-            '"[SC] EnumQueryServicesStatus:OpenService FAILED 1060:" & vbCrLf & vbCrLf & "The specified service does not exist as an installed service." & vbCrLf & vbCrLf
-            If console.Contains("FAILED") Or console.Contains("does not exist") Then
-                Return False
-            End If
-            Return True
-
-        End Using
+        Dim N = New ClassNssm
+        Return N.NssmCommand($"status {name}")
 
     End Function
 

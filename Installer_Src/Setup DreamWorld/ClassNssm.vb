@@ -87,6 +87,33 @@
 
     End Function
 
+    Public Function NssmCommand(command As String) As Boolean
+
+        Dim BootProcess = New Process
+        BootProcess.StartInfo.UseShellExecute = True
+        BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
+        BootProcess.StartInfo.CreateNoWindow = True
+        BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        BootProcess.StartInfo.Arguments = command
+
+        Dim ok As Boolean = False
+        Try
+            BootProcess.Start()
+            BootProcess.WaitForExit()
+            Dim code = BootProcess.ExitCode
+            If code = 0 Then
+                Return False
+            End If
+        Catch ex As Exception
+            Logger("Failed to Run ", command, "Outworldz")
+            Return False
+        End Try
+
+        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.nav_plain_red
+        Return True
+
+    End Function
+
     Public Function StartService() As Boolean
 
         If Not ServiceExists("DreamGridService") Then
@@ -148,33 +175,5 @@
             disposedValue = True
         End If
     End Sub
-
-    Private Function NssmCommand(command As String) As Boolean
-
-        Dim BootProcess = New Process
-        BootProcess.StartInfo.UseShellExecute = True
-        BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
-        BootProcess.StartInfo.CreateNoWindow = True
-        BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-        BootProcess.StartInfo.Arguments = command
-
-        Dim ok As Boolean = False
-        Try
-            BootProcess.Start()
-            Sleep(1000)
-            BootProcess.WaitForExit()
-            Dim code = BootProcess.ExitCode
-            If code = 0 Then
-                Return False
-            End If
-        Catch ex As Exception
-            Logger("Failed to Run ", command, "Outworldz")
-            Return False
-        End Try
-
-        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.nav_plain_red
-        Return True
-
-    End Function
 
 End Class
