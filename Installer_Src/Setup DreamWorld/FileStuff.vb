@@ -539,7 +539,7 @@ Module FileStuff
         If dll Is Nothing Then Return False
         If tofind Is Nothing Then Return False
         For Each filename In dll
-            If tofind.ToUpper(Globalization.CultureInfo.InvariantCulture) = filename.ToUpper(Globalization.CultureInfo.InvariantCulture) Then
+            If tofind.ToUpper(EnglishCulture.InvariantCulture) = filename.ToUpper(EnglishCulture.InvariantCulture) Then
                 Return True
             End If
         Next

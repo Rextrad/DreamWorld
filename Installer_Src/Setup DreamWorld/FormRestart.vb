@@ -37,7 +37,7 @@ Public Class FormRestart
         Settings.AutoRestartEnabled = ARTimerBox.Checked
         Settings.Autostart = AutoStartCheckbox.Checked
         Try
-            Settings.AutoRestartInterval = Convert.ToInt16(AutoRestartBox.Text, Globalization.CultureInfo.InvariantCulture)
+            Settings.AutoRestartInterval = Convert.ToInt16(AutoRestartBox.Text, EnglishCulture.InvariantCulture)
         Catch ex As Exception
             BreakPoint.Dump(ex)
             Settings.AutoRestartInterval = 0
@@ -83,7 +83,7 @@ Public Class FormRestart
         ToolTip1.SetToolTip(NoDelayRadioButton, Global.Outworldz.My.Resources.NoDelay_text)
         ToolTip1.SetToolTip(ConcurrentRadioButton, Global.Outworldz.My.Resources.Concurrent_text)
 
-        AutoRestartBox.Text = Settings.AutoRestartInterval.ToString(Globalization.CultureInfo.InvariantCulture)
+        AutoRestartBox.Text = Settings.AutoRestartInterval.ToString(EnglishCulture.InvariantCulture)
         ARTimerBox.Checked = Settings.AutoRestartEnabled
         AutoStartCheckbox.Checked = Settings.Autostart
         RestartOnCrash.Checked = Settings.RestartOnCrash
@@ -137,8 +137,8 @@ Public Class FormRestart
             Dim BTime As Int16 = CType(Settings.AutobackupInterval, Int16)
             If Settings.AutoBackup And Settings.AutoRestartInterval > 0 And Settings.AutoRestartInterval < BTime Then
                 Settings.AutoRestartInterval = BTime + 30
-                AutoRestartBox.Text = (BTime + 30).ToString(Globalization.CultureInfo.InvariantCulture)
-                MsgBox(My.Resources.Increasing_time_to_word & " " & BTime.ToString(Globalization.CultureInfo.InvariantCulture) & " + 30 Minutes for Autobackup to complete.", vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                AutoRestartBox.Text = (BTime + 30).ToString(EnglishCulture.InvariantCulture)
+                MsgBox(My.Resources.Increasing_time_to_word & " " & BTime.ToString(EnglishCulture.InvariantCulture) & " + 30 Minutes for Autobackup to complete.", vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
             End If
         Else
             Settings.AutoRestartEnabled = False

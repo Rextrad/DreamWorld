@@ -102,7 +102,7 @@ Public Class MySettings
     Public Sub SetMySetting(key As String, value As String)
 
         If value Is Nothing Then Return
-        Settings.SetIni("Data", key, value.ToString(Globalization.CultureInfo.InvariantCulture))
+        Settings.SetIni("Data", key, value.ToString(EnglishCulture.InvariantCulture))
 
     End Sub
 
@@ -511,7 +511,7 @@ Public Class MySettings
     Public Property BirdsBorderSize() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsBorderSize", "25"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsBorderSize", "25"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -538,7 +538,7 @@ Public Class MySettings
     Public Property BirdsDesiredSeparation() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsDesiredSeparation", "5"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsDesiredSeparation", "5"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -570,7 +570,7 @@ Public Class MySettings
     Public Property BirdsMaxForce() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsMaxForce", "0.2"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsMaxForce", "0.2"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -586,7 +586,7 @@ Public Class MySettings
     Public Property BirdsMaxHeight() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsMaxHeight", "25"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsMaxHeight", "25"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -602,7 +602,7 @@ Public Class MySettings
     Public Property BirdsMaxSpeed() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsMaxSpeed", "1.0"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsMaxSpeed", "1.0"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -627,7 +627,7 @@ Public Class MySettings
     Public Property BirdsNeighbourDistance() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsNeighbourDistance", "25"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsNeighbourDistance", "25"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -657,7 +657,7 @@ Public Class MySettings
     Public Property BirdsTolerance() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("BirdsTolerance", "25"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("BirdsTolerance", "25"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -874,7 +874,7 @@ Public Class MySettings
     Public Property Density() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("Density", "0.5"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("Density", "0.5"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -1115,7 +1115,7 @@ Public Class MySettings
     Public Property FlatlandLevel() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("FlatLandLevel", "21"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("FlatLandLevel", "21"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -1361,7 +1361,7 @@ Public Class MySettings
         Get
             Try
 
-                Return Convert.ToDouble(GetMySetting("LandSmoothValue", "0.5"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("LandSmoothValue", "0.5"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -1375,7 +1375,7 @@ Public Class MySettings
     Public Property LandStrength() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("LandStrength", "1.0"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("LandStrength", "1.0"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -1389,7 +1389,7 @@ Public Class MySettings
     Public Property LandTaper() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("LandTaper", "0.6"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("LandTaper", "0.6"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -1590,7 +1590,7 @@ Public Class MySettings
     Public Property MinTimerInterval() As Double
         Get
             Try
-                Dim value = Convert.ToDouble(GetMySetting("MinTimerInterval", "0.2"), Globalization.CultureInfo.InvariantCulture)
+                Dim value = Convert.ToDouble(GetMySetting("MinTimerInterval", "0.2"), EnglishCulture.InvariantCulture)
                 If value < 0.05 Or value > 1 Then value = 0.2
                 Return value
             Catch ex As Exception
@@ -1939,7 +1939,7 @@ Public Class MySettings
     Public Property RenderMaxHeight() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("RenderMaxHeight", "4096"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("RenderMaxHeight", "4096"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try
@@ -2290,7 +2290,7 @@ Public Class MySettings
     Public Property SkipUpdateCheck() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("SkipUpdateCheck", "0"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("SkipUpdateCheck", "0"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
             End Try
             Return 0
@@ -2578,7 +2578,7 @@ Public Class MySettings
 
     Public Property Total_InnoDB_GBytes() As Double
         Get
-            Dim amount = Convert.ToDouble("0" & GetMySetting("Total_InnoDB_GBytes", "1"), Globalization.CultureInfo.InvariantCulture)
+            Dim amount = Convert.ToDouble("0" & GetMySetting("Total_InnoDB_GBytes", "1"), EnglishCulture.InvariantCulture)
             If amount > 2 Then amount = 2
             Return amount
         End Get
@@ -2592,7 +2592,7 @@ Public Class MySettings
     Public Property TTSHours() As Double
         Get
             Try
-                Return Convert.ToDouble(GetMySetting("TTSHours", "1"), Globalization.CultureInfo.InvariantCulture)
+                Return Convert.ToDouble(GetMySetting("TTSHours", "1"), EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 BreakPoint.Dump(ex)
             End Try

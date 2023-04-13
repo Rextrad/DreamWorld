@@ -7,6 +7,9 @@
 <!--
  /* Font Definitions */
  @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
 	{font-family:SimSun;
 	panose-1:2 1 6 0 3 1 1 1 1 1;}
 @font-face
@@ -21,6 +24,9 @@
 @font-face
 	{font-family:Verdana;
 	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"Segoe UI Emoji";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
 @font-face
 	{font-family:"\@SimSun";
 	panose-1:2 1 6 0 3 1 1 1 1 1;}
@@ -88,6 +94,11 @@ span.Heading2Char
 	margin:1.0in 1.0in 1.0in 1.0in;}
 div.WordSection1
 	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
 -->
 </style>
 
@@ -109,16 +120,28 @@ bans shut off incoming traffic by using Opensim Robust capabilities, and by
 adding entries to the Windows Firewall.  They are not a total solution but can
 work in many cases.   This may not be effective as the login name can be
 changed, the Viewer Name can be tweaked, they may have another PC with a
-different MAC or they may have changes it, and the IP may change by the ISP or
-come from a VPN.    People who bypass this DRM restriction are breaking into a
-computer, which is a felony, so penalties far beyond copyright laws could
-apply.</p>
+different MAC, or they may have changed it, and the IP may change by the ISP or
+come from a VPN.    </p>
 
-<p class=MsoNormal><img width=624 height=251 id="Picture 1"
+<p class=MsoNormal>Syntax is shown below:</p>
+
+<p class=MsoNormal><img width=662 height=388 id="Picture 1"
 src="BanList_files/image001.png"></p>
 
-<p class=MsoNormal><b><u><span style='font-family:"Times New Roman",serif'>Note
-that # is a Comment</span></u></b></p>
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal><span style='font-family:"Times New Roman",serif'>Comments
+     - # is a Comment</span></li>
+ <li class=MsoNormal><span style='font-family:"Times New Roman",serif'>IP - IP
+     may be specified with four digits and dots or with /24 to cover
+     255.255.255.0 range.  /16 will block all IPs in the range of 255.255.0.0.</span></li>
+ <li class=MsoNormal><span style='font-family:"Times New Roman",serif'>MAC: and
+     two hex digits will ban by the hashed MAC address.</span></li>
+ <li class=MsoNormal><span style='font-family:"Times New Roman",serif'>Anything
+     else is assumed to be a Viewer string.</span></li>
+ <li class=MsoNormal><a href="http://(URL):Port"><span style='font-family:"Times New Roman",serif'>http</span><span
+     style='font-family:"Segoe UI Emoji",sans-serif'>://(URL):Port</span></a><span
+     style='font-family:"Segoe UI Emoji",sans-serif'> will ban this Grid.</span></li>
+</ul>
 
 <p class=MsoNormal>Settings go into effect when you save the screen after
 making changes.  For OsGrid, Metro and region servers, only IP bans will work
@@ -157,17 +180,16 @@ href="http://grid.nope.com:8002/"><span style='font-family:"Courier New"'>http:/
 
 </div>
 
-<p class=MsoNormal><b> </b>To ban the grid that the avatar who originally
-logged  on, add <a href="http://www.xyz.com:8002"><b><span style='font-family:
-"Times New Roman",serif'>http://www.xyz.com</span></b><span style='font-family:
-"Times New Roman",serif'>:8002</span></a>. The “http://” and “:port” number is
-required.</p>
+<p class=MsoNormal><b> </b>To ban the grid that the avatar who originally logged
+on, add <a href="http://www.xyz.com:8002"><b><span style='font-family:"Times New Roman",serif'>http://www.xyz.com</span></b><span
+style='font-family:"Times New Roman",serif'>:8002</span></a>. The “http://” and
+“:port” number is needed.</p>
 
 <p class=MsoNormal>To ban the grid that the avatar teleported from (not
 necessarily her home grid) , add <a href="http://grid.nope.com:8002"><b><span
 style='font-family:"Times New Roman",serif'>http://grid.nope.com</span></b><span
 style='font-family:"Times New Roman",serif'>:8002</span></a>. The “http://” and
-“:port” number is required.</p>
+“:port” number is needed.</p>
 
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
 
@@ -175,7 +197,7 @@ style='font-family:"Times New Roman",serif'>:8002</span></a>. The “http://” and
 
 </div>
 
-<p class=MsoNormal>To ban an IP, add the IP  like this:  52.8.203.221.    You
+<p class=MsoNormal>To ban an IP, add the IP like this:  52.8.203.221.    You
 can also add a /24 to the end to ban all IP addresses in the same range of 256
 IP addresses. Use IP “52.8.203.0/24” to ban all users from IP 52.8.203.0 to IP
 52.8.203.255.</p>
@@ -196,9 +218,8 @@ the MAC address from the robust log: “<b>d5af8bee7e6a265c41e729416d570f57</b>”. 
 
 </div>
 
-<p class=MsoNormal>To ban a specific viewer, add the name and Revision.
-“Firestorm-Releasex64 5.2.8.58205”.  To ban all version 5 Firestorms, add
-“Firestorm-Releasex64 5”. </p>
+<p class=MsoNormal>To ban a specific viewer, add the name and Revision. “Firestorm-Releasex64
+5.2.8.58205”.  To ban all version 5 Firestorms, add “Firestorm-Releasex64 5”. </p>
 
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
 

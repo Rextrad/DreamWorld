@@ -89,10 +89,10 @@ Public Class ClassScreenpos
             Return
         End If
 
-        ' Debug.Print("Saving " & name & "=" & size.ToString(Globalization.CultureInfo.InvariantCulture))
+        ' Debug.Print("Saving " & name & "=" & size.ToString(EnglishCulture.InvariantCulture))
 
         Dim s As String = name & "_width"
-        XYData("Data")(s.ToString(Globalization.CultureInfo.CurrentCulture)) = size.ToString(Globalization.CultureInfo.InvariantCulture)
+        XYData("Data")(s.ToString(Globalization.CultureInfo.CurrentCulture)) = size.ToString(EnglishCulture.InvariantCulture)
 
     End Sub
 
@@ -103,7 +103,7 @@ Public Class ClassScreenpos
         End If
 
         Dim Value = CType(XYData("Data".ToString(Globalization.CultureInfo.CurrentCulture))(GName1 + "_Initted"), Integer)
-        SetXYIni("Data".ToString(Globalization.CultureInfo.InvariantCulture), GName1 + "_Initted", "1")
+        SetXYIni("Data".ToString(EnglishCulture.InvariantCulture), GName1 + "_Initted", "1")
         SaveFormSettings()
         If Value = 0 Then Return False
         Return True
@@ -216,18 +216,18 @@ Public Class ClassScreenpos
         If XYData Is Nothing Then
             Return
         End If
-        SetXYIni("Data".ToString(Globalization.CultureInfo.InvariantCulture), GName1 + "_H", valueH.ToString(Globalization.CultureInfo.CurrentCulture))
-        SetXYIni("Data".ToString(Globalization.CultureInfo.InvariantCulture), GName1 + "_W", valueW.ToString(Globalization.CultureInfo.CurrentCulture))
+        SetXYIni("Data".ToString(EnglishCulture.InvariantCulture), GName1 + "_H", valueH.ToString(Globalization.CultureInfo.CurrentCulture))
+        SetXYIni("Data".ToString(EnglishCulture.InvariantCulture), GName1 + "_W", valueW.ToString(Globalization.CultureInfo.CurrentCulture))
         SaveFormSettings()
-        'Debug.Print("H>" + valueH.ToString(Globalization.CultureInfo.InvariantCulture))
-        'Debug.Print("W>" + valueW.ToString(Globalization.CultureInfo.InvariantCulture))
+        'Debug.Print("H>" + valueH.ToString(EnglishCulture.InvariantCulture))
+        'Debug.Print("W>" + valueW.ToString(EnglishCulture.InvariantCulture))
 
     End Sub
 
     Public Sub SaveXY(valueX As Integer, valueY As Integer)
 
-        SetXYIni("Data".ToString(Globalization.CultureInfo.InvariantCulture), GName1 + "_X", valueX.ToString(Globalization.CultureInfo.CurrentCulture))
-        SetXYIni("Data".ToString(Globalization.CultureInfo.InvariantCulture), GName1 + "_Y", valueY.ToString(Globalization.CultureInfo.CurrentCulture))
+        SetXYIni("Data".ToString(EnglishCulture.InvariantCulture), GName1 + "_X", valueX.ToString(Globalization.CultureInfo.CurrentCulture))
+        SetXYIni("Data".ToString(EnglishCulture.InvariantCulture), GName1 + "_Y", valueY.ToString(Globalization.CultureInfo.CurrentCulture))
         SaveFormSettings()
         ' Debug.Print("X>" + valueX.ToString(Globalization.CultureInfo.CurrentCulture))
         ' Debug.Print("Y>" + valueY.ToString(Globalization.CultureInfo.CurrentCulture))

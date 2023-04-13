@@ -75,49 +75,49 @@ Public Class FormBird
         BirdsFlockSize.Sorted = False
         Dim i As Integer
         For i = 1 To 100
-            BirdsFlockSize.Items.Add(i.ToString(Globalization.CultureInfo.InvariantCulture))
+            BirdsFlockSize.Items.Add(i.ToString(EnglishCulture.InvariantCulture))
         Next
         BirdsFlockSize.SelectedIndex = Settings.BirdsFlockSize - 1
         FlockLabel.Text = Global.Outworldz.My.Resources.Bird_Flock_Size_word
         ToolTip1.SetToolTip(FlockLabel, Global.Outworldz.My.Resources.Num_Birds)
         ToolTip1.SetToolTip(BirdsFlockSize, Global.Outworldz.My.Resources.tt_BirdsFlockSize)
 
-        ChatChanelTextBox.Text = Settings.BirdsChatChannel.ToString(Globalization.CultureInfo.InvariantCulture)
+        ChatChanelTextBox.Text = Settings.BirdsChatChannel.ToString(EnglishCulture.InvariantCulture)
         ChatLabel.Text = Global.Outworldz.My.Resources.Chat_Channel_word
         ToolTip1.SetToolTip(ChatChanelTextBox, Global.Outworldz.My.Resources.Which_Channel)
         ToolTip1.SetToolTip(ChatLabel, Global.Outworldz.My.Resources.Which_Channel)
 
-        MaxSpeedTextBox.Text = Settings.BirdsMaxSpeed.ToString(Globalization.CultureInfo.InvariantCulture)
+        MaxSpeedTextBox.Text = Settings.BirdsMaxSpeed.ToString(EnglishCulture.InvariantCulture)
         MaxSpeedLabel.Text = Global.Outworldz.My.Resources.Max_Speed
         ToolTip1.SetToolTip(MaxSpeedTextBox, Global.Outworldz.My.Resources.How_Far_Travel)
         ToolTip1.SetToolTip(MaxSpeedLabel, Global.Outworldz.My.Resources.How_Far_Travel)
 
-        MaxForceTextBox.Text = Settings.BirdsMaxForce.ToString(Globalization.CultureInfo.InvariantCulture)
+        MaxForceTextBox.Text = Settings.BirdsMaxForce.ToString(EnglishCulture.InvariantCulture)
         maxForceLabel.Text = Global.Outworldz.My.Resources.Max_Force
         ToolTip1.SetToolTip(MaxForceTextBox, Global.Outworldz.My.Resources.How_Far_Travel)
         ToolTip1.SetToolTip(maxForceLabel, Global.Outworldz.My.Resources.How_Far_Travel)
 
-        BirdsNeighbourDistanceTextBox.Text = Settings.BirdsNeighbourDistance.ToString(Globalization.CultureInfo.InvariantCulture)
+        BirdsNeighbourDistanceTextBox.Text = Settings.BirdsNeighbourDistance.ToString(EnglishCulture.InvariantCulture)
         NeighborLabel.Text = Global.Outworldz.My.Resources.Neighbor_Distance
         ToolTip1.SetToolTip(BirdsNeighbourDistanceTextBox, Global.Outworldz.My.Resources.Max_Dist)
         ToolTip1.SetToolTip(NeighborLabel, Global.Outworldz.My.Resources.Max_Dist)
 
-        DesiredSeparationTextBox.Text = Settings.BirdsDesiredSeparation.ToString(Globalization.CultureInfo.InvariantCulture)
+        DesiredSeparationTextBox.Text = Settings.BirdsDesiredSeparation.ToString(EnglishCulture.InvariantCulture)
         SeparationLabel.Text = Global.Outworldz.My.Resources.Desired_Separation_word
         ToolTip1.SetToolTip(SeparationLabel, Global.Outworldz.My.Resources.How_Far)
         ToolTip1.SetToolTip(DesiredSeparationTextBox, Global.Outworldz.My.Resources.How_Far)
 
-        BirdsToleranceTextBox.Text = Settings.BirdsTolerance.ToString(Globalization.CultureInfo.InvariantCulture)
+        BirdsToleranceTextBox.Text = Settings.BirdsTolerance.ToString(EnglishCulture.InvariantCulture)
         ToleranceLabel.Text = Global.Outworldz.My.Resources.Tolerance
         ToolTip1.SetToolTip(BirdsToleranceTextBox, Global.Outworldz.My.Resources.Tolerance)
         ToolTip1.SetToolTip(ToleranceLabel, Global.Outworldz.My.Resources.Tolerance)
 
-        BirdsBorderSizeTextBox.Text = Settings.BirdsBorderSize.ToString(Globalization.CultureInfo.InvariantCulture)
+        BirdsBorderSizeTextBox.Text = Settings.BirdsBorderSize.ToString(EnglishCulture.InvariantCulture)
         BorderLabel.Text = Global.Outworldz.My.Resources.Border_Size
         ToolTip1.SetToolTip(BirdsBorderSizeTextBox, Global.Outworldz.My.Resources.tt_Bird_Border_size)
         ToolTip1.SetToolTip(BorderLabel, Global.Outworldz.My.Resources.tt_Bird_Border_size)
 
-        BirdsMaxHeightTextBox.Text = Settings.BirdsMaxHeight.ToString(Globalization.CultureInfo.InvariantCulture)
+        BirdsMaxHeightTextBox.Text = Settings.BirdsMaxHeight.ToString(EnglishCulture.InvariantCulture)
         MaxHLabel.Text = Global.Outworldz.My.Resources.Max_Height
         ToolTip1.SetToolTip(BirdsMaxHeightTextBox, Global.Outworldz.My.Resources.tt_BirdsMaxHeightTextBox)
         ToolTip1.SetToolTip(MaxHLabel, Global.Outworldz.My.Resources.tt_BirdsMaxHeightTextBox)

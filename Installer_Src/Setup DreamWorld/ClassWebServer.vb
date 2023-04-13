@@ -127,7 +127,7 @@ Public Class NetServer
         Debug.Print(message)
         Try
             Using outputFile As New StreamWriter(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\Http.log"), False)
-                outputFile.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", Globalization.CultureInfo.InvariantCulture) & ":" & category & ":" & message)
+                outputFile.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", EnglishCulture.InvariantCulture) & ":" & category & ":" & message)
             End Using
         Catch ex As Exception
             ' none to prevent looping

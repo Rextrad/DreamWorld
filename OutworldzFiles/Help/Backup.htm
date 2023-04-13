@@ -31,19 +31,19 @@
 	{font-family:Verdana;
 	panose-1:2 11 6 4 3 5 4 4 2 4;}
 @font-face
-	{font-family:"Beyond Wonderland";
-	panose-1:2 0 0 0 0 0 0 0 0 0;}
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
 @font-face
 	{font-family:"Segoe UI";
 	panose-1:2 11 5 2 4 2 4 2 2 3;}
 @font-face
-	{font-family:"Open Sans";}
-@font-face
-	{font-family:Consolas;
-	panose-1:2 11 6 9 2 2 4 3 2 4;}
-@font-face
 	{font-family:"\@SimSun";
 	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Beyond Wonderland";
+	panose-1:2 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Open Sans";}
 @font-face
 	{font-family:"\@MS Mincho";
 	panose-1:2 2 6 9 4 2 5 8 3 4;}
@@ -140,32 +140,30 @@ ul
 
 </div>
 
-<p class=MsoNormal>The AutoBackup module periodically saves data to a
-folder.    </p>
+<p class=MsoNormal>The AutoBackup module periodically saves data to a folder. </p>
 
 <p class=MsoNormal><span style='font-size:10.5pt;line-height:115%;font-family:
-"Open Sans",sans-serif;color:#373737'><img width=361 height=321
-src="Backup_files/image001.png"
-alt="Graphical user interface, application&#13;&#10;&#13;&#10;Description automatically generated"></span></p>
+"Open Sans",sans-serif;color:#373737'><img width=411 height=384
+src="Backup_files/image001.png"></span></p>
 
 <p class=MsoNormal>When AutoBackup is enabled, Opensim will make various backups
 of each region. For example, Opensim will make OAR after Opensim has run for <b>Interval</b>
-time.  If there are checkboxes set in the [Backup Type], then those files will
+time. If there are checkboxes set in the [Backup Type], then those files will
 be backup up, too. The files will appear in the Outworldzfiles\AutoBackup
-folder.  </p>
+folder. </p>
 
-<p class=MsoNormal><b>Keep for Days</b> will delete any OAR or zip older than
-this period of time.   </p>
+<p class=MsoNormal><b>Keep for Days</b> will remove any folder older than this period.
+</p>
 
 <p class=MsoNormal><b>Save To Folder: </b>You can click on “AutoBackup” folder
 name, or the folder Icon, and set a different location.</p>
 
-<p class=MsoNormal><b>CAUTION:</b>  These backups can take a great deal of
-room!  <b>It is critical to save them to a different drive</b> so that a full
-drive does not crash your Database and Opensim system.   DreamGrid will check
-for free disk space and warn you if you are low. It will attempt to freeze all
-Opensim Region activity if disk space gets low.  If the disk space is &gt; 50
-MB, it will resume operation. </p>
+<p class=MsoNormal><b>CAUTION:</b>  These backups may use a great deal of room!
+<b>It is critical to save them to a different drive</b> so that a full drive
+does not crash your Database and Opensim system. DreamGrid will check for free
+disk space and warn you if you are low. It will freeze all Opensim Region
+activity if disk space gets low. If the disk space is &gt; 100 MB, it will
+resume operation. </p>
 
 <p class=MsoNormal><img width=399 height=324 src="Backup_files/image002.png"></p>
 
@@ -175,12 +173,12 @@ MB, it will resume operation. </p>
 from OutworldzFiles\Opensim\Bin\Regions to a Zip.</p>
 
 <p class=MsoNormal><b>Backup FSAssets folder</b> will make a copy of all the
-the (Very Large) FSassets folder.</p>
+(Very Large) FsAsset folder.</p>
 
 <p class=MsoNormal><b>Backup Custom Web Pages</b> are the two Wifi-Custom folders.</p>
 
 <p class=MsoNormal><b>Backup Oars</b> will manually backup all regions if the
-Rub Backup Now button is pressed.  It does not boot them again on a timer.   </p>
+Rub Backup Now button is pressed. It does not boot them again on a timer. </p>
 
 <p class=MsoNormal><b>Backup IARs </b>will start a new region named Temp ands
 back up all IARs one at a time. This can take a Very Long Time.</p>
@@ -188,12 +186,12 @@ back up all IARs one at a time. This can take a Very Long Time.</p>
 <p class=MsoNormal><b>Backup Custom Web Pages</b> are the two Wifi-Custom
 folders.</p>
 
-<p class=MsoNormal><b>Backup MySql Data Folder</b> will back up the main
-database.  You need a copy of FSassets, too!</p>
+<p class=MsoNormal><b>Backup MySQL Data Folder</b> will back up the main
+database. You need a copy of FsAssets, too!</p>
 
 <p class=MsoNormal><b>Robocopy</b>:  The <b>FSASSETS</b> system uses robocopy,
-a built in DOS program for FSassets. It follows two rules for visibility that
-you set for Regions, such as Always Show or Never Show.  It runs with the
+a built in DOS program for FsAssets. It follows two rules for visibility that
+you set for regions, such as Always Show or Never Show. It runs with the
 following switches:<br>
 <br>
 <a name="_Hlk90673964"></a></p>
@@ -203,19 +201,17 @@ following switches:<br>
 <p class=MsoNormal>/M –Modified files are copied that have the A bit set, then
 clears the bit.</p>
 
-<p class=MsoNormal>/TBD - Wait for share names to be defined by the network.</p>
-
-<p class=MsoNormal>/IM - Include Modified files that have modified times.</p>
+<p class=MsoNormal>/IM - Include Modified files that have changed times.</p>
 
 <p class=MsoNormal>/J – Use Unbuffered IO for large files.</p>
 
 <p class=MsoNormal><br>
-Robocopy will also add this LFSM switch on Windows 10.  It will not do so on
+Robocopy will also add this LFSM switch on Windows 10. It will not do so on
 Server or Windows 7.<br>
 <br>
-/LFSM:50M – Will operate in low free space mode, enabling copy pause and resume.
-Robocopy will pause whenever a file copy would cause the destination volume's
-free space to go below 50 Megabytes.</p>
+/LFSM:50M – Will work in low free space mode, enabling copy pause and resume. Robocopy
+will pause whenever a file copy would cause the destination volume's free space
+to go below 50 Megabytes.</p>
 
 <p class=MsoNormal><br>
 See the manual on “Manual Backups” for ways to back up manually.</p>
@@ -237,21 +233,21 @@ check all the boxes:</span></p>
      file</span></li>
  <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\Opensim\bin\LocalUserStatistics.db
      database of traffic and viewers.</span></li>
- <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\Photo.png 
+ <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\Photo.png
      Custom Hyperica Photo</span></li>
- <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\NewBlack.png 
+ <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\NewBlack.png
      Custom Theme</span></li>
- <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\NewWhite.png 
+ <li class=MsoNormal style='color:black'><span style='color:windowtext'>OutworldzFiles\NewWhite.png
      Custom Theme</span></li>
- <li class=MsoNormal>OutworldzFiles\NewCustom.png  Custom Theme</li>
+ <li class=MsoNormal>OutworldzFiles\NewCustom.png Custom Theme</li>
  <li class=MsoNormal>OutworldzFiles\Opensim\bin\Regions All the region Ini
      files</li>
- <li class=MsoNormal>Mysql Robust as .sql  a portable database of Robust</li>
+ <li class=MsoNormal>Mysql Robust as .sql a portable database of Robust</li>
  <li class=MsoNormal>Mysql Opensim as .sql a portable database of Opensim
      regions</li>
  <li class=MsoNormal>Joomla as .sql a portable database of joomla data.</li>
  <li class=MsoNormal>Opensim\bin\FSassets ALL the assets, which must be backed
-     up last on a live machine</li>
+     up last on a live machine.</li>
 </ul>
 
 <span style='font-size:10.0pt;line-height:115%;font-family:"Verdana",sans-serif'><br
@@ -267,11 +263,13 @@ Consolas;color:#A31515'>&nbsp;</span></p>
 
 </div>
 
-<p class=MsoNormal>Go get a USB drive, preferably USB 3.0 plug it into a Blue
-or Teal colored jack for fastest speed.  If you do not have the colored jacks,
-use any Black-colored jack.  Format it for EX FAT or NTFS, with a 4096 sector
-size.  ExFat is a standard format that works on all machines, including Mac’s,
-Linux and Windows.   A smaller sector sizes lets you put more data on the disk.</p>
+<p class=MsoNormal>Get a USB drive, preferably USB 3.0 plug it into a Blue or
+Teal colored jack for fastest speed. If you do not have the colored jacks, use
+any Black-colored jack. Format it for NTFS, with a 4096-sector size. ExFAT is a
+standard format that works on all machines, including Mac’s, Linux, and
+Windows. <b>You must select a smaller sector size in ExFAT,</b> or you will
+waste most of the space! A smaller sector size lets you put more data on the
+disk.</p>
 
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6'>
 
@@ -280,7 +278,7 @@ Linux and Windows.   A smaller sector sizes lets you put more data on the disk.<
 </div>
 
 <p class=MsoNormal><br>
-You can easily change an external hard drive to NTFS or ExFat file system
+You can easily change an external hard drive to NTFS or ExFAT file system
 via&nbsp;<span style='font-family:"Arial",sans-serif'>Disk Management</span>&nbsp;by
 following the steps listed below.</p>
 
@@ -322,35 +320,35 @@ id="Picture 5" src="Backup_files/image003.jpg" alt="Choose exFAT File System"></
 
 </div>
 
-<p class=MsoNormal>Set a path to this drive in AutoBackup.   Here I have my dev
+<p class=MsoNormal>Set a path to this drive in AutoBackup. Here I have my dev
 system set for my E: drive, a 14 TB Western Digital Easystore USB 3.0 HDD. Got
-it on Black Friday for $189 at Best Buy.  These are usually the best deals in
-the USA.  </p>
+it on Black Friday for $189 at Best Buy. These are usually the best deals in
+the USA. </p>
 
 <p class=MsoNormal>&nbsp;</p>
 
 <p class=MsoNormal><img border=0 width=361 height=321 id="Picture 1"
-src="Backup_files/image001.png"
+src="Backup_files/image004.png"
 alt="Graphical user interface, application&#13;&#10;&#13;&#10;Description automatically generated"><br>
 <br>
 </p>
 
-<p class=MsoNormal>Set it for a weeks’ worth of backups.    The default was 1
-day, the default now is 3 days. But that applies only to new grids.</p>
+<p class=MsoNormal>Set it for a week’s worth of backups. The default was 1 day,
+the default now is 3 days. But that applies only to new grids.</p>
 
 <p class=MsoNormal>Now click <b>Backup Type</b></p>
 
 <p class=MsoNormal><img border=0 width=250 height=275 id="Picture 2"
-src="Backup_files/image004.png"
+src="Backup_files/image005.png"
 alt="Graphical user interface, application&#13;&#10;&#13;&#10;Description automatically generated"></p>
 
 <p class=MsoNormal>Check all the boxes.</p>
 
 <ul style='margin-top:0in' type=disc>
  <li class=MsoNormal>A FULL backup is to check all boxes except Backup OARS.</li>
- <li class=MsoNormal>Backup OARS is a good way to get the regions in a portable
-     way, but this leaves out your users, your inventory, settings, and other
-     important things.</li>
+ <li class=MsoNormal>Backup OARS is an effective way to get to the regions in a
+     portable way, but this leaves out your users, your inventory, settings,
+     and other important things.</li>
  <li class=MsoNormal>To get an immediate backup of your grid, manually, click
      on the button that says: Run Backup Now.</li>
 </ul>
@@ -362,49 +360,45 @@ alt="Graphical user interface, application&#13;&#10;&#13;&#10;Description automa
 <p class=MsoNormal><b>This may take days to finish because FSASSETS is going to
 be HUGE and will grow every time you touch the grid.<br>
 </b><br>
-Now run the grid a week and check on the disk space.  If there is lots left
-over, make it hold 14 days and check again in another week.  When the disk
-looks like it will not make it a week, plug it into your concrete and steel
-Fire Safe that’s bolted to the floor and go buy another USB hard drive.   Your
-need TWO backups, and one MUST be offline.<br>
+Now run the grid a week and check on the disk space. If there are lots left
+over, make it hold 14 days and check again in another week. When the disk looks
+like it will not make it a week, plug it into your concrete and steel Fire Safe
+that is bolted to the floor and go buy another USB hard drive. Your need TWO
+backups, and one MUST be offline.<br>
 <br>
-This is only steps 3 and 2 of the 3:2:1 Backup method.   You should put at least
-the most recent copy in the cloud to handle the ‘1’ part.   There are many 
-solutions such as Google Drive, Microsoft’s OneDrive, or iDrive.   Forget
-Dropbox. It crashes on large zips and lots of files, such as bin\fsassets. 
-Google is scanning your files and will call the police on you if they find
-something suspicious.  I have not tried OneDrive even though I have a free 1T
-with my 365 subscriptions. I know that iDrive works well for some and never
-crashes.</p>
+This is only steps 3 and 2 of the 3:2:1 Backup method. You should put at least
+the most recent copy in the cloud to handle the ‘1’ part.   There are many
+solutions such as Google Drive, Microsoft’s OneDrive, or iDrive. Forget
+Dropbox. It crashes on large zips and lots of files, such as bin\fsassets. Google
+is scanning your files and will call the police on you if they find something
+suspicious. I have not tried OneDrive even though I have a free 1T with my 365
+subscriptions. I know that iDrive works well for some and never crashes.</p>
 
 <p class=MsoNormal>IAR AND OAR ARE NOT BACKUPS OF YOUR GRID</p>
 
-<p class=MsoNormal>IARS are portable.  They have that going for them.   You can
-easily back them all up.  Just look in Content under IARs, click the Backup All
-IARS link and choose a region that will be very busy for perhaps several days
-or longer.   I did 909 people recently. Works great. Used up 156 GB of disk.  
-Spotted one person who had 32 GB of inventory. Someone used my grid to go steal
-a bunch of stuff, so if she got banned, she would not be banned from visiting
-from her grid. I have been here for 11 years and have only 7 GB.</p>
+<p class=MsoNormal>IARS are portable. They have that going for them. You can
+easily back them all up. Just look in Content under IARs, click the Backup All
+IARS link and choose a region that will be remarkably busy for perhaps several
+days or longer. I did 909 people recently. Works great. Used up 156 GB of disk.
+Spotted one person who had 32 GB of inventory.</p>
 
-<p class=MsoNormal>IARS are backups of <u>portions</u> of one inventory.  IARS
-have no usernames, passwords, no UUIDs and until the latest opensim (as of
-yesterday) no alphas for your avatars.  IARs cannot reconstruct Appearances. 
-The UUIDs change when an IAR load, so the appearance links will be broken. You
-can easily repair them, but it is tedious. They are good for moving to another
-grid.  You can use the Diva Wifi Panel on any DreamGrid  to populate your IAR
-from another grid. IARs   have their uses but they are not a full backup.</p>
+<p class=MsoNormal>IARS are backups of <u>portions</u> of one inventory. IARs have
+no usernames, passwords, no UUIDs and until the latest opensim (as of
+yesterday) no alphas for your avatars. IARs cannot reconstruct Appearances. The
+UUIDs change when an IAR load, so the appearance links will be broken. You can
+easily repair them, but it is tedious. They are good for moving to another grid.
+You can use the Diva Wifi Panel on any DreamGrid to populate your IAR from
+another grid. IARs   have their uses but they are not a full backup.</p>
 
-<p class=MsoNormal>Same goes for OARS.  Very handy. But not a backup of a
-region. What size is the region? X or Y Engine?   That information is in
+<p class=MsoNormal>Same goes for OARS. Very handy. But not a backup of a
+region. What size is the region? X or Y Engine? That information is in
 bin\regions, which DreamGrid backs that up for you.</p>
 
 <p class=MsoNormal>Mysql\data and bin\fsassets are the things you must have to
-get a full backup to restore a grid.  FSAssets will be huge. Possibly millions
-of files.  Mysql must be backed up before you backup FSAssets as it points to
-the files.  If done in the wrong order on a live grid, you will lose assets if
-you try to restore from the fsasset + MySQL backup. Do it in the order of
-MySql, then Fsassets.</p>
+get a full backup to restore a grid. FSAssets will be huge. Millions of files. Mysql
+must be backed up before you backup FSAssets as it points to the files. If done
+in the wrong order on a live grid, you will lose assets if you try to restore
+from the FsAsset + MySQL backup. Do it in the order of MySQL, then Fsassets.</p>
 
 <p class=MsoNormal>&nbsp;</p>
 

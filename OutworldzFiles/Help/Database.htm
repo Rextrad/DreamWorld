@@ -111,8 +111,7 @@ Settings</span></a></h1>
 
 </div>
 
-<p class=MsoNormal><span lang=EN>Did MySQL crash?  See section <b>Crashes</b>. 
- </span></p>
+<p class=MsoNormal><span lang=EN>Did MySQL crash? See section <b>Crashes</b>. </span></p>
 
 <p class=MsoNormal style='margin-right:31.5pt'><span lang=EN><img width=624
 height=395 id="Picture 1" src="Database_files/image001.png"
@@ -122,15 +121,15 @@ alt="Graphical user interface, application&#10;&#10;Description automatically ge
 knowing what you are doing! </span></b></p>
 
 <p class=MsoNormal><span lang=EN>Any change here must match complicated
-hand-made changes in MySQL!  See the bottom of this help section for more details.</span></p>
+hand-made changes in MySQL! See the bottom of this help section for more details.</span></p>
 
 <p class=MsoNormal><span lang=EN>There are two databases in DreamGrid: Robust
-is the login and inventory database.  Each region also uses a separate Opensim
-database for storing what is in region.</span></p>
+is the login and inventory database. Each region also uses a separate Opensim
+database for storing what is in the region.</span></p>
 
-<p class=MsoNormal><span lang=EN>Database root password is blank. This is safe
-as it only listens on localhost, which is your server.  You can type in a new
-password when Mysql is running and it will be saved.</span></p>
+<p class=MsoNormal><span lang=EN>The database root password is blank. This is
+safe as it only listens on localhost, which is your server. You can type in a
+new password when Mysql is running, and it will be saved.</span></p>
 
 <div style='border:solid #D9E2F3 3.0pt;padding:0in 0in 0in 0in;background:#D9E2F3'>
 
@@ -148,7 +147,7 @@ password when Mysql is running and it will be saved.</span></p>
      The name of the Robust database. <br>
      <br>
      Default: <i>robust</i></span></li>
- <li class=MsoNormal><b><span lang=EN>User Name:</span></b><span lang=EN>  The
+ <li class=MsoNormal><b><span lang=EN>Username:</span></b><span lang=EN>  The
      login name 'robustuser'@localhost'. <br>
      <br>
      Default: <i>robustuser</i></span></li>
@@ -159,9 +158,9 @@ password when Mysql is running and it will be saved.</span></p>
      TCP/IP port that both databases use. <br>
      <br>
      Default = 3306. You can set this to 3307, 3308 or 3309 to not interfere
-     with the Other MySQL’s that may be running.  </span></li>
+     with the Other MySQL’s that may be running. </span></li>
  <li class=MsoNormal><b><span lang=EN>FSAssets:</span>  </b>You can select the
-     FSAssets button to set up a File System As Assets Database. This is
+     FSAssets button to set up a File System as Assets Database. This is
      recommended only for large grids, with hundreds of Gigabyte sized
      databases.</li>
 </ul>
@@ -177,12 +176,12 @@ password when Mysql is running and it will be saved.</span></p>
      name of the region database. <br>
      <br>
      default: <i>opensim</i></span></li>
- <li class=MsoNormal><b><span lang=EN>User Name:</span></b><span lang=EN>  The
+ <li class=MsoNormal><b><span lang=EN>Username:</span></b><span lang=EN>  The
      login name 'opensimuser'@localhost'. <br>
      <br>
      default: <i>opensimuser</i></span></li>
- <li class=MsoNormal><b><span lang=EN>Password:</span></b><span lang=EN> The
-     password for opensim region database.  <br>
+ <li class=MsoNormal><b><span lang=EN>Password:</span></b><span lang=EN> The password
+     for the opensim region database. <br>
      <br>
      default = <i>opensimpassword</i></span></li>
  <li class=MsoNormal><b><span lang=EN>MySQL Port: </span></b><span lang=EN>The
@@ -198,47 +197,47 @@ style='page-break-before:always'>
 
 <div style='border:solid #D9E2F3 3.0pt;padding:0in 0in 0in 0in;background:#D9E2F3'>
 
-<h2 style='background:#D9E2F3'><span lang=EN style='color:black'>Restore a
-Database</span></h2>
+<h2><span lang=EN style='color:black'>Restore a Database</span></h2>
 
 </div>
 
-<p class=MsoNormal>Restoring the database is a drastic step.  </p>
+<p class=MsoNormal>Restoring the database is a drastic step. </p>
 
 <p class=MsoNormal><b>The first thing to do is make a copy of the folder
-Outworldzfiles\Mysql\Data.  If the restore fails, you can delete the Data
-folder and rename or copy the backup folder back to \Mysql\Data.</b></p>
+Outworldzfiles\Mysql\Data. If the restore fails, you can delete the Data folder
+and rename or copy the backup folder back to \Mysql\Data.</b></p>
 
-<p class=MsoNormal>To restore the entire database you must have a .SQL backup. Look
-in your AutoBackup folder. It will have a zip file named Backup_(date).zip.
-Unzip it.</p>
+<p class=MsoNormal>To restore the entire database, you must have a .SQL backup.
+Look in your AutoBackup folder. It will have a zip file named
+Backup_(date).zip. Unzip it.</p>
 
 <p class=MsoNormal><img width=198 height=130 id="Picture 3"
 src="Database_files/image002.png"
 alt="Graphical user interface, text&#10;&#10;Description automatically generated"></p>
 
-<p class=MsoNormal>This may include JOpensim files, if Joomla is installed. The
-Joomla database is in a different zip. It contains the regions from Outworldzfiles\Opensim\bin\Regions,
-the Settings.INI files from Outworldzfiles, a statistics database from Outworldzfiles\Opensim\bin,
-and any Wifi Pages from Outworldzfiles\Opensim and OutworldzFiles\Opensim\bin. </p>
+<p class=MsoNormal>This may include JOpensim files if Joomla is installed. The Joomla
+database is in a different zip. It has the regions from
+Outworldzfiles\Opensim\bin\Regions, the Settings.INI files from Outworldzfiles,
+a statistics database from Outworldzfiles\Opensim\bin, and any Wifi Pages from
+Outworldzfiles\Opensim and OutworldzFiles\Opensim\bin. </p>
 
 <p class=MsoNormal>The database is in two or more files, which must be restored
-at the same time, together.   </p>
+at the same time, together. </p>
 
 <p class=MsoNormal><img width=317 height=94 id="Picture 4"
 src="Database_files/image003.png"
 alt="Text, letter&#10;&#10;Description automatically generated"></p>
 
-<p class=MsoNormal>Unzip these files. In this is a file with the .sql extension.
-Go to The DreamGrid GUI, and in the Mysql menu, select Restore Database.</p>
+<p class=MsoNormal>Unzip these files. In this is a file with the .sql
+extension. Go to GUI, and in the Mysql menu, select Restore Database.</p>
 
 <p class=MsoNormal><img width=263 height=322 id="Picture 5"
 src="Database_files/image004.png"
 alt="Graphical user interface, text, application&#10;&#10;Description automatically generated"></p>
 
-<p class=MsoNormal>Browse to the .sql files, one at a time, and select them. 
-You can restore more than one file at the same time. This may take a LONG TIME
-to run.   Do not interrupt it!  </p>
+<p class=MsoNormal>Browse the .sql files, one at a time, and select them. You
+can restore more than one file at the same time. This may take a LONG TIME to
+run. Do not interrupt it! </p>
 
 <p class=MsoNormal>This will drop each table, recreate it, and load it with the
 content from the backup.</p>
@@ -250,7 +249,7 @@ content from the backup.</p>
 </div>
 
 <p class=MsoNormal><span style='background:white'>DreamGrid will detect any
-running MySQL using the same port.  You can install MySQL as a Windows service.
+running MySQL using the same port. You can install MySQL as a Windows service.
 There is a batch file “InstallAsAService.bat” in MySQL\bin to set this up. MySQL
 will then start and stop safely with Windows. This batch file must be run once,
 as an Administrator. You type &quot;CMD&quot; in the search box, and then right
@@ -265,17 +264,17 @@ width=312 height=293 id="Picture 6" src="Database_files/image005.png"></span></p
 
 <p class=MsoNormal><span style='background:white'>Use that DOS box to run Outworldzfiles\Mysql\bin\<b>InstallAsAService.bat</b>.
 Then type in 'Services.msc&quot;, and use it to start MySQL, or type in ‘net
-start MySQL’&lt;enter&gt;.&nbsp; </span></p>
+start MySQL’&lt;enter&gt;. </span></p>
 
 <p class=MsoNormal><span style='background:white'>You can verify MySQL is
-running by typing <b>mysql - u root&lt;enter&gt;</b>.   If you get a MySQL
+running by typing <b>mysql - u root&lt;enter&gt;</b>. If you get a MySQL
 prompt, it is running as a service. Then type <b>quit;</b> with the semicolon
 and enter.</span><br>
 <br>
 <span style='background:white'>You should also set the service to restart so
 MySQL restarts on any crash. Windows knows about services and will send signals
 to MySQL to shut itself off gracefully. The only danger is that power fails and
-you corrupt the database.  If you are serious about running a grid, then a UPS
+you corrupt the database. If you are serious about running a grid, then a UPS
 is necessary.</span></p>
 
 <div style='border:solid #D9E2F3 3.0pt;padding:0in 0in 0in 0in;background:#D9E2F3'>
@@ -309,42 +308,41 @@ that appears should ‘stick’ open.</p>
 
 <p class=MsoNormal>Run Task manager by typing Ctrl-Shift-ESC.</p>
 
-<p class=MsoNormal>Look for <i>mysqld.exe.</i>  Wait for the CPU usage to go to
-0 on mysqld.exe. This may take a long time as MySQL is rebuilding the database.
+<p class=MsoNormal>Look for <i>mysqld.exe.</i> Wait for the CPU usage to go to zero
+on mysqld.exe. This may take a long time as MySQL is rebuilding the database.
 It could take an hour or more, depending upon the size and your disk and CPU
 speed.</p>
 
 <p class=MsoNormal>Double click <b>CheckandRepair.bat</b> to run diagnostics.</p>
 
-<p class=MsoNormal>If errors appear, answer any questions with a <b>‘Y’.</b>
+<p class=MsoNormal>If errors appear, answer any questions with a <b>‘Y.’</b>
 This will take a long time as MySQL is repairing the database.</p>
 
 <p class=MsoNormal>Once the Check and Repair is finished, double-click <b>Mysql\bin\StopMySQL.bat</b></p>
 
-<p class=MsoNormal>The DOS box that first appeared should now close.   Your
+<p class=MsoNormal>The DOS box that first appeared should now close. Your
 database has been recovered and it is safe to start DreamGrid.</p>
 
 <p class=MsoNormal><b>If you still have issues</b>, delete the file MySQL\Data\ib_logfile0
 and ib_logfile1. Do not delete ibdata1! Then repeat the above sequence.</p>
 
-<p class=MsoNormal>If I had really deep issues with a database and it was
+<p class=MsoNormal>If I had deep issues with a database and it was
 unrecoverable, I would try the last copied one,&nbsp;then the SQL restore
 method, then an OAR,&nbsp;and the very last thing I would try is an OAR/IAR
-restore.&nbsp;&nbsp;&nbsp; So far I have recovered at least a dozen databases
-for people. &nbsp; One developed a bad bit which took about a week to ftp, to
-develop a fix for and a simple query to repair.&nbsp; </p>
+restore. So far, I have recovered at least a dozen databases for people. One
+developed a bad bit which took about a week to ftp, to develop a fix for and a
+simple query to repair. </p>
 
 <p class=MsoNormal>Also have fixed a crashed &quot;primitems&quot; table that
-has reoccurred on one grid.  You log in to MySQL with the command ‘mysql -u
+has reoccurred on one grid. You log in to MySQL with the command ‘mysql -u
 root’ and type in:</p>
 
 <p class=MsoNormal><span style='font-family:"Courier New"'>use opensim;<br>
 repair table primitems;<br>
 quit;</span></p>
 
-<p class=MsoNormal><b>Please do not give up if your database will not start!  
-Contact me at </b><a href="mailto:fred@outworldz.com"><b><span
-style='font-family:"Verdana",sans-serif'>fred@outworldz.com</span></b></a><b>
+<p class=MsoNormal><b>Please do not give up if your database will not start! Contact
+me at </b><a href="mailto:fred@outworldz.com"><b><span style='font-family:"Verdana",sans-serif'>fred@outworldz.com</span></b></a><b>
 and I will see what I can do. I have not yet lost a database.</b></p>
 
 <div style='border:solid #D9E2F3 3.0pt;padding:0in 0in 0in 0in;background:#D9E2F3'>
@@ -353,9 +351,9 @@ and I will see what I can do. I have not yet lost a database.</b></p>
 
 </div>
 
-<p class=MsoNormal>You can wipe ALL data out.  If you do this, you must
-re-enter all accounts and recreate your system from OAR and IAR files. <u>This
-WILL LOSE ALL DATA. </u></p>
+<p class=MsoNormal>You can wipe ALL data out. If you do this, you must re-enter
+all accounts and recreate your system from OAR and IAR files. <u>This WILL LOSE
+ALL DATA. </u></p>
 
 <p class=MsoNormal>I recommend you make a backup of the MySQL\Data folder
 first.</p>
@@ -366,16 +364,16 @@ href="mailto:fred@outworldz.com"><span style='color:#0563C1'>fred@outworldz.com<
 if you have questions or need more help in recovering a database. The largest
 was 70 Gigabytes which took four days just to get a copy sent to me. It was
 fixed in a few hours. The problem was to a single bad character in a UUID. So
-please do not delete it unless you really, really want to start over!</p>
+please do not drop it unless you really, really want to start over!</p>
 
-<p class=MsoNormal>If you MUST wipe out the database and start over, delete the
-folder MySQL\data.   Then extract the contents of the file
+<p class=MsoNormal>If you MUST wipe out the database and start over, drop the
+folder MySQL\data. Then extract the contents of the file
 Blank-Mysql-Data-folder.zip to make a new MySQL\Data folder.</p>
 
-<p class=MsoNormal>This will make it start over at the very beginning.  The
-database should start up now.  You must go to Robust; type create
-user&lt;enter&gt;’ and re-enter your Avatar name and password. You can then
-re-enter your estate information in each DOS box for Each region.   </p>
+<p class=MsoNormal>This will make it start over at the very beginning. The
+database should start up now. You must go to Robust; type create user&lt;enter&gt;’
+and re-enter your Avatar name and password. You can then re-enter your estate
+information in each DOS box for Each region. </p>
 
 </div>
 

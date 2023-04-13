@@ -26,7 +26,7 @@ Module Logging
         For i = 0 To st.FrameCount - 1 Step 1
             'Note that high up the call stack, there Is only one stack frame.
             Dim sf As StackFrame = st.GetFrame(i)
-            Logger("StackFrame", sf.GetFileLineNumber().ToString(Globalization.CultureInfo.InvariantCulture) & ":" & sf.GetMethod().ToString, "Error")
+            Logger("StackFrame", sf.GetFileLineNumber().ToString(EnglishCulture.InvariantCulture) & ":" & sf.GetMethod().ToString, "Error")
         Next
 
     End Sub
@@ -46,7 +46,7 @@ Module Logging
     ''' <param name="message">The message</param>
     ''' <param name="file">Filename + .txt added</param>
     Public Sub Logger(category As String, message As String, file As String)
-        Dim s = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", Globalization.CultureInfo.InvariantCulture)}:{category}:{message}"
+        Dim s = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", EnglishCulture.InvariantCulture)}:{category}:{message}"
         Debug.Print(s)
         Try
             Using outputFile As New StreamWriter(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Logs\" & file & ".log"), True)

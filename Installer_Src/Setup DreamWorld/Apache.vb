@@ -116,16 +116,16 @@ Module Apache
             Dim SiteMapContents = "<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf
             SiteMapContents += "<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.0909"">" & vbCrLf
             SiteMapContents += "<url>" & vbCrLf
-            SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & "</loc>" & vbCrLf
+            SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture) & "/" & "</loc>" & vbCrLf
 
             If Settings.CMS = DreamGrid Then
-                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/DreamGrid" & "</loc>" & vbCrLf
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture) & "/DreamGrid" & "</loc>" & vbCrLf
             ElseIf Settings.CMS = JOpensim Then
-                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/jOpensim" & "</loc>" & vbCrLf
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture) & "/jOpensim" & "</loc>" & vbCrLf
             ElseIf Settings.CMS = WordPress Then
-                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/WordPress" & "</loc>" & vbCrLf
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture) & "/WordPress" & "</loc>" & vbCrLf
             Else
-                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture) & "/" & Settings.CMS & "</loc>" & vbCrLf
+                SiteMapContents += "<loc>http://" & Settings.PublicIP & ":" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture) & "/" & Settings.CMS & "</loc>" & vbCrLf
             End If
 
             SiteMapContents += "<changefreq>daily</changefreq>" & vbCrLf

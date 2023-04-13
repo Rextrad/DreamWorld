@@ -124,7 +124,7 @@ Public Class FormDatabase
         RobustDbName.Text = Settings.RobustDatabaseName
         RobustDBPassword.Text = Settings.RobustPassword
         RobustDBPassword.UseSystemPasswordChar = True
-        RobustDbPort.Text = Settings.MySqlRobustDBPort.ToString(Globalization.CultureInfo.InvariantCulture)
+        RobustDbPort.Text = Settings.MySqlRobustDBPort.ToString(EnglishCulture.InvariantCulture)
         RobustDBUsername.Text = Settings.RobustUserName
         RobustServer.Text = Settings.RobustServerIP
         RootPassword.Text = Settings.RootMysqlPassword
@@ -437,7 +437,7 @@ Public Class FormDatabase
     Private Sub ShowStatsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShowStatsCheckBox.CheckedChanged
 
         If Not Initted1 Then Return
-        Settings.ShowConsoleStats = ShowStatsCheckBox.Checked.ToString(Globalization.CultureInfo.InvariantCulture)
+        Settings.ShowConsoleStats = ShowStatsCheckBox.Checked.ToString(EnglishCulture.InvariantCulture)
         changed = True
 
     End Sub

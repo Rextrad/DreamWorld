@@ -836,7 +836,7 @@ Public Module MysqlInterface
 #Enable Warning CA2100 ' Review SQL queries for security vulnerabilities
 
                     cmd.Parameters.AddWithValue("@param", param)
-                    v = Convert.ToString(cmd.ExecuteScalar(), Globalization.CultureInfo.InvariantCulture)
+                    v = Convert.ToString(cmd.ExecuteScalar(), EnglishCulture.InvariantCulture)
                 End Using
             Catch ex As Exception
                 BreakPoint.Print(ex.Message)
@@ -865,7 +865,7 @@ Public Module MysqlInterface
 #Disable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 Using cmd As New MySqlCommand(SQL, MysqlConn)
 #Enable Warning
-                    v = Convert.ToString(cmd.ExecuteScalar(), Globalization.CultureInfo.InvariantCulture)
+                    v = Convert.ToString(cmd.ExecuteScalar(), EnglishCulture.InvariantCulture)
 #Enable Warning CA2100 ' Review SQL queries for security vulnerabilities
                 End Using
 

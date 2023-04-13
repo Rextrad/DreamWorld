@@ -151,7 +151,7 @@ Module Clear_Cache
                     If folders IsNot Nothing Then
                         For Each script As String In folders
                             Dim ext = Path.GetExtension(script)
-                            If ext.ToUpper(Globalization.CultureInfo.InvariantCulture) <> ".STATE" And ext.ToUpper(Globalization.CultureInfo.InvariantCulture) <> ".KEEP" Then
+                            If ext.ToUpper(EnglishCulture.InvariantCulture) <> ".STATE" And ext.ToUpper(EnglishCulture.InvariantCulture) <> ".KEEP" Then
                                 DeleteFile(script)
                                 ctr += 1
                                 If ctr Mod 100 = 0 Then TextPrint(My.Resources.Updated_word & " " & CStr(ctr) & " scripts")

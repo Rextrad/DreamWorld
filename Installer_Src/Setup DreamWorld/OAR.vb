@@ -263,7 +263,7 @@ Module OAR
         ' Set prompt.
         Message = Global.Outworldz.My.Resources.EnterName
         title = "Backup to OAR"
-        defaultValue = $"{RegionName}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)}({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)}).oar"
+        defaultValue = $"{RegionName}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)}({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)}).oar"
 
         ' Display message, title, and default value.
         myValue = InputBox(Message, title, defaultValue)

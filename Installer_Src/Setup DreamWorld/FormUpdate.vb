@@ -16,7 +16,7 @@ Public Class FormUpdate
         Dim BetaVersion As Double
         Dim ReleasedVersion As Double
         Dim Revisions As String
-        Dim MyVersion = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+        Dim MyVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
         Dim textbox As String = ""
 
         Using client As New Net.WebClient ' download client for web pages
@@ -31,7 +31,7 @@ Public Class FormUpdate
 
         Using client As New Net.WebClient ' download client for web pages
             Try
-                ReleasedVersion = Convert.ToDouble(client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/UpdateGrid.plx" & GetPostData()), Globalization.CultureInfo.InvariantCulture)
+                ReleasedVersion = Convert.ToDouble(client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/UpdateGrid.plx" & GetPostData()), EnglishCulture.InvariantCulture)
                 If CStr(ReleasedVersion).Length < 4 Then
                     textbox &= $"Released Version is {ReleasedVersion}{vbCrLf}"
                 End If
@@ -42,11 +42,11 @@ Public Class FormUpdate
         End Using
 
         ' Update Error check could be nothing
-        If ReleasedVersion = 0 Then ReleasedVersion = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+        If ReleasedVersion = 0 Then ReleasedVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
 
         Using client As New Net.WebClient ' download client for web pages
             Try
-                BetaVersion = Convert.ToDouble(client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/Grid/version.txt" & GetPostData()), Globalization.CultureInfo.InvariantCulture)
+                BetaVersion = Convert.ToDouble(client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/Grid/version.txt" & GetPostData()), EnglishCulture.InvariantCulture)
                 If CStr(ReleasedVersion).Length >= 4 Then
                     textbox &= $"Beta Version is {BetaVersion}{vbCrLf}"
                 End If
@@ -61,7 +61,7 @@ Public Class FormUpdate
         'BetaVersion = 4.9
 
         ' Update Error check could be nothing
-        If BetaVersion = 0 Then BetaVersion = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+        If BetaVersion = 0 Then BetaVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
 
         Try
             ' check if less than the last skipped update

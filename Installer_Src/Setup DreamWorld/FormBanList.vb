@@ -200,7 +200,7 @@ Public Class FormBanList
             ' Add the column to the table.
             table.Columns.Add(column2)
 
-            table.Locale = CultureInfo.InvariantCulture
+            table.Locale = EnglishCulture.InvariantCulture
 
             Dim filename As String = ""
 

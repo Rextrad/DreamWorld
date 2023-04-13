@@ -7,6 +7,9 @@
 
     Public Sub DeleteService()
 
+        Settings.RunAsService = False
+        Settings.SaveSettings()
+
         If Not ServiceExists("DreamGridService") Then
             TextPrint(My.Resources.ServiceRemoved)
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear

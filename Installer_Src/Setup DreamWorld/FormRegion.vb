@@ -102,7 +102,7 @@ Public Class FormRegion
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -258,8 +258,8 @@ Public Class FormRegion
             IsNew1 = True
             Gods_Use_Default.Checked = True
             RegionName.Text = Global.Outworldz.My.Resources.Name_of_Region_Word
-            CoordX.Text = (LargestX() + 8).ToString(Globalization.CultureInfo.InvariantCulture)
-            CoordY.Text = (LargestY() + 0).ToString(Globalization.CultureInfo.InvariantCulture)
+            CoordX.Text = (LargestX() + 8).ToString(EnglishCulture.InvariantCulture)
+            CoordY.Text = (LargestY() + 0).ToString(EnglishCulture.InvariantCulture)
             EnabledCheckBox.Checked = True
             RadioButton1.Checked = True
 
@@ -267,12 +267,12 @@ Public Class FormRegion
             Freeze_Thaw.Checked = False
             Shutdown_Boot.Checked = False
 
-            NonphysicalPrimMax.Text = 1024.ToString(Globalization.CultureInfo.InvariantCulture)
-            PhysicalPrimMax.Text = 64.ToString(Globalization.CultureInfo.InvariantCulture)
+            NonphysicalPrimMax.Text = 1024.ToString(EnglishCulture.InvariantCulture)
+            PhysicalPrimMax.Text = 64.ToString(EnglishCulture.InvariantCulture)
             ClampPrimSize.Checked = False
             ConciergeCheckBox.Checked = False
-            MaxPrims.Text = 45000.ToString(Globalization.CultureInfo.InvariantCulture)
-            MaxAgents.Text = 100.ToString(Globalization.CultureInfo.InvariantCulture)
+            MaxPrims.Text = 45000.ToString(EnglishCulture.InvariantCulture)
+            MaxAgents.Text = 100.ToString(EnglishCulture.InvariantCulture)
             RegionUUID = CreateRegionStruct("", "")
             UUID.Text = RegionUUID
             Gods_Use_Default.Checked = True
@@ -310,8 +310,8 @@ Public Class FormRegion
             NonphysicalPrimMax.Text = CStr(NonPhysical_PrimMax(RegionUUID))
             PhysicalPrimMax.Text = CStr(Physical_PrimMax(RegionUUID))
             ClampPrimSize.Checked = Clamp_PrimSize(RegionUUID)
-            MaxPrims.Text = Max_Prims(RegionUUID)
-            MaxAgents.Text = Max_Agents(RegionUUID)
+            MaxPrims.Text = CStr(Max_Prims(RegionUUID))
+            MaxAgents.Text = CStr(Max_Agents(RegionUUID))
             RegionPort.Text = CStr(Region_Port(RegionUUID))
 
             If Priority(RegionUUID).Length = 0 Then
@@ -436,11 +436,11 @@ Public Class FormRegion
 
             ' global coordinates
             If Coord_X(RegionUUID) <> 0 Then
-                CoordX.Text = Coord_X(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture)
+                CoordX.Text = Coord_X(RegionUUID).ToString(EnglishCulture.InvariantCulture)
             End If
 
             If Coord_Y(RegionUUID) <> 0 Then
-                CoordY.Text = Coord_Y(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture)
+                CoordY.Text = Coord_Y(RegionUUID).ToString(EnglishCulture.InvariantCulture)
             End If
 
             APIKey.Text = OpensimWorldAPIKey(RegionUUID)
@@ -465,8 +465,8 @@ Public Class FormRegion
             DisallowForeigners.Checked = True
         End If
 
-        ScriptTimerTextBox.Text = MinTimerInterval(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture)
-        FrametimeBox.Text = FrameTime(RegionUUID).ToString(Globalization.CultureInfo.InvariantCulture)
+        ScriptTimerTextBox.Text = MinTimerInterval(RegionUUID).ToString(EnglishCulture.InvariantCulture)
+        FrametimeBox.Text = FrameTime(RegionUUID).ToString(EnglishCulture.InvariantCulture)
 
         If SkipAutobackup(RegionUUID) = "True" Then
             SkipAutoCheckBox.Checked = True
@@ -854,7 +854,7 @@ Public Class FormRegion
     Private Sub ScriptTimerTextBox_focusChanged(sender As Object, e As EventArgs) Handles ScriptTimerTextBox.LostFocus
 
         Try
-            Dim value = Convert.ToDouble(ScriptTimerTextBox.Text, Globalization.CultureInfo.InvariantCulture)
+            Dim value = Convert.ToDouble(ScriptTimerTextBox.Text, EnglishCulture.InvariantCulture)
             If value < 0.01 Then ScriptTimerTextBox.Text = ""
         Catch ex As Exception
             ScriptTimerTextBox.Text = ""
@@ -888,7 +888,7 @@ Public Class FormRegion
     Private Sub TextBox1_FocusChanged(sender As Object, e As EventArgs) Handles FrametimeBox.LostFocus
 
         Try
-            Dim value = Convert.ToDouble(FrametimeBox.Text, Globalization.CultureInfo.InvariantCulture)
+            Dim value = Convert.ToDouble(FrametimeBox.Text, EnglishCulture.InvariantCulture)
             If value < 0.01 Then FrametimeBox.Text = ""
         Catch ex As Exception
             FrametimeBox.Text = ""
@@ -1023,18 +1023,18 @@ Public Class FormRegion
         End If
 
         ' global coordinates
-        If Convert.ToInt32("0" & CoordX.Text, Globalization.CultureInfo.InvariantCulture) < 0 Then
+        If Convert.ToInt32("0" & CoordX.Text, EnglishCulture.InvariantCulture) < 0 Then
             Message = Global.Outworldz.My.Resources.Region_Coordinate_X_cannot_be_less_than_0_word
             Return Message
-        ElseIf Convert.ToInt32("0" & CoordX.Text, Globalization.CultureInfo.InvariantCulture) > 65536 Then
+        ElseIf Convert.ToInt32("0" & CoordX.Text, EnglishCulture.InvariantCulture) > 65536 Then
             Message = Global.Outworldz.My.Resources.Region_Coordinate_X_is_too_large
             Return Message
         End If
 
-        If Convert.ToInt32("0" & CoordY.Text, Globalization.CultureInfo.InvariantCulture) < 32 Then
+        If Convert.ToInt32("0" & CoordY.Text, EnglishCulture.InvariantCulture) < 32 Then
             Message = Global.Outworldz.My.Resources.Region_Coordinate_Y_cannot_be_less_than_32
             Return Message
-        ElseIf Convert.ToInt32("0" & CoordY.Text, Globalization.CultureInfo.InvariantCulture) > 65536 Then
+        ElseIf Convert.ToInt32("0" & CoordY.Text, EnglishCulture.InvariantCulture) > 65536 Then
             Message = Global.Outworldz.My.Resources.Region_Coordinate_Y_Is_too_large
             Return Message
         End If
@@ -1198,10 +1198,18 @@ Public Class FormRegion
 
             Concierge(RegionUUID) = CStr(ConciergeCheckBox.Checked)
 
-            Max_Agents(RegionUUID) = MaxAgents.Text
-            Max_Prims(RegionUUID) = MaxPrims.Text
-            MinTimerInterval(RegionUUID) = ScriptTimerTextBox.Text
-            FrameTime(RegionUUID) = FrametimeBox.Text
+            If Not Integer.TryParse(MaxAgents.Text, Max_Agents(RegionUUID)) Then
+                ErrorLog("MaxAgents cannot be made an int")
+                Return False
+            End If
+
+            If Not Integer.TryParse(MaxPrims.Text, Max_Prims(RegionUUID)) Then
+                ErrorLog("MaxPrims cannot be made an int")
+                Return False
+            End If
+
+            MinTimerInterval(RegionUUID) = Convert.ToDouble(ScriptTimerTextBox.Text, EnglishCulture.InvariantCulture)
+            FrameTime(RegionUUID) = Convert.ToDouble(FrametimeBox.Text, EnglishCulture.InvariantCulture)
 
             Dim Snapshot As String = ""
             If PublishDefault.Checked Then
@@ -1610,12 +1618,30 @@ Public Class FormRegion
         HelpManual("Map Overrides")
     End Sub
 
+    Private Sub MaxAgents_TextChanged(sender As Object, e As EventArgs) Handles MaxAgents.TextChanged
+
+        If Initted1 Then Changed1 = True
+        Dim digitsOnly = New Regex("[^\d]")
+        MaxAgents.Text = digitsOnly.Replace(MaxAgents.Text, "")
+
+    End Sub
+
     Private Sub ModulesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModulesToolStripMenuItem.Click
         HelpManual("Module Overrides")
     End Sub
 
-    Private Sub Normal_CheckedChanged(sender As Object, e As EventArgs) Handles Normal.CheckedChanged
+    Private Sub NonphysicalPrimMax_TextChanged(sender As Object, e As EventArgs) Handles NonphysicalPrimMax.TextChanged
+
         If Initted1 Then Changed1 = True
+        Dim digitsOnly = New Regex("[^\d]")
+        NonphysicalPrimMax.Text = digitsOnly.Replace(NonphysicalPrimMax.Text, "")
+
+    End Sub
+
+    Private Sub Normal_CheckedChanged(sender As Object, e As EventArgs) Handles Normal.CheckedChanged
+
+        If Initted1 Then Changed1 = True
+
     End Sub
 
     Private Sub Opensimworld_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles Opensimworld.LinkClicked
@@ -1633,6 +1659,14 @@ Public Class FormRegion
 
     Private Sub PermissionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PermissionsToolStripMenuItem.Click
         HelpManual("Permission Overrides")
+    End Sub
+
+    Private Sub PhysicalPrimMax_TextChanged(sender As Object, e As EventArgs) Handles PhysicalPrimMax.TextChanged
+
+        If Initted1 Then Changed1 = True
+        Dim digitsOnly = New Regex("[^\d]")
+        PhysicalPrimMax.Text = digitsOnly.Replace(PhysicalPrimMax.Text, "")
+
     End Sub
 
     Private Sub Physics_Bullet_CheckedChanged(sender As Object, e As EventArgs) Handles Physics_Bullet.CheckedChanged

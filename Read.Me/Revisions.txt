@@ -1,12 +1,14 @@
 REVISIONS FOR DREAMGRID
 
-V5.33
+V5.37
 
+Fixes for German language 
+Changed the Voice API parameters for HTTP from Media on a Prim.
 Service: Run as a Service can be enabled in Setting->Region panel.  
 	You can control the service from the Top menu bar.  
 	The region start/stop/restart buttons will signal the service to do the action.
-	Console is different in Services mode.
-	Also made a setup.exe for Melanie's Console named "Setup_Console_Client.exe to the top folder.  This lets you remotely connect to Robust and regions from any other PC with a GUI.
+	Console is different in Services mode. If you close the console the region will continue to run.
+	There is a setup.exe for Melanie's Console named "Setup_Console_Client.exe to the top folder.  This lets you remotely connect to Robust and regions from any other PC with a GUI.
 Help: Added Gloebit Manual in prep for other money systems. Partial progress on DTL currency but it not enabled as it only partly works.
 PCampBot:  Added a control panel so you can add Test Bots named Iama Bot. See the Bots manual for details or open Settings->Bots.
 Diagnostic: If two regions have the same UUID, thine system shall bitch and moan.

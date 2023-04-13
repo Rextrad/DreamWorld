@@ -17,7 +17,7 @@ Module Events
                 Dim stm = "delete from ossearch.events"
                 Using cmd = New MySqlCommand(stm, osconnection)
                     Dim rowsdeleted = cmd.ExecuteNonQuery()
-                    BreakPoint.Print($"Rows: rowsdeleted.ToString(Globalization.CultureInfo.InvariantCulture)")
+                    BreakPoint.Print($"Rows: rowsdeleted.ToString(EnglishCulture.InvariantCulture)")
                 End Using
             End Using
         Catch

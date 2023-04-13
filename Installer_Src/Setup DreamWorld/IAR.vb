@@ -272,9 +272,9 @@ Module IAR
             RunningBackupName.TryAdd($"{My.Resources.Backup_IAR} {k} {My.Resources.Starting_word}", "")
 
             Dim newname = k.Replace(" ", "_")
-            Dim BackupName = $"{newname}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)}.iar"
+            Dim BackupName = $"{newname}_{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)}.iar"
 
-            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture))
+            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", EnglishCulture.InvariantCulture))
             FileIO.FileSystem.CreateDirectory(f)
 
             If Not System.IO.Directory.Exists(f & "/IAR") Then

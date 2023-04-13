@@ -122,8 +122,8 @@ Module Diags
                     PropMyUPnpMap.Remove(Convert.ToInt16(Settings.SCPortBase), UPnp.MyProtocol.TCP)
                 End If
                 Application.DoEvents()
-                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase, Integer), UPnp.MyProtocol.TCP, "Icecast TCP Public " & Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture)) Then
-                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":TCP:" & Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture))
+                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase, Integer), UPnp.MyProtocol.TCP, "Icecast TCP Public " & Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture)) Then
+                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":TCP:" & Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture))
                 End If
                 If Not PropOpensimIsRunning() Then Return False
                 '0 UDP
@@ -131,8 +131,8 @@ Module Diags
                     PropMyUPnpMap.Remove(Convert.ToInt16(Settings.SCPortBase), UPnp.MyProtocol.UDP)
                 End If
                 Application.DoEvents()
-                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase, Integer), UPnp.MyProtocol.UDP, "Icecast UDP Public " & Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture)) Then
-                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":UDP:" & Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture))
+                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase, Integer), UPnp.MyProtocol.UDP, "Icecast UDP Public " & Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture)) Then
+                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":UDP:" & Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture))
                 End If
                 If Not PropOpensimIsRunning() Then Return False
 
@@ -141,8 +141,8 @@ Module Diags
                     PropMyUPnpMap.Remove(Convert.ToInt16(Settings.SCPortBase1), UPnp.MyProtocol.TCP)
                 End If
                 Application.DoEvents()
-                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase1, Integer), UPnp.MyProtocol.TCP, "Icecast1 TCP Public " & Settings.SCPortBase1.ToString(Globalization.CultureInfo.InvariantCulture)) Then
-                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":TCP:" & Settings.SCPortBase1.ToString(Globalization.CultureInfo.InvariantCulture))
+                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase1, Integer), UPnp.MyProtocol.TCP, "Icecast1 TCP Public " & Settings.SCPortBase1.ToString(EnglishCulture.InvariantCulture)) Then
+                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":TCP:" & Settings.SCPortBase1.ToString(EnglishCulture.InvariantCulture))
                 End If
                 If Not PropOpensimIsRunning() Then Return False
 
@@ -153,8 +153,8 @@ Module Diags
                 Application.DoEvents()
                 If Not PropOpensimIsRunning() Then Return False
 
-                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase1, Integer), UPnp.MyProtocol.UDP, "Icecast1 UDP Public " & Settings.SCPortBase1.ToString(Globalization.CultureInfo.InvariantCulture)) Then
-                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":UDP:" & Settings.SCPortBase1.ToString(Globalization.CultureInfo.InvariantCulture))
+                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, CType(Settings.SCPortBase1, Integer), UPnp.MyProtocol.UDP, "Icecast1 UDP Public " & Settings.SCPortBase1.ToString(EnglishCulture.InvariantCulture)) Then
+                    TextPrint("--> " & My.Resources.Icecast_is_Set & ":UDP:" & Settings.SCPortBase1.ToString(EnglishCulture.InvariantCulture))
                 End If
                 Application.DoEvents()
             End If ' IceCast
@@ -163,8 +163,8 @@ Module Diags
                 If PropMyUPnpMap.Exists(Settings.ApachePort, UPnp.MyProtocol.TCP) Then
                     PropMyUPnpMap.Remove(Settings.ApachePort, UPnp.MyProtocol.TCP)
                 End If
-                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Settings.ApachePort, UPnp.MyProtocol.TCP, "Apache TCP Public " & Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture)) Then
-                    TextPrint("--> " & My.Resources.Apache_is_Set & ":TCP:" & Settings.ApachePort.ToString(Globalization.CultureInfo.InvariantCulture))
+                If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Settings.ApachePort, UPnp.MyProtocol.TCP, "Apache TCP Public " & Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture)) Then
+                    TextPrint("--> " & My.Resources.Apache_is_Set & ":TCP:" & Settings.ApachePort.ToString(EnglishCulture.InvariantCulture))
                 End If
                 Application.DoEvents()
             End If
@@ -172,31 +172,31 @@ Module Diags
             If Not PropOpensimIsRunning() Then Return False
 
             ' 8001 for Diagnostics
-            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.DiagnosticPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP) Then
-                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.DiagnosticPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP)
+            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.DiagnosticPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP) Then
+                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.DiagnosticPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP)
             End If
-            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.DiagnosticPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP, "Opensim TCP Grid " & Settings.HttpPort) Then
-                TextPrint("--> " & My.Resources.Diag_TCP_is_set_word & ":" & Settings.DiagnosticPort.ToString(Globalization.CultureInfo.InvariantCulture))
+            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.DiagnosticPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP, "Opensim TCP Grid " & Settings.HttpPort) Then
+                TextPrint("--> " & My.Resources.Diag_TCP_is_set_word & ":" & Settings.DiagnosticPort.ToString(EnglishCulture.InvariantCulture))
             End If
             Application.DoEvents()
             If Not PropOpensimIsRunning() Then Return False
 
             ' 8002 for TCP
-            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP) Then
-                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP)
+            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP) Then
+                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP)
             End If
-            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.TCP, "Opensim TCP Grid " & Settings.HttpPort) Then
-                TextPrint("--> " & My.Resources.Grid_TCP_is_set_word & ":" & Settings.HttpPort.ToString(Globalization.CultureInfo.InvariantCulture))
+            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.TCP, "Opensim TCP Grid " & Settings.HttpPort) Then
+                TextPrint("--> " & My.Resources.Grid_TCP_is_set_word & ":" & Settings.HttpPort.ToString(EnglishCulture.InvariantCulture))
             End If
             Application.DoEvents()
             If Not PropOpensimIsRunning() Then Return False
 
             ' 8002 for UDP
-            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.UDP) Then
-                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.UDP)
+            If PropMyUPnpMap.Exists(Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.UDP) Then
+                PropMyUPnpMap.Remove(Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.UDP)
             End If
-            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.HttpPort, Globalization.CultureInfo.InvariantCulture), UPnp.MyProtocol.UDP, "Opensim UDP Grid " & Settings.HttpPort) Then
-                TextPrint("--> " & My.Resources.Grid_UDP_is_set_word & ":" & Settings.HttpPort.ToString(Globalization.CultureInfo.InvariantCulture))
+            If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, Convert.ToInt16(Settings.HttpPort, EnglishCulture.InvariantCulture), UPnp.MyProtocol.UDP, "Opensim UDP Grid " & Settings.HttpPort) Then
+                TextPrint("--> " & My.Resources.Grid_UDP_is_set_word & ":" & Settings.HttpPort.ToString(EnglishCulture.InvariantCulture))
             End If
 
             Application.DoEvents()
@@ -211,7 +211,7 @@ Module Diags
                 If Not PropOpensimIsRunning() Then Return False
 
                 If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, R, UPnp.MyProtocol.UDP, "Opensim UDP Region " & Region_Name(RegionUUID) & " ") Then
-                    TextPrint("--> " & Region_Name(RegionUUID) & ":UDP:" & R.ToString(Globalization.CultureInfo.InvariantCulture))
+                    TextPrint("--> " & Region_Name(RegionUUID) & ":UDP:" & R.ToString(EnglishCulture.InvariantCulture))
                 End If
                 Application.DoEvents()
                 If Not PropOpensimIsRunning() Then Return False
@@ -223,7 +223,7 @@ Module Diags
                 If Not PropOpensimIsRunning() Then Return False
 
                 If PropMyUPnpMap.Add(PropMyUPnpMap.LocalIP, R, UPnp.MyProtocol.TCP, "Opensim TCP Region " & Region_Name(RegionUUID) & " ") Then
-                    TextPrint("--> " & Region_Name(RegionUUID) & ":TCP:" & R.ToString(Globalization.CultureInfo.InvariantCulture))
+                    TextPrint("--> " & Region_Name(RegionUUID) & ":TCP:" & R.ToString(EnglishCulture.InvariantCulture))
                 End If
                 Application.DoEvents()
                 If Not PropOpensimIsRunning() Then Return False
@@ -255,8 +255,8 @@ Module Diags
         End Using
 
         If result.Contains("<html") Or result.Contains("Ooops!") Or result.Length = 0 Then
-            Logger("INFO", Global.Outworldz.My.Resources.Loopback_Passed & " " & Port.ToString(Globalization.CultureInfo.InvariantCulture), "Diagnostics")
-            TextPrint(My.Resources.Loopback_Passed & " " & Port.ToString(Globalization.CultureInfo.InvariantCulture))
+            Logger("INFO", Global.Outworldz.My.Resources.Loopback_Passed & " " & Port.ToString(EnglishCulture.InvariantCulture), "Diagnostics")
+            TextPrint(My.Resources.Loopback_Passed & " " & Port.ToString(EnglishCulture.InvariantCulture))
             Settings.LoopbackDiag = True
         Else
             TextPrint(My.Resources.Loopback_Failed & " " & Weblink)

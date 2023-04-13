@@ -77,7 +77,7 @@ Public Class FormHelp
             Try
                 Process.Start(webAddress)
             Catch ex As Exception
-                BreakPoint.Dump(ex)
+                Me.Show()
             End Try
             Close()
         Else

@@ -42,7 +42,7 @@ Module Speech
         ' and format each one as a hexadecimal string.
         Dim i As Integer
         For i = 0 To data.Length - 1
-            sBuilder.Append(data(i).ToString("x2", CultureInfo.InvariantCulture.NumberFormat))
+            sBuilder.Append(data(i).ToString("x2", EnglishCulture.InvariantCulture.NumberFormat))
         Next i
 
         md5Hasher.Dispose()

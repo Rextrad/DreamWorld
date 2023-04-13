@@ -43,7 +43,7 @@ Public Class FormIarSave
         ToolTip1.SetToolTip(AviName, Global.Outworldz.My.Resources.Avatar_First_and_Last_Name_word)
         ToolTip1.SetToolTip(ObjectNameBox, Global.Outworldz.My.Resources.Enter_Name)
 
-        BackupNameTextBox.Text = "Backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture) + ".iar"
+        BackupNameTextBox.Text = "Backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture) + ".iar"
 
         GModify = ModifyCheckBox.Checked
         GTransfer = TransferCheckBox.Checked

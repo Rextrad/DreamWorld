@@ -581,8 +581,9 @@ Public Class FormSetup
         Settings.DiagFailed = False
 
         ' Boot Port 8001 Server
-        TextPrint(My.Resources.Starting_DiagPort_Webserver)
+
         If RunningInServiceMode() Or Not Settings.RunAsService Then
+            TextPrint(My.Resources.Starting_DiagPort_Webserver)
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StopWebserver()
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
@@ -960,14 +961,11 @@ Public Class FormSetup
             Create_ShortCut(_myFolder & "\Start.exe")
         End If
 
-        Settings = New MySettings(_myFolder) With {
-            .CurrentDirectory = _myFolder,
-            .CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
-            }
+        Settings = New MySettings(_myFolder)
 
+        Settings.CurrentDirectory = _myFolder
+        Settings.CurrentSlashDir = _myFolder.Replace("\", "/")    ' because MySQL uses Unix like slashes, that's why
         Settings.OpensimBinPath() = _myFolder & "\OutworldzFiles\Opensim\bin\"
-
-        Log("Startup", DisplayObjectInfo(Me))
 
         Dim cinfo() = System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
         Try
@@ -979,6 +977,8 @@ Public Class FormSetup
         End Try
 
         Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture
+
+        ' TODO Fix Log("Startup", DisplayObjectInfo(Me))
 
         For Each item In New System.Management.ManagementObjectSearcher("Select * from Win32_Processor").[Get]()
             coreCount += Integer.Parse(item("NumberOfCores").ToString())
@@ -1005,15 +1005,15 @@ Public Class FormSetup
 #Enable Warning VSTHRD100 ' Avoid async void methods
         Settings.SaveSettings()
 
-        '    For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
-        'Breakpoint.Print("")
-        'Breakpoint.Print(ci.Name)
-        'Breakpoint.Print(ci.TwoLetterISOLanguageName)
-        'Breakpoint.Print(ci.ThreeLetterISOLanguageName)
-        'Breakpoint.Print(ci.ThreeLetterWindowsLanguageName)
-        'Breakpoint.Print(ci.DisplayName)
-        'Breakpoint.Print(ci.EnglishName)
-        'Next
+        For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+            BreakPoint.Print("")
+            BreakPoint.Print(ci.Name)
+            BreakPoint.Print(ci.TwoLetterISOLanguageName)
+            BreakPoint.Print(ci.ThreeLetterISOLanguageName)
+            BreakPoint.Print(ci.ThreeLetterWindowsLanguageName)
+            BreakPoint.Print(ci.DisplayName)
+            BreakPoint.Print(ci.EnglishName)
+        Next
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
@@ -1547,11 +1547,11 @@ Public Class FormSetup
                 Dim r As Double
                 Dim v As Double
                 Try
-                    d = Convert.ToDouble(result("TotalVisibleMemorySize"), CultureInfo.InvariantCulture)
-                    f = Convert.ToDouble(result("FreePhysicalMemory"), CultureInfo.InvariantCulture)
+                    d = Convert.ToDouble(result("TotalVisibleMemorySize"), EnglishCulture.InvariantCulture)
+                    f = Convert.ToDouble(result("FreePhysicalMemory"), EnglishCulture.InvariantCulture)
                     r = (d - f) / d * 100
-                    d = Convert.ToDouble(result("TotalVirtualMemorySize"), CultureInfo.InvariantCulture)
-                    f = Convert.ToDouble(result("FreeVirtualMemory"), CultureInfo.InvariantCulture)
+                    d = Convert.ToDouble(result("TotalVirtualMemorySize"), EnglishCulture.InvariantCulture)
+                    f = Convert.ToDouble(result("FreeVirtualMemory"), EnglishCulture.InvariantCulture)
                     v = (d - f) / 1024 / 1024
                 Catch
                 End Try
@@ -1777,7 +1777,7 @@ Public Class FormSetup
 
     Private Sub LoadOarClick(sender As Object, e As EventArgs) ' event handler
 
-        Dim File As String = IO.Path.Combine(BackupPath, CStr(sender.Text)) 'make a real URL
+        Dim File As String = IO.Path.Combine(BackupPath, Convert.ToString(sender.Text, EnglishCulture.InvariantCulture)) 'make a real URL
         LoadOARContent(File)
         TextPrint($"{My.Resources.Opensimulator_is_loading} {CStr(sender.Text)}. {Global.Outworldz.My.Resources.Take_time}")
 
@@ -2155,7 +2155,7 @@ Public Class FormSetup
             ' print hourly marks on console
             If SecondsTicker Mod 3600 = 0 AndAlso SecondsTicker > 0 Then
                 Bench.Start("Hour worker")
-                TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(Globalization.CultureInfo.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
+                TextPrint($"{Global.Outworldz.My.Resources.Running_word} {CInt((SecondsTicker / 3600)).ToString(EnglishCulture.InvariantCulture)} {Global.Outworldz.My.Resources.Hours_word}")
                 ExpireLogsByAge()       ' clean up old logs
                 DeleteOldVisitors()     ' can be pretty old
                 ExpireLogByCount()      ' kill off old backup folders
@@ -2404,7 +2404,7 @@ Public Class FormSetup
     Private Sub ConnectToIceCastToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConnectToIceCastToolStripMenuItemIcecast.Click
 
         If Settings.SCEnable Then
-            Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.SCPortBase, Globalization.CultureInfo.InvariantCulture)
+            Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.SCPortBase, EnglishCulture.InvariantCulture)
             Try
                 Process.Start(webAddress)
             Catch ex As Exception
@@ -2418,7 +2418,7 @@ Public Class FormSetup
 
         If PropOpensimIsRunning() Then
             If Settings.ApacheEnable Then
-                Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture)
+                Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture)
                 Try
                     Process.Start(webAddress)
                 Catch ex As Exception
@@ -2436,7 +2436,7 @@ Public Class FormSetup
             End If
         Else
             If Settings.ApacheEnable Then
-                Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture)
+                Dim webAddress As String = "http://127.0.0.1:" & Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture)
                 Try
                     Process.Start(webAddress)
                 Catch ex As Exception
@@ -2611,7 +2611,7 @@ Public Class FormSetup
     Private Sub HelpClick(sender As Object, e As EventArgs)
 
         If sender Is Nothing Then Return
-        If sender.ToString.ToUpper(Globalization.CultureInfo.InvariantCulture) <> "DreamGrid Manual.pdf".ToUpper(Globalization.CultureInfo.InvariantCulture) Then
+        If sender.ToString.ToUpper(EnglishCulture.InvariantCulture) <> "DreamGrid Manual.pdf".ToUpper(EnglishCulture.InvariantCulture) Then
             HelpManual(CStr(sender.Text))
         End If
 
@@ -2759,7 +2759,7 @@ Public Class FormSetup
 
     Private Sub LoadIarClick(sender As Object, e As EventArgs) ' event handler
 
-        Dim File As String = IO.Path.Combine(BackupPath, CStr(sender.Text)) 'make a real URL
+        Dim File As String = IO.Path.Combine(BackupPath, Convert.ToString(sender.Text, EnglishCulture.InvariantCulture)) 'make a real URL
         If LoadIARContent(File) Then
             TextPrint($"{My.Resources.Opensimulator_is_loading} {CStr(sender.Text)}. {Global.Outworldz.My.Resources.Take_time}")
         End If
@@ -2782,7 +2782,7 @@ Public Class FormSetup
 
         Dim thing As String = sender.text.ToString
 
-        Dim File As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/IAR/" & CStr(thing)) 'make a real URL
+        Dim File As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/IAR/" & Convert.ToString(thing, EnglishCulture.InvariantCulture)) 'make a real URL
         If LoadIARContent(File) Then
             TextPrint(My.Resources.Opensimulator_is_loading & CStr(thing))
         End If
@@ -2791,7 +2791,7 @@ Public Class FormSetup
 
     Private Sub LocalOarClick(sender As Object, e As EventArgs)
 
-        Dim thing As String = sender.text.ToString
+        Dim thing As String = Convert.ToString(sender.text, EnglishCulture.InvariantCulture)
         Dim File As String = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/OAR/" & thing) 'make a real URL
         LoadOARContent(File)
         TextPrint(My.Resources.Opensimulator_is_loading & CStr(sender.Text))
@@ -3062,7 +3062,7 @@ Public Class FormSetup
             If thing.Length > 0 Then
 
                 Dim db As String
-                If thing.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains("ROBUST") Then
+                If thing.ToUpper(EnglishCulture.InvariantCulture).Contains("ROBUST") Then
                     db = Settings.RobustDatabaseName
                 Else
                     db = Settings.RegionDBName
@@ -3312,7 +3312,7 @@ Public Class FormSetup
     Private Sub Statmenu(sender As Object, e As EventArgs)
 
         If PropOpensimIsRunning() Then
-            Dim RegionUUID As String = FindRegionByName(CStr(sender.Text))
+            Dim RegionUUID As String = FindRegionByName(Convert.ToString(sender.Text, EnglishCulture.InvariantCulture))
             Dim port As String = CStr(Region_Port(RegionUUID))
             Dim webAddress As String = "http://127.0.0.1:" & Settings.HttpPort & "/bin/data/sim.html?port=" & port
             Try

@@ -5,6 +5,8 @@
 
 #End Region
 
+Imports System.ComponentModel
+Imports System.Globalization
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Threading
@@ -20,6 +22,7 @@ Public Class LoadIni
     Private _encoding As System.Text.Encoding
     Private _filename As String
     Private _sep As String
+
     Private SaveBusy As Boolean
 
     Public Sub New(File As String, arg As String, encoding As System.Text.Encoding)
@@ -86,13 +89,29 @@ Public Class LoadIni
     Public Function GetIni(section As String, key As String, Value As String, Optional V As String = Nothing) As Object
 
         If _SettingsData Is Nothing Then
-            Return CurDir()
+            Return ""
         End If
 
-        Dim Variable = Stripqq(_SettingsData(section)(key))
-
-        If Variable = Nothing Then Variable = Value
-        If Variable Is Nothing Then Return Value
+        Dim Variable As String = ""
+        Try
+            Variable = Stripqq(_SettingsData(section)(key))
+            If Variable Is Nothing Then
+                If V = "Boolean" Then
+                    Return Convert.ToBoolean(Value, EnglishCulture.InvariantCulture)
+                ElseIf V = "String" Then
+                    Return Convert.ToString(Value, EnglishCulture.InvariantCulture)
+                ElseIf V = "Single" Then
+                    Return Convert.ToSingle(Value, EnglishCulture.InvariantCulture)
+                ElseIf V = "Double" Then
+                    Return Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
+                ElseIf V = "Integer" Then
+                    Return Convert.ToInt32(Value, EnglishCulture.InvariantCulture)
+                Else
+                    Return ""
+                End If
+            End If
+        Catch ex As Exception
+        End Try
 
         Dim bool As Boolean
         If V = "Boolean" Then
@@ -101,23 +120,23 @@ Public Class LoadIni
             End If
             Return bool
         ElseIf V = "String" Then
-            Return Variable.Trim
+            Return Variable.Trim.ToString(EnglishCulture.InvariantCulture)
         ElseIf V = "Double" Then
             Dim DBL As Double
             If Not Double.TryParse(Variable, DBL) Then
-                Return 0
+                Return Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
             End If
-            Return DBL
+            Return Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
         ElseIf V = "Single" Then
             Dim SNG As Single
             If Not Single.TryParse(Variable, SNG) Then
-                Return 0
+                Return Convert.ToSingle(Value, EnglishCulture.InvariantCulture)
             End If
-            Return SNG
+            Return Convert.ToSingle(Value, EnglishCulture.InvariantCulture)
         ElseIf V = "Integer" Then
             Dim I As Integer
             If Not Integer.TryParse(Variable, I) Then
-                Return 0
+                Return Convert.ToInt32(Value, EnglishCulture.InvariantCulture)
             End If
             Return I
         End If
@@ -174,7 +193,7 @@ Public Class LoadIni
 
         ' sets values into any INI file Form1.Log(My.Resources.Info, "Writing section [" + section + "] " + key + "=" + value)
         Try
-            _SettingsData(section)(key) = value
+            _SettingsData(section)(key) = Convert.ToString(value, EnglishCulture.InvariantCulture)
         Catch ex As Exception
             ErrorLog($"Section {section} Key {key} Value {value} {ex.Message}")
             Return True

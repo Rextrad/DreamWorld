@@ -603,9 +603,9 @@ Public Class FormOAR
             If ExclusiveCheckbox.Checked Then
                 For Each item In json
                     If searchterm.Length = 0 Or
-                        item.License.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Or
-                        item.Name.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Or
-                        item.Author.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Then
+                        item.License.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Or
+                        item.Name.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Or
+                        item.Author.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Then
                         If item.Exclusive <> "yes" Then
                             Continue For
                         End If
@@ -623,9 +623,9 @@ Public Class FormOAR
                 If json IsNot Nothing Then
                     For Each item In json
                         If searchterm.Length = 0 Or
-                        item.License.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Or
-                        item.Name.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Or
-                        item.Author.ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(searchterm.ToUpper(Globalization.CultureInfo.InvariantCulture)) Then
+                        item.License.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Or
+                        item.Name.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Or
+                        item.Author.ToUpper(EnglishCulture.InvariantCulture).Contains(searchterm.ToUpper(EnglishCulture.InvariantCulture)) Then
                             Dim l As Integer
                             If SearchArray Is Nothing Then
                                 l = 0

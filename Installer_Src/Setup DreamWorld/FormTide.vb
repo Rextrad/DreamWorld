@@ -71,9 +71,9 @@ Public Class FormTide
         ToolTip1.SetToolTip(TideLowLevelTextBox, Global.Outworldz.My.Resources.Low_High)
         ToolTip1.ToolTipTitle = Global.Outworldz.My.Resources.Tide_Enable
         TideEnabledCheckbox.Checked = CType(Settings.TideEnabled, Boolean)
-        TideHighLevelTextBox.Text = Convert.ToString(Settings.TideHighLevel(), Globalization.CultureInfo.InvariantCulture)
-        TideLowLevelTextBox.Text = Convert.ToString(Settings.TideLowLevel(), Globalization.CultureInfo.InvariantCulture)
-        CycleTimeTextBox.Text = Settings.CycleTime.ToString(Globalization.CultureInfo.InvariantCulture)
+        TideHighLevelTextBox.Text = Convert.ToString(Settings.TideHighLevel(), EnglishCulture.InvariantCulture)
+        TideLowLevelTextBox.Text = Convert.ToString(Settings.TideLowLevel(), EnglishCulture.InvariantCulture)
+        CycleTimeTextBox.Text = Settings.CycleTime.ToString(EnglishCulture.InvariantCulture)
         BroadcastTideInfo.Checked = CType(Settings.BroadcastTideInfo, Boolean)
         TideInfoChannelTextBox.Text = CStr(Settings.TideInfoChannel)
         TideHiLoChannelTextBox.Text = CStr(Settings.TideLevelChannel)

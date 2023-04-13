@@ -101,7 +101,7 @@ Public Class FormCaches
 
     Private Sub Form_unload() Handles Me.Closing
 
-        Settings.CacheLogLevel = LogLevelBox.SelectedIndex.ToString(Globalization.CultureInfo.InvariantCulture)
+        Settings.CacheLogLevel = LogLevelBox.SelectedIndex.ToString(EnglishCulture.InvariantCulture)
         Settings.CacheFolder = CacheFolder.Text
         Settings.CacheTimeout = CacheTimeout.Text
 
@@ -170,7 +170,7 @@ Public Class FormCaches
 
         If Not IO.Directory.Exists(tmp) Then
             MsgBox(My.Resources.No_Locate_FSassets & tmp & Global.Outworldz.My.Resources.Reset_To_Default, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground)
-            CacheFolder.Text = ".\assetcache".ToString(Globalization.CultureInfo.InvariantCulture)
+            CacheFolder.Text = ".\assetcache".ToString(EnglishCulture.InvariantCulture)
         End If
 
         gInitted = True

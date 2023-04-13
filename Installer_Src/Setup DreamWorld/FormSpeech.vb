@@ -182,7 +182,7 @@ Public Class FormSpeech
     Private Sub TextBox2_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
 
         If Not initted Then Return
-        Settings.TTSHours = Convert.ToDouble("0" + TextBox2.Text, Globalization.CultureInfo.InvariantCulture)
+        Settings.TTSHours = Convert.ToDouble("0" + TextBox2.Text, EnglishCulture.InvariantCulture)
         Settings.SaveSettings()
 
     End Sub

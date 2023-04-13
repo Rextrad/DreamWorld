@@ -254,7 +254,7 @@ Public Class FormRegionlist
                     If AvatarCount(num) = 1 Then
                         response = MsgBox(My.Resources.OneAvatar & " " & Region_Name(num) & " " & Global.Outworldz.My.Resources.Do_you_still_want_to_Stop_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground)
                     Else
-                        response = MsgBox(AvatarCount(num).ToString(Globalization.CultureInfo.InvariantCulture) + " " & Global.Outworldz.My.Resources.Avatars_are_in & " " + Region_Name(num) + ". " & Global.Outworldz.My.Resources.Do_you_still_want_to_Stop_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground)
+                        response = MsgBox(AvatarCount(num).ToString(EnglishCulture.InvariantCulture) + " " & Global.Outworldz.My.Resources.Avatars_are_in & " " + Region_Name(num) + ". " & Global.Outworldz.My.Resources.Do_you_still_want_to_Stop_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground)
                     End If
                     If response = vbNo Then
                         StopIt = False
@@ -499,7 +499,7 @@ Public Class FormRegionlist
 
                         Dim extension As String = Path.GetExtension(ofdFilename)
                         extension = Mid(extension, 2, 5)
-                        If extension.ToUpper(Globalization.CultureInfo.InvariantCulture) = "INI" Then
+                        If extension.ToUpper(EnglishCulture.InvariantCulture) = "INI" Then
 
                             Dim filename = GetRegionsName(ofdFilename)
                             Dim RegionUUID As String = FindRegionByName(filename)
@@ -1172,28 +1172,28 @@ Public Class FormRegionlist
 
             '!!!
             ' index to display icons
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_up2", Globalization.CultureInfo.InvariantCulture))   ' 0 booting up
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_down2", Globalization.CultureInfo.InvariantCulture)) ' 1 shutting down
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("check2", Globalization.CultureInfo.InvariantCulture)) ' 2 okay, up
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_cross", Globalization.CultureInfo.InvariantCulture)) ' 3 disabled
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("cube_green", Globalization.CultureInfo.InvariantCulture))  ' 4 enabled, stopped
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_down", Globalization.CultureInfo.InvariantCulture))  ' 5 Recycling down
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_up", Globalization.CultureInfo.InvariantCulture))  ' 6 Recycling Up
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("warning", Globalization.CultureInfo.InvariantCulture))  ' 7 Unknown
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("user2", Globalization.CultureInfo.InvariantCulture))  ' 8 - 1 User
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("users1", Globalization.CultureInfo.InvariantCulture))  ' 9 - 2 user
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", Globalization.CultureInfo.InvariantCulture))  ' 10 - SmartStartStopped
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home", Globalization.CultureInfo.InvariantCulture))  '  11- home
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home_02", Globalization.CultureInfo.InvariantCulture))  '  12- home _offline
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("refresh", Globalization.CultureInfo.InvariantCulture))  '  13- Pending
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("media_pause", Globalization.CultureInfo.InvariantCulture))  '  14- Suspended
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("package_error", Globalization.CultureInfo.InvariantCulture))  '  15- Error
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("gear_stop", Globalization.CultureInfo.InvariantCulture))  '  16 - NoLogon
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("redo", Globalization.CultureInfo.InvariantCulture))  '  17 - NOError
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", Globalization.CultureInfo.InvariantCulture))  '  18 - NoEstate
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icecastpic", Globalization.CultureInfo.InvariantCulture))  '  19 - icecube
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icemelted", Globalization.CultureInfo.InvariantCulture))  '  20 - icecube
-            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("hourglass", Globalization.CultureInfo.InvariantCulture))  '  21 - Busy - do not shutdown
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_up2", EnglishCulture.InvariantCulture))   ' 0 booting up
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_down2", EnglishCulture.InvariantCulture)) ' 1 shutting down
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("check2", EnglishCulture.InvariantCulture)) ' 2 okay, up
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_cross", EnglishCulture.InvariantCulture)) ' 3 disabled
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("cube_green", EnglishCulture.InvariantCulture))  ' 4 enabled, stopped
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_down", EnglishCulture.InvariantCulture))  ' 5 Recycling down
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_up", EnglishCulture.InvariantCulture))  ' 6 Recycling Up
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("warning", EnglishCulture.InvariantCulture))  ' 7 Unknown
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("user2", EnglishCulture.InvariantCulture))  ' 8 - 1 User
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("users1", EnglishCulture.InvariantCulture))  ' 9 - 2 user
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", EnglishCulture.InvariantCulture))  ' 10 - SmartStartStopped
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home", EnglishCulture.InvariantCulture))  '  11- home
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("home_02", EnglishCulture.InvariantCulture))  '  12- home _offline
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("refresh", EnglishCulture.InvariantCulture))  '  13- Pending
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("media_pause", EnglishCulture.InvariantCulture))  '  14- Suspended
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("package_error", EnglishCulture.InvariantCulture))  '  15- Error
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("gear_stop", EnglishCulture.InvariantCulture))  '  16 - NoLogon
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("redo", EnglishCulture.InvariantCulture))  '  17 - NOError
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("navigate_minus", EnglishCulture.InvariantCulture))  '  18 - NoEstate
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icecastpic", EnglishCulture.InvariantCulture))  '  19 - icecube
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icemelted", EnglishCulture.InvariantCulture))  '  20 - icecube
+            ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("hourglass", EnglishCulture.InvariantCulture))  '  21 - Busy - do not shutdown
 
             If TheView1 = ViewType.Details Or TheView1 = ViewType.Icons Then
                 Timer1.Interval = 1000 ' check for Form1.PropUpdateView immediately
@@ -1236,7 +1236,7 @@ Public Class FormRegionlist
 
                 For Each RegionUUID In RegionUuids()
                     If SearchBox.Text.Length > 0 And SearchBox.Text <> My.Resources.Search_word Then
-                        If Region_Name(RegionUUID).ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(SearchBox.Text.ToUpper(Globalization.CultureInfo.InvariantCulture)) Then
+                        If Region_Name(RegionUUID).ToUpper(EnglishCulture.InvariantCulture).Contains(SearchBox.Text.ToUpper(EnglishCulture.InvariantCulture)) Then
                             SearchArray.Add(RegionUUID)
                         End If
                     Else
@@ -1250,7 +1250,7 @@ Public Class FormRegionlist
 
                 For Each RegionUUID In RegionUuids()
                     If SearchBox.Text.Length > 0 And SearchBox.Text <> My.Resources.Search_word Then
-                        If Region_Name(RegionUUID).ToUpper(Globalization.CultureInfo.InvariantCulture).Contains(SearchBox.Text.ToUpper(Globalization.CultureInfo.InvariantCulture)) Then
+                        If Region_Name(RegionUUID).ToUpper(EnglishCulture.InvariantCulture).Contains(SearchBox.Text.ToUpper(EnglishCulture.InvariantCulture)) Then
                             SearchArray.Add(RegionUUID)
                         End If
                     Else
@@ -1646,14 +1646,14 @@ Public Class FormRegionlist
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
 
-                    If MinTimerInterval(RegionUUID).Length > 0 Then
-                        item1.SubItems.Add(MinTimerInterval(RegionUUID))
+                    If MinTimerInterval(RegionUUID) > 0 Then
+                        item1.SubItems.Add(Convert.ToString(MinTimerInterval(RegionUUID), EnglishCulture.InvariantCulture))
                     Else
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If
 
-                    If FrameTime(RegionUUID).Length > 0 Then
-                        item1.SubItems.Add(FrameTime(RegionUUID))
+                    If FrameTime(RegionUUID) > 0 Then
+                        item1.SubItems.Add(Convert.ToString(FrameTime(RegionUUID), EnglishCulture.InvariantCulture))
                     Else
                         item1.SubItems.Add("-".ToUpperInvariant)
                     End If

@@ -268,7 +268,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         EndsizeX.Text = digitsOnly.Replace(EndsizeX.Text, "")
-        If Convert.ToSingle("0" & EndsizeX.Text, Globalization.CultureInfo.InvariantCulture) > 255 Then EndsizeX.Text = CStr(255)
+        If Convert.ToSingle("0" & EndsizeX.Text, EnglishCulture.InvariantCulture) > 255 Then EndsizeX.Text = CStr(255)
         MakeSetting()
     End Sub
 
@@ -276,7 +276,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         EndsizeY.Text = digitsOnly.Replace(EndsizeY.Text, "")
-        If Convert.ToSingle("0" & EndsizeY.Text, Globalization.CultureInfo.InvariantCulture) > 255 Then EndsizeY.Text = CStr(255)
+        If Convert.ToSingle("0" & EndsizeY.Text, EnglishCulture.InvariantCulture) > 255 Then EndsizeY.Text = CStr(255)
         MakeSetting()
     End Sub
 
@@ -284,7 +284,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         EndsizeZ.Text = digitsOnly.Replace(EndsizeZ.Text, "")
-        If Convert.ToSingle("0" & EndsizeZ.Text, Globalization.CultureInfo.InvariantCulture) > 255 Then EndsizeZ.Text = CStr(255)
+        If Convert.ToSingle("0" & EndsizeZ.Text, EnglishCulture.InvariantCulture) > 255 Then EndsizeZ.Text = CStr(255)
         MakeSetting()
     End Sub
 
@@ -313,8 +313,8 @@ Public Class FormSmartStart
     Private Sub Flat_TextChanged(sender As Object, e As EventArgs) Handles FlatLandLevel.TextChanged
         Dim digitsOnly = New Regex("[^\d\.]")
         FlatLandLevel.Text = digitsOnly.Replace(FlatLandLevel.Text, "")
-        If Convert.ToSingle("0" & FlatLandLevel.Text, Globalization.CultureInfo.InvariantCulture) > 100 Then FlatLandLevel.Text = CStr(100)
-        Settings.FlatlandLevel = Convert.ToDouble("0" & FlatLandLevel.Text, Globalization.CultureInfo.InvariantCulture)
+        If Convert.ToSingle("0" & FlatLandLevel.Text, EnglishCulture.InvariantCulture) > 100 Then FlatLandLevel.Text = CStr(100)
+        Settings.FlatlandLevel = Convert.ToDouble("0" & FlatLandLevel.Text, EnglishCulture.InvariantCulture)
     End Sub
 
     Private Sub Grass0_CheckedChanged(sender As Object, e As EventArgs)
@@ -1322,8 +1322,8 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         SmoothTextBox.Text = digitsOnly.Replace(SmoothTextBox.Text, "")
-        If Convert.ToSingle("0" & SmoothTextBox.Text, Globalization.CultureInfo.InvariantCulture) > 1 Then SmoothTextBox.Text = CStr(1)
-        Settings.LandStrength = Convert.ToDouble("0" & SmoothTextBox.Text, Globalization.CultureInfo.InvariantCulture)
+        If Convert.ToSingle("0" & SmoothTextBox.Text, EnglishCulture.InvariantCulture) > 1 Then SmoothTextBox.Text = CStr(1)
+        Settings.LandStrength = Convert.ToDouble("0" & SmoothTextBox.Text, EnglishCulture.InvariantCulture)
         Settings.SaveSettings()
 
     End Sub
@@ -1332,7 +1332,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         StartSizeX.Text = digitsOnly.Replace(StartSizeX.Text, "")
-        If Convert.ToSingle("0" & StartSizeX.Text, Globalization.CultureInfo.InvariantCulture) < 0 Then StartSizeX.Text = CStr(0)
+        If Convert.ToSingle("0" & StartSizeX.Text, EnglishCulture.InvariantCulture) < 0 Then StartSizeX.Text = CStr(0)
         MakeSetting()
     End Sub
 
@@ -1340,7 +1340,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         StartSizeY.Text = digitsOnly.Replace(StartSizeY.Text, "")
-        If Convert.ToSingle("0" & StartSizeY.Text, Globalization.CultureInfo.InvariantCulture) < 0 Then StartSizeY.Text = CStr(0)
+        If Convert.ToSingle("0" & StartSizeY.Text, EnglishCulture.InvariantCulture) < 0 Then StartSizeY.Text = CStr(0)
         MakeSetting()
     End Sub
 
@@ -1348,7 +1348,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         StartSizeZ.Text = digitsOnly.Replace(StartSizeZ.Text, "")
-        If Convert.ToSingle("0" & StartSizeZ.Text, Globalization.CultureInfo.InvariantCulture) < 0 Then StartSizeZ.Text = CStr(0)
+        If Convert.ToSingle("0" & StartSizeZ.Text, EnglishCulture.InvariantCulture) < 0 Then StartSizeZ.Text = CStr(0)
         MakeSetting()
     End Sub
 
@@ -1356,8 +1356,8 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d\.]")
         TaperTextBox.Text = digitsOnly.Replace(TaperTextBox.Text, "")
-        If Convert.ToSingle("0" & TaperTextBox.Text, Globalization.CultureInfo.InvariantCulture) > 1 Then TaperTextBox.Text = CStr(1)
-        Settings.LandTaper = Convert.ToDouble("0" & TaperTextBox.Text, Globalization.CultureInfo.InvariantCulture)
+        If Convert.ToSingle("0" & TaperTextBox.Text, EnglishCulture.InvariantCulture) > 1 Then TaperTextBox.Text = CStr(1)
+        Settings.LandTaper = Convert.ToDouble("0" & TaperTextBox.Text, EnglishCulture.InvariantCulture)
         MakeSetting()
 
     End Sub
@@ -1396,7 +1396,7 @@ Public Class FormSmartStart
         If Not _initialized Then Return
         Dim digitsOnly = New Regex("[^\d]")
         Rad.Text = digitsOnly.Replace(Rad.Text, "")
-        If Convert.ToSingle("0" & Rad.Text, Globalization.CultureInfo.InvariantCulture) > 1024 Then Rad.Text = CStr(1024)
+        If Convert.ToSingle("0" & Rad.Text, EnglishCulture.InvariantCulture) > 1024 Then Rad.Text = CStr(1024)
         MakeSetting()
     End Sub
 

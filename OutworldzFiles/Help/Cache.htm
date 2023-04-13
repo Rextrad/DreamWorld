@@ -7,6 +7,9 @@
 <!--
  /* Font Definitions */
  @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
 	{font-family:"Cambria Math";
 	panose-1:2 4 5 3 5 4 6 3 2 4;}
 @font-face
@@ -63,6 +66,11 @@ span.Heading1Char
 	margin:1.0in 1.0in 1.0in 1.0in;}
 div.WordSection1
 	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
 -->
 </style>
 
@@ -74,7 +82,7 @@ div.WordSection1
 
 <div style='border:solid #4472C4 3.0pt;padding:0in 0in 0in 0in;background:#4472C4'>
 
-<h1 style='background:#4472C4'><a name="OLE_LINK5"><span lang=EN>Cache Deletion</span></a></h1>
+<h1><a name="OLE_LINK5"><span lang=EN>Cache Deletion</span></a></h1>
 
 </div>
 
@@ -82,33 +90,33 @@ div.WordSection1
 "Times New Roman",serif'> </span></p>
 
 <p class=MsoNormal><span lang=EN>Opensimulator has many caches of data to
-improve performance. You may optionally clear these caches.  The system will
-refresh them on the next startup. This will slow your system down dramatically
+improve performance. You may optionally clear these caches. The system will
+refresh them at the next startup. This will slow your system down dramatically
 on the next boot as it must re-fetch all assets the next time it starts.</span></p>
 
 <p class=MsoNormal><span lang=EN>Opensim must be stopped to clear script and
 the Avatar Bake caches.</span></p>
 
-<p class=MsoNormal><img width=221 height=200 id="Picture 5"
+<p class=MsoNormal><img width=184 height=195 id="Picture 1"
 src="Cache_files/image001.png"
-alt="Graphical user interface, text, application&#10;&#10;Description automatically generated"></p>
+alt="Graphical user interface, application&#10;&#10;Description automatically generated"></p>
 
-<p class=MsoNormal><b><span lang=EN>Script cache: </span></b><span lang=EN>Clearing
-the script cache is only necessary after an update to Opensim binaries.  DreamGrid
-will not delete the “.STATE” files so your virtual pets will not die.</span></p>
-
-<p class=MsoNormal><b><span lang=EN>Avatars bakes cache:  </span></b><span
-lang=EN>this folder holds the various baked skin layers.</span></p>
-
-<p class=MsoNormal><b><span lang=EN>Asset cache: </span></b><span lang=EN> holds
-the assets (mesh, prims, textures) and is typically exceptionally large. It
-automatically flushes itself every 48 hours.</span></p>
-
-<p class=MsoNormal><b><span lang=EN>Image cache: </span></b><span lang=EN>holds
-the images and is typically exceptionally large. </span></p>
-
-<p class=MsoNormal><b><span lang=EN>Mesh cache: </span></b><span lang=EN>holds
-mesh pieces.</span></p>
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal><b><span lang=EN>Script cache: </span></b><span lang=EN>Clearing
+     the script cache is only necessary after an update to Opensim binaries. DreamGrid
+     will not remove the “.STATE” files so your virtual pets will not die.</span></li>
+ <li class=MsoNormal><b><span lang=EN>Avatars bakes cache:  </span></b><span
+     lang=EN>this folder holds the various baked skin layers.</span></li>
+ <li class=MsoNormal><b><span lang=EN>Asset cache: </span></b><span lang=EN> holds
+     the assets (mesh, prims, textures) and is typically exceptionally large.
+     It automatically flushes itself every 48 hours.</span></li>
+ <li class=MsoNormal><b><span lang=EN>Image cache: </span></b><span lang=EN>holds
+     the images and is typically exceptionally large. </span></li>
+ <li class=MsoNormal><b><span lang=EN>Mesh cache: </span></b><span lang=EN>holds
+     mesh pieces.</span></li>
+ <li class=MsoNormal><b><span lang=EN>Users:</span></b><span lang=EN>  Clears
+     any logged in Users. They may be stuck online.</span></li>
+</ul>
 
 <span lang=EN style='font-size:10.0pt;line-height:115%;font-family:"Calibri",sans-serif'><br
 clear=all style='page-break-before:always'>
@@ -125,11 +133,11 @@ clear=all style='page-break-before:always'>
 <p class=MsoNormal><span style='font-family:"Times New Roman",serif;background:
 white'><br>
 </span><span lang=EN>OpenSimulator has an asset cache that stores the assets
-retrieved from an asset service. This reduces the load on a possibly remote
-asset service and improves OpenSimulator responsiveness.</span></p>
+retrieved from an asset service. This reduces the load on a remote asset service
+and improves OpenSimulator responsiveness.</span></p>
 
 <p class=MsoNormal><b><span lang=EN>Viewer cache</span></b><span lang=EN> is
-for modern viewers. If you use old viewers you may have issues.  Turn this off
+for modern viewers. If you use old viewers, you may have issues. Turn this off
 for old viewers.</span></p>
 
 <p class=MsoNormal><b><span lang=EN>Cache Enabled</span></b><span lang=EN>: The
@@ -144,7 +152,7 @@ debugging.</span></p>
 
 <p class=MsoNormal><b><span lang=EN>Timeout in Hours </span></b><span lang=EN>is
 how you set how much disk it uses. Lower numbers = less disk space. The larger
-the number, the better performance you will get.   Typical numbers are 24 hours
+the number, the better performance you will get. Typical numbers are 24 hours
 for small grids, a few hours for large grids.</span></p>
 
 <p class=MsoNormal><img width=330 height=225 id="Picture 6"
@@ -165,7 +173,7 @@ white'>&nbsp;</span></p>
 </div>
 
 <p class=MsoNormal><span lang=EN>Note: You must run the Flotsam asset cache if
-you are running the FSassets file system database.</span></p>
+you are running the FsAssets file system database.</span></p>
 
 <p class=MsoNormal><span lang=EN>The Flotsam asset cache stores assets on disk
 and in memory. </span></p>
@@ -178,19 +186,19 @@ filesystem storage used by the cache can only be limited via manual actions
 
 <p class=MsoNormal><b><span lang=EN>General principles</span></b></p>
 
-<p class=MsoNormal><span lang=EN>When OpenSimulator requires an asset (e.g. in
+<p class=MsoNormal><span lang=EN>When OpenSimulator needs an asset (e.g., in
 response to a viewer request for a notecard), then it first asks the cache for
 this data. If the data is not found in the cache, then it asks the grid asset
-service (or possibly a foreign asset service in the case of Hypergrid). If the
-asset is found, then it is both stored in the cache and returned to the user.</span></p>
+service (or a foreign asset service in the case of Hypergrid). If the asset is found,
+then it is both stored in the cache and returned to the user.</span></p>
 
-<p class=MsoNormal><span lang=EN>If an asset is uploaded to OpenSimulator (e.g.
-by the viewer uploading an animation), then the asset is immediately both kept
-in cache (if there is room and the asset is not temporary) and sent to the
-asset service (if the asset is not temporary).</span></p>
+<p class=MsoNormal><span lang=EN>If an asset is uploaded to OpenSimulator (e.g.,
+by the viewer uploading an animation), then the asset is immediately kept in
+cache (if there is room and the asset is not temporary) and sent to the asset
+service (if the asset is not temporary).</span></p>
 
 <p class=MsoNormal><span lang=EN>Therefore, at any point you can wipe any
-temporary data stored by the asset cache (e.g. on the filesystem), since the
+temporary data stored by the asset cache (e.g., on the filesystem), since the
 next request for that asset will simply query the asset service as the asset
 will not be found in cache.</span></p>
 

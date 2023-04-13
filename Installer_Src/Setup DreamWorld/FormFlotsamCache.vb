@@ -52,14 +52,14 @@ Public Class FormFlotsamCache
             fsize += finnfo.Length
         Next
         fsize /= 1024
-        Text = String.Format(Globalization.CultureInfo.InvariantCulture, "{0: 0} Kb", fsize)
+        Text = String.Format(EnglishCulture.InvariantCulture, "{0: 0} Kb", fsize)
         CacheSizeLabel.Text = Text
 
     End Sub
 
     Private Sub Form_unload() Handles Me.Closing
 
-        Settings.CacheLogLevel = LogLevelBox.SelectedIndex.ToString(Globalization.CultureInfo.InvariantCulture)
+        Settings.CacheLogLevel = LogLevelBox.SelectedIndex.ToString(EnglishCulture.InvariantCulture)
         Settings.CacheFolder = CacheFolder.Text
         Settings.CacheEnabled = CacheEnabledBox.Checked
         Settings.CacheTimeout = CacheTimeout.Text

@@ -7,6 +7,7 @@
 
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports Google.Protobuf.WellKnownTypes
 
 Module DoIni
 
@@ -27,7 +28,7 @@ Module DoIni
         Apache.Write("PHPIniDir", $"PHPIniDir ""{Settings.CurrentSlashDir}/OutworldzFiles/PHP7""")
         Apache.Write("ServerName", "ServerName " & Settings.PublicIP)
         Apache.Write("ServerAdmin", "ServerAdmin " & Settings.AdminEmail)
-        Apache.Write("<VirtualHost", $"<VirtualHost  *:{Convert.ToString(Settings.ApachePort, Globalization.CultureInfo.InvariantCulture)}>")
+        Apache.Write("<VirtualHost", $"<VirtualHost  *:{Convert.ToString(Settings.ApachePort, EnglishCulture.InvariantCulture)}>")
         Apache.Write("ErrorLog", $"ErrorLog ""|bin/rotatelogs.exe  -l \""{Settings.CurrentSlashDir}/OutworldzFiles/Logs/Apache/Error-%Y-%m-%d.log\"" 86400""")
         Apache.Write("CustomLog", $"CustomLog ""|bin/rotatelogs.exe -l \""{Settings.CurrentSlashDir}/OutworldzFiles/Logs/Apache/access-%Y-%m-%d.log\"" 86400"" common env=!dontlog")
         Apache.Write("LoadModule php7_module", $"LoadModule php7_module ""{Settings.CurrentSlashDir}/OutworldzFiles/PHP7/php7apache2_4.dll""")
@@ -97,19 +98,19 @@ Module DoIni
             ";the number of birds to flock" & vbCrLf &
             "BirdsFlockSize = " & CStr(Settings.BirdsFlockSize) & vbCrLf & vbCrLf &
             ";how far each bird can travel per update" & vbCrLf &
-            "BirdsMaxSpeed = " & Settings.BirdsMaxSpeed.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsMaxSpeed = " & Settings.BirdsMaxSpeed.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";the maximum acceleration allowed to the current velocity of the bird" & vbCrLf &
-            "BirdsMaxForce = " & Settings.BirdsMaxForce.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsMaxForce = " & Settings.BirdsMaxForce.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";max distance for other birds to be considered in the same flock as us" & vbCrLf &
-            "BirdsNeighbourDistance = " & Settings.BirdsNeighbourDistance.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsNeighbourDistance = " & Settings.BirdsNeighbourDistance.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";how far away from other birds we would Like To stay" & vbCrLf &
-            "BirdsDesiredSeparation = " & Settings.BirdsDesiredSeparation.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsDesiredSeparation = " & Settings.BirdsDesiredSeparation.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";how close To the edges Of things can we Get without being worried" & vbCrLf &
-            "BirdsTolerance = " & Settings.BirdsTolerance.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsTolerance = " & Settings.BirdsTolerance.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";how close To the edge Of a region can we Get?" & vbCrLf &
-            "BirdsBorderSize = " & Settings.BirdsBorderSize.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsBorderSize = " & Settings.BirdsBorderSize.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";how high are we allowed To flock" & vbCrLf &
-            "BirdsMaxHeight = " & Settings.BirdsMaxHeight.ToString(Globalization.CultureInfo.InvariantCulture) & vbCrLf & vbCrLf &
+            "BirdsMaxHeight = " & Settings.BirdsMaxHeight.ToString(EnglishCulture.InvariantCulture) & vbCrLf & vbCrLf &
             ";By Default the Module will create a flock Of plain wooden spheres," & vbCrLf &
             ";however this can be overridden To the name Of an existing prim that" & vbCrLf &
             ";needs To already exist In the scene - i.e. be rezzed In the region." & vbCrLf &
@@ -464,7 +465,6 @@ Module DoIni
 
     Public Function DoMysql() As Boolean
 
-
         Dim INI = New LoadIni(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\mysql\my.ini"), "#", System.Text.Encoding.ASCII)
 
         INI.SetIni("mysqld", "innodb_buffer_pool_size", $"{Settings.Total_InnoDB_GBytes()}G")
@@ -668,7 +668,7 @@ Module DoIni
             'Gmail and other SMTP mailers
             ' Gmail requires you set to set low security access
             INI.SetIni("WifiService", "SmtpHost", Settings.SmtpHost)
-            INI.SetIni("WifiService", "SmtpPort", Convert.ToString(Settings.SmtpPort, Globalization.CultureInfo.InvariantCulture))
+            INI.SetIni("WifiService", "SmtpPort", Convert.ToString(Settings.SmtpPort, EnglishCulture.InvariantCulture))
             INI.SetIni("WifiService", "SmtpUsername", Settings.SmtPropUserName)
             INI.SetIni("WifiService", "SmtpPassword", Settings.SmtpPassword)
 
@@ -733,6 +733,7 @@ Module DoIni
     Public Function Stripqq(input As String) As String
 
         ' remove double quotes and any comments ";"
+
         Return Replace(input, """", "")
 
     End Function
@@ -798,11 +799,11 @@ Module DoIni
                     "TideUpdateRate = 50" & vbCrLf &
                         vbCrLf &
                     ";; low And high water marks in metres" & vbCrLf &
-                    "TideHighWater = " & Convert.ToString(Settings.TideHighLevel(), Globalization.CultureInfo.InvariantCulture) & vbCrLf &
-                    "TideLowWater = " & Convert.ToString(Settings.TideLowLevel(), Globalization.CultureInfo.InvariantCulture) & vbCrLf &
+                    "TideHighWater = " & Convert.ToString(Settings.TideHighLevel(), EnglishCulture.InvariantCulture) & vbCrLf &
+                    "TideLowWater = " & Convert.ToString(Settings.TideLowLevel(), EnglishCulture.InvariantCulture) & vbCrLf &
                     vbCrLf &
                     ";; how long in seconds for a complete cycle time low->high->low" & vbCrLf &
-                    "TideCycleTime = " & Convert.ToString(Settings.CycleTime(), Globalization.CultureInfo.InvariantCulture) & vbCrLf &
+                    "TideCycleTime = " & Convert.ToString(Settings.CycleTime(), EnglishCulture.InvariantCulture) & vbCrLf &
                         vbCrLf &
                     ";; provide tide information on the console?" & vbCrLf &
                     "TideInfoDebug = " & CStr(Settings.TideInfoDebug) & vbCrLf &
@@ -814,7 +815,7 @@ Module DoIni
                     "TideInfoChannel = " & CStr(Settings.TideInfoChannel) & vbCrLf &
                     vbCrLf &
                     ";; which channel to region chat on for just the tide level in metres" & vbCrLf &
-                    "TideLevelChannel = " & Convert.ToString(Settings.TideLevelChannel(), Globalization.CultureInfo.InvariantCulture) & vbCrLf &
+                    "TideLevelChannel = " & Convert.ToString(Settings.TideLevelChannel(), EnglishCulture.InvariantCulture) & vbCrLf &
                         vbCrLf &
                     ";; How many times to repeat Tide Warning messages at high/low tide" & vbCrLf &
                     "TideAnnounceCount = 1" & vbCrLf & vbCrLf & vbCrLf & vbCrLf

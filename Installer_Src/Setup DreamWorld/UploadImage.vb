@@ -112,7 +112,7 @@ Module UploadImage
 
     Private Sub RequestStreamAvailable(ByVal ar As IAsyncResult)
         Dim r_State As HttpRequestState = TryCast(ar.AsyncState, HttpRequestState)
-        Dim boundary As String = StrDup(20, "-"c) & Date.Now.ToString("yyyyMMdd-hhmm", Globalization.CultureInfo.InvariantCulture)
+        Dim boundary As String = StrDup(20, "-"c) & Date.Now.ToString("yyyyMMdd-hhmm", EnglishCulture.InvariantCulture)
         r_State.Request.ContentType = "multipart/form-data; boundary=" & boundary
         Debug.Print("multipart/form-data; boundary=" & boundary)
 
@@ -136,8 +136,8 @@ Module UploadImage
                     sw.WriteLine("--" & boundary)
                     Debug.Print("--" & boundary)
 
-                    sw.WriteLine(String.Format(Globalization.CultureInfo.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", key))
-                    Debug.Print(String.Format(Globalization.CultureInfo.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", key))
+                    sw.WriteLine(String.Format(EnglishCulture.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", key))
+                    Debug.Print(String.Format(EnglishCulture.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", key))
                     sw.WriteLine()
                     Debug.Print("")
                     sw.WriteLine(WebUtility.UrlEncode(r_State.Params(key)))
@@ -147,11 +147,11 @@ Module UploadImage
                 sw.WriteLine("--" & boundary)
                 Debug.Print("--" & boundary)
 
-                sw.WriteLine(String.Format(Globalization.CultureInfo.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", "FILE1"))
-                Debug.Print(String.Format(Globalization.CultureInfo.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", "FILE1"))
+                sw.WriteLine(String.Format(EnglishCulture.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", "FILE1"))
+                Debug.Print(String.Format(EnglishCulture.InvariantCulture, "Content-Disposition: form-data; name=""{0}""", "FILE1"))
 
-                sw.Write(String.Format(Globalization.CultureInfo.InvariantCulture, "filename=""{0}""", WebUtility.UrlEncode(IO.Path.GetFileName(r_State.FileName))))
-                Debug.Print(String.Format(Globalization.CultureInfo.InvariantCulture, "filename=""{0}""", WebUtility.UrlEncode(IO.Path.GetFileName(r_State.FileName))))
+                sw.Write(String.Format(EnglishCulture.InvariantCulture, "filename=""{0}""", WebUtility.UrlEncode(IO.Path.GetFileName(r_State.FileName))))
+                Debug.Print(String.Format(EnglishCulture.InvariantCulture, "filename=""{0}""", WebUtility.UrlEncode(IO.Path.GetFileName(r_State.FileName))))
 
                 sw.WriteLine()
                 Debug.Print("")

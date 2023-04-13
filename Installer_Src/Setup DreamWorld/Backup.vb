@@ -47,13 +47,13 @@ Module Backup
 
         Dim zipused As Boolean
         'used to zip it, zip it good
-        Dim _folder = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\tmp\Region_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture))
+        Dim _folder = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\tmp\Region_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture))
         FileIO.FileSystem.CreateDirectory(_folder)
-        Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)
+        Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)
 
         Dim FileName = "Region_" & whenrun ' Set default folder
         Dim Bak = IO.Path.Combine(_folder, FileName & ".zip")
-        Dim f = IO.Path.Combine(BackupPath(), Date.Now().ToString("yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture))
+        Dim f = IO.Path.Combine(BackupPath(), Date.Now().ToString("yyyy-MM-dd", EnglishCulture.InvariantCulture))
         FileIO.FileSystem.CreateDirectory(f)
         Dim NewFile = IO.Path.Combine(f, "Backup_" & Name & "_" & whenrun)
 
@@ -143,14 +143,14 @@ Module Backup
 
             RunningBackupName.TryAdd($"{Region_Name(RegionUUID)} {My.Resources.backup_running}", "")
 
-            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture))
+            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", EnglishCulture.InvariantCulture))
             FileIO.FileSystem.CreateDirectory(f)
 
             If Not System.IO.Directory.Exists(f & "/OAR") Then
                 MakeFolder(f & "/OAR")
             End If
 
-            Dim file = f & "/OAR/" & Region_Name(RegionUUID) & "_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss" & $"({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)})", Globalization.CultureInfo.InvariantCulture) & ".oar"
+            Dim file = f & "/OAR/" & Region_Name(RegionUUID) & "_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss" & $"({CStr(SizeX(RegionUUID) / 256)}X{CStr(SizeY(RegionUUID) / 256)})", EnglishCulture.InvariantCulture) & ".oar"
 
             Dim Obj = New TaskObject With {
                 .TaskName = TaskName.LaunchBackupper,

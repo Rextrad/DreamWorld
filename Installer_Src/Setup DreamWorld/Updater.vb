@@ -19,7 +19,7 @@ Module Updater
         Dim ReleasedVersion As Double
         Dim MyVersion As Double
         Try
-            MyVersion = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+            MyVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
         Catch
         End Try
 
@@ -28,7 +28,7 @@ Module Updater
             Try
                 Dim rev As String = client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/UpdateGrid.plx" & GetPostData())
                 rev = Stripqq(rev)
-                ReleasedVersion = Convert.ToDouble(rev, Globalization.CultureInfo.InvariantCulture)
+                ReleasedVersion = Convert.ToDouble(rev, EnglishCulture.InvariantCulture)
             Catch ex As Exception
                 ErrorLog(My.Resources.Wrong & " " & ex.Message)
                 Return
@@ -36,7 +36,7 @@ Module Updater
         End Using
 
         ' Update Error check could be nothing
-        If ReleasedVersion = 0 Then ReleasedVersion = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+        If ReleasedVersion = 0 Then ReleasedVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
 
         Try
             ' check if less than the last skipped update
@@ -71,7 +71,7 @@ Module Updater
         If doUpdate = DialogResult.No Then
 
             '  remind me later
-            Settings.SkipUpdateCheck() = Convert.ToDouble(PropMyVersion, Globalization.CultureInfo.InvariantCulture)
+            Settings.SkipUpdateCheck() = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
             Settings.SaveSettings()
 
         ElseIf doUpdate = DialogResult.Yes Then

@@ -247,7 +247,7 @@ Public Class FormDnsName
             Dim rgx As New Regex("[^a-zA-Z0-9\.\-]")
             DNSNameBox.Text = rgx.Replace(DNSNameBox.Text, "")
 
-            DNSNameBox.Text = DNSNameBox.Text.ToLower(Globalization.CultureInfo.InvariantCulture)
+            DNSNameBox.Text = DNSNameBox.Text.ToLower(EnglishCulture.InvariantCulture)
             DNSNameBox.Text = DNSNameBox.Text.Replace("http://", "")
             DNSNameBox.Text = DNSNameBox.Text.Replace("https://", "")
 
@@ -266,7 +266,7 @@ Public Class FormDnsName
         DNSAliasTextBox.Text = Regex.Replace(DNSAliasTextBox.Text, ":\d+", "") ' no :8002 on end.
         Dim rgx As New Regex("[^a-zA-Z0-9\.\-,]")
         DNSAliasTextBox.Text = rgx.Replace(DNSAliasTextBox.Text, "")
-        DNSAliasTextBox.Text = DNSAliasTextBox.Text.ToLower(Globalization.CultureInfo.InvariantCulture)
+        DNSAliasTextBox.Text = DNSAliasTextBox.Text.ToLower(EnglishCulture.InvariantCulture)
         Settings.AltDnsName = DNSAliasTextBox.Text
 
     End Sub

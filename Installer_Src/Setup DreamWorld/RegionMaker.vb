@@ -186,15 +186,15 @@ Module RegionMaker
                     ._Cores = 0,
                     ._CrashCounter = 0,
                     ._DisableGloebits = "",
-                    ._FrameTime = "",
+                    ._FrameTime = 1 / 11,
                     ._GodDefault = "",
                     ._Group = Group,
                     ._GroupPort = 0,
                     ._ManagerGod = "",
                     ._MapType = "",
-                    ._MaxAgents = "100",
-                    ._MaxPrims = "15000",
-                    ._MinTimerInterval = "",
+                    ._MaxAgents = 100,
+                    ._MaxPrims = 15000,
+                    ._MinTimerInterval = 1 / 11,
                     ._NonPhysicalPrimMax = "1024",
                     ._PhysicalPrimMax = "64",
                     ._Priority = "",
@@ -222,7 +222,7 @@ Module RegionMaker
                 RegionList.TryAdd(r._UUID, r)
             End If
 
-            Debug.Print("Region count is " & CStr(RegionList.Count))
+            Debug.Print("Region count Is " & CStr(RegionList.Count))
 
         End SyncLock
         Return UUID
@@ -268,7 +268,7 @@ Module RegionMaker
             ' Change estate for Endless Land, assuming its on
             Dim out As Integer
             If Integer.TryParse(Estate(RegionUUID), out) Then
-                ErrorLog("No Region UUID for Estate")
+                ErrorLog("No Region UUID For Estate")
             End If
 
             If Settings.AutoFill AndAlso
@@ -282,7 +282,7 @@ Module RegionMaker
             End If
 
             Dim proto = "; * Regions configuration file; " & vbCrLf _
-        & "; Automatically changed and read by Dreamworld. Edits here are allowed and take effect on restart" & vbCrLf _
+        & "; Automatically changed And read by Dreamworld. Edits here are allowed And take effect On restart" & vbCrLf _
         & "; Rule1: The File name must match the RegionName in brackets exactly." & vbCrLf _
         & "; Rule2: Only one region per INI file." & vbCrLf _
         & ";" & vbCrLf _
@@ -317,8 +317,8 @@ Module RegionMaker
         & $"DisableGloebits={DisableGloebits(RegionUUID)}" & vbCrLf _
         & $"DisallowForeigners={Disallow_Foreigners(RegionUUID)}" & vbCrLf _
         & $"DisallowResidents={Disallow_Residents(RegionUUID)}" & vbCrLf _
-        & $"MinTimerInterval={MinTimerInterval(RegionUUID)}" & vbCrLf _
-        & $"Frametime={FrameTime(RegionUUID)}" & vbCrLf _
+        & $"MinTimerInterval={Convert.ToString(MinTimerInterval(RegionUUID), EnglishCulture.InvariantCulture)}" & vbCrLf _
+        & $"Frametime={Convert.ToString(FrameTime(RegionUUID), EnglishCulture.InvariantCulture)}" & vbCrLf _
         & $"ScriptEngine={ScriptEngine(RegionUUID)}" & vbCrLf _
         & $"Publicity={GDPR(RegionUUID)}" & vbCrLf _
         & $"Concierge={Concierge(RegionUUID)}" & vbCrLf _
@@ -601,7 +601,7 @@ Module RegionMaker
                             NonPhysical_PrimMax(uuid) = CStr(INI.GetIni(fName, "NonPhysicalPrimMax", "1024", "Integer"))
                             Physical_PrimMax(uuid) = CStr(INI.GetIni(fName, "PhysicalPrimMax", "64", "Integer"))
                             Clamp_PrimSize(uuid) = CBool(INI.GetIni(fName, "ClampPrimSize", "False", "Boolean"))
-                            Max_Agents(uuid) = CStr(INI.GetIni(fName, "MaxAgents", "100", "Integer"))
+                            Max_Agents(uuid) = CInt(INI.GetIni(fName, "MaxAgents", "100", "Integer"))
 
                             ' Location is int,int format.
                             Dim C As String = CStr(INI.GetIni(fName, "Location", RandomNumber.Between(980, 1020) & "," & RandomNumber.Between(980, 1020)))
@@ -610,27 +610,27 @@ Module RegionMaker
                             Coord_Y(uuid) = CInt("0" & CStr(parts(1).Trim))
 
                             ' options parameters coming from INI file can be blank!
-                            MinTimerInterval(uuid) = CStr(INI.GetIni(fName, "MinTimerInterval", "", "String"))
-                            FrameTime(uuid) = CStr(INI.GetIni(fName, "FrameTime", "", "String"))
+                            MinTimerInterval(uuid) = Convert.ToDouble(INI.GetIni(fName, "MinTimerInterval", "0.0909", "Double"), EnglishCulture.InvariantCulture)
+                            FrameTime(uuid) = CDbl(INI.GetIni(fName, "FrameTime", "0.0909", "Double"))
                             RegionSnapShot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
                             MapType(uuid) = CStr(INI.GetIni(fName, "MapType", "", "String"))
                             RegionPhysics(uuid) = CStr(INI.GetIni(fName, "Physics", "", "String"))
-                            Max_Prims(uuid) = CStr(INI.GetIni(fName, "MaxPrims", "", "String"))
+                            Max_Prims(uuid) = CInt(INI.GetIni(fName, "MaxPrims", "45000", "String"))
                             GodDefault(uuid) = CStr(INI.GetIni(fName, "GodDefault", "True", "String"))
                             AllowGods(uuid) = CStr(INI.GetIni(fName, "AllowGods", "", "String"))
                             RegionGod(uuid) = CStr(INI.GetIni(fName, "RegionGod", "", "String"))
                             ManagerGod(uuid) = CStr(INI.GetIni(fName, "ManagerGod", "", "String"))
-                            Birds(uuid) = CStr(INI.GetIni(fName, "Birds", "", "String"))
-                            Tides(uuid) = CStr(INI.GetIni(fName, "Tides", "", "String"))
-                            Teleport_Sign(uuid) = CBool(INI.GetIni(fName, "Teleport", "", "Boolean"))
-                            DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "", "String"))
-                            Disallow_Foreigners(uuid) = CStr(INI.GetIni(fName, "DisallowForeigners", "", "String"))
+                            Birds(uuid) = CStr(INI.GetIni(fName, "Birds", "False", "String"))
+                            Tides(uuid) = CStr(INI.GetIni(fName, "Tides", "False", "String"))
+                            Teleport_Sign(uuid) = CBool(INI.GetIni(fName, "Teleport", "True", "Boolean"))
+                            DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "True", "String"))
+                            Disallow_Foreigners(uuid) = CStr(INI.GetIni(fName, "DisallowForeigners", "False", "String"))
                             Disallow_Residents(uuid) = CStr(INI.GetIni(fName, "DisallowResidents", "", "String"))
-                            SkipAutobackup(uuid) = CStr(INI.GetIni(fName, "SkipAutoBackup", "", "String"))
-                            Snapshot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "", "String"))
+                            SkipAutobackup(uuid) = CStr(INI.GetIni(fName, "SkipAutoBackup", "False", "String"))
+                            Snapshot(uuid) = CStr(INI.GetIni(fName, "RegionSnapShot", "False", "String"))
                             ScriptEngine(uuid) = CStr(INI.GetIni(fName, "ScriptEngine", "", "String"))
-                            GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "", "String"))
-                            Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "", "String"))
+                            GDPR(uuid) = CStr(INI.GetIni(fName, "Publicity", "False", "String"))
+                            Concierge(uuid) = CStr(INI.GetIni(fName, "Concierge", "False", "String"))
                             Smart_Suspend_Enabled(uuid) = CBool(INI.GetIni(fName, "SmartStart", "False", "String"))
                             Smart_Boot_Enabled(uuid) = CBool(INI.GetIni(fName, "SmartBoot", "False", "String"))
                             LandingSpot(uuid) = CStr(INI.GetIni(fName, "DefaultLanding", "", "String"))
@@ -878,15 +878,15 @@ Module RegionMaker
         Public _Concierge As String = ""
         Public _CrashCounter As Integer
         Public _DisableGloebits As String = ""
-        Public _FrameTime As String = ""
+        Public _FrameTime As Double
         Public _GDPR As String = ""
         Public _GodDefault As String = ""
         Public _GroupPort As Integer
         Public _ManagerGod As String = ""
         Public _MapType As String = ""
-        Public _MaxAgents As String = ""
-        Public _MaxPrims As String = ""
-        Public _MinTimerInterval As String = ""
+        Public _MaxAgents As Integer
+        Public _MaxPrims As Integer
+        Public _MinTimerInterval As Double
         Public _NonPhysicalPrimMax As String = ""
         Public _OSWAPIKey As String = ""
         Public _PhysicalPrimMax As String = ""
@@ -1071,33 +1071,33 @@ Module RegionMaker
         End Set
     End Property
 
-    Public Property Max_Agents(uuid As String) As String
+    Public Property Max_Agents(uuid As String) As Integer
         Get
             If RegionList.ContainsKey(uuid) Then
-                If String.IsNullOrEmpty(RegionList(uuid)._MaxAgents) Then RegionList(uuid)._MaxAgents = "100"
-                Return RegionList(uuid)._MaxAgents
+                If RegionList(uuid)._MaxAgents = 0 Then RegionList(uuid)._MaxAgents = 100
+                Return CInt(RegionList(uuid)._MaxAgents)
             End If
             BadUUID(uuid)
-            Return "100"
+            Return 100
         End Get
-        Set(ByVal Value As String)
-            RegionList(uuid)._MaxAgents = Value
+        Set(ByVal Value As Integer)
+            RegionList(uuid)._MaxAgents = CInt(Value)
         End Set
     End Property
 
-    Public Property Max_Prims(uuid As String) As String
+    Public Property Max_Prims(uuid As String) As Integer
         Get
             If RegionList.ContainsKey(uuid) Then
-                If String.IsNullOrEmpty(RegionList(uuid)._MaxPrims) Then
-                    RegionList(uuid)._MaxPrims = "45000"
+                If RegionList(uuid)._MaxPrims = 0 Then
+                    RegionList(uuid)._MaxPrims = 45000
                 End If
                 Return RegionList(uuid)._MaxPrims
             End If
             BadUUID(uuid)
-            Return "45000"
+            Return 45000
         End Get
-        Set(ByVal Value As String)
-            RegionList(uuid)._MaxPrims = Value
+        Set(ByVal Value As Integer)
+            RegionList(uuid)._MaxPrims = CInt(Value)
         End Set
     End Property
 
@@ -1345,15 +1345,14 @@ Module RegionMaker
         End Set
     End Property
 
-    Public Property FrameTime(uuid As String) As String
+    Public Property FrameTime(uuid As String) As Double
         Get
-            If RegionList.ContainsKey(uuid) Then Return RegionList(uuid)._FrameTime
+            If RegionList.ContainsKey(uuid) Then Return Convert.ToDouble(RegionList(uuid)._FrameTime, EnglishCulture.InvariantCulture)
             BadUUID(uuid)
-            Return ""
+            Return 1 / 11
         End Get
-        Set(ByVal Value As String)
-            Value = Value.Replace(",", ".")
-            RegionList(uuid)._FrameTime = Value
+        Set(ByVal Value As Double)
+            RegionList(uuid)._FrameTime = Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
         End Set
     End Property
 
@@ -1429,16 +1428,14 @@ Module RegionMaker
         End Set
     End Property
 
-    Public Property MinTimerInterval(uuid As String) As String
+    Public Property MinTimerInterval(uuid As String) As Double
         Get
             If RegionList.ContainsKey(uuid) Then Return RegionList(uuid)._MinTimerInterval
             BadUUID(uuid)
-            Return ""
+            Return 1 / 11
         End Get
-        Set(ByVal Value As String)
-            If Value Is Nothing Then Return
-            Value = Value.Replace(",", ".")
-            RegionList(uuid)._MinTimerInterval = Value
+        Set(ByVal Value As Double)
+            RegionList(uuid)._MinTimerInterval = Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
         End Set
     End Property
 
@@ -2158,13 +2155,11 @@ Module RegionMaker
 
             ' set new Min Timer Interval for how fast a script can go. Can be set in region files as a float, or nothing
             Dim Xtime As Double = 1 / 11   '1/11 of a second is as fast as she can go
-            If MinTimerInterval(uuid).Length > 0 Then
-                If Not Double.TryParse(MinTimerInterval(uuid), Xtime) Then
-                    Xtime = 0.0909
-                End If
+            If MinTimerInterval(uuid) = 0 Then
+                Xtime = 0.0909
             End If
 
-            If MinTimerInterval(uuid).Length > 0 Then
+            If MinTimerInterval(uuid) = 0 Then
                 If INI.SetIni("YEngine", "MinTimerInterval", CStr(MinTimerInterval(uuid))) Then Return True
                 If INI.SetIni("XEngine", "MinTimerInterval", CStr(MinTimerInterval(uuid))) Then Return True
             End If
@@ -2177,8 +2172,8 @@ Module RegionMaker
 
             If INI.SetIni("Startup", "FrameTime", CStr(1 / 11)) Then Return True
 
-            If FrameTime(uuid).Length > 0 Then
-                If INI.SetIni("Startup", "FrameTime", CStr(FrameTime(uuid))) Then Return True
+            If FrameTime(uuid) > 0 Then
+                If INI.SetIni("Startup", "FrameTime", Convert.ToString(FrameTime(uuid), EnglishCulture.InvariantCulture)) Then Return True
             End If
 
             ' God
@@ -2567,27 +2562,18 @@ Module RegionMaker
                         If regionINI.SetIni(Name, "PhysicalPrimMax", Physical_PrimMax(uuid)) Then Return True
                 End Select
 
-                If Settings.Primlimits Then
-                    Select Case Max_Prims(uuid)
-                        Case ""
-                            If regionINI.SetIni(Name, "MaxPrims", CStr(45000)) Then Return True
-                        Case Else
-                            If regionINI.SetIni(Name, "MaxPrims", Max_Prims(uuid)) Then Return True
-                    End Select
-                Else
-                    Select Case Max_Prims(uuid)
-                        Case ""
-                            If regionINI.SetIni(Name, "MaxPrims", CStr(45000)) Then Return True
-                        Case Else
-                            If regionINI.SetIni(Name, "MaxPrims", Max_Prims(uuid)) Then Return True
-                    End Select
-                End If
+                Select Case Max_Prims(uuid)
+                    Case 0
+                        If regionINI.SetIni(Name, "MaxPrims", CStr(45000)) Then Return True
+                    Case Else
+                        If regionINI.SetIni(Name, "MaxPrims", CStr(Max_Prims(uuid))) Then Return True
+                End Select
 
                 Select Case Max_Agents(uuid)
-                    Case ""
+                    Case 0
                         If regionINI.SetIni(Name, "MaxAgents", CStr(100)) Then Return True
                     Case Else
-                        If regionINI.SetIni(Name, "MaxAgents", Max_Agents(uuid)) Then Return True
+                        If regionINI.SetIni(Name, "MaxAgents", CStr(Max_Agents(uuid))) Then Return True
                 End Select
 
                 ' Maps
@@ -2635,7 +2621,7 @@ Module RegionMaker
                 If regionINI.SetIni(Name, "DisallowResidents", Disallow_Residents(uuid)) Then Return True
                 If regionINI.SetIni(Name, "SkipAutoBackup", SkipAutobackup(uuid)) Then Return True
                 If regionINI.SetIni(Name, "Physics", RegionPhysics(uuid)) Then Return True
-                If regionINI.SetIni(Name, "FrameTime", FrameTime(uuid)) Then Return True
+                If regionINI.SetIni(Name, "FrameTime", Convert.ToString(FrameTime(uuid), EnglishCulture.InvariantCulture)) Then Return True
 
                 regionINI.SaveIni()
 

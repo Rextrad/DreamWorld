@@ -80,10 +80,10 @@ Public Class Backups
         RunningBackupName.TryAdd($"{My.Resources.Backup_word} {Name} {My.Resources.Starting_word}", "")
 
         Try
-            Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)
+            Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)
 
             'used to zip it, zip it good
-            _folder = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\tmp\Backup_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture))
+            _folder = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\tmp\Backup_" & DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture))
             FileIO.FileSystem.CreateDirectory(_folder)
 
             Dim FileName = "Backup_" & Name & "_" & whenrun & ".sql"
@@ -159,7 +159,7 @@ Public Class Backups
 
             RunningBackupName.TryAdd($"{My.Resources.Backup_word} {Name} {My.Resources.Saving_Zip}", "")
 
-            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture))
+            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", EnglishCulture.InvariantCulture))
             FileIO.FileSystem.CreateDirectory(f)
             Dim NewFile = IO.Path.Combine(f, "Backup_" & Name & "_" & whenrun & ".zip")
 
@@ -221,15 +221,15 @@ Public Class Backups
         If Settings.BackupSettings Or Settings.BackupWifi Or Settings.BackupRegion Then
             Dim zipused As Boolean
             'used to zip it, zip it good
-            Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)
+            Dim whenrun As String = Date.Now().ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)
 
             _folder = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\tmp\Backup_" & whenrun)
             FileIO.FileSystem.CreateDirectory(_folder)
 
-            Dim FileName = "Backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", Globalization.CultureInfo.InvariantCulture)   ' Set default folder
+            Dim FileName = "Backup_" + DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss", EnglishCulture.InvariantCulture)   ' Set default folder
             Dim Bak = IO.Path.Combine(_folder, FileName & ".zip")
 
-            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture))
+            Dim f = IO.Path.Combine(BackupPath(), "AutoBackup-" & Date.Now().ToString("yyyy-MM-dd", EnglishCulture.InvariantCulture))
             FileIO.FileSystem.CreateDirectory(f)
             Dim NewFile = IO.Path.Combine(f, "Backup_" & whenrun & ".zip")
 
@@ -336,7 +336,7 @@ Public Class Backups
             Settings.SaveSettings()
         End If
 
-        Dim Tomorrow = Settings.StartDate.AddMinutes(Convert.ToDouble(Settings.AutobackupInterval, Globalization.CultureInfo.InvariantCulture))
+        Dim Tomorrow = Settings.StartDate.AddMinutes(Convert.ToDouble(Settings.AutobackupInterval, EnglishCulture.InvariantCulture))
         Dim diff = DateTime.Compare(currentdatetime, Tomorrow)
         If diff > 0 Then
             Settings.StartDate = currentdatetime ' wait another interval
@@ -370,7 +370,7 @@ Public Class Backups
             Dim Name = "FsAssets"
             Try
                 Dim f As String
-                If Settings.BaseDirectory.ToUpper(Globalization.CultureInfo.InvariantCulture) = "./FSASSETS" Then
+                If Settings.BaseDirectory.ToUpper(EnglishCulture.InvariantCulture) = "./FSASSETS" Then
                     f = IO.Path.Combine(Settings.OpensimBinPath, "FSAssets")
                 Else
                     f = Settings.BaseDirectory

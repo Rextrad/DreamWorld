@@ -122,8 +122,8 @@ Public Class FormIcecast
         ShoutcastEnable.Checked = Settings.SCEnable
         ShoutcastEnable.Text = Global.Outworldz.My.Resources.Enable_word
         ShoutcastPassword.Text = Settings.SCPassword
-        ShoutcastPort.Text = Settings.SCPortBase.ToString(Globalization.CultureInfo.InvariantCulture)
-        ShoutcastPort1.Text = Settings.SCPortBase1.ToString(Globalization.CultureInfo.InvariantCulture)
+        ShoutcastPort.Text = Settings.SCPortBase.ToString(EnglishCulture.InvariantCulture)
+        ShoutcastPort1.Text = Settings.SCPortBase1.ToString(EnglishCulture.InvariantCulture)
         Text = Global.Outworldz.My.Resources.Icecast_word
         ToolStripMenuItem30.Image = Global.Outworldz.My.Resources.question_and_answer
         ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Help_word
