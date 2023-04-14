@@ -1,5 +1,8 @@
 REVISIONS FOR DREAMGRID
 
+V5.38
+Issues with Ban list parsing could block users by thinking a viewer is banned.
+
 V5.37
 
 Fixes for German language 
