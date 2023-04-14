@@ -8,6 +8,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Text.RegularExpressions
+Imports Nini
 
 Module Robust
 
@@ -150,6 +151,8 @@ Module Robust
 
                 If DoRobust() Then Return False
 
+                DoBanList()
+
                 If SignalService("StartRobust") = "ACK" Then
                     RobustIcon(True)
                     Return True
@@ -273,7 +276,9 @@ Module Robust
 
 #End Region
 
-    Public Sub DoBanList(INI As LoadIni)
+    Public Sub DoBanList()
+
+        Dim INI = New LoadIni(Settings.OpensimBinPath & "Robust.HG.ini", ";", System.Text.Encoding.UTF8)
 
         Dim Bans As String = Settings.BanList
         ' causes robust to crash due to bad parser
@@ -301,11 +306,8 @@ Module Robust
             Dim s = a(0)
             Debug.Print(s)
 
-            If s.Contains("38a80450e580456cb87fa26ff5052d2") Then
-                Dim b1 As String = ""
-            End If
-            If s.Contains("39be5d8471475dbc565a5dcd6036110") Then
-                Dim b2 As String = ""
+            If s.Contains("test") Then
+                Dim aaaa As Integer = 1
             End If
 
             Dim pattern1 = New Regex("^#")
@@ -325,9 +327,12 @@ Module Robust
                 Continue For
             End If
 
-            Dim pattern0 = New Regex("^\w\.\w$")
+            Dim pattern0 = New Regex("^(\w+)\.(\w+)$")
             Dim match As Match = pattern0.Match(s)
             If match.Success Then
+                Dim First = match.Groups(1).Value
+                Dim Last = match.Groups(2).Value
+                BanUser(First, Last)
                 Log("BanList Local User", s)
                 Continue For
             End If
@@ -433,6 +438,8 @@ Module Robust
         INI.SetIni("GatekeeperService", "AllowExcept", GridString)
         INI.SetIni("AccessControl", "DeniedClients", ViewerString)
 
+        INI.SaveIni()
+
     End Sub
 
     Public Function DoRobust() As Boolean
@@ -533,8 +540,6 @@ Module Robust
 
             INI.SetIni("Const", "GridName", Settings.SimName)
             INI.SetIni("Const", "BaseURL", "http://" & Settings.PublicIP)
-
-            DoBanList(INI)
 
             ' Smart Start cannot boot a HG region so send them to welcome.
             'INI.SetIni("GatekeeperService", "AllowTeleportsToAnyRegion", CStr(Settings.Smart_Start_Enabled))

@@ -409,6 +409,26 @@ Public Module MysqlInterface
 
 #Region "Delete Stuff"
 
+    Public Sub BanUser(First As String, Last As String)
+
+        Using MysqlConn As New MySqlConnection(Settings.RobustMysqlConnection)
+            Try
+                MysqlConn.Open()
+
+                Dim stm = "Update useraccounts set userlevel = '-1' where firstname=@F and lastname=@L"
+                Using cmd = New MySqlCommand(stm, MysqlConn)
+                    cmd.Parameters.AddWithValue("@F", First)
+                    cmd.Parameters.AddWithValue("@L", Last)
+                    cmd.ExecuteNonQuery()
+                End Using
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+
+        End Using
+
+    End Sub
+
     <CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")>
     Public Sub DeleteContent(RegionUuid As String, tablename As String, uuidname As String)
 
