@@ -1195,10 +1195,8 @@ Public Class FormRegionlist
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("Icemelted", EnglishCulture.InvariantCulture))  '  20 - icecube
             ImageListSmall.Images.Add(My.Resources.ResourceManager.GetObject("hourglass", EnglishCulture.InvariantCulture))  '  21 - Busy - do not shutdown
 
-            If TheView1 = ViewType.Details Or TheView1 = ViewType.Icons Then
-                Timer1.Interval = 1000 ' check for Form1.PropUpdateView immediately
-                Timer1.Start() 'Timer starts functioning
-            End If
+            Timer1.Interval = 1000 ' check for Form1.PropUpdateView immediately
+            Timer1.Start() 'Timer starts functioning
 
             ShowUponBootToolStripMenuItem.Checked = Settings.ShowRegionListOnBoot
             Settings.SaveSettings()
@@ -1869,11 +1867,6 @@ Public Class FormRegionlist
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-
-        If TheView1 = ViewType.Users Then
-            Timer1.Stop()
-            Return
-        End If
 
         If PropUpdateView() Then ' force a refresh
             LoadMyListView()

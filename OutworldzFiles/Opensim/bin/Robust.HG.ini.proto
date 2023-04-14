@@ -715,6 +715,7 @@ AllowExcept=
 ;; If ForeignAgentsAllowed is false, make exceptions using DisallowExcept
 ;; Leave blank or commented for no exceptions.
 ; DisallowExcept = "http://myfriendgrid.com:8002, http://myboss.com:8002"
+;
 ; DeniedMacs
 ; Must be set in LoginService and GatekeeperService
 ;Fetch your mac string from the login or gatekeeper service(should both be the same anyways), and add inside the GateKeeper and LoginService section. Delimiter is a space for more than one mac

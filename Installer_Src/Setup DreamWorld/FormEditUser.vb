@@ -65,6 +65,7 @@
             Dim response = MsgBox(My.Resources.Save_changes_word, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Information_word)
             If response = vbYes Then
                 MysqlSaveUserData(UD)
+                PropUpdateView() = True
             End If
         End If
 
