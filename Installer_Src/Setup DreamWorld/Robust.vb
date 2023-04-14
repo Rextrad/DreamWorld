@@ -275,10 +275,6 @@ Module Robust
 
     Public Sub DoBanList(INI As LoadIni)
 
-        Dim IDString As String = ""
-        Dim MACString As String = ""
-        Dim ViewerString As String = ""
-        Dim GridString As String = ""
         Dim Bans As String = Settings.BanList
         ' causes robust to crash due to bad parser
         Bans = Bans.Replace("(", "")
@@ -290,12 +286,27 @@ Module Robust
             Bans = ReadBanList(filename)
         End If
 
+        'storage
+        Dim ViewerStringList As New List(Of String)
+        Dim GridStringList As New List(Of String)
+        Dim MacStringList As New List(Of String)
+        Dim IDStringList As New List(Of String)
+
         Dim Banlist As String()
+
         Banlist = Bans.Split("|".ToCharArray())
         For Each str As String In Banlist
 
             Dim a() = str.Split("=".ToCharArray())
             Dim s = a(0)
+            Debug.Print(s)
+
+            If s.Contains("38a80450e580456cb87fa26ff5052d2") Then
+                Dim b1 As String = ""
+            End If
+            If s.Contains("39be5d8471475dbc565a5dcd6036110") Then
+                Dim b2 As String = ""
+            End If
 
             Dim pattern1 = New Regex("^#")
             Dim match1 As Match = pattern1.Match(s)
@@ -307,65 +318,119 @@ Module Robust
             Dim pattern2 = New Regex("^http", RegexOptions.IgnoreCase)
             Dim match2 As Match = pattern2.Match(s)
             If match2.Success Then
-                GridString += s & ","   ' delimiter is a comma for grids
+                If Not GridStringList.Contains(s) Then
+                    GridStringList.Add(s)
+                    Log("BanList Grid", s)
+                End If
+                Continue For
+            End If
+
+            Dim pattern0 = New Regex("^\w\.\w$")
+            Dim match As Match = pattern0.Match(s)
+            If match.Success Then
+                Log("BanList Local User", s)
+                Continue For
+            End If
+
+            Dim patterna = New Regex("^\w+\.\w+\s?@.*?: \d+$")
+            Dim matcha As Match = patterna.Match(s)
+            If matcha.Success Then
+                Log("BanList HG User", s)
                 Continue For
             End If
 
             ' Ban IP's
-
-            Dim pattern3 = New Regex("^\d+\.\d+\.\d+\.\d+")
+            Dim pattern3 = New Regex("^\d+\.\d+\.\d+\.\d+$|^\d+\.\d+\.\d+\.\d+\/\d+$")
             Dim match3 As Match = pattern3.Match(s)
             If match3.Success Then
                 Firewall.BlockIP(s)
+                Log("BanList IP", s)
                 Continue For
             End If
 
             ' ban MAC Addresses
             'MAC:acbf6d9e97686d38d6fc1c2b335f126
+            'MAC:58e4b7e4-88f0-4035-954a-c7ec197afd19
 
-            Dim pattern4a = New Regex("^([0-9a-f-]{32})", RegexOptions.IgnoreCase)
+            ' Begins with MAC
+            Dim pattern4a = New Regex("MAC:([0-9a-f-]{32})|MAC:([0-9a-f-]{8}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{12})", RegexOptions.IgnoreCase)
             Dim match4a As Match = pattern4a.Match(s)
             If match4a.Success Then
-                MACString += match4a.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+                s = match4a.Groups(1).Value
+                If Not MacStringList.Contains(s) Then
+                    s = s.Replace("-", "")
+                    MacStringList.Add(s)
+                End If
+                Log("BanList MAC", s)
                 Continue For
             End If
 
-            Dim pattern4 = New Regex("^MAC:([0-9a-f-]{32})", RegexOptions.IgnoreCase)
-            Dim match4 As Match = pattern4.Match(s)
-            If match4.Success Then
-                MACString += match4.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+            Dim pattern4b = New Regex("([0-9a-f-]{32})|([0-9a-f-]{8}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{12})", RegexOptions.IgnoreCase)
+            Dim match4b As Match = pattern4b.Match(s)
+            If match4b.Success Then
+                s = match4b.Groups(1).Value
+                If Not MacStringList.Contains(s) Then
+                    s = s.Replace("-", "")
+                    MacStringList.Add(s)
+                End If
+                Log("BanList MAC", s)
                 Continue For
             End If
 
-            Dim pattern5 = New Regex("^ID:([0-9a-f]{32})", RegexOptions.IgnoreCase)
+            Dim pattern4c = New Regex("(.*?\-.*?\-.*?\-.*-.*)")
+            Dim match4c As Match = pattern4c.Match(s)
+            If match4c.Success Then
+                s = match4b.Groups(1).Value
+                ErrorLog($"BanList MAC is incorrect format {s}")
+                Continue For
+            End If
+
+            Dim pattern5 = New Regex("^ID:([0-9a-f-]{8}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{4}[0-9a-f-]{16})", RegexOptions.IgnoreCase)
             Dim match5 As Match = pattern5.Match(s)
+
             If match5.Success Then
-                IDString += match5.Groups(1).Value & " " ' delimiter is a " " and  not a pipe
+                s = match5.Groups(1).Value
+                If Not IDStringList.Contains(s) Then
+                    IDStringList.Add(s)
+                End If
+                Log("BanList ID0", match5.Groups(1).Value)
                 Continue For
             End If
 
             ' none of the above
             If s.Length > 0 Then
-                ViewerString += s & "|"
+                If Not s.Contains("@") Then
+                    Dim pattern6 = New Regex("(.*):(\d+$)")
+                    Dim match6 As Match = pattern6.Match(s)
+                    If match6.Success Then
+                        Dim t = $"http://{match6.Groups(1).Value}:{match6.Groups(2).Value}"
+                        If Not GridStringList.Contains(t) Then
+                            GridStringList.Add(t)
+                        End If
+                        Log("BanList Grid", t)
+                    Else
+                        If Not ViewerStringList.Contains(s) Then
+                            ViewerStringList.Add(s)
+                        End If
+                        Log("BanList Viewer", s)
+                    End If
+                End If
             End If
 
         Next
 
+        Dim ViewerString = String.Join("|", ViewerStringList)
+        Dim GridString = String.Join(",", GridStringList)
+        Dim MacString = String.Join(" ", MacStringList)
+        Dim IDString = String.Join(" ", IDStringList)
+
         ' Ban Macs
-        INI.SetIni("LoginService", "DeniedMacs", MACString)
-        INI.SetIni("GatekeeperService", "DeniedMacs", MACString)
+        INI.SetIni("LoginService", "DeniedMacs", MacString)
+        INI.SetIni("GatekeeperService", "DeniedMacs", MacString)
 
         INI.SetIni("LoginService", "DeniedID0s", IDString)
         INI.SetIni("GatekeeperService", "DeniedID0s", IDString)
-
-        ' Ban grids
-        GridString = GridString.Replace(",", "")
-
         INI.SetIni("GatekeeperService", "AllowExcept", GridString)
-
-        'Ban Viewers
-        ViewerString = ViewerString.Replace(" ", "")
-
         INI.SetIni("AccessControl", "DeniedClients", ViewerString)
 
     End Sub
