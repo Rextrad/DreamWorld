@@ -126,13 +126,13 @@ Public Class LoadIni
             If Not Double.TryParse(Variable, DBL) Then
                 Return Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
             End If
-            Return Convert.ToDouble(Value, EnglishCulture.InvariantCulture)
+            Return Convert.ToDouble(DBL, EnglishCulture.InvariantCulture)
         ElseIf V = "Single" Then
             Dim SNG As Single
             If Not Single.TryParse(Variable, SNG) Then
                 Return Convert.ToSingle(Value, EnglishCulture.InvariantCulture)
             End If
-            Return Convert.ToSingle(Value, EnglishCulture.InvariantCulture)
+            Return Convert.ToSingle(SNG, EnglishCulture.InvariantCulture)
         ElseIf V = "Integer" Then
             Dim I As Integer
             If Not Integer.TryParse(Variable, I) Then
