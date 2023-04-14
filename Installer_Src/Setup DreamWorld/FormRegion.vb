@@ -810,7 +810,7 @@ Public Class FormRegion
     Private Sub DeleteButton_Click(sender As Object, e As EventArgs) Handles DeleteButton.Click
 
         If RegionStatus(RegionUUID) <> SIMSTATUSENUM.Stopped Then
-            MsgBox(My.Resources.Regions_Are_Running, vbInformation Or vbMsgBoxSetForeground)
+            MsgBox(My.Resources.Regions_Are_Running, vbInformation Or vbMsgBoxSetForeground, "")
             Return
         End If
 
