@@ -248,6 +248,23 @@ Public Class FormCurrency
 
     End Sub
 
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+
+        For Each RegionUUID In RegionUuids()
+            DisableGloebits(RegionUUID) = CStr(False)
+        Next
+        TextPrint(My.Resources.AllGloebitOn)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        For Each RegionUUID In RegionUuids()
+            DisableGloebits(RegionUUID) = CStr(True)
+        Next
+        TextPrint(My.Resources.AllGloebitOff)
+
+    End Sub
+
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
         Dim webAddress As String = "http://dev.gloebit.com/opensim/"

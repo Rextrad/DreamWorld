@@ -75,8 +75,6 @@
             Settings.RunAsService = True
             TextPrint(My.Resources.ServiceInstalled)
 
-            StartService()
-
             FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_run
             Settings.RunAsService = True
             ForeGND()
@@ -92,27 +90,45 @@
 
     Public Function NssmCommand(command As String) As Boolean
 
-        Dim BootProcess = New Process
-        BootProcess.StartInfo.UseShellExecute = True
-        BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
-        BootProcess.StartInfo.CreateNoWindow = True
-        BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-        BootProcess.StartInfo.Arguments = command
+        Using BootProcess As New Process
+            BootProcess.StartInfo.UseShellExecute = True
+            BootProcess.StartInfo.FileName = IO.Path.Combine(Settings.CurrentDirectory(), "nssm.exe")
+            BootProcess.StartInfo.CreateNoWindow = True
+            BootProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+            BootProcess.StartInfo.Arguments = command
+            BootProcess.StartInfo.UseShellExecute = False
+            BootProcess.StartInfo.RedirectStandardError = True
+            BootProcess.StartInfo.RedirectStandardOutput = True
 
-        Dim ok As Boolean = False
-        Try
-            BootProcess.Start()
-            BootProcess.WaitForExit()
-            Dim code = BootProcess.ExitCode
-            If code = 0 Then
-                Return False
-            End If
-        Catch ex As Exception
-            Logger("Failed to Run ", command, "Outworldz")
-            Return False
-        End Try
+            Dim ok As Boolean = False
+            Try
+                BootProcess.Start()
+                Dim response = BootProcess.StandardOutput.ReadToEnd() & BootProcess.StandardError.ReadToEnd()
+                Debug.Print(response)
+                If response.Contains("has not been started") Then
+                    Return False
+                End If
+                If response.Contains("The operation completed successfully") Then
+                    Return False
+                End If
+                If response.Contains("The specified service already exists") Then
+                    Return False
+                End If
+                If response.Contains("Set parameter") Then
+                    Return False
+                End If
+                BootProcess.WaitForExit()
+                Dim code = BootProcess.ExitCode
+                If code = 0 Then
+                    Return False
+                End If
+            Catch ex As Exception
+                Logger("Failed to Run ", command, "Outworldz")
+                Return True
+            End Try
+        End Using
 
-        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.nav_plain_red
+        FormSetup.ServiceToolStripMenuItemDG.Image = My.Resources.gear_error
         Return True
 
     End Function

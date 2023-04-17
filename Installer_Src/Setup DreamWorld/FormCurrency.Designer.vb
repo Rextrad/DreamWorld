@@ -34,6 +34,9 @@ Partial Class FormCurrency
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GloebitsEnabled = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ProdKeyTextBox = New System.Windows.Forms.TextBox()
         Me.ProdSecretTextBox = New System.Windows.Forms.TextBox()
@@ -68,6 +71,7 @@ Partial Class FormCurrency
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.GloeBitTab.SuspendLayout()
@@ -175,6 +179,7 @@ Partial Class FormCurrency
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.GroupBox4)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.ProdKeyTextBox)
         Me.GroupBox2.Controls.Add(Me.ProdSecretTextBox)
@@ -191,6 +196,35 @@ Partial Class FormCurrency
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Production Mode"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Button1)
+        Me.GroupBox4.Controls.Add(Me.Button2)
+        Me.GroupBox4.Location = New System.Drawing.Point(281, 113)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(137, 90)
+        Me.GroupBox4.TabIndex = 14
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "All Regions"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(26, 19)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 12
+        Me.Button1.Text = "On"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(26, 48)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 13
+        Me.Button2.Text = "Off"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -299,21 +333,21 @@ Partial Class FormCurrency
         '
         Me.HelpGloebitToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelpGloebitToolStripMenuItem.Name = "HelpGloebitToolStripMenuItem"
-        Me.HelpGloebitToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.HelpGloebitToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.HelpGloebitToolStripMenuItem.Text = "Help Gloebit Currency"
         '
         'GloebitWebSiteToolStripMenuItem
         '
         Me.GloebitWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
         Me.GloebitWebSiteToolStripMenuItem.Name = "GloebitWebSiteToolStripMenuItem"
-        Me.GloebitWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.GloebitWebSiteToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.GloebitWebSiteToolStripMenuItem.Text = "Gloebit Web Site"
         '
         'HelptDTLCurrencyToolStripMenuItem
         '
         Me.HelptDTLCurrencyToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.question_and_answer
         Me.HelptDTLCurrencyToolStripMenuItem.Name = "HelptDTLCurrencyToolStripMenuItem"
-        Me.HelptDTLCurrencyToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.HelptDTLCurrencyToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.HelptDTLCurrencyToolStripMenuItem.Text = "Help DTL Currency"
         Me.HelptDTLCurrencyToolStripMenuItem.Visible = False
         '
@@ -321,7 +355,7 @@ Partial Class FormCurrency
         '
         Me.DTLWebSiteToolStripMenuItem.Image = Global.Outworldz.My.Resources.Resources.edge
         Me.DTLWebSiteToolStripMenuItem.Name = "DTLWebSiteToolStripMenuItem"
-        Me.DTLWebSiteToolStripMenuItem.Size = New System.Drawing.Size(199, 30)
+        Me.DTLWebSiteToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.DTLWebSiteToolStripMenuItem.Text = "DTL Web Site"
         Me.DTLWebSiteToolStripMenuItem.Visible = False
         '
@@ -511,11 +545,11 @@ Partial Class FormCurrency
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormCurrency"
-        Me.Text = ""
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -576,4 +610,7 @@ Partial Class FormCurrency
     Friend WithEvents GloebitWebSiteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelptDTLCurrencyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DTLWebSiteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
