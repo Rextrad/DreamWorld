@@ -1,5 +1,12 @@
 REVISIONS FOR DREAMGRID
 
+V5.39
+Known issue in TOS not making a correct URL to click on is still in progress.
+Nasty $ typo stopped making the Region INI Group Port change. Grids will develop hissy fits over port conflicts.
+Simplified the Services Icon to just gears.
+Previous revs set Disable Gloebit = True in all Region INI files. due to a bad choice for default. Should have been False. To fix, see Currency panel for a Set all Gleobit or off.
+
+
 V5.38
 Issues with Ban list parsing could block users by thinking a viewer is banned.
 
