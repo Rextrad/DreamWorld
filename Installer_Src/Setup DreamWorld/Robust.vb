@@ -306,10 +306,6 @@ Module Robust
             Dim s = a(0)
             Debug.Print(s)
 
-            If s.Contains("test") Then
-                Dim aaaa As Integer = 1
-            End If
-
             Dim pattern1 = New Regex("^#")
             Dim match1 As Match = pattern1.Match(s)
             If match1.Success Then
@@ -685,7 +681,7 @@ Module Robust
                 'TODO see if this still exists in Opensim code
                 url = "http://" & Settings.LANIP & ":" & Settings.HttpPort & "/index.php?version"
             Else
-                url = "http//" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"
+                url = "http://" & Settings.PublicIP & ":" & Settings.HttpPort & "/index.php?version"
             End If
 
             Try
