@@ -1,4 +1,5 @@
 ﻿Imports Renci.SshNet.Messages
+Imports Renci.SshNet.Sftp
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Module Services
@@ -66,10 +67,8 @@ Module Services
 
         If ServiceExists("DreamGridService") AndAlso
                 CheckPortSocket(Settings.LANIP, Settings.DiagnosticPort) Then
-            ServiceIcon(True)
             Return True
         End If
-        ServiceIcon(False)
         Return False
 
     End Function
@@ -88,23 +87,63 @@ Module Services
         If ServiceExists("DreamGridService") And
             CBool(Param.ToLower = "service") And
             Settings.RunAsService Then
+            ServiceIcon(True)
             Return True
         Else
+            ServiceIcon(False)
             Return False
         End If
     End Function
 
     Public Function ServiceExists(name As String) As Boolean
 
-        Dim N = New ClassNssm
-        Return N.NssmCommand($"status {name}")
+        Dim win = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "sc.exe")
+        Dim pi = New ProcessStartInfo With {
+            .WindowStyle = ProcessWindowStyle.Hidden,
+            .CreateNoWindow = True,
+            .FileName = win,
+            .Arguments = $"query {name}",
+            .UseShellExecute = False,
+            .RedirectStandardError = True,
+            .RedirectStandardOutput = True
+        }
+        Using p As New Process
+            p.StartInfo = pi
+            Try
+                p.Start()
+                Dim response = p.StandardOutput.ReadToEnd() & p.StandardError.ReadToEnd()
+                Debug.Print(response)
+                If response.Contains("does not exist") Then
+                    Return False
+                End If
+                If response.Contains(": 1  STOPPED") Then
+                    Return True
+                End If
+                If response.Contains(": 4  RUNNING") Then
+                    Return True
+                End If
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+        End Using
+        Return False
 
     End Function
 
     Public Sub ServiceIcon(Running As Boolean)
 
+        If ServiceExists("DreamGridService") Then
+            If isDreamGridServiceRunning() Then
+                FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.check2
+                Return
+            Else
+                FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.gear_run
+                Return
+            End If
+        End If
+
         If Not Running Then
-            FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.nav_plain_red
+            FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.gear
         Else
             FormSetup.ServiceToolStripMenuItemDG.Image = Global.Outworldz.My.Resources.check2
         End If
