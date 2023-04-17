@@ -112,7 +112,7 @@ foreach my $path (@deletions) {
 DelMaps();
 
 PrintDate("Delete Misc files");
-doUnlink ("$dir/tos,html" );     # tos.proto gets copied here.
+doUnlink ("$dir/tos.html" );     # tos.proto gets copied here.
 doUnlink ("$dir/BareTail.udm" );
 doUnlink ("$dir/SET_externalIP-PrintDate.txt");
 doUnlink ("$dir/OutworldzFiles/Photo.png");
