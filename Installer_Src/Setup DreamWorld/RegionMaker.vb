@@ -291,7 +291,7 @@ Module RegionMaker
         & $"Location={CStr(Coord_X(RegionUUID))},{CStr(Coord_Y(RegionUUID))}" & vbCrLf _
         & $"InternalAddress={Settings.InternalAddress}" & vbCrLf _
         & $"InternalPort={Region_Port(RegionUUID)}" & vbCrLf _
-        & $"$GroupPort={GroupPort(RegionUUID)}" & vbCrLf _
+        & $"GroupPort={GroupPort(RegionUUID)}" & vbCrLf _
         & "AllowAlternatePorts=False" & vbCrLf _
         & $"ExternalHostName={Settings.ExternalHostName()}" & vbCrLf _
         & $"SizeX={CStr(SizeX(RegionUUID)) & vbCrLf _
@@ -623,7 +623,7 @@ Module RegionMaker
                             Birds(uuid) = CStr(INI.GetIni(fName, "Birds", "False", "String"))
                             Tides(uuid) = CStr(INI.GetIni(fName, "Tides", "False", "String"))
                             Teleport_Sign(uuid) = CBool(INI.GetIni(fName, "Teleport", "True", "Boolean"))
-                            DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "True", "String"))
+                            DisableGloebits(uuid) = CStr(INI.GetIni(fName, "DisableGloebits", "False", "String"))
                             Disallow_Foreigners(uuid) = CStr(INI.GetIni(fName, "DisallowForeigners", "False", "String"))
                             Disallow_Residents(uuid) = CStr(INI.GetIni(fName, "DisallowResidents", "", "String"))
                             SkipAutobackup(uuid) = CStr(INI.GetIni(fName, "SkipAutoBackup", "False", "String"))
@@ -1753,11 +1753,11 @@ Module RegionMaker
 
             If HttpUtility.ParseQueryString(myUri.Query).Get("Alt") IsNot Nothing Then
                 Return SmartStartParse(myUri)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TOS") IsNot Nothing Then
+            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("agree") IsNot Nothing Then
                 Return TOS(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("SET_PARTNER") IsNot Nothing Then
+            ElseIf post.contains("SET_PARTNER") Then
                 Return SetPartner(post)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("GET_PARTNER") IsNot Nothing Then
+            ElseIf post.contains("GET_PARTNER") Then
                 Return GetPartner(post)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
                 Return Text2Speech(post)
@@ -1898,7 +1898,7 @@ Module RegionMaker
 
             If match2.Success Then
                 Agree2Tos(sid)  ' detect and print a response to an ACCEPT
-                Dim include = "Welcome! You can close this window."
+                Dim include = $"Welcome to {Settings.SimName}! You can close this window."
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
                 Dim streamReader As System.IO.FileStream = Nothing
                 Try
