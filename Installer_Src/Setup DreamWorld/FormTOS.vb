@@ -5,6 +5,8 @@
 
 #End Region
 
+Imports System.IO
+
 Public Class TosForm
 
 #Region "ScreenSize"
@@ -23,7 +25,7 @@ Public Class TosForm
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
@@ -42,11 +44,13 @@ Public Class TosForm
 
     Private Sub ApplyButton_Click(sender As Object, e As EventArgs) Handles ApplyButton.Click
 
-        Save()
+        Save(False)
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles PreviewButton.Click
+
+        Save(True)
 
         If PropOpensimIsRunning() Then
             Dim webAddress As String = "http://" & CStr(Settings.PublicIP) & ":" & CStr(Settings.HttpPort) & "/wifi/termsofservice.html"
@@ -56,7 +60,14 @@ Public Class TosForm
                 BreakPoint.Dump(ex)
             End Try
         Else
-            MsgBox(My.Resources.Not_Running)
+
+            Dim webAddress As String = IO.Path.Combine(Settings.OpensimBinPath, "WifiPages/tos.html")
+            Try
+                Process.Start(webAddress)
+            Catch ex As Exception
+                BreakPoint.Dump(ex)
+            End Try
+
         End If
 
     End Sub
@@ -81,7 +92,11 @@ Public Class TosForm
         CheckBox1.Text = My.Resources.RequireTOS
 
         Dim reader As System.IO.StreamReader
-        reader = System.IO.File.OpenText(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
+        If File.Exists(IO.Path.Combine(Settings.CurrentDirectory, "tos.htm")) Then
+            reader = System.IO.File.OpenText(IO.Path.Combine(Settings.CurrentDirectory, "tos.htm"))
+        Else
+            reader = System.IO.File.OpenText(IO.Path.Combine(Settings.CurrentDirectory, "tos.proto"))
+        End If
 
         'now loop through each line
         Dim HTML As String = ""
@@ -96,6 +111,7 @@ Public Class TosForm
         Catch ex As Exception
             ErrorLog(ex.Message)
         End Try
+        reader.Close()
 
         SetScreen()
 
@@ -103,20 +119,26 @@ Public Class TosForm
 
     End Sub
 
-    Private Sub Save()
+    Private Sub Save(disk As Boolean)
         Try
             Dim arrList = New ArrayList(Editor1.BodyHtml.Split(New String() {Convert.ToChar(13), Convert.ToChar(10)}, StringSplitOptions.RemoveEmptyEntries))
             Dim HTML As String = ""
-            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles\Opensim\bin\WifiPages\tos.html")
+            Dim fname = IO.Path.Combine(Settings.CurrentDirectory, "tos.html")
             Dim file As System.IO.StreamWriter
             file = My.Computer.FileSystem.OpenTextFileWriter(fname, False)
 
             For Each Str As String In arrList
-                Str = Str.Replace("[GRIDNAME]", "'<!-- #get var=GridName -->'")
+                If disk Then
+                    Str = Str.Replace("[GRIDNAME]", Settings.SimName)
+                Else
+                    Str = Str.Replace("[GRIDNAME]", "'<!-- #get var=GridName -->'")
+                End If
+
                 file.WriteLine(Str & vbCrLf)
             Next
             file.Close()
-            CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"), IO.Path.Combine(Settings.CurrentDirectory, "tos.html"))
+            Sleep(100)
+            CopyFileFast(IO.Path.Combine(Settings.CurrentDirectory, "tos.html"), IO.Path.Combine(Settings.OpensimBinPath, "WifiPages\tos.html"))
         Catch
         End Try
 
@@ -124,7 +146,7 @@ Public Class TosForm
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
-        Save()
+        Save(False)
         Me.Close()
 
     End Sub

@@ -582,7 +582,7 @@ Public Class FormSetup
 
         ' Boot Port 8001 Server
 
-        If RunningInServiceMode() Or Not Settings.RunAsService Then
+        If Not ServiceExists("DreamGridService") And (RunningInServiceMode() Or Not Settings.RunAsService) Then
             TextPrint(My.Resources.Starting_DiagPort_Webserver)
             PropWebserver = NetServer.GetWebServer
             PropWebserver.StopWebserver()
@@ -1819,7 +1819,7 @@ Public Class FormSetup
 
                     Dim UUID = System.Guid.NewGuid.ToString
 
-                    Dim URL = $"http//{Settings.PublicIP}{Settings.DiagnosticPort}?TOS=1&uid={UUID}"
+                    Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}?TOS=1&uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
@@ -1836,8 +1836,9 @@ Public Class FormSetup
                     PropUpdateView = True
 
                     If Not IsTOSAccepted(AgentObject, UUID) And Settings.TOSEnabled Then
-                        RPC_admin_dialog(AgentObject.AvatarUUID, $"{My.Resources.AgreeTOS}{vbCrLf}{URL}")
                         SetTos2Zero(AgentObject.AvatarUUID)
+                        RPC_admin_dialog(AgentObject.AvatarUUID, $"{My.Resources.AgreeTOS}{vbCrLf}{URL}")
+
                     End If
 
                 End If
@@ -1905,7 +1906,7 @@ Public Class FormSetup
 
     Private Sub ScriptsResumeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsResumeToolStripMenuItem.Click
         SetLoading(True)
-        SendScriptCmd("scripts resume")
+        SendScriptCmd("scripts Resume")
         SetLoading(False)
     End Sub
 
@@ -1917,7 +1918,7 @@ Public Class FormSetup
 
     Private Sub ScriptsStopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScriptsStopToolStripMenuItem.Click
         SetLoading(True)
-        SendScriptCmd("scripts stop")
+        SendScriptCmd("scripts Stop")
         SetLoading(False)
     End Sub
 
@@ -1929,7 +1930,7 @@ Public Class FormSetup
 
     Private Sub SearchForOarsAtOutworldzToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchForOarsAtOutworldzToolStripMenuItem.Click
 
-        Dim webAddress As String = PropHttpsDomain & "/cgi/freesculpts.plx?q=OAR-"
+        Dim webAddress As String = PropHttpsDomain & "/cgi/freesculpts.plx?q= OAR - "
         Try
             Process.Start(webAddress)
         Catch ex As Exception
@@ -2987,6 +2988,7 @@ Public Class FormSetup
     Private Sub RestartToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles RestartToolStripMenuItem.Click
 
         SetLoading(True)
+        ServiceIcon(False)
         NssmService.StopService()
         NssmService.StartService()
         SetLoading(False)
@@ -3270,12 +3272,18 @@ Public Class FormSetup
 
     Private Sub StartDreamGridServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartDreamGridServiceToolStripMenuItem.Click
 
+        HelpOnce("DreamGrid Service")
+
+        Dim yn = MsgBox(My.Resources.StartAll & " in Background?", MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.DreamGrid_word)
+        If yn = MsgBoxResult.No Then Return
+
         SetLoading(True)
 
         PropWebserver = NetServer.GetWebServer
         PropWebserver.StopWebserver()
         NssmService.InstallService()
-        Settings.SaveSettings()
+        NssmService.StartService()
+
         SetLoading(False)
 
     End Sub
@@ -3330,6 +3338,7 @@ Public Class FormSetup
 
         SetLoading(True)
         NssmService.StopService()
+        ServiceIcon(False)
         SetLoading(False)
 
     End Sub
