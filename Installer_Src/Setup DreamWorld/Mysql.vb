@@ -706,7 +706,7 @@ Public Module MysqlInterface
     End Function
 
     ''' <summary>
-    ''' Check if an avatar has been here 5 minutes and not agreed to a TOS. If so, it logs them out
+    ''' Check if an avatar has been here 2 minutes and not agreed to a TOS. If so, it logs them out
     ''' </summary>
     Public Sub NewUserTimeout()
 
@@ -715,7 +715,7 @@ Public Module MysqlInterface
         Using Connection As New MySqlConnection(Settings.RobustMysqlConnection)
             Try
                 Connection.Open()
-                Dim stm = "Select avatarname, avataruuid, grid from tosauth where TIMESTAMPDIFF(minute,createtime,now()) > 5 and agreed = 0; "
+                Dim stm = "Select avatarname, avataruuid, grid from tosauth where TIMESTAMPDIFF(minute,createtime,now()) > 2 and agreed = 0; "
                 Using cmd = New MySqlCommand(stm, Connection)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         While reader.Read()
@@ -741,7 +741,7 @@ Public Module MysqlInterface
         Using NewSQLConn As New MySqlConnection(Settings.RobustMysqlConnection)
             Try
                 NewSQLConn.Open()
-                Dim stm As String = "update tosauth set agreed='0' where avataruuid = @UUID"
+                Dim stm As String = "update tosauth set agreed='0', createtime = now() where avataruuid = @UUID"
                 Using cmd As New MySqlCommand(stm, NewSQLConn)
                     cmd.Parameters.AddWithValue("@UUID", AvatarUUID)
                     cmd.ExecuteNonQuery()
