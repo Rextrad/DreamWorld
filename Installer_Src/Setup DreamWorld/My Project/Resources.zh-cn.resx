@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>已启用来自对象的电子邮件</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>所有区域都禁用了 Gloebit。</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>所有区域都启用了 Gloebit。</value>
+  </data>
 </root>

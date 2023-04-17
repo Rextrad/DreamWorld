@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>Povolené e-maily z objektů</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Všechny oblasti mají Gloebit zakázán.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Všechny oblasti mají Gloebit povolen.</value>
+  </data>
 </root>

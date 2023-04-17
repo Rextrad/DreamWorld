@@ -338,6 +338,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to All regions have Gloebit disabled..
+        '''</summary>
+        Friend ReadOnly Property AllGloebitOff() As String
+            Get
+                Return ResourceManager.GetString("AllGloebitOff", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to All regions have Gloebit enabled..
+        '''</summary>
+        Friend ReadOnly Property AllGloebitOn() As String
+            Get
+                Return ResourceManager.GetString("AllGloebitOn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to All/None.
         '''</summary>
         Friend ReadOnly Property AllNone_word() As String

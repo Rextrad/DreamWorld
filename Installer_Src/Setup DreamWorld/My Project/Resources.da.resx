@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>E-mail fra objekter aktiveret</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Alle regioner har Gloebit deaktiveret.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Alle regioner har Gloebit aktiveret.</value>
+  </data>
 </root>

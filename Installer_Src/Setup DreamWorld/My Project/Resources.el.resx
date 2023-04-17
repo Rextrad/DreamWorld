@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>Ηλεκτρονικό ταχυδρομείο από αντικείμενα ενεργοποιημένη</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Όλες οι περιοχές έχουν απενεργοποιημένο το Gloebit.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Όλες οι περιοχές έχουν ενεργοποιημένο το Gloebit.</value>
+  </data>
 </root>

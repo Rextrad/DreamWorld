@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>Posta elektronikoa gaitutako objektuetatik</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Eskualde guztiek dute Gloebit desgaitua.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Eskualde guztiek dute Gloebit gaituta.</value>
+  </data>
 </root>

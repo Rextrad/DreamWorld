@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>Tölvupóstur frá hlutum virkur</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Öll svæði eru með Gloebit óvirka.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Öll svæði hafa Gloebit virkt.</value>
+  </data>
 </root>

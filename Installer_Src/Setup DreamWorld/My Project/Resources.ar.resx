@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>البريد الإلكتروني من الكائنات الممكنة</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>جميع المناطق لديها Gloebit معطل.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>تم تمكين Gloebit في جميع المناطق.</value>
+  </data>
 </root>

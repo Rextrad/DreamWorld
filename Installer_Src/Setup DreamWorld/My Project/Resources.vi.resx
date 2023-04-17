@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>Email từ các đối tượng được bật</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>Tất cả các khu vực đã tắt Gloebit.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>Tất cả các khu vực đã bật Gloebit.</value>
+  </data>
 </root>

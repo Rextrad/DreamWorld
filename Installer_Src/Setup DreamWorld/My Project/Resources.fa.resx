@@ -4191,4 +4191,10 @@
   <data name="Outboundenabled" xml:space="preserve">
     <value>ایمیل از اشیاء فعال</value>
   </data>
+  <data name="AllGloebitOff" xml:space="preserve">
+    <value>همه مناطق Gloebit معلول هستند.</value>
+  </data>
+  <data name="AllGloebitOn" xml:space="preserve">
+    <value>همه مناطق Gloebit را فعال کرده اند.</value>
+  </data>
 </root>
