@@ -987,7 +987,11 @@ Public Class FormSetup
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
         Application.DoEvents()
-        Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again so it will be translated
+        Try
+            Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again so it will be translated
+        Catch ex As Exception
+            MsgBox("Fatal Error, DreamGrid " & Global.Outworldz.My.Resources.Quit_unexpectedly & " " & Global.Outworldz.My.Resources.See_Log, MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground Or MsgBoxStyle.Critical, Global.Outworldz.My.Resources.Error_word)
+        End Try
 
     End Sub
 
