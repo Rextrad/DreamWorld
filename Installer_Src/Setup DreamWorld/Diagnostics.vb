@@ -16,10 +16,7 @@ Module Diags
         End Set
     End Property
 
-#Disable Warning VSTHRD100 ' Avoid async void methods
-
-    Public Async Sub DoDiag()
-#Enable Warning VSTHRD100 ' Avoid async void methods
+    Public Sub DoDiag()
 
         TextPrint("___DIAG_START_______")
         TextPrint(My.Resources.Running_Network)
@@ -28,7 +25,7 @@ Module Diags
 
         OpenPorts() ' Open router ports with UPnp
         ProbePublicPort() ' Probe using Outworldz like Canyouseeme.org does on HTTP port
-        Await TestPrivateLoopbackAsync()   ' Diagnostics
+        TestPrivateLoopback()   ' Diagnostics
         TestPublicLoopback()    ' Http port
         TestAllRegionPorts()    ' All Dos boxes, actually
 
@@ -267,14 +264,13 @@ Module Diags
 
     End Sub
 
-    Public Async Function TestPrivateLoopbackAsync() As Task(Of Boolean)
+    Public Function TestPrivateLoopback() As Boolean
 
         TextPrint(My.Resources.Checking_LAN_Loopback_word)
         Dim weblink = $"http://{Settings.LANIP()}:{Settings.DiagnosticPort}/?_TestLoopback={RandomNumber.Random()}"
         Logger("Info", "URL= " & weblink, "Diagnostics")
         Try
-            Dim rr = Await GetURLContentsAsync(weblink)
-            Dim msg = System.Text.Encoding.ASCII.GetString(rr)
+            Dim msg = GetURLContents(weblink)
             If msg = "Test Completed" Then
                 Return True
             End If

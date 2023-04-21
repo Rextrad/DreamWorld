@@ -65,7 +65,7 @@ Public Class FormDatabase
     End Property
 
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 

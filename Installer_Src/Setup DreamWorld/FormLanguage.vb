@@ -223,10 +223,8 @@
 
     End Sub
 
-#Disable Warning VSTHRD100 ' Avoid async void methods
+    Private Sub Language(sender As Object, e As EventArgs)
 
-    Private Async Sub Language(sender As Object, e As EventArgs)
-#Enable Warning VSTHRD100 ' Avoid async void methods
         Settings.SaveSettings()
 
         'For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
@@ -244,7 +242,7 @@
 
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
-        Await FormSetup.FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again
+        FormSetup.FrmHomeLoad(sender, e) 'Load everything in your form load event again
     End Sub
 
     Private Sub Turkish_Click(sender As Object, e As EventArgs) Handles Turkish.Click

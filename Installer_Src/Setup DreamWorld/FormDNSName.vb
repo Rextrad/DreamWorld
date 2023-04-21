@@ -118,26 +118,25 @@ Public Class FormDnsName
         NextNameButton.Text = Global.Outworldz.My.Resources.Busy_word
         DNSNameBox.Text = String.Empty
         Application.DoEvents()
-        Dim newname = GetNewDnsNameAsync()
-        Dim n = newname.ToString
+        Dim n = GetNewDnsName()
         NextNameButton.Text = Global.Outworldz.My.Resources.Next1
         If n.Length = 0 Then
             MsgBox(My.Resources.Please_enter, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)
             NextNameButton.Enabled = False
         Else
             NextNameButton.Enabled = True
-            DNSNameBox.Text = n
+            DNSNameBox.Text = n.ToString
         End If
         PictureBox.Visible = False
 
     End Sub
 
-    Private Async Function SaveAllAsync() As Task(Of Boolean)
+    Private Function SaveAll() As Boolean
 
         NextNameButton.Text = Global.Outworldz.My.Resources.Saving_word
         PictureBox.Visible = True
         Settings.SaveSettings()
-        Await SetPublicIPAsync()
+        SetPublicIP()
         PictureBox.Visible = False
         If Settings.DnsTestPassed Then Me.Close()
 
@@ -145,13 +144,10 @@ Public Class FormDnsName
 
     End Function
 
-#Disable Warning VSTHRD100 ' Avoid async void methods
-
-    Private Async Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
-#Enable Warning VSTHRD100 ' Avoid async void methods
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton1.Click
 
         PictureBox.Visible = True
-        Dim r = Await SaveAllAsync()
+        Dim r = SaveAll()
         PictureBox.Visible = False
         Close()
 
@@ -168,10 +164,7 @@ Public Class FormDnsName
 
     End Sub
 
-#Disable Warning VSTHRD100 ' Avoid async void methods
-
-    Private Async Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
-#Enable Warning VSTHRD100 ' Avoid async void methods
+    Private Sub TestButton1_Click(sender As Object, e As EventArgs) Handles TestButton1.Click
 
         PictureBox.Visible = True
         Application.DoEvents()
@@ -181,7 +174,7 @@ Public Class FormDnsName
         If DNSNameBox.Text.Length <> 0 Then
 
             Settings.PublicIP = DNSNameBox.Text
-            Dim r = Await RegisterNameAsync(Settings.PublicIP)    ' force it to register
+            Dim r = RegisterName(Settings.PublicIP)    ' force it to register
 
             Try
                 If IPAddress.TryParse(DNSNameBox.Text, address) Then
@@ -211,7 +204,7 @@ Public Class FormDnsName
                     Dim array As String() = Settings.AltDnsName.Split(",".ToCharArray())
                     For Each part As String In array
 
-                        Dim rr = Await RegisterNameAsync(part)
+                        Dim rr = RegisterName(part)
                         PictureBox.Visible = False
                         If IPAddress.TryParse(part, address) Then
                             MsgBox(Global.Outworldz.My.Resources.resolved & " " & part, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Info_word)

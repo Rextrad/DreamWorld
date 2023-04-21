@@ -1,72 +1,51 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading.Tasks
+Imports System.Windows.Interop
 
 Module DNS
 
-    Public Async Function GetNewDnsNameAsync() As Task(Of String)
+    Public Function GetNewDnsName() As String
 
-        Dim Checkname() As Byte
+        Dim Checkname As String
 
         Try
-            Checkname = Await GetURLContentsAsync("http://ns1.outworldz.com/getnewname.plx/?r=" & RandomNumber.Random)
-            Dim msg = System.Text.Encoding.ASCII.GetString(Checkname)
-            Return msg
+            Checkname = GetURLContents("http://ns1.outworldz.com/getnewname.plx/?r=" & RandomNumber.Random)
+            Return Checkname
         Catch ex As Exception
             ErrorLog("Error:Cannot get new name fron NS1:" & ex.Message)
         End Try
 
         Try
-            Checkname = Await GetURLContentsAsync("http://ns2.outworldz.com/getnewname.plx/?r=" & RandomNumber.Random)
-            Dim msg = System.Text.Encoding.ASCII.GetString(Checkname)
-            Return msg
+            Checkname = GetURLContents("http://ns2.outworldz.com/getnewname.plx/?r=" & RandomNumber.Random)
+            Return Checkname
         Catch ex As Exception
             ErrorLog("Error:Cannot get new name from NS2:" & ex.Message)
-        End Try
-
-        Try
-            Checkname = Await GetURLContentsAsync("http://ns3.outworldz.com/getnewname.plx/?r=" & RandomNumber.Random)
-            Dim msg = System.Text.Encoding.ASCII.GetString(Checkname)
-            Return msg
-        Catch ex As Exception
-            ErrorLog("Error:Cannot get new name from NS3:" & ex.Message)
         End Try
 
         Return ""
 
     End Function
 
-    Public Async Function GetURLContentsAsync(url As String) As Task(Of Byte())
+    Public Function GetURLContents(url As String) As String
 
-        Dim content = New MemoryStream()
-        ' Initialize an HttpWebRequest for the current URL.
-        Dim webReq = CType(WebRequest.Create(url), HttpWebRequest)
-        webReq.AllowAutoRedirect = True
-
+        Dim wc = New System.Net.WebClient()
         ' Send the request to the Internet resource and wait for
-        ' the response.
-        Using response As WebResponse = Await webReq.GetResponseAsync()
-            ' Get the data stream that is associated with the specified URL.
-            Using responseStream As Stream = response.GetResponseStream()
-                ' Read the bytes in responseStream and copy them to content.
-                Await responseStream.CopyToAsync(content)
-            End Using
-        End Using
-        Return content.ToArray()
+        Return wc.DownloadString(url)
 
     End Function
 
     Public Sub NewDNSName()
 
         If Settings.DnsName.Length = 0 And Settings.EnableHypergrid Then
-            Dim newname = GetNewDnsNameAsync()
-            If newname.ToString.Length >= 0 And Not RunningInServiceMode() Then
-                Dim r = RegisterNameAsync(newname.ToString).ToString
-                If Not CBool(r) Then
+            Dim newname = GetNewDnsName()
+            If newname.Length >= 0 And Not RunningInServiceMode() Then
+                Dim r = RegisterName(newname)
+                If r Then
                     Settings.DnsName = newname.ToString
                     Settings.PublicIP = newname.ToString
                     Settings.SaveSettings()
-
+                Else
                     MsgBox(My.Resources.NameAlreadySet, MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground, Global.Outworldz.My.Resources.Information_word)
                 End If
             End If
@@ -75,12 +54,12 @@ Module DNS
 
     End Sub
 
-    Public Async Function RegisterNameAsync(DNSName As String) As Task(Of Boolean)
+    Public Function RegisterName(DNSName As String) As Boolean
 
         DNSName = DNSName.Trim
         If DNSName Is Nothing Then Return False
         If DNSName.Length = 0 Then Return False
-        Dim Checkname As Byte() = Nothing
+        Dim Checkname As String = ""
 
         If IPCheck.IsPrivateIP(DNSName) Then
             Settings.DnsTestPassed() = True
@@ -91,20 +70,18 @@ Module DNS
              "http://ns1.outworldz.com/dns.plx" & GetPostData(DNSName),
              "http://ns2.outworldz.com/dns.plx" & GetPostData(DNSName),
              "http://ns1.outworldz.net/dns.plx" & GetPostData(DNSName),
-             "http://ns2.outworldz.net/dns.plx" & GetPostData(DNSName),
-             "http://ns3.outworldz.net/dns.plx" & GetPostData(DNSName),
-             "http://ns3.outworldz.com/dns.plx" & GetPostData(DNSName)
+             "http://ns2.outworldz.net/dns.plx" & GetPostData(DNSName)
             }
 
         For Each url In DNS
             Try
-                Checkname = Await GetURLContentsAsync(url)
+                Checkname = GetURLContents(url)
                 Logger("DNS", url, "Outworldz")
             Catch ex As Exception
                 ErrorLog("Warn: Cannot register this DNS Name " & ex.Message)
             End Try
-            Dim name = System.Text.Encoding.ASCII.GetString(Checkname)
-            If name = "UPDATE" Then
+
+            If Checkname = "UPDATE" Then
                 Settings.DnsTestPassed() = True
                 Return True
             Else
@@ -122,7 +99,7 @@ Module DNS
 
     End Function
 
-    Public Async Function SetPublicIPAsync() As Task(Of Boolean)
+    Public Function SetPublicIP() As Boolean
 
         TextPrint(My.Resources.Public_IP_Setup_Word)
 
@@ -132,12 +109,12 @@ Module DNS
         Settings.MacAddress = GetMacByIP(Settings.LANIP)
 
         Settings.BaseHostName = Settings.PublicIP
-        Await RegisterNameAsync(Settings.PublicIP)
+        RegisterName(Settings.PublicIP)
         TextPrint($"WAN->{Settings.PublicIP}")
 
         ' Region Name override
         If Settings.OverrideName.Length > 0 Then
-            Await RegisterNameAsync(Settings.OverrideName)
+            RegisterName(Settings.OverrideName)
             TextPrint($"REGION->{Settings.OverrideName}")
         End If
 
@@ -145,7 +122,7 @@ Module DNS
         Dim a As String() = Settings.AltDnsName.Split(",".ToCharArray())
         For Each part As String In a
             If part.Length > 0 Then
-                Await RegisterNameAsync(part)
+                RegisterName(part)
                 TextPrint($"ALT->{part}")
             End If
         Next
@@ -155,7 +132,6 @@ Module DNS
             Settings.PublicIP = Settings.LANIP
         ElseIf Settings.DnsName.Length > 0 Then
             Settings.PublicIP = Settings.DnsName()
-            TextPrint($"DNS->{Settings.DnsName}")
         End If
 
         Settings.SaveSettings()

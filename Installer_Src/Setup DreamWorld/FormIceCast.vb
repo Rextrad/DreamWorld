@@ -25,7 +25,7 @@ Public Class FormIcecast
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 
