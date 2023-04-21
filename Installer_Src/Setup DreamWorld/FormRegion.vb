@@ -182,7 +182,7 @@ Public Class FormRegion
         MaxMAvatarsLabel.Text = Global.Outworldz.My.Resources.Max_Avatars
         MaxNPrimsLabel.Text = Global.Outworldz.My.Resources.Max_NumPrims
 
-        MenuStrip2.Text = Global.Outworldz.My.Resources._0
+        MenuStrip2.Text = "0"
         NonPhysPrimLabel.Text = Global.Outworldz.My.Resources.Nonphysical_Prim
         NoPublish.Text = Global.Outworldz.My.Resources.No_Publish_Items
 
@@ -1373,7 +1373,7 @@ Public Class FormRegion
                             "Concierge =  " & CStr(ConciergeCheckBox.Checked) & vbCrLf &
                             "MaxAgents=" & MaxAgents.Text & vbCrLf &
                             "MaxPrims=" & MaxPrims.Text & vbCrLf &
-                            "RegionType = Estate" & vbCrLf & vbCrLf &
+                            "RegionType = Estate" & vbCrLf &
                             "DefaultLanding = " & LandingSpotTextBox.Text & vbCrLf & vbCrLf &
                             ";# Extended region properties from Dreamgrid" & vbCrLf &
                             "MinTimerInterval=" & ScriptTimerTextBox.Text & vbCrLf &

@@ -4372,9 +4372,6 @@
   <data name="StartAll" xml:space="preserve">
     <value>Start all checked regions</value>
   </data>
-  <data name="_0" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="View_Simulator_Stats" xml:space="preserve">
     <value>View Simulator Stats</value>
   </data>
@@ -4782,5 +4779,8 @@
   </data>
   <data name="AllGloebitOn" xml:space="preserve">
     <value>All regions have Gloebit enabled.</value>
+  </data>
+  <data name="_0" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
