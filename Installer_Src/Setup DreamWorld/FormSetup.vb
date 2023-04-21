@@ -245,7 +245,7 @@ Public Class FormSetup
 
     End Function
 
-    Public Async Function FrmHomeLoadAsync(ByVal sender As Object, ByVal e As EventArgs) As Task(Of Boolean)
+    Public Function FrmHomeLoad(ByVal sender As Object, ByVal e As EventArgs) As Boolean
 
         My.Application.ChangeUICulture(Settings.Language)
         My.Application.ChangeCulture(Settings.Language)
@@ -589,7 +589,7 @@ Public Class FormSetup
             PropWebserver.StartServer(Settings.CurrentDirectory, Settings)
             Thread.Sleep(100)
 
-            Await TestPrivateLoopbackAsync()
+            TestPrivateLoopback()
             If Settings.DiagFailed Then
                 ErrorLog("Diagnostic Listener port failed. Aborting")
                 TextPrint("Diagnostic Listener port failed. Aborting")
@@ -599,7 +599,7 @@ Public Class FormSetup
         End If
 
         GetServiceList()
-        Await IPPublicAsync()
+        IPPublic()
 
         If Not Settings.DnsTestPassed Then
             MsgBox("Unable to Connect to Dyn DNS.", vbCritical)
@@ -941,7 +941,7 @@ Public Class FormSetup
     ''' <summary>Form Load is main() for all DreamGrid</summary>
     ''' <param name="sender">Unused</param>
     ''' <param name="e">Unused</param>
-    Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 #Enable Warning VSTHRD100 ' Avoid async void methods
 #Enable Warning VSTHRD100 ' Avoid async void methods
 
@@ -987,22 +987,19 @@ Public Class FormSetup
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
         Application.DoEvents()
-        Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again so it will be translated
+        FrmHomeLoad(sender, e) 'Load everything in your form load event again so it will be translated
 
     End Sub
 
-    Private Async Function IPPublicAsync() As Task(Of Boolean)
+    Private Function IPPublic() As Boolean
 
-        Dim r = Await SetPublicIPAsync()
+        Dim r = SetPublicIP()
         Return r
 
     End Function
 
-#Disable Warning VSTHRD100 ' Avoid async void methods
-#Disable Warning VSTHRD100 ' Avoid async void methods
+    Private Sub Language(sender As Object, e As EventArgs)
 
-    Private Async Sub Language(sender As Object, e As EventArgs)
-#Enable Warning VSTHRD100 ' Avoid async void methods
         Settings.SaveSettings()
 
         For Each ci As CultureInfo In CultureInfo.GetCultures(CultureTypes.NeutralCultures)
@@ -1019,7 +1016,8 @@ Public Class FormSetup
         My.Application.ChangeCulture(Settings.Language)
         Me.Controls.Clear() 'removes all the controls on the form
         InitializeComponent() 'load all the controls again
-        Await FrmHomeLoadAsync(sender, e) 'Load everything in your form load event again
+        FrmHomeLoad(sender, e) 'Load everything in your form load event again
+
     End Sub
 
     Private Sub Link_Clicked(ByVal sender As Object, ByVal e As System.Windows.Forms.LinkClickedEventArgs) Handles TextBox1.LinkClicked
