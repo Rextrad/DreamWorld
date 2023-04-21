@@ -1755,9 +1755,9 @@ Module RegionMaker
                 Return SmartStartParse(myUri)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("agree") IsNot Nothing Then
                 Return TOS(post)
-            ElseIf post.contains("SET_PARTNER") Then
+            ElseIf post.Contains("SET_PARTNER") Then
                 Return SetPartner(post)
-            ElseIf post.contains("GET_PARTNER") Then
+            ElseIf post.Contains("GET_PARTNER") Then
                 Return GetPartner(post)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
                 Return Text2Speech(post)

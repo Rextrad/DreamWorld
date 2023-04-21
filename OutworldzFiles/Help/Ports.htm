@@ -132,13 +132,27 @@ name="OLE_LINK11"><span lang=EN>Port Settings and UPnP</span></a></h1>
 <p class=MsoNormal><span lang=EN>Multiple TCP and UDP Ports are used in
 Opensim.  The defaults are shown below.</span></p>
 
-<p class=MsoNormal><span lang=EN><img width=242 height=229
-src="Ports_files/image001.png" alt=Image></span></p>
+<p class=MsoNormal>
 
-<p class=MsoNormal><span lang=EN>The defaults are 8001 (Diagnostic), 8002 (Public)
-, 8003 (Private) and 8004 (Starting Region).  If you have manually added more
-regions, their region ports also need to be open. Each region that is used
-takes up one port. They start at 8004 and count up by one.</span></p>
+<table cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=42 height=0></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=242 height=312 src="Ports_files/image001.png" alt=Image></td>
+ </tr>
+</table>
+
+<br clear=ALL>
+<span lang=EN>The defaults are 8001 (Diagnostic), 8002 (Public), 8003 (Private)
+and 8004 (Starting Region) which gets 1 added to it for every region.  If you
+have manually added more regions, their region ports also need to be port
+forwarded in the router Each region that is used takes up one port. They start
+at 8004 and count up by one.</span></p>
+
+<p class=MsoNormal><span lang=EN>The Internal IP for regions should normally be
+0.0.0.0. It is only used in Region servers. How it is used is in the manual “Servers”.</span></p>
 
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6;
 margin-left:.5in;margin-right:.5in'>
@@ -171,13 +185,11 @@ help menu has a useful tool to look at uPnP in your router:</span></p>
 <p class=MsoNormal><span lang=EN style='font-size:11.0pt;line-height:115%'><img
 width=353 height=230 src="Ports_files/image002.png" alt=Image></span><span
 lang=EN><br>
- UPnp (Universal Plug and Play) Tool for Windows</span></p>
+ UPnP (Universal Plug and Play) Tool for Windows</span></p>
 
 <p class=MsoNormal><span lang=EN>You can add, delete, and modify the settings
 without a password, assuming you have UPnP enabled. This tool is available in
 Dreamworld and DreamGrid in the Help menu.</span></p>
-
-<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
 
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6;
 margin-left:.5in;margin-right:.5in'>
@@ -188,8 +200,8 @@ Ports</span></h2>
 
 </div>
 
-<p class=MsoNormal><span lang=EN>A list of routers and instructions is at &nbsp;http://www.portforward.com&nbsp;which
-can help you identify your router type.</span></p>
+<p class=MsoNormal><span lang=EN>A list of routers and instructions is at http://www.portforward.com&nbsp;which
+can help you to identify your router type.</span></p>
 
 <p class=MsoNormal><span lang=EN>Step 1) Get your PC LAN IP address by going to
 a DOS prompt and typing 'ipconfig'.</span></p>
@@ -204,8 +216,6 @@ could also be a 10.0.*.* number. For my Linksys, it looks like this:</span></p>
 <p class=MsoNormal><span lang=EN><img width=552 height=358
 src="Ports_files/image004.png"></span></p>
 
-<p class=MsoNormal><span lang=EN>&nbsp;</span></p>
-
 <div style='border:solid #DEEAF6 3.0pt;padding:0in 0in 0in 0in;background:#DEEAF6;
 margin-left:.5in;margin-right:.5in'>
 
@@ -216,14 +226,13 @@ margin-left:.5in;margin-right:.5in'>
 </div>
 
 <p class=MsoNormal><span lang=EN>Ports 8080 and 8081 must be added when you are
-running the Icecast/Shoutcast server.<br>
-<br>
-</span></p>
+running the Icecast/Shoutcast server. You may use other ports that are set into
+Icecast control panel.</span></p>
 
 <p class=MsoNormal><b><span lang=EN>Which ports?</span></b><span lang=EN>&nbsp;You
 need to Port-Forward 8001, 8002, and 8004-8010 (or higher, I usually open up to
 8050) to have room for expansion. You can also add 8080 and 8081 for
-Shoutcast/Icecast.&nbsp; Do not do 8003 for security reasons. These can
+Shoutcast/Icecast.&nbsp; <b>Do not do 8003 for security reasons.</b> These can
 usually&nbsp;be done in ranges, like 8001-8002 and 8004-8010. The latter ones
 are for regions - you need one port per region, so this would let you have 7
 regions. Add more if you want - nothing wrong with opening up to 8020 or 8030
@@ -241,7 +250,8 @@ lang=EN style='color:#5973CC'>http://www.canyouseeme.org</span></a><span
 lang=EN>, and enter 8002 while Opensimulator is running. Then click the Test
 Button at CanYouSeeMe.  If that works, the ports are fine.  If this does not
 work, try disabling your PC firewall. If this works, you must add exclusions to
-the firewall and then turn the firewall back on.</span></p>
+the firewall and then turn the firewall back on. Normally, DreamGrid handles
+all the firewall rules.</span></p>
 
 <p class=MsoNormal><span lang=EN>See <b>Firewall Issues</b> for help with the
 PC firewall.</span></p>
@@ -292,9 +302,9 @@ I also set all the ports to be open in firewalls  when you first click start.  <
 <p class=MsoNormal><span lang=EN>If you are using an Anti-virus with a
 firewall, such as Zone Alarm, AVG Internet Suite, or anything else, running
 Start.exe may trigger the 3rd party firewall popup warnings. Opensim.exe needs
-to be allowed internet access, and Start.exe must  be allowed to make changes to
-the firewall. If not, it will not work, and you will have to take manual action
-to fix it.</span></p>
+to be allowed internet access, and Start.exe must  be allowed to make changes
+to the firewall. If not, it will not work, and you will have to take manual
+action to fix it.</span></p>
 
 <p class=MsoNormal><span lang=EN>This code is safe and is digitally signed by
 me, Fred Beckhusen of Outworldz.com, and is open source and available for
@@ -402,8 +412,8 @@ margin-left:.5in;margin-right:.5in'>
 region traffic. Regions chat to the server database for login, presence, and
 other services use it to talk to the region so people can teleport from one
 region to another. In Dream World, regions must be on the same machine. In
-Dream<u>Grid</u>, just like OsGrid or any other remotely attachable grid, the regions
-can run on any machine anywhere in the world.</span></p>
+Dream<u>Grid</u>, just like OsGrid or any other remotely attachable grid, the
+regions can run on any machine anywhere in the world.</span></p>
 
 <p class=MsoNormal><span lang=EN>If you opened port 8003 to anyone on the web,
 you expose the internal database protocol to the web. Anyone with the right
@@ -422,9 +432,9 @@ margin-left:.5in;margin-right:.5in'>
 <p class=MsoNormal><span lang=EN>The region ports (8004-upward) run both TCP
 and UDP.&nbsp;&nbsp; UDP is used for the viewer. UDP cuts the load on the
 server dramatically as there is no need to automatically always ACK every
-packet. As one example, no one cares if an audio stream gets briefly
-interrupted as you cannot hear it anyway, and it is too late to use it if it
-comes later in a retry. It just gets discarded.</span></p>
+packet. As one example, no one cares if an audio stream gets briefly interrupted
+as you cannot hear it anyway, and it is too late to use it if it comes later in
+a retry. It just gets discarded.</span></p>
 
 <p class=MsoNormal><span lang=EN>For multiple regions in a single DOS box, all
 regions listen for TCP traffic on the last port used in that DOS box.  As one
