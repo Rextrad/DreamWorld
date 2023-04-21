@@ -339,8 +339,8 @@ Public Class FormDebug
         If BotPID > 0 Then
             Try
                 AppActivate(BotPID)
-                SendKeys.Send("{ENTER}" & "disconnect" & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
-                SendKeys.Send("{ENTER}" & "quit" & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
+                SendKeys.SendWait("{ENTER}" & "disconnect" & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
+                SendKeys.SendWait("{ENTER}" & "quit" & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
                 SendKeys.Flush()
                 ProgressPrint("Shutdown Sent")
             Catch

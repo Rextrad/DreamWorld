@@ -110,7 +110,7 @@ Module WindowHandlers
             Try
                 AppActivate(PID)
                 If (FocusWindow(PID)) Then
-                    SendKeys.Send("{ENTER}" & command & "{ENTER}")  ' DO NOT make a interpolated string, will break due to {}
+                    SendKeys.SendWait("{ENTER}" & command & "{ENTER}")  ' DO NOT make a interpolated string, will break due to {}
                     SendKeys.Flush()
                 End If
             Catch ex As Exception

@@ -75,7 +75,7 @@ Public Class CampBots
         If BotPID > 0 Then
             Try
                 AppActivate(BotPID)
-                SendKeys.Send("{ENTER}" & msg & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
+                SendKeys.SendWait("{ENTER}" & msg & "{ENTER}")  ' DO NOT make a interpolated string, will break!!
                 SendKeys.Flush()
             Catch
             End Try
