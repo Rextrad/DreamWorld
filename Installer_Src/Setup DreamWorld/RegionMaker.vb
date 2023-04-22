@@ -326,7 +326,7 @@ Module RegionMaker
         & $"SmartBoot={CStr(Smart_Boot_Enabled(RegionUUID))}" & vbCrLf _
         & $"LandingSpot={LandingSpot(RegionUUID)}" & vbCrLf _
         & $"Cores={Cores(RegionUUID)}" & vbCrLf _
-        & "Priority={Priority(RegionUUID)}" & vbCrLf _
+        & $"Priority={Priority(RegionUUID)}" & vbCrLf _
         & $"OpenSimWorldAPIKey={OpensimWorldAPIKey(RegionUUID)}" & vbCrLf _
         & $"SkipAutoBackup={SkipAutobackup(RegionUUID)}" & vbCrLf
 
@@ -2219,10 +2219,8 @@ Module RegionMaker
 
             If INI.SetIni("XEngine", "DeleteScriptsOnStartup", "False") Then Return True
 
-            If Not Settings.LSLHTTP Then
-                If INI.SetIni("Network", "OutboundDisallowForUserScriptsExcept",
-                               $"{Settings.PublicIP}:{Settings.DiagnosticPort}|127.0.0.1:{Settings.DiagnosticPort}|localhost:{Settings.DiagnosticPort}|{Settings.LANIP()}:{Settings.DiagnosticPort}|{Settings.LANIP()}:{Settings.HttpPort}|{Settings.PublicIP()}:{Settings.HttpPort}") Then Return True
-            End If
+            If INI.SetIni("Network", "OutboundDisallowForUserScriptsExcept",
+                           $"{Settings.PublicIP}:{Settings.DiagnosticPort}|127.0.0.1:{Settings.DiagnosticPort}|localhost:{Settings.DiagnosticPort}|{Settings.LANIP()}:{Settings.DiagnosticPort}|{Settings.LANIP()}:{Settings.HttpPort}|{Settings.PublicIP()}:{Settings.HttpPort}") Then Return True
 
             If INI.SetIni("PrimLimitsModule", "EnforcePrimLimits", CStr(Settings.Primlimits)) Then Return True
             If Settings.Primlimits Then
