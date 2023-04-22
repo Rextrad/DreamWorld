@@ -1473,15 +1473,6 @@ Public Class MySettings
         End Set
     End Property
 
-    Public Property LSLHTTP() As Boolean
-        Get
-            Return CType(GetMySetting("LSL_HTTP", "False"), Boolean)
-        End Get
-        Set
-            SetMySetting("LSL_HTTP", CStr(Value))
-        End Set
-    End Property
-
     Public Property MacAddress() As String
         Get
             Return GetMySetting("MacAddress")

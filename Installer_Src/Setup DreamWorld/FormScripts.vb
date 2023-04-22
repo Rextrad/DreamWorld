@@ -23,8 +23,7 @@ Public Class FormScripts
         My.Application.ChangeCulture(Settings.Language)
 
         GroupBox1.Text = Global.Outworldz.My.Resources.Script_Engine_word '"Script Engine"
-        GroupBox8.Text = Global.Outworldz.My.Resources.Allow_LSL
-        LSLCheckbox.Text = Global.Outworldz.My.Resources.Enable_word
+
         MenuStrip2.Text = Global.Outworldz.My.Resources._0
         Text = Global.Outworldz.My.Resources.Scripts_word
         ToolStripMenuItem30.Image = Global.Outworldz.My.Resources.question_and_answer
@@ -34,8 +33,6 @@ Public Class FormScripts
         ScriptsOff.Text = Global.Outworldz.My.Resources.Off
 
         SetScreen()
-
-        LSLCheckbox.Checked = Settings.LSLHTTP()
 
         If Settings.ScriptEngine() = "YEngine" Then
             YengineButton.Checked = True
@@ -55,15 +52,6 @@ Public Class FormScripts
 #End Region
 
 #Region "Buttons"
-
-    Private Sub LSLCheckbox_CheckedChanged(sender As Object, e As EventArgs) Handles LSLCheckbox.CheckedChanged
-
-        If initted Then
-            Settings.LSLHTTP() = LSLCheckbox.Checked
-            Settings.SaveSettings()
-        End If
-
-    End Sub
 
     Private Sub ScriptsOff_CheckedChanged(sender As Object, e As EventArgs) Handles ScriptsOff.CheckedChanged
 
@@ -104,7 +92,7 @@ Public Class FormScripts
 
     'The following detects  the location of the form in screen coordinates
     Private Sub Resize_page(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
         ScreenPosition.SaveXY(Me.Left, Me.Top)
     End Sub
 

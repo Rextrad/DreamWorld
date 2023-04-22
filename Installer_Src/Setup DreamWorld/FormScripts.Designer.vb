@@ -25,15 +25,12 @@ Partial Class FormScripts
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormScripts))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ScriptsOff = New System.Windows.Forms.RadioButton()
         Me.YengineButton = New System.Windows.Forms.RadioButton()
         Me.XengineButton = New System.Windows.Forms.RadioButton()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.LSLCheckbox = New System.Windows.Forms.CheckBox()
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem30 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ScriptsOff = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,15 +41,26 @@ Partial Class FormScripts
         Me.GroupBox1.Controls.Add(Me.XengineButton)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 50)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(255, 93)
+        Me.GroupBox1.Size = New System.Drawing.Size(255, 121)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Script Engine"
         '
+        'ScriptsOff
+        '
+        Me.ScriptsOff.AutoSize = True
+        Me.ScriptsOff.Location = New System.Drawing.Point(12, 37)
+        Me.ScriptsOff.Name = "ScriptsOff"
+        Me.ScriptsOff.Size = New System.Drawing.Size(39, 17)
+        Me.ScriptsOff.TabIndex = 2
+        Me.ScriptsOff.TabStop = True
+        Me.ScriptsOff.Text = "Off"
+        Me.ScriptsOff.UseVisualStyleBackColor = True
+        '
         'YengineButton
         '
         Me.YengineButton.AutoSize = True
-        Me.YengineButton.Location = New System.Drawing.Point(12, 70)
+        Me.YengineButton.Location = New System.Drawing.Point(12, 83)
         Me.YengineButton.Name = "YengineButton"
         Me.YengineButton.Size = New System.Drawing.Size(68, 17)
         Me.YengineButton.TabIndex = 1
@@ -63,33 +71,13 @@ Partial Class FormScripts
         'XengineButton
         '
         Me.XengineButton.AutoSize = True
-        Me.XengineButton.Location = New System.Drawing.Point(12, 47)
+        Me.XengineButton.Location = New System.Drawing.Point(12, 60)
         Me.XengineButton.Name = "XengineButton"
         Me.XengineButton.Size = New System.Drawing.Size(68, 17)
         Me.XengineButton.TabIndex = 0
         Me.XengineButton.TabStop = True
         Me.XengineButton.Text = Global.Outworldz.My.Resources.Resources.XEngine_word
         Me.XengineButton.UseVisualStyleBackColor = True
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.LSLCheckbox)
-        Me.GroupBox8.Location = New System.Drawing.Point(12, 148)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(255, 48)
-        Me.GroupBox8.TabIndex = 2
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Allow LSL to contact the server"
-        '
-        'LSLCheckbox
-        '
-        Me.LSLCheckbox.AutoSize = True
-        Me.LSLCheckbox.Location = New System.Drawing.Point(12, 19)
-        Me.LSLCheckbox.Name = "LSLCheckbox"
-        Me.LSLCheckbox.Size = New System.Drawing.Size(59, 17)
-        Me.LSLCheckbox.TabIndex = 0
-        Me.LSLCheckbox.Text = Global.Outworldz.My.Resources.Resources.Enable_word
-        Me.LSLCheckbox.UseVisualStyleBackColor = True
         '
         'MenuStrip2
         '
@@ -108,17 +96,6 @@ Partial Class FormScripts
         Me.ToolStripMenuItem30.Size = New System.Drawing.Size(68, 28)
         Me.ToolStripMenuItem30.Text = Global.Outworldz.My.Resources.Resources.Help_word
         '
-        'ScriptsOff
-        '
-        Me.ScriptsOff.AutoSize = True
-        Me.ScriptsOff.Location = New System.Drawing.Point(12, 24)
-        Me.ScriptsOff.Name = "ScriptsOff"
-        Me.ScriptsOff.Size = New System.Drawing.Size(39, 17)
-        Me.ScriptsOff.TabIndex = 2
-        Me.ScriptsOff.TabStop = True
-        Me.ScriptsOff.Text = "Off"
-        Me.ScriptsOff.UseVisualStyleBackColor = True
-        '
         'FormScripts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -126,15 +103,12 @@ Partial Class FormScripts
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(279, 216)
         Me.Controls.Add(Me.MenuStrip2)
-        Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormScripts"
         Me.Text = "Scripts"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
@@ -145,8 +119,6 @@ Partial Class FormScripts
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents YengineButton As RadioButton
     Friend WithEvents XengineButton As RadioButton
-    Friend WithEvents GroupBox8 As GroupBox
-    Friend WithEvents LSLCheckbox As CheckBox
     Friend WithEvents MenuStrip2 As MenuStrip
     Friend WithEvents ToolStripMenuItem30 As ToolStripMenuItem
     Friend WithEvents ScriptsOff As RadioButton
