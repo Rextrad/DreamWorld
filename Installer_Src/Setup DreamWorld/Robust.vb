@@ -608,6 +608,12 @@ Module Robust
 
             INI.SetIni("ServiceList", "GetTextureConnector", """" & "${Const|PublicPort}/Opensim.Capabilities.Handlers.dll:GetTextureServerConnector" & """")
 
+            ' default
+            INI.SetIni("ServiceList", "UserProfilesServiceConnector", "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector")
+            INI.SetIni("UserProfiles", "ProfileServiceURL", "${Const|BaseURL}:${Const|PublicPort}")
+
+            SetupJopensimProfile()
+
             If Settings.CMS = JOpensim Then
                 INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
                 INI.SetIni("UserProfilesService", "Enabled", "False")
@@ -615,6 +621,10 @@ Module Robust
                 INI.SetIni("GridInfoService", "register", "${Const|BaseURL}:${Const|ApachePort}/jOpensim/index.php?option=com_opensim")
                 INI.SetIni("GridInfoService", "economy", "${Const|BaseURL}:${Const|ApachePort}/jOpensim/components/com_opensim/")
                 INI.SetIni("GridInfoService", "password", "${Const|BaseURL}:${Const|PublicPort}/wifi/forgotpassword/")
+
+                INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
+                ' versus ${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector
+                INI.SetIni("UserProfiles", "ProfileServiceURL", "")
 
             ElseIf Settings.CMS = WordPress Then
                 INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
@@ -758,6 +768,17 @@ Module Robust
             If (yesno = vbYes) Then
                 Baretail("""" & Settings.OpensimBinPath & "Robust.log" & """")
             End If
+        End If
+
+    End Sub
+
+    Private Sub SetupJopensimProfile()
+
+        If Settings.CMS = JOpensim Then
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Profile.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Profile.dll"))
+        Else
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Profile.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Profile.dll.bak"))
+            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Profile.dll"))
         End If
 
     End Sub
