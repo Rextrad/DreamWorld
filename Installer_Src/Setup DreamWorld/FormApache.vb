@@ -167,7 +167,7 @@ Public Class FormApache
 
         Dim digitsOnly = New Regex("[^\d]")
         ApachePort.Text = digitsOnly.Replace(ApachePort.Text, "")
-        If ApachePort.Text.Length > 0 And ApachePort.MaxLength < 6 Then
+        If ApachePort.Text.Length > 0 And ApachePort.Text.Length < 6 Then
             Settings.ApachePort = CType(ApachePort.Text, Integer)
         End If
         If Settings.ApachePort <> 80 Then
