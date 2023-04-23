@@ -2162,6 +2162,7 @@ Public Class FormSetup
                 ' set mysql for amount of buffer to use now that it running.
                 ' Will take effect next time Mysql is started.
                 Settings.Total_InnoDB_GBytes = Total_InnoDB_Bytes()
+                IPPublic()
                 Bench.Print("Hour worker")
             End If
 
