@@ -169,7 +169,7 @@ namespace OpenSim.Region.OptionalModules.Scripting.RegionReady
                 m_oarFileLoading = false;
                 m_scene.Backup(false);
 
-                m_log.DebugFormat("[RegionReady]: Region \"{0}\" is ready: \"{1}\" on channel {2}",
+                m_log.InfoFormat("[RegionReady]: Region \"{0}\" is ready: \"{1}\" on channel {2}",
                                  m_scene.RegionInfo.RegionName, c.Message, m_channelNotify);
 
                 m_scene.EventManager.TriggerOnChatBroadcast(this, c);
