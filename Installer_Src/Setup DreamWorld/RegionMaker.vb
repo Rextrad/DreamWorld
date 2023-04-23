@@ -1742,7 +1742,7 @@ Module RegionMaker
         '"{""alert"":""region_ready"",""login"":""shutdown"",""region_name"":""8021"",""region_id"":""c46ee5e5-5bb8-4cb5-8efd-eff44a0c7160""}"
         ' we want region name, UUID and server_startup could also be a probe from the outworldz to check if ports are open.
 
-        If post.Contains("""alert"":""region_ready""") Then
+        If post.ToLower.Contains("""alert"":""region_ready""") Then
             WebserverList.TryAdd(post, "")
         Else
             Dim myUri As Uri = Nothing
@@ -1755,9 +1755,9 @@ Module RegionMaker
                 Return SmartStartParse(myUri)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("agree") IsNot Nothing Then
                 Return TOS(post)
-            ElseIf post.Contains("SET_PARTNER") Then
+            ElseIf post.ToLower.Contains("set_partner") Then
                 Return SetPartner(post)
-            ElseIf post.Contains("GET_PARTNER") Then
+            ElseIf post.ToLower.Contains("get_partner") Then
                 Return GetPartner(post)
             ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("TTS") IsNot Nothing Then
                 Return Text2Speech(post)
