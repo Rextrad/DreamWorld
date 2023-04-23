@@ -65,7 +65,7 @@ Define ENABLE_TLS13 "Yes"
 # prevent Apache from glomming onto all bound IP addresses.
 #
 #Listen 12.34.56.78:80
-Listen 80
+Listen 7900
 
 #
 # Dynamic Shared Object (DSO) Support
@@ -329,7 +329,7 @@ Require all granted
 Use VDir "C:/Opensim/Outworldz_Dreamgrid/OutworldzFiles/Apache/htdocs"
 
 
-<VirtualHost  *:80>
+<VirtualHost  *:7900>
 #two minutes for wp to install
 TimeOut 240
 #

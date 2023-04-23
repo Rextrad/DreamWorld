@@ -878,7 +878,7 @@ Public Class FormRegionlist
                 PropUpdateView = True
             End If
         Next
-        LoadMyListView()
+        'LoadMyListView()
 
     End Sub
 
