@@ -66,6 +66,12 @@ Module DNS
             Return True
         End If
 
+        Dim IP = GetHostAddresses(DNSName)
+        If IP = Settings.WANIP Then
+            Settings.DnsTestPassed() = True
+            Return True
+        End If
+
         Dim DNS = New List(Of String) From {
              "http://ns1.outworldz.com/dns.plx" & GetPostData(DNSName),
              "http://ns2.outworldz.com/dns.plx" & GetPostData(DNSName),
@@ -73,6 +79,7 @@ Module DNS
              "http://ns2.outworldz.net/dns.plx" & GetPostData(DNSName)
             }
 
+        Dim Failcounter As Integer
         For Each url In DNS
             Try
                 Checkname = GetURLContents(url)
@@ -83,22 +90,35 @@ Module DNS
                     Continue For
                 End If
             End Try
-
             If Checkname = "UPDATE" Then
+                Settings.WANIP = GetHostAddresses(DNSName)
+            End If
+
+            ' test all 4
+            If Checkname = "UPDATE" And Not Debugger.IsAttached Then
                 Settings.DnsTestPassed() = True
                 Return True
-            Else
-                If Not RunningInServiceMode() Then
-                    MsgBox(DNSName & ":" & My.Resources.DDNS_In_Use, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
-                    Exit For
-                End If
-
             End If
+
+            If Checkname = "NAK" Then
+                Failcounter += 1
+            End If
+
+            If Not RunningInServiceMode() And Checkname = "NAK" Then
+                MsgBox(DNSName & ":" & My.Resources.DDNS_In_Use, vbInformation Or MsgBoxStyle.MsgBoxSetForeground)
+                Exit For
+            End If
+
             Application.DoEvents()
         Next
 
-        Settings.DnsTestPassed() = False
-        Return False
+        If Failcounter > 0 Then
+            Settings.DnsTestPassed() = False
+            Return False
+        End If
+
+        Settings.DnsTestPassed() = True
+        Return True
 
     End Function
 
@@ -113,6 +133,7 @@ Module DNS
 
         Settings.BaseHostName = Settings.PublicIP
         RegisterName(Settings.PublicIP)
+
         TextPrint($"WAN->{Settings.PublicIP}")
 
         ' Region Name override
