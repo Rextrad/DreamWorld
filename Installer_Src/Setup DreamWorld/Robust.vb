@@ -626,7 +626,10 @@ Module Robust
                 ' versus ${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector
                 INI.SetIni("UserProfiles", "ProfileServiceURL", "")
 
+
+
             ElseIf Settings.CMS = WordPress Then
+                INI.SetIni("Messaging", "OfflineMessageURL", "")
                 INI.SetIni("ServiceList", "UserProfilesServiceConnector", "")
                 INI.SetIni("UserProfilesService", "Enabled", "False")
                 INI.SetIni("GridInfoService", "welcome", "${Const|BaseURL}:${Const|ApachePort}/wordpress/wp-login.php?action=register")
@@ -644,6 +647,9 @@ Module Robust
                     ' use Landtool.php
                     INI.SetIni("GridInfoService", "economy", "${Const|BaseURL}:${Const|ApachePort}/Land")
                 End If
+
+                INI.SetIni("Messaging", "OfflineMessageURL", "")
+
             End If
 
             INI.SetIni("DatabaseService", "ConnectionString", Settings.RobustDBConnection)
@@ -783,18 +789,37 @@ Module Robust
 
     End Sub
 
+    Private Sub SetupDeleteAllMoney()
+
+        CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"))
+        DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
+        CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Modules.Currency.dll"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Modules.Currency.dll.bak"))
+        DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Modules.Currency.dll"))
+        CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Money.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Money.dll.bak"))
+        DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Money.dll"))
+
+    End Sub
     Private Sub SetupMoney(INI As LoadIni)
 
-        DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpenSim.Money.dll"))
+        SetupDeleteAllMoney()
+
         If Settings.GloebitsEnable Then
+
             INI.SetIni("LoginService", "Currency", "G$")
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
-        ElseIf Settings.GloebitsEnable = False And Settings.CMS = JOpensim Then
+
+        ElseIf Settings.JOpensimMoney Then
+
             INI.SetIni("LoginService", "Currency", "jO$")
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Joomla.Money.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Joomla.Money.dll"))
+
+        ElseIf Settings.DTLEnable Then
+
+            INI.SetIni("LoginService", "Currency", "D$")
+            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Modules.Currency.dll.bak"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSim.Modules.Currency.dll"))
+
         Else
-            INI.SetIni("LoginService", "Currency", "$")
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "Gloebit.dll"))
+            INI.SetIni("LoginService", "Currency", "-")
         End If
 
     End Sub
@@ -802,23 +827,35 @@ Module Robust
     Private Sub SetupRobustSearchINI(INI As LoadIni)
 
         If Settings.CMS = JOpensim And Settings.SearchOptions = JOpensim Then
-            Dim SearchURL = "http://" & Settings.PublicIP & ":" & Settings.ApachePort & "/jOpensim/index.php?option=com_opensim&view=inworldsearch&task=viewersearch&tmpl=component&"
+
+            Dim SearchURL = $"http://{Settings.PublicIP}:{Settings.ApachePort}/jOpensim/index.php?option=com_opensim&view=inworldsearch&task=viewersearch&tmpl=component"
             INI.SetIni("LoginService", "SearchURL", SearchURL)
-            INI.SetIni("LoginService", "DestinationGuide", "http://" & Settings.PublicIP & ":" & Settings.ApachePort & "/jOpensim/index.php?option=com_opensim&view=guide&tmpl=component")
+            INI.SetIni("LoginService", "DestinationGuide", $"http://{Settings.PublicIP}:{Settings.ApachePort}/jOpensim/index.php?option=com_opensim&view=guide&tmpl=component")
+
         ElseIf Settings.SearchOptions = Outworldz Then
-            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
-            INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
+
+            INI.SetIni("LoginService", "SearchURL", $"{PropHttpsDomain}/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", $"{PropHttpsDomain}/destination-guide")
+
         ElseIf Settings.SearchOptions = "Hyperica" Then
+
+            ' old default - reset it
             Settings.SearchOptions = Outworldz
             Settings.SaveSettings()
-            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
+
+            INI.SetIni("LoginService", "SearchURL", $"{PropHttpsDomain}/Search/query.php")
             INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
+
         ElseIf Settings.SearchOptions = "Local" Then
-            INI.SetIni("LoginService", "SearchURL", PropHttpsDomain & "/Search/query.php")
-            INI.SetIni("LoginService", "DestinationGuide", PropHttpsDomain & "/destination-guide")
+
+            INI.SetIni("LoginService", "SearchURL", $"{PropHttpsDomain}/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", $"{PropHttpsDomain}/destination-guide")
+
         Else
-            INI.SetIni("LoginService", "SearchURL", "")
-            INI.SetIni("LoginService", "DestinationGuide", "")
+            ' default is Outworldz
+            INI.SetIni("LoginService", "SearchURL", $"{PropHttpsDomain}/Search/query.php")
+            INI.SetIni("LoginService", "DestinationGuide", $"{PropHttpsDomain}/destination-guide")
+
         End If
 
     End Sub

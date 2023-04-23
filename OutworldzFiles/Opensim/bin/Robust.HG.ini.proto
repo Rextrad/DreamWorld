@@ -54,6 +54,9 @@ ApachePort=80
 ;
 ;Password from DYN DNS
 MachineID=
+;
+jOpensimURL= 
+
 
 
 ;
@@ -140,6 +143,8 @@ GroupsServiceConnector="${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsSer
 ;; Uncomment to provide bakes caching
 BakedTextureService="${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"
 
+
+; set by Dreamgrid for jOpensim and others
 ;; Uncomment for UserProfiles see [UserProfilesService] to configure...
 UserProfilesServiceConnector="${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"
 

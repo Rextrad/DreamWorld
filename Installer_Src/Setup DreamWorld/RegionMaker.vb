@@ -2097,12 +2097,22 @@ Module RegionMaker
                 Case MetroServer
             End Select
 
+            ' default
+            INI.SetIni("Messaging", "OfflineMessageURL", "")
+
             If Settings.CMS = JOpensim Then
                 If INI.SetIni("UserProfiles", "ProfileServiceURL", "") Then Return True
+
                 If INI.SetIni("Groups", "Module", "GroupsModule") Then Return True
                 If INI.SetIni("Groups", "ServicesConnectorModule", """" & "XmlRpcGroupsServicesConnector" & """") Then Return True
                 If INI.SetIni("Groups", "MessagingModule", "GroupsMessagingModule") Then Return True
                 If INI.SetIni("Groups", "GroupsServerURI", "http://" & Settings.PublicIP & ":" & Settings.ApachePort & "/jOpensim/index.php?option=com_opensim&view=interface") Then Return True
+                If INI.SetIni("Groups", "XmlRpcServiceReadKey", Settings.MachineId) Then Return True
+                If INI.SetIni("Groups", "XmlRpcServiceWriteKey", Settings.MachineId) Then Return True
+
+                INI.SetIni("Messaging", "OfflineMessageURL", "${Const|jOpensimURL}/index.php?option=com_opensim&view=interface&messaging=")
+                INI.SetIni("Messaging", "MuteListURL ", "${Const|jOpensimURL}/index.php?option=com_opensim&view=interface&messaging=")
+
             End If
 
             If INI.SetIni("Const", "ApachePort", CStr(Settings.ApachePort)) Then Return True
@@ -2233,9 +2243,7 @@ Module RegionMaker
                 If INI.SetIni("Economy", "EconomyModule", "Gloebit") Then Return True
                 If INI.SetIni("Economy", "CurrencyURL", "") Then Return True
             ElseIf Settings.JopensimMoney Then
-                ' TODO !!!  Jopensim money
-                If INI.SetIni("Economy", "EconomyModule", "") Then Return True
-                If INI.SetIni("Economy", "EconomyModule", "") Then Return True
+                If INI.SetIni("Economy", "EconomyModule", "jOpenSimMoneyModule") Then Return True
                 If INI.SetIni("Economy", "CurrencyURL", "{$Const|BaseURL}:${Const|ApachePort}/jOpensim/index.php?option=com_opensim&view=interface") Then Return True
             ElseIf Settings.DTLEnable Then
                 If INI.SetIni("Economy", "EconomyModule", "DTLNSLMoneyModule") Then Return True
@@ -2702,10 +2710,11 @@ Module RegionMaker
 
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "OpenSimSearch.Modules.dll"))
+
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
-            CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.bak"))
-            DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimProfile.Modules.dll"))
+
+
         End If
 
     End Sub
