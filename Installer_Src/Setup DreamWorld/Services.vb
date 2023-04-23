@@ -112,7 +112,7 @@ Module Services
             Try
                 p.Start()
                 Dim response = p.StandardOutput.ReadToEnd() & p.StandardError.ReadToEnd()
-                Debug.Print(response)
+                'Debug.Print(response)
                 If response.Contains("does not exist") Then
                     Return False
                 End If
