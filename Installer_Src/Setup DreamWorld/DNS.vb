@@ -79,7 +79,9 @@ Module DNS
                 Logger("DNS", url, "Outworldz")
             Catch ex As Exception
                 ErrorLog("Warn: Cannot register this DNS Name " & ex.Message)
-                Continue For
+                If Not Debugger.IsAttached Then
+                    Continue For
+                End If
             End Try
 
             If Checkname = "UPDATE" Then
