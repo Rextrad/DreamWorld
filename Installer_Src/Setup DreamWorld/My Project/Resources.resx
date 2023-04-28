@@ -4783,4 +4783,10 @@
   <data name="_0" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Auto Backup IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
 </root>

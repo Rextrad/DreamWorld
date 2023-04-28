@@ -39,9 +39,36 @@
             FnameTextBox.Text = My.Resources.Not_Found
             LastNameTextBox.Text = My.Resources.Not_Found
         End If
+
+        Dim arrList = New ArrayList(Settings.IARsToSkipBackup.Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries))
+        If arrList.Contains(FnameTextBox.Text & " " & LastNameTextBox.Text) Then
+            CheckBox1.Checked = True
+        End If
+
         HelpOnce("Users")
 
         initted = True
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+
+        If Not initted Then Return
+        Dim arrList = New ArrayList(Settings.IARsToSkipBackup.Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries))
+
+        If CheckBox1.Checked Then
+            If Not arrList.Contains(FnameTextBox.Text & " " & LastNameTextBox.Text) Then
+                arrList.Add(FnameTextBox.Text & " " & LastNameTextBox.Text)
+            End If
+        Else
+            If arrList.Contains(FnameTextBox.Text & " " & LastNameTextBox.Text) Then
+                arrList.Remove(FnameTextBox.Text & " " & LastNameTextBox.Text)
+            End If
+        End If
+
+        Dim a = arrList.ToArray
+        Settings.IARsToSkipBackup = Join(a, ",")
+        Settings.SaveSettings()
 
     End Sub
 

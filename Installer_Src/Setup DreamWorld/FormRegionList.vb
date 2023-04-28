@@ -1132,6 +1132,9 @@ Public Class FormRegionlist
             UserView.Columns.Add(My.Resources.Title_word, colsize.ColumnWidth("Title" & ctr & "_" & CStr(ViewType.Users), 90), HorizontalAlignment.Left)
             UserView.Columns(ctr).Name = "User" & ctr & "_" & CStr(ViewType.Users)
             ctr += 1
+            UserView.Columns.Add(My.Resources.BackupIAR, colsize.ColumnWidth("IAR" & ctr & "_" & CStr(ViewType.Users), 120), HorizontalAlignment.Left)
+            UserView.Columns(ctr).Name = "IAR" & ctr & "_" & CStr(ViewType.Users)
+            ctr += 1
             UserView.Columns.Add(My.Resources.Items_word, colsize.ColumnWidth("Items" & ctr & "_" & CStr(ViewType.Users), 90), HorizontalAlignment.Left)
             UserView.Columns(ctr).Name = "User" & ctr & "_" & CStr(ViewType.Users)
             ctr += 1
@@ -1346,7 +1349,7 @@ Public Class FormRegionlist
         Try
             For Each item In User
                 Dim Username = item.SubItems(0).Text.Trim
-                Dim UUID = item.SubItems(7).Text.Trim
+                Dim UUID = item.SubItems(8).Text.Trim
                 If Username.Length > 0 Then
 
                     Dim UserData As New FormEditUser
@@ -1772,6 +1775,8 @@ Public Class FormRegionlist
         UserView.CheckBoxes = True
         Dim Index = 0
 
+        Dim arrList = New ArrayList(Settings.IARsToSkipBackup.Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries))
+
         Try
 
             ' Create items and sub items for each item.
@@ -1816,6 +1821,15 @@ Public Class FormRegionlist
 
                     item1.SubItems.Add(O.Email)
                     item1.SubItems.Add(O.Title)
+
+                    Dim IARValue As String
+                    If arrList.Contains(O.Firstname & " " & O.LastName) Then
+                        IARValue = "Backup"
+                    Else
+                        IARValue = "Skip"
+
+                    End If
+                    item1.SubItems.Add(IARValue)
                     item1.SubItems.Add(InventoryCount.ToString("00000", Globalization.CultureInfo.CurrentCulture))
                     item1.SubItems.Add(O.Userlevel)
                     item1.SubItems.Add(O.Datestring)

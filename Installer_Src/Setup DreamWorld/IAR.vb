@@ -160,7 +160,7 @@ Module IAR
                     Dim RegionUUID = FindRegionByName(Settings.WelcomeRegion)
 
                     Dim Result = New WaitForFile(RegionUUID, "Saved archive", "Save IAR")
-                    ConsoleCommand(RegionUUID, "save iar " & opt & Name & " " & """" & itemName & """" & " " & """" & ToBackup & """")
+                    ConsoleCommand(RegionUUID, $"save iar {opt} --home {Settings.DnsName}  {Name} ""{itemName}"" ""{ToBackup}""")
                     Result.Scan()
 
                     TextPrint(My.Resources.Saving_word & " " & Newpath & "\" & BackupName & ", Region " & Region_Name(RegionUUID))
@@ -265,10 +265,18 @@ Module IAR
         Dim ToBackup As String
         Dim UserList = GetAvatarList()
 
+        Dim arrList = New ArrayList(Settings.IARsToSkipBackup.Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries))
+
         Dim RegionUUID = FindRegionByName(RegionName)
         If Not IsBooted(RegionUUID) Then Return
         For Each k As String In UserList
             If BackupAbort Then Return
+
+            If Not arrList.Contains(k) Then
+                RunningBackupName.TryAdd($"{My.Resources.Backup_IAR} {k} {My.Resources.Skipped}", "")
+                Continue For
+            End If
+
             RunningBackupName.TryAdd($"{My.Resources.Backup_IAR} {k} {My.Resources.Starting_word}", "")
 
             Dim newname = k.Replace(" ", "_")
@@ -282,7 +290,7 @@ Module IAR
             End If
 
             ToBackup = IO.Path.Combine(f & "/IAR", BackupName)
-            RPC_Region_Command(RegionUUID, $"save iar {opt} {k} / ""{ToBackup}""")
+            RPC_Region_Command(RegionUUID, $"save iar {opt} --home {Settings.DnsName} {k} / ""{ToBackup}""")
             WaitforComplete(RegionUUID, ToBackup)
             RunningBackupName.TryAdd($"{My.Resources.Backup_IAR} {k} {My.Resources.Ok}", "")
 

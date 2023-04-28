@@ -2183,15 +2183,6 @@ Public Class FormSetup
 
 #Region "Clicks"
 
-    Public Sub StartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem1.Click
-
-        SetLoading(True)
-        DoMysql()
-        StartMySQL()
-        SetLoading(False)
-
-    End Sub
-
     Private Shared Sub RunCheck(type As String)
         Using p = New Process()
             Dim pi = New ProcessStartInfo With {
@@ -3293,6 +3284,15 @@ Public Class FormSetup
         DoApache()
         Settings.SaveSettings()
         StartApache()
+
+    End Sub
+
+    Private Sub StartToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem1.Click
+
+        SetLoading(True)
+        DoMysql()
+        StartMySQL()
+        SetLoading(False)
 
     End Sub
 
