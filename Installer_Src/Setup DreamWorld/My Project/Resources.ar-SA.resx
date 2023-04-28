@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>تم تمكين Gloebit في جميع المناطق.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>النسخ الاحتياطي التلقائي IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>تخطي</value>
+  </data>
 </root>

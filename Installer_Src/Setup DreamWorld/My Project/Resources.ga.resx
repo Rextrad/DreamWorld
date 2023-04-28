@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Tá Gloebit cumasaithe ag gach réigiún.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Cúltaca Uathoibríoch IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Scipeáladh</value>
+  </data>
 </root>

@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Všechny oblasti mají Gloebit povolen.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>IAR automatického zálohování</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Přeskočený</value>
+  </data>
 </root>

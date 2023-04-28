@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Öll svæði hafa Gloebit virkt.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Sjálfvirk öryggisafrit IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Sleppt</value>
+  </data>
 </root>
