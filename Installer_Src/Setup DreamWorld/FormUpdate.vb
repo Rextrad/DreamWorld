@@ -83,7 +83,10 @@ Public Class FormUpdate
                 End If
 
             ElseIf BetaVersion = MyVersion Then
-                InstallButton.Text = $"Reinstall {MyVersion}"
+                InstallButton.Text = $"Repair {MyVersion}"
+
+            ElseIf ReleasedVersion < MyVersion Then
+                InstallButton.Text = $"Downgrade to {BetaVersion}"
 
             End If
 
