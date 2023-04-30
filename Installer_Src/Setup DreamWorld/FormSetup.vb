@@ -1849,9 +1849,7 @@ Public Class FormSetup
                         AvatarCount(RegionUUID) += 1
                     Catch
                     End Try
-
                 End If
-
             Next
 
             ' remove anyone who has left for good
