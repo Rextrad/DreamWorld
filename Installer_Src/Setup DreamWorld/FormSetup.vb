@@ -1832,7 +1832,6 @@ Public Class FormSetup
                     'SetTos2Zero(AgentObject.AvatarUUID) ' for debug
                     Dim UUID = System.Guid.NewGuid.ToString
                     If Not IsTOSAccepted(AgentObject, UUID) And Settings.TOSEnabled Then
-                        Dim UUID = System.Guid.NewGuid.ToString
                         Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}/TOS/uid/{UUID}"
                         RPC_admin_dialog(AgentObject.AvatarUUID, $"{My.Resources.AgreeTOS}{vbCrLf}{URL}")
                     End If
