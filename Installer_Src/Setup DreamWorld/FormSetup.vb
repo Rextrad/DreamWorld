@@ -560,8 +560,6 @@ Public Class FormSetup
 
         TextPrint(My.Resources.Setup_Network)
 
-        SetServerType()
-
         If SetIniData() Then
             If Not RunningInServiceMode() Then
                 MsgBox("Failed to setup INI files", MsgBoxStyle.Critical Or MsgBoxStyle.MsgBoxSetForeground, My.Resources.Error_word)
@@ -600,6 +598,7 @@ Public Class FormSetup
 
         GetServiceList()
         IPPublic()
+        SetServerType()
 
         If Not Settings.DnsTestPassed Then
             MsgBox("Unable to Connect to Dyn DNS.", vbCritical)
@@ -1815,9 +1814,6 @@ Public Class FormSetup
                 If Not CurrentLocation.ContainsKey(AvatarKey) Then
                     TextPrint($"{Avatar} {My.Resources.Arriving_word} {RegionName}")
 
-                    Dim UUID = System.Guid.NewGuid.ToString
-
-                    Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}?TOS=1&uid={UUID}"
                     Dim Fname As String = ""
                     Dim Lname As String = ""
                     Dim pattern As New Regex("^(.*?) (.*?)$")
@@ -1833,12 +1829,13 @@ Public Class FormSetup
                     AddorUpdateVisitor(Avatar, RegionName)
                     PropUpdateView = True
 
+                    'SetTos2Zero(AgentObject.AvatarUUID) ' for debug
+                    Dim UUID = System.Guid.NewGuid.ToString
                     If Not IsTOSAccepted(AgentObject, UUID) And Settings.TOSEnabled Then
-                        SetTos2Zero(AgentObject.AvatarUUID)
+                        Dim UUID = System.Guid.NewGuid.ToString
+                        Dim URL = $"http://{Settings.PublicIP}:{Settings.DiagnosticPort}/TOS/uid/{UUID}"
                         RPC_admin_dialog(AgentObject.AvatarUUID, $"{My.Resources.AgreeTOS}{vbCrLf}{URL}")
-
                     End If
-
                 End If
 
                 If Not CurrentLocation.Item(AvatarKey) = RegionName Then
@@ -2076,7 +2073,6 @@ Public Class FormSetup
             TimerisBusy += 1
 
             CheckPost()                 ' see if anything arrived in the web server
-
             CheckForBootedRegions()     ' task to scan for anything that just came on line
             ProcessQuit()               ' check if any processes exited
             PrintBackups()              ' print if backups are running
@@ -2113,7 +2109,6 @@ Public Class FormSetup
                 MakeMaps()              ' Make all the large maps
                 ScanOpenSimWorld(True) ' force an update at startup.
                 Bench.Print("60 second worker")
-
             End If
 
             If SecondsTicker Mod 60 = 0 AndAlso SecondsTicker > 0 Then
