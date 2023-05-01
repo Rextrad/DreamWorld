@@ -678,11 +678,6 @@ Public Module MysqlInterface
         If Agent Is Nothing Then Return False
         If Not Settings.TOSEnabled Then Return True
 
-        If Not InAuth(Agent.AvatarUUID) Then
-            Add2Tos(Agent, token)
-            Return False
-        End If
-
         Using NewSQLConn As New MySqlConnection(Settings.RobustMysqlConnection)
             Try
                 NewSQLConn.Open()
@@ -700,6 +695,13 @@ Public Module MysqlInterface
                 BreakPoint.Dump(ex)
             End Try
         End Using
+
+        If Not InAuth(Agent.AvatarUUID) Then
+            Add2Tos(Agent, token)
+            Return False
+        Else
+            UpdateTos(Agent, token)
+        End If
 
         Return False
 
@@ -750,6 +752,25 @@ Public Module MysqlInterface
                 BreakPoint.Dump(ex)
             End Try
         End Using
+    End Sub
+
+    Public Sub UpdateTos(Agent As AvatarObject, token As String)
+
+        Using NewSQLConn As New MySqlConnection(Settings.RobustMysqlConnection)
+
+            Dim stm = "update tosauth set token = @TOKEN where avataruuid = @AVI;"
+            Using cmd As New MySqlCommand(stm, NewSQLConn)
+                Try
+                    NewSQLConn.Open()
+                    cmd.Parameters.AddWithValue("@TOKEN", token)
+                    cmd.Parameters.AddWithValue("@AVI", Agent.AvatarUUID)
+                    cmd.ExecuteScalar()
+                Catch ex As Exception
+                    BreakPoint.Dump(ex)
+                End Try
+            End Using
+        End Using
+
     End Sub
 
     ''' <summary>

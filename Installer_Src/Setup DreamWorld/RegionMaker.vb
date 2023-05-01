@@ -1753,7 +1753,7 @@ Module RegionMaker
 
             If HttpUtility.ParseQueryString(myUri.Query).Get("Alt") IsNot Nothing Then
                 Return SmartStartParse(myUri)
-            ElseIf HttpUtility.ParseQueryString(myUri.Query).Get("agree") IsNot Nothing Then
+            ElseIf post.Contains("/TOS/uid/") Then
                 Return TOS(post)
             ElseIf post.ToLower.Contains("set_partner") Then
                 Return SetPartner(post)
@@ -1857,15 +1857,19 @@ Module RegionMaker
         '"action-accept=Accept&uid=acb8fd92-c725-423f-b750-5fd971d73182&sid=40c5b80a-5377-4b97-820c-a0952782a701"
 
         Dim sid As Guid
+        Dim webpage = ""
 
         Try
-            Dim webpage = ""
-            Dim pattern = New Regex("uid=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})")
-            Dim match As Match = pattern.Match(post)
-            If match.Success Then
 
-                Dim include = TosInclude(match.Groups(1).Value)
+            ' detect and print a response to an ACCEPT
+            Dim pattern2 = New Regex("sid=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})")
+            Dim match2 As Match = pattern2.Match(post)
 
+            If match2.Success Then
+                sid = Guid.Parse(match2.Groups(1).Value)
+
+                Agree2Tos(sid)  ' detect and print a response to an ACCEPT
+                Dim include = $"Welcome to {Settings.SimName}! You can close this window."
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
                 Dim streamReader As System.IO.FileStream = Nothing
                 Try
@@ -1888,17 +1892,19 @@ Module RegionMaker
                 webpage += "</head>"
                 Return webpage
             End If
+        Catch ex As Exception
+            BreakPoint.Dump(ex)
+            Return "<html><head></head><body>Error</html>"
+        End Try
 
-            ' detect and print a response to an ACCEPT
-            Dim pattern2 = New Regex("sid=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})")
-            Dim match2 As Match = pattern2.Match(post)
-            If match2.Success Then
-                sid = Guid.Parse(match2.Groups(1).Value)
-            End If
+        Try
 
-            If match2.Success Then
-                Agree2Tos(sid)  ' detect and print a response to an ACCEPT
-                Dim include = $"Welcome to {Settings.SimName}! You can close this window."
+            Dim pattern = New Regex("uid/([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})")
+            Dim match As Match = pattern.Match(post)
+            If match.Success Then
+
+                Dim include = TosInclude(match.Groups(1).Value)
+
                 Dim Header = IO.Path.Combine(Settings.CurrentDirectory, "termsofservice.html")
                 Dim streamReader As System.IO.FileStream = Nothing
                 Try
@@ -1927,6 +1933,7 @@ Module RegionMaker
             BreakPoint.Dump(ex)
             Return "<html><head></head><body>Error</html>"
         End Try
+        Return "<html><head></head><body>Error</html>"
 
     End Function
 
@@ -1942,7 +1949,7 @@ Module RegionMaker
                 'now loop through each line
                 While S.Peek <> -1
                     Dim data = S.ReadLine
-                    data = data.Replace("[GRIDNAME]", Settings.SimName)
+                    data = data.Replace("<!-- #get var=GridName -->", Settings.SimName)
                     include += data
                 End While
                 streamRead = Nothing
@@ -2713,7 +2720,6 @@ Module RegionMaker
 
             CopyFileFast(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"), IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.bak"))
             DeleteFile(IO.Path.Combine(Settings.OpensimBinPath, "jOpensimSearch.Modules.dll"))
-
 
         End If
 
