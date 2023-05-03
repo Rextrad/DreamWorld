@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Eskualde guztiek dute Gloebit gaituta.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Segurtasun automatikoaren kopiaren IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Salto egin dugu</value>
+  </data>
 </root>

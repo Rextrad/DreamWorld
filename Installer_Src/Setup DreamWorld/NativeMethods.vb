@@ -45,15 +45,11 @@ Friend Module NativeMethods
 
     Public Sub SetWindowOnTop(ByVal lhWnd As Int32)
 
-        On Error GoTo SetWindowOnTop_Err
-
-        SetWindowPos(lhWnd, HWND_TOP, 0, 0, 0, 0, NOMOVE Or NOSIZE)
-
-SetWindowOnTop_Exit:
-        Exit Sub
-
-SetWindowOnTop_Err:
-        Resume SetWindowOnTop_Exit
+        Try
+            SetWindowPos(lhWnd, HWND_TOP, 0, 0, 0, 0, NOMOVE Or NOSIZE)
+        Catch
+            Return
+        End Try
 
     End Sub
 

@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Alla regioner har Gloebit aktiverat.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Automatisk säkerhetskopiering IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Överhoppade</value>
+  </data>
 </root>

@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Gloebit on käytössä kaikilla alueilla.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Automaattinen varmuuskopiointi IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Ohitetaan</value>
+  </data>
 </root>

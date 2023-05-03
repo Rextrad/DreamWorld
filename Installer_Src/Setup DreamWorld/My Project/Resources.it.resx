@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Tutte le regioni hanno Gloebit abilitato.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Backup automatico IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Saltato</value>
+  </data>
 </root>

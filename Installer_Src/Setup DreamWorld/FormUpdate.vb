@@ -74,7 +74,6 @@ Public Class FormUpdate
                 textbox = $"Update notifications are off. The system will let you know when a new update is available.{vbCrLf}{vbCrLf}"
             End If
 
-            InstallButton.Enabled = False
             ' Check if update is > Current version
             If ReleasedVersion > MyVersion Or BetaVersion > MyVersion Then
                 If CStr(BetaVersion).Length >= 4 Then
@@ -82,10 +81,13 @@ Public Class FormUpdate
                 Else
                     InstallButton.Text = $"Install Release {BetaVersion}"
                 End If
-                InstallButton.Enabled = True
+
             ElseIf BetaVersion = MyVersion Then
-                InstallButton.Text = $"Reinstall {MyVersion}"
-                InstallButton.Enabled = True
+                InstallButton.Text = $"Repair {MyVersion}"
+
+            ElseIf ReleasedVersion < MyVersion Then
+                InstallButton.Text = $"Downgrade to {BetaVersion}"
+
             End If
 
             RichTextBox3.Text = textbox & Revisions

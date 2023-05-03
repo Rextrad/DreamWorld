@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Όλες οι περιοχές έχουν ενεργοποιημένο το Gloebit.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Αυτόματη δημιουργία αντιγράφων ασφαλείας IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Παραλείπεται</value>
+  </data>
 </root>

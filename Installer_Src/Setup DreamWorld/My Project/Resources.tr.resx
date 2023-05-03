@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Tüm bölgelerde Gloebit etkindir.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Otomatik Yedekleme IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Atlanır</value>
+  </data>
 </root>

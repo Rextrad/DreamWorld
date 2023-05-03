@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>所有區域都啟用了 Gloebit。</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>自動備份 IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>跳</value>
+  </data>
 </root>

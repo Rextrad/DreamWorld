@@ -1268,6 +1268,15 @@ Public Class MySettings
         End Set
     End Property
 
+    Public Property IARsToSkipBackup As String
+        Get
+            Return GetMySetting("IARsToSkipBackup", "")
+        End Get
+        Set
+            SetMySetting("IARsToSkipBackup", Value)
+        End Set
+    End Property
+
     ''' <summary>
     ''' Http Port for the grid in robust default = 8002
     ''' </summary>

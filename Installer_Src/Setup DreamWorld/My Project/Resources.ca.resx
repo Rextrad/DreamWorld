@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Totes les regions tenen Gloebit habilitat.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>IAR de còpia de seguretat automàtica</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Saltar</value>
+  </data>
 </root>

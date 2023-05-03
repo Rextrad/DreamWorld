@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>همه مناطق Gloebit را فعال کرده اند.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>پشتیبان گیری خودکار IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>نادیده گرفته</value>
+  </data>
 </root>

@@ -124,7 +124,7 @@ Module DNS
 
     Public Function SetPublicIP() As Boolean
 
-        TextPrint(My.Resources.Public_IP_Setup_Word)
+        'TextPrint(My.Resources.Public_IP_Setup_Word)
 
         If PropMyUPnpMap Is Nothing Then Return False
 

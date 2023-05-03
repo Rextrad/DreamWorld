@@ -10,7 +10,10 @@ Module GridNames
     Public Sub SetServerType()
 
         If Settings.ServerType = RobustServerName Then
-            Settings.ExternalHostName = Settings.DnsName
+            Settings.ExternalHostName = Settings.WANIP
+            If Settings.DnsName.Length = 0 Then
+                Settings.ExternalHostName = Settings.LANIP
+            End If
             TextPrint("--> " & My.Resources.Server_Type_is & " Robust")
         ElseIf Settings.ServerType = OsgridServer Then
             Settings.DnsName = "hg.osgrid.org"

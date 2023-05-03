@@ -4197,4 +4197,10 @@
   <data name="AllGloebitOn" xml:space="preserve">
     <value>Tất cả các khu vực đã bật Gloebit.</value>
   </data>
+  <data name="BackupIAR" xml:space="preserve">
+    <value>Tự động sao lưu IAR</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Bỏ</value>
+  </data>
 </root>
