@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Παραλείπεται</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Η ενημέρωση δεν είναι διαθέσιμη</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Κυκλοφόρησε έκδοση</value>
+  </data>
 </root>

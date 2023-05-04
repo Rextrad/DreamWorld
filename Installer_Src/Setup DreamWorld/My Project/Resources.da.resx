@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Springes</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Opdatering er ikke tilgængelig</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Udgivet version</value>
+  </data>
 </root>

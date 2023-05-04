@@ -1,11 +1,11 @@
 REVISIONS FOR DREAMGRID
 
 V5.392
-Use up to 4 DNS servers
-no need to refresh view if just checkboxing
-JOpensim Gropups and Messaging for 0.9.2 added
+Use up to 4 DNS servers.
+No need to refresh view if just checkboxing.
+JOpensim Gropups and Messaging for 0.9.2 added.
 DNS speedup: Compare IP before re-registering.
-
+File Menu links for copy payh, command prompt, explorer, check for update, Support Group (Mewe).
 
 V5.391
 Old bug in Apache did not change of port from 80.

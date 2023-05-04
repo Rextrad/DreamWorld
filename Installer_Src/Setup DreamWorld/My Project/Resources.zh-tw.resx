@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>跳</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>更新不可用</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>發佈版本</value>
+  </data>
 </root>

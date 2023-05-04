@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Ohitetaan</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Päivitys ei ole saatavilla</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Julkaistu versio</value>
+  </data>
 </root>

@@ -13,22 +13,22 @@ Module Updater
 
     ''' <summary>Checks the Outworldz Web site to see if a new version exist,.</summary>
     Public Sub CheckForUpdates()
-
-        If RunningInServiceMode() Then Return
-
+        TextPrint(My.Resources.Checking_for_Updates_word)
         Dim ReleasedVersion As Double
         Dim MyVersion As Double
         Try
             MyVersion = Convert.ToDouble(PropMyVersion, EnglishCulture.InvariantCulture)
+            TextPrint($"{My.Resources.Version_word} {CStr(MyVersion)}")
         Catch
         End Try
 
         Using client As New Net.WebClient ' download client for web pages
-            TextPrint(My.Resources.Checking_for_Updates_word)
+
             Try
                 Dim rev As String = client.DownloadString(PropHttpsDomain & "/Outworldz_Installer/UpdateGrid.plx" & GetPostData())
                 rev = Stripqq(rev)
                 ReleasedVersion = Convert.ToDouble(rev, EnglishCulture.InvariantCulture)
+                TextPrint($"{My.Resources.ReleasedVersion} {CStr(ReleasedVersion)}")
             Catch ex As Exception
                 ErrorLog(My.Resources.Wrong & " " & ex.Message)
                 Return
@@ -42,11 +42,13 @@ Module Updater
             ' check if less than the last skipped update
             ' could be the same or later version already
             If ReleasedVersion <= Settings.SkipUpdateCheck Then
+                TextPrint(My.Resources.Update_is_Not_available)
                 Return
             End If
 
             ' Check if update is <= Current version, if so skip
             If ReleasedVersion <= MyVersion Then
+                TextPrint(My.Resources.Update_is_Not_available)
                 Return
             End If
         Catch ex As Exception

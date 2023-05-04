@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>تخطي</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>التحديث غير متوفر</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>نسخة تم إصدارها</value>
+  </data>
 </root>

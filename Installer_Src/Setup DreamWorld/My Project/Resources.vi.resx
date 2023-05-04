@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Bỏ</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Cập nhật không có sẵn</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Phiên bản đã phát hành</value>
+  </data>
 </root>

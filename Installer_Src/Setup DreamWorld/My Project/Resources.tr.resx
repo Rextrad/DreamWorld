@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Atlanır</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Güncelleme mevcut değil</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Yayınlanan Sürüm</value>
+  </data>
 </root>

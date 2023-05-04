@@ -1670,6 +1670,7 @@
     <None Include="Resources\Outworldz ad by Marianna Monentes.png" />
     <Content Include="Resources\registry.ico" />
     <Content Include="Resources\spy.ico" />
+    <None Include="Resources\Terminal.png" />
     <Content Include="Resources\view.ico" />
     <Content Include="Resources\warning.ico" />
   </ItemGroup>

@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -10073,6 +10073,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Released Version.
+        '''</summary>
+        Friend ReadOnly Property ReleasedVersion() As String
+            Get
+                Return ResourceManager.GetString("ReleasedVersion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Reload the grid.
         '''</summary>
         Friend ReadOnly Property Reload() As String
@@ -12502,6 +12511,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Terminal() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Terminal", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Do you agree to these terms?.
         '''</summary>
         Friend ReadOnly Property Terms() As String
@@ -13330,6 +13349,15 @@ Namespace My.Resources
         Friend ReadOnly Property Update_is_available() As String
             Get
                 Return ResourceManager.GetString("Update_is_available", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Update is not available.
+        '''</summary>
+        Friend ReadOnly Property Update_is_Not_available() As String
+            Get
+                Return ResourceManager.GetString("Update_is_Not_available", resourceCulture)
             End Get
         End Property
         

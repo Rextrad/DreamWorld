@@ -4203,4 +4203,10 @@
   <data name="Skipped" xml:space="preserve">
     <value>Gehüpft</value>
   </data>
+  <data name="Update_is_Not_available" xml:space="preserve">
+    <value>Update ist nicht verfügbar</value>
+  </data>
+  <data name="ReleasedVersion" xml:space="preserve">
+    <value>Veröffentlichte Version</value>
+  </data>
 </root>

@@ -12,6 +12,7 @@ Imports System.Threading
 Imports System.Threading.Tasks
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
 Imports IWshRuntimeLibrary
+Imports Org.BouncyCastle.Math
 
 Public Class FormSetup
 
@@ -2358,6 +2359,12 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub CheckForUpdatesNowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdatesNowToolStripMenuItem.Click
+
+        CheckForUpdates()
+
+    End Sub
+
     Private Sub CHeckForUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CHeckForUpdatesToolStripMenuItem.Click
 
         ShowUpdateForm()
@@ -2438,6 +2445,25 @@ Public Class FormSetup
         Catch ex As Exception
             BreakPoint.Dump(ex)
         End Try
+    End Sub
+
+    Private Sub CoomandPromptHereToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CoomandPromptHereToolStripMenuItem.Click
+
+        Try
+            Dim startInfo = New ProcessStartInfo With {
+                .Arguments = Settings.CurrentDirectory,
+                .FileName = "cmd.exe"
+            }
+            Process.Start(startInfo)
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
+    Private Sub CopyPathToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyPathToolStripMenuItem.Click
+
+        Clipboard.SetText(Settings.CurrentDirectory)
+
     End Sub
 
     Private Sub Debug_Click(sender As Object, e As EventArgs) Handles Debug.Click
@@ -2550,12 +2576,34 @@ Public Class FormSetup
 
     End Sub
 
+    Private Sub ExploreHereToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExploreHereToolStripMenuItem.Click
+
+        Try
+            Dim startInfo = New ProcessStartInfo With {
+                .Arguments = Settings.CurrentDirectory,
+                .FileName = "explorer.exe"
+            }
+            Process.Start(startInfo)
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
     Private Sub Fatal1_Click(sender As Object, e As EventArgs) Handles Fatal1.Click
 
         SetLoading(True)
         Settings.LogLevel = "FATAL"
         SendLogLevel(Settings.LogLevel)
         SetLoading(False)
+
+    End Sub
+
+    Private Sub FileABugReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileABugReportToolStripMenuItem.Click
+
+        Try
+            Process.Start("http://mantis.outworldz.com")
+        Catch
+        End Try
 
     End Sub
 
@@ -3373,6 +3421,15 @@ Public Class FormSetup
         StopIcecast()
         PropAborting = False
         SetLoading(False)
+
+    End Sub
+
+    Private Sub SupportForumToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupportForumToolStripMenuItem.Click
+
+        Try
+            Process.Start("https://mewe.com/join/opensimulator_dreamworld_and_dreamgrid")
+        Catch ex As Exception
+        End Try
 
     End Sub
 
