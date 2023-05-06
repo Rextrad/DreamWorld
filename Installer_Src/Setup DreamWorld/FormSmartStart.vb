@@ -772,7 +772,7 @@ Public Class FormSmartStart
         Try
             Dim Terrainfolder = IO.Path.Combine(Settings.OpensimBinPath, "Terrains")
             Dim directory As New System.IO.DirectoryInfo(Terrainfolder)
-            Dim File As System.IO.FileInfo() = directory.GetFiles()
+            Dim File As System.IO.FileInfo() = directory.GetFiles("*.jpg")
             Dim File1 As System.IO.FileInfo
 
             For Each File1 In File
@@ -964,9 +964,12 @@ Public Class FormSmartStart
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles NextButton.Click
 
         _Index += 1
-        If _Index >= _TerrainList.Count Then _Index = 0
-        PictureBox3.Image = _TerrainList.Item(_Index)
-        LabelName.Text = IO.Path.GetFileNameWithoutExtension(_TerrainName.Item(_Index))
+        If _Index >= _TerrainList.Count Then _Index = 1
+        Try
+            PictureBox3.Image = _TerrainList.Item(_Index)
+            LabelName.Text = IO.Path.GetFileNameWithoutExtension(_TerrainName.Item(_Index))
+        Catch
+        End Try
 
     End Sub
 
@@ -974,6 +977,8 @@ Public Class FormSmartStart
 
         _Index -= 1
         If _Index < 0 Then _Index = _TerrainList.Count - 1
+
+        If _Index < 1 Then Return
         PictureBox3.Image = _TerrainList.Item(_Index)
         LabelName.Text = IO.Path.GetFileNameWithoutExtension(_TerrainName.Item(_Index))
 

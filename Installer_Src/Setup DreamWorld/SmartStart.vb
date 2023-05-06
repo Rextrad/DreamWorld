@@ -1148,6 +1148,7 @@ Module SmartStart
                 Maketypes(extension, File, RegionUUId)
             Next
         Next
+        TextPrint(My.Resources.Finished_word)
 
     End Sub
 
@@ -1186,6 +1187,8 @@ Module SmartStart
         Dim Terrainfolder = IO.Path.Combine(Settings.OpensimBinPath, "Terrains")
         Dim extension = IO.Path.GetExtension(Filename)
 
+        'If Not Filename.Contains("default") Then Return
+
         RPC_Region_Command(RegionUUID, $"change region ""{Region_Name(RegionUUID)}""")
 
         Dim RegionName = Filename
@@ -1194,12 +1197,27 @@ Module SmartStart
         RPC_Region_Command(RegionUUID, $"terrain load ""{Filename}""")
 
         RegionName = RegionName.Replace($"{extension}", "")
-
-        Save(RegionUUID, $"terrain save ""{RegionName}.r32""")
-        Save(RegionUUID, $"terrain save ""{RegionName}.raw""")
-        Save(RegionUUID, $"terrain save ""{RegionName}.jpg""")
-        Save(RegionUUID, $"terrain save ""{RegionName}.png""")
-        Save(RegionUUID, $"terrain save ""{RegionName}.ter""")
+        TextPrint($"Processing {RegionName} texture")
+        If Not File.Exists($"{RegionName}.r32") Then
+            TextPrint("->Save .r32")
+            Save(RegionUUID, $"terrain save ""{RegionName}.r32""")
+        End If
+        If Not File.Exists($"{RegionName}.raw") Then
+            TextPrint("->Save .raw")
+            Save(RegionUUID, $"terrain save ""{RegionName}.raw""")
+        End If
+        If Not File.Exists($"{RegionName}.jpg") Then
+            TextPrint("->Save .jpg")
+            Save(RegionUUID, $"terrain save ""{RegionName}.jpg""")
+        End If
+        If Not File.Exists($"{RegionName}.png") Then
+            TextPrint("->Save .png")
+            Save(RegionUUID, $"terrain save ""{RegionName}.png""")
+        End If
+        If Not File.Exists($"{RegionName}.ter") Then
+            TextPrint("->Save .ter")
+            Save(RegionUUID, $"terrain save ""{RegionName}.ter""")
+        End If
 
     End Sub
 
