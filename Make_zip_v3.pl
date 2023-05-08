@@ -3,8 +3,6 @@
 # build Zipfile
 # AGPL licensed, see AGPL 3.0 at https://www.gnu.org/licenses/agpl-3.0.en.html
 
-
-
 use strict;
 use warnings;
 use IO::All -utf8; 
@@ -38,7 +36,6 @@ CheckDistro();
 
 my $thumbprint = '9FC0371A50087DD2A0FD134131B0DC4A98104832'; #2022
 
-
 my $signfiles = 1;    # 0 to not authenticode sign
 
 my $Version = `git rev-parse --short HEAD `;
@@ -51,7 +48,6 @@ PrintDate("Building DreamGrid.zip");
 PrintDate('Server Publish ? <p = publish, c = clean, enter = make the zip only>');
 my $publish = <stdin>;
 chomp $publish;
-
 
 PrintDate("Delete Destination Zip");
 JustDelete($zip);
@@ -69,70 +65,9 @@ foreach my $lang (@languages) {
     JustDelete($lang);
 }
 
-#drop all debug code
-PrintDate("Delete pdb");
-my @a = io->dir('.')->all(0);
-
-foreach my $f (@a) {
-    if ( $f->name =~ /tmp.*\.html$|\.pdb$/ ) {        
-        $f->unlink;
-    }
-}
-
 DelZips();
 
 PrintDate("Clean up opensim");
-
-
-my @deletions = (
-    "$dir/Licenses_to_Content",             
-    "$dir/OutworldzFiles/AutoBackup",
-    "$dir/OutworldzFiles/Opensim/WifiPages-Custom",
-    "$dir/OutworldzFiles/Opensim/bin/WifiPages-Custom",
-    "$dir/OutworldzFiles/Opensim/WifiPages",
-    "$dir/OutworldzFiles/Opensim/bin/WifiPages",
-    "$dir/OutworldzFiles/Opensim/bin/datasnapshot",
-    "$dir/OutworldzFiles/Opensim/bin/assetcache",
-    "$dir/OutworldzFiles/Opensim/bin/j2kDecodeCache",
-    "$dir/OutworldzFiles/Opensim/bin/MeshCache",
-    "$dir/OutworldzFiles/Opensim/bin/ScriptEngines",
-    "$dir/OutworldzFiles/Opensim/bin/maptiles",
-    "$dir/OutworldzFiles/Opensim/bin/bakes",
-    "$dir/OutworldzFiles/logs/",
-    "$dir/OutworldzFiles/logs/Apache",
-    "$dir/OutworldzFiles/Apache/htdocs/Stats/Maps/",
-    "$dir/OutworldzFiles/Apache/htdocs/TTS",
-    "$dir/OutworldzFiles/Apache/htdocs/.well-known",
-);
-
-foreach my $path (@deletions) {    
-    DeleteandKeep($path);
-}
-
-DelMaps();
-
-PrintDate("Delete Misc files");
-doUnlink ("$dir/tos.html" );     # tos.proto gets copied here.
-doUnlink ("$dir/BareTail.udm" );
-doUnlink ("$dir/SET_externalIP-PrintDate.txt");
-doUnlink ("$dir/OutworldzFiles/Photo.png");
-doUnlink ("$dir/OutworldzFiles/XYSettings.ini");
-doUnlink ("$dir/OutworldzFiles/Opensim/bin/OpensimConsoleHistory.txt");
-doUnlink ("$dir/OutworldzFiles/Opensim/bin/RobustConsoleHistory.txt");
-doUnlink ("$dir/OutworldzFiles/Opensim/bin/LocalUserStatistics.db");
-doUnlink ("$dir/OutworldzFiles/BanList.txt");
-
-
-PrintDate("Delete Fsassets files");
-DeleteandKeep("$dir/OutworldzFiles/Opensim/bin/fsassets");
-
-
-#zips
-doUnlink ("../Zips/DreamGrid.zip");
-doUnlink ("../Zips/Outworldz-Update.zip");
-doUnlink ("$dir/DreamGrid.zip");
-doUnlink ("$dir/Start.exe.lastcodeanalysissucceeded");
-doUnlink ("$dir/Start.exe.CodeAnalysisLog.xml");
 
 PrintDate("DLL List Build");
 use File::Find;
@@ -147,14 +82,13 @@ find(
 print OUT "\\OutworldzFiles\\opensim\\bin\\jOpensimProfile.Modules.dll\n";
 print OUT "\\OutworldzFiles\\opensim\\bin\\jOpensimSearch.Modules.dll\n";
 print OUT "\\OutworldzFiles\\opensim\\bin\\jOpensimMoney.Modules.dll\n";
-
 close OUT;
 
-
+PrintDate("Update the Updater");
+copy("$dir/DreamGridUpdater.exe", "$dir/DreamGridUpdater.new") || die;
 
 PrintDate("Copy Release");
 my $exes = "$dir/Installer_Src/Setup DreamWorld/bin/Release/";
-
 
 use File::Copy::Recursive qw(dircopy);
 dircopy( $exes, $dir ) or die("$!\n");
@@ -172,25 +106,60 @@ foreach my $file (@files) {
     copy("$dir/$file", "$zip$file") || die;
 }
 
-PrintDate("Update the Updater");
-copy("$dir/DreamGridUpdater.exe", "$dir/DreamGridUpdater.new") || die;
-
-PrintDate("Adding folders");
-
+PrintDate("Adding folders to Zip ");
 # just dirs
 ProcessDir('MSFT_Runtimes');
 ProcessDir('Read.Me');
 ProcessDir('Licenses_to_Content');
 ProcessDir('OutworldzFiles');
 
+###############################################
+
+#drop all debug code
+PrintDate("Delete pdb");
+my @a = io->dir($zip)->all(0);
+
+foreach my $f (@a) {
+    if ( $f->name =~ /tmp.*\.html$|\.pdb$/ ) {        
+        $f->unlink;
+    }
+}
+
+my @deletions = (
+    "$zip/Licenses_to_Content",             
+    "$zip/OutworldzFiles/AutoBackup",
+    "$zip/OutworldzFiles/Opensim/WifiPages-Custom",
+    "$zip/OutworldzFiles/Opensim/bin/WifiPages-Custom",
+    "$zip/OutworldzFiles/Opensim/WifiPages",
+    "$zip/OutworldzFiles/Opensim/bin/WifiPages",
+    "$zip/OutworldzFiles/Opensim/bin/datasnapshot",
+    "$zip/OutworldzFiles/Opensim/bin/assetcache",
+    "$zip/OutworldzFiles/Opensim/bin/j2kDecodeCache",
+    "$zip/OutworldzFiles/Opensim/bin/MeshCache",
+    "$zip/OutworldzFiles/Opensim/bin/ScriptEngines",
+    "$zip/OutworldzFiles/Opensim/bin/maptiles",
+    "$zip/OutworldzFiles/Opensim/bin/bakes",
+    "$zip/OutworldzFiles/logs/",
+    "$zip/OutworldzFiles/logs/Apache",
+    "$zip/OutworldzFiles/Apache/htdocs/Stats/Maps/",
+    "$zip/OutworldzFiles/Apache/htdocs/TTS",
+    "$zip/OutworldzFiles/Apache/htdocs/.well-known",
+);
+
+foreach my $path (@deletions) {    
+    DeleteandKeep($path);
+}
+
+DelMaps();
+
 foreach my $lang (@languages) {
     ProcessDir($lang);
 }
 
-PrintDate("Drop mysql files from update");
+PrintDate("Drop Zip MySQL files from update");
 DeleteandKeep("$zip/Outworldzfiles/mysql/Data");
-PrintDate("Drop JOpensim Folder");
 
+PrintDate("Drop Zip JOpensim Folder");
 DeleteandKeep("$zip/Outworldzfiles/Apache/htdocs/jOpensim");
 DeleteandKeep("$zip/Outworldzfiles/tmp");
 
@@ -204,17 +173,36 @@ if (
     die $!;
 }
 
-PrintDate("Drop Regions and Fsasset Folders");
+
+PrintDate("Delete Zip Misc files");
+doUnlink ("$zip/tos.html" );     # tos.proto gets copied here.
+doUnlink ("$zip/BareTail.udm" );
+doUnlink ("$zip/SET_externalIP-PrintDate.txt");
+doUnlink ("$zip/OutworldzFiles/Photo.png");
+doUnlink ("$zip/OutworldzFiles/XYSettings.ini");
+doUnlink ("$zip/OutworldzFiles/Opensim/bin/OpensimConsoleHistory.txt");
+doUnlink ("$zip/OutworldzFiles/Opensim/bin/RobustConsoleHistory.txt");
+doUnlink ("$zip/OutworldzFiles/Opensim/bin/LocalUserStatistics.db");
+doUnlink ("$zip/OutworldzFiles/BanList.txt");
+
+PrintDate("Delete Zip Fsassets files");
+DeleteandKeep("$zip/OutworldzFiles/Opensim/bin/fsassets");
+
+doUnlink ("$zip/DreamGrid.zip");
+doUnlink ("$zip/Start.exe.lastcodeanalysissucceeded");
+doUnlink ("$zip/Start.exe.CodeAnalysisLog.xml");
+
+PrintDate("Drop Zip Regions and Fsasset Folders");
 DeleteandKeep("$zip/OutworldzFiles/Opensim/bin/Regions");
 DeleteandKeep("$zip/OutworldzFiles/Opensim/bin/fsassets");
 DeleteandKeep("$zip/Licenses_to_Content");
 
 PrintDate("Drop Opensim Source code from update");
-
 JustDelete("$zip/Make_zip_v3.pl");
 JustDelete("$zip/Start.vshost.exe.manifest");
 JustDelete("$zip/Start.vshost.exe.config");
 JustDelete("$zip/Start.vshost.exe");
+JustDelete("$zip/Outworldzfiles/Mysql/my.bak");
 JustDelete("$zip/Outworldzfiles/Opensim/Opensim");
 JustDelete("$zip/Outworldzfiles/Opensim/packages");
 JustDelete("$zip/Outworldzfiles/Opensim/runprebuild19.sh");
@@ -251,9 +239,6 @@ JustDelete("$zip/Outworldzfiles/opensim/runprebuild48.sh");
 JustDelete("$zip/Outworldzfiles/Opensim/TESTING.txt");
 JustDelete("$zip/OutworldzFiles/Opensim/bin/.git");
 JustDelete("$zip/OutworldzFiles/Opensim/Ezombie");
-JustDelete("$zip/Start.exe.lastcodeanalysissucceeded");
-JustDelete("$zip/Start.exe.CodeAnalysisLog.xml");
-
 JustDelete("$zip/Outworldzfiles/opensim/bin/OpenSim.exe.config.bak");
 JustDelete("$zip/Outworldzfiles/opensim/bin/OpenSim.ini.example");
 JustDelete("$zip/Outworldzfiles/opensim/bin/opensim.sh");
@@ -264,6 +249,8 @@ JustDelete("$zip/Outworldzfiles/opensim/bin/Robust32.exe.config");
 JustDelete("$zip/Outworldzfiles/opensim/bin/Robust32.vshost.exe");
 JustDelete("$zip/Outworldzfiles/opensim/bin/Robust32.vshost.exe.config");
 
+JustDelete("$zip/Start.exe.lastcodeanalysissucceeded");
+JustDelete("$zip/Start.exe.CodeAnalysisLog.xml");
 #Setting
 JustDelete ("$zip/Outworldzfiles/Settings.ini");
 
@@ -274,8 +261,6 @@ use IO::All;
 end:
 
 say "Make zip\n";
-
-
 
 my $dest = "$repo/DreamGrid$type.zip";
 doUnlink ($dest);
@@ -300,7 +285,6 @@ if ( $publish =~ /p/ ) {
     CheckDistro();
     CopyManuals();
         
-    
     #doUnlink("$Contabo/Inetpub/Secondlife/Outworldz_Installer/Grid/Older Versions/DreamGrid/DreamGrid.zip");
     #doUnlink("$Fleta/Inetpub/Secondlife/Outworldz_Installer/Grid/Older Versions/DreamGrid/DreamGrid.zip");
         
@@ -490,7 +474,7 @@ sub DelZips {
 }
 
 sub DelMaps {
-    while ( $_ = glob("$dir/Outworldzfiles/opensim/bin/Map-*.png") ) {
+    while ( $_ = glob("$zip/Outworldzfiles/opensim/bin/Map-*.png") ) {
         doUnlink($_) or die("Can't remove $_: $!");
     }
 }

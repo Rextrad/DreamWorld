@@ -1,13 +1,19 @@
 REVISIONS FOR DREAMGRID
 
 V5.392
+
 Use up to 4 DNS servers.
 No need to refresh view if just checkboxing.
 JOpensim Gropups and Messaging for 0.9.2 added.
 DNS speedup: Compare IP before re-registering.
-File Menu links for copy payh, command prompt, explorer, check for update, Support Group (Mewe).
+File Menu links for copy path, command prompt, explorer, check for update, Support Group (Mewe).
+Added a switch to Not backup IARS for your users.  Default is OFF.  To backup an IAR, you must enable it individually.
+Allow downgrade  in Updater.
+Blank DNS was no longer setting up the LAN IP.
+TOS URL improvement for clicking. No need to copy and paste if require TOS agreement is checked.
 
 V5.391
+
 Old bug in Apache did not change of port from 80.
 
 V5.39

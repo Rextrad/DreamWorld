@@ -17,6 +17,7 @@
 \OutworldzFiles\Opensim\bin\DotNetOpenMail.dll
 \OutworldzFiles\Opensim\bin\ICSharpCode.SharpZipLib.dll
 \OutworldzFiles\Opensim\bin\Ionic.Zip.dll
+\OutworldzFiles\Opensim\bin\jOpenSim.Profile.dll
 \OutworldzFiles\Opensim\bin\lame_enc.dll
 \OutworldzFiles\Opensim\bin\log4net.dll
 \OutworldzFiles\Opensim\bin\LukeSkywalker.IPNetwork.dll
@@ -69,7 +70,6 @@
 \OutworldzFiles\Opensim\bin\OpenSim.Framework.Servers.HttpServer.dll
 \OutworldzFiles\Opensim\bin\OpenSim.Framework.Servers.Tests.dll
 \OutworldzFiles\Opensim\bin\OpenSim.Framework.Tests.dll
-\OutworldzFiles\Opensim\bin\OpenSim.Modules.Currency.dll
 \OutworldzFiles\Opensim\bin\OpenSim.Region.ClientStack.LindenCaps.dll
 \OutworldzFiles\Opensim\bin\OpenSim.Region.ClientStack.LindenCaps.Tests.dll
 \OutworldzFiles\Opensim\bin\OpenSim.Region.ClientStack.LindenUDP.dll
