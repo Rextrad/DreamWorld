@@ -46,10 +46,7 @@ Public Class Backups
             DoBackup("WordPress")
             Application.DoEvents()
         End If
-        If Directory.Exists(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/Mysql/Data/Joomla")) Then
-            DoBackup("Joomla")
-            Application.DoEvents()
-        End If
+
         If Directory.Exists(IO.Path.Combine(Settings.CurrentDirectory, "OutworldzFiles/Mysql/Data/ossearch")) Then
             DoBackup("ossearch")
             Application.DoEvents()
